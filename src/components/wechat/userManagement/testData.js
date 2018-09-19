@@ -1,0 +1,43 @@
+export const data = [
+    {
+        id: 1,
+        avatar: "http://ovwvaynot.bkt.clouddn.com/1.jpg",
+        tag: [1,2],
+        name: "张三",
+        remark: "这是备注",
+        operation: 1,
+        sex: 1,
+        follow_time: "2017-10-24 14:32:07",
+        news:1,
+        msg:2,
+        marrow:3,
+    }, {
+        id: 2,
+        avatar: 'http://ovwvaynot.bkt.clouddn.com/2.jpg',
+        tag: [],
+        name: "李四",
+        remark: "",
+        operation: 2,
+        sex: 0,
+        follow_time: "2017-03-12 04:52:07",
+    }, {
+        id: '3',
+        avatar: 'http://ovwvaynot.bkt.clouddn.com/3.jpg',
+        tag: [],
+        name: "王五",
+        remark: "",
+        operation: 3,
+        sex: 1,
+        follow_time: "2012-05-12 14:32:07",
+    },
+    {
+        id: '4',
+        avatar: 'http://ovwvaynot.bkt.clouddn.com/4.jpg',
+        tag: [],
+        name: "赵六",
+        remark: "",
+        operation: 4,
+        sex: 0,
+        follow_time: "2017-10-24 14:33:50",
+    }
+]

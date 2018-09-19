@@ -1,0 +1,56 @@
+
+.goodsList{
+
+}
+.goodsListTop{
+    flex-direction: row;
+    margin-bottom: 16px;
+}
+.paginationView{
+    margin-top: 16px;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+.goodsListItem{
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 10px;
+    border: 1px solid #efefef;
+    flex:1;
+    margin: 15px;
+    cursor: pointer;
+}
+.itemLeft{
+    flex-direction: row;
+}
+.itemLeft img{
+    width: 40px;
+    height: 40px;
+    border-radius: 4px;
+    margin-right: 10px;
+    border: 1px solid #f4f4f4;
+}
+.itemText{
+
+}
+.itemText p{
+    font-family: 'PingFangSC-Semibold', 'PingFang SC Semibold', 'PingFang SC';
+    font-weight: 600;
+    color: rgba(0, 0, 0, 0.847058823529412);
+    margin: 0;
+}
+.itemText span{
+    font-family: 'PingFangSC-Regular', 'PingFang SC';
+    font-weight: 400;
+    color: rgba(0, 0, 0, 0.447058823529412);
+}
+.scrollView{
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+.view1{
+    flex-direction: row;
+    width: 50%;
+    align-items: center;
+}

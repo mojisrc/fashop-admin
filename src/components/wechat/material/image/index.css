@@ -1,0 +1,60 @@
+.imageTableView{
+    border: 1px solid #ececec;
+    border-radius: 4px;
+    margin-bottom: 24px;
+}
+.imageTableView>p{
+    padding: 10px;
+    font-family: 'PingFangSC-Regular', 'PingFang SC';
+    font-size: 14px;
+    color: rgba(0, 0, 0, 0.847058823529412);
+    border-bottom: 1px solid #ececec;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.imgView{
+    width: 100%;
+    height: 158px;
+    overflow: hidden;
+}
+.imgView img{
+    width: 100%;
+}
+.operation{
+    height: 48px;
+    background-color: #f7f9fa;
+    flex-direction: row;
+    align-items: center;
+    border-top: 1px solid #ececec;
+}
+.operation a{
+    flex: 1;
+    text-align: center;
+}
+.operation a:not(:last-child){
+    border-right: 1px solid #ececec;
+}
+.pageView{
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+.emptyImageView{
+    align-items: center;
+}
+.emptyImageView img{
+
+}
+.emptyImageView strong{
+    font-family: 'PingFangSC-Semibold', 'PingFang SC Semibold', 'PingFang SC';
+    font-weight: 600;
+    font-style: normal;
+    font-size: 16px;
+    color: #666666;
+    text-align: center;
+    line-height: 24px;
+}
+.emptyImageView button{
+    margin: 20px 0;
+}

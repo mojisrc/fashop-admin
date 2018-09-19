@@ -1,0 +1,44 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.title{
+    margin-top: 60px;
+    font-family: 'PingFangSC-Regular', 'PingFang SC';
+    font-weight: 400;
+    font-style: normal;
+    font-size: 21px;
+    color: #666666;
+    text-align: center;
+    line-height: 32px;
+}
+.bindBtn{
+    margin-top: 24px;
+}
+.tableContainer{
+    padding: 60px;
+    color:#9b9b9b;
+}
+.columns{
+    text-align: center!important;
+}
+.table i{
+    color: #188fff;
+    font-size: 16px;
+    font-weight: 600;
+}
+.tableHeader{
+    margin-bottom: 8px;
+}
+.tableHeader p{
+    margin: 0;
+    line-height: 22px;
+    font-size: 14px;
+    font-family: 'PingFangSC-Regular', 'PingFang SC';
+    color: rgba(0, 0, 0, 0.447058823529412);
+}
+.tableHeader p span{
+    font-family: 'LucidaGrande', 'Lucida Grande';
+    color: #BFBFBF;
+}

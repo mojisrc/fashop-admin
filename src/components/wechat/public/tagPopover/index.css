@@ -1,0 +1,30 @@
+.tagPopoverView{
+    flex-direction: row;
+    align-items: center;
+}
+.tagPopoverView i{
+    font-size: 12px;
+    color: #cdcdcd;
+}
+.poppverContent{
+    min-width: 360px;
+}
+
+.addTagView{
+    flex-direction: row;
+    align-items: center;
+    margin: 20px 0;
+    line-height: 32px;
+}
+.addTagView a{
+    margin-left: 10px;
+}
+.btnGroup{
+    flex: 1;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: flex-end;
+}
+.btnGroup button:not(:last-child){
+    margin-right: 10px;
+}

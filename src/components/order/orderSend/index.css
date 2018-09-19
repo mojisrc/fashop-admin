@@ -1,0 +1,31 @@
+.title{
+    font-family: 'PingFangSC-Semibold', 'PingFang SC Semibold', 'PingFang SC';
+    font-weight: 600;
+    font-style: normal;
+    font-size: 16px;
+    color: rgba(0, 0, 0, 0.847058823529412);
+    line-height: 24px;
+}
+.orderSendItemWarp{
+    margin-bottom: 24px;
+}
+.cardInnerCol{
+    color: rgba(0, 0, 0, 0.847058823529412);
+}
+.cardInnerCol span{
+    color: rgba(0, 0, 0, 0.647058823529412);
+}
+.cardExtra{
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+}
+.sendAddress{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.sendAddressSelect{
+    margin-right: 15px;
+    margin-bottom: 5px;
+}

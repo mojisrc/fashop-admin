@@ -1,0 +1,30 @@
+.infoItem{
+    color: rgba(0, 0, 0, 0.847058823529412);
+    display: flex;
+    margin-bottom: 10px;
+}
+.infoItem span{
+    color: rgba(0, 0, 0, 0.647058823529412);
+}
+
+.squareImageList {
+    flex-direction: row;
+    margin-bottom: 14px;
+    flex-wrap: wrap;
+}
+
+.squareImageList > div {
+    width: 100px;
+    height: 100px;
+    overflow: hidden;
+    border-radius: 4px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #f3f3f3;
+    text-align: center;
+}
+
+.squareImageList > div > img {
+    height: 100%;
+}
+

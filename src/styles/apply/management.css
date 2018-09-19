@@ -1,0 +1,29 @@
+.managementBox{
+  height:67px;
+  background-image:url(../../images/apply/line.png);
+  background-size:100% 1px;
+  background-position:left bottom;
+  background-repeat:no-repeat;
+}
+.managementLeft{
+  float:left;
+  height:67px;
+  line-height:67px;
+}
+.managementRight{
+  margin-left:100px;
+  height:67px;
+  line-height:67px;
+  color:#5a5a5a;
+
+}
+.managementRight span{
+  margin-right:44px;
+  cursor:pointer;
+}
+.managementBotton{
+  padding-top:20px;
+}
+.managementBotton Button{
+  margin-right:20px;
+}

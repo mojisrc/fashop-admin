@@ -1,0 +1,22 @@
+.dataDisplay{
+    flex-direction: row;
+    margin-bottom: 24px;
+}
+.dataDisplayItem{
+    flex: 1;
+    padding-left: 24px;
+    border-right: 1px solid #ececec;
+}
+.dataDisplayItem:last-child{
+    border-right: 0;
+}
+.dataDisplayItem span{
+    color: rgb(153, 153, 153);
+    line-height: 22px;
+}
+.dataDisplayItem p{
+    font-size: 24px;
+    color: rgba(0, 0, 0, 0.847);
+    line-height: 38px;
+    margin: 0;
+}

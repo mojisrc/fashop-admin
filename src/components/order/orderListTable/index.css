@@ -1,0 +1,49 @@
+.column{
+    text-align: center!important;
+}
+.operation{
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
+.operation a{
+    margin-right: 10px;
+}
+.operation a:last-child{
+    margin-right: 0;
+}
+.batchView{
+    margin-bottom: 24px;
+    flex-direction: row;
+}
+.batchView button{
+    margin-right: 24px;
+}
+
+.borderRightNone{
+    border-right: 0!important;
+}
+.borderLeft{
+    border-left: 1px solid #f4f4f4!important;
+}
+.goodsGoodsImg{width: 90px}
+.goodsTitle{
+    width: 300px;
+}
+
+.goodsPrice{
+    width: 100px;
+}
+.goodsNum{
+    width: 80px;
+}
+.goodsSpec{
+    width: 150px;
+}
+.reciver{
+    width: 100px;
+}
+.reciverPhone{
+    width: 150px;
+}
+.reciverAddress{}

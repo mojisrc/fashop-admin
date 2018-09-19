@@ -1,0 +1,26 @@
+.column{
+    text-align: center!important;
+}
+.uploadView{
+    align-items: center;
+    justify-content: center;
+}
+.goodsSpecTitle{
+    text-indent: 1rem;
+    margin-top: 0.5rem;
+}
+.form{
+    max-width: 60%;
+}
+.formSpecAddItem{
+    padding: 24px;
+    background: #fbfbfb;
+    border: 1px solid #d9d9d9;
+    border-radius: 6px;
+    margin-bottom: 3rem;
+}
+.editBtnWarp{
+    width: 25%;
+    flex-direction: row;
+    justify-content: space-around;
+}

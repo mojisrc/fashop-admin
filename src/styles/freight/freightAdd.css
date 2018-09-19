@@ -1,0 +1,20 @@
+.view1{
+    flex-direction: row;
+    justify-content: space-between;
+}
+.view2{
+    border: 1px solid #e5e5e5;
+    flex:1;
+}
+.view3{
+    height: 40px;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+    border-bottom: 1px solid #e5e5e5;
+}
+.view4{
+    width:150px;
+    justify-content: center;
+    align-items: center;
+}

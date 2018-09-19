@@ -1,0 +1,100 @@
+.userInfoWarp h3{
+    font-family: 'PingFangSC-Semibold', 'PingFang SC Semibold', 'PingFang SC';
+    font-weight: 600;
+    font-style: normal;
+    font-size: 16px;
+    color: rgba(0, 0, 0, 0.847058823529412);
+    line-height: 44px;
+}
+.userInfoItem:not(:last-of-type){
+    margin-bottom: 24px;
+    border-bottom: 1px solid #ededed;
+}
+
+.avatarInput{
+    opacity: 0;
+    filter: alpha(opacity=0);
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 9;
+    cursor: pointer;
+}
+.uploadWarp{
+    width: 80px;
+    height: 80px;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+.uploadBtn{
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+}
+.uploadBtn p{
+    margin: 0;
+}
+.avatarImg{
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+}
+.settingAvatar{
+    display: flex;
+    flex-direction: row;
+    margin-left: 48px;
+    align-items: center;
+    font-family: 'PingFangSC-Regular', 'PingFang SC';
+    font-weight: 400;
+    font-style: normal;
+    font-size: 14px;
+    text-align: right;
+    line-height: 22px;
+    padding: 12px 0;
+}
+.settingAvatar>img{
+
+}
+.settingAvatar>div{
+
+}
+.settingAvatar>p{
+    margin: 0;
+    color: rgba(0, 0, 0, 0.247058823529412);
+}
+
+.userInfo{
+
+}
+.userInfo p{
+    font-family: 'PingFangSC-Regular', 'PingFang SC';
+    font-size: 14px;
+    color: rgba(0, 0, 0, 0.847058823529412);
+    line-height: 22px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding-top: 24px;
+}
+.userInfo p span:first-child{
+    display: inline-block;
+    min-width: 124px;
+    text-align: right;
+}
+.userInfo p span:last-child{
+    color: rgba(0, 0, 0, 0.647058823529412);
+}
+.userInfo p a{
+    margin-left: 10px;
+}
+.layoutIcon{
+    display: flex;
+    flex-direction: row;
+}
+.uploadIcon{
+    margin-left: 10px;
+    margin-right: 10px;
+}

@@ -1,0 +1,11 @@
+/* titlePhone */
+.titlePhoneWarp{
+    height: 30px;
+    line-height: 30px;
+    padding: 0 10px;
+    margin: 0;
+    overflow: hidden;
+}
+.titlePhoneWarp img{
+    width: 30px;
+}

@@ -1,0 +1,30 @@
+.flt{
+  float:left;
+}
+.frt{
+  float:right;
+}
+.clearfix{ *zoom: 1;}
+.clearfix:before, .clearfix:after { display: table; line-height: 0; content: "";}
+.clearfix:after { clear: both;}
+.hide {display: none;}
+
+
+.tabPane{
+  margin:20px;
+  padding:20px 30px;
+  background-color:#fff;
+}
+.tabLeftForm{
+  background-color: #fff;
+}
+.tabTop{
+  border-bottom: 1px solid #DEDEDE;
+}
+.tabCenter{
+  height: 80px;
+  border-bottom: 1px solid #DEDEDE;
+}
+.tabFooter{
+  background-color: #fff;
+}

@@ -1,0 +1,70 @@
+
+.claimTitle{
+  color:#272727;
+  font-size:17px;
+}
+.business{
+  margin-top:20px;
+  margin-left:-7px;
+}
+
+.businessSon{
+  float:left;
+  width:334px;
+  margin-bottom:14px;
+
+}
+.businessContent{
+  margin:0 7px 0 7px;
+  padding:20px;
+  border:1px solid #e8e8e8;
+  border-radius:6px;
+}
+.orange{
+  display:inline-block;
+  vertical-align:middle;
+  position:relative;
+  left:0;
+  top:0;
+  width:50px;
+  height:50px;
+  border-radius:4px;
+  background-color:#fe831d;
+}
+.claimImg{
+  position:absolute;
+  left:50%;
+  top:50%;
+  margin-left:-15px;
+  margin-top:-15px;
+  height:30px;
+}
+.businessText{
+  display:inline-block;
+  vertical-align:middle;
+  width:75%;
+  box-sizing:border-box;
+  -moz-box-sizing:border-box;
+  padding-left:20px;
+}
+.businessText div{
+   color:#8c8c8c;
+   font-size:12px;
+   overflow:hidden;
+   white-space:nowrap;
+   text-overflow:ellipsis;
+}
+.businessText div:first-child{
+  color:#5a5a5a;
+  padding-bottom:3px;
+  font-size:13px;
+}
+.red{
+  background-color:#fa7368;
+}
+.blue{
+  background-color:#66a0fd;
+}
+.green{
+  background-color:#0fcb6f;
+}

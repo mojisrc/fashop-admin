@@ -1,0 +1,32 @@
+.inputBox{
+  width:30%;
+  display:inline-block;
+  vertical-align:middle;
+}
+.deliveText{
+  width:90px;
+  display:inline-block;
+  color:#555;
+  text-align:right;
+  vertical-align:middle;
+}
+.deliveSpan{
+  margin-left:5px;
+}
+.deliveFont{
+  color:#979797;
+  padding-left:90px;
+  padding-top:5px;
+  font-size:13px;
+  padding-bottom:8px;
+}
+.deliveWrap{
+  padding-bottom:25px;
+}
+.inputButtonWrap{
+  padding-left:90px;
+  padding-top:20px;
+}
+.inputButton{
+  margin-right:20px;
+}

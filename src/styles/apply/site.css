@@ -1,0 +1,100 @@
+.siteTitle{
+   text-align:center;
+   color:#272727;
+   font-size:24px;
+   letter-spacing:1px;
+   padding-top:10px;
+   padding-bottom:10px;
+}
+.siteContent{
+  width:1002px;
+  margin:0 auto;
+}
+.siteMore{
+  text-align:center;
+  color:#188fff;
+  padding-top:10px;
+  cursor:pointer;
+}
+.siteBox{
+  background-color:#fafafa;
+  width:1002px;
+  margin:20px auto 0 auto;
+  text-align:center;
+  padding-top:50px;
+  padding-bottom:40px;
+}
+.siteNum{
+  position:relative;
+  left:0;
+  top:0;
+  display:inline-block;
+  vertical-align:middle;
+  height:65px;
+  width:65px;
+  text-align:center;
+  line-height:65px;
+  border-radius:65px;
+  color:#1e90fd;
+  font-size:16px;
+  border:1px solid #dcdcdc;
+  background-color:#fff;
+}
+.siteLine{
+  display:inline-block;
+  vertical-align:middle;
+  width:280px;
+  height:1px;
+  margin:0 10px;
+  background-color:#dbdbdb;
+}
+.siteText{
+  position:absolute;
+  left:50%;
+  bottom:-30px;
+  color:#585858;
+  line-height:normal;
+  white-space:nowrap;
+  transform:translate(-50%,0);
+  font-size:14px;
+  letter-spacing:1px;
+}
+.siteBind{
+  color:#262626;
+  font-size:22px;
+  text-align:center;
+  padding-top:100px;
+}
+.siteInputWarp{
+  width:370px;
+  margin:0 auto;
+}
+.siteInput{
+  display:block;
+  width:370px;
+  height:40px;
+  border:none;
+  border:1px solid #d8d8d8;
+  border-radius:4px;
+  padding:0 10px;
+  margin-top:20px;
+}
+.siteButtonWrap{
+  position:relative;
+  left:0;
+  top:0;
+  padding-top:35px;
+  text-align:left;
+}
+.buttonWidth{
+  width:204px;
+}
+.siteSpan{
+  color:#1e90fd;
+  font-size:13px;
+  position:absolute;
+  right:24px;
+  top:35px;
+  height:32px;
+  line-height:32px;
+}

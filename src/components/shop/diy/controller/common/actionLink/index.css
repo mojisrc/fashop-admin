@@ -1,0 +1,8 @@
+.actionLinkPopoverContent{
+
+}
+.actionLinkPopoverContent a{
+    display: block;
+    color: #333;
+    line-height: 32px;
+}

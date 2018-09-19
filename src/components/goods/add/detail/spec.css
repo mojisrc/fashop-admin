@@ -1,0 +1,72 @@
+.itemWarp{
+    border: 1px solid #e5e5e5;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+}
+.buttonWarp{
+    border: 1px solid #e5e5e5;
+    border-top: 0;
+    padding: 10px;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+}
+.item{
+}
+.itemTop{
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #f8f8f8;
+    padding: 10px;
+}
+.tagsWarp{
+    min-height: 50px;
+    flex-direction: row;
+    padding: 10px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.valuesPopoverWarp{
+    max-width: 500px;
+    padding: 10px;
+}
+.valuesPopoverTop{
+    padding: 10px 0;
+    border-bottom: 1px solid #e5e5e5;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+.valuesPopoverTopItem{
+    flex-direction: row;
+    margin-bottom: 10px;
+}
+.valuesPopoverMid{
+    padding: 10px 0;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+.valuesPopoverBot{
+    flex-direction: row;
+    padding-top: 10px;
+    justify-content: flex-end;
+    align-items: center;
+}
+.valuesPopoverBot button:first-child{
+    margin-right: 5px;
+}
+.tableFooter{
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+.tableFooterRight{
+    flex-direction: row;
+    justify-content: flex-end;
+}
+.tableBottom{
+    width: 90px;
+    padding-left: 33px;
+    margin-bottom: 0;
+    box-sizing: initial;
+}

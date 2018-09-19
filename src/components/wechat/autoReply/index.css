@@ -1,0 +1,39 @@
+.keyWordsReplyHeaderView{
+    padding: 8px 0 24px 0;
+    flex-direction: row;
+    /* justify-content: space-between; */
+}
+/* .keyWordsReplyLeftView{
+    flex-direction: row;
+} */
+.keyWordsReplyHeaderView button{
+    margin-left: 24px;
+}
+
+.opration{
+    flex-direction: row;
+}
+.opration a:not(:last-child){
+    margin-right: 10px;
+}
+
+.followedReplyView{
+    padding-top: 8px;
+}
+.btnGroup{
+    flex-direction: row;
+    margin-top: 24px;
+}
+.btnGroup button:not(:last-child){
+    margin-right: 10px;
+}
+
+.alertSwitchView{
+    position: relative;
+    margin: 8px 0 16px 0;
+}
+.alertSwitchView>span{
+    position: absolute;
+    right: 24px;
+    top: 30px;
+}

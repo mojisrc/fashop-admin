@@ -1,0 +1,33 @@
+
+.imgList{
+    padding: 16px;
+    padding-top: 0;
+}
+.imgListTop{
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 24px;
+}
+.imgContent{
+
+}
+.imgView{
+    width: 117px;
+    height: 78px;
+    justify-content: center;
+    align-items: center;
+    background-color: #808080;
+}
+.imgView i{
+    color: #666;
+    font-weight: 500;
+    font-size: 18px;
+}
+.videoImgView{
+    width: 117px;
+    height: 78px;
+    overflow: hidden;
+}
+.videoImg{
+    width: 100%;
+}

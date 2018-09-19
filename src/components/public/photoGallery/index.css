@@ -1,0 +1,81 @@
+.imgInput{
+    opacity: 0;
+    filter: alpha(opacity=0);
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 9;
+    cursor: pointer;
+}
+.uploadWarp{
+    cursor: pointer;
+    position: relative;
+}
+.imgList{
+    padding: 15px;
+    padding-top: 0;
+}
+.imgListTop{
+    flex-direction: row;
+    justify-content: space-between;
+}
+.imgContent{
+
+}
+.imgItem{
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    border-radius: 4px;
+    border: 1px solid rgba(235, 235, 235, 1);
+    cursor: pointer;
+    position: relative;
+}
+.imgItem:hover{
+    border-color: #188fff;
+}
+.imgItem p{
+    margin: 0;
+    border-bottom: 1px solid rgba(235, 235, 235, 1);
+    font-family: 'PingFangSC-Regular', 'PingFang SC', serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 14px;
+    color: rgba(0, 0, 0, 0.847058823529412);
+    line-height: 42px;
+    padding-left: 16px;
+}
+.imgItem div {
+    width: 101.33px;
+    height: 101.33px;
+    overflow: hidden;
+    text-align: center;
+}
+.imgItem img{
+    height: 100%;
+}
+.paginationView{
+    margin-top: 16px;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+.checkbox{
+    display: block;
+    position: relative;
+}
+.checkbox :global(.ant-checkbox){
+    position: absolute;
+    right:15px;
+    top:15px;
+    height: 16px;
+    width: 16px;
+    z-index: 5;
+}
+.checkbox span:nth-child(2){
+    height: 100%;
+    width: 100%;
+    display: block;
+    padding:0;
+}

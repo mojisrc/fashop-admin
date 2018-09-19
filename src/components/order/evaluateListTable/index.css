@@ -1,0 +1,154 @@
+.avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid #ececec;
+}
+
+.replyCol button {
+    margin-top: 10px;
+}
+
+.top {
+    margin: 0 0 10px 0;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.topLeft p,
+.topRight p {
+    margin: 0;
+}
+
+.topLeft p {
+    font-family: 'PingFangSC-Semibold', 'PingFang SC Semibold', 'PingFang SC', serif;
+    font-weight: 600;
+    font-style: normal;
+    font-size: 20px;
+    color: rgba(0, 0, 0, 0.847058823529412);
+    text-align: left;
+}
+
+.topLeft p span {
+    display: inline-block;
+    width: 94px;
+    height: 20px;
+    line-height: 20px;
+    background-color: rgba(245, 245, 245, 1);
+    box-sizing: border-box;
+    border: 1px solid rgba(217, 217, 217, 1);
+    border-radius: 4px;
+    font-size: 12px;
+    color: rgba(0, 0, 0, 0.647058823529412);
+    text-align: center;
+    margin-left: 10px;
+}
+
+.topRight {
+    align-items: flex-end;
+}
+
+.topRight > span {
+    font-family: 'Helvetica', serif;
+    font-size: 14px;
+    color: rgba(0, 0, 0, 0.247058823529412);
+}
+
+.topRight p {
+    text-align: right;
+}
+
+.topRight p span:first-child {
+    display: inline-block;
+    font-family: 'PingFangSC-Regular', 'PingFang SC', serif;
+    font-size: 14px;
+    color: rgba(0, 0, 0, 0.647058823529412);
+    margin: 6px 10px 0 0;
+}
+
+.evaluateContent {
+    flex-direction: row;
+}
+
+.evaluateImg {
+    flex-direction: row;
+    margin-bottom: 14px;
+    flex-wrap: wrap;
+}
+
+.evaluateImg > div {
+    width: 100px;
+    height: 100px;
+    overflow: hidden;
+    border-radius: 4px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #f3f3f3;
+    text-align: center;
+}
+
+.evaluateImg > div > img {
+    height: 100%;
+}
+
+.evaluateImg img:last-child {
+    margin-right: 0;
+}
+
+.goodsList {
+
+}
+
+.goodsListItem {
+    flex-direction: row;
+    margin-bottom: 24px;
+}
+
+.goodsListItem img {
+    width: 40px;
+    height: 40px;
+    border-radius: 4px;
+    margin-right: 10px;
+}
+
+.goodsListRight {
+    display: flex;
+    justify-content: center;
+}
+
+.goodsListRight span {
+    color: #999;
+}
+
+.contentList {
+    padding-top: 10px;
+    border-top: 1px solid #e9e9e9;
+}
+
+.contentListItem {
+    margin-bottom: 10px;
+}
+
+.contentItemTop,
+.contentItemBot {
+    font-family: 'PingFangSC-Regular', 'PingFang SC', serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 14px;
+    line-height: 22px;
+    margin: 0;
+}
+
+.contentItemTop span {
+    color: rgba(0, 0, 0, 0.447058823529412);
+    margin-left: 10px;
+}
+
+.contentItemBot {
+    color: rgba(0, 0, 0, 0.647058823529412);
+}
+
+.pageView {
+    flex-direction: row;
+    justify-content: flex-end;
+}

@@ -1,0 +1,32 @@
+.goodsDetail{
+
+}
+/* list */
+.listWarp{
+    flex-direction: row;
+    background-color: #fff;
+    padding: 10px;
+    margin: 10px;
+    border: 1px solid #eaeaea;
+}
+.listImgWarp{
+    width: 30%;
+    margin-right: 10px;
+}
+.listImgWarp img{
+    width: 100%;
+}
+.listRight{
+    flex: 1;
+    justify-content:space-between;
+    padding: 10px 0;
+}
+.listTitle{
+    line-height: 15px;
+    font-size: 15px;
+}
+.listPrice{
+    color: #ff585d;
+    line-height: 12px;
+    font-size: 12px;
+}

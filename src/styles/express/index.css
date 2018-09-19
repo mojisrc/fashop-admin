@@ -1,0 +1,24 @@
+.line{
+  display:block;
+  width:100%;
+  height:2px;
+  margin-bottom:20px;
+}
+.deliveWrap{
+  padding-bottom:25px;
+}
+.deliveText{
+  width:120px;
+  display:inline-block;
+  color:#555;
+  text-align:right;
+  vertical-align:middle;
+}
+.deliveSpan{
+  margin-left:5px;
+}
+.inputBox{
+  width:70%;
+  display:inline-block;
+  vertical-align:middle;
+}

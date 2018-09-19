@@ -1,0 +1,99 @@
+.imgInput{
+    opacity: 0;
+    filter: alpha(opacity=0);
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 9;
+    cursor: pointer;
+}
+.uploadWarp{
+    cursor: pointer;
+    position: relative;
+}
+.imgList{
+    padding: 16px;
+    padding-top: 0;
+}
+.imgListTop{
+    flex-direction: row;
+    justify-content: space-between;
+}
+.imgContent{
+
+}
+.imgItem{
+    width: 260px;
+    border-radius: 4px;
+    border: 1px solid rgba(235, 235, 235, 1);
+    margin-top: 16px;
+    cursor: pointer;
+    position: relative;
+}
+.imgItem:hover{
+    border-color: #188fff;
+}
+.imgItem>p{
+    margin: 0;
+    border-bottom: 1px solid rgba(235, 235, 235, 1);
+    font-family: 'PingFangSC-Regular', 'PingFang SC';
+    font-weight: 400;
+    font-style: normal;
+    font-size: 14px;
+    color: rgba(0, 0, 0, 0.847058823529412);
+    line-height: 42px;
+    padding-left: 16px;
+}
+.imgItem img{
+    width: 100%;
+    /* max-height: 158px; */
+}
+.paginationView{
+    margin-top: 16px;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+
+/* ModalNews */
+.modalNewsView{
+    /* width: 260px; */
+    /* border: 1px solid #ececec; */
+    border-radius: 4px;
+    font-family: 'PingFangSC-Regular', 'PingFang SC';
+}
+.modalNewsView>p{
+    padding: 10px;
+    border-bottom: 1px solid #ececec;
+    font-size: 12px;
+    color: rgba(0, 0, 0, 0.647058823529412);
+    line-height: 22px;
+    margin: 0;
+}
+.contentView{
+
+}
+.imgView{
+    height: 135px;
+    padding: 0 10px;
+    overflow: hidden;
+}
+.imgView img{
+    width: 100%;
+}
+.contentView p{
+    color: rgba(0, 0, 0, 0.847058823529412);
+    line-height: 24px;
+    padding: 10px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin: 0;
+}
+.contentView p:last-child{
+    font-size: 12px;
+    color: rgba(0, 0, 0, 0.447058823529412);
+    line-height: 22px;
+}

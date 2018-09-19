@@ -1,0 +1,36 @@
+.emptyView{
+    flex: 1;
+    min-height: 520px;
+    justify-content: center;
+    align-items: center;
+    font-family: 'PingFangSC-Semibold', 'PingFang SC Semibold', 'PingFang SC';
+}
+.emptyImgView{
+    width: 96px;
+    height: 115px;
+    overflow: hidden;
+}
+.emptyImgView img{
+    width: 100%;
+}
+.emptyView p{
+    color: #8d8d8d;
+    font-size: 14px;
+}
+.emptyView strong{
+    font-weight: 650;
+    font-size: 16px;
+    color: #666666;
+    margin: 34px 0 24px 0;
+}
+.subBtnView{
+    margin-top: 50px;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+.subBtnView button:not(:last-child){
+    margin-right: 24px;
+}
+.fatherTishi{
+    margin: 0 0 24px 24px;
+}

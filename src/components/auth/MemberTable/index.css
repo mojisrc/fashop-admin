@@ -1,0 +1,21 @@
+.column{
+    text-align: center;
+}
+.operation{
+    flex-direction: row;
+    justify-content: space-around;
+}
+.avatarWarp{
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+.avatar{
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+}
+.tableWarp{
+    border: 1px solid #f4f4f4;
+    border-radius: 4px;
+}

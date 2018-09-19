@@ -1,0 +1,35 @@
+.smstitle{
+  position:relative;
+  left:0;
+  top:0;
+  font-size:16px;
+  color:#272727;
+  padding-top:20px;
+  padding-bottom:30px;
+}
+.smstext{
+  font-size:13px;
+  color:#188fff;
+  margin-left:15px;
+}
+.switch{
+  position:absolute;
+  right:0;
+  top:20px;
+}
+.smsbox{
+  padding-bottom:30px;
+  /* border-bottom:1px solid #eaeaea */
+}
+.smsson{
+  position:relative;
+  left:0;
+  top:0;
+  font-size:16px;
+  color:#272727;
+  padding:45px 0;
+  border-top:1px solid #eaeaea
+}
+.smsson .switch{
+  top:40px;
+}

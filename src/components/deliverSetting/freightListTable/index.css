@@ -1,0 +1,42 @@
+.column{
+    text-align: center!important;
+}
+.operationTh{
+    text-align: right!important;
+}
+.operation{
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+}
+.operation a{
+    margin-right: 10px;
+}
+.operation a:last-child{
+    margin-right: 0;
+}
+.batchView{
+    margin-bottom: 24px;
+    flex-direction: row;
+}
+.batchView button{
+    margin-right: 24px;
+}
+.goodsGoodsImg{width: 70px}
+.areas{
+    width: 200px;
+}
+
+.firstAmount{
+    width: 100px;
+}
+.firstFee{
+    width: 80px;
+}
+.additionalAmount{
+    width: 150px;
+}
+.additionalFee{
+    width: 100px;
+}
+ddress{}

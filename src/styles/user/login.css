@@ -1,0 +1,27 @@
+.loginBgc{
+    height: 100vh;
+    background-color: rgba(241, 242, 246, 1);
+    justify-content: center;
+    align-items: center;
+}
+.loginWarp{
+    width: 368px;
+    height: 368px;
+}
+.logo{
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    height: 54px;
+    line-height: 54px;
+    margin-bottom: 48px;
+}
+.logo img{
+    width: 207px;
+    margin-right: 8px;
+}
+.logo span{
+    vertical-align: text-bottom;
+    font-size: 16px;
+    text-transform: uppercase;
+}

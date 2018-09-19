@@ -1,0 +1,54 @@
+.operateButton{
+   position:absolute;
+   right:0;
+   top:0;
+}
+.operateHeader{
+  position:relative;
+  left:0;
+  top:0;
+  border-top:1px solid #f4f4f4;
+  border-left:1px solid #f4f4f4;
+  border-right:1px solid #f4f4f4;
+  border-radius:3px 3px 0 0;
+  *zoom: 1;
+}
+.operateWrap{
+  margin-bottom:27px;
+}
+.operateHeader:before,.operateHeader:after { display: table; line-height: 0; content: "";}
+.operateHeader:after { clear: both;}
+.operateText{
+  height:40px;
+  line-height:40px;
+  margin-left:16px;
+  float:left;
+}
+.information{
+  height:40px;
+  line-height:40px;
+  margin-right:16px;
+  float:right;
+}
+.deliveTable{
+  border-radius:0;
+}
+.time{
+  margin-right:24px;
+  margin-left:13px;
+}
+.num{
+  color:rgba(0, 0, 0, 0.85)
+}
+.weight{
+  display:inline-block;
+  background-color:#fff2e8;
+  padding:0px 6px;
+  font-size:12px;
+  color:#fa545b;
+  border:1px solid #ffbb96;
+  border-radius:4px;
+  margin:0 auto;
+  line-height:normal;
+  margin-left:15px
+}

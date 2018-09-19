@@ -1,0 +1,22 @@
+.item{
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    height: 90px;
+    border-bottom: 1px solid #f4f4f4;
+    padding: 24px 0;
+}
+.item:last-child{
+    border-bottom: 0;
+}
+.itemLeft{
+    font-family: 'PingFangSC-Semibold', 'PingFang SC Semibold', 'PingFang SC';
+}
+.itemLeft p{
+    font-weight: 600;
+    color: rgba(0, 0, 0, 0.847058823529412);
+}
+.itemLeft span{
+    font-weight: 400;
+    color: rgba(0, 0, 0, 0.447058823529412);
+}

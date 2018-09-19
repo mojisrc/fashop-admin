@@ -1,0 +1,15 @@
+export const GET_SETTING_BASIC = 'GET_SETTING_BASIC'; // 获取基础配置
+export const CHANGE_ROUTER_CONFIG_ROUTERS = 'CHANGE_ROUTER_CONFIG_ROUTERS'; // 改变路由数据结构
+export const GET_AREA_LIST = 'GET_AREA_LIST'; // 获取地区列表
+export const SET_AREA_LIST = 'SET_AREA_LIST'; // 获取地区列表
+export const SETTING_PAY = 'SETTING_PAY'; //支付设置
+export const PSETTING_SMSPROVIDER = 'PSETTING_SMSPROVIDER';//短信服务商
+export const SMSLIST_SETTING = 'SMSLIST_SETTING' //短信场景列表
+export const CREEIVESMSLIST_SETTING = 'CREEIVESMSLIST_SETTING' //获取短信场景列表
+export const SMSSCENCEEDIT_SEETING = 'SMSSCENCEEDIT_SEETING' //短信场景设置
+export const SMSSCENEINFO_SETTING = 'SMSSCENEINFO_SETTING' //短信场景详情
+export const GETSMSCENEINFO_SETTING = 'GETSMSCENEINFO_SETTING' //获取短信场景内容
+
+
+export const GET_FREIGHT_LIST = 'GET_FREIGHT_LIST'; // 获取运费列表
+export const SET_FREIGHT_LIST = 'SET_FREIGHT_LIST'; // 设置运费列表

@@ -1,0 +1,23 @@
+.mentItem{
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+}
+.mentItem p{
+    margin: 0;
+    min-width: 60%;
+}
+.mentItem div{
+    min-width: 20%;
+}
+.popoverContent{
+
+}
+.popoverBtnView{
+    flex-direction: row;
+    justify-content: flex-end;
+    margin-top: 12px;
+}
+.popoverBtnView button:first-child{
+    margin-right: 16px;
+}

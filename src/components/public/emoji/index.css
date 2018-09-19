@@ -1,0 +1,24 @@
+
+.popoverContentView{
+    flex-direction: row;
+    width: 386px;
+    flex-wrap: wrap;
+}
+.popoverContentView p{
+    width: 24px;
+    height: 24px;
+    background-color: #fff;
+    text-align: center;
+}
+.popoverContentView p:hover{
+    background-color: #F6F8F9;
+}
+.popoverContentView p span{
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+    vertical-align: middle;
+    display: inline-block;
+    background: transparent url(https://res.wx.qq.com/mpres/zh_CN/htmledition/pages/modules/emoji_panel/icon_emotion_panel.2x.png) no-repeat 0 0;
+    background-size: 20px auto;
+}

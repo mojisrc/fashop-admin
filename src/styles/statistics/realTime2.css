@@ -1,0 +1,11 @@
+.barContainer{
+  margin-top: 15px;
+  background: #fff;
+  padding:15px 30px;
+}
+.extra span{
+  cursor: pointer;
+}
+.extra span:hover{
+  color:#9c6e4e;
+}

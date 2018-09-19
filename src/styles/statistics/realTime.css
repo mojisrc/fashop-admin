@@ -1,0 +1,30 @@
+.col1{
+    margin-bottom: 24px;
+}
+.p1{
+    line-height: 16px;
+    font-size: 16px;
+    height: 16px;
+}
+.p2{
+    line-height: 32px;
+    font-size: 24px;
+}
+.ul1{
+    text-align: right;
+    color: #999;
+    font-size: 14px;
+}
+.li1{
+    height: 48px;
+    line-height: 48px;
+    display: inline-block;
+    margin-left: 24px;
+}
+.span1{
+    width: 12px;
+    height: 12px;
+    margin-right: 8px;
+    border-radius: 50%;
+    display: inline-block;
+}

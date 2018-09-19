@@ -1,0 +1,11 @@
+.div1{
+    margin-left: 20px;
+}
+.view1{
+    flex-direction: row;
+    align-items: center;
+}
+.p1{
+    margin: 0;
+    margin-right: 12px;
+}

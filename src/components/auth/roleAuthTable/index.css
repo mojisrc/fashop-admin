@@ -1,0 +1,30 @@
+.table{
+    flex-direction: row;
+    border: 1px solid #eaeaea;
+    border-bottom: 0;
+}
+.table:last-child{
+    border-bottom: 1px solid #eaeaea;
+}
+.tableLeft{
+    padding: 20px;
+    align-items: flex-start;
+    justify-content: center;
+    min-width: 18%;
+    max-width: 18%;
+}
+.tableRight{
+    justify-content: center;
+    border-left: 1px solid #eaeaea;
+    padding: 20px;
+    flex-wrap: wrap;
+}
+.checkedAllWarp{
+    flex-direction: row;
+    padding: 15px 10px;
+    justify-content: space-between;
+}
+.view1{
+    flex-direction: row;
+    align-items: center;
+}

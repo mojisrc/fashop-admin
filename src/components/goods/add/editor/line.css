@@ -1,0 +1,7 @@
+.lineDetail{
+    background-color: #fff;
+}
+.lineDetail p{
+    border-bottom: 1px dashed #ccc;
+    margin: 20px 0;
+}

@@ -1,0 +1,42 @@
+.refundEditWarp{
+    /* border-top: 1px solid #e9e9e9; */
+}
+.detailTop{
+    background-color: #fff;
+    padding: 20px 0 0 20px;
+}
+.avatar{
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+}
+.btnView{
+    flex-direction: row;
+}
+.btnView button{
+    margin-right: 20px;
+}
+.btnView button:last-child{
+    margin-right: 0;
+}
+.infoView{
+
+}
+.infoView h3{
+    font-family: Arial-BoldMT, "Arial Bold", Arial;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 20px;
+    color: rgba(0, 0, 0, 0.847);
+    height: 28px;
+    line-height: 28px;
+}
+.infoView p{
+    font-family: "Microsoft YaHei";
+    font-size: 14px;
+    color: rgba(0, 0, 0, 0.847);
+    line-height: 22px;
+}
+.infoView p span{
+    color: rgba(0, 0, 0, 0.647);
+}

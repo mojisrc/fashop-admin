@@ -1,0 +1,16 @@
+.column,
+.iconcolumn{
+    text-align: center!important;
+}
+.operation{
+    flex-direction: row;
+    justify-content: center;
+}
+.operation a:first-child{
+    margin-right: 10px;
+}
+.iconcolumn i{
+    font-size: 15px;
+    color: #188fff;
+    font-weight: 600;
+}

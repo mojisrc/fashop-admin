@@ -1,0 +1,20 @@
+.page{
+  box-shadow: 4px 4px 20px 0 rgba(0,0,0,.01);
+  background: #fff;
+  border-radius: 4px;
+  min-height: 722px;
+  margin: 24px;
+}
+
+.menu :global(.ant-menu-item){
+  margin-top: 8px;
+  height: 55px;
+  line-height: 55px;
+}
+
+.alertView{
+    padding: 24px;
+}
+.alertViewNone{
+    display: none;
+}
