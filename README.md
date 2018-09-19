@@ -18,7 +18,7 @@ npm run build
 ```
 ## 接口地址
 - 如果您想自己搭建请去www.fashop.cn去了解安装教程
-- 您可以使用我们的测试接口地址 https://demo.fashop.cn
+- 您可以使用我们的测试接口地址 https://demo.fashop.cn，具体文档请求fashop官网查看
 - 更改接口地址文件 public/index.html 这是为了配合我们的fashop项目使用
 ## 最新功能
 
