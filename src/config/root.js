@@ -49,9 +49,7 @@ const AppEnv = __DEV__ ? 'debug' : 'release'
 */
 const developmentConfig = {
     // api域名
-    // domain: 'http://192.168.1.123:9510',
     domain: windowConfig.apiHost,
-    // domain : 'https://demo.fashop.cn',
 
     // 是否开启输出日志
     log: true,
