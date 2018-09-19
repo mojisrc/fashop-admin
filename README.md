@@ -7,6 +7,7 @@
 
 开发问题欢迎一起交流 ： QQ交流群：632466687
 
+小程序项目地址：[https://github.com/mojisrc/wechat-mini-shop](https://github.com/mojisrc/wechat-mini-shop)
 ## 使用
 ```bash
 # 安装
