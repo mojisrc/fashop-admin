@@ -10,7 +10,7 @@ import styles from './index.css'
     ({})=>({}),
     {}
 )
-export default class SystemInfo extends Component<
+    export default class SystemInfo extends Component<
    {},
    {}
 > {

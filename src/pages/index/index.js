@@ -21,7 +21,7 @@ class Index extends Component {
                     <Col span={17+7} >
                         <DataDisplay {...this.props} />
                         <Charts {...this.props} />
-                        <SystemInfo {...this.props} />
+                        {/*<SystemInfo {...this.props} />*/}
                     </Col>
                     {/*<Col span={7}>*/}
                         {/*<LoginInfo {...this.props} />*/}

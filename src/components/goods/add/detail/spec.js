@@ -179,14 +179,18 @@ export default class GoodsSpec extends Component<Props, State> {
                                             value={spec.id > 0 ? `${spec.id}` : []}
                                             style={{ width: '30%', top: '0' }}
                                             onChange={(specId) => {
-                                                this.onSpecSelectChange(specId, index)
+                                                if (specId === 'customSpecShow') {
+                                                    this.customSpecShow()
+                                                } else {
+                                                    this.onSpecSelectChange(specId, index)
+                                                }
                                             }}
                                         >
                                             {specList.map((item) => (
                                                 <Option key={item.id} disabled={!!specs.find((spec) => {
                                                     return item.id === spec.id
                                                 })}>{item.name}</Option>))}
-                                            <Option key={'undefined'}>自定义</Option>
+                                            <Option key={'customSpecShow'}>自定义</Option>
                                         </Select>
                                         {
                                             specRowRightCloseBtnHoverIndex === index ?
@@ -278,36 +282,37 @@ export default class GoodsSpec extends Component<Props, State> {
         )
     }
 
+    customSpecShow() {
+        this.setState({ customSpecSortShow: true })
+    }
+
     onSpecSelectChange(specId: number, index: number) {
-        const { skus, specList, onChange } = this.props;
+        const { specList, onChange } = this.props;
         const { specs, } = this.state
-        if (skus === 'undefined') { // 看不懂 todo
-            this.setState({ customSpecSortShow: true })
-        } else {
-            const findExistItem = specs.find((spec) => {
+
+        const findExistItem = specs.find((spec) => {
+            return spec.id === Number(specId)
+        })
+        // 判断是否有重复，没重复添加
+        if (findExistItem === undefined) {
+            const spec = specList.find((spec) => {
                 return spec.id === Number(specId)
             })
-            // 判断是否有重复，没重复添加
-            if (findExistItem === undefined) {
-                const spec = specList.find((spec) => {
-                    return spec.id === Number(specId)
-                })
-                if (!spec) {
-                    message.warning('商品型号不能重复')
-                } else {
-                    const _specs = [...specs]
-                    _specs[index] = {
-                        id: spec.id,
-                        name: spec.name,
-                        values: []
-                    }
-                    const data = this.mergeSkus(_specs)
-                    this.setState({ specs: _specs })
-                    onChange(data);
-                }
-            } else {
+            if (!spec) {
                 message.warning('商品型号不能重复')
+            } else {
+                const _specs = [...specs]
+                _specs[index] = {
+                    id: spec.id,
+                    name: spec.name,
+                    values: []
+                }
+                const data = this.mergeSkus(_specs)
+                this.setState({ specs: _specs })
+                onChange(data);
             }
+        } else {
+            message.warning('商品型号不能重复')
         }
     }
 
@@ -458,7 +463,7 @@ export default class GoodsSpec extends Component<Props, State> {
     addSpecItemButtom() {
         const { specs } = this.state
         return (
-             <Button
+            <Button
                 type="dashed"
                 disabled={specs[specs.length - 1].id <= 0}
                 onClick={() => {
