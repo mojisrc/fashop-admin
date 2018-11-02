@@ -240,7 +240,7 @@ export default class Add extends Component<Props, State> {
                         freightList={freightList}
                         shippingCostSelect={shippingCostSelect}
                         refreshfreightList={this.refreshfreightList}
-                        freight_fee={freight_fee}
+                        freight_fee={0}
                     />
                     <Editor
                         getFieldDecorator={getFieldDecorator}
