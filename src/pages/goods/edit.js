@@ -196,7 +196,7 @@ export default class Add extends Component<Props, State> {
 
     render() {
         const { photoGalleryVisible, previewVisible, previewImage, shippingCostSelect, info, skus, multiSpec } = this.state
-        const { body } = info
+        const { body ,freight_fee} = info
         const { categoryTree, specList, freightList, form, } = this.props
         const { getFieldDecorator, getFieldValue, } = form
         const formItemLayout = {
@@ -257,6 +257,7 @@ export default class Add extends Component<Props, State> {
                         freightList={freightList}
                         shippingCostSelect={shippingCostSelect}
                         refreshfreightList={this.refreshfreightList}
+                        freight_fee={freight_fee}
                     />
                     <Editor
                         getFieldDecorator={getFieldDecorator}

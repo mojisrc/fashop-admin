@@ -17,9 +17,11 @@ export default class M extends Component <{
     }>,
     shippingCostSelect: string | null,
     refreshShippingTemplateList: Function,
+
 }, {}> {
     render() {
-        const { getFieldDecorator, formItemLayout, shippingTemplateList, shippingCostSelect, refreshShippingTemplateList } = this.props;
+        const { getFieldDecorator, formItemLayout, shippingTemplateList, shippingCostSelect, refreshShippingTemplateList,freight_fee } = this.props;
+        console.log(freight_fee)
         return (
             <View className={Wstyles.goodsItem}>
                 <h3>运费其他</h3>
@@ -32,7 +34,7 @@ export default class M extends Component <{
                             validator: this.freightValidator,
                             required: true
                         }],
-                        initialValue: { key: "freight", value: "0.00" }
+                        initialValue: { key: "freight", value: freight_fee?freight_fee:"0.00" }
                     })(
                         <GoodsFreight
                             shippingCostSelect={shippingCostSelect}
@@ -184,7 +186,8 @@ type FreightProps = {
         name: string
     }>,
     refreshShippingTemplateList: Function,
-    onChange: Function
+    onChange: Function,
+    freight_fee: number,
 }
 
 type FreightState = {
@@ -226,8 +229,8 @@ class GoodsFreight extends Component<FreightProps, FreightState> {
     }
 
     render() {
-        const { shippingTemplateList, refreshShippingTemplateList, } = this.props;
-        const { loading, freight, freight_id, shippingCostSelect, } = this.state
+        const { shippingTemplateList, refreshShippingTemplateList, value } = this.props;
+        const { loading, freight_id, shippingCostSelect, } = this.state
         const radioStyle = {
             display: 'block',
             height: '30px',
@@ -252,7 +255,7 @@ class GoodsFreight extends Component<FreightProps, FreightState> {
                         formatter={value => `￥ ${value}`}
                         min={0}
                         precision={2}
-                        value={freight}
+                        value={value.value}
                         onChange={(e) => {
                             this.setState({ freight: e })
                         }}
