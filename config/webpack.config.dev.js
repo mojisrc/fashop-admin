@@ -127,7 +127,11 @@ module.exports = {
                                 },
                             },
                             {
-                                loader: require.resolve('less-loader')
+                                loader: require.resolve('less-loader'),
+                                options: {
+                                    javascriptEnabled: true,
+                                    modifyVars: theme,
+                                },
                             }
                         ],
                         exclude: [paths.appCssModules, paths.appComponentCssModules],
@@ -187,6 +191,7 @@ module.exports = {
                             {
                                 loader: require.resolve('less-loader'),
                                 options: {
+                                    javascriptEnabled: true,
                                     modifyVars: theme,
                                 },
                             },
