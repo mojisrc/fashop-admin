@@ -21,6 +21,7 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPl
 const publicPath = paths.servedPath;
 
 
+
 var HappyPack = require('happypack');
 var happyThreadPool = HappyPack.ThreadPool({ size: 5 });
 
@@ -59,6 +60,11 @@ const extractTextPluginOptions = shouldUseRelativeAssetPaths
 const entryFile = Object.assign({}, {
     main: [require.resolve('./polyfills'), paths.appIndexJs]
 }, getPagesFileEntry(paths.appPage))
+
+
+const pkgPath = path.resolve(__dirname, '../package.json');
+const pkg = require(pkgPath)
+const theme = pkg.theme;
 
 // console.log(entryFile)
 module.exports = {
@@ -246,7 +252,13 @@ module.exports = {
                                     ],
                                 },
                             },
-                            require.resolve('less-loader')
+                            {
+                                loader: require.resolve('less-loader'),
+                                options: {
+                                    javascriptEnabled: true,
+                                    modifyVars: theme,
+                                },
+                            },
                         ],
                         include: [paths.appComponentCssModules]
                     },
