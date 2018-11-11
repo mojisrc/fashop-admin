@@ -185,6 +185,8 @@ export default class SelectGoods extends Component<Props, State> {
                     </Spin>
                 </Modal>
             )
+        }else{
+            return null
         }
     }
 }

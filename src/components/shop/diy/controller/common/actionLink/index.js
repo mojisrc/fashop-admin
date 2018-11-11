@@ -5,10 +5,11 @@ import { View } from "react-web-dom";
 import { Popover, Tag, Input, Modal } from 'antd';
 import SelectGoods from "../../../../../public/selectGoods/index";
 import SelectPage from "../../../../../public/selectPage/index";
+import SelectGoodsCategory from "../../../../../public/selectGoodsCategory/index";
 
 const { TextArea } = Input;
 
-export type LinkActionType = 'portal' | 'goods' | 'page' | 'url'
+export type LinkActionType = 'portal' | 'goods' | 'page' | 'url' | 'goods_category'
 type Props = {
     getValues: Function,
     type: LinkActionType,
@@ -20,6 +21,7 @@ type State = {
     },
     selectGoodsVisible: boolean,
     selectPageVisible: boolean,
+    selectGoodsCategoryVisible:boolean,
     inputUrlVisible: boolean,
 }
 export const linkInfo = {
@@ -42,6 +44,11 @@ export const linkInfo = {
         type: 'url',
         name: '自定义链接',
         alias: '链接地址'
+    },
+    goods_category: {
+        type: 'goods_category',
+        name: '商品分类链接',
+        alias: '商品分类'
     }
 }
 
@@ -52,6 +59,7 @@ export default class Index extends Component<Props, State> {
         },
         selectGoodsVisible: false,
         selectPageVisible: false,
+        selectGoodsCategoryVisible:false,
         inputUrlVisible: false
     }
     onClick = (linkAction: LinkActionType) => {
@@ -72,6 +80,11 @@ export default class Index extends Component<Props, State> {
                     selectPageVisible: true
                 })
                 break;
+            case 'goods_category':
+                this.setState({
+                    selectGoodsCategoryVisible: true
+                })
+                break;
             // TODO
             case 'url':
                 this.setState({
@@ -85,7 +98,7 @@ export default class Index extends Component<Props, State> {
     render() {
         const props = { ...this.props }
         const { type, getValues } = props
-        const { selectGoodsVisible, selectPageVisible, inputUrlVisible, urlValue } = this.state
+        const { selectGoodsVisible, selectPageVisible,selectGoodsCategoryVisible, inputUrlVisible, urlValue } = this.state
         return (
             <View>
                 <View>
@@ -99,6 +112,9 @@ export default class Index extends Component<Props, State> {
                                 <a onClick={() => {
                                     this.onClick('goods')
                                 }}>{linkInfo.goods.name}</a>
+                                <a onClick={() => {
+                                    this.onClick('goods_category')
+                                }}>{linkInfo.goods_category.name}</a>
                                 <a onClick={() => {
                                     this.onClick('page')
                                 }}>{linkInfo.page.name}</a>
@@ -149,6 +165,28 @@ export default class Index extends Component<Props, State> {
                             getValues({
                                 ...props, ...{
                                     type: 'page',
+                                    value: {
+                                        id: state.value.id
+                                    },
+                                }
+                            })
+                        })
+                    }}
+                />
+                <SelectGoodsCategory
+                    visible={selectGoodsCategoryVisible}
+                    close={() => {
+                        this.setState({
+                            selectGoodsCategoryVisible: false
+                        })
+                    }}
+                    getState={(state) => {
+                        this.setState({
+                            selectGoodsCategoryVisible: false
+                        }, () => {
+                            getValues({
+                                ...props, ...{
+                                    type: 'goods_category',
                                     value: {
                                         id: state.value.id
                                     },

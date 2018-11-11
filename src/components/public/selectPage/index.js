@@ -113,6 +113,8 @@ export default class SelectPage extends Component<Props, State> {
                     </View>
                 </Modal>
             )
+        }else{
+            return null
         }
     }
 

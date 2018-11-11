@@ -1,20 +1,14 @@
 import React, { Component } from "react";
 import {
-    Row,
-    Col,
     Button,
     Modal,
     Tree,
     message,
-    Popover,
-    Radio,
 } from "antd";
-import styles from "./index.css";
 import { View } from "react-web-dom";
 import { sortCategory } from "../../../actions/goods/category";
 
 const TreeNode = Tree.TreeNode;
-const RadioGroup = Radio.Group;
 
 export default class CategorySort extends Component {
     state = {
