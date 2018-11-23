@@ -6,17 +6,17 @@ export const data = [
             {
                 id: 0,
                 title: '网站标题',
-                value: '晋皇商城',
+                value: '恒源祥商城',
                 type: 'string',
             },{
                 id: 1,
                 title: '网站描述',
-                value: '晋皇小米',
+                value: '恒源祥',
                 type: 'text',
             },{
                 id: 2,
                 title: '客服电话',
-                value: 4006665233,
+                value: 4000000000,
                 type: 'number',
             },
         ]

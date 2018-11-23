@@ -25,7 +25,7 @@ export default class ModalVideo extends Component<Props,State>{
                 {/* <p>{title}</p>
                 <View className={styles.coverView}>
                     <Image
-                        src={`https://demo.fashop.cn/admin/mix/wechatImage?url=${img}`}
+                        src={`https://demo.iotiotiot.cn/admin/mix/wechatImage?url=${img}`}
                     />
                 </View> */}
             </View>

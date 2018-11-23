@@ -64,16 +64,18 @@ export default class Charts extends Component<{},
                     api: StatisticsApi.monthSalesHistogram,
                     params: { date }
                 })
-                list = e.result.list
-                this.setState({
-                    monthSaleChartList: list,
-                    xAxisData: list.map((item) => {
-                        return `${item.day}日`
-                    }),
-                    yAxisData: list.map((item) => {
-                        return item.sale_number
+                if(e.result.list){
+                    list = e.result.list
+                    this.setState({
+                        monthSaleChartList: list,
+                        xAxisData: list.map((item) => {
+                            return `${item.day}日`
+                        }),
+                        yAxisData: list.map((item) => {
+                            return item.sale_number
+                        })
                     })
-                })
+                }
                 break
             case '月订单量':
                 e = await Fetch.fetch({

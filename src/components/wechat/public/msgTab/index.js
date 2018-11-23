@@ -387,7 +387,7 @@ export default class MsgTab extends Component<Props,State> {
                 <View>
                     <Image
                         style={{width: 98}}
-                        src={`https://demo.fashop.cn/admin/mix/wechatImage?url=${extra.url}`}
+                        src={`https://demo.iotiotiot.cn/admin/mix/wechatImage?url=${extra.url}`}
                     />
                 </View>
                 <a

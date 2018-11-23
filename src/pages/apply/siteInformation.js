@@ -49,7 +49,7 @@ export default class SiteInformation extends Component{
                           授权域名
                       </div>
                       <div className={siteInformation.informationRight}>
-                          www.fashop.cn
+                          47.107.139.33
                       </div>
                   </div>
                   <div className={siteInformation.informationBox}>

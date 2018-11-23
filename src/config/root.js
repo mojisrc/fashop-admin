@@ -4,7 +4,7 @@ const windowConfig = window.fashop
 /*
  *  项目名称
 */
-const AppName = `Fashop Admin`
+const AppName = `HYX Admin`
 
 /*
  *  项目平台
@@ -14,7 +14,7 @@ const AppPlatform = 'web'
 /*
  *  项目存储前缀名称
 */
-const AppStorageName = `fashop-admin`
+const AppStorageName = `hyx-admin`
 
 /*
  *  错误收集接口地址

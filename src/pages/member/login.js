@@ -47,10 +47,6 @@ export default class Login extends Component {
             <View className={styles.loginBgc}>
                 <View className={styles.loginWarp}>
                     <View className={styles.logo}>
-                        <img
-                            alt={'logo'}
-                            src={'/logo-black.png'}
-                        />
                     </View>
                     <Form onSubmit={this.handleSubmit}>
                         <FormItem>

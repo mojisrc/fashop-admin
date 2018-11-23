@@ -177,10 +177,10 @@ export default class MyTemplate extends Component<Props, State> {
                             <Input
                                 disabled
                                 style={{ width: 276 }}
-                                value="http://www.fashop.cn/wap"
+                                value="http://47.107.139.33/wap"
                             />
                             <CopyToClipboard
-                                text="http://www.fashop.cn/wap"
+                                text="http://47.107.139.33/wap"
                                 onCopy={() => message.success('复制成功！', 1)}
                             >
                                 <Button>复制</Button>
@@ -193,10 +193,10 @@ export default class MyTemplate extends Component<Props, State> {
                     <Input
                         disabled
                         style={{ width: 276 }}
-                        value="http://www.fashop.cn/page/1002dassd"
+                        value="http://47.107.139.33/page/1002dassd"
                     />
                     <CopyToClipboard
-                        text="http://www.fashop.cn/page/1002dassd"
+                        text="http://47.107.139.33/page/1002dassd"
                         onCopy={() => message.success('复制成功！', 1)}
                     >
                         <Button>复制</Button>

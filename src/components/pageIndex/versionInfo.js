@@ -21,7 +21,7 @@ class VersionInfo extends Component<
                    </View> */}
                    <p>
                        程序版本：
-                       <span>fashop v 1.0</span>
+                       <span>hyx v 1.0</span>
                        <Button
                            size='small'
                            className={styles.newVersionBtn}

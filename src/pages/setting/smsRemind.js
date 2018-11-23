@@ -99,7 +99,7 @@ export default class SmsRemind extends Component{
                         {...formItemLayout}
                         label="阿里云短信"
                         >
-                            <span className="ant-form-text"><a href="https://help.aliyun.com/document_detail/55327.html?from=fashop">立即申请</a></span>
+                            <span className="ant-form-text"><a href="https://help.aliyun.com/document_detail/55327.html">立即申请</a></span>
                         </FormItem>
                         <FormItem
                         label="Access KeyID"

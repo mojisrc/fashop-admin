@@ -1,8 +1,8 @@
 {
-  "name": "fashop-admin",
+  "name": "hyx-admin",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://www.fashop.cn",
+  "homepage": "http://47.107.139.33",
   "dependencies": {
     "antd": "^3.8.1",
     "autoprefixer": "7.1.6",
@@ -46,7 +46,8 @@
     "source-map-explorer": "^1.6.0",
     "sw-precache-webpack-plugin": "0.11.5",
     "whatwg-fetch": "^2.0.4",
-    "ws-web-utils": "^2.0.5"
+    "ws-web-utils": "^2.0.5",
+    "mini-css-extract-plugin": "^0.4.4"
   },
   "devDependencies": {
     "babel-core": "^6.26.3",
