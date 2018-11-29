@@ -1,7 +1,6 @@
 //@flow
 import React, { Component } from "react";
 import { Button, Input, Select, TreeSelect, Form } from "antd";
-import { View } from "react-web-dom";
 import { formType, handleSubmitType } from "../../../utils/flow";
 import { formdDfaultProps } from "../../../utils/defaultProps";
 import { connect } from "react-redux";

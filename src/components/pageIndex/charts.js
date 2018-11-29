@@ -50,29 +50,29 @@ export default class Charts extends Component<{},
     }
 
     async initChart(date: string, activeKey: string) {
-        const {
-            monthSaleChartList,
-            monthOrderChartList,
-            customerGrowthChartList,
-            newCustomerCostList
-        } = this.state
         let e
         let list
+        let xAxisData = []
+        let yAxisData = []
         switch (activeKey) {
             case '月销售额':
                 e = await Fetch.fetch({
                     api: StatisticsApi.monthSalesHistogram,
                     params: { date }
                 })
-                list = e.result.list
-                this.setState({
-                    monthSaleChartList: list,
-                    xAxisData: list.map((item) => {
+                if (Array.isArray(e.result.list) && e.result.list.length > 0) {
+                    list = e.result.list
+                    xAxisData = list.map((item) => {
                         return `${item.day}日`
-                    }),
-                    yAxisData: list.map((item) => {
+                    })
+                    yAxisData = list.map((item) => {
                         return item.sale_number
                     })
+                }
+                this.setState({
+                    monthSaleChartList: list,
+                    xAxisData,
+                    yAxisData
                 })
                 break
             case '月订单量':
@@ -80,15 +80,19 @@ export default class Charts extends Component<{},
                     api: StatisticsApi.monthOrderCountHistogram,
                     params: { date }
                 })
-                list = e.result.list
-                this.setState({
-                    monthOrderChartList: list,
-                    xAxisData: list.map((item) => {
+                if (Array.isArray(e.result.list) && e.result.list.length > 0) {
+                    list = e.result.list
+                    xAxisData = list.map((item) => {
                         return `${item.day}日`
-                    }),
-                    yAxisData: list.map((item) => {
+                    })
+                    yAxisData = list.map((item) => {
                         return item.order_number
                     })
+                }
+                this.setState({
+                    monthOrderChartList: list,
+                    xAxisData,
+                    yAxisData
                 })
                 break
             case '客户增量':
@@ -96,15 +100,19 @@ export default class Charts extends Component<{},
                     api: StatisticsApi.monthUserAddCountHistogram,
                     params: { date }
                 })
-                list = e.result.list
-                this.setState({
-                    customerGrowthChartList: list,
-                    xAxisData: list.map((item) => {
+                if (Array.isArray(e.result.list) && e.result.list.length > 0) {
+                    list = e.result.list
+                    xAxisData = list.map((item) => {
                         return `${item.day}日`
-                    }),
-                    yAxisData: list.map((item) => {
+                    })
+                    yAxisData = list.map((item) => {
                         return item.customer_number
                     })
+                }
+                this.setState({
+                    customerGrowthChartList: list,
+                    xAxisData,
+                    yAxisData
                 })
                 break
             case '新客户消费':
@@ -112,15 +120,19 @@ export default class Charts extends Component<{},
                     api: StatisticsApi.monthNewUserSalesHistogram,
                     params: { date }
                 })
-                list = e.result.list
-                this.setState({
-                    newCustomerCostList: list,
-                    xAxisData: list.map((item) => {
+                if (Array.isArray(e.result.list) && e.result.list.length > 0) {
+                    list = e.result.list
+                    xAxisData = list.map((item) => {
                         return `${item.day}日`
-                    }),
-                    yAxisData: list.map((item) => {
+                    })
+                    yAxisData = list.map((item) => {
                         return item.cost
                     })
+                }
+                this.setState({
+                    newCustomerCostList: list,
+                    xAxisData,
+                    yAxisData
                 })
                 break
         }
