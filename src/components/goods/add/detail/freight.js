@@ -4,6 +4,7 @@ import { View } from "react-web-dom";
 import { Select, Radio, InputNumber, Form, Button, DatePicker } from "antd";
 import Wstyles from './index.css'
 import { Link } from "react-router-dom";
+import moment from "moment";
 
 const Option = Select.Option;
 const RadioGroup = Radio.Group;
@@ -20,8 +21,7 @@ export default class M extends Component <{
 
 }, {}> {
     render() {
-        const { getFieldDecorator, formItemLayout, shippingTemplateList, shippingCostSelect, refreshShippingTemplateList,freight_fee } = this.props;
-        console.log(freight_fee)
+        const { getFieldDecorator, formItemLayout, shippingTemplateList, shippingCostSelect, refreshShippingTemplateList, freight_fee, sale_time } = this.props;
         return (
             <View className={Wstyles.goodsItem}>
                 <h3>运费其他</h3>
@@ -52,7 +52,7 @@ export default class M extends Component <{
                             validator: this.saleTimeValidator,
                             required: true
                         }],
-                        initialValue: { key: 0, value: null }
+                        initialValue: sale_time!==undefined ? { key: 1, value: moment(sale_time,'X') } : { key: 0, value: null }
                     })(
                         <GoodsSaleTime />
                     )}
@@ -105,9 +105,13 @@ class GoodsSaleTime extends Component<{
     sale_time: number | null
 
 }> {
-    state = {
-        immediateSale: 0,
-        sale_time: null,
+    constructor(props) {
+        super(props);
+        const value = props.value || {};
+        this.state = {
+            immediateSale: value.key || 0,
+            sale_time: value.value || null,
+        };
     }
     static defaultProps = {
         onChange: (any) => {
@@ -121,7 +125,6 @@ class GoodsSaleTime extends Component<{
             onChange(changedValue)
         }
     }
-
     componentWillUpdate(nextProps, nextState) {
         const {
             immediateSale,
@@ -136,7 +139,7 @@ class GoodsSaleTime extends Component<{
     }
 
     render() {
-        const { immediateSale } = this.state
+        const { immediateSale, sale_time } = this.state
         const radioStyle = {
             display: 'block',
             height: '30px',
@@ -162,6 +165,7 @@ class GoodsSaleTime extends Component<{
                         format="YYYY-MM-DD HH:mm:ss"
                         placeholder="选择时间"
                         style={{ marginLeft: 20 }}
+                        defaultValue={sale_time}
                         onOk={(e) => {
                             if (e) {
                                 this.setState({

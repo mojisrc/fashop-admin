@@ -196,7 +196,7 @@ export default class Add extends Component<Props, State> {
 
     render() {
         const { photoGalleryVisible, previewVisible, previewImage, shippingCostSelect, info, skus, multiSpec } = this.state
-        const { body ,freight_fee} = info
+        const { body, freight_fee, sale_time } = info
         const { categoryTree, specList, freightList, form, } = this.props
         const { getFieldDecorator, getFieldValue, } = form
         const formItemLayout = {
@@ -221,6 +221,9 @@ export default class Add extends Component<Props, State> {
                 },
             },
         };
+        if(!info.id){
+            return null
+        }
         return (
             <Page>
                 <Form onSubmit={this.handleSubmit} style={{ width: 1000 }}>
@@ -258,6 +261,7 @@ export default class Add extends Component<Props, State> {
                         shippingCostSelect={shippingCostSelect}
                         refreshfreightList={this.refreshfreightList}
                         freight_fee={freight_fee}
+                        sale_time={sale_time}
                     />
                     <Editor
                         getFieldDecorator={getFieldDecorator}
