@@ -85,7 +85,7 @@ export default class DeliveryWay extends Component<Props, State> {
                         <RadioGroup onChange={(e) => {
                             onExpressChange({
                                 express_id,
-                                need_express: e.target.value === 1,
+                                need_express: e.target.value ? 1 : 0,
                                 tracking_no
                             })
                         }}>

@@ -46,7 +46,7 @@ export default class OrderDetailOperateInfo extends Component<Props, State> {
                     <Button
                         type='primary'
                         onClick={() => {
-                            history.push('/order/send?id=' + id)
+                            history.push('/order/list/send?id=' + id)
                         }}
                     >
                         设置发货
