@@ -95,11 +95,16 @@ export default class Query {
 
     static page(page = 1, rows = 10) {
         const { historyPrefix } = window.fashop
-        return Query.getPath(window.location.pathname.replace(__DEV__ ? historyPrefix : historyPrefix, ''), {
+        const path = Query.getPath(window.location.pathname.replace(__DEV__ ? historyPrefix : historyPrefix, ''), {
             ...Query.getQuery(),
             page,
             rows
         })
+        if(path.indexOf("/") === 0){
+            return path
+        }else{
+            return `/${path}`
+        }
     }
 
 }
