@@ -18,7 +18,8 @@ type States = {
     checked: boolean,
     app_id: string,
     app_secret: string,
-    miniapp_id: string,
+    mini_app_id: string,
+    mini_app_secret: string,
     mch_id: string,
     key: string,
     status: number,
@@ -79,7 +80,8 @@ export default class WechatPay extends Component<Props, States> {
         checked: true,
         app_secret: '',
         app_id: '',
-        miniapp_id: '',
+        mini_app_id: '',
+        mini_app_secret: '',
         mch_id: '',
         key: '',
         status: 0,
@@ -92,7 +94,7 @@ export default class WechatPay extends Component<Props, States> {
         e.preventDefault()
         this.props.form.validateFieldsAndScroll(async (err, values) => {
             const { apiclientCert, apiclientKey } = this.state
-            const { app_id, app_secret, status, miniapp_id, mch_id, key } = values
+            const { app_id, app_secret, status, mini_app_id, mch_id, key } = values
             if (!err) {
                 const e = await Fetch.fetch({
                     api: PaymentApi.edit,
@@ -101,7 +103,7 @@ export default class WechatPay extends Component<Props, States> {
                         config: {
                             app_id,
                             app_secret,
-                            miniapp_id,
+                            mini_app_id,
                             mch_id,
                             key,
                             apiclient_cert: typeof apiclientCert[0]['path'] !== "undefined" ? apiclientCert[0].path : '',
@@ -132,7 +134,8 @@ export default class WechatPay extends Component<Props, States> {
                 this.setState({
                     app_id: config.app_id,
                     app_secret: config.app_secret,
-                    miniapp_id: config.miniapp_id,
+                    mini_app_id: config.mini_app_id,
+                    mini_app_secret: config.mini_app_secret,
                     mch_id: config.mch_id,
                     key: config.key,
                     status,
@@ -158,7 +161,7 @@ export default class WechatPay extends Component<Props, States> {
     }
 
     render() {
-        const { checked, app_id, status, miniapp_id, mch_id, key, apiclientCert, apiclientKey } = this.state
+        const { checked, app_id,app_secret, status, mini_app_id,mini_app_secret, mch_id, key, apiclientCert, apiclientKey } = this.state
         const { form, name, action, headers } = this.props
         const { getFieldDecorator } = form
 
@@ -236,20 +239,40 @@ export default class WechatPay extends Component<Props, States> {
                         </FormItem>
                         <FormItem
                             {...formItemLayout}
-                            label="小程序APPID"
+                            label="小程序App Id"
                         >
-                            {getFieldDecorator('miniapp_id', {
-                                initialValue: miniapp_id
+                            {getFieldDecorator('mini_app_id', {
+                                initialValue: mini_app_id
                             })(
                                 <Input placeholder='请输入' />
                             )}
                         </FormItem>
                         <FormItem
                             {...formItemLayout}
-                            label="公众号APPID"
+                            label="小程序App Secret"
+                        >
+                            {getFieldDecorator('mini_app_secret', {
+                                initialValue: mini_app_secret
+                            })(
+                                <Input placeholder='请输入' />
+                            )}
+                        </FormItem>
+                        <FormItem
+                            {...formItemLayout}
+                            label="公众号App Id"
                         >
                             {getFieldDecorator('app_id', {
                                 initialValue: app_id
+                            })(
+                                <Input placeholder='请输入' />
+                            )}
+                        </FormItem>
+                        <FormItem
+                            {...formItemLayout}
+                            label="公众号App Secret"
+                        >
+                            {getFieldDecorator('app_secret', {
+                                initialValue: app_secret
                             })(
                                 <Input placeholder='请输入' />
                             )}

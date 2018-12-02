@@ -1,7 +1,7 @@
 //@flow
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Form, Tabs } from 'antd';
+import {  Tabs } from 'antd';
 import { View } from "react-web-dom";
 import Page from '../../components/public/page'
 import styles from '../../styles/setting/paymentSetting.css'
@@ -31,7 +31,7 @@ export default class PaymentSetting extends Component<Props, State> {
             {
                 id: `1`,
                 tab: '微信支付',
-                type: 'wechat_mini_pay',
+                type: 'wechat_pay',
                 view: () => <WechatPay
                     action={UploadApi.addCert.url}
                     headers={getHeaders()}
@@ -41,7 +41,7 @@ export default class PaymentSetting extends Component<Props, State> {
         return (
             <View className={`${styles.paymentSettingWarp} paymentSetting`}>
                 <Tabs
-                    activeKey={location.state ? location.state.type : 'wechat_mini_pay'}
+                    activeKey={location.state ? location.state.type : 'wechat_pay'}
                     onChange={(key) => {
                         history.push({
                             pathname: '/setting/paymentSetting',
