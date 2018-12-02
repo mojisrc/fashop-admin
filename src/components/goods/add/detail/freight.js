@@ -34,7 +34,7 @@ export default class M extends Component <{
                             validator: this.freightValidator,
                             required: true
                         }],
-                        initialValue: { key: "freight", value: freight_fee?freight_fee:"0.00" }
+                        initialValue: { key: "freight", value: freight_fee ? freight_fee : "0.00" }
                     })(
                         <GoodsFreight
                             shippingCostSelect={shippingCostSelect}
@@ -52,7 +52,10 @@ export default class M extends Component <{
                             validator: this.saleTimeValidator,
                             required: true
                         }],
-                        initialValue: sale_time!==undefined ? { key: 1, value: moment(sale_time,'X') } : { key: 0, value: null }
+                        initialValue: sale_time !== undefined ? { key: 1, value: moment(sale_time, 'X') } : {
+                            key: 0,
+                            value: null
+                        }
                     })(
                         <GoodsSaleTime />
                     )}
@@ -113,6 +116,7 @@ class GoodsSaleTime extends Component<{
             sale_time: value.value || null,
         };
     }
+
     static defaultProps = {
         onChange: (any) => {
         },
@@ -125,6 +129,7 @@ class GoodsSaleTime extends Component<{
             onChange(changedValue)
         }
     }
+
     componentWillUpdate(nextProps, nextState) {
         const {
             immediateSale,
@@ -170,7 +175,7 @@ class GoodsSaleTime extends Component<{
                             if (e) {
                                 this.setState({
                                     immediateSale: 1,
-                                    sale_time: e.unix()
+                                    sale_time: e
                                 })
                             }
                         }}

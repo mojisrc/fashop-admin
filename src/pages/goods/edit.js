@@ -178,7 +178,7 @@ export default class Add extends Component<Props, State> {
                 if (sale_time.key === 0) {
                     params.sale_time = moment().unix()
                 } else {
-                    params.sale_time = sale_time.value
+                    params.sale_time = sale_time.value.unix()
                 }
                 const e = await Fetch.fetch({
                     api: GoodsApi.edit,
@@ -221,7 +221,7 @@ export default class Add extends Component<Props, State> {
                 },
             },
         };
-        if(!info.id){
+        if (!info.id) {
             return null
         }
         return (
@@ -281,7 +281,7 @@ export default class Add extends Component<Props, State> {
                             保存修改
                         </Button>
                         {/*<Button htmlType="submit">*/}
-                            {/*放入仓库*/}
+                        {/*放入仓库*/}
                         {/*</Button>*/}
                     </FormItem>
                 </Form>

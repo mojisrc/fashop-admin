@@ -165,7 +165,7 @@ export default class Add extends Component<Props, State> {
                 if (sale_time.key === 0) {
                     params.sale_time = moment().unix()
                 } else {
-                    params.sale_time = sale_time.value
+                    params.sale_time = sale_time.value.unix()
                 }
                 const e = await Fetch.fetch({
                     api: GoodsApi.add,
@@ -259,7 +259,7 @@ export default class Add extends Component<Props, State> {
                             上架出售
                         </Button>
                         {/*<Button htmlType="submit">*/}
-                            {/*放入仓库*/}
+                        {/*放入仓库*/}
                         {/*</Button>*/}
                     </FormItem>
                 </Form>
