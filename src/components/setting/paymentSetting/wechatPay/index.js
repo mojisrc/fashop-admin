@@ -1,17 +1,18 @@
 //@flow
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Alert, Switch, Form, Input, Button, message } from 'antd';
-import { View } from "react-web-dom";
+import { Alert, Switch, Form, Input, Button, message, Upload, Icon } from 'antd';
+import { View, Text } from "react-web-dom";
 import styles from './index.css'
 import Fetch from "../../../../utils/fetch";
 import { PaymentApi } from "../../../../config/api/payment";
+import { formType } from "../../../../utils/flow";
 
 type Props = {
-    form: {
-        validateFieldsAndScroll: Function,
-        getFieldDecorator: Function,
-    },
+    form: formType,
+    name: string,
+    action: string,
+    headers: Object
 }
 type States = {
     checked: boolean,
@@ -20,12 +21,60 @@ type States = {
     miniapp_id: string,
     mch_id: string,
     key: string,
-    status: number
+    status: number,
+    apiclient_cert: string,
+    apiclient_key: string,
+    apiclientCert: Array<any>,
+    apiclientKey: Array<any>
 }
 const FormItem = Form.Item;
 @Form.create()
 @connect()
 export default class WechatPay extends Component<Props, States> {
+    static defaultProps = {
+        form: {},
+        name: 'cert',
+        action: 'http://127.0.0.1:9510/admin/upload/addCert',
+        headers: {
+            'Access-Token': ''
+        }
+    }
+    onApiclientCertChange = (info: any) => {
+        let fileList = info.fileList;
+        fileList = fileList.slice(-1);
+        fileList = fileList.map((file) => {
+            if (file.response) {
+                file.path = file.response.result.path;
+                file.name = '证书';
+            }
+            return file;
+        });
+        fileList = fileList.filter((file) => {
+            if (file.response) {
+                return file.response.code === 0;
+            }
+            return true;
+        });
+        this.setState({ apiclientCert: fileList });
+    }
+    onApiclientKeyChange = (info: any) => {
+        let fileList = info.fileList;
+        fileList = fileList.slice(-1);
+        fileList = fileList.map((file) => {
+            if (file.response) {
+                file.path = file.response.result.path;
+                file.name = '证书';
+            }
+            return file;
+        });
+        fileList = fileList.filter((file) => {
+            if (file.response) {
+                return file.response.code === 0;
+            }
+            return true;
+        });
+        this.setState({ apiclientKey: fileList });
+    }
     state = {
         checked: true,
         app_secret: '',
@@ -33,12 +82,17 @@ export default class WechatPay extends Component<Props, States> {
         miniapp_id: '',
         mch_id: '',
         key: '',
-        status: 0
+        status: 0,
+        apiclient_cert: '',
+        apiclient_key: '',
+        apiclientCert: [],
+        apiclientKey: []
     }
-    handleSubmit = (e) => {
+    handleSubmit = (e: any) => {
         e.preventDefault()
         this.props.form.validateFieldsAndScroll(async (err, values) => {
-            const {app_id, app_secret, status, miniapp_id, mch_id, key } = values
+            const { apiclientCert, apiclientKey } = this.state
+            const { app_id, app_secret, status, miniapp_id, mch_id, key } = values
             if (!err) {
                 const e = await Fetch.fetch({
                     api: PaymentApi.edit,
@@ -49,7 +103,9 @@ export default class WechatPay extends Component<Props, States> {
                             app_secret,
                             miniapp_id,
                             mch_id,
-                            key
+                            key,
+                            apiclient_cert: typeof apiclientCert[0]['path'] !== "undefined" ? apiclientCert[0].path : '',
+                            apiclient_key: typeof apiclientKey[0]['path'] !== "undefined" ? apiclientKey[0].path : ''
                         },
                         status: status ? 1 : 0
                     }
@@ -62,6 +118,7 @@ export default class WechatPay extends Component<Props, States> {
             }
         });
     }
+
     async componentDidMount() {
         const paymentInfo = await Fetch.fetch({
             api: PaymentApi.info,
@@ -71,7 +128,7 @@ export default class WechatPay extends Component<Props, States> {
         if (paymentInfo.code === 0) {
             // 项目初始化的时候为空
             const { config, status } = paymentInfo.result.info
-            if(config){
+            if (config) {
                 this.setState({
                     app_id: config.app_id,
                     app_secret: config.app_secret,
@@ -79,15 +136,30 @@ export default class WechatPay extends Component<Props, States> {
                     mch_id: config.mch_id,
                     key: config.key,
                     status,
+                    apiclient_cert: config.apiclient_cert,
+                    apiclient_key: config.apiclient_key,
+                    apiclientCert: config.apiclient_cert ? [{
+                        uid: '-1',
+                        name: '证书',
+                        status: 'done',
+                        path: config.apiclient_cert
+                    }] : [],
+                    apiclientKey: config.apiclient_key ? [{
+                        uid: '-1',
+                        name: '证书',
+                        status: 'done',
+                        path: config.apiclient_key
+                    }] : [],
                 })
             }
         } else {
             message.warning(paymentInfo.msg)
         }
     }
+
     render() {
-        const { checked, app_id,  status, miniapp_id, mch_id, key } = this.state
-        const { form } = this.props
+        const { checked, app_id, status, miniapp_id, mch_id, key, apiclientCert, apiclientKey } = this.state
+        const { form, name, action, headers } = this.props
         const { getFieldDecorator } = form
 
         const formItemLayout = {
@@ -180,6 +252,56 @@ export default class WechatPay extends Component<Props, States> {
                                 initialValue: app_id
                             })(
                                 <Input placeholder='请输入' />
+                            )}
+                        </FormItem>
+                        <FormItem
+                            {...formItemLayout}
+                            label="CERT证书"
+                            extra="下载证书 cert.zip 中的 apiclient_cert.pem 文件，微信退款原路退回时所需"
+                        >
+                            {getFieldDecorator('apiclient_cert', {})(
+                                <Upload
+                                    name={name}
+                                    action={action}
+                                    headers={headers}
+                                    onChange={(e) => {
+                                        this.onApiclientCertChange(e)
+                                    }}
+                                    fileList={apiclientCert}
+                                >
+                                    <Button>
+                                        <Icon type="upload" /> 上传证书
+                                    </Button>
+                                    {Array.isArray(apiclientCert) && apiclientCert.length > 0 ?
+                                        <Text style={{ marginLeft: 10, color: 'green' }}>已上传</Text> :
+                                        <Text style={{ marginLeft: 10 }}>未上传</Text>
+                                    }
+                                </Upload>
+                            )}
+                        </FormItem>
+                        <FormItem
+                            {...formItemLayout}
+                            label="KEY密钥文件"
+                            extra="下载证书 cert.zip 中的 apiclient_key.pem 文件，微信退款原路退回时所需"
+                        >
+                            {getFieldDecorator('apiclient_key', {})(
+                                <Upload
+                                    name={name}
+                                    action={action}
+                                    headers={headers}
+                                    onChange={(e) => {
+                                        this.onApiclientKeyChange(e)
+                                    }}
+                                    fileList={apiclientKey}
+                                >
+                                    <Button>
+                                        <Icon type="upload" /> 上传证书
+                                    </Button>
+                                    {Array.isArray(apiclientKey) && apiclientKey.length > 0 ?
+                                        <Text style={{ marginLeft: 10, color: 'green' }}>已上传</Text> :
+                                        <Text style={{ marginLeft: 10 }}>未上传</Text>
+                                    }
+                                </Upload>
                             )}
                         </FormItem>
                         <FormItem

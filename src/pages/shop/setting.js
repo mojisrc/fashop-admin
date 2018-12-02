@@ -24,7 +24,7 @@ class Setting extends Component<{},
             <View className={`${styles.shopSettingWarp} shopSetting`}>
                 <Tabs defaultActiveKey='1'>
                     {
-                        tabsList.map(({ tab, id, pageRender }, index) =>
+                        tabsList.map(({ tab, id, pageRender }) =>
                             <TabPane tab={tab} key={id}>
                                 {
                                     pageRender()

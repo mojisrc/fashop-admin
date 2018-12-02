@@ -1,13 +1,15 @@
 //@flow
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Tabs } from 'antd';
+import { Form, Tabs } from 'antd';
 import { View } from "react-web-dom";
 import Page from '../../components/public/page'
 import styles from '../../styles/setting/paymentSetting.css'
 import WechatPay from '../../components/setting/paymentSetting/wechatPay'
 import { formType, historyType } from "../../utils/flow";
 import { dispatchProps } from "../../utils/defaultProps";
+import { getHeaders } from '../../utils/index';
+import { UploadApi } from '../../config/api/upload'
 
 const TabPane = Tabs.TabPane;
 type Props = {
@@ -30,7 +32,10 @@ export default class PaymentSetting extends Component<Props, State> {
                 id: `1`,
                 tab: '微信支付',
                 type: 'wechat_mini_pay',
-                view: () => <WechatPay />
+                view: () => <WechatPay
+                    action={UploadApi.addCert.url}
+                    headers={getHeaders()}
+                />
             }
         ]
         return (
