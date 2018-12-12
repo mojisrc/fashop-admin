@@ -1,13 +1,5 @@
 import React,{ Component } from "react";
 import { connect } from "react-redux";
-// import {
-//     Route,
-// } from "react-router-dom";
-// import {View} from "react-web-dom";
-// import { ThemeStyle, windowHeight } from "../../utils/style";
-// import { Layout, Menu, Icon, Card, Row, Col } from 'antd';
-// import styles from '../../styles/statistics/realTime.css';
-// import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts'
 import Page from 'components/public/Page'
 import SettingManageConfigHeader from 'components/setting/ManageConfigHeader'
 import SettingManageConfigTable from 'components/setting/ManageConfigTable'

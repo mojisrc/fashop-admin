@@ -1,4 +1,4 @@
-// @flow
+
 import React, { Component } from "react";
 import { Row, Col, Button, Input, Select, DatePicker, } from "antd";
 import styles from "./index.css";
@@ -23,7 +23,7 @@ type State = {
         type: string,
     }
 }
-export default class EvaluateListHeader extends Component<Props, State> {
+export default class EvaluateListHeader extends Component {
     state = {
         reply_content: '',
         queryParams: {

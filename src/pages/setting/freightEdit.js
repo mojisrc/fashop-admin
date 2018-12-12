@@ -1,4 +1,3 @@
-//@flow
 import React, { Component } from "react";
 import { Input,  Button, Modal, Form, Tree, message } from "antd";
 import { Link } from "react-router-dom";
@@ -7,80 +6,20 @@ import Page from "../../components/public/page";
 import { formType, handleSubmitType, dispatchType } from '../../utils/flow'
 import FreightAddTable from '../../components/setting/freightAddTable'
 import { connect } from "react-redux";
-import { getAreaListData } from "../../actions/setting";
+import { areaList } from "../../actions/setting";
 import { View, ScrollView } from "react-web-dom";
 import { Fetch, publicFunction } from "../../utils";
-import { getFreightInfo } from "../../actions/deliver/freight";
+import { info } from "../../actions/deliver/freight";
 import {FreightApi} from "../../config/api/freight";
-
 const {
     parseQuery
 } = publicFunction
 
 const FormItem = Form.Item;
 const TreeNode = Tree.TreeNode;
-
-type IdsType = Array<string>
-type AreaType = Array<{
-    id: number,
-    name: string,
-    _child: Array<{
-        id: number,
-        name: string,
-        _child: Array<any>
-    }>
-}>
-type Props = {
-    history: { push: Function },
-    form: formType,
-    areaList: AreaType,
-    dispatch: dispatchType,
-    location: {
-        state?: {
-            categoryData?: { name: string, pid: number, icon: string }
-        },
-        search: string,
-    }
-};
-type State = {
-    payType: 1 | 2,
-    visible: boolean,
-    tableDataSource: Array<{
-        additional_amount: number,
-        additional_fee: number,
-        first_amount: number,
-        first_fee: number,
-        ids: Array<string>
-    }>,
-    checkedAreaKeys: IdsType,
-    expandedKeys: IdsType,
-    checkedKeys: IdsType,
-    editAreaTableIndex: number | null,
-    loading: boolean,
-    autoExpandParent: boolean,
-    autoExpandParent2: boolean,
-    expandedKeys2: IdsType,
-    checkedKeys2: IdsType,
-    selectedKeys2: IdsType,
-    selectedKeys: IdsType,
-    tableDataSource: Array<{
-        additional_amount: number,
-        additional_fee: number,
-        first_amount: number,
-        first_fee: number,
-        ids: Array<string>
-    }>,
-    info: {
-        id: number,
-        name: string,
-        pay_type: 1 | 2,
-        areas: AreaType
-    }
-}
-
 @connect(({ app: { setting: { areaList } } }) => ({ areaList }))
 @Form.create()
-export default class FreightEdit extends Component<Props, State> {
+export default class FreightEdit extends Component {
     state = {
         info: {
             id: 0,
@@ -113,7 +52,7 @@ export default class FreightEdit extends Component<Props, State> {
     async componentDidMount() {
         const { areaList, dispatch, location } = this.props
         const { id } = parseQuery(location.search)
-        const e = await getFreightInfo({ params: { id } })
+        const e = await info({ params: { id } })
         if (e.code === 0) {
             const { info } = e.result
             this.setState({
@@ -123,7 +62,7 @@ export default class FreightEdit extends Component<Props, State> {
             })
         }
         if (!areaList.length) {
-            dispatch(getAreaListData())
+            dispatch(areaList())
         }
     }
 
@@ -227,7 +166,7 @@ export default class FreightEdit extends Component<Props, State> {
     handleCancel = () => {
         this.changeAreaListModal(false)
     }
-    handleSubmit = (e: handleSubmitType) => {
+    handleSubmit = (e) => {
         e.preventDefault();
         const {
             validateFieldsAndScroll,

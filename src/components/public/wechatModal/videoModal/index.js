@@ -1,4 +1,4 @@
-//@flow
+
 import React, { Component } from "react";
 import { bindActionCreators } from 'redux';
 import { connect } from "react-redux";
@@ -15,11 +15,11 @@ type Props = {
     onOk:Function,
     newsType:string,
     rowSelectionType:string,
-    getWechatMaterialList:Function,
+    wechatMaterialList:Function,
     videoMaterialList:{
         item:Array<{}>
     },
-    materialListLoading:boolean,
+    wechatMaterialListLoading:boolean,
 }
 type State = {
     newsTypeValue:string,
@@ -29,15 +29,15 @@ type State = {
 }
 
 @connect(
-    ({view:{material:{ videoMaterialList, videoCurrentPage, videoPageSize, materialListLoading }}}) => ({
+    ({view:{material:{ videoMaterialList, videoCurrentPage, videoPageSize, wechatMaterialListLoading }}}) => ({
         videoMaterialList,
         videoCurrentPage,
         videoPageSize,
-        materialListLoading,
+        wechatMaterialListLoading,
     }),
     dispatch => bindActionCreators(actions,dispatch),
 )
-export default class VideoModal extends Component<Props,State> {
+export default class VideoModal extends Component {
     state = {
         newsTypeValue:this.props.newsType,
         selectedRowKeys:[],
@@ -45,7 +45,7 @@ export default class VideoModal extends Component<Props,State> {
         addVideoVisible:false
     }
     componentDidMount(){
-        this.props.getWechatMaterialList({
+        this.props.wechatMaterialList({
             params:{
                 type:'video',
                 offset:'0',
@@ -103,7 +103,7 @@ export default class VideoModal extends Component<Props,State> {
                              this.setState({
                                  addVideoVisible:false,
                              })
-                             this.props.getWechatMaterialList({
+                             this.props.wechatMaterialList({
                                  params:{
                                      type:'video',
                                      offset:'0',
@@ -133,10 +133,10 @@ export default class VideoModal extends Component<Props,State> {
             newsType,
             rowSelectionType,
             videoMaterialList,
-            materialListLoading,
+            wechatMaterialListLoading,
             videoCurrentPage,
             videoPageSize,
-            getWechatMaterialList,
+            wechatMaterialList,
             newVideoBtn,
         } = this.props
         const { total_count } = videoMaterialList
@@ -202,7 +202,7 @@ export default class VideoModal extends Component<Props,State> {
                 </View>
                 <Table
                     bordered
-                    loading={materialListLoading}
+                    loading={wechatMaterialListLoading}
                     rowSelection={rowSelection}
                     columns={columns}
                     dataSource={videoMaterialList.item ? videoMaterialList.item : []}
@@ -216,7 +216,7 @@ export default class VideoModal extends Component<Props,State> {
                         hideOnSinglePage:true,
                         pageSizeOptions:['5','10','15','20'],
                         onChange:(page, pageSize)=>{
-                            getWechatMaterialList({
+                            wechatMaterialList({
                                 params:{
                                     type:'video',
                                     offset:page===1 ? '0' : (page-1)*pageSize-1,
@@ -225,7 +225,7 @@ export default class VideoModal extends Component<Props,State> {
                             })
                         },
                         onShowSizeChange:(current, size)=>{
-                            getWechatMaterialList({
+                            wechatMaterialList({
                                 params:{
                                     type:'video',
                                     offset:'0',

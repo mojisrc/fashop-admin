@@ -1,16 +1,11 @@
-// @flow
+
 import React, { Component } from "react";
 import { Table, Tag } from "antd";
 import styles from "./index.css";
 import { View } from "react-web-dom";
 
-type Props = {
-    extend_order_goods: Array<{}>,
-    amount: number,
-    freight_fee: number
-}
-type State = {}
-export default class OrderDetailGoodsInfo extends Component<Props, State> {
+
+export default class OrderDetailGoodsInfo extends Component {
     render() {
         const { extend_order_goods, amount, freight_fee } = this.props
         const columns = [
@@ -28,7 +23,7 @@ export default class OrderDetailGoodsInfo extends Component<Props, State> {
                 key: 'goods_spec',
                 render: (goods_spec) => {
                     return goods_spec.map(function (item,index) {
-                        return <Tag key={index}>{item.value_name}</Tag>
+                        return item.value_id > 0 && <Tag key={index}>{item.value_name}</Tag>
                     })
                 }
             }, {

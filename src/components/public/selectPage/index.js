@@ -1,9 +1,9 @@
-//@flow
+
 import React, { Component } from "react";
 import { View } from "react-web-dom";
 import { Modal, Table, Button } from "antd";
 import { connect } from "react-redux";
-import { getShopPageList } from "../../../actions/shop/decorate";
+import { list } from "../../../models/decorate";
 import moment from "moment";
 
 type PageRowType = {
@@ -39,7 +39,7 @@ type State = {
         shopPageListLoading,
     })
 )
-export default class SelectPage extends Component<Props, State> {
+export default class SelectPage extends Component {
     constructor(props: Props) {
         super(props);
         this.state = {
@@ -50,7 +50,7 @@ export default class SelectPage extends Component<Props, State> {
     componentDidMount() {
         const { dispatch } = this.props
         if (dispatch) {
-            dispatch(getShopPageList({ params: { page: 1, rows: 5 } }))
+            dispatch(list({ params: { page: 1, rows: 5 } }))
         }
     }
 
@@ -106,7 +106,7 @@ export default class SelectPage extends Component<Props, State> {
                             }}
                             onChange={({ current, pageSize }) => {
                                 if (dispatch) {
-                                    dispatch(getShopPageList({ params: { page: current, rows: pageSize } }))
+                                    dispatch(list({ params: { page: current, rows: pageSize } }))
                                 }
                             }}
                         />

@@ -1,35 +1,16 @@
-// @flow
 import React, { Component } from "react";
 import { Input, Button, Form, Switch } from 'antd';
 import Page from '../../components/public/page'
 import { connect } from "react-redux";
-import { dispatchType, formType, handleSubmitType } from "../../utils/flow";
 import { publicFunction } from "../../utils";
-import { getExpressInfo, editExpress } from "../../actions/deliver/express";
-
+import { info, edit } from "../../actions/deliver/express";
 const {
     parseQuery
 } = publicFunction
-
 const FormItem = Form.Item;
-type Props = {
-    form: formType,
-    dispatch: dispatchType,
-    editExpress: Function,
-    location: {
-        search: string,
-    }
-}
-type State = {
-    info: {
-        id: number,
-        company_name: string,
-        is_commonly_use: number,
-    }
-}
 @Form.create()
 @connect()
-export default class ExpressEdit extends Component<Props, State> {
+export default class ExpressEdit extends Component {
     state = {
         areaList: [],
         info: {
@@ -42,7 +23,7 @@ export default class ExpressEdit extends Component<Props, State> {
     async componentDidMount() {
         const { location } = this.props
         const { id } = parseQuery(location.search)
-        const e = await getExpressInfo({ params: { id } })
+        const e = await info({ params: { id } })
         if (e.code === 0) {
             const { info } = e.result
             this.setState({ info })
@@ -50,7 +31,7 @@ export default class ExpressEdit extends Component<Props, State> {
 
     }
 
-    handleSubmit = (e: handleSubmitType) => {
+    handleSubmit = (e) => {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
             if (!err) {
@@ -61,7 +42,7 @@ export default class ExpressEdit extends Component<Props, State> {
                     company_name: values.company_name,
                     is_commonly_use: values.is_commonly_use ? 1 : 0,
                 }
-                dispatch(editExpress({ params }))
+                dispatch(edit({ params }))
             }
         });
     }

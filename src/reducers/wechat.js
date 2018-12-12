@@ -13,7 +13,7 @@ const initialState = {
     keyWordsReplyListLoading: false,
     followedReplyInfo: {},
     //material
-    materialListLoading: false,
+    wechatMaterialListLoading: false,
     currentPage: 1,
     pageSize: 10,
     imageMaterialList: {},
@@ -91,35 +91,35 @@ export default (state = initialState, action) => {
 
         case types.wechat.START_GET_MATERIAL_LIST:
             return Object.assign({}, state, {
-                materialListLoading: true
+                wechatMaterialListLoading: true
             })
         case types.wechat.SET_IMAGE_MATERIAL_LIST:
             return Object.assign({}, state, {
                 imageMaterialList: action.imageMaterialList,
                 imageCurrentPage: action.currentPage,
                 imagePageSize: action.pageSize,
-                materialListLoading: false,
+                wechatMaterialListLoading: false,
             })
         case types.wechat.SET_VIDEO_MATERIAL_LIST:
             return Object.assign({}, state, {
                 videoMaterialList: action.videoMaterialList,
                 videoCurrentPage: action.currentPage,
                 videoPageSize: action.pageSize,
-                materialListLoading: false,
+                wechatMaterialListLoading: false,
             })
         case types.wechat.SET_VOICE_MATERIAL_LIST:
             return Object.assign({}, state, {
                 voiceMaterialList: action.voiceMaterialList,
                 voiceCurrentPage: action.currentPage,
                 voicePageSize: action.pageSize,
-                materialListLoading: false,
+                wechatMaterialListLoading: false,
             })
         case types.wechat.SET_NEWS_MATERIAL_LIST:
             return Object.assign({}, state, {
                 newsMaterialList: action.newsMaterialList,
                 newsCurrentPage: action.currentPage,
                 newsPageSize: action.pageSize,
-                materialListLoading: false,
+                wechatMaterialListLoading: false,
             })
         case types.wechat.START_GET_LOCAL_NEWS_MATERIAL_LIST:
             return Object.assign({}, state, {

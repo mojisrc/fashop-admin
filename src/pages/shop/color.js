@@ -1,34 +1,9 @@
-//@flow
 import React,{ Component } from "react";
 import { View } from "react-web-dom";
 import { Row, Col, Button } from 'antd';
 import Page from '../../components/public/page'
 import styles from '../../styles/shop/shopColor.css'
-
-type Props = {
-    getShopInfo:Function,
-    editShopColorScheme:Function,
-    shopInfo:{
-        info:{
-            logo:string,
-            name:string,
-            contact_number:string,
-            description:string,
-            portal_template_id:number,
-            goods_category_style:number,
-            color_scheme:number,
-        }
-    },
-}
-type State = {
-    colorList:Array<{
-        color:Array<string>,
-        example:Array<string>,
-    }>,
-    currentColor:number
-}
-
-export default class Color extends Component<Props,State> {
+export default class Color extends Component {
     state = {
         colorList : [
             {

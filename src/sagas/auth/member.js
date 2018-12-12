@@ -7,7 +7,7 @@ import {
     setMemberList,
     addMemberButtonLoading,
     editMemberButtonLoading,
-} from '../../actions/auth/member';
+} from '../../actions/member';
 import { MemberApi } from "../../config/api/member";
 
 

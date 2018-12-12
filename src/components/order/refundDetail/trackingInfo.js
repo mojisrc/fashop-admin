@@ -1,11 +1,11 @@
-// @flow
+
 import React, { Component } from "react";
 import styles from "./index.css";
 import { View } from "react-web-dom";
 import InfoColumn from "../../public/info/infoColumn";
 import moment from "moment";
 import { Modal } from "antd";
-import { receiveOrderRefund } from "../../../actions/order/refund";
+import { receive } from "../../../models/refund";
 import { dispatchProps } from "../../../utils/defaultProps";
 import connect from "react-redux/es/connect/connect";
 
@@ -24,7 +24,7 @@ type Props = {
 type State = {}
 
 @connect()
-export default class TrackingInfo extends Component<Props, State> {
+export default class TrackingInfo extends Component {
     static defaultProps = {
         dispatch: () => {
         }
@@ -83,7 +83,7 @@ export default class TrackingInfo extends Component<Props, State> {
                                         okType: 'danger',
                                         cancelText: '取消',
                                         onOk: () => {
-                                            dispatch(receiveOrderRefund({ params : {id} }))
+                                            dispatch(receive({ params : {id} }))
                                         }
                                     })
                                 }}>确认收货？</a></div>

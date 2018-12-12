@@ -1,4 +1,3 @@
-//@flow
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import {
@@ -26,27 +25,9 @@ import {
 import EditGroupMemberModal from '../../components/auth/editGroupMemberModal'
 import {AuthCom,authHoc} from '../../components/auth/authRules'
 import authSignConfig from '../../utils/authSignConfig'
-
-
 const MenuItem = Menu.Item;
 const { Header, Content, Sider } = Layout;
 const TabPane = Tabs.TabPane;
-
-
-type Props = {
-    groupListLoading: boolean,
-    groupList: Array<{id:number,name:string}>,
-    dispatch: Function,
-    groupMemberList:{},
-}
-
-type State = {
-    onSelectKey: null|number,
-    editModalVisible: boolean,
-    onSelectIndex: null|number,
-    addGroupVisible: boolean,
-    editGroupMemberModalVisible: boolean,
-}
 
 @authHoc({
     rules: authSignConfig.auth.role
@@ -60,7 +41,7 @@ type State = {
     groupList,
     groupMemberList,
 }))
-export default class RoleOwner extends Component<Props,State> {
+export default class RoleOwner extends Component {
     state = {
         onSelectKey: null,
         editModalVisible: false,

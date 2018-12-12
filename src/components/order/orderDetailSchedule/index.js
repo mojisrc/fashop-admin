@@ -1,4 +1,4 @@
-// @flow
+
 import React, { Component } from "react";
 import {
     Card,
@@ -14,7 +14,7 @@ type Props = {
 type State = {
     stepCurrent:number
 }
-export default class OrderDetailSchedule extends Component<Props, State> {
+export default class OrderDetailSchedule extends Component {
     state = {
         stepCurrent: 1
     }

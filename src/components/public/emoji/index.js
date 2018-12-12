@@ -1,4 +1,4 @@
-//@flow
+
 import React, { Component } from "react";
 import { View } from "react-web-dom";
 import { Popover, Icon } from "antd";
@@ -10,7 +10,7 @@ type Props = {
 }
 type State = {}
 
-export default class Emoji extends Component<Props,State> {
+export default class Emoji extends Component {
     render() {
         return (
             <Popover

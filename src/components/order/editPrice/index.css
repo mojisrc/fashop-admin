@@ -1,0 +1,28 @@
+.goodsDesc{
+    flex-direction: row;
+    align-items: center;
+}
+.goodsDesc img{
+    width: 40px;
+    height: 40px;
+    border-radius: 4px;
+    margin-right: 5px;
+}
+.tableFooter{
+    margin: 0;
+    text-align: right;
+}
+.resultPrice{
+    margin-bottom: 10px;
+}
+.resultPrice label{
+    font-size: 18px;
+    color: #1890FF;
+}
+.resultPrice em{
+    font-style: normal;
+    font-weight: bold;
+}
+.resultPriceIntro{
+    color: #999999;
+}

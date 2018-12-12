@@ -1,9 +1,9 @@
-//@flow
+
 import React, { Component } from "react";
 import { View } from "react-web-dom";
 import { Modal, Tree } from "antd";
 import { connect } from "react-redux";
-import { getGoodsCategoryList } from "../../../actions/goods/category";
+import { list } from "../../../actions/goods/category";
 
 const TreeNode = Tree.TreeNode;
 
@@ -39,7 +39,7 @@ type State = {
         categoryTree, categoryList
     })
 )
-export default class SelectGoodsCategory extends Component<Props, State> {
+export default class SelectGoodsCategory extends Component {
     constructor(props: Props) {
         super(props);
         this.state = {
@@ -60,7 +60,7 @@ export default class SelectGoodsCategory extends Component<Props, State> {
     componentDidMount() {
         const { dispatch } = this.props
         if (dispatch) {
-            dispatch(getGoodsCategoryList())
+            dispatch(list())
         }
     }
 

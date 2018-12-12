@@ -1,9 +1,9 @@
-// @flow
+
 import React, { Component } from "react";
 import { Button, Input, InputNumber } from "antd";
 import styles from "./index.css";
 import { View } from "react-web-dom";
-import { handleOrderRefund } from "../../../actions/order/refund";
+import { handle } from "../../../models/refund";
 import { dispatchProps } from "../../../utils/defaultProps";
 import connect from "react-redux/es/connect/connect";
 const TextArea = Input.TextArea
@@ -19,7 +19,7 @@ type State = {
     handle_message: string
 }
 @connect()
-export default class OrderDetailOperateInfo extends Component<Props, State> {
+export default class OrderDetailOperateInfo extends Component {
     static defaultProps = {
         dispatch: () => {
         }
@@ -79,7 +79,7 @@ export default class OrderDetailOperateInfo extends Component<Props, State> {
                         <Button
                             type='primary'
                             onClick={() => {
-                                dispatch(handleOrderRefund({ params: { id, handle_state: 20, handle_message } }))
+                                dispatch(handle({ params: { id, handle_state: 20, handle_message } }))
                             }}
                         >
                             同意申请
@@ -87,7 +87,7 @@ export default class OrderDetailOperateInfo extends Component<Props, State> {
 
                        <Button
                             onClick={() => {
-                                dispatch(handleOrderRefund({ params: { id, handle_state: 10, handle_message } }))
+                                dispatch(handle({ params: { id, handle_state: 10, handle_message } }))
                             }}
                         >
                             拒绝退款

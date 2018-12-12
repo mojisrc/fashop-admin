@@ -1,24 +1,15 @@
-// @flow
 import React, { Component } from "react";
 import { Input, Button, Form, Switch } from 'antd';
 import Page from '../../components/public/page'
 import { connect } from "react-redux";
-import { dispatchType, formType, handleSubmitType } from "../../utils/flow";
-import { addExpress } from "../../actions/deliver/express";
-
+import { add } from "../../actions/deliver/express";
 const FormItem = Form.Item;
-type Props = {
-    form: formType,
-    dispatch: dispatchType,
-    addExpress: Function
-}
-type State = {}
 @Form.create()
 @connect()
-export default class ExpressAdd extends Component<Props, State> {
+export default class ExpressAdd extends Component {
     state = {}
 
-    handleSubmit = (e: handleSubmitType) => {
+    handleSubmit = (e) => {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
             if (!err) {
@@ -27,7 +18,7 @@ export default class ExpressAdd extends Component<Props, State> {
                     company_name: values.company_name,
                     is_commonly_use: values.is_commonly_use ? 1 : 0,
                 }
-                dispatch(addExpress({ params }))
+                dispatch(add({ params }))
             }
         });
     }

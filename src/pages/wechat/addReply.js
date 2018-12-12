@@ -1,4 +1,3 @@
-//@flow
 import React,{ Component } from 'react'
 import { bindActionCreators } from 'redux';
 import { connect } from "react-redux";
@@ -29,71 +28,6 @@ const Option = Select.Option;
 const RadioGroup = Radio.Group;
 
 let uuid = 0;
-
-type Props = {
-    history:historyType,
-    form:formType,
-    addAutoReplyKeywords:Function,
-    getWechatMaterialList:Function,
-    getLocalNewsMaterialList:Function,
-    imageMaterialList:{
-        item:Array<{
-            name:string,
-            url:string,
-            media_id:string,
-        }>
-    },
-    materialListLoading:boolean,
-    newsMaterialList:{
-        item:Array<{
-            content:{
-                news_item:Array<{
-                    digest:string,
-                    thumb_url:string,
-                    title:string,
-                }>,
-                update_time:string,
-            },
-            media_id:string
-        }>
-    },
-    localNewsMaterialList:{
-        item:Array<{
-            content:{
-                news_item:Array<{
-                    digest:string,
-                    thumb_url:string,
-                    title:string,
-                }>,
-                update_time:string,
-            },
-            media_id:string
-        }>
-    },
-    voiceMaterialList:{
-        item:Array<{
-            name:string,
-            update_time:string,
-            media_id:string,
-        }>,
-        item_count:number,
-        total_count:number,
-    },
-    videoMaterialList:{
-        item:Array<{}>
-    },
-}
-type State = {
-    newsVisible:boolean,
-    localNewsVisible:boolean,
-    imageVisible:boolean,
-    textVisible:boolean,
-    voiceVisible:boolean,
-    videoVisible:boolean,
-    textInit:string,
-    reply_content_index:number,
-}
-
 @Form.create()
 @connect(
     ({view:{wechatAutoReply:{ keyWordsReplyList, keyWordsReplyListLoading }}}) => ({
@@ -102,7 +36,7 @@ type State = {
     }),
     dispatch => bindActionCreators(actions,dispatch),
 )
-export default class AddReply extends Component<Props,State> {
+export default class AddReply extends Component {
     state = {
         newsVisible:false,
         localNewsVisible:false,

@@ -217,8 +217,8 @@ export const WechatApi = {
         showLoading: false,
         needLogin: true,
     },
-    materialList:{
-        url: `${ROOT_URL}wechat/materialList`,
+    wechatMaterialList:{
+        url: `${ROOT_URL}wechat/wechatMaterialList`,
         method: 'GET',
         showLoading: false,
         needLogin: true,

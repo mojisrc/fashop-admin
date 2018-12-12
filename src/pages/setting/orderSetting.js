@@ -1,4 +1,3 @@
-//@flow
 import React,{ Component } from "react";
 import { connect } from "react-redux";
 import { Tabs } from 'antd';
@@ -9,15 +8,7 @@ import OrderProcess from '../../components/setting/orderSetting/orderProcess'
 
 const TabPane = Tabs.TabPane;
 
-class OrderSetting extends Component
-<
-    {
-        location:{state:{type:string}},
-        history:{push:Function}
-    },
-    {}
->
-{
+class OrderSetting extends Component{
     render() {
         const { location, history } = this.props
         const tabsList = [

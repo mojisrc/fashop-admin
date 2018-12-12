@@ -1,4 +1,4 @@
-// @flow
+
 import React, { Component } from "react";
 
 import styles from "./index.css";
@@ -12,7 +12,7 @@ type Props = {
     user_images: Array<string>,
 }
 type State = {}
-export default class OrderDetailOtherInfo extends Component<Props, State> {
+export default class OrderDetailOtherInfo extends Component {
     render() {
         const {
             refund_amount,

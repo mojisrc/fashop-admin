@@ -9,8 +9,6 @@ import Image from "../../image";
 import { View } from "react-web-dom";
 
 export default class InfoColumn extends Component {
-    PhotoGallery: any
-
     render() {
         const { infoList } = this.props
         return (

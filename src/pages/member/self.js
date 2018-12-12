@@ -1,4 +1,3 @@
-//@flow
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { View } from "react-web-dom";
@@ -8,26 +7,13 @@ import styles from '../../styles/user/userInfo.css'
 import UploadImage from '../../components/uploadImage'
 import { editSelfAvatar } from '../../actions/member'
 import types from '../../constants'
-import { historyType } from "../../utils/flow";
-import { dispatchProps } from "../../utils/defaultProps";
-type Props = {
-    history: historyType,
-    dispatch: dispatchProps,
-    location: { state: { type: string, record: {} }, search: string, pathname: string },
-    match: { url: string, path: string },
-    userInfo:{
-        avatar:string,
-        nickname:string
-    }
 
-}
-type State = {
-}
+
 
 @connect(({ app: { member: { userInfo } } }) => ({
     userInfo
 }))
-export default class Self extends Component<Props,State>{
+export default class Self extends Component{
 
     render() {
         const { dispatch, userInfo } = this.props;

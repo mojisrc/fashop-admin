@@ -7,8 +7,8 @@ import { Fetch } from '../../utils'
 import types from '../../constants';
 import { message } from 'antd';
 import {
-    setShippingTemplateList,
-} from '../../actions/setting/shippingTemplate';
+    setList,
+} from '../../models/shippingTemplate';
 import { FreightApi } from "../../config/api/freight";
 
 function* getList({ callback }) {
@@ -17,7 +17,7 @@ function* getList({ callback }) {
         const {
             list
         } = e.result
-        yield put(setShippingTemplateList({ list }))
+        yield put(setList({ list }))
         yield callback && callback()
     } else {
         message.warning(e.msg)

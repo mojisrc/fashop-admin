@@ -7,7 +7,7 @@ import { Fetch} from '../../utils'
 import types from '../../constants';
 import { message } from 'antd';
 import {
-    setGoodsSpecList,
+    setSpecList,
 } from '../../actions/goods/spec';
 import { GoodsApi } from "../../config/api/goods";
 
@@ -17,7 +17,7 @@ function* getList() {
         const {
             list
         } = e.result
-        yield put(setGoodsSpecList({ list }))
+        yield put(setSpecList({ list }))
     } else {
         message.warning(e.msg)
     }

@@ -1,4 +1,4 @@
-// @flow
+
 import React, { Component } from "react";
 import { Form, Select, Card, Row, Col, Alert } from 'antd';
 import { View } from "react-web-dom";
@@ -27,7 +27,7 @@ type State = {
     selectVisible: boolean,
     shipper_id: number
 }
-export default class SendAddress extends Component<Props, State> {
+export default class SendAddress extends Component {
     static defaultProps = {
         shipperList: [],
         shipper_id: 0,

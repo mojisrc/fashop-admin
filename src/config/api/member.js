@@ -1,5 +1,6 @@
 import { env } from '../root';
 const ROOT_URL = `${env.domain}/admin/`;
+
 export const MemberApi ={
     del:{
         url: `${ROOT_URL}member/del`,

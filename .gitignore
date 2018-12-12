@@ -1,13 +1,19 @@
 # See https://help.github.com/ignore-files/ for more about ignoring files.
-
+# misc
+.DS_Store
+npm-debug.log*
+# umi
+.umi
+.umi-production
+.vscode
+.vscode/settings.json
+package-lock.json
 # dependencies
 /node_modules
-
 # testing
 /coverage
 /package-lock.json
 # production
-
 # misc
 .DS_Store
 .env.local

@@ -6,7 +6,7 @@ import {
 import { Fetch } from '../../utils'
 import types from '../../constants';
 import { message } from 'antd';
-import { setRuleTree } from '../../actions/auth';
+import { setRuleTree } from '../../models/auth';
 import { AuthApi } from "../../config/api/auth";
 
 function* groupList() {

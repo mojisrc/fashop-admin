@@ -1,4 +1,4 @@
-//@flow
+
 import React, { Component } from "react";
 import { View } from "react-web-dom";
 import {
@@ -13,7 +13,7 @@ import {
 } from "antd";
 import styles from "./index.css";
 import { connect } from "react-redux";
-import { getPhotoGalleryList } from "../../../actions/app/photoGallery";
+import { getPhotoGalleryList } from "../../../models/photoGallery";
 import UploadImage from "../../../components/uploadImage";
 import Image from "../../image";
 
@@ -35,7 +35,7 @@ type State = {
 @connect(({ app: { app: { imageList } } }) => ({
     imageList
 }))
-export default class PhotoGallery extends Component<Props, State> {
+export default class PhotoGallery extends Component {
     static defaultProps = {
         imageList: {
             page: 1,

@@ -1,9 +1,9 @@
-//@flow
+
 import React, { Component } from "react";
 import { View } from "react-web-dom";
 import { Modal, Input, Checkbox, Pagination, Spin,Button } from "antd";
 import styles from "./index.css";
-import { getGoodsList } from "../../../actions/goods";
+import { list } from "../../../models/goods";
 import { connect } from "react-redux";
 import { ScrollView } from "react-web-dom";
 import Image from '../../image'
@@ -40,7 +40,7 @@ type State = {
     loading,
     listData,
 }))
-export default class SelectGoods extends Component<Props, State> {
+export default class SelectGoods extends Component {
 
     constructor(props: Props) {
         super(props);
@@ -55,7 +55,7 @@ export default class SelectGoods extends Component<Props, State> {
     componentDidMount() {
         const { dispatch } = this.props
         if (dispatch) {
-            dispatch(getGoodsList({ params: { page: 1, rows: 10 } }))
+            dispatch(list({ params: { page: 1, rows: 10 } }))
         }
     }
 
@@ -93,7 +93,7 @@ export default class SelectGoods extends Component<Props, State> {
                                     placeholder="请输入商品名称"
                                     onSearch={(value) => {
                                         if (dispatch) {
-                                            dispatch(getGoodsList({ params: { page, rows, title: value } }))
+                                            dispatch(list({ params: { page, rows, title: value } }))
                                         }
                                     }}
                                     style={{ width: 200 }}
@@ -160,7 +160,7 @@ export default class SelectGoods extends Component<Props, State> {
                                     current={page}
                                     onChange={(current, pageSize) => {
                                         if (dispatch) {
-                                            dispatch(getGoodsList({
+                                            dispatch(list({
                                                 params: {
                                                     page: current,
                                                     rows: pageSize
@@ -171,7 +171,7 @@ export default class SelectGoods extends Component<Props, State> {
                                     onShowSizeChange={(current, pageSize) => {
                                         if (dispatch) {
 
-                                            dispatch(getGoodsList({
+                                            dispatch(list({
                                                 params: {
                                                     page: current,
                                                     rows: pageSize

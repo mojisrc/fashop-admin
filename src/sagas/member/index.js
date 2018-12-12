@@ -4,7 +4,7 @@ import { userLogin, initUserInfoStorage, userSignOut, setUserinfos } from '../..
 import types from '../../constants';
 import { replace, push } from 'react-router-redux'
 import { message } from 'antd';
-import { getRuleTree } from "../../actions/auth"
+import { getRuleTree } from "../../models/auth"
 import { MemberApi } from "../../config/api/member";
 
 function* self({ access_token }) {
@@ -57,7 +57,7 @@ function* logout() {
 
 function* storage() {
     // todo 需要重构 太乱了
-    const userInfo = storageModule.getUserInfo()
+    const userInfo = storageModule.info()
     if(userInfo){
         yield put(initUserInfoStorage({ userInfo }))
         yield put({ type: types.app.INIT_USERINFO_STORAGE })

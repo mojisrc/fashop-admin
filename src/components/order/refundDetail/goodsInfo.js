@@ -1,4 +1,4 @@
-// @flow
+
 import React, { Component } from "react";
 import {
     Table, Tag
@@ -20,7 +20,7 @@ type Props = {
     goods_pay_price: number,
 }
 type State = {}
-export default class OrderDetailGoodsInfo extends Component<Props, State> {
+export default class OrderDetailGoodsInfo extends Component {
     render() {
         const {
             goods_id,
@@ -47,7 +47,7 @@ export default class OrderDetailGoodsInfo extends Component<Props, State> {
                     console.log(goods_spec)
                     if(Array.isArray(goods_spec) && goods_spec.length>0){
                         return goods_spec.map(function (item,index) {
-                            return <Tag key={index}>{item.value_name}</Tag>
+                            return item.value_id > 0 && <Tag key={index}>{item.value_name}</Tag>
                         })
                     }else{
                         return ''

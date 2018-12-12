@@ -8,8 +8,6 @@ import PropTypes from 'prop-types'
 const {  Footer} = Layout;
 const FormItem = Form.Item;
 let checkSwitchs = true;
-
-
 @Form.create()
 @connect(
     ({

@@ -1,44 +1,19 @@
-//@flow
 import React,{ Component } from "react";
-import { Row, Col, message, Button } from 'antd';
+import { Row, Col,Button } from 'antd';
 import { View } from "react-web-dom";
 import styles from '../../styles/shop/shopSort.css'
 import Page from '../../components/public/page'
 import { CopyToClipboard } from 'react-copy-to-clipboard';
-import QRCode from 'qrcode-react';
 import connect from "react-redux/es/connect/connect";
 import { bindActionCreators } from "redux";
 import * as actions from "../../actions/shop";
-
-type Props = {
-    getShopInfo:Function,
-    editGoodsCategoryStyle:Function,
-    shopInfo:{
-        info:{
-            logo:string,
-            name:string,
-            contact_number:string,
-            description:string,
-            portal_template_id:number,
-            goods_category_style:number,
-            color_scheme:number,
-        }
-    },
-}
-type State = {
-    availableList:Array<{
-        link:string,
-        img:string,
-        title:string,
-    }>,
-}
 @connect(
     ({ view: { shop: { shopInfo } } }) => ({
         shopInfo
     }),
     dispatch => bindActionCreators(actions, dispatch),
 )
-export default class DecorateCategory extends Component<Props,State> {
+export default class DecorateCategory extends Component {
     state = {
         availableList : [
             {
@@ -57,7 +32,7 @@ export default class DecorateCategory extends Component<Props,State> {
         ],
     }
     componentDidMount() {
-        this.props.getShopInfo()
+        this.props.info()
     }
     render() {
         const { availableList } = this.state

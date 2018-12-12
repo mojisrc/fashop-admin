@@ -1,4 +1,3 @@
-//@flow
 import React,{ Component } from "react";
 import { bindActionCreators } from 'redux';
 import { connect } from "react-redux";
@@ -8,26 +7,8 @@ import { View } from "react-web-dom";
 import Page from '../../components/public/page'
 import { formType, handleSubmitType } from '../../utils/flow'
 import UploadImage from "../../components/uploadImage";
-
 const { TextArea } = Input;
 const FormItem = Form.Item;
-
-type Props = {
-    form:formType,
-    getShopInfo:Function,
-    editShopInfo:Function,
-    shopInfo:{
-        info:{
-            logo:string,
-            name:string,
-            contact_number:string,
-            description:string,
-        }
-    },
-}
-type State = {
-
-}
 
 @Form.create()
 @connect(
@@ -36,16 +17,16 @@ type State = {
     }),
     dispatch => bindActionCreators(actions,dispatch),
 )
-export default class BasicInfo extends Component<Props,State> {
+export default class BasicInfo extends Component {
     componentDidMount(){
-        this.props.getShopInfo()
+        this.props.info()
     }
     handleSubmit = (e:handleSubmitType) => {
         e.preventDefault()
         this.props.form.validateFields((err, values) => {
             if (!err) {
                 console.log('Received values of form: ', values);
-                this.props.editShopInfo({
+                this.props.edit({
                     params:values
                 })
             }

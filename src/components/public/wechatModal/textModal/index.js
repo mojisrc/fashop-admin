@@ -1,4 +1,4 @@
-//@flow
+
 import React, { Component } from "react";
 import { View } from "react-web-dom";
 import { Modal, Input } from "antd";
@@ -17,7 +17,7 @@ type State = {
     textValue:string
 }
 
-export default class TextModal extends Component<Props,State> {
+export default class TextModal extends Component {
     state = {
         textValue:''
     }

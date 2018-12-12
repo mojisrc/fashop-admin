@@ -3,9 +3,9 @@ import Img from 'react-image'
 import { Icon } from 'antd'
 import styles from './index.css'
 import { View } from 'react-web-dom'
-
 export default class NetWorkImage extends PureComponent {
     render() {
+
         const { src, style, className, type, onClick } = this.props
         let unloaderSrc = type && type === 'avatar' ?
             require('../../images/default_avatar.png') : type && type === 'goods' ?

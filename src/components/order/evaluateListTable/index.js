@@ -1,4 +1,4 @@
-// @flow
+
 import React, { Component } from "react";
 import { Row, Col, Button, Input, Rate, Switch, Pagination, Spin, } from "antd";
 import styles from "./index.css";
@@ -7,7 +7,7 @@ import { View } from "react-web-dom";
 import moment from "moment";
 import Query from "../../../utils/query";
 import connect from "react-redux/es/connect/connect";
-import { getOrderEvaluateList } from "../../../actions/order/evaluate";
+import { list } from "../../../models/evaluate";
 import { dispatchType } from "../../../utils/flow";
 import PhotoGallery from "../../../components/photoGallery"
 import Fetch from "../../../utils/fetch";
@@ -70,7 +70,7 @@ type State = {
     orderEvaluateList,
     orderEvaluateListLoading,
 }))
-export default class EvaluateListTable extends Component<Props, State> {
+export default class EvaluateListTable extends Component {
 
     state = {
         reply_content: [],
@@ -96,7 +96,7 @@ export default class EvaluateListTable extends Component<Props, State> {
         if (params['create_time'] !== undefined) {
             params['create_time'] = [moment(params['create_time'][0]).unix(), moment(params['create_time'][1]).unix()]
         }
-        dispatch(getOrderEvaluateList({ params }))
+        dispatch(list({ params }))
     }
 
     render() {

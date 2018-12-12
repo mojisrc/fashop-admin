@@ -1,30 +1,17 @@
-//@flow
 import React, { Component } from "react";
 import { connect } from "react-redux";
-
 import { Tabs } from 'antd';
-
 import {
     Route,
     Redirect,
     Switch,
 } from "react-router-dom";
-
 //可配送区域
 import { getRoutes } from "../../utils"
 import * as routerRedux from 'react-router-redux';
-
 const TabPane = Tabs.TabPane;
-type Props = {
-    history: { push: Function },
-    location: { state: { activeKey: string } }
-}
-type State = {
-    activeKey: string
-}
-
 @connect()
-export default class Deliver extends Component<Props, State> {
+export default class Deliver extends Component {
     state = {
         activeKey: 'shipper'
     }

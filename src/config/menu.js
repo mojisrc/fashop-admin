@@ -71,6 +71,32 @@ const menuData = [
             }
         ]
     },
+    {
+            path: 'marketing',
+            name: '营销',
+            children: [
+                {
+                    path: 'group',
+                    name: '拼团',
+                },
+                {
+                    path: 'group/scondKill',
+                    name: '秒杀',
+                },
+                {
+                    path: 'group/xianshigou',
+                    name: '限时购',
+                },
+                {
+                    path: 'group/manjian',
+                    name: '满减',
+                },
+                {
+                    path: 'group/zengpin',
+                    name: '赠品',
+                }
+            ]
+    },
     // , {
     //     path: 'article',
     //     name: '图文',

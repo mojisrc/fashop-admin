@@ -202,6 +202,10 @@ function isUrl(path) {
     return reg.test(path);
 }
 
+function parsePrice(price){
+    price = isNaN(price) || !price ? 0.00 : price
+    return parseFloat(parseFloat(price).toFixed(2))
+}
 export {
     stateHoc,
     Fetch,
@@ -211,5 +215,6 @@ export {
     getRoutes,
     getPageQuery,
     getQueryPath,
-    isUrl
+    isUrl,
+    parsePrice
 }

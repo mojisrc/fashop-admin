@@ -1,4 +1,4 @@
-//@flow
+
 import React, { Component } from "react";
 import { bindActionCreators } from 'redux';
 import { connect } from "react-redux";
@@ -45,7 +45,7 @@ type State = {
     }),
     dispatch => bindActionCreators(actions,dispatch),
 )
-export default class LocalNewsView extends Component<Props,State> {
+export default class LocalNewsView extends Component {
     state = {
         checkedValues:'',
     }

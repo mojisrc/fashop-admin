@@ -1,19 +1,8 @@
-//@flow
 import React,{ Component } from "react";
 import { View } from "react-web-dom";
 import { Redirect, Route, Switch } from "react-router-dom";
 import { getRoutes } from "../../utils";
-import { dispatchProps } from "../../utils/defaultProps";
-type Props = {
-    location:{state:{type:string}},
-    history:{push:Function},
-    routerData: {},
-    dispatch: dispatchProps,
-    location: { state: { type: string, record: {} }, search: string, pathname: string },
-    match: { url: string, path: string }
-}
-
-export default class Index extends Component<Props,{}> {
+export default class Index extends Component {
     render() {
         const { match, routerData } = this.props;
         const routes = getRoutes(match.path, routerData);

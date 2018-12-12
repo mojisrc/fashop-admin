@@ -1,4 +1,3 @@
-//@flow
 import React,{ Component } from 'react'
 import { bindActionCreators } from 'redux';
 import { connect } from "react-redux";
@@ -18,48 +17,13 @@ const FormItem = Form.Item;
 const { TextArea } = Input;
 const Option = Select.Option;
 
-type Props = {
-    history:historyType,
-    form:formType,
-    pathSearch:{
-        id:string
-    },
-    localnewsMaterialInfo:{
-        info:{
-            media:Array<{
-                title: string,
-                digest: string,
-                cover_pic: string,
-                link:{
-                    action:string,
-                    param:{}
-                }
-            }>
-        }
-    },
-    getLocalnewsMaterialInfo:Function,
-    editLocalNewsMaterialList:Function,
-}
-type State = {
-    media:Array<{
-        title: string,
-        digest: string,
-        cover_pic: string,
-        link:{
-            action:string,
-            param:{}
-        }
-    }>,
-    active:number,
-}
-
 @connect(
     ({view:{material:{ localnewsMaterialInfo }}}) => ({
         localnewsMaterialInfo
     }),
     dispatch => bindActionCreators(actions,dispatch),
 )
-export default class EditServerMaterial extends Component<Props,State> {
+export default class EditServerMaterial extends Component {
     state = {
         media: [],
         active:0

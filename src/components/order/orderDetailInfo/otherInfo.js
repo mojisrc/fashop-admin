@@ -1,14 +1,10 @@
-// @flow
 import React, { Component } from "react";
 import styles from "./index.css";
 import { View } from "react-web-dom";
 import InfoColumn from "../../public/info/infoColumn";
 
-type Props = {
-    message: string
-}
-type State = {}
-export default class OrderDetailOtherInfo extends Component<Props, State> {
+
+export default class OrderDetailOtherInfo extends Component{
     render() {
         const { message } = this.props
         return (

@@ -1,11 +1,11 @@
-// @flow
+
 import React, { Component } from "react";
 import { Table, Button, } from "antd";
 import styles from "./index.css";
 import { View } from "react-web-dom";
 import moment from 'moment'
 import Query from "../../../utils/query";
-import { getOrderRefundList } from "../../../actions/order/refund";
+import { list } from "../../../models/refund";
 import { dispatchProps } from "../../../utils/defaultProps";
 import connect from "react-redux/es/connect/connect";
 
@@ -18,8 +18,8 @@ type Props = {
         rows: number
     },
     orderRefundListLoading: boolean,
-    getOrderRefundList: Array<{}>,
-    getOrderRefundList?: Function,
+    list: Array<{}>,
+    list?: Function,
     location: { state: { type: string, record: {} }, search: string },
     history: { push: Function }
 
@@ -46,7 +46,7 @@ type State = {
     orderRefundList,
     orderRefundListLoading,
 }))
-export default class RefundTable extends Component<Props, State> {
+export default class RefundTable extends Component {
     state = {
         selectedRowKeys: [],
         queryParams: {
@@ -75,7 +75,7 @@ export default class RefundTable extends Component<Props, State> {
         if (params['create_time'] !== undefined) {
             params['create_time'] = [moment(params['create_time'][0]).unix(), moment(params['create_time'][1]).unix()]
         }
-        dispatch(getOrderRefundList({ params }))
+        dispatch(list({ params }))
     }
 
     onSelectChange = (selectedRowKeys: Array<string>) => {

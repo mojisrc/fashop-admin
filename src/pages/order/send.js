@@ -1,4 +1,3 @@
-// @flow
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Form, Button, Input } from 'antd';
@@ -8,87 +7,17 @@ import Page from "../../components/public/page";
 import { formType } from "../../utils/flow";
 import { Fetch, publicFunction } from "../../utils";
 import { message } from "antd/lib/index";
-import { dispatchProps } from "../../utils/defaultProps";
-import { orderSetSend } from "../../actions/order";
+
+import { setSend } from "../../actions/order";
 import { OrderApi } from "../../config/api/order";
 import { ExpressApi } from "../../config/api/express";
 import { ShipperApi } from "../../config/api/shipper";
-
 const { TextArea } = Input;
-
-type Props = {
-    orderInfo: {
-        info: {
-            sn: string,
-            create_time: number,
-            extend_order_goods: Array<{}>,
-            extend_order_extend: {
-                reciver_name: string,
-                reciver_info: {
-                    address: string,
-                    name: string,
-                    phone: string
-                },
-                remark: string,
-                deliver_name: string,
-                deliver_phone: string,
-                deliver_address: string,
-                need_express: number
-            },
-        }
-    },
-    form: formType,
-    history: { goBack: Function },
-    dispatch: dispatchProps,
-    location: { state: { type: string, record: {} }, search: string },
-
-}
-type State = {
-    shipperList: Array<{
-        id: number,
-        name: string,
-        combine_detail: string,
-        address: string,
-        contact_number: string,
-        is_default: number
-    }>,
-    expressList: Array<{
-        id: number,
-        company_name: string,
-        is_commonly_use: number
-    }>,
-    info: {
-        sn: string,
-        create_time: number,
-        extend_order_goods: Array<{}>,
-        extend_order_extend: {
-            reciver_name: string,
-            reciver_info: {
-                address: string,
-                name: string,
-                phone: string
-            },
-            message: string,
-            deliver_name: string,
-            deliver_phone: string,
-            deliver_address: string,
-            need_express: number
-        },
-    },
-    deliver_name: string,
-    deliver_phone: string,
-    deliver_address: string,
-    express_id: number,
-    tracking_no: string,
-    remark: string,
-    need_express: number
-}
 const { parseQuery } = publicFunction
-
 const FormItem = Form.Item;
 @Form.create()
 @connect()
-export default class Send extends Component<Props, State> {
+export default class Send extends Component {
     state = {
         express_id: 0,
         tracking_no: '',
@@ -118,9 +47,7 @@ export default class Send extends Component<Props, State> {
             },
         },
     }
-    static defaultProps = {
-        dispatch: dispatchProps,
-    }
+
     handleSubmit = (e: { preventDefault: Function }) => {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
@@ -143,7 +70,7 @@ export default class Send extends Component<Props, State> {
                         tracking_no: values.tracking_no
                     })
                 }
-                dispatch(orderSetSend({ params }))
+                dispatch(setSend({ params }))
             }
         });
     }

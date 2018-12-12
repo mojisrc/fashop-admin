@@ -1,4 +1,4 @@
-//@flow
+
 import React,{ Component } from 'react'
 import { bindActionCreators } from 'redux';
 import { connect } from "react-redux";
@@ -30,93 +30,6 @@ const Option = Select.Option;
 const RadioGroup = Radio.Group;
 
 let uuid = 1;
-
-type Props = {
-    history:historyType,
-    form:formType,
-    getAutoReplyKeywordsInfo:Function,
-    editAutoReplyKeywords:Function,
-    getWechatMaterialList:Function,
-    getLocalNewsMaterialList:Function,
-    pathSearch:{
-        editReplyId:string
-    },
-    autoReplyKeywordsInfo:{
-        info:{
-            id:number,
-            keys:Array<string>,
-            keywords:Array<{
-                key:string,
-                match_mode:string
-            }>,
-            reply_mode:string,
-            rule_name:string,
-            reply_content:Array<{
-                type:string,
-                media_id:string,
-                local_news_id:string,
-                content:string,
-            }>
-        }
-    },
-    imageMaterialList:{
-        item:Array<{
-            name:string,
-            url:string,
-            media_id:string,
-        }>
-    },
-    materialListLoading:boolean,
-    newsMaterialList:{
-        item:Array<{
-            content:{
-                news_item:Array<{
-                    digest:string,
-                    thumb_url:string,
-                    title:string,
-                }>,
-                update_time:string,
-            },
-            media_id:string
-        }>
-    },
-    localNewsMaterialList:{
-        item:Array<{
-            content:{
-                news_item:Array<{
-                    digest:string,
-                    thumb_url:string,
-                    title:string,
-                }>,
-                update_time:string,
-            },
-            media_id:string
-        }>
-    },
-    voiceMaterialList:{
-        item:Array<{
-            // name:string,
-            // update_time:string,
-            // media_id:string,
-        }>,
-        item_count:number,
-        total_count:number,
-    },
-    videoMaterialList:{
-        item:Array<{}>
-    },
-}
-type State = {
-    newsVisible:boolean,
-    localNewsVisible:boolean,
-    imageVisible:boolean,
-    textVisible:boolean,
-    voiceVisible:boolean,
-    videoVisible:boolean,
-    textInit:string,
-    reply_content_index:number,
-}
-
 @Form.create()
 @connect(
     ({view:{wechatAutoReply:{ autoReplyKeywordsInfo }}}) => ({
@@ -124,7 +37,7 @@ type State = {
     }),
     dispatch => bindActionCreators(actions,dispatch),
 )
-export default class EditReply extends Component<Props,State> {
+export default class EditReply extends Component {
     state = {
         newsVisible:false,
         localNewsVisible:false,

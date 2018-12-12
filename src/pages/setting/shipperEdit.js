@@ -1,54 +1,18 @@
-// @flow
+
 import React, { Component } from "react";
 import { Input, Button, Form, Cascader } from 'antd';
 import Page from '../../components/public/page'
-import { getCascaderAreaList } from "../../actions/area";
+import { cascader } from "../../actions/area";
 import { connect } from "react-redux";
-import { dispatchType, formType, handleSubmitType } from "../../utils/flow";
 import { publicFunction } from "../../utils";
-import { getShipperInfo, editShipper } from "../../actions/deliver/shipper";
-
+import { info, edit } from "../../actions/deliver/shipper";
 const {
     parseQuery
 } = publicFunction
-
 const FormItem = Form.Item;
-type Props = {
-    form: formType,
-    dispatch: dispatchType,
-    editShipper: Function,
-    location: {
-        state?: {
-        },
-        search: string,
-    }
-}
-type State = {
-    areaList: Array<{
-        value: number,
-        label: string,
-        children: Array<{
-            value: number,
-            label: string,
-            children: Array<{
-                value: number,
-                label: string
-            }>
-        }>
-    }>,
-    info: {
-        id: number,
-        name: string,
-        province_id: number,
-        city_id: number,
-        area_id: number,
-        address: string,
-        contact_number: string
-    }
-}
 @Form.create()
 @connect()
-export default class ShipperEdit extends Component<Props, State> {
+export default class ShipperEdit extends Component {
     state = {
         areaList: [],
         info: {
@@ -65,17 +29,17 @@ export default class ShipperEdit extends Component<Props, State> {
     async componentDidMount() {
         const { location } = this.props
         const { id } = parseQuery(location.search)
-        const e = await getShipperInfo({ params: { id } })
+        const e = await info({ params: { id } })
         if (e.code === 0) {
             const { info } = e.result
             this.setState({ info })
         }
         this.setState({
-            areaList: await getCascaderAreaList()
+            areaList: await cascader()
         })
     }
 
-    handleSubmit = (e: handleSubmitType) => {
+    handleSubmit = (e) => {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
             if (!err) {
@@ -88,7 +52,7 @@ export default class ShipperEdit extends Component<Props, State> {
                     area_id: values.areas[2],
                     address: values.address
                 }
-                dispatch(editShipper({ params }))
+                dispatch(edit({ params }))
             }
         });
     }

@@ -1,20 +1,10 @@
-// @flow
 import React, { Component } from "react";
 import styles from "./index.css";
 import { View } from "react-web-dom";
 import InfoRow from "../../public/info/infoRow";
 import moment from "moment";
 
-type Props = {
-    deliver_name: string,
-    deliver_phone: string,
-    deliver_address: string,
-    tracking_time: number,
-    tracking_no: string,
-    remark: string,
-}
-type State = {}
-export default class DeliverInfo extends Component<Props, State> {
+export default class DeliverInfo extends Component {
     render() {
         const { deliver_name, deliver_phone, deliver_address, tracking_time, tracking_no, remark } = this.props
         return (

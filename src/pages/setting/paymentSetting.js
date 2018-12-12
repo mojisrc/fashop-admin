@@ -1,4 +1,3 @@
-//@flow
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import {  Tabs } from 'antd';
@@ -6,24 +5,11 @@ import { View } from "react-web-dom";
 import Page from '../../components/public/page'
 import styles from '../../styles/setting/paymentSetting.css'
 import WechatPay from '../../components/setting/paymentSetting/wechatPay'
-import { formType, historyType } from "../../utils/flow";
-import { dispatchProps } from "../../utils/defaultProps";
 import { getHeaders } from '../../utils/index';
 import { UploadApi } from '../../config/api/upload'
-
 const TabPane = Tabs.TabPane;
-type Props = {
-    history: historyType,
-    routerData: {},
-    dispatch: dispatchProps,
-    location: { state: { type: string, record: {} }, search: string, pathname: string },
-    match: { url: string, path: string },
-    form: formType,
-}
-type State = {}
-
 @connect()
-export default class PaymentSetting extends Component<Props, State> {
+export default class PaymentSetting extends Component {
 
     render() {
         const { location, history } = this.props

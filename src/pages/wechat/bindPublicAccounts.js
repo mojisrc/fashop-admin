@@ -1,4 +1,3 @@
-//@flow
 import React,{ Component } from 'react'
 import { bindActionCreators } from 'redux';
 import { connect } from "react-redux";
@@ -12,12 +11,6 @@ const { TextArea } = Input
 const FormItem = Form.Item;
 const Option = Select.Option;
 
-type Props = {
-    form:formType,
-    history:historyType,
-    editWechatConfig:Function
-}
-type State = {}
 
 @connect(
     ({view:{wechat:{ wechatConfigInfo }}}) => ({
@@ -26,14 +19,14 @@ type State = {}
     dispatch => bindActionCreators(actions,dispatch),
 )
 @Form.create()
-export default class BindOfficialAccounts extends Component<Props,State> {
+export default class BindOfficialAccounts extends Component {
     handleSubmit = (e:{preventDefault:Function}) => {
         e.preventDefault();
-        const { form, editWechatConfig } = this.props
+        const { form, editConfig } = this.props
         form.validateFieldsAndScroll((err, values) => {
             if (!err) {
                 // console.log('Received values of form: ', values);
-                editWechatConfig({
+                editConfig({
                     params:values
                 })
                 this.props.history.goBack()

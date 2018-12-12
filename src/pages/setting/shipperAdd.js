@@ -1,46 +1,24 @@
-// @flow
 import React, { Component } from "react";
 import { Input, Button, Form, Cascader } from 'antd';
 import Page from '../../components/public/page'
-import { getCascaderAreaList } from "../../actions/area";
+import { cascader } from "../../actions/area";
 import { connect } from "react-redux";
-import { dispatchType, formType, handleSubmitType } from "../../utils/flow";
-import { addShipper } from "../../actions/deliver/shipper";
-
+import { add } from "../../actions/deliver/shipper";
 const FormItem = Form.Item;
-type Props = {
-    form: formType,
-    dispatch: dispatchType,
-    addShipper: Function
-}
-type State = {
-    areaList: Array<{
-        value: number,
-        label: string,
-        children: Array<{
-            value: number,
-            label: string,
-            children: Array<{
-                value: number,
-                label: string
-            }>
-        }>
-    }>
-}
 @Form.create()
 @connect()
-export default class ShipperAdd extends Component<Props, State> {
+export default class ShipperAdd extends Component {
     state = {
         areaList: []
     }
 
     async componentDidMount() {
         this.setState({
-            areaList: await getCascaderAreaList()
+            areaList: await cascader()
         })
     }
 
-    handleSubmit = (e: handleSubmitType) => {
+    handleSubmit = (e) => {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
             if (!err) {
@@ -51,7 +29,7 @@ export default class ShipperAdd extends Component<Props, State> {
                     area_id: values.areas[2],
                     address: values.address
                 }
-                dispatch(addShipper({ params }))
+                dispatch(add({ params }))
             }
         });
     }

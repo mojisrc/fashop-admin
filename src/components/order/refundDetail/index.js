@@ -1,4 +1,4 @@
-// @flow
+
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { View } from "react-web-dom";
@@ -8,7 +8,7 @@ import GoodsInfo from "./goodsInfo";
 import OperateInfo from "./operateInfo";
 import TrackingInfo from "./trackingInfo";
 import { publicFunction } from "../../../utils";
-import { getOrderRefundInfo } from "../../../actions/order/refund"
+import { info } from "../../../models/refund"
 import { dispatchType } from "../../../utils/flow";
 import { Spin } from "antd";
 
@@ -19,7 +19,7 @@ type Props = {
     history: { push: Function },
     location: { state: { type: string, record: {} }, search: string },
     id: number,
-    getOrderRefundInfo?: Function,
+    info?: Function,
     orderRefundInfo: {
         id: number,// 记录ID,
         order_id: number, // 订单ID,
@@ -78,11 +78,11 @@ type State = {}
         orderRefundInfo,
     })
 )
-export default class RefundDetail extends Component<Props, State> {
+export default class RefundDetail extends Component {
     componentDidMount() {
         const { location, dispatch } = this.props
         const { id } = parseQuery(location.search)
-        dispatch(getOrderRefundInfo({ params: { id } }))
+        dispatch(info({ params: { id } }))
     }
 
     render() {

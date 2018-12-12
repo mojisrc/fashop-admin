@@ -1,65 +1,20 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-// import { Route } from "react-router-dom";
-// import { View } from "react-web-dom";
-// import { ThemeStyle, windowHeight } from "../../utils/style";
 import {
-    // Layout,
-    // Menu,
-    // Icon,
-    // Card,
-    // Row,
-    // Col,
     Form,
     Select,
-    // AutoComplete,
     Input,
-    // Cascader,
     Button,
-    // Tooltip,
-    // Checkbox,
     InputNumber,
-    // Switch,
     Tabs,
 } from "antd";
-// import styles from "../../styles/statistics/realTime.css";
 import Page from "components/public/Page";
 import {data} from "./configTestData";
-// import SettingManageConfigHeader from 'components/setting/ManageConfigHeader'
-// import SettingManageConfigTable from 'components/setting/ManageConfigTable'
 
-// let arrayValuesUuid = 0;
-// let enumValuesUuid = 0;
 const FormItem = Form.Item;
 const Option = Select.Option;
-// const AutoCompleteOption = AutoComplete.Option;
 const { TextArea } = Input;
 const TabPane = Tabs.TabPane;
-
-
-// const residences = [{
-//   value: 'zhejiang',
-//   label: 'Zhejiang',
-//   children: [{
-//     value: 'hangzhou',
-//     label: 'Hangzhou',
-//     children: [{
-//       value: 'xihu',
-//       label: 'West Lake',
-//     }],
-//   }],
-// }, {
-//   value: 'jiangsu',
-//   label: 'Jiangsu',
-//   children: [{
-//     value: 'nanjing',
-//     label: 'Nanjing',
-//     children: [{
-//       value: 'zhonghuamen',
-//       label: 'Zhong Hua Men',
-//     }],
-//   }],
-// }];
 
 
 const formItemLayout = {

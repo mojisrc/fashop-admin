@@ -3,7 +3,7 @@ import { Fetch } from '../../utils'
 import types from '../../constants';
 import { message } from 'antd';
 import {
-    setGoodsCategoryList,
+    setList,
 } from '../../actions/goods/category';
 import { goBack } from 'react-router-redux'
 import { GoodsApi } from "../../config/api/goods";
@@ -18,14 +18,14 @@ function* getList() {
         const {
             list
         } = e.result
-        yield put(setGoodsCategoryList({ list }))
+        yield put(setList({ list }))
     } else {
         message.warning(e.msg)
     }
 }
 
 
-function* addCategory({ params }) {
+function* add({ params }) {
     const e = yield call(Fetch.fetch, { api: GoodsApi.category.add, params })
     if (e.code === 0) {
         message.success('添加成功')
@@ -36,7 +36,7 @@ function* addCategory({ params }) {
 }
 
 
-function* editCategory({ params }) {
+function* edit({ params }) {
     const e = yield call(Fetch.fetch, { api: GoodsApi.category.edit, params })
     if (e.code === 0) {
         message.success('修改成功')
@@ -47,7 +47,7 @@ function* editCategory({ params }) {
 }
 
 
-function* delCategory({ params }) {
+function* del({ params }) {
     const e = yield call(Fetch.fetch, { api: GoodsApi.category.del, params })
     if (e.code === 0) {
         message.success('已删除')
@@ -58,7 +58,7 @@ function* delCategory({ params }) {
 }
 
 
-function* sortCategory({ params, func }) {
+function* sort({ params, func }) {
     const e = yield call(Fetch.fetch, { api: GoodsApi.category.sort, params })
     if (e.code === 0) {
         message.success('排序成功')
@@ -72,9 +72,9 @@ function* sortCategory({ params, func }) {
 
 export default function* rootSaga() {
     yield takeEvery(types.goods.GET_GOODS_CATEGORY_LIST, getList)
-    yield takeEvery(types.goods.ADD_GOODS_CATEGORY, addCategory)
-    yield takeEvery(types.goods.EDIT_GOODS_CATEGORY, editCategory)
-    yield takeEvery(types.goods.DEL_GOODS_CATEGORY, delCategory)
-    yield takeEvery(types.goods.SORT_GOODS_CATEGORY, sortCategory)
+    yield takeEvery(types.goods.ADD_GOODS_CATEGORY, add)
+    yield takeEvery(types.goods.EDIT_GOODS_CATEGORY, edit)
+    yield takeEvery(types.goods.DEL_GOODS_CATEGORY, del)
+    yield takeEvery(types.goods.SORT_GOODS_CATEGORY, sort)
 
 }

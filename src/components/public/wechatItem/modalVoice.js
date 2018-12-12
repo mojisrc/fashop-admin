@@ -1,4 +1,4 @@
-//@flow
+
 import React,{ Component } from "react";
 import { View } from "react-web-dom";
 import styles from "./index.css";
@@ -12,7 +12,7 @@ type State = {
     voiceing:boolean
 }
 
-export default class ModalVoice extends Component<Props,State>{
+export default class ModalVoice extends Component{
     state = {
         voiceing:false
     }

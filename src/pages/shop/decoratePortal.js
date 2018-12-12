@@ -1,49 +1,20 @@
-//@flow
 import React,{ Component } from "react";
 import { View } from "react-web-dom";
-import { message } from 'antd';
-import styles from '../../styles/shop/shopIndex.css'
 import Page from '../../components/public/page'
 import { CopyToClipboard } from 'react-copy-to-clipboard';
-import QRCode from 'qrcode-react';
-import { historyType } from '../../utils/flow';
 import ShopIndexBot from '../../components/shop/shopIndex';
 import { bindActionCreators } from 'redux';
 import { connect } from "react-redux";
 import * as actions from "../../actions/shop";
-import { dispatchProps } from "../../utils/defaultProps";
-
-type Props = {
-    history:historyType,
-    getShopInfo:Function,
-    editPortalTemplate:Function,
-    shopInfo:{
-        info:{
-            logo:string,
-            name:string,
-            contact_number:string,
-            description:string,
-            portal_url:string,
-            portal_template_id:number,
-            goods_category_style:number,
-            color_scheme:number,
-        }
-    },
-    routerData: {},
-    dispatch: dispatchProps,
-    location: { state: { type: string, record: {} }, search: string, pathname: string },
-    match: { url: string, path: string }
-}
-type State = {}
 @connect(
     ({ view: { shop: { shopInfo } } }) => ({
         shopInfo
     }),
     dispatch => bindActionCreators(actions, dispatch),
 )
-export default class DecoratePortal extends Component<Props,State> {
+export default class DecoratePortal extends Component {
     componentDidMount() {
-        this.props.getShopInfo()
+        this.props.info()
     }
     render() {
         const { shopInfo } = this.props

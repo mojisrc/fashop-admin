@@ -1,4 +1,4 @@
-// @flow
+
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import {
@@ -31,7 +31,7 @@ type Props = {
 }
 type State = {}
 @connect()
-export default class DeliveryWay extends Component<Props, State> {
+export default class DeliveryWay extends Component {
     static defaultProps = {
         expressList: [],
         express_id: 0,

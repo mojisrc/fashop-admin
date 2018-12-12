@@ -1,4 +1,3 @@
-//@flow
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Form, Button, Modal, message } from "antd";
@@ -9,10 +8,10 @@ import Editor from '../../components/goods/add/editor'
 import Freight from '../../components/goods/add/detail/freight'
 import PhotoGallery from '../../components/public/photoGallery'
 import { formType, handleSubmitType, dispatchType } from '../../utils/flow'
-import { getGoodsCategoryList } from '../../actions/goods/category'
-import { getGoodsInfo } from '../../actions/goods'
-import { getGoodsSpecList } from '../../actions/goods/spec'
-import { getFreightList } from '../../actions/deliver/freight'
+import { list } from '../../actions/goods/category'
+import { info } from '../../actions/goods'
+import { specList } from '../../actions/goods/spec'
+import { list } from '../../actions/deliver/freight'
 import { Fetch, publicFunction } from "../../utils";
 import moment from "moment";
 import { GoodsApi } from "../../config/api/goods";
@@ -20,53 +19,6 @@ import { GoodsApi } from "../../config/api/goods";
 const { parseQuery } = publicFunction
 
 const FormItem = Form.Item;
-type SkusType = Array<{
-    price: number | null,
-    stock: number | null,
-    code: string | null,
-    weight: ? number | null,
-    spec: Array<{
-        id: number,
-        name: string | null,
-        value_id: number,
-        value_name: string | null
-    }>
-}>
-type Props = {
-    location: { state: { type: string, record: {} }, search: string },
-    form: formType,
-    dispatch: dispatchType,
-    categoryTree: Array<{}>,
-    specList: Array<{
-        id: number,
-        name: string,
-        values: Array<{
-            id: number,
-            name: string,
-        }>
-    }>,
-    history: { goBack: Function, push: Function },
-    freightList: Array<{
-        id: number,
-        name: string
-    }>,
-}
-
-type State = {
-    photoGalleryVisible: boolean,
-    photoGalleryOnOk: Function,
-    previewVisible: boolean,
-    previewImage: string,
-    photoGalleryOnOk: Function,
-    shippingCostSelect: string,
-    freightList: Array<{
-        id: number,
-        name: string
-    }>,
-    skus: SkusType,
-    multiSpec: boolean
-}
-
 @connect(({
               view: {
                   goods: {
@@ -83,7 +35,7 @@ type State = {
     freightList,
 }))
 @Form.create()
-export default class Add extends Component<Props, State> {
+export default class Add extends Component {
     state = {
         photoGalleryVisible: false,
         photoGalleryOnOk: (e: any) => {
@@ -117,7 +69,7 @@ export default class Add extends Component<Props, State> {
     async componentWillMount() {
         const { dispatch, location } = this.props
         const { id } = parseQuery(location.search)
-        const response = await getGoodsInfo({ params: { id } })
+        const response = await info({ params: { id } })
 
         if (response.code === 0) {
             const { info } = response.result
@@ -126,9 +78,9 @@ export default class Add extends Component<Props, State> {
                 skus: info.sku_list,
                 multiSpec: info.sku_list[0].spec[0].id > 0,
             }, () => {
-                dispatch(getGoodsCategoryList())
-                dispatch(getGoodsSpecList())
-                dispatch(getFreightList({ params: { page: 1, rows: 1000 } }))
+                dispatch(list())
+                dispatch(specList())
+                dispatch(list({ params: { page: 1, rows: 1000 } }))
             })
         }
 
@@ -136,7 +88,7 @@ export default class Add extends Component<Props, State> {
 
     refreshfreightList = (callback: Function) => {
         const { dispatch } = this.props
-        dispatch(getFreightList(callback))
+        dispatch(list(callback))
     }
     openPhotoGallery = ({ photoGalleryOnOk }: { photoGalleryOnOk: Function }) => {
         this.setState({
@@ -164,7 +116,7 @@ export default class Add extends Component<Props, State> {
             previewImage,
         })
     }
-    handleSubmit = (e: handleSubmitType) => {
+    handleSubmit = (e) => {
         e.preventDefault();
         this.props.form.validateFieldsAndScroll(async (err, values) => {
             if (!err) {

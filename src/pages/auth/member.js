@@ -1,4 +1,3 @@
-//@flow
 import React, { Component } from "react";
 import {Row,Button} from "antd";
 import Page from "../../components/public/page";
@@ -7,19 +6,10 @@ import AddMemberModal from '../../components/auth/addMemberModal'
 import {AuthCom,authHoc} from '../../components/auth/authRules'
 import authSignConfig from '../../utils/authSignConfig'
 
-
-type Props = {
-    dispatch: Function,
-}
-
-type State = {
-    roleMembersVisible: boolean,
-}
-
 @authHoc({
     rules: authSignConfig.auth.member
 })
-export default class Member extends Component<Props,State> {
+export default class Member extends Component {
     state = {
         roleMembersVisible: false,
     };

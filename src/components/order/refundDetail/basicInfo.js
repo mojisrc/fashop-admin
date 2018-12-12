@@ -1,4 +1,4 @@
-// @flow
+
 import React, { Component } from "react";
 import styles from "./index.css";
 import { View } from "react-web-dom";
@@ -16,7 +16,7 @@ type Props = {
     order_sn: string,
 }
 type State = {}
-export default class OrderDetailBasicInfo extends Component<Props, State> {
+export default class OrderDetailBasicInfo extends Component {
     render() {
         const { refund_sn, refund_type, handle_state, handle_message, create_time, order_id, order_sn, history } = this.props
         return (

@@ -1,6 +1,7 @@
-//@flow
+
 import React, { Component } from "react";
-import { Table } from "antd";
+import { Table, Modal } from "antd";
+import * as ReactDOM from 'react-dom';
 import styles from "./index.css";
 import { View } from "react-web-dom";
 import { connect } from "react-redux";
@@ -8,14 +9,16 @@ import { dispatchType, historyType } from "../../../utils/flow";
 import { dispatchProps } from "../../../utils/defaultProps";
 import moment from "moment/moment";
 import Image from '../../image'
-import { getOrderList } from "../../../actions/order";
+import { list } from "../../../models/order";
 import Query from "../../../utils/query"
+import EditAddress from "../editAddress"
+import EditPrice from "../editPrice"
 
 type Props = {
     history: historyType,
     dispatch: dispatchType,
     orderListLoading: boolean,
-    getOrderList: Function,
+    list: Function,
     orderList: {
         page: number,
         rows: number,
@@ -38,12 +41,15 @@ type Props = {
                     phone: string,
                     rows?: number
                 },
-                rows: number
+                rows: number,
             }>
         }>,
     },
 }
-type State = {}
+type State = {
+    orderId: number,
+    expandedRowKeys: Array<string>
+}
 @connect(({
               view: {
                   order: {
@@ -55,11 +61,19 @@ type State = {}
     orderList,
     orderListLoading,
 }))
-export default class OrderManagementTable extends Component  <Props, State> {
+
+
+export default class OrderManagementTable extends Component   {
     static defaultProps = {
         dispatch: dispatchProps,
         orderListLoading: false,
         orderList: {},
+    }
+    state = {
+        orderId: 0,
+        visible: false,
+        visible: false,
+        expandedRowKeys: []
     }
 
     componentDidMount() {
@@ -71,7 +85,15 @@ export default class OrderManagementTable extends Component  <Props, State> {
         if (params['create_time'] !== undefined) {
             params['create_time'] = [moment(params['create_time'][0]).unix(), moment(params['create_time'][1]).unix()]
         }
-        dispatch(getOrderList({ params }))
+        dispatch(list({ params }))
+    }
+
+    componentWillReceiveProps(nextProps: Props) {
+        if (nextProps.orderList.list !== this.props.orderList.list) {
+            this.setState({
+                expandedRowKeys: nextProps.orderList.list.map((item: any) => item.id)
+            })
+        }
     }
 
     onSelectChange = (selectedRowKeys: Array<string>) => {
@@ -79,6 +101,7 @@ export default class OrderManagementTable extends Component  <Props, State> {
 
     render() {
         const { orderList, orderListLoading } = this.props
+        const { orderId, expandedRowKeys } = this.state
         let { list } = orderList
         if (list) {
             list.map((item) => {
@@ -89,7 +112,9 @@ export default class OrderManagementTable extends Component  <Props, State> {
                 })
                 return item
             })
+
         }
+
         const columns = [
             {
                 title: "订单号",
@@ -126,6 +151,34 @@ export default class OrderManagementTable extends Component  <Props, State> {
                 title: '操作',
                 key: 'operation',
                 render: (record) => <View className={styles.operation}>
+                    <a
+                        onClick={() => {
+                            const container = document.createElement('div')
+                            ReactDOM.render(<EditAddress
+                                orderId={record.id}
+                                visible={true}
+                                onCancel={() => {
+                                    ReactDOM.unmountComponentAtNode(container)
+                                }}
+                            />, container);
+                        }}
+                    >
+                        修改地址
+                    </a>
+                    <a
+                        onClick={() => {
+                            const container = document.createElement('div')
+                            ReactDOM.render(<EditPrice
+                                orderId={record.id}
+                                visible={true}
+                                onCancel={() => {
+                                    ReactDOM.unmountComponentAtNode(container)
+                                }}
+                            />, container);
+                        }}
+                    >
+                        改价
+                    </a>
                     <a
                         onClick={() => {
                             this.props.history.push(`/order/list/detail?id=${record.id}`)
@@ -216,23 +269,32 @@ export default class OrderManagementTable extends Component  <Props, State> {
                 }
             }
         ]
+
         return (
             <View>
                 {orderList.list ? <Table
-                    className="tableGoodsNested"
                     loading={orderListLoading}
                     dataSource={orderList.list ? orderList.list : []}
                     columns={columns}
                     expandedRowRender={record => (
                         <Table
-                            className="tableGoodsNestedChild"
                             dataSource={record.extend_order_goods ? record.extend_order_goods : []}
                             columns={expandedRowColumns}
                             pagination={false}
+                            defaultExpandAllRows={true}
                             rowKey={record => `${record.id}_child`}
                         />
                     )}
-                    defaultExpandAllRows={false}
+                    onExpand={(expanded, record) => {
+                        let expandedRowKeys = this.state.expandedRowKeys;
+                        if (expanded) {
+                            expandedRowKeys.push(record.id);
+                        } else {
+                            expandedRowKeys = expandedRowKeys.filter(v => v !== record.id);
+                        }
+                        this.setState({ expandedRowKeys });
+                    }}
+                    expandedRowKeys={expandedRowKeys}
                     pagination={{
                         showSizeChanger: false,
                         showQuickJumper: false,
@@ -254,11 +316,11 @@ export default class OrderManagementTable extends Component  <Props, State> {
             case 0:
                 return '已取消'
             case 10:
-                return <span style={{color:'#ccc'}}>未支付</span>
+                return <span style={{ color: '#ccc' }}>未支付</span>
             case 20:
-                return <span style={{color:'#EC9729'}}>待发货</span>
+                return <span style={{ color: '#EC9729' }}>待发货</span>
             case 30:
-                return <span style={{color:'#6AEB52'}}>已发货</span>
+                return <span style={{ color: '#6AEB52' }}>已发货</span>
             case 40:
                 return '已完成'
             default:

@@ -1,17 +1,12 @@
-//@flow
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Tabs } from 'antd';
 import { View } from "react-web-dom";
 import styles from '../../styles/shop/shopSetting.css'
 import { setDiyData } from '../../actions/shop/decorate'
-
 import ShopBasicInfo from './basicInfo'
-
 const TabPane = Tabs.TabPane;
-
-class Setting extends Component<{},
-    {}> {
+class Setting extends Component{
     render() {
         const tabsList = [
             {

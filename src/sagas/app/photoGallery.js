@@ -2,12 +2,12 @@ import { takeEvery, call, put, select } from 'redux-saga/effects'
 import { Fetch } from '../../utils'
 import types from '../../constants';
 import { message } from 'antd';
-import { setGoodsList } from '../../actions/app/photoGallery';
+import { setList } from '../../models/photoGallery';
 import { ImageApi } from '../../config/api/image'
 
 function* getList({ params }) {
     const { imageList: result } = yield select(({ app: { app: { imageList } } }) => ({ imageList }))
-    yield put(setGoodsList({
+    yield put(setList({
         params,
         result,
         loading: true,
@@ -17,7 +17,7 @@ function* getList({ params }) {
         const {
             result
         } = e
-        yield put(setGoodsList({
+        yield put(setList({
             params,
             result,
             loading: false,

@@ -2,7 +2,7 @@ import { takeEvery, call, put, select } from 'redux-saga/effects'
 import { Fetch } from '../../utils'
 import types from '../../constants';
 import { message } from 'antd';
-import { setGoodsList } from '../../actions/goods';
+import { setList } from '../../models/goods';
 import { GoodsApi } from "../../config/api/goods";
 
 function* getList({ params }) {
@@ -14,7 +14,7 @@ function* getList({ params }) {
         const {
             result
         } = e
-        yield put(setGoodsList({
+        yield put(setList({
             params,
             result
         }))

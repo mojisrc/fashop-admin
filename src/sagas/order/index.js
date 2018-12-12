@@ -6,24 +6,24 @@ import {
 import { Fetch } from '../../utils'
 import types from '../../constants';
 import { message } from 'antd';
-import { saveOrderList, saveOrderInfo } from '../../actions/order';
+import { setList, setInfo } from '../../models/order';
 import { goBack } from 'react-router-redux'
 import { OrderApi } from "../../config/api/order";
 
-function* getOrderList({ params }) {
+function* list({ params }) {
     yield put({ type: types.order.START_GET_ORDER_LIST })
     const e = yield call(Fetch.fetch, { api: OrderApi.list, params })
     if (e.code === 0) {
-        yield put(saveOrderList({ result: e.result, params }))
+        yield put(setList({ result: e.result, params }))
     } else {
         message.warning(e.msg)
     }
 }
 
-function* getOrderInfo({ params }) {
+function* info({ params }) {
     const e = yield call(Fetch.fetch, { api: OrderApi.info, params })
     if (e.code === 0) {
-        yield put(saveOrderInfo({ result: e.result }))
+        yield put(setInfo({ result: e.result }))
     } else {
         message.warning(e.msg)
     }
@@ -50,8 +50,8 @@ function* setSend({ params }) {
 }
 
 export default function* rootSaga() {
-    yield takeEvery(types.order.GET_ORDER_LIST, getOrderList)
-    yield takeEvery(types.order.GET_ORDER_INFO, getOrderInfo)
+    yield takeEvery(types.order.GET_ORDER_LIST, list)
+    yield takeEvery(types.order.GET_ORDER_INFO, info)
     yield takeEvery(types.order.ORDER_SETTING, setOrderRe)
     yield takeEvery(types.order.ORDER_SET_SEND, setSend)
 }

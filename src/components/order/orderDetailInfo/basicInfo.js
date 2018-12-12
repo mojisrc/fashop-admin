@@ -1,4 +1,4 @@
-// @flow
+
 import React, { Component } from "react";
 
 import styles from "./index.css";
@@ -6,15 +6,7 @@ import { View } from "react-web-dom";
 import InfoRow from "../../public/info/infoRow";
 import moment from 'moment'
 
-type Props = {
-    sn: string,
-    reciver_name: string,
-    create_time: number,
-    trade_no:string,
-    state: number
-}
-type State = {}
-export default class OrderDetailBasicInfo extends Component<Props, State> {
+export default class OrderDetailBasicInfo extends Component{
     render() {
         const { sn, create_time, state,trade_no } = this.props
         return (
@@ -48,7 +40,7 @@ export default class OrderDetailBasicInfo extends Component<Props, State> {
         );
     }
 
-    returnOrderState(state: number) {
+    returnOrderState(state) {
         switch (state) {
             case 0:
                 return '已取消'

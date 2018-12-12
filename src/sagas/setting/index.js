@@ -7,7 +7,7 @@ import { Fetch } from '../../utils'
 import types from '../../constants';
 import { message } from 'antd';
 import {
-    setAreaListData,
+    setAreaList,
     receiveSmslist,
     getInfoMessage
 } from '../../actions/setting';
@@ -21,7 +21,7 @@ function* getList() {
         const {
             list
         } = e.result
-        yield put(setAreaListData({ list }))
+        yield put(setAreaList({ list }))
     } else {
         message.warning(e.msg)
     }

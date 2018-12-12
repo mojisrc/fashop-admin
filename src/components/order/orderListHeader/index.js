@@ -1,4 +1,4 @@
-// @flow
+
 import React, { Component } from "react";
 import { Row, Col, Button, Input, Select, DatePicker } from "antd";
 import styles from "./index.css";
@@ -17,7 +17,7 @@ type State = {
         keywords_type: string
     }
 }
-export default class OrderManagementHeader extends Component<Props, State> {
+export default class OrderManagementHeader extends Component {
 
     state = {
         queryParams: {
@@ -25,6 +25,7 @@ export default class OrderManagementHeader extends Component<Props, State> {
             keywords: null,
             create_time: [],
             state_type: 'all',
+            order_kind:'all'
         }
     }
 
@@ -36,13 +37,14 @@ export default class OrderManagementHeader extends Component<Props, State> {
                 keywords: params['keywords'] !== undefined ? params['keywords'] : null,
                 create_time: params['create_time'] !== undefined ? params['create_time'] : [],
                 state_type: params['state_type'] !== undefined ? params['state_type'] : 'all',
+                order_kind: params['order_kind'] !== undefined ? params['order_kind'] : 'all',
             }
         })
     }
 
     render() {
         const { queryParams } = this.state
-        const { keywords_type, keywords, create_time, state_type } = queryParams
+        const { keywords_type, keywords, create_time, state_type ,order_kind} = queryParams
         let create_time_moment = []
         if (create_time.length > 0) {
             create_time_moment = [moment(create_time[0]), moment(create_time[1])]
@@ -61,16 +63,24 @@ export default class OrderManagementHeader extends Component<Props, State> {
                 name: '已发货',
                 state_type: 'state_send'
             }
-            // , {
-            //     name: '待评价',
-            //     state_type: 'state_noeval'
-            // }
             , {
                 name: '已完成',
                 state_type: 'state_success'
             }, {
                 name: '已关闭',
                 state_type: 'state_cancel'
+            }
+        ]
+        const order_kind_list = [
+            {
+                name: '全部',
+                order_kind: 'all'
+            }, {
+                name: '普通订单',
+                order_kind: 'ordinary'
+            }, {
+                name: '拼团',
+                order_kind: 'group'
             }
         ]
         return (
@@ -80,10 +90,10 @@ export default class OrderManagementHeader extends Component<Props, State> {
                 borderBottom: '1px dashed #ededed'
             }}
             >
-                <Col span={6}>
+                <Col span={5}>
                     <InputGroup compact>
                         <Select
-                            style={{ minWidth: '40%' }}
+                            style={{ minWidth: '115px' }}
                             placeholder="搜索条件"
                             value={keywords_type}
                             onChange={(keywords_type) => {
@@ -124,7 +134,33 @@ export default class OrderManagementHeader extends Component<Props, State> {
                         />
                     </View>
                 </Col>
-                <Col span={4} className={styles.div1}>
+                <Col span={3} className={styles.div1}>
+                    <View className={styles.view1}>
+                        <p className={styles.p1}>订单类型</p>
+                        <Select
+                            placeholder="请选择"
+                            style={{ flex: 1 }}
+                            value={order_kind}
+                            onChange={(order_kind) => {
+                                this.setState(update(this.state, {
+                                    queryParams: { order_kind: { $set: order_kind } }
+                                }))
+                            }}
+                        >
+                            {
+                                order_kind_list.map((item, index) =>
+                                    <Option
+                                        value={item.order_kind}
+                                        key={index}
+                                    >
+                                        {item.name}
+                                    </Option>
+                                )
+                            }
+                        </Select>
+                    </View>
+                </Col>
+                <Col span={3} className={styles.div1}>
                     <View className={styles.view1}>
                         <p className={styles.p1}>订单状态</p>
                         <Select
@@ -167,6 +203,7 @@ export default class OrderManagementHeader extends Component<Props, State> {
                                     keywords,
                                     create_time,
                                     state_type,
+                                    order_kind,
                                 })
                                 this.props.history.push(path)
 

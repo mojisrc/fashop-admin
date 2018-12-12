@@ -1,4 +1,3 @@
-//@flow
 import React, { Component } from "react";
 import { bindActionCreators } from 'redux';
 import { View } from "react-web-dom";
@@ -16,47 +15,6 @@ import BaseInfo from '../../components/shop/diy/baseinfo'
 import styles from '../../styles/shop/shopPageEdit.css'
 import Fetch from "../../utils/fetch";
 import { GoodsApi } from "../../config/api/goods";
-
-type Props = {
-    viewContent: any,
-    setDiyData: Function,
-    getShopPageInfo: Function,
-    getGoodsList: Function,
-    addShopPage: Function,
-    history: historyType,
-    location: {
-        search: {},
-        state: {
-            record: {
-                background_color: string
-            }
-        }
-    },
-    options: optionsType,
-    body: PageBodyType,
-    goodsListData: {
-        list: Array<{
-            id: number,
-            img: string,
-            title: string,
-            price: string,
-            market_price: string,
-            desc: string,
-        }>
-    },
-    shopPageInfo: {}
-}
-type State = {
-    name: string,
-    description: string,
-    background_color: string,
-    body: Array<any>,
-    options: {
-        type: string,
-        index: number
-    },
-    baseInfoVisible: boolean,
-}
 @connect(
     ({ view: { goods: { listData }, shop: { shopPageInfo } } }) => ({
         goodsListData: listData,
@@ -65,7 +23,7 @@ type State = {
     dispatch => bindActionCreators(Object.assign(shopDecorateActions, goodsActions), dispatch)
 )
 
-export default class PageAdd extends Component<Props, State> {
+export default class PageAdd extends Component {
     state = {
         name: '',
         description: '',
@@ -79,8 +37,8 @@ export default class PageAdd extends Component<Props, State> {
     }
 
     async componentDidMount() {
-        const { getGoodsList } = this.props
-        getGoodsList({
+        const { list } = this.props
+        list({
             params: {
                 page: 1,
                 rows: 6,
@@ -184,7 +142,7 @@ export default class PageAdd extends Component<Props, State> {
     }
 
     render() {
-        const { addShopPage, history } = this.props
+        const { add, history } = this.props
         let { options, body, baseInfoVisible, name, description, background_color } = this.state
         return (
             body ? <Page>
@@ -248,7 +206,7 @@ export default class PageAdd extends Component<Props, State> {
                                     body,
                                     module: 'mobile',
                                 }
-                                addShopPage({
+                                add({
                                     params
                                 })
                             }}

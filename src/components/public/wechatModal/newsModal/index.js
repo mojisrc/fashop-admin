@@ -1,4 +1,4 @@
-//@flow
+
 import React, { Component } from "react";
 import { View } from "react-web-dom";
 import { Modal, Button, Input, Row, Col, Card, Checkbox, Pagination, Radio } from "antd";
@@ -27,7 +27,7 @@ type State = {
     }
 }
 
-export default class NewsModal extends Component<Props,State> {
+export default class NewsModal extends Component {
     state = {
         newsTypeValue:this.props.newsType,
         news:{

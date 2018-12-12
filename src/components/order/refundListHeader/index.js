@@ -1,4 +1,4 @@
-// @flow
+
 import React, { Component } from "react";
 import { Row, Col, Button, Input, Select, DatePicker } from "antd";
 import styles from "./index.css";
@@ -25,7 +25,7 @@ const { Fragment } = React
 const InputGroup = Input.Group;
 const { RangePicker } = DatePicker;
 const Option = Select.Option;
-export default class RefundHeader extends Component <Props, State> {
+export default class RefundHeader extends Component  {
     state = {
         queryParams: {
             keywords_type: 'goods_name',

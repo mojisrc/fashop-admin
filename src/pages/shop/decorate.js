@@ -1,41 +1,13 @@
-//@flow
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Tabs } from 'antd';
 import { historyType } from '../../utils/flow';
 import { Redirect, Route, Switch } from "react-router-dom";
 import { getRoutes } from "../../utils";
-import { dispatchProps } from "../../utils/defaultProps";
 import * as routerRedux from 'react-router-redux';
-
 const TabPane = Tabs.TabPane;
-
-type Props = {
-    history: historyType,
-    getShopInfo: Function,
-    editGoodsCategoryStyle: Function,
-    editShopColorScheme: Function,
-    editPortalTemplate: Function,
-    shopInfo: {
-        info: {
-            logo: string,
-            name: string,
-            contact_number: string,
-            description: string,
-            portal_template_id: number,
-            goods_category_style: number,
-            color_scheme: number,
-        }
-    },
-    routerData: {},
-    dispatch: dispatchProps,
-    location: { state: { type: string, record: {} }, search: string, pathname: string },
-    match: { url: string, path: string }
-}
-type State = {}
-
 @connect()
-export default class Decorate extends Component<Props, State> {
+export default class Decorate extends Component {
     render() {
         const tabList = [
             {

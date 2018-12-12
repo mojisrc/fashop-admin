@@ -11,7 +11,7 @@ import {
 import { goBack } from 'react-router-redux'
 import { WechatApi } from "../../config/api/wechat";
 
-function* getAutoReplyStatus() {
+function* autoReplyStatus() {
     const e = yield call(Fetch.fetch, { api: WechatApi.autoReplyStatusSet })
     if (e.code === 0) {
         yield put(saveAutoReplyStatus({ result: e.result }))
@@ -23,13 +23,13 @@ function* getAutoReplyStatus() {
 function* setAutoReplyStatus({ params }) {
     const e = yield call(Fetch.fetch, { api: WechatApi.autoReplyStatusSet, params })
     if (e.code === 0) {
-        yield call(getAutoReplyStatus)
+        yield call(autoReplyStatus)
     } else {
         message.warning(e.msg)
     }
 }
 
-function* getKeyWordsReplyList({ params }) {
+function* keyWordsReplyList({ params }) {
     yield put({
         type: types.wechat.START_GET_KEYWORDS_REPLY_LIST
     })
@@ -45,7 +45,7 @@ function* delAutoReplyKeywords({ params }) {
     const e = yield call(Fetch.fetch, { api: WechatApi.autoReplyKeywordsDel, params })
     if (e.code === 0) {
         message.success('已删除')
-        yield call(getKeyWordsReplyList, { params: {} })
+        yield call(keyWordsReplyList, { params: {} })
     } else {
         message.warning(e.msg)
     }
@@ -100,9 +100,9 @@ function* setFollowedReplyInfo({ params }) {
 }
 
 export default function* rootSaga() {
-    yield takeEvery(types.wechat.GET_AUTO_REPLY_STATUS, getAutoReplyStatus)
+    yield takeEvery(types.wechat.GET_AUTO_REPLY_STATUS, autoReplyStatus)
     yield takeEvery(types.wechat.SET_AUTO_REPLY_STATUS, setAutoReplyStatus)
-    yield takeEvery(types.wechat.GET_KEYWORDS_REPLY_LIST, getKeyWordsReplyList)
+    yield takeEvery(types.wechat.GET_KEYWORDS_REPLY_LIST, keyWordsReplyList)
     yield takeEvery(types.wechat.DEL_AUTO_REPLY_KEYWORDS, delAutoReplyKeywords)
     yield takeEvery(types.wechat.ADD_AUTO_REPLY_KEYWORDS, addAutoReplyKeywords)
     yield takeEvery(types.wechat.EDIT_AUTO_REPLY_KEYWORDS, editAutoReplyKeywords)

@@ -4,6 +4,7 @@ import { Spin } from 'antd';
 import pathToRegexp from 'path-to-regexp';
 import Loadable from 'react-loadable';
 import { getMenuData } from './menu';
+import { Redirect } from "react-router-dom";
 
 let routerDataCache;
 const dynamicWrapper = (component) => {
@@ -53,12 +54,6 @@ function getFlatMenuData(menus) {
 
 export const getRouterData = () => {
     const routerConfig = {
-        '/': {
-            component: dynamicWrapper(() => import('../pages/setting/deliver')),
-        },
-        '/home': {
-            component: dynamicWrapper(() => import('../pages/setting/deliver')),
-        },
         '/home/analysis': {
             component: dynamicWrapper(() => import('../pages/index/index')),
         },
@@ -184,6 +179,14 @@ export const getRouterData = () => {
         },
         '/setting/deliver/freightEdit': {
             component: dynamicWrapper(() => import('../pages/setting/freightEdit')),
+        },
+        '/marketing/group': {
+            exact:true,
+            component: () => <Redirect push  to='/marketing/group/list' />,
+        },
+        '/marketing/group/list': {
+            exact:false,
+            component: dynamicWrapper(() => import('../pages/marketing/group/list')),
         },
         // '/article/list': {
         //     component: dynamicWrapper(() => import('../pages/article/list')),

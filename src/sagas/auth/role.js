@@ -5,7 +5,7 @@ import { message } from 'antd';
 import {
     groupList,
     selectRuleids,
-} from '../../actions/auth/role';
+} from '../../models/role';
 import { AuthApi } from "../../config/api/auth";
 
 function* groupAdd({ params, func }) {

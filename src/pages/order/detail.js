@@ -1,50 +1,11 @@
-// @flow
 import React, { Component } from "react";
 import { message } from "antd";
 import OrderDetailView from "../../components/order/orderDetail";
 import { View } from "react-web-dom";
 import { publicFunction } from "../../utils";
-import { getOrderInfo } from "../../actions/order"
-
+import { info } from "../../actions/order"
 const { parseQuery } = publicFunction
-type Props = {
-    id: number,
-    location: { state: { type: string, record: {} }, search: string, pathname: string },
-    history: { goBack: Function, push: Function },
-}
-
-type State = {
-    orderInfo: {
-        info: {
-            id: number,
-            amount: number,
-            freight_fee: number,
-            sn: string,
-            trade_no: string,
-            create_time: number,
-            extend_order_goods: Array<{}>,
-            extend_order_extend: {
-                reciver_name: string,
-                reciver_info: {
-                    address: string,
-                    name: string,
-                    phone: string,
-                    combine_detail: string,
-                },
-                message: string,
-                deliver_name: string,
-                deliver_phone: string,
-                deliver_address: string,
-                tracking_time: number,
-                tracking_no: string,
-                remark: string
-            },
-            state: number,
-
-        }
-    }
-}
-export default class Detail extends Component<Props, State> {
+export default class Detail extends Component {
     state = {
         orderInfo: {
             info: {
@@ -80,7 +41,7 @@ export default class Detail extends Component<Props, State> {
     async componentWillMount() {
         const { location } = this.props
         const { id } = parseQuery(location.search)
-        const response = await getOrderInfo({ params: { id } })
+        const response = await info({ params: { id } })
         if (response.code === 0) {
             this.setState({
                 orderInfo: response.result

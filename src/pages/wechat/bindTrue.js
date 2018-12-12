@@ -1,4 +1,3 @@
-//@flow
 import React,{ Component } from 'react'
 import { bindActionCreators } from 'redux';
 import { connect } from "react-redux";
@@ -19,33 +18,13 @@ import PublicAccountsSetting from '../../components/wechat/publicAccountsSetting
 
 import AddReply from './addReply'
 import EditReply from './editReply'
-import AddWechatMaterial from './addWechatMaterial'
+import AddMaterial from './addMaterial'
 import AddServerMaterial from './addServerMaterial'
-import EditWechatMaterial from './editWechatMaterial'
+import EditMaterial from './editMaterial'
 import EditServerMaterial from './editServerMaterial'
 
 const { Content, Sider } = Layout
 const { parseQuery } = publicFunction
-
-type Props = {
-    history:{
-        push:Function,
-        replace:Function,
-        goBack:Function,
-    },
-    location:{
-        search:string
-    },
-    form:{
-        getFieldValue:Function,
-        setFieldsValue:Function,
-        validateFields:Function,
-        getFieldDecorator:Function,
-    },
-    getWechatApiStatus:Function,
-    wechatApiStatus: boolean
-}
-type State = {}
 
 @connect(
     ({view:{wechat:{ wechatApiStatus }}}) => ({
@@ -53,9 +32,9 @@ type State = {}
     }),
     dispatch => bindActionCreators(actions,dispatch),
 )
-export default class BindTruePublicAccounts extends Component<Props,State> {
+export default class BindTruePublicAccounts extends Component {
     componentDidMount(){
-        this.props.getWechatApiStatus()
+        this.props.apiStatus()
     }
     render() {
         const { location, history, wechatApiStatus } = this.props
@@ -147,9 +126,9 @@ export default class BindTruePublicAccounts extends Component<Props,State> {
         switch (search.router) {
             case 'addReply': return <AddReply {...this.props} pathSearch={search} />
             case 'editReply': return <EditReply {...this.props} pathSearch={search} />
-            case 'addWechatMaterial': return <AddWechatMaterial {...this.props} pathSearch={search} />
+            case 'addMaterial': return <AddMaterial {...this.props} pathSearch={search} />
             case 'addServerMaterial': return <AddServerMaterial {...this.props} pathSearch={search} />
-            case 'editWechatMaterial': return <EditWechatMaterial {...this.props} pathSearch={search} />
+            case 'editMaterial': return <EditMaterial {...this.props} pathSearch={search} />
             case 'editServerMaterial': return <EditServerMaterial {...this.props} pathSearch={search} />
         }
     }
