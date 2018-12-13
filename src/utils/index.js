@@ -1,32 +1,19 @@
-import { message, Modal } from 'antd';
-import stateHoc from './stateHoc';
-import Fetch from './fetch';
-import { initLibraryConfigFunc } from "ws-web-utils";
-import { publicFunction as nativePublicFunction } from "ws-web-utils";
-import { AppName, AppPlatform, errorCollectApi, env } from "../config/root";
-import store from "../store";
 import imageUpload from "./imageUpload";
-import { parse, stringify } from 'qs';
+import { parse, stringify } from "qs";
+
 export { fetchStatus, storageModule } from "ws-web-utils";
-const publicFunction = {
-    ...nativePublicFunction,
-    ...{
-        unique,
-        type,
-    }
-}
 const getHeaders = () => {
-    const { member } = store.getState().app
-    const { userInfo } = member
+    const { member } = store.getState().app;
+    const { userInfo } = member;
     return {
-        'User-Id': userInfo ? userInfo.user_id : null,
-        'Access-Token': userInfo ? userInfo.access_token : null,
-    }
-}
+        "User-Id": userInfo ? userInfo.user_id : null,
+        "Access-Token": userInfo ? userInfo.access_token : null
+    };
+};
 
 function unique(arr) {
-    const seen = new Map()
-    return arr.filter((a) => !seen.has(a) && seen.set(a, 1))
+    const seen = new Map();
+    return arr.filter((a) => !seen.has(a) && seen.set(a, 1));
 }
 
 function type(o) {
@@ -37,10 +24,10 @@ function type(o) {
 
 function getRelation(str1, str2) {
     if (str1 === str2) {
-        console.warn('Two path are equal!'); // eslint-disable-line
+        console.warn("Two path are equal!"); // eslint-disable-line
     }
-    const arr1 = str1.split('/');
-    const arr2 = str2.split('/');
+    const arr1 = str1.split("/");
+    const arr2 = str2.split("/");
     if (arr2.every((item, index) => item === arr1[index])) {
         return 1;
     } else if (arr1.every((item, index) => item === arr2[index])) {
@@ -75,7 +62,7 @@ function getRoutes(path, routerData) {
         routePath => routePath.indexOf(path) === 0 && routePath !== path
     );
     // Replace path to '' eg. path='user' /user/name => name
-    routes = routes.map(item => item.replace(path, ''));
+    routes = routes.map(item => item.replace(path, ""));
     // Get the route to be rendered to remove the deep rendering
     const renderArr = getRenderArr(routes);
     // Conversion and stitching parameters
@@ -85,17 +72,17 @@ function getRoutes(path, routerData) {
             exact,
             ...routerData[`${path}${item}`],
             key: `${path}${item}`,
-            path: `${path}${item}`,
+            path: `${path}${item}`
         };
     });
 }
 
 
 function getPageQuery() {
-    return parse(window.location.href.split('?')[1]);
+    return parse(window.location.href.split("?")[1]);
 }
 
-function getQueryPath(path = '', query = {}) {
+function getQueryPath(path = "", query = {}) {
     const search = stringify(query);
     if (search.length) {
         return `${path}?${search}`;
@@ -111,12 +98,12 @@ function isUrl(path) {
     return reg.test(path);
 }
 
-function parsePrice(price){
-    price = isNaN(price) || !price ? 0.00 : price
-    return parseFloat(parseFloat(price).toFixed(2))
+function parsePrice(price) {
+    price = isNaN(price) || !price ? 0.00 : price;
+    return parseFloat(parseFloat(price).toFixed(2));
 }
+
 export {
-    stateHoc,
     imageUpload,
     getHeaders,
     getRoutes,
@@ -124,4 +111,4 @@ export {
     getQueryPath,
     isUrl,
     parsePrice
-}
+};

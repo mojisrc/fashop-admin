@@ -6,7 +6,7 @@ import { connect } from 'dva';
 import router from 'umi/router';
 import GlobalHeader from '@/components/globalHeader';
 import TopNavHeader from '@/components/topNavHeader';
-import styles from './Header.less';
+import styles from './header.less';
 
 const { Header } = Layout;
 

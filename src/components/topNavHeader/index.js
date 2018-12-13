@@ -1,8 +1,8 @@
 import React, { PureComponent } from 'react';
 import Link from 'umi/link';
-import RightContent from '../globalHeader/RightContent';
-import BaseMenu from '../siderMenu/BaseMenu';
-import { getFlatMenuKeys } from '../siderMenu/SiderMenuUtils';
+import RightContent from '../globalHeader/rightContent';
+import BaseMenu from '../siderMenu/baseMenu';
+import { getFlatMenuKeys } from '../siderMenu/siderMenuUtils';
 import styles from './index.less';
 
 export default class TopNavHeader extends PureComponent {
