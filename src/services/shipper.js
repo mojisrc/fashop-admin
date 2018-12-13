@@ -1,41 +1,46 @@
-import { env } from '../root';
-import Fetch from "@/utils/fetch";
-const ROOT_URL = `${env.domain}/admin/`;
-export const ShipperApi = {
-    list:{
-        url: `${ROOT_URL}shipper/list`,
-        method: 'GET',
-        showLoading: false,
-        needLogin: true,
+import fa from "@/fa";
+
+export default {
+    async list(data = {}) {
+        return await fa.request({
+            url: `shipper/list`,
+            method: "GET",
+            data
+        });
     },
-    info:{
-        url: `${ROOT_URL}shipper/info`,
-        method: 'GET',
-        showLoading: false,
-        needLogin: true,
+    async info(data = {}) {
+        return await fa.request({
+            url: `shipper/info`,
+            method: "GET",
+            data
+        });
     },
-    add:{
-        url: `${ROOT_URL}shipper/add`,
-        method: 'POST',
-        showLoading: false,
-        needLogin: true,
+    async add(data = {}) {
+        return await fa.request({
+            url: `shipper/add`,
+            method: "POST",
+            data
+        });
     },
-    edit:{
-        url: `${ROOT_URL}shipper/edit`,
-        method: 'POST',
-        showLoading: false,
-        needLogin: true,
+    async edit(data = {}) {
+        return await fa.request({
+            url: `shipper/edit`,
+            method: "POST",
+            data
+        });
     },
-    del:{
-        url: `${ROOT_URL}shipper/del`,
-        method: 'POST',
-        showLoading: false,
-        needLogin: true,
+    async del(data = {}) {
+        return await fa.request({
+            url: `shipper/del`,
+            method: "POST",
+            data
+        });
     },
-    setDefault:{
-        url: `${ROOT_URL}shipper/setDefault`,
-        method: 'POST',
-        showLoading: false,
-        needLogin: true,
+    async setDefault(data = {}) {
+        return await fa.request({
+            url: `shipper/setDefault`,
+            method: "POST",
+            data
+        });
     }
-}
+};

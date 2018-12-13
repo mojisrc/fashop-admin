@@ -1,41 +1,47 @@
-import { env } from '../root';
-import Fetch from "@/utils/fetch";
-const ROOT_URL = `${env.domain}/admin/`;
-export const ExpressApi ={
-    list:{
-        url: `${ROOT_URL}express/list`,
-        method: 'POST',
-        showLoading: false,
-        needLogin: true,
+import fa from "@/fa";
+
+export default {
+    async list(data = {}) {
+        return await fa.request({
+            url: `express/list`,
+            method: "POST",
+            data
+        });
     },
-    info:{
-        url: `${ROOT_URL}express/info`,
-        method: 'GET',
-        showLoading: false,
-        needLogin: true,
+    async info(data = {}) {
+        return await fa.request({
+            url: `express/info`,
+            method: "GET",
+            data
+        });
     },
-    add:{
-        url: `${ROOT_URL}express/add`,
-        method: 'POST',
-        showLoading: false,
-        needLogin: true,
+    async add(data = {}) {
+        return await fa.request({
+            url: `express/add`,
+            method: "POST",
+            data
+        });
     },
-    edit:{
-        url: `${ROOT_URL}express/edit`,
-        method: 'POST',
-        showLoading: false,
-        needLogin: true,
+    async edit(data = {}) {
+        return await fa.request({
+            url: `express/edit`,
+            method: "POST",
+            data
+        });
     },
-    del:{
-        url: `${ROOT_URL}express/del`,
-        method: 'POST',
-        showLoading: false,
-        needLogin: true,
+    async del(data = {}) {
+        return await fa.request({
+            url: `express/del`,
+            method: "POST",
+            data
+        });
     },
-    setCommonlyUse:{
-        url: `${ROOT_URL}express/setCommonlyUse`,
-        method: 'POST',
-        showLoading: false,
-        needLogin: true,
+    async setCommonlyUse(data = {}) {
+        return await fa.request({
+            url: `express/setCommonlyUse`,
+            method: "POST",
+            data
+        });
+
     }
-}
+};

@@ -1,39 +1,45 @@
-import { env } from '../root';
-import Fetch from "@/utils/fetch";
-const ROOT_URL = `${env.domain}/admin/`;
-export const SmsApi = {
-    provider:{
-        edit:{
-            url: `${ROOT_URL}Smsprovider/edit`,
-            method: 'POST',
-            showLoading: false,
-            needLogin: true,
+import fa from "@/fa";
+
+export default {
+    provider: {
+        async edit(data = {}) {
+            return await fa.request({
+                url: `Smsprovider/edit`,
+                method: "POST",
+                data
+            });
         }
     },
-    scene:{
-        edit:{
-            url: `${ROOT_URL}Smsscene/edit`,
-            method: 'POST',
-            showLoading: false,
-            needLogin: true,
+    scene: {
+        async edit(data = {}) {
+            return await fa.request({
+                url: `Smsscene/edit`,
+                method: "POST",
+                data
+            });
+
         },
-        info:{
-            url: `${ROOT_URL}Smsscene/info`,
-            method: 'GET',
-            showLoading: false,
-            needLogin: true,
+        async info(data = {}) {
+            return await fa.request({
+                url: `Smsscene/info`,
+                method: "GET",
+                data
+            });
+
         },
-        list:{
-            url: `${ROOT_URL}Smsscene/list`,
-            method: 'GET',
-            showLoading: false,
-            needLogin: true,
+        async list(data = {}) {
+            return await fa.request({
+                url: `Smsscene/list`,
+                method: "GET",
+                data
+            });
         },
-        add:{
-            url: `${ROOT_URL}goods/add`,
-            method: 'POST',
-            showLoading: true,
-            needLogin: true,
+        async add(data = {}) {
+            return await fa.request({
+                url: `goods/add`,
+                method: "POST",
+                data
+            });
         }
     }
-}
+};

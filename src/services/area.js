@@ -1,11 +1,11 @@
-import { env } from '../root';
-import Fetch from "@/utils/fetch";
-const ROOT_URL = `${env.domain}/admin/`;
-export const AreaApi = {
-    list: {
-        url: `${ROOT_URL}Area/list`,
-        method: 'GET',
-        showLoading: false,
-        needLogin: true,
+import fa from "@/fa";
+
+export default {
+    async list(data = {}) {
+        return await fa.request({
+            url: `area/list`,
+            method: "GET",
+            data
+        });
     }
-}
+};

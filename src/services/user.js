@@ -1,38 +1,32 @@
-import request from '@/utils/request';
+import fa from "@/fa";
 
-import Fetch from "@/utils/fetch";
-export async function query() {
-  return request('/api/users');
-}
-
-export async function queryCurrent() {
-  return request('/api/currentUser');
-}
-
-
-export const UserApi = {
-  list: {
-    url: `${ROOT_URL}user/list`,
-    method: 'GET',
-    showLoading: false,
-    needLogin: true,
-  },
-  info: {
-    url: `${ROOT_URL}user/info`,
-    method: 'GET',
-    showLoading: false,
-    needLogin: true,
-  },
-  address: {
-    url: `${ROOT_URL}user/address`,
-    method: 'GET',
-    showLoading: false,
-    needLogin: true,
-  },
-  statistics:{
-    url: `${ROOT_URL}user/statistics`,
-    method: 'GET',
-    showLoading: false,
-    needLogin: true,
-  }
-}
+export default {
+    async list(data = {}) {
+        return await fa.request({
+            url: `user/list`,
+            method: "GET",
+            data
+        });
+    },
+    async info(data = {}) {
+        return await fa.request({
+            url: `user/info`,
+            method: "GET",
+            data
+        });
+    },
+    async address(data = {}) {
+        return await fa.request({
+            url: `user/address`,
+            method: "GET",
+            data
+        });
+    },
+    async statistics(data = {}) {
+        return await fa.request({
+            url: `user/statistics`,
+            method: "GET",
+            data
+        });
+    }
+};

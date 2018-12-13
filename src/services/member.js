@@ -1,65 +1,72 @@
-import { env } from '../root';
-import Fetch from "@/utils/fetch";
-const ROOT_URL = `${env.domain}/admin/`;
-
-export const MemberApi ={
-    del:{
-        url: `${ROOT_URL}member/del`,
-        method: 'POST',
-        showLoading: true,
-        needLogin: true,
+import fa from "@/fa";
+export default {
+    async del(data = {}) {
+        return await fa.request({
+            url: `member/del`,
+            method: "POST",
+            data
+        });
     },
-    token:{
-        url: `${ROOT_URL}member/token`,
-        method: 'POST',
-        showLoading: true,
-        needLogin: false,
+    async token(data = {}) {
+        return await fa.request({
+            url: `member/token`,
+            method: "POST",
+            data
+        });
     },
-    selfEdit:{
-        url: `${ROOT_URL}member/selfEdit`,
-        method: 'POST',
-        showLoading: true,
-        needLogin: true,
+    async selfEdit(data = {}) {
+        return await fa.request({
+            url: `member/selfEdit`,
+            method: "POST",
+            data
+        });
     },
-    add:{
-        url: `${ROOT_URL}member/add`,
-        method: 'POST',
-        showLoading: false,
-        needLogin: true,
+    async add(data = {}) {
+        return await fa.request({
+            url: `member/add`,
+            method: "POST",
+            data
+        });
     },
-    list:{
-        method: 'GET',
-        showLoading: false,
-        needLogin: true,
+    async list(data = {}) {
+        return await fa.request({
+            method: "GET",
+            data
+        });
     },
-    verifyCode:{
-        url: `${ROOT_URL}member/verifyCode`,
-        method: 'GET',
-        showLoading: false,
-        needLogin: false,
+    async verifyCode(data = {}) {
+        return await fa.request({
+            url: `member/verifyCode`,
+            method: "GET",
+            data
+        });
     },
-    logout:{
-        url: `${ROOT_URL}member/logout`,
-        method: 'GET',
-        showLoading: false,
-        needLogin: false,
+    async logout(data = {}) {
+        return await fa.request({
+            url: `member/logout`,
+            method: "GET",
+            data
+        });
     },
-    self:{
-        url: `${ROOT_URL}member/self`,
-        method: 'GET',
-        showLoading: true,
-        needLogin: false,
+    async self(data = {}) {
+        return await fa.request({
+            url: `member/self`,
+            method: "GET",
+            data
+        });
     },
-    selfPassword:{
-        url: `${ROOT_URL}member/selfPassword`,
-        method: 'POST',
-        showLoading: true,
-        needLogin: true,
+    async selfPassword(data = {}) {
+        return await fa.request({
+            url: `member/selfPassword`,
+            method: "POST",
+            data
+        });
     },
-    login:{
-        url: `${ROOT_URL}member/login`,
-        method: 'POST',
-        showLoading: true,
-        needLogin: false,
+    async login(data = {}) {
+        return await fa.request({
+            url: `member/login`,
+            method: "POST",
+            data
+        });
     }
-}
+};

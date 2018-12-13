@@ -1,47 +1,53 @@
-import { env } from '../root';
-import Fetch from "@/utils/fetch";
-const ROOT_URL = `${env.domain}/admin/`;
-export const StatisticsApi = {
-    quantity:{
-        url: `${ROOT_URL}Statistics/quantity`,
-        method: 'GET',
-        showLoading: true,
-        needLogin: true,
+import fa from "@/fa";
+
+export default {
+    async quantity(data = {}) {
+        return await fa.request({
+            url: `Statistics/quantity`,
+            method: "GET",
+            data
+        });
     },
-    monthSalesHistogram:{
-        url: `${ROOT_URL}Statistics/monthSalesHistogram`,
-        method: 'GET',
-        showLoading: true,
-        needLogin: true,
+    async monthSalesHistogram(data = {}) {
+        return await fa.request({
+            url: `Statistics/monthSalesHistogram`,
+            method: "GET",
+            data
+        });
     },
-    monthOrderCountHistogram:{
-        url: `${ROOT_URL}Statistics/monthOrderCountHistogram`,
-        method: 'GET',
-        showLoading: true,
-        needLogin: true,
+    async monthOrderCountHistogram(data = {}) {
+        return await fa.request({
+            url: `Statistics/monthOrderCountHistogram`,
+            method: "GET",
+            data
+        });
     },
-    monthUserAddCountHistogram:{
-        url: `${ROOT_URL}Statistics/monthUserAddCountHistogram`,
-        method: 'GET',
-        showLoading: true,
-        needLogin: true,
+    async monthUserAddCountHistogram(data = {}) {
+        return await fa.request({
+            url: `Statistics/monthUserAddCountHistogram`,
+            method: "GET",
+            data
+        });
     },
-    monthNewUserSalesHistogram:{
-        url: `${ROOT_URL}Statistics/monthNewUserSalesHistogram`,
-        method: 'GET',
-        showLoading: true,
-        needLogin: true,
+    async monthNewUserSalesHistogram(data = {}) {
+        return await fa.request({
+            url: `Statistics/monthNewUserSalesHistogram`,
+            method: "GET",
+            data
+        });
     },
-    saleAccumulativeAmount:{
-        url: `${ROOT_URL}Statistics/saleAccumulativeAmount`,
-        method: 'GET',
-        showLoading: true,
-        needLogin: true,
+    async saleAccumulativeAmount(data = {}) {
+        return await fa.request({
+            url: `Statistics/saleAccumulativeAmount`,
+            method: "GET",
+            data
+        });
     },
-    dayAverage:{
-        url: `${ROOT_URL}Statistics/dayAverage`,
-        method: 'GET',
-        showLoading: true,
-        needLogin: true,
+    async dayAverage(data = {}) {
+        return await fa.request({
+            url: `Statistics/dayAverage`,
+            method: "GET",
+            data
+        });
     }
-}
+};

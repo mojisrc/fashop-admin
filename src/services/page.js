@@ -1,35 +1,39 @@
-import { env } from '../root';
-import Fetch from "@/utils/fetch";
-const ROOT_URL = `${env.domain}/admin/`;
-export const PageApi = {
-    list:{
-        url: `${ROOT_URL}page/list`,
-        method: 'GET',
-        showLoading: false,
-        needLogin: true,
+import fa from "@/fa";
+
+export default {
+    async list(data = {}) {
+        return await fa.request({
+            url: `page/list`,
+            method: "GET",
+            data
+        });
     },
-    info:{
-        url: `${ROOT_URL}page/info`,
-        method: 'GET',
-        showLoading: false,
-        needLogin: true,
+    async info(data = {}) {
+        return await fa.request({
+            url: `page/info`,
+            method: "GET",
+            data
+        });
     },
-    add:{
-        url: `${ROOT_URL}page/add`,
-        method: 'POST',
-        showLoading: false,
-        needLogin: true,
+    async add(data = {}) {
+        return await fa.request({
+            url: `page/add`,
+            method: "POST",
+            data
+        });
     },
-    edit:{
-        url: `${ROOT_URL}page/edit`,
-        method: 'POST',
-        showLoading: false,
-        needLogin: true,
+    async edit(data = {}) {
+        return await fa.request({
+            url: `page/edit`,
+            method: "POST",
+            data
+        });
     },
-    setPortal:{
-        url: `${ROOT_URL}page/setPortal`,
-        method: 'POST',
-        showLoading: false,
-        needLogin: true,
+    async setPortal(data = {}) {
+        return await fa.request({
+            url: `page/setPortal`,
+            method: "POST",
+            data
+        });
     }
-}
+};

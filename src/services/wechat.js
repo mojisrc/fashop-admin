@@ -1,311 +1,371 @@
-import { env } from '../root';
-import Fetch from "@/utils/fetch";
-const ROOT_URL = `${env.domain}/admin/`;
-export const WechatApi = {
-    getConf:{
-        url: `${ROOT_URL}wechat/getConf`,
-        method: 'GET',
-        showLoading: false,
-        needLogin: true,
+import fa from "@/fa";
+export default {
+    async getConf(data = {}) {
+        return await fa.request({
+            url: `wechat/getConf`,
+            method: "GET",
+            data
+        });
     },
-    checkApiStatus:{
-        url: `${ROOT_URL}wechat/checkApiStatus`,
-        method: 'GET',
-        showLoading: false,
-        needLogin: true,
+    async checkApiStatus(data = {}) {
+        return await fa.request({
+            url: `wechat/checkApiStatus`,
+            method: "GET",
+            data
+        });
     },
-    confSet:{
-        url: `${ROOT_URL}wechat/confSet`,
-        method: 'POST',
-        showLoading: false,
-        needLogin: true,
+    async confSet(data = {}) {
+        return await fa.request({
+            url: `wechat/confSet`,
+            method: "POST",
+            data
+        });
     },
-    menuList:{
-        url: `${ROOT_URL}wechat/menuList`,
-        method: 'POST',
-        showLoading: false,
-        needLogin: true,
+    async menuList(data = {}) {
+        return await fa.request({
+            url: `wechat/menuList`,
+            method: "POST",
+            data
+        });
     },
-    menuCurrent:{
-        url: `${ROOT_URL}wechat/menuCurrent`,
-        method: 'POST',
-        showLoading: false,
-        needLogin: true,
+    async menuCurrent(data = {}) {
+        return await fa.request({
+            url: `wechat/menuCurrent`,
+            method: "POST",
+            data
+        });
     },
-    menuCreate:{
-        url: `${ROOT_URL}wechat/menuCreate`,
-        method: 'POST',
-        showLoading: false,
-        needLogin: true,
+    async menuCreate(data = {}) {
+        return await fa.request({
+            url: `wechat/menuCreate`,
+            method: "POST",
+            data
+        });
     },
-    menuDelete:{
-        url: `${ROOT_URL}wechat/menuDelete`,
-        method: 'POST',
-        showLoading: false,
-        needLogin: true,
+    async menuDelete(data = {}) {
+        return await fa.request({
+            url: `wechat/menuDelete`,
+            method: "POST",
+            data
+        });
     },
-    autoReplyStatusSet:{
-        url: `${ROOT_URL}wechat/autoReplyStatusSet`,
-        method: 'POST',
-        showLoading: false,
-        needLogin: true,
+    async autoReplyStatusSet(data = {}) {
+        return await fa.request({
+            url: `wechat/autoReplyStatusSet`,
+            method: "POST",
+            data
+        });
     },
-    autoReplyStatusGet:{
-        url: `${ROOT_URL}wechat/autoReplyStatusGet`,
-        method: 'GET',
-        showLoading: false,
-        needLogin: true,
+    async autoReplyStatusGet(data = {}) {
+        return await fa.request({
+            url: `wechat/autoReplyStatusGet`,
+            method: "GET",
+            data
+        });
     },
-    autoReplySubscribeGet:{
-        url: `${ROOT_URL}wechat/autoReplySubscribeGet`,
-        method: 'GET',
-        showLoading: false,
-        needLogin: true,
+    async autoReplySubscribeGet(data = {}) {
+        return await fa.request({
+            url: `wechat/autoReplySubscribeGet`,
+            method: "GET",
+            data
+        });
     },
-    autoReplySubscribeSet:{
-        url: `${ROOT_URL}wechat/autoReplySubscribeSet`,
-        method: 'POST',
-        showLoading: false,
-        needLogin: true,
+    async autoReplySubscribeSet(data = {}) {
+        return await fa.request({
+            url: `wechat/autoReplySubscribeSet`,
+            method: "POST",
+            data
+        });
     },
-    replyKeywordsList:{
-        url: `${ROOT_URL}wechat/replyKeywordsList`,
-        method: 'GET',
-        showLoading: false,
-        needLogin: true,
+    async replyKeywordsList(data = {}) {
+        return await fa.request({
+            url: `wechat/replyKeywordsList`,
+            method: "GET",
+            data
+        });
     },
-    autoReplyKeywordsAdd:{
-        url: `${ROOT_URL}wechat/autoReplyKeywordsAdd`,
-        method: 'POST',
-        showLoading: false,
-        needLogin: true,
+    async autoReplyKeywordsAdd(data = {}) {
+        return await fa.request({
+            url: `wechat/autoReplyKeywordsAdd`,
+            method: "POST",
+            data
+        });
     },
-    autoReplyKeywordsEdit:{
-        url: `${ROOT_URL}wechat/autoReplyKeywordsEdit`,
-        method: 'POST',
-        showLoading: false,
-        needLogin: true,
+    async autoReplyKeywordsEdit(data = {}) {
+        return await fa.request({
+            url: `wechat/autoReplyKeywordsEdit`,
+            method: "POST",
+            data
+        });
     },
-    autoReplyKeywordsDel:{
-        url: `${ROOT_URL}wechat/autoReplyKeywordsDel`,
-        method: 'POST',
-        showLoading: false,
-        needLogin: true,
+    async autoReplyKeywordsDel(data = {}) {
+        return await fa.request({
+            url: `wechat/autoReplyKeywordsDel`,
+            method: "POST",
+            data
+        });
     },
-    autoReplyKeywordsInfo:{
-        url: `${ROOT_URL}wechat/autoReplyKeywordsInfo`,
-        method: 'GET',
-        showLoading: false,
-        needLogin: true,
+    async autoReplyKeywordsInfo(data = {}) {
+        return await fa.request({
+            url: `wechat/autoReplyKeywordsInfo`,
+            method: "GET",
+            data
+        });
     },
-    userList:{
-        url: `${ROOT_URL}wechat/userList`,
-        method: 'GET',
-        showLoading: false,
-        needLogin: true,
+    async userList(data = {}) {
+        return await fa.request({
+            url: `wechat/userList`,
+            method: "GET",
+            data
+        });
     },
-    userBlackList:{
-        url: `${ROOT_URL}wechat/userBlackList`,
-        method: 'GET',
-        showLoading: false,
-        needLogin: true,
+    async userBlackList(data = {}) {
+        return await fa.request({
+            url: `wechat/userBlackList`,
+            method: "GET",
+            data
+        });
     },
-    userSelect:{
-        url: `${ROOT_URL}wechat/userSelect`,
-        method: 'POST',
-        showLoading: false,
-        needLogin: true,
+    async userSelect(data = {}) {
+        return await fa.request({
+            url: `wechat/userSelect`,
+            method: "POST",
+            data
+        });
     },
-    userBlock:{
-        url: `${ROOT_URL}wechat/userBlock`,
-        method: 'POST',
-        showLoading: false,
-        needLogin: true,
+    async userBlock(data = {}) {
+        return await fa.request({
+            url: `wechat/userBlock`,
+            method: "POST",
+            data
+        });
     },
-    userUnblock:{
-        url: `${ROOT_URL}wechat/userUnblock`,
-        method: 'POST',
-        showLoading: false,
-        needLogin: true,
+    async userUnblock(data = {}) {
+        return await fa.request({
+            url: `wechat/userUnblock`,
+            method: "POST",
+            data
+        });
     },
-    userRemark:{
-        url: `${ROOT_URL}wechat/userRemark`,
-        method: 'POST',
-        showLoading: false,
-        needLogin: true,
+    async userRemark(data = {}) {
+        return await fa.request({
+            url: `wechat/userRemark`,
+            method: "POST",
+            data
+        });
     },
-    userTagList:{
-        url: `${ROOT_URL}wechat/userTagList`,
-        method: 'GET',
-        showLoading: false,
-        needLogin: true,
+    async userTagList(data = {}) {
+        return await fa.request({
+            url: `wechat/userTagList`,
+            method: "GET",
+            data
+        });
     },
-    getToken:{
-        url: `${ROOT_URL}wechat/getToken`,
-        method: 'GET',
-        showLoading: false,
-        needLogin: true,
+    async getToken(data = {}) {
+        return await fa.request({
+            url: `wechat/getToken`,
+            method: "GET",
+            data
+        });
     },
-    userTagCreate:{
-        url: `${ROOT_URL}wechat/userTagCreate`,
-        method: 'POST',
-        showLoading: false,
-        needLogin: true,
+    async userTagCreate(data = {}) {
+        return await fa.request({
+            url: `wechat/userTagCreate`,
+            method: "POST",
+            data
+        });
     },
-    userTagUpdate:{
-        url: `${ROOT_URL}wechat/userTagUpdate`,
-        method: 'POST',
-        showLoading: false,
-        needLogin: true,
+    async userTagUpdate(data = {}) {
+        return await fa.request({
+            url: `wechat/userTagUpdate`,
+            method: "POST",
+            data
+        });
     },
-    userTagDelete:{
-        url: `${ROOT_URL}wechat/userTagDelete`,
-        method: 'POST',
-        showLoading: false,
-        needLogin: true,
+    async userTagDelete(data = {}) {
+        return await fa.request({
+            url: `wechat/userTagDelete`,
+            method: "POST",
+            data
+        });
     },
-    userTagsByOpenid:{
-        url: `${ROOT_URL}wechat/userTagsByOpenid`,
-        method: 'GET',
-        showLoading: false,
-        needLogin: true,
+    async userTagsByOpenid(data = {}) {
+        return await fa.request({
+            url: `wechat/userTagsByOpenid`,
+            method: "GET",
+            data
+        });
     },
-    userTagUsersOfTag:{
-        url: `${ROOT_URL}wechat/userTagUsersOfTag`,
-        method: 'GET',
-        showLoading: false,
-        needLogin: true,
+    async userTagUsersOfTag(data = {}) {
+        return await fa.request({
+            url: `wechat/userTagUsersOfTag`,
+            method: "GET",
+            data
+        });
     },
-    userTagTagUsers:{
-        url: `${ROOT_URL}wechat/userTagTagUsers`,
-        method: 'POST',
-        showLoading: false,
-        needLogin: true,
+    async userTagTagUsers(data = {}) {
+        return await fa.request({
+            url: `wechat/userTagTagUsers`,
+            method: "POST",
+            data
+        });
     },
-    userTagUntagUsers:{
-        url: `${ROOT_URL}wechat/userTagUntagUsers`,
-        method: 'POST',
-        showLoading: false,
-        needLogin: true,
+    async userTagUntagUsers(data = {}) {
+        return await fa.request({
+            url: `wechat/userTagUntagUsers`,
+            method: "POST",
+            data
+        });
     },
-    broadcastRecords:{
-        url: `${ROOT_URL}wechat/broadcastRecords`,
-        method: 'GET',
-        showLoading: false,
-        needLogin: true,
+    async broadcastRecords(data = {}) {
+        return await fa.request({
+            url: `wechat/broadcastRecords`,
+            method: "GET",
+            data
+        });
     },
-    broadcastUserSearch:{
-        url: `${ROOT_URL}wechat/broadcastUserSearch`,
-        method: 'POST',
-        showLoading: false,
-        needLogin: true,
+    async broadcastUserSearch(data = {}) {
+        return await fa.request({
+            url: `wechat/broadcastUserSearch`,
+            method: "POST",
+            data
+        });
     },
-    broadcastCreate:{
-        url: `${ROOT_URL}wechat/broadcastCreate`,
-        method: 'POST',
-        showLoading: false,
-        needLogin: true,
+    async broadcastCreate(data = {}) {
+        return await fa.request({
+            url: `wechat/broadcastCreate`,
+            method: "POST",
+            data
+        });
     },
-    broadcastSurplus:{
-        url: `${ROOT_URL}wechat/broadcastSurplus`,
-        method: 'GET',
-        showLoading: false,
-        needLogin: true,
+    async broadcastSurplus(data = {}) {
+        return await fa.request({
+            url: `wechat/broadcastSurplus`,
+            method: "GET",
+            data
+        });
     },
-    broadcastRecordsDel:{
-        url: `${ROOT_URL}wechat/broadcastRecordsDel`,
-        method: 'POST',
-        showLoading: false,
-        needLogin: true,
+    async broadcastRecordsDel(data = {}) {
+        return await fa.request({
+            url: `wechat/broadcastRecordsDel`,
+            method: "POST",
+            data
+        });
     },
-    wechatMaterialList:{
-        url: `${ROOT_URL}wechat/wechatMaterialList`,
-        method: 'GET',
-        showLoading: false,
-        needLogin: true,
+    async wechatMaterialList(data = {}) {
+        return await fa.request({
+            url: `wechat/wechatMaterialList`,
+            method: "GET",
+            data
+        });
     },
-    materialUploadThumb:{
-        url: `${ROOT_URL}wechat/materialUploadThumb`,
-        method: 'POST',
-        showLoading: false,
-        needLogin: true,
+    async materialUploadThumb(data = {}) {
+        return await fa.request({
+            url: `wechat/materialUploadThumb`,
+            method: "POST",
+            data
+        });
+
+
     },
-    materialUploadArticle:{
-        url: `${ROOT_URL}wechat/materialUploadArticle`,
-        method: 'POST',
-        showLoading: false,
-        needLogin: true,
+    async materialUploadArticle(data = {}) {
+        return await fa.request({
+            url: `wechat/materialUploadArticle`,
+            method: "POST",
+            data
+        });
+
     },
-    materialUpdateArticle:{
-        url: `${ROOT_URL}wechat/materialUpdateArticle`,
-        method: 'POST',
-        showLoading: false,
-        needLogin: true,
+    async materialUpdateArticle(data = {}) {
+        return await fa.request({
+            url: `wechat/materialUpdateArticle`,
+            method: "POST",
+            data
+        });
+
     },
-    materialGet:{
-        url: `${ROOT_URL}wechat/materialGet`,
-        method: 'GET',
-        showLoading: false,
-        needLogin: true,
+    async materialGet(data = {}) {
+        return await fa.request({
+            url: `wechat/materialGet`,
+            method: "GET",
+            data
+        });
+
     },
-    materialUploadArticleImage:{
-        url: `${ROOT_URL}wechat/materialUploadArticleImage`,
-        method: 'POST',
-        showLoading: false,
-        needLogin: true,
+    async materialUploadArticleImage(data = {}) {
+        return await fa.request({
+            url: `wechat/materialUploadArticleImage`,
+            method: "POST",
+            data
+        });
+
     },
-    materialUploadImage:{
-        url: `${ROOT_URL}wechat/materialUploadImage`,
-        method: 'POST',
-        showLoading: false,
-        needLogin: true,
+    async materialUploadImage(data = {}) {
+        return await fa.request({
+            url: `wechat/materialUploadImage`,
+            method: "POST",
+            data
+        });
+
     },
-    materialUploadVoice:{
-        url: `${ROOT_URL}wechat/materialUploadVoice`,
-        method: 'POST',
-        showLoading: false,
-        needLogin: true,
+    async materialUploadVoice(data = {}) {
+        return await fa.request({
+            url: `wechat/materialUploadVoice`,
+            method: "POST",
+            data
+        });
+
     },
-    materialUploadVideo:{
-        url: `${ROOT_URL}wechat/materialUploadVideo`,
-        method: 'POST',
-        showLoading: false,
-        needLogin: true,
+    async materialUploadVideo(data = {}) {
+        return await fa.request({
+            url: `wechat/materialUploadVideo`,
+            method: "POST",
+            data
+
+        });
     },
-    localNews:{
-        url: `${ROOT_URL}wechat/localNews`,
-        method: 'GET',
-        showLoading: false,
-        needLogin: true,
+    async localNews(data = {}) {
+        return await fa.request({
+            url: `wechat/localNews`,
+            method: "GET",
+            data
+        });
+
     },
-    localNewsInfo:{
-        url: `${ROOT_URL}wechat/localNewsInfo`,
-        method: 'GET',
-        showLoading: false,
-        needLogin: true,
+    async localNewsInfo(data = {}) {
+        return await fa.request({
+            url: `wechat/localNewsInfo`,
+            method: "GET",
+            data
+        });
     },
-    localNewsAdd:{
-        url: `${ROOT_URL}wechat/localNewsAdd`,
-        method: 'POST',
-        showLoading: false,
-        needLogin: true,
+    async localNewsAdd(data = {}) {
+        return await fa.request({
+            url: `wechat/localNewsAdd`,
+            method: "POST",
+            data
+        });
     },
-    localNewsEdit:{
-        url: `${ROOT_URL}wechat/localNewsEdit`,
-        method: 'POST',
-        showLoading: false,
-        needLogin: true,
+    async localNewsEdit(data = {}) {
+        return await fa.request({
+            url: `wechat/localNewsEdit`,
+            method: "POST",
+            data
+        });
     },
-    localNewsDel:{
-        url: `${ROOT_URL}wechat/localNewsDel`,
-        method: 'POST',
-        showLoading: false,
-        needLogin: true,
+    async localNewsDel(data = {}) {
+        return await fa.request({
+            url: `wechat/localNewsDel`,
+            method: "POST",
+            data
+
+        });
     },
-    materialDelete:{
-        url: `${ROOT_URL}wechat/materialDelete`,
-        method: 'POST',
-        showLoading: false,
-        needLogin: true,
+    async materialDelete(data = {}) {
+        return await fa.request({
+            url: `wechat/materialDelete`,
+            method: "POST",
+            data
+        });
     }
-}
+};

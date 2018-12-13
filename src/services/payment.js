@@ -1,18 +1,18 @@
-import { env } from '../root';
-import Fetch from "@/utils/fetch";
+import fa from "@/fa";
 
-const ROOT_URL = `${env.domain}/admin/`;
-export const PaymentApi = {
-    edit: {
-        url: `${ROOT_URL}payment/edit`,
-        method: 'POST',
-        showLoading: false,
-        needLogin: true,
+export default {
+    async edit(data = {}) {
+        return await fa.request({
+            url: `payment/edit`,
+            method: "POST",
+            data
+        });
     },
-    info: {
-        url: `${ROOT_URL}payment/info`,
-        method: 'GET',
-        showLoading: false,
-        needLogin: true,
+    async info(data = {}) {
+        return await fa.request({
+            url: `payment/info`,
+            method: "GET",
+            data
+        });
     }
-}
+};

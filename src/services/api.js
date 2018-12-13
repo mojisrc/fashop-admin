@@ -9,11 +9,11 @@ export async function queryActivities() {
   return request('/api/activities');
 }
 
-export async function queryRule(params) {
-  return request(`/api/rule?${stringify(params)}`);
+export async function queryRule(data = {}) {
+  return request(`/api/rule?${stringify(data = {})}`);
 }
 
-export async function removeRule(params) {
+export async function removeRule(data = {}) {
   return request('/api/rule', {
     method: 'POST',
     body: {
@@ -23,7 +23,7 @@ export async function removeRule(params) {
   });
 }
 
-export async function addRule(params) {
+export async function addRule(data = {}) {
   return request('/api/rule', {
     method: 'POST',
     body: {
@@ -33,7 +33,7 @@ export async function addRule(params) {
   });
 }
 
-export async function updateRule(params) {
+export async function updateRule(data = {}) {
   return request('/api/rule', {
     method: 'POST',
     body: {
@@ -43,7 +43,7 @@ export async function updateRule(params) {
   });
 }
 
-export async function fakeSubmitForm(params) {
+export async function fakeSubmitForm(data = {}) {
   return request('/api/forms', {
     method: 'POST',
     body: params,
@@ -66,11 +66,11 @@ export async function queryAdvancedProfile() {
   return request('/api/profile/advanced');
 }
 
-export async function queryFakeList(params) {
-  return request(`/api/fake_list?${stringify(params)}`);
+export async function queryFakeList(data = {}) {
+  return request(`/api/fake_list?${stringify(data = {})}`);
 }
 
-export async function removeFakeList(params) {
+export async function removeFakeList(data = {}) {
   const { count = 5, ...restParams } = params;
   return request(`/api/fake_list?count=${count}`, {
     method: 'POST',
@@ -81,7 +81,7 @@ export async function removeFakeList(params) {
   });
 }
 
-export async function addFakeList(params) {
+export async function addFakeList(data = {}) {
   const { count = 5, ...restParams } = params;
   return request(`/api/fake_list?count=${count}`, {
     method: 'POST',
@@ -92,7 +92,7 @@ export async function addFakeList(params) {
   });
 }
 
-export async function updateFakeList(params) {
+export async function updateFakeList(data = {}) {
   const { count = 5, ...restParams } = params;
   return request(`/api/fake_list?count=${count}`, {
     method: 'POST',
@@ -103,14 +103,14 @@ export async function updateFakeList(params) {
   });
 }
 
-export async function fakeAccountLogin(params) {
+export async function fakeAccountLogin(data = {}) {
   return request('/api/login/account', {
     method: 'POST',
     body: params,
   });
 }
 
-export async function fakeRegister(params) {
+export async function fakeRegister(data = {}) {
   return request('/api/register', {
     method: 'POST',
     body: params,

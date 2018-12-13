@@ -1,35 +1,39 @@
-import { env } from '../root';
-import Fetch from "@/utils/fetch";
-const ROOT_URL = `${env.domain}/admin/`;
-export const FreightApi ={
-    list:{
-        url: `${ROOT_URL}freight/list`,
-        method: 'POST',
-        showLoading: false,
-        needLogin: true,
+import fa from "@/fa";
+
+export default {
+    async list(data = {}) {
+        return await fa.request({
+            url: `freight/list`,
+            method: "POST",
+            data
+        });
     },
-    info:{
-        url: `${ROOT_URL}freight/info`,
-        method: 'GET',
-        showLoading: false,
-        needLogin: true,
+    async info(data = {}) {
+        return await fa.request({
+            url: `freight/info`,
+            method: "GET",
+            data
+        });
     },
-    add:{
-        url: `${ROOT_URL}freight/add`,
-        method: 'POST',
-        showLoading: false,
-        needLogin: true,
+    async add(data = {}) {
+        return await fa.request({
+            url: `freight/add`,
+            method: "POST",
+            data
+        });
     },
-    edit:{
-        url: `${ROOT_URL}freight/edit`,
-        method: 'POST',
-        showLoading: false,
-        needLogin: true,
+    async edit(data = {}) {
+        return await fa.request({
+            url: `freight/edit`,
+            method: "POST",
+            data
+        });
     },
-    del:{
-        url: `${ROOT_URL}freight/del`,
-        method: 'POST',
-        showLoading: false,
-        needLogin: true,
+    async del(data = {}) {
+        return await fa.request({
+            url: `freight/del`,
+            method: "POST",
+            data
+        });
     }
-}
+};

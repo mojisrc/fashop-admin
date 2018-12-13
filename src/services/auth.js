@@ -1,60 +1,70 @@
-import { env } from '../root';
-import Fetch from "@/utils/fetch";
-const ROOT_URL = `${env.domain}/admin/`;
+import fa from "@/fa";
 
-export const AuthApi = {
-    groupAuthorise: {
-        url: `${ROOT_URL}auth/groupAuthorise`,
-        method: 'POST',
-        showLoading: true,
-        needLogin: true,
+export default {
+    async groupAuthorise(data = {}) {
+        return await fa.request({
+            url: `auth/groupAuthorise`,
+            method: "POST",
+            data
+        });
     },
-    ruleTree: {
-        url: `${ROOT_URL}auth/ruleTree`,
-        method: 'GET',
-        showLoading: false,
-        needLogin: true,
+    async ruleTree(data = {}) {
+        return await fa.request({
+            url: `auth/ruleTree`,
+            method: "GET",
+            data
+        });
     },
-    groupInfo: {
-        url: `${ROOT_URL}auth/groupInfo`,
-        method: 'GET',
-        showLoading: false,
-        needLogin: true,
+    async groupInfo(data = {}) {
+        return await fa.request({
+            url: `auth/groupInfo`,
+            method: "GET",
+            data
+        });
     },
-    groupMemberEdit: {
-        url: `${ROOT_URL}auth/groupMemberEdit`,
-        method: 'POST',
-        showLoading: true,
-        needLogin: true,
+    async groupMemberEdit(data = {}) {
+        return await fa.request({
+            url: `auth/groupMemberEdit`,
+            method: "POST",
+            data
+        });
     },
-    groupDel: {
-        url: `${ROOT_URL}auth/groupDel`,
-        method: 'POST',
-        showLoading: true,
-        needLogin: true,
+    async groupDel(data = {}) {
+        return await fa.request({
+            url: `auth/groupDel`,
+            method: "POST",
+            data
+
+        });
     },
-    groupAdd: {
-        url: `${ROOT_URL}auth/groupAdd`,
-        method: 'POST',
-        showLoading: true,
-        needLogin: true,
+    async groupAdd(data = {}) {
+        return await fa.request({
+            url: `auth/groupAdd`,
+            method: "POST",
+            data
+        });
     },
-    groupEdit: {
-        url: `${ROOT_URL}auth/groupEdit`,
-        method: 'POST',
-        showLoading: true,
-        needLogin: true,
+    async groupEdit(data = {}) {
+        return await fa.request({
+            url: `auth/groupEdit`,
+            method: "POST",
+            data
+        });
     },
-    groupMemberList: {
-        url: `${ROOT_URL}auth/groupMemberList`,
-        method: 'GET',
-        showLoading: false,
-        needLogin: true,
+    async groupMemberList(data = {}) {
+        return await fa.request({
+            url: `auth/groupMemberList`,
+            method: "GET",
+            data
+        });
     },
-    groupList: {
-        url: `${ROOT_URL}auth/groupList`,
-        method: 'GET',
-        showLoading: false,
-        needLogin: true,
+    async groupList(data = {}) {
+        return await fa.request({
+            url: `auth/groupList`,
+            method: "GET",
+            data
+        });
     }
-}
+};
+
+

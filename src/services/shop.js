@@ -1,41 +1,46 @@
-import { env } from '../root';
-import Fetch from "@/utils/fetch";
-const ROOT_URL = `${env.domain}/admin/`;
-export const ShopApi = {
-    info:{
-        url: `${ROOT_URL}shop/info`,
-        method: 'GET',
-        showLoading: false,
-        needLogin: true,
+import fa from "@/fa";
+
+export default {
+    async info(data = {}) {
+        return await fa.request({
+            url: `shop/info`,
+            method: "GET",
+            data
+        });
     },
-    setOrderExpires:{
-        url: `${ROOT_URL}shop/setOrderExpires`,
-        method: 'POST',
-        showLoading: false,
-        needLogin: true,
+    async setOrderExpires(data = {}) {
+        return await fa.request({
+            url: `shop/setOrderExpires`,
+            method: "POST",
+            data
+        });
     },
-    setBaseInfo:{
-        url: `${ROOT_URL}shop/setBaseInfo`,
-        method: 'POST',
-        showLoading: false,
-        needLogin: true,
+    async setBaseInfo(data = {}) {
+        return await fa.request({
+            url: `shop/setBaseInfo`,
+            method: "POST",
+            data
+        });
     },
-    setGoodsCategoryStyle:{
-        url: `${ROOT_URL}shop/setGoodsCategoryStyle`,
-        method: 'POST',
-        showLoading: false,
-        needLogin: true,
+    async setGoodsCategoryStyle(data = {}) {
+        return await fa.request({
+            url: `shop/setGoodsCategoryStyle`,
+            method: "POST",
+            data
+        });
     },
-    setColorScheme:{
-        url: `${ROOT_URL}shop/setColorScheme`,
-        method: 'POST',
-        showLoading: false,
-        needLogin: true,
+    async setColorScheme(data = {}) {
+        return await fa.request({
+            url: `shop/setColorScheme`,
+            method: "POST",
+            data
+        });
     },
-    setPortalTemplate:{
-        url: `${ROOT_URL}shop/setPortalTemplate`,
-        method: 'POST',
-        showLoading: false,
-        needLogin: true,
+    async setPortalTemplate(data = {}) {
+        return await fa.request({
+            url: `shop/setPortalTemplate`,
+            method: "POST",
+            data
+        });
     }
-}
+};

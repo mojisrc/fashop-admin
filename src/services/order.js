@@ -1,55 +1,62 @@
-import { env } from '../root';
-import Fetch from "@/utils/fetch";
-const ROOT_URL = `${env.domain}/admin/`;
-export const OrderApi = {
-    list: {
-        url: `${ROOT_URL}order/list`,
-        method: 'GET',
-        showLoading: false,
-        needLogin: true,
+import fa from "@/fa";
+
+export default {
+    async list(data = {}) {
+        return await fa.request({
+            url: `order/list`,
+            method: "GET",
+            data
+        });
     },
-    info: {
-        url: `${ROOT_URL}order/info`,
-        method: 'GET',
-        showLoading: false,
-        needLogin: true,
+    async info(data = {}) {
+        return await fa.request({
+            url: `order/info`,
+            method: "GET",
+            data
+        });
     },
-    setSend: {
-        url: `${ROOT_URL}order/setSend`,
-        method: 'POST',
-        showLoading: false,
-        needLogin: true,
+    async setSend(data = {}) {
+        return await fa.request({
+            url: `order/setSend`,
+            method: "POST",
+            data
+        });
     },
-    setOrderExpires: {
-        url: `${ROOT_URL}shop/setOrderExpires`,
-        method: 'POST',
-        showLoading: false,
-        needLogin: true,
+    async setOrderExpires(data = {}) {
+        return await fa.request({
+            url: `shop/setOrderExpires`,
+            method: "POST",
+            data
+        });
     },
     refund: {
-        list: {
-            url: `${ROOT_URL}Orderrefund/list`,
-            method: 'GET',
-            showLoading: false,
-            needLogin: true,
+        async list(data = {}) {
+            return await fa.request({
+                url: `orderrefund/list`,
+                method: "GET",
+                data
+            });
         },
-        info: {
-            url: `${ROOT_URL}Orderrefund/info`,
-            method: 'GET',
-            showLoading: false,
-            needLogin: true,
+        async info(data = {}) {
+            return await fa.request({
+                url: `orderrefund/info`,
+                method: "GET",
+                data
+            });
         },
-        handle:{
-            url: `${ROOT_URL}Orderrefund/handle`,
-            method: 'POST',
-            showLoading: false,
-            needLogin: true,
+        async handle(data = {}) {
+            return await fa.request({
+                url: `orderrefund/handle`,
+                method: "POST",
+                data
+            });
         },
-        receive:{
-            url: `${ROOT_URL}Orderrefund/receive`,
-            method: 'POST',
-            showLoading: false,
-            needLogin: true,
+        async receive(data = {}) {
+            return await fa.request({
+                url: `orderrefund/receive`,
+                method: "POST",
+                data
+            });
         }
     }
-}
+};

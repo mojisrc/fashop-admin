@@ -1,17 +1,18 @@
-import { env } from '../root';
-import Fetch from "@/utils/fetch";
-const ROOT_URL = `${env.domain}/admin/`;
-export const ArticleApi = {
-    list: {
-        url: `${ROOT_URL}Article/list`,
-        method: 'GET',
-        showLoading: false,
-        needLogin: true,
+import fa from "@/fa";
+
+export default {
+    async list(data = {}) {
+        return await fa.request({
+            url: `article/list`,
+            method: "GET",
+            data
+        });
     },
-    info: {
-        url: `${ROOT_URL}Article/info`,
-        method: 'GET',
-        showLoading: false,
-        needLogin: true,
+    async info(data = {}) {
+        return await fa.request({
+            url: `article/info`,
+            method: "GET",
+            data
+        });
     }
-}
+};

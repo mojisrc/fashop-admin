@@ -1,146 +1,171 @@
-import { env } from '../root';
-import Fetch from "@/utils/fetch";
-const ROOT_URL = `${env.domain}/admin/`;
-export const GoodsApi = {
-    list:{
-        url: `${ROOT_URL}goods/list`,
-        method: 'GET',
-        showLoading: false,
-        needLogin: true,
+import fa from "@/fa";
+
+export default {
+    async list(data = {}) {
+        return await fa.request({
+            url: `goods/list`,
+            method: "GET",
+            data
+        });
     },
-    add:{
-        url: `${ROOT_URL}goods/add`,
-        method: 'POST',
-        showLoading: false,
-        needLogin: true,
+    async add(data = {}) {
+        return await fa.request({
+            url: `goods/add`,
+            method: "POST",
+            data
+        });
     },
-    edit:{
-        url: `${ROOT_URL}goods/edit`,
-        method: 'POST',
-        showLoading: false,
-        needLogin: true,
+    async edit(data = {}) {
+        return await fa.request({
+            url: `goods/edit`,
+            method: "POST",
+            data
+        });
     },
-    info:{
-        url: `${ROOT_URL}goods/info`,
-        method: 'GET',
-        showLoading: false,
-        needLogin: true,
+    async info(data = {}) {
+        return await fa.request({
+            url: `goods/info`,
+            method: "GET",
+            data
+        });
     },
-    del:{
-        url: `${ROOT_URL}goods/del`,
-        method: 'POST',
-        showLoading: false,
-        needLogin: true,
+    async del(data = {}) {
+        return await fa.request({
+            url: `goods/del`,
+            method: "POST",
+            data
+        });
     },
-    offSale:{
-        url: `${ROOT_URL}goods/offSale`,
-        method: 'POST',
-        showLoading: false,
-        needLogin: true,
+    async offSale(data = {}) {
+        return await fa.request({
+            url: `goods/offSale`,
+            method: "POST",
+            data
+        });
     },
-    onSale:{
-        url: `${ROOT_URL}goods/onSale`,
-        method: 'POST',
-        showLoading: false,
-        needLogin: true,
+    async onSale(data = {}) {
+        return await fa.request({
+            url: `goods/onSale`,
+            method: "POST",
+            data
+        });
     },
-    spec:{
-        list:{
-            url: `${ROOT_URL}goodsspec/list`,
-            method: 'GET',
-            showLoading: false,
-            needLogin: true,
-        },
-        add:{
-            url: `${ROOT_URL}goodsspec/add`,
-            method: 'POST',
-            showLoading: true,
-            needLogin: true,
-        }
-    },
-    specValue:{
-        del:{
-            url: `${ROOT_URL}Goodsspecvalue/del`,
-            method: 'POST',
-            showLoading: true,
-            needLogin: true,
-        },
-        add:{
-            url: `${ROOT_URL}Goodsspecvalue/add`,
-            method: 'POST',
-            showLoading: true,
-            needLogin: true,
-        },
+    async batchUpshelf(data = {}) {
+        return await fa.request({
+            url: `goods/batchUpshelf`,
+            method: "POST",
+            data
+        });
 
     },
-    batchUpshelf:{
-        url: `${ROOT_URL}goods/batchUpshelf`,
-        method: 'POST',
-        showLoading: true,
-        needLogin: true,
+    async batchDownshelf(data = {}) {
+        return await fa.request({
+            url: `goods/batchDownshelf`,
+            method: "POST",
+            data
+        });
+
     },
-    batchDownshelf:{
-        url: `${ROOT_URL}goods/batchDownshelf`,
-        method: 'POST',
-        showLoading: true,
-        needLogin: true,
-    },
-    category:{
-        list:{
-            url: `${ROOT_URL}goodscategory/list`,
-            method: 'GET',
-            showLoading: false,
-            needLogin: true,
+    spec: {
+        async list(data = {}) {
+            return await fa.request({
+                url: `goodsspec/list`,
+                method: "GET",
+                data
+            });
         },
-        sort:{
-            url: `${ROOT_URL}goodscategory/sort`,
-            method: 'POST',
-            showLoading: true,
-            needLogin: true,
-        },
-        del:{
-            url: `${ROOT_URL}goodscategory/del`,
-            method: 'POST',
-            showLoading: true,
-            needLogin: true,
-        },
-        add:{
-            url: `${ROOT_URL}goodscategory/add`,
-            method: 'POST',
-            showLoading: true,
-            needLogin: true,
-        },
-        edit:{
-            url: `${ROOT_URL}goodscategory/edit`,
-            method: 'POST',
-            showLoading: true,
-            needLogin: true,
-        },
-        info:{
-            url: `${ROOT_URL}goodscategory/info`,
-            method: 'GET',
-            showLoading: false,
-            needLogin: true,
+        async add(data = {}) {
+            return await fa.request({
+                url: `goodsspec/add`,
+                method: "POST",
+                data
+            });
         }
     },
-    evaluate:{
-        list:{
-            url: `${ROOT_URL}goodsevaluate/list`,
-            method: 'GET',
-            showLoading: false,
-            needLogin: true,
+    specValue: {
+        async del(data = {}) {
+            return await fa.request({
+                url: `goodsspecvalue/del`,
+                method: "POST",
+                data
+            });
         },
-        reply:{
-            url: `${ROOT_URL}goodsevaluate/reply`,
-            method: 'POST',
-            showLoading: false,
-            needLogin: true,
+        async add(data = {}) {
+            return await fa.request({
+                url: `goodsspecvalue/add`,
+                method: "POST",
+                data
+            });
+        }
+    },
+    category: {
+        async list(data = {}) {
+            return await fa.request({
+                url: `goodscategory/list`,
+                method: "GET",
+                data
+            });
         },
-        display:{
-            url: `${ROOT_URL}goodsevaluate/display`,
-            method: 'POST',
-            showLoading: false,
-            needLogin: true,
+        async info(data = {}) {
+            return await fa.request({
+                url: `goodscategory/info`,
+                method: "GET",
+                data
+            });
+        },
+        async sort(data = {}) {
+            return await fa.request({
+                url: `goodscategory/sort`,
+                method: "POST",
+                data
+            });
+        },
+        async del(data = {}) {
+            return await fa.request({
+                url: `goodscategory/del`,
+                method: "POST",
+                data
+            });
+        }
+        ,
+        async add(data = {}) {
+            return await fa.request({
+                url: `goodscategory/add`,
+                method: "POST",
+                data
+            });
+        }
+        ,
+        async edit(data = {}) {
+            return await fa.request({
+                url: `goodscategory/edit`,
+                method: "POST",
+                data
+            });
+        }
+    },
+    evaluate: {
+        async list(data = {}) {
+            return await fa.request({
+                url: `goodsevaluate/list`,
+                method: "GET",
+                data
+            });
+        },
+        async reply(data = {}) {
+            return await fa.request({
+                url: `goodsevaluate/reply`,
+                method: "POST",
+                data
+            });
+        },
+        async display(data = {}) {
+            return await fa.request({
+                url: `goodsevaluate/display`,
+                method: "POST",
+                data
+            });
         }
     }
 }
+;
