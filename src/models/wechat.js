@@ -57,359 +57,359 @@ export default {
     },
     effects: {
         * getConf({ payload }, { call, put }) {
-            const response = yield call(wechat.list, payload);
+            const response = yield call(wechat.getConf, payload);
             yield put({
-                type: "list",
+                type: "getConf",
                 payload: response
             });
         },
         * checkApiStatus({ payload }, { call, put }) {
-            const response = yield call(wechat.list, payload);
+            const response = yield call(wechat.checkApiStatus, payload);
             yield put({
-                type: "list",
+                type: "checkApiStatus",
                 payload: response
             });
         },
         * confSet({ payload }, { call, put }) {
-            const response = yield call(wechat.list, payload);
+            const response = yield call(wechat.confSet, payload);
             yield put({
-                type: "list",
+                type: "confSet",
                 payload: response
             });
         },
         * menuList({ payload }, { call, put }) {
-            const response = yield call(wechat.list, payload);
+            const response = yield call(wechat.confSet, payload);
             yield put({
-                type: "list",
+                type: "confSet",
                 payload: response
             });
         },
         * menuCurrent({ payload }, { call, put }) {
-            const response = yield call(wechat.list, payload);
+            const response = yield call(wechat.menuCurrent, payload);
             yield put({
-                type: "list",
+                type: "menuCurrent",
                 payload: response
             });
         },
         * menuCreate({ payload }, { call, put }) {
-            const response = yield call(wechat.list, payload);
+            const response = yield call(wechat.menuCreate, payload);
             yield put({
-                type: "list",
+                type: "menuCreate",
                 payload: response
             });
         },
         * menuDelete({ payload }, { call, put }) {
-            const response = yield call(wechat.list, payload);
+            const response = yield call(wechat.menuDelete, payload);
             yield put({
-                type: "list",
+                type: "menuDelete",
                 payload: response
             });
         },
         * autoReplyStatusSet({ payload }, { call, put }) {
-            const response = yield call(wechat.list, payload);
+            const response = yield call(wechat.autoReplyStatusSet, payload);
             yield put({
-                type: "list",
+                type: "autoReplyStatusSet",
                 payload: response
             });
         },
         * autoReplyStatusGet({ payload }, { call, put }) {
-            const response = yield call(wechat.list, payload);
+            const response = yield call(wechat.autoReplyStatusGet, payload);
             yield put({
-                type: "list",
+                type: "autoReplyStatusGet",
                 payload: response
             });
         },
         * autoReplySubscribeGet({ payload }, { call, put }) {
-            const response = yield call(wechat.list, payload);
+            const response = yield call(wechat.autoReplySubscribeGet, payload);
             yield put({
-                type: "list",
+                type: "autoReplySubscribeGet",
                 payload: response
             });
         },
         * autoReplySubscribeSet({ payload }, { call, put }) {
-            const response = yield call(wechat.list, payload);
+            const response = yield call(wechat.autoReplySubscribeSet, payload);
             yield put({
-                type: "list",
+                type: "autoReplySubscribeSet",
                 payload: response
             });
         },
         * replyKeywordsList({ payload }, { call, put }) {
-            const response = yield call(wechat.list, payload);
+            const response = yield call(wechat.replyKeywordsList, payload);
             yield put({
-                type: "list",
+                type: "replyKeywordsList",
                 payload: response
             });
         },
         * autoReplyKeywordsAdd({ payload }, { call, put }) {
-            const response = yield call(wechat.list, payload);
+            const response = yield call(wechat.autoReplyKeywordsAdd, payload);
             yield put({
-                type: "list",
+                type: "autoReplyKeywordsAdd",
                 payload: response
             });
         },
         * autoReplyKeywordsEdit({ payload }, { call, put }) {
-            const response = yield call(wechat.list, payload);
+            const response = yield call(wechat.autoReplyKeywordsEdit, payload);
             yield put({
-                type: "list",
+                type: "autoReplyKeywordsEdit",
                 payload: response
             });
         },
         * autoReplyKeywordsDel({ payload }, { call, put }) {
-            const response = yield call(wechat.list, payload);
+            const response = yield call(wechat.autoReplyKeywordsDel, payload);
             yield put({
-                type: "list",
+                type: "autoReplyKeywordsDel",
                 payload: response
             });
         },
         * autoReplyKeywordsInfo({ payload }, { call, put }) {
-            const response = yield call(wechat.list, payload);
+            const response = yield call(wechat.autoReplyKeywordsInfo, payload);
             yield put({
-                type: "list",
+                type: "autoReplyKeywordsInfo",
                 payload: response
             });
         },
         * userList({ payload }, { call, put }) {
-            const response = yield call(wechat.list, payload);
+            const response = yield call(wechat.userList, payload);
             yield put({
-                type: "list",
+                type: "userList",
                 payload: response
             });
         },
         * userBlackList({ payload }, { call, put }) {
-            const response = yield call(wechat.list, payload);
+            const response = yield call(wechat.userBlackList, payload);
             yield put({
-                type: "list",
+                type: "userBlackList",
                 payload: response
             });
         },
         * userSelect({ payload }, { call, put }) {
-            const response = yield call(wechat.list, payload);
+            const response = yield call(wechat.userSelect, payload);
             yield put({
-                type: "list",
+                type: "userSelect",
                 payload: response
             });
         },
         * userBlock({ payload }, { call, put }) {
-            const response = yield call(wechat.list, payload);
+            const response = yield call(wechat.userBlock, payload);
             yield put({
-                type: "list",
+                type: "userBlock",
                 payload: response
             });
         },
         * userUnblock({ payload }, { call, put }) {
-            const response = yield call(wechat.list, payload);
+            const response = yield call(wechat.userUnblock, payload);
             yield put({
-                type: "list",
+                type: "userUnblock",
                 payload: response
             });
         },
         * userRemark({ payload }, { call, put }) {
-            const response = yield call(wechat.list, payload);
+            const response = yield call(wechat.userRemark, payload);
             yield put({
-                type: "list",
+                type: "userRemark",
                 payload: response
             });
         },
         * userTagList({ payload }, { call, put }) {
-            const response = yield call(wechat.list, payload);
+            const response = yield call(wechat.userTagList, payload);
             yield put({
-                type: "list",
+                type: "userTagList",
                 payload: response
             });
         },
         * getToken({ payload }, { call, put }) {
-            const response = yield call(wechat.list, payload);
+            const response = yield call(wechat.getToken, payload);
             yield put({
-                type: "list",
+                type: "getToken",
                 payload: response
             });
         },
         * userTagCreate({ payload }, { call, put }) {
-            const response = yield call(wechat.list, payload);
+            const response = yield call(wechat.userTagCreate, payload);
             yield put({
-                type: "list",
+                type: "userTagCreate",
                 payload: response
             });
         },
         * userTagUpdate({ payload }, { call, put }) {
-            const response = yield call(wechat.list, payload);
+            const response = yield call(wechat.userTagUpdate, payload);
             yield put({
-                type: "list",
+                type: "userTagUpdate",
                 payload: response
             });
         },
         * userTagDelete({ payload }, { call, put }) {
-            const response = yield call(wechat.list, payload);
+            const response = yield call(wechat.userTagDelete, payload);
             yield put({
-                type: "list",
+                type: "userTagDelete",
                 payload: response
             });
         },
         * userTagsByOpenid({ payload }, { call, put }) {
-            const response = yield call(wechat.list, payload);
+            const response = yield call(wechat.userTagsByOpenid, payload);
             yield put({
-                type: "list",
+                type: "userTagsByOpenid",
                 payload: response
             });
         },
         * userTagUsersOfTag({ payload }, { call, put }) {
-            const response = yield call(wechat.list, payload);
+            const response = yield call(wechat.userTagUsersOfTag, payload);
             yield put({
-                type: "list",
+                type: "userTagUsersOfTag",
                 payload: response
             });
         },
         * userTagTagUsers({ payload }, { call, put }) {
-            const response = yield call(wechat.list, payload);
+            const response = yield call(wechat.userTagTagUsers, payload);
             yield put({
-                type: "list",
+                type: "userTagTagUsers",
                 payload: response
             });
         },
         * userTagUntagUsers({ payload }, { call, put }) {
-            const response = yield call(wechat.list, payload);
+            const response = yield call(wechat.userTagUntagUsers, payload);
             yield put({
-                type: "list",
+                type: "userTagUntagUsers",
                 payload: response
             });
         },
         * broadcastRecords({ payload }, { call, put }) {
-            const response = yield call(wechat.list, payload);
+            const response = yield call(wechat.broadcastRecords, payload);
             yield put({
-                type: "list",
+                type: "broadcastRecords",
                 payload: response
             });
         },
         * broadcastUserSearch({ payload }, { call, put }) {
-            const response = yield call(wechat.list, payload);
+            const response = yield call(wechat.broadcastUserSearch, payload);
             yield put({
-                type: "list",
+                type: "broadcastUserSearch",
                 payload: response
             });
         },
         * broadcastCreate({ payload }, { call, put }) {
-            const response = yield call(wechat.list, payload);
+            const response = yield call(wechat.broadcastCreate, payload);
             yield put({
-                type: "list",
+                type: "broadcastCreate",
                 payload: response
             });
         },
         * broadcastSurplus({ payload }, { call, put }) {
-            const response = yield call(wechat.list, payload);
+            const response = yield call(wechat.broadcastSurplus, payload);
             yield put({
-                type: "list",
+                type: "broadcastSurplus",
                 payload: response
             });
         },
         * broadcastRecordsDel({ payload }, { call, put }) {
-            const response = yield call(wechat.list, payload);
+            const response = yield call(wechat.broadcastRecordsDel, payload);
             yield put({
-                type: "list",
+                type: "broadcastRecordsDel",
                 payload: response
             });
         },
         * wechatMaterialList({ payload }, { call, put }) {
-            const response = yield call(wechat.list, payload);
+            const response = yield call(wechat.wechatMaterialList, payload);
             yield put({
                 type: "list",
                 payload: response
             });
         },
         * materialUploadThumb({ payload }, { call, put }) {
-            const response = yield call(wechat.list, payload);
+            const response = yield call(wechat.materialUploadThumb, payload);
             yield put({
-                type: "list",
+                type: "materialUploadThumb",
                 payload: response
             });
         },
         * materialUploadArticle({ payload }, { call, put }) {
-            const response = yield call(wechat.list, payload);
+            const response = yield call(wechat.materialUploadArticle, payload);
             yield put({
-                type: "list",
+                type: "materialUploadArticle",
                 payload: response
             });
         },
         * materialUpdateArticle({ payload }, { call, put }) {
-            const response = yield call(wechat.list, payload);
+            const response = yield call(wechat.materialUpdateArticle, payload);
             yield put({
-                type: "list",
+                type: "materialUpdateArticle",
                 payload: response
             });
         },
         * materialGet({ payload }, { call, put }) {
-            const response = yield call(wechat.list, payload);
+            const response = yield call(wechat.materialGet, payload);
             yield put({
-                type: "list",
+                type: "materialGet",
                 payload: response
             });
         },
         * materialUploadArticleImage({ payload }, { call, put }) {
-            const response = yield call(wechat.list, payload);
+            const response = yield call(wechat.materialUploadArticleImage, payload);
             yield put({
-                type: "list",
+                type: "materialUploadArticleImage",
                 payload: response
             });
         },
         * materialUploadImage({ payload }, { call, put }) {
-            const response = yield call(wechat.list, payload);
+            const response = yield call(wechat.materialUploadImage, payload);
             yield put({
-                type: "list",
+                type: "materialUploadImage",
                 payload: response
             });
         },
         * materialUploadVoice({ payload }, { call, put }) {
-            const response = yield call(wechat.list, payload);
+            const response = yield call(wechat.materialUploadVoice, payload);
             yield put({
-                type: "list",
+                type: "materialUploadVoice",
                 payload: response
             });
         },
         * materialUploadVideo({ payload }, { call, put }) {
-            const response = yield call(wechat.list, payload);
+            const response = yield call(wechat.materialUploadVideo, payload);
             yield put({
-                type: "list",
+                type: "materialUploadVideo",
                 payload: response
             });
         },
         * localNews({ payload }, { call, put }) {
-            const response = yield call(wechat.list, payload);
+            const response = yield call(wechat.localNews, payload);
             yield put({
-                type: "list",
+                type: "localNews",
                 payload: response
             });
         },
         * localNewsInfo({ payload }, { call, put }) {
-            const response = yield call(wechat.list, payload);
+            const response = yield call(wechat.localNewsInfo, payload);
             yield put({
-                type: "list",
+                type: "localNewsInfo",
                 payload: response
             });
         },
         * localNewsAdd({ payload }, { call, put }) {
-            const response = yield call(wechat.list, payload);
+            const response = yield call(wechat.localNewsAdd, payload);
             yield put({
-                type: "list",
+                type: "localNewsAdd",
                 payload: response
             });
         },
         * localNewsEdit({ payload }, { call, put }) {
-            const response = yield call(wechat.list, payload);
+            const response = yield call(wechat.localNewsEdit, payload);
             yield put({
-                type: "list",
+                type: "localNewsEdit",
                 payload: response
             });
         },
         * localNewsDel({ payload }, { call, put }) {
-            const response = yield call(wechat.list, payload);
+            const response = yield call(wechat.localNewsDel, payload);
             yield put({
-                type: "list",
+                type: "localNewsDel",
                 payload: response
             });
         },
         * materialDelete({ payload }, { call, put }) {
-            const response = yield call(wechat.list, payload);
+            const response = yield call(wechat.materialDelete, payload);
             yield put({
-                type: "list",
+                type: "materialDelete",
                 payload: response
             });
         }
@@ -424,301 +424,301 @@ export default {
         checkApiStatus(state, action) {
             return {
                 ...state,
-                edit: action.payload
+                getConf: action.payload
             };
         },
         confSet(state, action) {
             return {
                 ...state,
-                edit: action.payload
+                confSet: action.payload
             };
         },
         menuList(state, action) {
             return {
                 ...state,
-                edit: action.payload
+                menuList: action.payload
             };
         },
         menuCurrent(state, action) {
             return {
                 ...state,
-                edit: action.payload
+                menuCurrent: action.payload
             };
         },
         menuCreate(state, action) {
             return {
                 ...state,
-                edit: action.payload
+                menuCreate: action.payload
             };
         },
         menuDelete(state, action) {
             return {
                 ...state,
-                edit: action.payload
+                menuDelete: action.payload
             };
         },
         autoReplyStatusSet(state, action) {
             return {
                 ...state,
-                edit: action.payload
+                autoReplyStatusSet: action.payload
             };
         },
         autoReplyStatusGet(state, action) {
             return {
                 ...state,
-                edit: action.payload
+                autoReplyStatusGet: action.payload
             };
         },
         autoReplySubscribeGet(state, action) {
             return {
                 ...state,
-                edit: action.payload
+                autoReplySubscribeGet: action.payload
             };
         },
         autoReplySubscribeSet(state, action) {
             return {
                 ...state,
-                edit: action.payload
+                autoReplySubscribeSet: action.payload
             };
         },
         replyKeywordsList(state, action) {
             return {
                 ...state,
-                edit: action.payload
+                replyKeywordsList: action.payload
             };
         },
         autoReplyKeywordsAdd(state, action) {
             return {
                 ...state,
-                edit: action.payload
+                autoReplyKeywordsAdd: action.payload
             };
         },
         autoReplyKeywordsEdit(state, action) {
             return {
                 ...state,
-                edit: action.payload
+                autoReplyKeywordsEdit: action.payload
             };
         },
         autoReplyKeywordsDel(state, action) {
             return {
                 ...state,
-                edit: action.payload
+                autoReplyKeywordsDel: action.payload
             };
         },
         autoReplyKeywordsInfo(state, action) {
             return {
                 ...state,
-                edit: action.payload
+                autoReplyKeywordsInfo: action.payload
             };
         },
         userList(state, action) {
             return {
                 ...state,
-                edit: action.payload
+                userList: action.payload
             };
         },
         userBlackList(state, action) {
             return {
                 ...state,
-                edit: action.payload
+                userBlackList: action.payload
             };
         },
         userSelect(state, action) {
             return {
                 ...state,
-                edit: action.payload
+                userSelect: action.payload
             };
         },
         userBlock(state, action) {
             return {
                 ...state,
-                edit: action.payload
+                userBlock: action.payload
             };
         },
         userUnblock(state, action) {
             return {
                 ...state,
-                edit: action.payload
+                userUnblock: action.payload
             };
         },
         userRemark(state, action) {
             return {
                 ...state,
-                edit: action.payload
+                userRemark: action.payload
             };
         },
         userTagList(state, action) {
             return {
                 ...state,
-                edit: action.payload
+                userTagList: action.payload
             };
         },
         getToken(state, action) {
             return {
                 ...state,
-                edit: action.payload
+                getToken: action.payload
             };
         },
         userTagCreate(state, action) {
             return {
                 ...state,
-                edit: action.payload
+                userTagCreate: action.payload
             };
         },
         userTagUpdate(state, action) {
             return {
                 ...state,
-                edit: action.payload
+                userTagUpdate: action.payload
             };
         },
         userTagDelete(state, action) {
             return {
                 ...state,
-                edit: action.payload
+                userTagDelete: action.payload
             };
         },
         userTagsByOpenid(state, action) {
             return {
                 ...state,
-                edit: action.payload
+                userTagsByOpenid: action.payload
             };
         },
         userTagUsersOfTag(state, action) {
             return {
                 ...state,
-                edit: action.payload
+                userTagUsersOfTag: action.payload
             };
         },
         userTagTagUsers(state, action) {
             return {
                 ...state,
-                edit: action.payload
+                userTagTagUsers: action.payload
             };
         },
         userTagUntagUsers(state, action) {
             return {
                 ...state,
-                edit: action.payload
+                userTagUntagUsers: action.payload
             };
         },
         broadcastRecords(state, action) {
             return {
                 ...state,
-                edit: action.payload
+                broadcastRecords: action.payload
             };
         },
         broadcastUserSearch(state, action) {
             return {
                 ...state,
-                edit: action.payload
+                broadcastUserSearch: action.payload
             };
         },
         broadcastCreate(state, action) {
             return {
                 ...state,
-                edit: action.payload
+                broadcastCreate: action.payload
             };
         },
         broadcastSurplus(state, action) {
             return {
                 ...state,
-                edit: action.payload
+                broadcastSurplus: action.payload
             };
         },
         broadcastRecordsDel(state, action) {
             return {
                 ...state,
-                edit: action.payload
+                broadcastRecordsDel: action.payload
             };
         },
         wechatMaterialList(state, action) {
             return {
                 ...state,
-                edit: action.payload
+                wechatMaterialList: action.payload
             };
         },
         materialUploadThumb(state, action) {
             return {
                 ...state,
-                edit: action.payload
+                materialUploadThumb: action.payload
             };
         },
         materialUploadArticle(state, action) {
             return {
                 ...state,
-                edit: action.payload
+                materialUploadArticle: action.payload
             };
         },
         materialUpdateArticle(state, action) {
             return {
                 ...state,
-                edit: action.payload
+                materialUpdateArticle: action.payload
             };
         },
         materialGet(state, action) {
             return {
                 ...state,
-                edit: action.payload
+                materialGet: action.payload
             };
         },
         materialUploadArticleImage(state, action) {
             return {
                 ...state,
-                edit: action.payload
+                materialUploadArticleImage: action.payload
             };
         },
         materialUploadImage(state, action) {
             return {
                 ...state,
-                edit: action.payload
+                materialUploadImage: action.payload
             };
         },
         materialUploadVoice(state, action) {
             return {
                 ...state,
-                edit: action.payload
+                materialUploadVoice: action.payload
             };
         },
         materialUploadVideo(state, action) {
             return {
                 ...state,
-                edit: action.payload
+                materialUploadVideo: action.payload
             };
         },
         localNews(state, action) {
             return {
                 ...state,
-                edit: action.payload
+                localNews: action.payload
             };
         },
         localNewsInfo(state, action) {
             return {
                 ...state,
-                edit: action.payload
+                localNewsInfo: action.payload
             };
         },
         localNewsAdd(state, action) {
             return {
                 ...state,
-                edit: action.payload
+                localNewsAdd: action.payload
             };
         },
         localNewsEdit(state, action) {
             return {
                 ...state,
-                edit: action.payload
+                localNewsEdit: action.payload
             };
         },
         localNewsDel(state, action) {
             return {
                 ...state,
-                edit: action.payload
+                localNewsDel: action.payload
             };
         },
         materialDelete(state, action) {
             return {
                 ...state,
-                edit: action.payload
+                materialDelete: action.payload
             };
         }
     }
