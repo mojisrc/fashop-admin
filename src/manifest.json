@@ -1,6 +1,6 @@
 {
-  "name": "Ant Design Pro",
-  "short_name": "Ant Design Pro",
+  "name": "FaShop 商城系统 - Power By FaShop ( www.fashop.cn )",
+  "short_name": "FaShop 商城系统 - Power By FaShop ( www.fashop.cn )",
   "display": "standalone",
   "start_url": "./?utm_source=homescreen",
   "theme_color": "#002140",
