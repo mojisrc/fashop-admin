@@ -3,49 +3,49 @@ import fa from "@/utils/fa";
 export default {
     async quantity(data = {}) {
         return fa.request({
-            url: `Statistics/quantity`,
+            url: `/admin/Statistics/quantity`,
             method: "GET",
             data
         });
     },
     async monthSalesHistogram(data = {}) {
         return fa.request({
-            url: `Statistics/monthSalesHistogram`,
+            url: `/admin/Statistics/monthSalesHistogram`,
             method: "GET",
             data
         });
     },
     async monthOrderCountHistogram(data = {}) {
         return fa.request({
-            url: `Statistics/monthOrderCountHistogram`,
+            url: `/admin/Statistics/monthOrderCountHistogram`,
             method: "GET",
             data
         });
     },
     async monthUserAddCountHistogram(data = {}) {
         return fa.request({
-            url: `Statistics/monthUserAddCountHistogram`,
+            url: `/admin/Statistics/monthUserAddCountHistogram`,
             method: "GET",
             data
         });
     },
     async monthNewUserSalesHistogram(data = {}) {
         return fa.request({
-            url: `Statistics/monthNewUserSalesHistogram`,
+            url: `/admin/Statistics/monthNewUserSalesHistogram`,
             method: "GET",
             data
         });
     },
     async saleAccumulativeAmount(data = {}) {
         return fa.request({
-            url: `Statistics/saleAccumulativeAmount`,
+            url: `/admin/Statistics/saleAccumulativeAmount`,
             method: "GET",
             data
         });
     },
     async dayAverage(data = {}) {
         return fa.request({
-            url: `Statistics/dayAverage`,
+            url: `/admin/Statistics/dayAverage`,
             method: "GET",
             data
         });

@@ -1,5 +1,4 @@
 import { parse, stringify } from 'qs';
-import { __DEV__ } from '../config/root'
 // todo params class
 export default class Query {
     params;

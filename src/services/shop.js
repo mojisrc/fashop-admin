@@ -3,42 +3,42 @@ import fa from "@/utils/fa";
 export default {
     async info(data = {}) {
         return fa.request({
-            url: `shop/info`,
+            url: `/admin/shop/info`,
             method: "GET",
             data
         });
     },
     async setOrderExpires(data = {}) {
         return fa.request({
-            url: `shop/setOrderExpires`,
+            url: `/admin/shop/setOrderExpires`,
             method: "POST",
             data
         });
     },
     async setBaseInfo(data = {}) {
         return fa.request({
-            url: `shop/setBaseInfo`,
+            url: `/admin/shop/setBaseInfo`,
             method: "POST",
             data
         });
     },
     async setGoodsCategoryStyle(data = {}) {
         return fa.request({
-            url: `shop/setGoodsCategoryStyle`,
+            url: `/admin/shop/setGoodsCategoryStyle`,
             method: "POST",
             data
         });
     },
     async setColorScheme(data = {}) {
         return fa.request({
-            url: `shop/setColorScheme`,
+            url: `/admin/shop/setColorScheme`,
             method: "POST",
             data
         });
     },
     async setPortalTemplate(data = {}) {
         return fa.request({
-            url: `shop/setPortalTemplate`,
+            url: `/admin/shop/setPortalTemplate`,
             method: "POST",
             data
         });

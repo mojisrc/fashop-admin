@@ -1,12 +1,8 @@
 import React,{ Component } from 'react'
 import { connect } from "dva";
-import * as actions from "@/actions/wechat/material";
 import { Button, Radio, Upload, message } from 'antd';
 import { View } from 'react-web-dom'
 import styles from '../index.css'
-
-import { env } from '@/config/root'
-
 @connect(
     ({view:{material:{ imageMaterialList }}}) => ({
         imageMaterialList,

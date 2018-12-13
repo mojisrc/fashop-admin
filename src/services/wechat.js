@@ -2,266 +2,266 @@ import fa from "@/utils/fa";
 export default {
     async getConf(data = {}) {
         return fa.request({
-            url: `wechat/getConf`,
+            url: `/admin/wechat/getConf`,
             method: "GET",
             data
         });
     },
     async checkApiStatus(data = {}) {
         return fa.request({
-            url: `wechat/checkApiStatus`,
+            url: `/admin/wechat/checkApiStatus`,
             method: "GET",
             data
         });
     },
     async confSet(data = {}) {
         return fa.request({
-            url: `wechat/confSet`,
+            url: `/admin/wechat/confSet`,
             method: "POST",
             data
         });
     },
     async menuList(data = {}) {
         return fa.request({
-            url: `wechat/menuList`,
+            url: `/admin/wechat/menuList`,
             method: "POST",
             data
         });
     },
     async menuCurrent(data = {}) {
         return fa.request({
-            url: `wechat/menuCurrent`,
+            url: `/admin/wechat/menuCurrent`,
             method: "POST",
             data
         });
     },
     async menuCreate(data = {}) {
         return fa.request({
-            url: `wechat/menuCreate`,
+            url: `/admin/wechat/menuCreate`,
             method: "POST",
             data
         });
     },
     async menuDelete(data = {}) {
         return fa.request({
-            url: `wechat/menuDelete`,
+            url: `/admin/wechat/menuDelete`,
             method: "POST",
             data
         });
     },
     async autoReplyStatusSet(data = {}) {
         return fa.request({
-            url: `wechat/autoReplyStatusSet`,
+            url: `/admin/wechat/autoReplyStatusSet`,
             method: "POST",
             data
         });
     },
     async autoReplyStatusGet(data = {}) {
         return fa.request({
-            url: `wechat/autoReplyStatusGet`,
+            url: `/admin/wechat/autoReplyStatusGet`,
             method: "GET",
             data
         });
     },
     async autoReplySubscribeGet(data = {}) {
         return fa.request({
-            url: `wechat/autoReplySubscribeGet`,
+            url: `/admin/wechat/autoReplySubscribeGet`,
             method: "GET",
             data
         });
     },
     async autoReplySubscribeSet(data = {}) {
         return fa.request({
-            url: `wechat/autoReplySubscribeSet`,
+            url: `/admin/wechat/autoReplySubscribeSet`,
             method: "POST",
             data
         });
     },
     async replyKeywordsList(data = {}) {
         return fa.request({
-            url: `wechat/replyKeywordsList`,
+            url: `/admin/wechat/replyKeywordsList`,
             method: "GET",
             data
         });
     },
     async autoReplyKeywordsAdd(data = {}) {
         return fa.request({
-            url: `wechat/autoReplyKeywordsAdd`,
+            url: `/admin/wechat/autoReplyKeywordsAdd`,
             method: "POST",
             data
         });
     },
     async autoReplyKeywordsEdit(data = {}) {
         return fa.request({
-            url: `wechat/autoReplyKeywordsEdit`,
+            url: `/admin/wechat/autoReplyKeywordsEdit`,
             method: "POST",
             data
         });
     },
     async autoReplyKeywordsDel(data = {}) {
         return fa.request({
-            url: `wechat/autoReplyKeywordsDel`,
+            url: `/admin/wechat/autoReplyKeywordsDel`,
             method: "POST",
             data
         });
     },
     async autoReplyKeywordsInfo(data = {}) {
         return fa.request({
-            url: `wechat/autoReplyKeywordsInfo`,
+            url: `/admin/wechat/autoReplyKeywordsInfo`,
             method: "GET",
             data
         });
     },
     async userList(data = {}) {
         return fa.request({
-            url: `wechat/userList`,
+            url: `/admin/wechat/userList`,
             method: "GET",
             data
         });
     },
     async userBlackList(data = {}) {
         return fa.request({
-            url: `wechat/userBlackList`,
+            url: `/admin/wechat/userBlackList`,
             method: "GET",
             data
         });
     },
     async userSelect(data = {}) {
         return fa.request({
-            url: `wechat/userSelect`,
+            url: `/admin/wechat/userSelect`,
             method: "POST",
             data
         });
     },
     async userBlock(data = {}) {
         return fa.request({
-            url: `wechat/userBlock`,
+            url: `/admin/wechat/userBlock`,
             method: "POST",
             data
         });
     },
     async userUnblock(data = {}) {
         return fa.request({
-            url: `wechat/userUnblock`,
+            url: `/admin/wechat/userUnblock`,
             method: "POST",
             data
         });
     },
     async userRemark(data = {}) {
         return fa.request({
-            url: `wechat/userRemark`,
+            url: `/admin/wechat/userRemark`,
             method: "POST",
             data
         });
     },
     async userTagList(data = {}) {
         return fa.request({
-            url: `wechat/userTagList`,
+            url: `/admin/wechat/userTagList`,
             method: "GET",
             data
         });
     },
     async getToken(data = {}) {
         return fa.request({
-            url: `wechat/getToken`,
+            url: `/admin/wechat/getToken`,
             method: "GET",
             data
         });
     },
     async userTagCreate(data = {}) {
         return fa.request({
-            url: `wechat/userTagCreate`,
+            url: `/admin/wechat/userTagCreate`,
             method: "POST",
             data
         });
     },
     async userTagUpdate(data = {}) {
         return fa.request({
-            url: `wechat/userTagUpdate`,
+            url: `/admin/wechat/userTagUpdate`,
             method: "POST",
             data
         });
     },
     async userTagDelete(data = {}) {
         return fa.request({
-            url: `wechat/userTagDelete`,
+            url: `/admin/wechat/userTagDelete`,
             method: "POST",
             data
         });
     },
     async userTagsByOpenid(data = {}) {
         return fa.request({
-            url: `wechat/userTagsByOpenid`,
+            url: `/admin/wechat/userTagsByOpenid`,
             method: "GET",
             data
         });
     },
     async userTagUsersOfTag(data = {}) {
         return fa.request({
-            url: `wechat/userTagUsersOfTag`,
+            url: `/admin/wechat/userTagUsersOfTag`,
             method: "GET",
             data
         });
     },
     async userTagTagUsers(data = {}) {
         return fa.request({
-            url: `wechat/userTagTagUsers`,
+            url: `/admin/wechat/userTagTagUsers`,
             method: "POST",
             data
         });
     },
     async userTagUntagUsers(data = {}) {
         return fa.request({
-            url: `wechat/userTagUntagUsers`,
+            url: `/admin/wechat/userTagUntagUsers`,
             method: "POST",
             data
         });
     },
     async broadcastRecords(data = {}) {
         return fa.request({
-            url: `wechat/broadcastRecords`,
+            url: `/admin/wechat/broadcastRecords`,
             method: "GET",
             data
         });
     },
     async broadcastUserSearch(data = {}) {
         return fa.request({
-            url: `wechat/broadcastUserSearch`,
+            url: `/admin/wechat/broadcastUserSearch`,
             method: "POST",
             data
         });
     },
     async broadcastCreate(data = {}) {
         return fa.request({
-            url: `wechat/broadcastCreate`,
+            url: `/admin/wechat/broadcastCreate`,
             method: "POST",
             data
         });
     },
     async broadcastSurplus(data = {}) {
         return fa.request({
-            url: `wechat/broadcastSurplus`,
+            url: `/admin/wechat/broadcastSurplus`,
             method: "GET",
             data
         });
     },
     async broadcastRecordsDel(data = {}) {
         return fa.request({
-            url: `wechat/broadcastRecordsDel`,
+            url: `/admin/wechat/broadcastRecordsDel`,
             method: "POST",
             data
         });
     },
     async wechatMaterialList(data = {}) {
         return fa.request({
-            url: `wechat/wechatMaterialList`,
+            url: `/admin/wechat/wechatMaterialList`,
             method: "GET",
             data
         });
     },
     async materialUploadThumb(data = {}) {
         return fa.request({
-            url: `wechat/materialUploadThumb`,
+            url: `/admin/wechat/materialUploadThumb`,
             method: "POST",
             data
         });
@@ -270,7 +270,7 @@ export default {
     },
     async materialUploadArticle(data = {}) {
         return fa.request({
-            url: `wechat/materialUploadArticle`,
+            url: `/admin/wechat/materialUploadArticle`,
             method: "POST",
             data
         });
@@ -278,7 +278,7 @@ export default {
     },
     async materialUpdateArticle(data = {}) {
         return fa.request({
-            url: `wechat/materialUpdateArticle`,
+            url: `/admin/wechat/materialUpdateArticle`,
             method: "POST",
             data
         });
@@ -286,7 +286,7 @@ export default {
     },
     async materialGet(data = {}) {
         return fa.request({
-            url: `wechat/materialGet`,
+            url: `/admin/wechat/materialGet`,
             method: "GET",
             data
         });
@@ -294,7 +294,7 @@ export default {
     },
     async materialUploadArticleImage(data = {}) {
         return fa.request({
-            url: `wechat/materialUploadArticleImage`,
+            url: `/admin/wechat/materialUploadArticleImage`,
             method: "POST",
             data
         });
@@ -302,7 +302,7 @@ export default {
     },
     async materialUploadImage(data = {}) {
         return fa.request({
-            url: `wechat/materialUploadImage`,
+            url: `/admin/wechat/materialUploadImage`,
             method: "POST",
             data
         });
@@ -310,7 +310,7 @@ export default {
     },
     async materialUploadVoice(data = {}) {
         return fa.request({
-            url: `wechat/materialUploadVoice`,
+            url: `/admin/wechat/materialUploadVoice`,
             method: "POST",
             data
         });
@@ -318,7 +318,7 @@ export default {
     },
     async materialUploadVideo(data = {}) {
         return fa.request({
-            url: `wechat/materialUploadVideo`,
+            url: `/admin/wechat/materialUploadVideo`,
             method: "POST",
             data
 
@@ -326,7 +326,7 @@ export default {
     },
     async localNews(data = {}) {
         return fa.request({
-            url: `wechat/localNews`,
+            url: `/admin/wechat/localNews`,
             method: "GET",
             data
         });
@@ -334,28 +334,28 @@ export default {
     },
     async localNewsInfo(data = {}) {
         return fa.request({
-            url: `wechat/localNewsInfo`,
+            url: `/admin/wechat/localNewsInfo`,
             method: "GET",
             data
         });
     },
     async localNewsAdd(data = {}) {
         return fa.request({
-            url: `wechat/localNewsAdd`,
+            url: `/admin/wechat/localNewsAdd`,
             method: "POST",
             data
         });
     },
     async localNewsEdit(data = {}) {
         return fa.request({
-            url: `wechat/localNewsEdit`,
+            url: `/admin/wechat/localNewsEdit`,
             method: "POST",
             data
         });
     },
     async localNewsDel(data = {}) {
         return fa.request({
-            url: `wechat/localNewsDel`,
+            url: `/admin/wechat/localNewsDel`,
             method: "POST",
             data
 
@@ -363,7 +363,7 @@ export default {
     },
     async materialDelete(data = {}) {
         return fa.request({
-            url: `wechat/materialDelete`,
+            url: `/admin/wechat/materialDelete`,
             method: "POST",
             data
         });

@@ -5,8 +5,8 @@ import { CopyToClipboard } from "react-copy-to-clipboard";
 import { connect } from "dva";
 import omit from "omit.js";
 import styles from "./index.less";
-import ThemeColor from "./ThemeColor";
-import BlockChecbox from "./BlockChecbox";
+import ThemeColor from "./themeColor";
+import BlockChecbox from "./blockChecbox";
 
 const { Option } = Select;
 const Body = ({ children, title, style }) => (

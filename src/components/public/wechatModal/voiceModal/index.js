@@ -1,14 +1,12 @@
 import React, { Component } from "react";
 
 import { connect } from 'dva';
-import * as actions from "@/actions/wechat/material";
 import { View } from "react-web-dom";
-import { Modal, Button,  Row, Col,  Checkbox, Pagination, Radio, Spin, Upload, message } from "antd";
+import { Modal, Button,  Row, Col,   Pagination, Radio, Spin, Upload, message } from "antd";
 import styles from "./index.css";
 import ModalVoice from "../../wechatItem/modalVoice";
 import EmptyView from "@/wechat/material/emptyView";
 
-import { env } from '@/config/root'
 const RadioGroup = Radio.Group
 //
 // type Props = {

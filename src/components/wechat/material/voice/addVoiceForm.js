@@ -3,7 +3,6 @@ import { connect } from "dva";
 import * as actions from "@/actions/wechat/material";
 import { Button, Upload, message } from 'antd';
 import { View } from 'react-web-dom'
-import { env } from '@/config/root'
 // type Props = {
 //     hideModal: Function
 // }

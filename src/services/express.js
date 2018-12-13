@@ -3,42 +3,42 @@ import fa from "@/utils/fa";
 export default {
     async list(data = {}) {
         return fa.request({
-            url: `express/list`,
+            url: `/admin/express/list`,
             method: "POST",
             data
         });
     },
     async info(data = {}) {
         return fa.request({
-            url: `express/info`,
+            url: `/admin/express/info`,
             method: "GET",
             data
         });
     },
     async add(data = {}) {
         return fa.request({
-            url: `express/add`,
+            url: `/admin/express/add`,
             method: "POST",
             data
         });
     },
     async edit(data = {}) {
         return fa.request({
-            url: `express/edit`,
+            url: `/admin/express/edit`,
             method: "POST",
             data
         });
     },
     async del(data = {}) {
         return fa.request({
-            url: `express/del`,
+            url: `/admin/express/del`,
             method: "POST",
             data
         });
     },
     async setCommonlyUse(data = {}) {
         return fa.request({
-            url: `express/setCommonlyUse`,
+            url: `/admin/express/setCommonlyUse`,
             method: "POST",
             data
         });

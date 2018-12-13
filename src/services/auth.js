@@ -3,35 +3,35 @@ import fa from "@/utils/fa";
 export default {
     async groupAuthorise(data = {}) {
         return fa.request({
-            url: `auth/groupAuthorise`,
+            url: `/admin/auth/groupAuthorise`,
             method: "POST",
             data
         });
     },
     async ruleTree(data = {}) {
         return fa.request({
-            url: `auth/ruleTree`,
+            url: `/admin/auth/ruleTree`,
             method: "GET",
             data
         });
     },
     async groupInfo(data = {}) {
         return fa.request({
-            url: `auth/groupInfo`,
+            url: `/admin/auth/groupInfo`,
             method: "GET",
             data
         });
     },
     async groupMemberEdit(data = {}) {
         return fa.request({
-            url: `auth/groupMemberEdit`,
+            url: `/admin/auth/groupMemberEdit`,
             method: "POST",
             data
         });
     },
     async groupDel(data = {}) {
         return fa.request({
-            url: `auth/groupDel`,
+            url: `/admin/auth/groupDel`,
             method: "POST",
             data
 
@@ -39,28 +39,28 @@ export default {
     },
     async groupAdd(data = {}) {
         return fa.request({
-            url: `auth/groupAdd`,
+            url: `/admin/auth/groupAdd`,
             method: "POST",
             data
         });
     },
     async groupEdit(data = {}) {
         return fa.request({
-            url: `auth/groupEdit`,
+            url: `/admin/auth/groupEdit`,
             method: "POST",
             data
         });
     },
     async groupMemberList(data = {}) {
         return fa.request({
-            url: `auth/groupMemberList`,
+            url: `/admin/auth/groupMemberList`,
             method: "GET",
             data
         });
     },
     async groupList(data = {}) {
         return fa.request({
-            url: `auth/groupList`,
+            url: `/admin/auth/groupList`,
             method: "GET",
             data
         });

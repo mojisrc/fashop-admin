@@ -1,11 +1,9 @@
 import React from 'react'
 import { connect } from "dva";
-import * as actions from "@/actions/wechat/material";
 import { Popconfirm, Row, Col, Pagination, Spin, Button, Upload, message } from 'antd';
 import { View } from 'react-web-dom'
 import styles from './index.css'
 
-import { env } from '@/config/root'
 import Image from '@/image'
 //
 // type Props = {

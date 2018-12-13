@@ -2,7 +2,6 @@ import React,{ Component } from 'react';
 import styles from './index.css'
 import { Icon } from 'antd'
 import { View } from "react-web-dom";
-import { env } from "@/config/root";
 
 export default class InputFile extends Component{
     state = {

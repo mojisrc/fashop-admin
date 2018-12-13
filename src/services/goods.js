@@ -3,56 +3,56 @@ import fa from "@/utils/fa";
 export default {
     async list(data = {}) {
         return fa.request({
-            url: `goods/list`,
+            url: `/admin/goods/list`,
             method: "GET",
             data
         });
     },
     async add(data = {}) {
         return fa.request({
-            url: `goods/add`,
+            url: `/admin/goods/add`,
             method: "POST",
             data
         });
     },
     async edit(data = {}) {
         return fa.request({
-            url: `goods/edit`,
+            url: `/admin/goods/edit`,
             method: "POST",
             data
         });
     },
     async info(data = {}) {
         return fa.request({
-            url: `goods/info`,
+            url: `/admin/goods/info`,
             method: "GET",
             data
         });
     },
     async del(data = {}) {
         return fa.request({
-            url: `goods/del`,
+            url: `/admin/goods/del`,
             method: "POST",
             data
         });
     },
     async offSale(data = {}) {
         return fa.request({
-            url: `goods/offSale`,
+            url: `/admin/goods/offSale`,
             method: "POST",
             data
         });
     },
     async onSale(data = {}) {
         return fa.request({
-            url: `goods/onSale`,
+            url: `/admin/goods/onSale`,
             method: "POST",
             data
         });
     },
     async batchUpshelf(data = {}) {
         return fa.request({
-            url: `goods/batchUpshelf`,
+            url: `/admin/goods/batchUpshelf`,
             method: "POST",
             data
         });
@@ -60,7 +60,7 @@ export default {
     },
     async batchDownshelf(data = {}) {
         return fa.request({
-            url: `goods/batchDownshelf`,
+            url: `/admin/goods/batchDownshelf`,
             method: "POST",
             data
         });
@@ -69,21 +69,21 @@ export default {
     spec: {
         async list(data = {}) {
             return fa.request({
-                url: `goodsspec/list`,
+                url: `/admin/goodsspec/list`,
                 method: "GET",
                 data
             });
         },
         async add(data = {}) {
             return fa.request({
-                url: `goodsspec/add`,
+                url: `/admin/goodsspec/add`,
                 method: "POST",
                 data
             });
         },
         async edit(data = {}) {
             return fa.request({
-                url: `goodsspec/edit`,
+                url: `/admin/goodsspec/edit`,
                 method: "POST",
                 data
             });
@@ -92,21 +92,21 @@ export default {
     specValue: {
         async list(data = {}) {
             return fa.request({
-                url: `goodsspecvalue/list`,
+                url: `/admin/goodsspecvalue/list`,
                 method: "POST",
                 data
             });
         },
         async del(data = {}) {
             return fa.request({
-                url: `goodsspecvalue/del`,
+                url: `/admin/goodsspecvalue/del`,
                 method: "POST",
                 data
             });
         },
         async add(data = {}) {
             return fa.request({
-                url: `goodsspecvalue/add`,
+                url: `/admin/goodsspecvalue/add`,
                 method: "POST",
                 data
             });
@@ -115,28 +115,28 @@ export default {
     category: {
         async list(data = {}) {
             return fa.request({
-                url: `goodscategory/list`,
+                url: `/admin/goodscategory/list`,
                 method: "GET",
                 data
             });
         },
         async info(data = {}) {
             return fa.request({
-                url: `goodscategory/info`,
+                url: `/admin/goodscategory/info`,
                 method: "GET",
                 data
             });
         },
         async sort(data = {}) {
             return fa.request({
-                url: `goodscategory/sort`,
+                url: `/admin/goodscategory/sort`,
                 method: "POST",
                 data
             });
         },
         async del(data = {}) {
             return fa.request({
-                url: `goodscategory/del`,
+                url: `/admin/goodscategory/del`,
                 method: "POST",
                 data
             });
@@ -144,7 +144,7 @@ export default {
         ,
         async add(data = {}) {
             return fa.request({
-                url: `goodscategory/add`,
+                url: `/admin/goodscategory/add`,
                 method: "POST",
                 data
             });
@@ -152,7 +152,7 @@ export default {
         ,
         async edit(data = {}) {
             return fa.request({
-                url: `goodscategory/edit`,
+                url: `/admin/goodscategory/edit`,
                 method: "POST",
                 data
             });
@@ -161,21 +161,21 @@ export default {
     evaluate: {
         async list(data = {}) {
             return fa.request({
-                url: `goodsevaluate/list`,
+                url: `/admin/goodsevaluate/list`,
                 method: "GET",
                 data
             });
         },
         async reply(data = {}) {
             return fa.request({
-                url: `goodsevaluate/reply`,
+                url: `/admin/goodsevaluate/reply`,
                 method: "POST",
                 data
             });
         },
         async display(data = {}) {
             return fa.request({
-                url: `goodsevaluate/display`,
+                url: `/admin/goodsevaluate/display`,
                 method: "POST",
                 data
             });

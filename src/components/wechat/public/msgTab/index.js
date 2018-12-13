@@ -11,7 +11,6 @@ import {
 import { View } from 'react-web-dom'
 import styles from './index.css'
 import Emoji from "@/public/emoji";
-import { env } from '@/config/root'
 import ModalNews from "@/public/wechatItem/modalNews";
 import NewsModal from "@/public/wechatModal/newsModal";
 import ImageModal from "@/public/wechatModal/imageModal";

@@ -1,7 +1,7 @@
 import user from "@/services/user";
 
 export default {
-    namespace: "user",
+    namespace: "user1",
     state: {
         list: {},
         info: {},

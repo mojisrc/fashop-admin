@@ -9,13 +9,7 @@ import RouterBreadcrumb from "@/components/wechat/public/routerBreadcrumb";
 import InputFile from "@/components/inputFile";
 import styles from "@/styles/wechat/addMaterial.css";
 import Editor from "react-umeditor";
-import {
-    handleSubmitType,
-    formType,
-    historyType,
-} from "@/utils/flow";
 import { Fetch } from '@/utils'
-import { env } from '../../config/root'
 
 const FormItem = Form.Item;
 const { TextArea } = Input;

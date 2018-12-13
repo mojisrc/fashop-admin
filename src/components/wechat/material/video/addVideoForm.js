@@ -2,9 +2,6 @@ import React,{ Component } from 'react'
 import { Form, Input, Button, Upload, Tooltip, Popover, Icon, Checkbox, message, Spin } from 'antd';
 import { View } from 'react-web-dom'
 
-
-import { env } from '@/config/root'
-
 const FormItem = Form.Item;
 const { TextArea } = Input
 //

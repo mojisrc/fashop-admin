@@ -10,7 +10,7 @@ import pathToRegexp from "path-to-regexp";
 import Media from "react-media";
 import { formatMessage } from "umi/locale";
 import Authorized from "@/utils/authorized";
-import logo from "../assets/logo.svg";
+import logo from "@/assets/logo.svg";
 import Footer from "./footer";
 import Header from "./header";
 import Context from "./menuContext";

@@ -4,7 +4,7 @@ export default {
     provider: {
         async edit(data = {}) {
             return fa.request({
-                url: `Smsprovider/edit`,
+                url: `/admin/Smsprovider/edit`,
                 method: "POST",
                 data
             });
@@ -13,7 +13,7 @@ export default {
     scene: {
         async edit(data = {}) {
             return fa.request({
-                url: `Smsscene/edit`,
+                url: `/admin/Smsscene/edit`,
                 method: "POST",
                 data
             });
@@ -21,7 +21,7 @@ export default {
         },
         async info(data = {}) {
             return fa.request({
-                url: `Smsscene/info`,
+                url: `/admin/Smsscene/info`,
                 method: "GET",
                 data
             });
@@ -29,14 +29,14 @@ export default {
         },
         async list(data = {}) {
             return fa.request({
-                url: `Smsscene/list`,
+                url: `/admin/Smsscene/list`,
                 method: "GET",
                 data
             });
         },
         async add(data = {}) {
             return fa.request({
-                url: `goods/add`,
+                url: `/admin/goods/add`,
                 method: "POST",
                 data
             });

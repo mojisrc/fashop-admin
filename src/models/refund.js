@@ -2,7 +2,7 @@ import order from "@/services/order";
 
 const refund = order.refund;
 export default {
-    namespace: "order",
+    namespace: "refund",
     state: {
         list: {},
         info: {},

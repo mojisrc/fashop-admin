@@ -3,28 +3,28 @@ import fa from "@/utils/fa";
 export default {
     async list(data = {}) {
         return fa.request({
-            url: `user/list`,
+            url: `/admin/user/list`,
             method: "GET",
             data
         });
     },
     async info(data = {}) {
         return fa.request({
-            url: `user/info`,
+            url: `/admin/user/info`,
             method: "GET",
             data
         });
     },
     async address(data = {}) {
         return fa.request({
-            url: `user/address`,
+            url: `/admin/user/address`,
             method: "GET",
             data
         });
     },
     async statistics(data = {}) {
         return fa.request({
-            url: `user/statistics`,
+            url: `/admin/user/statistics`,
             method: "GET",
             data
         });

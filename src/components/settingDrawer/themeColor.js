@@ -1,7 +1,7 @@
 import React from 'react';
 import { Tooltip, Icon } from 'antd';
 import { formatMessage } from 'umi/locale';
-import styles from './ThemeColor.less';
+import styles from './themeColor.less';
 
 const Tag = ({ color, check, ...rest }) => (
   <div
