@@ -1,14 +1,14 @@
-import images from "@/services/images";
+import image from "@/services/image";
 
 export default {
-    namespace: "images",
+    namespace: "image",
     state: {
         list: {},
         add: {}
     },
     effects: {
         * list({ payload, callback }, { call, put }) {
-            const response = yield call(images.list, payload);
+            const response = yield call(image.list, payload);
             yield put({
                 type: "list",
                 payload: response
@@ -16,7 +16,7 @@ export default {
             if (callback) callback();
         },
         * add({ payload, callback }, { call, put }) {
-            const response = yield call(images.add, payload);
+            const response = yield call(image.add, payload);
             yield put({
                 type: "add",
                 payload: response

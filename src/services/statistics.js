@@ -1,4 +1,4 @@
-import fa from "@/fa";
+import fa from "@/utils/fa";
 
 export default {
     async quantity(data = {}) {

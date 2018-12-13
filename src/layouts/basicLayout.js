@@ -21,7 +21,7 @@ import SiderMenu from '@/components/siderMenu';
 import styles from './BasicLayout.less';
 
 // lazy load SettingDrawer
-const SettingDrawer = React.lazy(() => import('@/components/SettingDrawer'));
+const SettingDrawer = React.lazy(() => import('@/components/settingDrawer'));
 
 const { Content } = Layout;
 
