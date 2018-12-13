@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Input,  Button, Modal, Form, Tree, message } from "antd";
 import { Link } from "react-router-dom";
-import styles from "../../styles/freight/freightAdd.css";
+import styles from "@/styles/freight/freightAdd.css";
 import Page from "@/components/public/page";
 
 import FreightAddTable from '@/components/setting/freightAddTable'

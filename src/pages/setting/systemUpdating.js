@@ -1,7 +1,7 @@
 import React,{ Component } from "react";
 import {Alert} from 'antd';
-import delivePublic from '../../styles/setting/delivePublic.css'
-import systemSetting from '../../styles/setting/systemSetting.css'
+import delivePublic from '@/styles/setting/delivePublic.css'
+import systemSetting from '@/styles/setting/systemSetting.css'
 export default class SystemUpdating extends Component{
     render(){
 

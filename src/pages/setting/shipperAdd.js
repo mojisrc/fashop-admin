@@ -1,9 +1,7 @@
 import React, { Component } from "react";
 import { Input, Button, Form, Cascader } from 'antd';
 import Page from '@/components/public/page'
-import { cascader } from "../../actions/area";
 import { connect } from 'dva';
-import { add } from "../../actions/deliver/shipper";
 const FormItem = Form.Item;
 @Form.create()
 @connect()

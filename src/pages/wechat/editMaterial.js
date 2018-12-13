@@ -6,7 +6,7 @@ import * as actions from "../../actions/wechat/material";
 import { View } from "react-web-dom";
 import { Row, Col, Card, Form, Input, Button, Upload, Icon, message, Checkbox, Popover } from "antd";
 import RouterBreadcrumb from "@/components/wechat/public/routerBreadcrumb";
-import styles from "../../styles/wechat/addMaterial.css";
+import styles from "@/styles/wechat/addMaterial.css";
 import InputFile from "@/components/inputFile";
 import Editor from "react-umeditor";
 import { Fetch } from '@/utils'

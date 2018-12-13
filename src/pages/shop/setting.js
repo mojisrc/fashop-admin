@@ -2,11 +2,11 @@ import React, { Component } from "react";
 import { connect } from 'dva';
 import { Tabs } from 'antd';
 import { View } from "react-web-dom";
-import styles from '../../styles/shop/shopSetting.css'
-import { setDiyData } from '../../actions/shop/decorate'
+import styles from '@/styles/shop/shopSetting.css'
 import ShopBasicInfo from './basicInfo'
 const TabPane = Tabs.TabPane;
-class Setting extends Component{
+@connect()
+export default class Setting extends Component{
     render() {
         const tabsList = [
             {
@@ -32,12 +32,12 @@ class Setting extends Component{
         )
     }
 }
-
-const mapStateToProps = ({ view }) => {
-    return {
-        options: view.shop.options,
-        body: view.shop.body,
-    }
-}
-
-export default connect(mapStateToProps, { setDiyData })(Setting)
+//
+// const mapStateToProps = ({ view }) => {
+//     return {
+//         options: view.shop.options,
+//         body: view.shop.body,
+//     }
+// }
+//
+// export default connect(mapStateToProps, { setDiyData })(Setting)

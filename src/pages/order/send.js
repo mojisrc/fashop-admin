@@ -75,7 +75,6 @@ export default class Send extends Component {
     }
 
     async componentDidMount() {
-        const { location } = this.props
         const { id } = query.getParams()
 
         const orderInfo = await Fetch.fetch({

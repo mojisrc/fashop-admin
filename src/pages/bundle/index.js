@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Spin } from 'antd';
 import { View } from "react-web-dom";
-import styles from "../../styles/bundle/index.css";
+import styles from "@/styles/bundle/index.css";
 export default class Bundle extends Component {
     state = {
         mod: null

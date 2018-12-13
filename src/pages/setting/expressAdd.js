@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { Input, Button, Form, Switch } from 'antd';
 import Page from '@/components/public/page'
 import { connect } from 'dva';
-import { add } from "../../actions/deliver/express";
 const FormItem = Form.Item;
 @Form.create()
 @connect()

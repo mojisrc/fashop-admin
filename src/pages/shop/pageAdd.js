@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-
 import { View } from "react-web-dom";
 import { connect } from 'dva';
 import { Row, Col, Button, Affix, message } from 'antd';
@@ -7,12 +6,8 @@ import Page from '@/components/public/page'
 import PageTool from '@/components/shop/diy/tool'
 import PageView from '@/components/shop/diy/view'
 import PageControl from '@/components/shop/diy/controller'
-
-import * as shopDecorateActions from "../../actions/shop/decorate";
-import * as goodsActions from "../../actions/goods";
-import type { optionsType, PageBodyType } from "../../interfaces/page";
 import BaseInfo from '@/components/shop/diy/baseinfo'
-import styles from '../../styles/shop/shopPageEdit.css'
+import styles from '@/styles/shop/shopPageEdit.css'
 
 import GoodsApi from "@/services/goods";
 @connect(

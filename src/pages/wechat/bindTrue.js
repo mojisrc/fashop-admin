@@ -5,7 +5,7 @@ import * as actions from "../../actions/wechat";
 import { Layout, Menu, Icon, Alert } from 'antd'
 import { View } from 'react-web-dom'
 import Page from '@/components/public/page/index'
-import styles from '../../styles/wechat/management.css'
+import styles from '@/styles/wechat/management.css'
 import { publicFunction } from '@/utils'
 
 import SelfMenu from '@/components/wechat/selfMenu'

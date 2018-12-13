@@ -7,7 +7,7 @@ import { View } from "react-web-dom";
 import { Row, Col, Card, Form, Input, Button, Upload, Icon, message, Checkbox, Popover } from "antd";
 import RouterBreadcrumb from "@/components/wechat/public/routerBreadcrumb";
 import InputFile from "@/components/inputFile";
-import styles from "../../styles/wechat/addMaterial.css";
+import styles from "@/styles/wechat/addMaterial.css";
 import Editor from "react-umeditor";
 import {
     handleSubmitType,

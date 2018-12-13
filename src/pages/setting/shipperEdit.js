@@ -1,14 +1,7 @@
-
 import React, { Component } from "react";
 import { Input, Button, Form, Cascader } from 'antd';
 import Page from '@/components/public/page'
-import { cascader } from "../../actions/area";
 import { connect } from 'dva';
-import { publicFunction } from "@/utils";
-import { info, edit } from "../../actions/deliver/shipper";
-const {
-    parseQuery
-} = publicFunction
 const FormItem = Form.Item;
 @Form.create()
 @connect()
@@ -27,7 +20,6 @@ export default class ShipperEdit extends Component {
     }
 
     async componentDidMount() {
-        const { location } = this.props
         const { id } = query.getParams()
         const e = await info({ params: { id } })
         if (e.code === 0) {

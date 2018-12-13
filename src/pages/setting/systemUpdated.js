@@ -1,7 +1,7 @@
 import React,{ Component } from "react";
 import {Checkbox,Button,Modal} from 'antd';
-import delivePublic from '../../styles/setting/delivePublic.css'
-import systemSetting from '../../styles/setting/systemSetting.css'
+import delivePublic from '@/styles/setting/delivePublic.css'
+import systemSetting from '@/styles/setting/systemSetting.css'
 export default class SystemUpdated extends Component{
       state = { visible: false }
       showModal = () => {

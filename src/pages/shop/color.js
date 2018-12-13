@@ -2,7 +2,7 @@ import React,{ Component } from "react";
 import { View } from "react-web-dom";
 import { Row, Col, Button } from 'antd';
 import Page from '@/components/public/page'
-import styles from '../../styles/shop/shopColor.css'
+import styles from '@/styles/shop/shopColor.css'
 export default class Color extends Component {
     state = {
         colorList : [

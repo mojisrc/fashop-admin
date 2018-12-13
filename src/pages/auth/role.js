@@ -13,7 +13,7 @@ import {
     Modal,
 } from "antd";
 import { View } from "react-web-dom";
-import styles from "../../styles/auth/role.css";
+import styles from "@/styles/auth/role.css";
 import RoleMembersTable from '@/components/auth/roleMembersTable'
 import RoleAuthTable from '@/components/auth/roleAuthTable'
 import GroupEditModal from '@/components/auth/groupEditModal'
