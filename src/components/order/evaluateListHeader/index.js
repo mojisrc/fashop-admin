@@ -1,4 +1,3 @@
-
 import React, { Component } from "react";
 import { Row, Col, Button, Input, Select, DatePicker, } from "antd";
 import styles from "./index.css";
@@ -11,18 +10,7 @@ import { getQueryPath } from "@/utils";
 const InputGroup = Input.Group;
 const Option = Select.Option;
 const { RangePicker } = DatePicker;
-type Props = {
-    location: { state: { type: string, record: {} }, search: string },
-    history: { push: Function }
-}
-type State = {
-    queryParams: {
-        keywords_type: string,
-        keywords: string | null,
-        create_time: Array<{}>,
-        type: string,
-    }
-}
+
 export default class EvaluateListHeader extends Component {
     state = {
         reply_content: '',

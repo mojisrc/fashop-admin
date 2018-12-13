@@ -1,40 +1,13 @@
-
 import React, { Component } from "react";
-import { Table, Button, } from "antd";
+import { Table } from "antd";
 import styles from "./index.css";
 import { View } from "react-web-dom";
 import moment from 'moment'
 import Query from "@/utils/query";
-import { list } from "../../../models/refund";
-import { dispatchProps } from "@/utils/defaultProps";
-import connect from "react-redux/es/connect/connect";
+import { list } from "@/models/refund";
 
-type Props = {
-    dispatch: dispatchProps,
-    orderRefundList: {
-        list: Array<{}>,
-        total_number: number,
-        page: number,
-        rows: number
-    },
-    orderRefundListLoading: boolean,
-    list: Array<{}>,
-    list?: Function,
-    location: { state: { type: string, record: {} }, search: string },
-    history: { push: Function }
+import { connect } from "dva";
 
-}
-type State = {
-    selectedRowKeys: Array<string>,
-    queryParams: {
-        keywords_type: string,
-        keywords: string | null,
-        create_time: Array<{}>,
-        refund_type: string,
-        refund_state: string,
-        order_type: string,
-    }
-}
 @connect(({
               view: {
                   order: {
@@ -59,7 +32,7 @@ export default class RefundTable extends Component {
         }
     }
     static defaultProps = {
-        dispatch: dispatchProps,
+
         orderRefundListLoading: false,
         orderRefundList: [],
     }

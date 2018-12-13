@@ -1,7 +1,5 @@
-
 import React,{ Component } from 'react'
 import {
-    Popover,
     Table ,
     Tag ,
 } from 'antd';
@@ -10,10 +8,7 @@ import styles from './index.css'
 import AvatarPopover from '../public/avatarPopover'
 import { data } from './testData'
 
-type Props = {}
-type State = {}
-
-export default class MessageManagementTable extends Component<Props,State> {
+export default class MessageManagementTable extends Component {
     render() {
         const tagList = [
             {

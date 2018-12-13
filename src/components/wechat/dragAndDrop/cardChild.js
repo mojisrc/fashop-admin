@@ -1,4 +1,3 @@
-
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { DragSource, DropTarget } from 'react-dnd'
@@ -88,7 +87,7 @@ export default class Card extends Component<{
                 <div style={{ ...style, opacity }}>
                     <img
                         alt='drag'
-                        src={require('../../../images/wechat/drag.png')}
+                        src={require('@/images/wechat/drag.png')}
                         style={{
                             width: '14px',
                             marginRight: '5px',

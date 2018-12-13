@@ -1,19 +1,18 @@
-
 import React, { Component } from "react";
 import styles from "./index.css";
-
-type Props = {
-    options: {
-        title: string,
-        align: string,
-        background_color: string,
-        font_color: string,
-        leading_image: {
-            url: string
-        }
-    }
-}
-type State = {}
+//
+// type Props = {
+//     options: {
+//         title: string,
+//         align: string,
+//         background_color: string,
+//         font_color: string,
+//         leading_image: {
+//             url: string
+//         }
+//     }
+// }
+// type State = {}
 
 export default class Index extends Component {
     render() {

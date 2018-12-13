@@ -1,4 +1,3 @@
-
 import React, { Component } from "react";
 import { Row, Col, Button, Input, Rate, Switch, Pagination, Spin, } from "antd";
 import styles from "./index.css";
@@ -6,59 +5,14 @@ import Image from "../../image";
 import { View } from "react-web-dom";
 import moment from "moment";
 import Query from "@/utils/query";
-import connect from "react-redux/es/connect/connect";
-import { list } from "../../../models/evaluate";
-import { dispatchType } from "@/utils/flow";
-import PhotoGallery from "../@/components/photoGallery"
-import Fetch from "@/utils/fetch";
-import { GoodsApi } from "../../../config/api/goods";
+import { connect } from "dva";
+import { list } from "@/models/evaluate";
+import PhotoGallery from "@/components/photoGallery"
+import GoodsApi from "@/services/goods";
 
 const { TextArea } = Input;
 const { Fragment } = React
 
-type Props = {
-    dispatch: dispatchType,
-    orderEvaluateList: {
-        list: Array<{
-            id: number,
-            avatar: string,
-            nickname: string,
-            score: number,
-            create_time: number,
-            display: number,
-            goods_img: string,
-            goods_price: number,
-            goods_title: string,
-            goods_number: number,
-            phone: string,
-            content: string,
-            images: Array<string>,
-            reply_time: number,
-            reply_content: string,
-            reply_time2: number,
-            reply_content2: string,
-            additional_content: string,
-            additional_time: number,
-            additional_images: Array<string>,
-        }>,
-        total_number: number,
-        page: number,
-        rows: number
-    },
-    orderEvaluateListLoading: boolean,
-    location: { state: { type: string, record: {} }, search: string },
-    history: { push: Function },
-}
-
-type State = {
-    reply_content: Array<string>,
-    queryParams: {
-        keywords_type: string,
-        keywords: string | null,
-        create_time: Array<{}>,
-        type: string,
-    }
-}
 @connect(({
               view: {
                   order: {
@@ -81,7 +35,7 @@ export default class EvaluateListTable extends Component {
             type: 'all',
         },
     }
-    PhotoGallery: any
+    PhotoGallery
 
     componentDidMount() {
         this.getGoodsEvaluateList()

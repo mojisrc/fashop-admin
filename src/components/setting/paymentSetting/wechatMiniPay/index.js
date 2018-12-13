@@ -1,29 +1,22 @@
-
 import React, { Component } from "react";
-import { connect } from "react-redux";
+import { connect } from "dva";
 import { Alert, Form, Switch, Input, Button, message } from 'antd';
 import { View } from "react-web-dom";
 import styles from './index.css'
-import Fetch from "../@/utils/fetch";
-import { PaymentApi } from "../../../../config/api/payment";
 
+import { PaymentApi } from "@/config/api/payment";
 const FormItem = Form.Item;
 
-type Props = {
-    form: {
-        validateFieldsAndScroll: Function,
-        getFieldDecorator: Function,
-    },
-}
-type States = {
-    checked: boolean,
-    app_id: string,
-    app_secret: string,
-    status: number
-}
+//
+// type States = {
+//     checked: boolean,
+//     app_id: string,
+//     app_secret: string,
+//     status: number
+// }
 @Form.create()
 @connect(({ app: { setting: { areaList } } }) => ({ areaList }))
-export default class WechatMiniPay extends Component<Props, States> {
+export default class WechatMiniPay extends Component {
     state = {
         checked: true,
         app_secret: '',

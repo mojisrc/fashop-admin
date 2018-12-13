@@ -1,21 +1,8 @@
-
 import React, { Component } from "react";
 import styles from "./index.css";
 import { View } from "react-web-dom";
 import InfoRow from "../../public/info/infoRow";
 import moment from 'moment'
-
-type Props = {
-    history: { push: Function },
-    refund_sn: string,
-    refund_type: number,
-    handle_state: number,
-    create_time: number,
-    handle_message: string,
-    order_id: number,
-    order_sn: string,
-}
-type State = {}
 export default class OrderDetailBasicInfo extends Component {
     render() {
         const { refund_sn, refund_type, handle_state, handle_message, create_time, order_id, order_sn, history } = this.props

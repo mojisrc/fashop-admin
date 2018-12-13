@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from 'dva';
 import { Tabs } from 'antd';
-import { historyType } from '@/utils/flow';
+;
 import { Redirect, Route, Switch } from "react-router-dom";
 import { getRoutes } from "@/utils";
 import * as routerRedux from 'react-router-redux';

@@ -1,13 +1,9 @@
-
 import React,{ Component } from 'react'
 import { View } from 'react-web-dom'
 import { Card, Button } from 'antd'
 import styles from './index.css'
 
-type Props = {}
-type State = {}
-
-export default class JumpApplet extends Component<Props,State>{
+export default class JumpApplet extends Component{
     render(){
         return(
             <View>

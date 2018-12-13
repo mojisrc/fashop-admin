@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { bindActionCreators } from 'redux';
+
 import { View } from "react-web-dom";
 import { connect } from 'dva';
 import { Row, Col, Button, Affix, message } from 'antd';
@@ -8,17 +8,17 @@ import PageTool from '@/components/shop/diy/tool'
 import PageView from '@/components/shop/diy/view'
 import PageControl from '@/components/shop/diy/controller'
 import { publicFunction } from '@/utils'
-import { historyType } from '@/utils/flow'
+
 import * as shopDecorateActions from "../../actions/shop/decorate";
 import * as goodsActions from "../../actions/goods";
 import type { optionsType, PageBodyType } from "../../interfaces/page";
 import { info } from "../../actions/shop/decorate";
 import BaseInfo from '@/components/shop/diy/baseinfo'
 import styles from '../../styles/shop/shopPageEdit.css'
-import Fetch from "@/utils/fetch";
-import { GoodsApi } from "../../config/api/goods";
 
-const { parseQuery } = publicFunction
+import GoodsApi from "@/services/goods";
+
+import { query } from "@/utils/fa"
 @connect(
     ({ view: { goods: { listData }, shop: { shopPageInfo } } }) => ({
         goodsListData: listData,
@@ -43,7 +43,7 @@ export default class PageEdit extends Component {
 
     async componentDidMount() {
         const { location, list } = this.props
-        const { id } = parseQuery(location.search)
+        const { id } = query.getParams()
         const e = await info({ params: { id } })
         if (e.code === 0) {
             const { info } = e.result

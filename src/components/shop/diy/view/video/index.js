@@ -1,13 +1,12 @@
-
 import React, { Component } from "react";
 import { View } from "react-web-dom";
 import styles from "../separator/index.css";
-
-type Props = {
-    options: any,
-    data: { url: string }
-}
-type State = {}
+//
+// type Props = {
+//     options: any,
+//     data: { url: string }
+// }
+// type State = {}
 
 export default class Index extends Component {
     render() {

@@ -6,7 +6,8 @@ import { Row, Col } from "antd";
 
 import DataDisplay from '@/components/pageIndex/dataDisplay'
 import Charts from '@/components/pageIndex/charts'
-class Index extends Component {
+@connect()
+export default class Index extends Component {
     render() {
         return (
             <View className={styles.indexWarp}>
@@ -20,10 +21,3 @@ class Index extends Component {
         )
     }
 }
-const portal = store => {
-    return {
-        login: store.app.member.login
-    }
-}
-
-export default connect(portal)(Index)

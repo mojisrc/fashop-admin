@@ -3,7 +3,7 @@ import { View } from "react-web-dom";
 import Page from '@/components/public/page'
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import ShopIndexBot from '@/components/shop/shopIndex';
-import { bindActionCreators } from 'redux';
+
 import { connect } from 'dva';
 import * as actions from "../../actions/shop";
 @connect(

@@ -1,6 +1,5 @@
-
 import React, { Component } from "react";
-import { setGoodsDetailData } from '../../../../actions/goods/detail'
+import { setGoodsDetailData } from '@/actions/goods/detail'
 import { View } from "react-web-dom";
 import { Form, Button, Row, Col, Modal, message } from "antd";
 import styles from './index.css'
@@ -12,13 +11,9 @@ import Video from './video'
 import Goods from './goods'
 import Line from './line'
 import Blank from './blank'
-import EmptyDetail from './empty'
-
 
 const FormItem = Form.Item;
 
-
-type Props = {}
 
 export default class Editor extends Component {
     render() {
@@ -116,7 +111,7 @@ class EditorContent extends Component<{},
                         <View className={styles.bodyContentWarp}>
                             <img
                                 className={styles.phoneTop}
-                                src={require('../../../../images/shop/diyPhone.png')}
+                                src={require('@/images/shop/diyPhone.png')}
                                 alt='diyPhone'
                             />
                             <View className={styles.bodyContent}>

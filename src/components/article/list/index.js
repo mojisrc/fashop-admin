@@ -1,33 +1,34 @@
-import React, { Component } from 'react'
-import { Button,Table, Modal } from 'antd';
-import { View } from 'react-web-dom'
-import styles from './index.css'
-import moment from 'moment'
+import React, { Component } from "react";
+import { Button, Table, Modal } from "antd";
+import { View } from "react-web-dom";
+import styles from "./index.css";
+import moment from "moment";
 import Image from "../../image";
-import Fetch from "@/utils/fetch";
-import { GoodsApi } from "../../../config/api/article";
+
+import { GoodsApi } from "@/config/api/article";
 import Query from "@/utils/query";
+
 export default class TableList extends Component {
     state = {
         rowSelectionIds: [],
-        delIds: [],
-    }
+        delIds: []
+    };
 
     render() {
-        const { articleList } = this.props
-        let { page, rows, total_number, list, } = articleList
-        const { delIds } = this.state
+        const { articleList } = this.props;
+        let { page, rows, total_number, list } = articleList;
+        const { delIds } = this.state;
 
         Array.isArray(list) && list.length > 0 && list.map((article: any) => {
             if (delIds.indexOf(article.id) === -1) {
-                list.push(article)
+                list.push(article);
             }
-        })
+        });
 
         const columns = [
             {
                 title: "封面图",
-                dataIndex: 'img',
+                dataIndex: "img",
                 width: 50,
                 render: (e) => (
                     <Image
@@ -43,11 +44,11 @@ export default class TableList extends Component {
             }, {
                 title: "创建时间",
                 dataIndex: "create_time",
-                render: e => moment(e * 1000).format('YYYY-MM-DD hh:mm'),
-                width: 200,
+                render: e => moment(e * 1000).format("YYYY-MM-DD hh:mm"),
+                width: 200
             }, {
-                title: '操作',
-                key: 'operation',
+                title: "操作",
+                key: "operation",
                 width: 100,
                 render: (record) => <View className={styles.operation}>
                     <a
@@ -56,9 +57,9 @@ export default class TableList extends Component {
                                 pathname: `/article/list/edit`,
                                 search: `?id=${record.id}`,
                                 state: {
-                                    record,
+                                    record
                                 }
-                            })
+                            });
                         }}
                     >
                         编辑
@@ -66,37 +67,37 @@ export default class TableList extends Component {
                     <a
                         onClick={async () => {
                             Modal.confirm({
-                                title: '确认删除？',
-                                okText: '确认',
-                                okType: 'danger',
-                                cancelText: '取消',
+                                title: "确认删除？",
+                                okText: "确认",
+                                okType: "danger",
+                                cancelText: "取消",
                                 onOk: async () => {
                                     const response = await Fetch.fetch({
                                         api: GoodsApi.del,
                                         params: { ids: [record.id] }
-                                    })
+                                    });
                                     if (response.code === 0) {
                                         this.setState({
                                             delIds: [...delIds, record.id]
                                         }, () => {
-                                            message.success('已删除', 1)
-                                        })
+                                            message.success("已删除", 1);
+                                        });
                                     }
                                 }
-                            })
+                            });
 
                         }}
                     >删除</a>
                 </View>
             }
-        ]
+        ];
         return (
             <View>
                 <View className={styles.batchView}>
                     <Button
                         type='primary'
                         onClick={() => {
-                            history.push('/article/list/add')
+                            history.push("/article/list/add");
                         }}
                     >
                         添加文章
@@ -112,14 +113,14 @@ export default class TableList extends Component {
                         showQuickJumper: false,
                         pageSize: rows,
                         total: total_number,
-                        current: page,
+                        current: page
                     }}
                     onChange={({ current, pageSize }) => {
-                        this.props.history.push(Query.page(current, pageSize))
+                        this.props.history.push(Query.page(current, pageSize));
                     }}
                 />
             </View>
-        )
+        );
     }
 
 }

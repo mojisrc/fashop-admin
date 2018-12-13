@@ -1,8 +1,6 @@
 
 import React,{ Component } from 'react'
-import { bindActionCreators } from 'redux';
-import { connect } from "react-redux";
-// import * as actions from "../../../actions/wechat/user";
+import { connect } from "dva";
 import {
     getWechatUserList,
     getWechatuserBlackList,
@@ -10,7 +8,7 @@ import {
     setUserUnblock,
     editUserRemark,
     getWechatUserListByTag,
-} from "../../../actions/wechat/user";
+} from "@/actions/wechat/user";
 import {
     getWechatUserTagList,
     addWechatUserTagList,
@@ -18,60 +16,59 @@ import {
     delWechatUserTagList,
     tagWechatUser,
     untagWechatUser,
-} from "../../../actions/wechat/userTags";
+} from "@/actions/wechat/userTags";
 import { View } from 'react-web-dom'
-import { Row, Col, Button, Input, Table, Menu, Pagination, Popover, Popconfirm, Icon } from 'antd'
+import { Row, Col, Button, Table, Menu, Pagination, Popover, Popconfirm, Icon } from 'antd'
 import styles from './index.css'
 import AvatarPopover from '../public/avatarPopover'
 import TagPopover from '../public/tagPopover'
-import { data } from './testData'
 import PublicPopoverContent from './publicPopoverContent'
-
-type Props = {
-    dispatch:Function,
-    editUserRemark:Function,
-    setUserBlock:Function,
-    setUserUnblock:Function,
-    getWechatUserList:Function,
-    getWechatuserBlackList:Function,
-    getWechatUserListByTag:Function,
-    getWechatUserTagList:Function,
-    addWechatUserTagList:Function,
-    editWechatUserTagList:Function,
-    delWechatUserTagList:Function,
-    userTagList:Array<{
-        name:string,
-        count:number,
-        id:number
-    }>,
-    userList:{
-        total:number,
-        next_openid:string,
-        data:{openid:Array<string>}
-    },
-    prev_openid:string,
-    next_openid:string,
-    userBlackList:{
-        total:number,
-        data:{openid:Array<string>}
-    },
-    userInfoList:Array<{
-        openid:string,
-        headimgurl:string,
-        nickname:string,
-        sex:number,
-        subscribe_time:string,
-        remark:string,
-        tagid_list:Array<string>
-    }>,
-    userListLoading:boolean,
-}
-type State = {
-    currentMenu:string,
-    editTagId:string,
-    currentId:string,
-    selectedRowKeys:Array<string>,
-}
+//
+// type Props = {
+//     dispatch:Function,
+//     editUserRemark:Function,
+//     setUserBlock:Function,
+//     setUserUnblock:Function,
+//     getWechatUserList:Function,
+//     getWechatuserBlackList:Function,
+//     getWechatUserListByTag:Function,
+//     getWechatUserTagList:Function,
+//     addWechatUserTagList:Function,
+//     editWechatUserTagList:Function,
+//     delWechatUserTagList:Function,
+//     userTagList:Array<{
+//         name:string,
+//         count:number,
+//         id:number
+//     }>,
+//     userList:{
+//         total:number,
+//         next_openid:string,
+//         data:{openid:Array<string>}
+//     },
+//     prev_openid:string,
+//     next_openid:string,
+//     userBlackList:{
+//         total:number,
+//         data:{openid:Array<string>}
+//     },
+//     userInfoList:Array<{
+//         openid:string,
+//         headimgurl:string,
+//         nickname:string,
+//         sex:number,
+//         subscribe_time:string,
+//         remark:string,
+//         tagid_list:Array<string>
+//     }>,
+//     userListLoading:boolean,
+// }
+// type State = {
+//     currentMenu:string,
+//     editTagId:string,
+//     currentId:string,
+//     selectedRowKeys:Array<string>,
+// }
 
 @connect(
     ({view:{
@@ -86,9 +83,9 @@ type State = {
         userTagList,
         userInfoList,
     }),
-    // dispatch => bindActionCreators(actions,dispatch),
+    //
 )
-export default class FollowTable extends Component<Props,State> {
+export default class FollowTable extends Component {
     state = {
         currentMenu:'0',
         editTagId:'0',

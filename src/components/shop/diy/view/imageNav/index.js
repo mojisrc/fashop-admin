@@ -1,26 +1,24 @@
-
 import React, { Component } from "react";
 import styles from "./index.css";
 import { View } from "react-web-dom";
-import type { LinkActionType } from "../../controller/common/actionLink"
-
-type Props = {
-    options: {
-        rows: number,
-        each_row_display: number,
-    },
-    data: Array<{
-        img: {
-            url: string
-        },
-        title: string,
-        link: {
-            action: LinkActionType,
-            param: {}
-        }
-    }>
-}
-type State = {}
+//
+// type Props = {
+//     options: {
+//         rows: number,
+//         each_row_display: number,
+//     },
+//     data: Array<{
+//         img: {
+//             url: string
+//         },
+//         title: string,
+//         link: {
+//             action: LinkActionType,
+//             param: {}
+//         }
+//     }>
+// }
+// type State = {}
 
 export default class Index extends Component {
     render() {

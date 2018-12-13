@@ -1,42 +1,40 @@
-
 import React,{ Component } from 'react'
 import { View } from 'react-web-dom'
 import { Popover, Icon, Button, Input, Popconfirm } from 'antd'
 import styles from './index.css'
 import TagPopover from '../tagPopover'
-import Image from '../../../image'
+import Image from '@/image'
 import moment from 'moment'
+// type Props = {
+//     record:{
+//         openid:string,
+//         headimgurl:string,
+//         nickname:string,
+//         sex:number,
+//         subscribe_time:string,
+//         remark:string,
+//         // news:number,
+//         // msg:number,
+//         // marrow:number,
+//         tagid_list:Array<string>
+//     },
+//     tagList:Array<{
+//         name:string,
+//         count:number,
+//         id:number
+//     }>,
+//     editRemarkFunc:Function,
+//     addTagFunc:Function,
+//     tagWechatUserFunc:Function,
+//     blackFunc:Function,
+//     avatarType:string
+// }
+// type State = {
+//     remarkValue:string,
+//     editRemark:boolean
+// }
 
-type Props = {
-    record:{
-        openid:string,
-        headimgurl:string,
-        nickname:string,
-        sex:number,
-        subscribe_time:string,
-        remark:string,
-        // news:number,
-        // msg:number,
-        // marrow:number,
-        tagid_list:Array<string>
-    },
-    tagList:Array<{
-        name:string,
-        count:number,
-        id:number
-    }>,
-    editRemarkFunc:Function,
-    addTagFunc:Function,
-    tagWechatUserFunc:Function,
-    blackFunc:Function,
-    avatarType:string
-}
-type State = {
-    remarkValue:string,
-    editRemark:boolean
-}
-
-export default class AvatarPopover extends Component<Props,State> {
+export default class AvatarPopover extends Component {
     state = {
         editRemark:false,
         remarkValue:''

@@ -1,59 +1,58 @@
-
 import React, { Component } from "react";
 import { Table, Button, InputNumber } from "antd";
 import styles from './index.css'
-
-type IdsType = Array<string>
-
-type AreaType = Array<{
-    id: number,
-    name: string,
-    _child: Array<{
-        id: number,
-        name: string,
-        _child: Array<any>
-    }>
-}>
-type Props = {
-    onChange?: Function,
-    areaList: AreaType,
-    dataSource: Array<{
-        additional_amount: number,
-        additional_fee: number,
-        first_amount: number,
-        first_fee: number,
-        ids: Array<string>
-    }>,
-    payType: 1 | 2,
-    changeAreaListModal: Function,
-    changeTableDataSource: Function,
-    delAreaList: Function,
-    editAreaList: Function,
-    getChildIds: Function,
-    getChildInCludes: Function,
-}
-type State = {
-    payType: number,
-    visible: boolean,
-    checkedAreaKeys: IdsType,
-    expandedKeys: IdsType,
-    checkedKeys: IdsType,
-    editAreaTableIndex: number | null,
-    loading: boolean,
-    autoExpandParent: boolean,
-    autoExpandParent2: boolean,
-    expandedKeys2: IdsType,
-    checkedKeys2: IdsType,
-    selectedKeys2: IdsType,
-    selectedKeys: IdsType,
-    tableDataSource: Array<{
-        additional_amount: number,
-        additional_fee: number,
-        first_amount: number,
-        first_fee: number,
-        ids: Array<string>
-    }>
-}
+//
+// type IdsType = Array<string>
+//
+// type AreaType = Array<{
+//     id: number,
+//     name: string,
+//     _child: Array<{
+//         id: number,
+//         name: string,
+//         _child: Array<any>
+//     }>
+// }>
+// type Props = {
+//     onChange?: Function,
+//     areaList: AreaType,
+//     dataSource: Array<{
+//         additional_amount: number,
+//         additional_fee: number,
+//         first_amount: number,
+//         first_fee: number,
+//         ids: Array<string>
+//     }>,
+//     payType: 1 | 2,
+//     changeAreaListModal: Function,
+//     changeTableDataSource: Function,
+//     delAreaList: Function,
+//     editAreaList: Function,
+//     getChildIds: Function,
+//     getChildInCludes: Function,
+// }
+// type State = {
+//     payType: number,
+//     visible: boolean,
+//     checkedAreaKeys: IdsType,
+//     expandedKeys: IdsType,
+//     checkedKeys: IdsType,
+//     editAreaTableIndex: number | null,
+//     loading: boolean,
+//     autoExpandParent: boolean,
+//     autoExpandParent2: boolean,
+//     expandedKeys2: IdsType,
+//     checkedKeys2: IdsType,
+//     selectedKeys2: IdsType,
+//     selectedKeys: IdsType,
+//     tableDataSource: Array<{
+//         additional_amount: number,
+//         additional_fee: number,
+//         first_amount: number,
+//         first_fee: number,
+//         ids: Array<string>
+//     }>
+// }
 
 export default class FreightAddTable extends Component {
 

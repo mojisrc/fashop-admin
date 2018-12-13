@@ -1,4 +1,3 @@
-
 import React, { Component } from "react";
 import {
     Table,
@@ -7,31 +6,11 @@ import {
 } from "antd";
 import styles from "./index.css";
 import { View } from "react-web-dom";
-import { connect } from "react-redux";
-
-import { dispatchProps } from "@/utils/defaultProps";
+import { connect } from "dva";
 import moment from "moment/moment";
-import { getFreightList, delFreight } from "../../../actions/deliver/freight";
-import { getKeyAreaList } from "../../../actions/area"
-import { Modal } from "antd/lib/index";
-
-type Props = {
-    history: historyType,
-    dispatch: dispatchType,
-    loading: boolean,
-    listData: {
-        page: number,
-        rows: number,
-        total_number: number,
-        list: Array<{}>,
-    }
-}
-
-type State = {
-    page: number,
-    rows: number,
-    areaList: Array<any>
-}
+import { getFreightList, delFreight } from "@/actions/deliver/freight";
+import { getKeyAreaList } from "@/actions/area"
+import { Modal } from "antd";
 
 @connect(({
               view: {
@@ -51,7 +30,7 @@ export default class FreightListTable extends Component   {
         areaList: []
     }
     static defaultProps = {
-        dispatch: dispatchProps,
+
         loading: false,
         listData: [],
     }

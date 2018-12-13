@@ -1,44 +1,41 @@
-
 import React, { Component } from "react";
-import { bindActionCreators } from 'redux';
+
 import { connect } from 'dva';
-import * as actions from "../../../../actions/wechat/material";
+import * as actions from "@/actions/wechat/material";
 import { View } from "react-web-dom";
-import { Modal, Button, Input, Row, Col, Card, Checkbox, Pagination, Radio, Spin, Upload, message } from "antd";
+import { Modal, Button,  Row, Col,  Checkbox, Pagination, Radio, Spin, Upload, message } from "antd";
 import styles from "./index.css";
 import ModalVoice from "../../wechatItem/modalVoice";
-import EmptyView from "../../../wechat/material/emptyView";
-import { Fetch } from '../@/utils'
-import { env } from '../../../../config/root'
+import EmptyView from "@/wechat/material/emptyView";
 
+import { env } from '@/config/root'
 const RadioGroup = Radio.Group
-const CheckboxGroup = Checkbox.Group;
-
-type Props = {
-    visible:boolean,
-    close:Function,
-    onOk:Function,
-    newsType:string,
-    wechatMaterialList:Function,
-    // voiceCurrentPage:number,
-    // voicePageSize:number,
-    wechatMaterialListLoading:boolean,
-    voiceMaterialList:{
-        item:Array<{
-            // name:string,
-            // update_time:string,
-            // media_id:string,
-        }>,
-        item_count:number,
-        total_count:number,
-    },
-}
-type State = {
-    newsTypeValue:string,
-    checkedValues:{
-        media_id:string
-    }
-}
+//
+// type Props = {
+//     visible:boolean,
+//     close:Function,
+//     onOk:Function,
+//     newsType:string,
+//     wechatMaterialList:Function,
+//     // voiceCurrentPage:number,
+//     // voicePageSize:number,
+//     wechatMaterialListLoading:boolean,
+//     voiceMaterialList:{
+//         item:Array<{
+//             // name:string,
+//             // update_time:string,
+//             // media_id:string,
+//         }>,
+//         item_count:number,
+//         total_count:number,
+//     },
+// }
+// type State = {
+//     newsTypeValue:string,
+//     checkedValues:{
+//         media_id:string
+//     }
+// }
 
 @connect(
     ({view:{material:{ voiceMaterialList, voiceCurrentPage, voicePageSize, wechatMaterialListLoading }}}) => ({
@@ -47,7 +44,7 @@ type State = {
         voicePageSize,
         wechatMaterialListLoading,
     }),
-    dispatch => bindActionCreators(actions,dispatch),
+
 )
 export default class VoiceModal extends Component {
     state = {

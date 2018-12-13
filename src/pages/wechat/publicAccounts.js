@@ -1,5 +1,5 @@
 import React,{ Component } from 'react'
-import { bindActionCreators } from 'redux';
+
 import { connect } from 'dva';
 import * as actions from "../../actions/wechat";
 import { View } from "react-web-dom";
@@ -9,7 +9,7 @@ import BindPublicAccountsFalse from "./bindFalse";
     ({view:{wechat:{ wechatConfigInfo }}}) => ({
         wechatConfigInfo
     }),
-    dispatch => bindActionCreators(actions,dispatch),
+
 )
 export default class PublicAccounts extends Component {
     componentDidMount(){

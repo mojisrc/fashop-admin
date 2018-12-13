@@ -1,31 +1,28 @@
-
 import React, { Component } from "react";
 import { View } from "react-web-dom";
-import { Modal, Button, Input, Row, Col, Card, Checkbox, Pagination, Radio } from "antd";
+import { Modal, Button,   Radio } from "antd";
 import styles from "./index.css";
 import NewsView from "./newsView";
 import LocalNewsView from "./localNewsView";
-import ModalNews from "../../wechatItem/modalNews";
 
-const CheckboxGroup = Checkbox.Group;
-
-type Props = {
-    visible:boolean,
-    close:Function,
-    onOk:Function,
-    newsType:string,
-}
-type State = {
-    newsTypeValue:string,
-    news:{
-        value:string,
-        detail:{}
-    },
-    localNews:{
-        value:string,
-        detail:{}
-    }
-}
+//
+// type Props = {
+//     visible:boolean,
+//     close:Function,
+//     onOk:Function,
+//     newsType:string,
+// }
+// type State = {
+//     newsTypeValue:string,
+//     news:{
+//         value:string,
+//         detail:{}
+//     },
+//     localNews:{
+//         value:string,
+//         detail:{}
+//     }
+// }
 
 export default class NewsModal extends Component {
     state = {

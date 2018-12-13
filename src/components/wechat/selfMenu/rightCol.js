@@ -1,4 +1,3 @@
-
 import React,{ Component } from 'react'
 import { Form, Card, Input, Radio, Button, Icon, Modal } from 'antd'
 import { View } from 'react-web-dom'
@@ -6,32 +5,30 @@ import styles from './rightCol.css'
 import MsgTab from '../public/msgTab'
 import JumpWebpage from './jumpWebpage'
 import JumpApplet from './jumpApplet'
-import { formType, handleSubmitType } from "@/utils/flow";
 
 const FormItem = Form.Item
 const RadioGroup = Radio.Group
-
-type Props = {
-    form:formType,
-    sort:boolean,
-    wechatMenuList:{
-        menu:{
-            button:Array<{
-                name:string,
-                type:string,
-                sub_button:Array<{
-                    name:string,
-                    type:string,
-                }>
-            }>,
-        }
-    },
-    currentMenu:Array<number>,
-    setWechatMenuList:Function,
-    setCurrentMenu:Function,
-    createWechatMenuList:Function,
-}
-type State = {}
+//
+// type Props = {
+//     form:formType,
+//     sort:boolean,
+//     wechatMenuList:{
+//         menu:{
+//             button:Array<{
+//                 name:string,
+//                 type:string,
+//                 sub_button:Array<{
+//                     name:string,
+//                     type:string,
+//                 }>
+//             }>,
+//         }
+//     },
+//     currentMenu:Array<number>,
+//     setWechatMenuList:Function,
+//     setCurrentMenu:Function,
+//     createWechatMenuList:Function,
+// }
 
 const onFieldsChange = (props, fields)=>{
     console.log(fields);
@@ -60,7 +57,7 @@ const onFieldsChange = (props, fields)=>{
 @Form.create({
     onFieldsChange,
 })
-export default class RightCol extends Component<Props,State>{
+export default class RightCol extends Component{
     handleSubmit = (e:handleSubmitType) => {
         e.preventDefault();
         const { form, wechatMenuList, createWechatMenuList } = this.props
@@ -96,7 +93,7 @@ export default class RightCol extends Component<Props,State>{
                 <View className={styles.emptyImgView}>
                     <img
                         alt='empty'
-                        src={require('../../../images/fetchStatus/emptyMenu.png')}
+                        src={require('@/images/fetchStatus/emptyMenu.png')}
                     />
                 </View>
                 <strong>还没有菜单，点击左图进行操作</strong>

@@ -1,14 +1,10 @@
 import React, { Component } from "react";
 import { connect } from 'dva';
 import { View } from "react-web-dom";
-import { Input } from "antd";
 import Page from '@/components/public/page'
 import styles from '../../styles/user/userInfo.css'
 import UploadImage from '@/components/uploadImage'
-import { editSelfAvatar } from '../../actions/member'
 import types from '../../constants'
-
-
 
 @connect(({ app: { member: { userInfo } } }) => ({
     userInfo

@@ -15,7 +15,7 @@ import TopMenu from "./topMenu";
 import Title from "./title";
 import TextNav from "./textNav";
 import AuxiliaryBlank from "./auxiliaryBlank";
-import type { optionsType, PageBodyType } from '../../../../interfaces/page'
+import type { optionsType, PageBodyType } from '@/interfaces/page'
 import styles from "./index.css";
 
 const SortableItem = SortableElement(({ value }) =>
@@ -257,7 +257,7 @@ export default class PageView extends Component {
                 >
                     <span>设置页面信息</span>
                     <img
-                        src={require('../../../../images/shop/page-setting.png')}
+                        src={require('@/images/shop/page-setting.png')}
                         alt='diyPhone'
                     />
                 </View>

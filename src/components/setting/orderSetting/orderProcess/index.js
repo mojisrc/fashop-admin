@@ -1,32 +1,30 @@
-
 import React, { Component } from "react";
-import { connect } from "react-redux";
+import { connect } from "dva";
 import { Alert, Form, InputNumber, Row, Col, Button, message } from 'antd';
 import { View } from "react-web-dom";
-import { sendOrderSet } from '../../../../actions/order';
+import { sendOrderSet } from '@/actions/order';
 import styles from './index.css'
-import Fetch from "../@/utils/fetch";
-import { ShopApi } from "../../../../config/api/shop";
+import { ShopApi } from "@/config/api/shop";
 
 const FormItem = Form.Item;
-type Props = {
-    location: { state: { state_type: string } },
-    history: { push: Function },
-    form: {
-        validateFieldsAndScroll: Function,
-        getFieldDecorator: Function,
-    }
-}
-type States = {
-    order_auto_close_expires_day: number,
-    order_auto_close_expires_hour: number,
-    order_auto_close_expires_minute: number,
-    order_auto_confirm_expires_day: number,
-    order_auto_close_refound_expires_day: number
-}
+// type Props = {
+//     location: { state: { state_type: string } },
+//     history: { push: Function },
+//     form: {
+//         validateFieldsAndScroll: Function,
+//         getFieldDecorator: Function,
+//     }
+// }
+// type States = {
+//     order_auto_close_expires_day: number,
+//     order_auto_close_expires_hour: number,
+//     order_auto_close_expires_minute: number,
+//     order_auto_confirm_expires_day: number,
+//     order_auto_close_refound_expires_day: number
+// }
 @Form.create()
 @connect(null, { sendOrderSet })
-export default class OrderProcess extends Component<Props, States> {
+export default class OrderProcess extends Component {
     state = {
         order_auto_close_expires_day: 0,
         order_auto_close_expires_hour: 0,

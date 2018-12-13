@@ -1,33 +1,28 @@
-
 import React from 'react'
-import { bindActionCreators } from 'redux';
-import { connect } from "react-redux";
-import * as actions from "../../../../actions/wechat/material";
+import { connect } from "dva";
+import * as actions from "@/actions/wechat/material";
 import { Popconfirm, Row, Col, Pagination, Spin } from 'antd';
 import { View } from 'react-web-dom'
 import styles from './index.css'
 import EmptyView from '../emptyView'
 import moment from 'moment'
-
-type Props = {
-    voiceMaterialList:{
-        item:Array<{
-            name:string,
-            update_time:string,
-            media_id:string,
-        }>,
-        item_count:number,
-        total_count:number
-    },
-    getWechatMaterialList:Function,
-    voiceCurrentPage:number,
-    voicePageSize:number,
-    materialListLoading:boolean,
-    delWechatMaterial:Function,
-}
-type State = {
-    voiceActive:string
-}
+//
+// type Props = {
+//     voiceMaterialList:{
+//         item:Array<{
+//             name:string,
+//             update_time:string,
+//             media_id:string,
+//         }>,
+//         item_count:number,
+//         total_count:number
+//     },
+//     getWechatMaterialList:Function,
+//     voiceCurrentPage:number,
+//     voicePageSize:number,
+//     materialListLoading:boolean,
+//     delWechatMaterial:Function,
+// }
 
 @connect(
     ({view:{material:{ voiceMaterialList, voiceCurrentPage, voicePageSize, materialListLoading }}}) => ({
@@ -36,9 +31,9 @@ type State = {
         voicePageSize,
         materialListLoading,
     }),
-    dispatch => bindActionCreators(actions,dispatch),
+
 )
-export default class VoiceTable extends React.Component<Props,State> {
+export default class VoiceTable extends React.Component {
     state = {
         voiceActive:""
     }
@@ -81,14 +76,14 @@ export default class VoiceTable extends React.Component<Props,State> {
                                             {
                                                 voiceActive===item.media_id ?
                                                 <img
-                                                    src={require('../../../../images/wechat/voiceing.gif')}
+                                                    src={require('@/images/wechat/voiceing.gif')}
                                                     style={{
                                                         width:'100%',
                                                         height:'100%',
                                                     }}
                                                 /> :
                                                 <img
-                                                    src={require('../../../../images/wechat/voice.png')}
+                                                    src={require('@/images/wechat/voice.png')}
                                                     style={{
                                                         width:'100%',
                                                         height:'100%',

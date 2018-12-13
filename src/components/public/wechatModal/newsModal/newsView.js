@@ -1,8 +1,8 @@
 
 import React, { Component } from "react";
-import { bindActionCreators } from 'redux';
+
 import { connect } from 'dva';
-import * as actions from "../../../../actions/wechat/material";
+import * as actions from "@/actions/wechat/material";
 import { View } from "react-web-dom";
 import { Modal, Button, Input, Row, Col, Card, Checkbox, Pagination, Radio, Spin } from "antd";
 import styles from "./index.css";
@@ -45,7 +45,7 @@ type State = {
         newsPageSize,
         wechatMaterialListLoading,
     }),
-    dispatch => bindActionCreators(actions,dispatch),
+
 )
 export default class NewsView extends Component {
     state = {

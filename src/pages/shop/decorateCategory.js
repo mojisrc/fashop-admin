@@ -4,7 +4,7 @@ import { View } from "react-web-dom";
 import styles from '../../styles/shop/shopSort.css'
 import Page from '@/components/public/page'
 import { CopyToClipboard } from 'react-copy-to-clipboard';
-import connect from "react-redux/es/connect/connect";
+import { connect } from "dva";
 import { bindActionCreators } from "redux";
 import * as actions from "../../actions/shop";
 @connect(

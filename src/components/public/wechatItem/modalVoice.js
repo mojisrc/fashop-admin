@@ -32,14 +32,14 @@ export default class ModalVoice extends Component{
                     {
                         voiceing ?
                         <img
-                            src={require('../../../images/wechat/voiceing.gif')}
+                            src={require('@/images/wechat/voiceing.gif')}
                             style={{
                                 width:'100%',
                                 height:'100%',
                             }}
                         /> :
                         <img
-                            src={require('../../../images/wechat/voice.png')}
+                            src={require('@/images/wechat/voice.png')}
                             style={{
                                 width:'100%',
                                 height:'100%',

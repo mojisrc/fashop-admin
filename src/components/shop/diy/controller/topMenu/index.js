@@ -1,36 +1,35 @@
-
 import React, { Component } from "react";
 import { Icon, Input, Row, Col, Radio, Modal, message } from "antd";
-import ColorPicker from "../../../../public/ColorPicker";
+import ColorPicker from "@/public/ColorPicker";
 import styles from "./index.css";
 import { View } from "react-web-dom";
-import UploadImage from "../../../../uploadImage/index";
+import UploadImage from "@/uploadImage/index";
 import ActionLink, { linkInfo } from "../common/actionLink"
 
 const RadioGroup = Radio.Group;
-type LinkActionType = 'portal' | 'goods' | 'page' | 'url'
-
-type Props = {
-    componentName: string,
-    getValues: Function,
-    options: {
-        menu_format: number,
-        menu_space: number
-    },
-    data: Array<{
-        img: {
-            url: string
-        },
-        title: string,
-        link: {
-            action: LinkActionType,
-            param: {}
-        },
-        background_color: string,
-        font_color: string
-    }>
-}
-type State = {}
+// type LinkActionType = 'portal' | 'goods' | 'page' | 'url'
+//
+// type Props = {
+//     componentName: string,
+//     getValues: Function,
+//     options: {
+//         menu_format: number,
+//         menu_space: number
+//     },
+//     data: Array<{
+//         img: {
+//             url: string
+//         },
+//         title: string,
+//         link: {
+//             action: LinkActionType,
+//             param: {}
+//         },
+//         background_color: string,
+//         font_color: string
+//     }>
+// }
+// type State = {}
 
 export default class Index extends Component {
 

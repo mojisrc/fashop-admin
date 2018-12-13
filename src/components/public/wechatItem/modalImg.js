@@ -1,4 +1,3 @@
-
 import React from "react";
 import { View } from "react-web-dom";
 import styles from "./index.css";

@@ -1,32 +1,29 @@
-
 import React from 'react'
-import { bindActionCreators } from 'redux';
-import { connect } from "react-redux";
-import * as actions from "../../../../actions/wechat/material";
+import { connect } from "dva";
+import * as actions from "@/actions/wechat/material";
 import { Popconfirm, Row, Col, Pagination, Spin, Button, Upload, message } from 'antd';
 import { View } from 'react-web-dom'
 import styles from './index.css'
-import { Fetch } from '../@/utils'
-import { env } from '../../../../config/root'
-import Image from '../../../image'
 
-type Props = {
-    imageMaterialList:{
-        item:Array<{
-            name:string,
-            url:string,
-            media_id:string,
-        }>,
-        item_count:number,
-        total_count:number
-    },
-    getWechatMaterialList:Function,
-    imageCurrentPage:number,
-    imagePageSize:number,
-    materialListLoading:boolean,
-    delWechatMaterial:Function,
-}
-type State = {}
+import { env } from '@/config/root'
+import Image from '@/image'
+//
+// type Props = {
+//     imageMaterialList:{
+//         item:Array<{
+//             name:string,
+//             url:string,
+//             media_id:string,
+//         }>,
+//         item_count:number,
+//         total_count:number
+//     },
+//     getWechatMaterialList:Function,
+//     imageCurrentPage:number,
+//     imagePageSize:number,
+//     materialListLoading:boolean,
+//     delWechatMaterial:Function,
+// }
 
 @connect(
     ({view:{material:{ imageMaterialList, imageCurrentPage, imagePageSize, materialListLoading }}}) => ({
@@ -35,9 +32,9 @@ type State = {}
         imagePageSize,
         materialListLoading,
     }),
-    dispatch => bindActionCreators(actions,dispatch),
+
 )
-export default class ImageTable extends React.Component<Props,State> {
+export default class ImageTable extends React.Component {
     componentDidMount(){
         this.props.getWechatMaterialList({
             params:{
@@ -143,7 +140,7 @@ export default class ImageTable extends React.Component<Props,State> {
             <View className={styles.emptyImageView}>
                 <img
                     alt=''
-                    src={require('../../../../images/fetchStatus/emptyImage.png')}
+                    src={require('@/images/fetchStatus/emptyImage.png')}
                 />
                 <strong>暂时还没有图片资源</strong>
                 <Upload

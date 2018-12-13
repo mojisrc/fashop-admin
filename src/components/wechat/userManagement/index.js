@@ -1,18 +1,12 @@
-
 import React,{ Component } from 'react'
 import { Tabs } from 'antd'
 import { View } from 'react-web-dom'
-import styles from './index.css'
 
 import FollowTable from './follow'
 import BlackList from './blackList'
 
 const TabPane = Tabs.TabPane
-
-type Props = {}
-type State = {}
-
-export default class UserManagement extends Component<Props,State> {
+export default class UserManagement extends Component {
     render() {
         const tabList = [
             {

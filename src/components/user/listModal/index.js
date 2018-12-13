@@ -1,4 +1,3 @@
-
 import React, { Component } from "react";
 import {
     Button,
@@ -8,22 +7,20 @@ import {
     Radio,
     DatePicker,
 } from "antd";
-import { formType } from "@/utils/flow";
-
 const FormItem = Form.Item;
-const RadioGroup = Radio.Group;
-
-type Props = {
-    form: formType,
-    customerVisible: boolean,
-    customerCancel: boolean,
-    type: string,
-}
-type State = {
-    confirmDirty: boolean,
-}
-
-class ListModal extends Component {
+// const RadioGroup = Radio.Group;
+//
+// type Props = {
+//     form: formType,
+//     customerVisible: boolean,
+//     customerCancel: boolean,
+//     type: string,
+// }
+// type State = {
+//     confirmDirty: boolean,
+// }
+@Form.create()
+export default class ListModal extends Component {
     state = {
         confirmDirty: false,
     }
@@ -133,6 +130,3 @@ class ListModal extends Component {
     }
 }
 
-ListModal = Form.create()(ListModal);
-
-export default ListModal

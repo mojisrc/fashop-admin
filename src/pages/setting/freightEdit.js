@@ -3,14 +3,14 @@ import { Input,  Button, Modal, Form, Tree, message } from "antd";
 import { Link } from "react-router-dom";
 import styles from "../../styles/freight/freightAdd.css";
 import Page from "@/components/public/page";
-import { formType, handleSubmitType, dispatchType } from '@/utils/flow'
+
 import FreightAddTable from '@/components/setting/freightAddTable'
 import { connect } from 'dva';
 import { areaList } from "../../actions/setting";
 import { View, ScrollView } from "react-web-dom";
 import { Fetch, publicFunction } from "@/utils";
 import { info } from "../../actions/deliver/freight";
-import {FreightApi} from "../../config/api/freight";
+import {FreightApi} from "@/config/api/freight";
 const {
     parseQuery
 } = publicFunction
@@ -51,7 +51,7 @@ export default class FreightEdit extends Component {
 
     async componentDidMount() {
         const { areaList, dispatch, location } = this.props
-        const { id } = parseQuery(location.search)
+        const { id } = query.getParams()
         const e = await info({ params: { id } })
         if (e.code === 0) {
             const { info } = e.result

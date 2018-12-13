@@ -1,25 +1,21 @@
-
 import React,{ Component } from 'react'
 import { Tabs } from 'antd'
 import { View } from 'react-web-dom'
-import styles from './index.css'
-
 import SendTable from './sendTable'
 import SendRecord from './sendRecord'
 
 const TabPane = Tabs.TabPane
+//
+// type Props = {
+//     getBroadcastRecord:Function,
+//     broadcastRecord:{
+//         list:Array<{}>,
+//         total_number:number
+//     },
+//     broadcastRecordLoading:boolean
+// }
 
-type Props = {
-    getBroadcastRecord:Function,
-    broadcastRecord:{
-        list:Array<{}>,
-        total_number:number
-    },
-    broadcastRecordLoading:boolean
-}
-type State = {}
-
-export default class MessageSend extends Component<Props,State> {
+export default class MessageSend extends Component {
     render() {
         const tabList = [
             {

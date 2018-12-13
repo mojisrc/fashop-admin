@@ -28,7 +28,7 @@ export default class ShipperEdit extends Component {
 
     async componentDidMount() {
         const { location } = this.props
-        const { id } = parseQuery(location.search)
+        const { id } = query.getParams()
         const e = await info({ params: { id } })
         if (e.code === 0) {
             const { info } = e.result

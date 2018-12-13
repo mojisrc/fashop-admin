@@ -1,4 +1,3 @@
-
 import React, { Component } from "react";
 import { Row, Col, Button, Input, Select, DatePicker } from "antd";
 import styles from "./index.css";
@@ -7,20 +6,6 @@ import Query from "@/utils/query";
 import moment from "moment";
 import update from "immutability-helper";
 import { getQueryPath } from "@/utils";
-type Props = {
-    location: { state: { type: string, record: {} }, search: string },
-    history: { push: Function }
-}
-type State = {
-    queryParams: {
-        keywords_type: string,
-        keywords: string | null,
-        create_time: Array<{}>,
-        refund_type: string,
-        refund_state: string,
-        order_type: string,
-    }
-}
 const { Fragment } = React
 const InputGroup = Input.Group;
 const { RangePicker } = DatePicker;

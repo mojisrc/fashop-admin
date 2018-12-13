@@ -1,20 +1,13 @@
-
 import React,{ Component } from 'react'
 import { Tabs } from 'antd'
 import { View } from 'react-web-dom'
-import styles from './index.css'
-
 import Article from './article'
 import Image from './image'
 import Voice from './voice'
 import Video from './video'
-
 const TabPane = Tabs.TabPane
 
-type Props = {}
-type State = {}
-
-export default class Material extends Component<Props,State> {
+export default class Material extends Component {
     render() {
         const tabList = [
             {

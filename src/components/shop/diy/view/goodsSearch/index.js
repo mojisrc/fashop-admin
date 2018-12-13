@@ -1,18 +1,17 @@
-
 import React, { Component } from "react";
 import { View } from "react-web-dom";
 import { Input } from 'antd';
 import styles from "./index.css";
 
 const Search = Input.Search;
-
-type Props = {
-    options: {
-        background_color: string
-    },
-    data: {}
-}
-type State = {}
+//
+// type Props = {
+//     options: {
+//         background_color: string
+//     },
+//     data: {}
+// }
+// type State = {}
 
 export default class Index extends Component {
     render() {

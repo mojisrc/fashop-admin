@@ -1,26 +1,23 @@
-
 import React, { Component } from "react";
 import { Icon, Input, Row, Col, Modal, message } from "antd";
 import styles from "./index.css";
 import { View } from "react-web-dom";
 import ActionLink, { linkInfo } from "../common/actionLink"
-import type { LinkActionType } from "../../controller/common/actionLink"
-
-type Props = {
-    componentName: string,
-    getValues: Function,
-    options: {},
-    data: Array<{
-        title: string,
-        link: {
-            action: LinkActionType,
-            param: {}
-        },
-        background_color: string,
-        font_color: string
-    }>
-}
-type State = {}
+// type Props = {
+//     componentName: string,
+//     getValues: Function,
+//     options: {},
+//     data: Array<{
+//         title: string,
+//         link: {
+//             action: LinkActionType,
+//             param: {}
+//         },
+//         background_color: string,
+//         font_color: string
+//     }>
+// }
+// type State = {}
 
 export default class Index extends Component {
 

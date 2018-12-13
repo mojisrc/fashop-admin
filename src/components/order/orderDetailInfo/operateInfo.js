@@ -1,11 +1,9 @@
-
 import React, { Component } from "react";
 import {
     Button
 } from "antd";
 import styles from "./index.css";
 import { View } from "react-web-dom";
-
 export default class OrderDetailOperateInfo extends Component {
     render() {
         const { history, info } = this.props

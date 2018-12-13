@@ -7,13 +7,8 @@ import Detail from '@/components/goods/add/detail'
 import Editor from '@/components/goods/add/editor'
 import Freight from '@/components/goods/add/detail/freight'
 import PhotoGallery from '@/components/public/photoGallery'
-import { formType, handleSubmitType, dispatchType } from '@/utils/flow'
-import { list } from '../../actions/goods/category'
-import { specList } from '../../actions/goods/spec'
-import { Fetch } from "@/utils";
 import moment from "moment";
-import { GoodsApi } from "../../config/api/goods";
-import { list } from "../../actions/deliver/freight";
+import GoodsApi from "@/services/goods";
 const FormItem = Form.Item;
 @connect(({
               view: {

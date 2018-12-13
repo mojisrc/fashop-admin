@@ -1,39 +1,37 @@
-
 import React, { Component } from "react";
-import { bindActionCreators } from 'redux';
+
 import { connect } from 'dva';
-import * as actions from "../../../../actions/wechat/material";
+import * as actions from "@/actions/wechat/material";
 import { View } from "react-web-dom";
-import { Modal, Button, Input, Row, Col, Card, Checkbox, Pagination, Radio, Spin, Upload, message } from "antd";
+import { Modal, Button,  Row, Col, Pagination, Radio, Spin, Upload, message } from "antd";
 import styles from "./index.css";
 import ModalImg from "../../wechatItem/modalImg";
-import { Fetch } from '../@/utils'
-import { env } from '../../../../config/root'
+
+import { env } from '@/config/root'
 
 const RadioGroup = Radio.Group
-const CheckboxGroup = Checkbox.Group;
-
-type Props = {
-    visible:boolean,
-    close:Function,
-    onOk:Function,
-    newsType:string,
-    imageMaterialList:{
-        item:Array<{
-            name:string,
-            url:string,
-            media_id:string,
-        }>
-    },
-    wechatMaterialListLoading:boolean,
-    wechatMaterialList:Function,
-}
-type State = {
-    newsTypeValue:string,
-    checkedValues:{
-        media_id:string
-    }
-}
+//
+// type Props = {
+//     visible:boolean,
+//     close:Function,
+//     onOk:Function,
+//     newsType:string,
+//     imageMaterialList:{
+//         item:Array<{
+//             name:string,
+//             url:string,
+//             media_id:string,
+//         }>
+//     },
+//     wechatMaterialListLoading:boolean,
+//     wechatMaterialList:Function,
+// }
+// type State = {
+//     newsTypeValue:string,
+//     checkedValues:{
+//         media_id:string
+//     }
+// }
 
 @connect(
     ({view:{material:{ imageMaterialList, imageCurrentPage, imagePageSize, wechatMaterialListLoading }}}) => ({
@@ -42,7 +40,7 @@ type State = {
         imagePageSize,
         wechatMaterialListLoading,
     }),
-    dispatch => bindActionCreators(actions,dispatch),
+
 )
 export default class ImageModal extends Component {
     state = {

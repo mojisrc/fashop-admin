@@ -1,35 +1,31 @@
-
 import React,{ Component } from 'react'
-import { bindActionCreators } from 'redux';
-import { connect } from "react-redux";
-import * as actions from "../../../actions/wechat/user";
+import { connect } from "dva";
 import { View } from 'react-web-dom'
 import { Button, Table, Popover, Popconfirm } from 'antd'
 import styles from './index.css'
-import { data } from './testData'
 import PublicPopoverContent from './publicPopoverContent'
 import AvatarPopover from '../public/avatarPopover'
-
-type Props = {
-    getWechatuserBlackList:Function,
-    setUserUnblock:Function,
-    editUserRemark:Function,
-    userBlackList:Array<string>,
-    userInfoBlackList:Array<{}>,
-}
-type State = {
-    selectedRowKeys:Array<string>,
-    currentId:string
-}
+//
+// type Props = {
+//     getWechatuserBlackList:Function,
+//     setUserUnblock:Function,
+//     editUserRemark:Function,
+//     userBlackList:Array<string>,
+//     userInfoBlackList:Array<{}>,
+// }
+// type State = {
+//     selectedRowKeys:Array<string>,
+//     currentId:string
+// }
 
 @connect(
     ({view:{wechatUser:{ userBlackList, userInfoBlackList }}}) => ({
         userBlackList,
         userInfoBlackList,
     }),
-    dispatch => bindActionCreators(actions,dispatch),
+
 )
-export default class BlackList extends Component<Props,State>{
+export default class BlackList extends Component{
     state = {
         selectedRowKeys:[],
         currentId:'-1'

@@ -1,4 +1,3 @@
-
 import React, { Component } from "react";
 import { Row, Col, Button, Input, Select, DatePicker } from "antd";
 import styles from "./index.css";
@@ -7,16 +6,9 @@ import { getQueryPath } from "@/utils"
 import moment from "moment";
 import Query from "@/utils/query";
 import update from 'immutability-helper'
-
 const InputGroup = Input.Group;
 const Option = Select.Option;
 const { RangePicker } = DatePicker;
-type Props = {}
-type State = {
-    queryParams: {
-        keywords_type: string
-    }
-}
 export default class OrderManagementHeader extends Component {
 
     state = {

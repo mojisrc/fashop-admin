@@ -1,4 +1,3 @@
-
 import React, { Component } from "react";
 import { View } from "react-web-dom";
 import {
@@ -13,24 +12,24 @@ import {
 } from "antd";
 import styles from "./index.css";
 import { connect } from 'dva';
-import { getPhotoGalleryList } from "../../../models/photoGallery";
-import UploadImage from "../@/components/uploadImage";
+import { getPhotoGalleryList } from "@/models/photoGallery";
+import UploadImage from "@/components/uploadImage";
 import Image from "../../image";
 
 const TabPane = Tabs.TabPane;
 const CheckboxGroup = Checkbox.Group;
 
-type Props = {
-    visible: boolean,
-    onCancel: Function,
-    onOk: Function,
-    imageList: {}
-};
-
-type State = {
-    url: string,
-    checkedValues: Array<string>
-};
+// type Props = {
+//     visible: boolean,
+//     onCancel: Function,
+//     onOk: Function,
+//     imageList: {}
+// };
+//
+// type State = {
+//     url: string,
+//     checkedValues: Array<string>
+// };
 
 @connect(({ app: { app: { imageList } } }) => ({
     imageList

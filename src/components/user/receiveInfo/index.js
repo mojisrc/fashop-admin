@@ -1,30 +1,28 @@
-
 import React, { Component } from "react";
-import { connect } from "react-redux";
+import { connect } from "dva";
 import { View } from "react-web-dom";
 import { Card, Pagination } from 'antd';
 import styles from './index.css'
 import InfoRow from '../../public/info/infoRow'
-import Fetch from "@/utils/fetch";
-import { UserApi } from "../../../config/api/user";
-
-type Props = {
-    user_id: number,
-
-}
-type State = {
-    list: Array<{
-        id: number,
-        truename: string,
-        address: string,
-        combine_detail: string,
-        is_default: number,
-        mobile_phone: number
-    }>,
-    page: number,
-    rows: number,
-    total_number: number
-}
+import { UserApi } from "@/config/api/user";
+//
+// type Props = {
+//     user_id: number,
+//
+// }
+// type State = {
+//     list: Array<{
+//         id: number,
+//         truename: string,
+//         address: string,
+//         combine_detail: string,
+//         is_default: number,
+//         mobile_phone: number
+//     }>,
+//     page: number,
+//     rows: number,
+//     total_number: number
+// }
 @connect()
 export default class ReceiveInfo extends Component {
     state = {
@@ -103,7 +101,7 @@ export default class ReceiveInfo extends Component {
                     }}
                 /> : <View className={styles.addressEmpty}>
                     <img
-                        src={require('../../../images/fetchStatus/emptySearch.png')}
+                        src={require('@/images/fetchStatus/emptySearch.png')}
                     />
                     <p>该用户还没有添加收货地址</p>
                 </View>}

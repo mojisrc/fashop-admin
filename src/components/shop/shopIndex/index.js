@@ -1,9 +1,7 @@
-// @flow
 import React,{ Component } from "react";
 import { Tabs } from 'antd';
 import SystemTemplate from "./systemTemplate";
 import MyTemplate from "./myTemplate";
-const TabPane = Tabs.TabPane;
 export default class ShopIndex extends Component {
     render() {
         const tabList = [

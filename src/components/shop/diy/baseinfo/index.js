@@ -1,20 +1,18 @@
-
 import React, { Component } from "react";
 import { Input, Row, Col } from "antd";
-import ColorPicker from "../../../public/ColorPicker";
+import ColorPicker from "@/public/ColorPicker";
 import styles from "../controller/title/index.css";
 import { View } from "react-web-dom";
-
 const { TextArea } = Input;
 
-type Props = {
-    name: string,
-    description: string,
-    backgroundColor: string,
-    getValues: Function
-}
-type State = {
-}
+// type Props = {
+//     name: string,
+//     description: string,
+//     backgroundColor: string,
+//     getValues: Function
+// }
+// type State = {
+// }
 
 export default class Index extends Component {
 

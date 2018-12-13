@@ -1,21 +1,19 @@
-
 import React, { Component } from "react";
 import { View } from "react-web-dom";
 import { Modal, Input } from "antd";
 import styles from "./index.css";
 import Emoji from "../../emoji";
-
 const { TextArea } = Input;
-
-type Props = {
-    visible:boolean,
-    close:Function,
-    onOk:Function,
-    initialValue:string
-}
-type State = {
-    textValue:string
-}
+//
+// type Props = {
+//     visible:boolean,
+//     close:Function,
+//     onOk:Function,
+//     initialValue:string
+// }
+// type State = {
+//     textValue:string
+// }
 
 export default class TextModal extends Component {
     state = {

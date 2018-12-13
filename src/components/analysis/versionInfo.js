@@ -1,14 +1,9 @@
-
 import React,{ Component } from "react";
-import { connect } from 'dva';
 import { View } from "react-web-dom";
 import { Card, Badge, Button } from 'antd';
 import styles from './index.css'
 
-class VersionInfo extends Component<
-   {},
-   {}
-> {
+export default class VersionInfo extends Component {
    render() {
        return (
            <View className={styles.versionInfoWarp}>
@@ -50,11 +45,3 @@ class VersionInfo extends Component<
        )
    }
 }
-
-const mapStateToProps = ({view}) => {
-   return {
-
-   }
-}
-
-export default connect(mapStateToProps)(VersionInfo)

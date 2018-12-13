@@ -1,5 +1,5 @@
 import React,{ Component } from "react";
-import { bindActionCreators } from 'redux';
+
 import { connect } from 'dva';
 import * as actions from "../../actions/shop";
 import { Form, Input,  Button } from 'antd';
@@ -15,7 +15,7 @@ const FormItem = Form.Item;
     ({view:{shop:{ shopInfo }}}) => ({
         shopInfo
     }),
-    dispatch => bindActionCreators(actions,dispatch),
+
 )
 export default class BasicInfo extends Component {
     componentDidMount(){

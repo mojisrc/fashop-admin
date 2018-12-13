@@ -1,32 +1,31 @@
-
 import React, { Component } from "react";
-import { bindActionCreators } from 'redux';
+
 import { connect } from 'dva';
-import * as actions from "../../../../actions/wechat/material";
+import * as actions from "@/actions/wechat/material";
 import { View } from "react-web-dom";
 import { Modal, Button, Radio, Table, Icon } from "antd";
 import styles from "./index.css";
 import moment from 'moment'
-import AddVideoForm from '../../../wechat/material/video/addVideoForm'
-
-type Props = {
-    visible:boolean,
-    close:Function,
-    onOk:Function,
-    newsType:string,
-    rowSelectionType:string,
-    wechatMaterialList:Function,
-    videoMaterialList:{
-        item:Array<{}>
-    },
-    wechatMaterialListLoading:boolean,
-}
-type State = {
-    newsTypeValue:string,
-    selectedRowKeys:Array<number>,
-    selectedValue:{media_id:string},
-    addVideoVisible:boolean,
-}
+import AddVideoForm from '@/wechat/material/video/addVideoForm'
+//
+// type Props = {
+//     visible:boolean,
+//     close:Function,
+//     onOk:Function,
+//     newsType:string,
+//     rowSelectionType:string,
+//     wechatMaterialList:Function,
+//     videoMaterialList:{
+//         item:Array<{}>
+//     },
+//     wechatMaterialListLoading:boolean,
+// }
+// type State = {
+//     newsTypeValue:string,
+//     selectedRowKeys:Array<number>,
+//     selectedValue:{media_id:string},
+//     addVideoVisible:boolean,
+// }
 
 @connect(
     ({view:{material:{ videoMaterialList, videoCurrentPage, videoPageSize, wechatMaterialListLoading }}}) => ({
@@ -35,7 +34,7 @@ type State = {
         videoPageSize,
         wechatMaterialListLoading,
     }),
-    dispatch => bindActionCreators(actions,dispatch),
+
 )
 export default class VideoModal extends Component {
     state = {

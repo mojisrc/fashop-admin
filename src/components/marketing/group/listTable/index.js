@@ -1,30 +1,14 @@
-
 import React, { Component } from "react";
 import { Table, Divider, Input, Select, Button, Form } from "antd";
 import { View } from "react-web-dom";
-import { dispatchType, historyType } from "../@/utils/flow";
-import { dispatchProps } from "../@/utils/defaultProps";
 import moment from "moment/moment";
-import Query from "../@/utils/query"
-import OrderModel from "../../../../models1/order"
+import Query from "@/utils/query"
+import OrderModel from "@/models1/order"
 import update from "immutability-helper";
-import { getQueryPath } from "../@/utils";
+import { getQueryPath } from "@/utils";
 const FormItem = Form.Item;
 const Option = Select.Option;
 const orderModel = new OrderModel()
-type Props = {
-    history: historyType,
-    dispatch: dispatchType,
-}
-type State = {
-    list:Array<any>,
-    totalNumber:number,
-    page:number,
-    rows:number,
-    queryParams: {
-        keywords_type: string
-    }
-}
 
 const order_kind_list = [
     {
@@ -40,7 +24,7 @@ const order_kind_list = [
 ]
 export default class ListTable extends Component   {
     static defaultProps = {
-        dispatch: dispatchProps,
+
     }
     state = {
         orderId: 0,

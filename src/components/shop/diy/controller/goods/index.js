@@ -1,36 +1,35 @@
-
 import React, { Component } from "react";
 import { Row, Col, Icon, Modal, message, Radio } from "antd";
 import styles from "./index.css";
-import SeleceGoods from "../../../../public/selectGoods/index";
+import SeleceGoods from "@/public/selectGoods/index";
 import { View } from "react-web-dom";
-import Image from "../../../../image/index";
+import Image from "@/image/index";
 
 const RadioGroup = Radio.Group;
-
-type Props = {
-    options: {
-        layout_direction: number,
-    },
-    data: Array<{
-        id: number,
-        img: {
-            url: string
-        },
-        title: string,
-        price: number,
-        // market_price: number,
-        // desc: string
-    }>,
-    getValues: Function,
-    componentName?: string
-}
-
-type State = {
-    addGoodsVisible: boolean,
-    delectShow: boolean,
-    currentId: number,
-}
+//
+// type Props = {
+//     options: {
+//         layout_direction: number,
+//     },
+//     data: Array<{
+//         id: number,
+//         img: {
+//             url: string
+//         },
+//         title: string,
+//         price: number,
+//         // market_price: number,
+//         // desc: string
+//     }>,
+//     getValues: Function,
+//     componentName?: string
+// }
+//
+// type State = {
+//     addGoodsVisible: boolean,
+//     delectShow: boolean,
+//     currentId: number,
+// }
 
 export default class Index extends Component  {
     state = {

@@ -1,23 +1,13 @@
-
 import React, { Component } from "react";
 import { Button, Input, InputNumber } from "antd";
 import styles from "./index.css";
 import { View } from "react-web-dom";
-import { handle } from "../../../models/refund";
-import { dispatchProps } from "@/utils/defaultProps";
-import connect from "react-redux/es/connect/connect";
+import { handle } from "@/models/refund";
+
+import { connect } from "dva";
 const TextArea = Input.TextArea
 const { Fragment } = React
-type Props = {
-    dispatch: dispatchProps,
-    id: number,
-    refund_amount: number,
-    handle_message: string,
-    handle_state: number
-}
-type State = {
-    handle_message: string
-}
+
 @connect()
 export default class OrderDetailOperateInfo extends Component {
     static defaultProps = {

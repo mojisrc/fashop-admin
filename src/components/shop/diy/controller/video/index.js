@@ -1,16 +1,15 @@
-
 import React, { Component } from "react";
 import { View } from "react-web-dom";
 import { Row, Col, Input } from "antd";
 import styles from "../separator/index.css";
-
-type Props = {
-    componentName: string,
-    getValues: Function,
-    options: {},
-    data: { url: string }
-}
-type State = {}
+//
+// type Props = {
+//     componentName: string,
+//     getValues: Function,
+//     options: {},
+//     data: { url: string }
+// }
+// type State = {}
 
 export default class Index extends Component {
 

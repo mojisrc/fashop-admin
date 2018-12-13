@@ -1,4 +1,3 @@
-
 import React,{ Component } from 'react'
 import {
     Button,
@@ -11,92 +10,87 @@ import {
 } from 'antd'
 import { View } from 'react-web-dom'
 import styles from './index.css'
-import Emoji from "../../../public/emoji";
-import { Fetch } from '../@/utils'
-import { env } from '../../../../config/root'
-
-import ModalNews from "../../../public/wechatItem/modalNews";
-import ModalVoice from "../../../public/wechatItem/modalVoice";
-
-import NewsModal from "../../../public/wechatModal/newsModal";
-import ImageModal from "../../../public/wechatModal/imageModal";
-import VoiceModal from "../../../public/wechatModal/voiceModal";
-import VideoModal from "../../../public/wechatModal/videoModal";
+import Emoji from "@/public/emoji";
+import { env } from '@/config/root'
+import ModalNews from "@/public/wechatItem/modalNews";
+import NewsModal from "@/public/wechatModal/newsModal";
+import ImageModal from "@/public/wechatModal/imageModal";
+import VoiceModal from "@/public/wechatModal/voiceModal";
+import VideoModal from "@/public/wechatModal/videoModal";
 import AddVideoForm from '../../material/video/addVideoForm'
-
-import Image from "../../../image";
+import Image from "@/image";
 
 const TabPane = Tabs.TabPane
 const { TextArea } = Input
+//
+// type Props = {
+//     showTabKey:Array<number>,
+//     size:string,
+//     initialValue:{
+//         type:string,
+//         content:string,
+//         media_id:string
+//     },
+//     getWechatMaterialList:Function,
+//     getLocalNewsMaterialList:Function,
+//     imageMaterialList:{
+//         item:Array<{
+//             name:string,
+//             url:string,
+//             media_id:string,
+//         }>
+//     },
+//     materialListLoading:boolean,
+//     newsMaterialList:{
+//         item:Array<{
+//             content:{
+//                 news_item:Array<{
+//                     digest:string,
+//                     thumb_url:string,
+//                     title:string,
+//                 }>,
+//                 update_time:string,
+//             },
+//             media_id:string
+//         }>
+//     },
+//     localNewsMaterialList:{
+//         item:Array<{
+//             content:{
+//                 news_item:Array<{
+//                     digest:string,
+//                     thumb_url:string,
+//                     title:string,
+//                 }>,
+//                 update_time:string,
+//             },
+//             media_id:string
+//         }>
+//     },
+//     voiceMaterialList:{
+//         item:Array<{}>,
+//         item_count:number,
+//         total_count:number,
+//     },
+//     videoMaterialList:{
+//         item:Array<{}>,
+//     },
+// }
+// type State = {
+//     textValue:string,
+//     newsVisible:boolean,
+//     imageVisible:boolean,
+//     voiceVisible:boolean,
+//     videoVisible:boolean,
+//     addVideoVisible:boolean,
+//     send_content:Array<{type:string,extra:mixed}>,
+//     currentArticleValue:{},
+//     currentImageValue:{},
+//     currentVoiceValue:{},
+//     currentVideoValue:{},
+// }
 
-type Props = {
-    showTabKey:Array<number>,
-    size:string,
-    initialValue:{
-        type:string,
-        content:string,
-        media_id:string
-    },
-    getWechatMaterialList:Function,
-    getLocalNewsMaterialList:Function,
-    imageMaterialList:{
-        item:Array<{
-            name:string,
-            url:string,
-            media_id:string,
-        }>
-    },
-    materialListLoading:boolean,
-    newsMaterialList:{
-        item:Array<{
-            content:{
-                news_item:Array<{
-                    digest:string,
-                    thumb_url:string,
-                    title:string,
-                }>,
-                update_time:string,
-            },
-            media_id:string
-        }>
-    },
-    localNewsMaterialList:{
-        item:Array<{
-            content:{
-                news_item:Array<{
-                    digest:string,
-                    thumb_url:string,
-                    title:string,
-                }>,
-                update_time:string,
-            },
-            media_id:string
-        }>
-    },
-    voiceMaterialList:{
-        item:Array<{}>,
-        item_count:number,
-        total_count:number,
-    },
-    videoMaterialList:{
-        item:Array<{}>,
-    },
-}
-type State = {
-    textValue:string,
-    newsVisible:boolean,
-    imageVisible:boolean,
-    voiceVisible:boolean,
-    videoVisible:boolean,
-    addVideoVisible:boolean,
-    send_content:Array<{type:string,extra:mixed}>,
-    currentArticleValue:{},
-    currentImageValue:{},
-    currentVoiceValue:{},
-    currentVideoValue:{},
-}
-
-export default class MsgTab extends Component<Props,State> {
+export default class MsgTab extends Component {
     state = {
         textValue:'',
         newsVisible:false,
@@ -416,7 +410,7 @@ export default class MsgTab extends Component<Props,State> {
             <View className={styles.warp}>
                 <View className={`${styles.contentItem} ${styles.voiceContent}`}>
                     <img
-                        src={require('../../../../images/wechat/voice.png')}
+                        src={require('@/images/wechat/voice.png')}
                         style={{
                             width:70,
                             height:70,

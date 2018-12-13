@@ -1,4 +1,3 @@
-
 import React, { Component } from "react";
 import OrderDetailInfo from "../orderDetailInfo";
 import { View } from "react-web-dom";

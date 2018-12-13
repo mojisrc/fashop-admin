@@ -1,33 +1,32 @@
-
 import React, { Component } from "react";
 import { Icon,  Row, Col, Radio } from "antd";
 import styles from "./index.css";
 import { View } from "react-web-dom";
-import UploadImage from "../../../../uploadImage/index";
-import ActionLink, { linkInfo } from "../common/actionLink"
+import UploadImage from "@/uploadImage/index";
+import ActionLink from "../common/actionLink"
 
 const RadioGroup = Radio.Group;
-type LinkActionType = 'portal' | 'goods' | 'page' | 'url'
-
-type Props = {
-    componentName: string,
-    getValues: Function,
-    options: {
-        layout_style: number
-    },
-    data: Array<{
-        img: {
-            url: string
-        },
-        title: string,
-        link: {
-            action: LinkActionType,
-            param: {}
-        }
-    }>
-}
-type State = {
-}
+// type LinkActionType = 'portal' | 'goods' | 'page' | 'url'
+//
+// type Props = {
+//     componentName: string,
+//     getValues: Function,
+//     options: {
+//         layout_style: number
+//     },
+//     data: Array<{
+//         img: {
+//             url: string
+//         },
+//         title: string,
+//         link: {
+//             action: LinkActionType,
+//             param: {}
+//         }
+//     }>
+// }
+// type State = {
+// }
 
 export default class Index extends Component {
     static defaultProps = {

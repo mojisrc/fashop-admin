@@ -19,7 +19,6 @@ const EvaluateListTable = Loadable({
 })
 @connect()
 export default class Evaluate extends Component {
-
     render() {
         const { match, routerData } = this.props;
         const routes = getRoutes(match.path, routerData);

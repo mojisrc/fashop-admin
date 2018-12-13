@@ -1,4 +1,3 @@
-
 import React, { Component } from "react";
 import { connect } from 'dva';
 import {
@@ -10,26 +9,10 @@ import {
 } from 'antd';
 import { View } from "react-web-dom";
 import styles from "./index.css";
-import { formType } from "@/utils/flow";
-
 const FormItem = Form.Item;
 const Option = Select.Option;
 const RadioGroup = Radio.Group;
-type Props = {
-    form: formType,
-    expressList: Array<{
-        id: number,
-        company_name: string,
-        is_commonly_use: number,
-    }>,
-    express_id: number,
-    tracking_no: string,
-    onChange?: Function,
-    onExpressChange: Function,
-    need_express: number
 
-}
-type State = {}
 @connect()
 export default class DeliveryWay extends Component {
     static defaultProps = {

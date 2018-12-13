@@ -1,17 +1,16 @@
-
 import React,{ Component } from "react";
 import { View } from "react-web-dom";
 import styles from "./index.css";
 import Image from '../../image'
 
-type Props = {
-    extra:Array<{
-        title:string,
-        thumb_url:string,
-        digest:string
-    }>
-}
-type State = {}
+// type Props = {
+//     extra:Array<{
+//         title:string,
+//         thumb_url:string,
+//         digest:string
+//     }>
+// }
+// type State = {}
 
 export default class ModalNews extends Component {
     render(){

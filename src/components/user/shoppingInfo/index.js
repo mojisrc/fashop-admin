@@ -1,6 +1,5 @@
-
 import React, { Component } from "react";
-import { connect } from "react-redux";
+import { connect } from "dva";
 import { View } from "react-web-dom";
 import styles from './index.css'
 import Loadable from 'react-loadable';
@@ -12,19 +11,18 @@ const OrderListTable = Loadable({
         return <Spin size="large" className="global-spin" />;
     },
 })
-type Props = {
-    history: { push: Function },
-    user_id: number,
-    refund_times: number,
-    refund_total: number,
-    buy_times: number,
-    cost_average: number,
-    cost_total: number,
-}
-
-type States = {}
+// type Props = {
+//     user_id: number,
+//     refund_times: number,
+//     refund_total: number,
+//     buy_times: number,
+//     cost_average: number,
+//     cost_total: number,
+// }
+//
+// type States = {}
 @connect()
-export default class ShoppingInfo extends Component<Props, States> {
+export default class ShoppingInfo extends Component {
     render() {
         const { user_id, refund_times, refund_total, buy_times, cost_average, cost_total,history } = this.props
         return (

@@ -1,16 +1,12 @@
-
 import React,{ Component } from 'react'
 import { Input, Button, Select, Row, Col, Checkbox } from 'antd';
 import { View } from 'react-web-dom'
 import styles from './index.css'
-
 const Search = Input.Search;
 const Option = Select.Option;
 
-type Props = {}
-type State = {}
 
-export default class MessageManagementHeader extends Component<Props,State> {
+export default class MessageManagementHeader extends Component {
     render() {
         return (
             <Row gutter={24} style={{ padding: "12px 0 24px 0" }}>

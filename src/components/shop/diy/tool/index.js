@@ -1,15 +1,14 @@
-
 import React, { Component } from "react";
 import { Row, Col, Button } from 'antd';
 import styles from "./index.css";
 import { View } from "react-web-dom";
 import { defaultData } from "./defaultData";
-
-type Props = {
-    onToolItemClick: Function
-}
-type State = {
-}
+//
+// type Props = {
+//     onToolItemClick: Function
+// }
+// type State = {
+// }
 
 export default class PageTool extends Component {
     render() {

@@ -1,10 +1,7 @@
-
 import React, { Component } from "react";
 import { Button, Input, Select, TreeSelect, Form } from "antd";
-import { formType, handleSubmitType } from "@/utils/flow";
-import { formdDfaultProps } from "@/utils/defaultProps";
-import { connect } from "react-redux";
-import { dispatchType } from "@/utils/flow";
+
+import { connect } from "dva";
 import Query from "@/utils/query";
 import { getQueryPath } from "@/utils";
 
@@ -74,21 +71,6 @@ const categoryTreeData = (categoryList) => {
 }
 
 
-type Props = {
-    form: formType,
-    dispatch: dispatchType,
-    listData: {
-        page: number,
-        rows: number,
-        total_number: number,
-    },
-    loading: boolean,
-    categoryList: Array<{ name: string, id: number, children: any }>,
-    history: { goBack: Function, push: Function },
-
-}
-
-
 @connect(({
               view: {
                   goods: {
@@ -103,17 +85,7 @@ type Props = {
     categoryList,
 }))
 @Form.create()
-export default class GoodsListHeader extends Component<Props, {
-    queryParams: {
-        sale_state: string,
-        title: string | null,
-        category_ids: Array<number>,
-        order_type: string
-    }
-}> {
-    static defaultProps = {
-        form: formdDfaultProps,
-    }
+export default class GoodsListHeader extends Component {
     state = {
         queryParams: {
             sale_state: 'all',

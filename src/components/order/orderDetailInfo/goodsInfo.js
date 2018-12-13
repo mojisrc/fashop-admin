@@ -1,9 +1,7 @@
-
 import React, { Component } from "react";
 import { Table, Tag } from "antd";
 import styles from "./index.css";
 import { View } from "react-web-dom";
-
 
 export default class OrderDetailGoodsInfo extends Component {
     render() {

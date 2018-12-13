@@ -1,36 +1,35 @@
-
 import React from 'react'
 import { View } from 'react-web-dom'
-import { Icon, Table, Row, Col, Alert, Popover, Input, Popconfirm, Select, Upload, message, Modal } from 'antd'
+import { Icon, Table,  Alert, Popover, Input, Popconfirm, Select, Upload, message, Modal } from 'antd'
 import styles from './index.css'
 import { imageUpload } from "@/utils";
 
 const Option = Select.Option;
+//
+// type Props = {
+//     wechatConfigInfo:{
+//         account:string,
+//         description:string,
+//         level:number,
+//         original:string,
+//         app_id:string,
+//         app_key:string,
+//         app_secret:string,
+//         headimg:string,
+//         name:string,
+//         qrcode:string,
+//     },
+//     editWechatConfig:Function,
+// }
+// type State = {
+//     activeId:string,
+//     activeValue:string,
+//     app_key_new:string,
+//     app_secret_new:string,
+//     appSecretVisible:boolean,
+// }
 
-type Props = {
-    wechatConfigInfo:{
-        account:string,
-        description:string,
-        level:number,
-        original:string,
-        app_id:string,
-        app_key:string,
-        app_secret:string,
-        headimg:string,
-        name:string,
-        qrcode:string,
-    },
-    editWechatConfig:Function,
-}
-type State = {
-    activeId:string,
-    activeValue:string,
-    app_key_new:string,
-    app_secret_new:string,
-    appSecretVisible:boolean,
-}
-
-export default class BasicsSetting extends React.Component<Props,State> {
+export default class BasicsSetting extends React.Component {
     state = {
         activeId:'-1',
         activeValue:'',

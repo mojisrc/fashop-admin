@@ -1,15 +1,12 @@
-
 import React,{ Component } from 'react'
 import { View } from 'react-web-dom'
 import { Card, Input } from 'antd'
 import styles from './index.css'
+// type State = {
+//     approve:boolean
+// }
 
-type Props = {}
-type State = {
-    approve:boolean
-}
-
-export default class JumpWebpage extends Component<Props,State>{
+export default class JumpWebpage extends Component{
     state = {
         approve:false
     }

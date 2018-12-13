@@ -1,34 +1,30 @@
-
 import React, { Component } from "react";
 import { Table, } from "antd";
 import styles from "./index.css";
 import { View } from "react-web-dom";
-import connect from "react-redux/es/connect/connect";
-
-import { dispatchProps } from "@/utils/defaultProps";
+import { connect } from "dva";
 import Query from "@/utils/query";
-import { getUserList } from "../../../actions/user";
+import { getUserList } from "@/actions/user";
 import moment from "moment/moment";
 import Image from "../../image";
-
-
-type Props = {
-    history: historyType,
-    dispatch: dispatchType,
-    userListLoading: boolean,
-    getUserList: Function,
-    userList: {
-        page: number,
-        rows: number,
-        total_number: number,
-        list: Array<{}>
-    }
-}
-type State = {
-    selectedRowKeys: Array<string>,
-    customerVisible: boolean,
-    currentUser: {},
-}
+//
+// type Props = {
+//     history: historyType,
+//     dispatch: dispatchType,
+//     userListLoading: boolean,
+//     getUserList: Function,
+//     userList: {
+//         page: number,
+//         rows: number,
+//         total_number: number,
+//         list: Array<{}>
+//     }
+// }
+// type State = {
+//     selectedRowKeys: Array<string>,
+//     customerVisible: boolean,
+//     currentUser: {},
+// }
 @connect(({
               view: {
                   user: {
@@ -47,7 +43,7 @@ export default class UserListTable extends Component {
         currentUser: {}
     }
     static defaultProps = {
-        dispatch: dispatchProps,
+
         userListLoading: false,
         userList: [],
     }

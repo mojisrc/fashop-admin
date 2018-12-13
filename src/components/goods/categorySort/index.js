@@ -6,7 +6,7 @@ import {
     message,
 } from "antd";
 import { View } from "react-web-dom";
-import { sortCategory } from "../../../actions/goods/category";
+import { sortCategory } from "@/actions/goods/category";
 
 const TreeNode = Tree.TreeNode;
 

@@ -1,29 +1,28 @@
-
 import React, { Component } from "react";
 import styles from "./index.css";
 import { View } from "react-web-dom";
-import Image from "../../../../image/index";
-
-type goodsItem = {
-    id: number,
-    img: {
-        url: string
-    },
-    title: string,
-    price: number,
-    market_price: number,
-    desc: string
-}
-type Props = {
-    options: {
-        goods_sort: number,
-        goods_display_num: number,
-        goods_display_field: Array<string>,
-        layout_style: number,
-    },
-    data: Array<goodsItem>
-}
-type State = {}
+import Image from "@/image/index";
+//
+// type goodsItem = {
+//     id: number,
+//     img: {
+//         url: string
+//     },
+//     title: string,
+//     price: number,
+//     market_price: number,
+//     desc: string
+// }
+// type Props = {
+//     options: {
+//         goods_sort: number,
+//         goods_display_num: number,
+//         goods_display_field: Array<string>,
+//         layout_style: number,
+//     },
+//     data: Array<goodsItem>
+// }
+// type State = {}
 
 export default class Index extends Component {
     render() {

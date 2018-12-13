@@ -1,25 +1,24 @@
-
 import React, { Component } from "react";
 import { View } from "react-web-dom";
 import { Slider, Row, Col } from "antd";
-
-type Props = {
-    componentName?:string,
-    getValues: Function,
-    options: {
-        height: number
-    },
-    data: {}
-}
-type State = {}
+// type Props = {
+//     componentName?:string,
+//     getValues: Function,
+//     options: {
+//         height: number
+//     },
+//     data: {}
+// }
+// type State = {}
 
 export default class Index extends Component {
     static defaultProps = {
-        componentName: 'auxiliaryBlank'
-    }
+        componentName: "auxiliaryBlank"
+    };
+
     render() {
-        const { options,data, getValues } = this.props
-        const { height } = options
+        const { options, data, getValues } = this.props;
+        const { height } = options;
         return (
             <View className={`auxiliaryBlankCtrlWarp`}>
                 <Row gutter={16}>
@@ -33,13 +32,13 @@ export default class Index extends Component {
                                         height
                                     },
                                     data
-                                })
+                                });
                             }}
                         />
                     </Col>
                     <Col span={4}>{height}</Col>
                 </Row>
             </View>
-        )
+        );
     }
 }

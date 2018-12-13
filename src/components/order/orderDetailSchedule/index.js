@@ -1,4 +1,3 @@
-
 import React, { Component } from "react";
 import {
     Card,
@@ -7,13 +6,7 @@ import {
 } from "antd";
 import styles from "./index.css";
 import { View } from "react-web-dom";
-
 const Step = Steps.Step;
-type Props = {
-}
-type State = {
-    stepCurrent:number
-}
 export default class OrderDetailSchedule extends Component {
     state = {
         stepCurrent: 1

@@ -4,7 +4,7 @@ import {
     Col,
 } from "antd";
 import styles from "./index.css";
-import PhotoGallery from "../@/components/photoGallery"
+import PhotoGallery from "@/components/photoGallery"
 import Image from "../../image";
 import { View } from "react-web-dom";
 

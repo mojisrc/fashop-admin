@@ -1,5 +1,5 @@
 import React,{ Component } from 'react'
-import { bindActionCreators } from 'redux';
+
 import { connect } from 'dva';
 import * as actions from "../../actions/wechat/material";
 import { View } from "react-web-dom";
@@ -21,7 +21,7 @@ const Option = Select.Option;
     ({view:{material:{ localnewsMaterialInfo }}}) => ({
         localnewsMaterialInfo
     }),
-    dispatch => bindActionCreators(actions,dispatch),
+
 )
 export default class EditServerMaterial extends Component {
     state = {

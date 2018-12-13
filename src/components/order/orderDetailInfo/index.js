@@ -1,4 +1,3 @@
-
 import React, { Component } from "react";
 
 import BasicInfo from "./basicInfo";
@@ -8,7 +7,6 @@ import OtherInfo from "./otherInfo";
 import GoodsInfo from "./goodsInfo";
 import OperateInfo from "./operateInfo";
 import Page from "../../public/page";
-
 export default class OrderDetailInfo extends Component {
     render() {
         const { orderInfo } = this.props

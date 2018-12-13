@@ -1,26 +1,8 @@
-
 import React, { Component } from "react";
-import {
-    Row,
-    Col,
-    Button,
-    Input,
-    Select,
-    TreeSelect,
-    Form,
-} from "antd";
-import styles from "./index.css";
+import {Button, Input,Select, TreeSelect,Form, } from "antd";
 import { View } from "react-web-dom";
-import { formType,handleSubmitType } from "@/utils/flow";
-import { formdDfaultProps } from "@/utils/defaultProps";
-import { connect } from "react-redux";
-import {
-    getGoodsList,
-} from "../../../actions/goods";
-import { dispatchProps } from "@/utils/defaultProps";
-import { dispatchType } from "@/utils/flow";
-
-
+import { connect } from "dva";
+import { getGoodsList, } from "@/actions/goods";
 
 const Search = Input.Search;
 const Option = Select.Option;

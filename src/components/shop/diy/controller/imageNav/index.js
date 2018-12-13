@@ -1,33 +1,31 @@
-
 import React, { Component } from "react";
 import { Icon, Input, Modal, message, Radio, Row, Col } from "antd";
 import styles from "./index.css";
 import { View } from "react-web-dom";
-import UploadImage from "../../../../uploadImage/index";
+import UploadImage from "@/uploadImage/index";
 import ActionLink, { linkInfo } from "../common/actionLink"
-
 const RadioGroup = Radio.Group;
-type LinkActionType = 'portal' | 'goods' | 'page' | 'url'
-
-type Props = {
-    componentName?: string,
-    getValues: Function,
-    options: {
-        rows: number,
-        each_row_display: number,
-    },
-    data: Array<{
-        img: {
-            url: string
-        },
-        title: string,
-        link: {
-            action: LinkActionType,
-            param: {}
-        }
-    }>
-}
-type State = {}
+// type LinkActionType = 'portal' | 'goods' | 'page' | 'url'
+//
+// type Props = {
+//     componentName?: string,
+//     getValues: Function,
+//     options: {
+//         rows: number,
+//         each_row_display: number,
+//     },
+//     data: Array<{
+//         img: {
+//             url: string
+//         },
+//         title: string,
+//         link: {
+//             action: LinkActionType,
+//             param: {}
+//         }
+//     }>
+// }
+// type State = {}
 
 export default class Index extends Component {
 
@@ -256,7 +254,7 @@ export default class Index extends Component {
                             ...data,
                             {
                                 img: {
-                                    url: require('../../../../../images/page/view/image-nav-default.png')
+                                    url: require('@/../images/page/view/image-nav-default.png')
                                 },
                                 title: '文字',
                                 link: {

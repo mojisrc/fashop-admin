@@ -1,5 +1,5 @@
 import React,{ Component } from 'react'
-import { bindActionCreators } from 'redux';
+
 import { connect } from 'dva';
 import * as actions from "../../actions/wechat";
 import { Form, Input, Button, Select } from 'antd'
@@ -16,7 +16,7 @@ const Option = Select.Option;
     ({view:{wechat:{ wechatConfigInfo }}}) => ({
         wechatConfigInfo
     }),
-    dispatch => bindActionCreators(actions,dispatch),
+
 )
 @Form.create()
 export default class BindOfficialAccounts extends Component {

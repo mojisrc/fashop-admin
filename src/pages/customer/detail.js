@@ -8,9 +8,8 @@ import ShoppingInfo from "@/components/user/shoppingInfo";
 import ReceiveInfo from "@/components/user/receiveInfo";
 import Image from "@/components/image";
 import moment from "moment/moment";
-import { info, userStatistics } from "../../actions/user";
 import { publicFunction } from "@/utils";
-const { parseQuery } = publicFunction
+import { query } from "@/utils/fa"
 
 const TabPane = Tabs.TabPane;
 @connect()
@@ -37,7 +36,7 @@ export default class Detail extends Component {
 
     async componentWillMount() {
         const { location } = this.props
-        const { id } = parseQuery(location.search)
+        const { id } = query.getParams()
         const response = await info({ params: { id } })
         if (response.code === 0) {
             const { info } = response.result
@@ -57,7 +56,7 @@ export default class Detail extends Component {
     render() {
         const { location, history } = this.props
         const { user, statistics, tabsActiveKey } = this.state
-        const { id } = parseQuery(location.search)
+        const { id } = query.getParams()
         const { avatar, nickname, sex, create_time, phone, birthday, customer_source } = user
         const { refund_times, refund_total, buy_times, cost_average, cost_total } = statistics
         const tabsList = [

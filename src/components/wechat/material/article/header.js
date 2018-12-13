@@ -1,20 +1,17 @@
-
 import React,{ Component } from 'react'
 import { Button, Radio, Popover } from 'antd';
 import { View } from 'react-web-dom'
 import styles from '../index.css'
-import { Fetch } from '../@/utils'
+//
+// type Props = {
+//     history:{
+//         push:Function
+//     },
+//     articleType:string,
+//     changeType:Function
+// }
 
-type Props = {
-    history:{
-        push:Function
-    },
-    articleType:string,
-    changeType:Function
-}
-type State = {}
-
-export default class ArticleHeader extends Component<Props,State> {
+export default class ArticleHeader extends Component {
     render() {
         const { articleType, changeType } = this.props
         return (

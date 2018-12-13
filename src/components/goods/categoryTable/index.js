@@ -1,5 +1,3 @@
-
-
 import React, { Component } from "react";
 import {
     Table,
@@ -8,25 +6,14 @@ import {
 } from "antd";
 import styles from "./index.css";
 import { View } from "react-web-dom";
-import { connect } from "react-redux";
-
-import { dispatchProps } from "@/utils/defaultProps";
+import { connect } from "dva";
 import {
     getGoodsCategoryList,
     delCategory,
-} from "../../../actions/goods/category";
+} from "@/actions/goods/category";
 import CategorySort from "../../goods/categorySort";
-import Image from "../../image";
+import Image from "@/components/image";
 
-type Props = {
-    loading: boolean,
-    dispatch: dispatchType,
-    categoryTree: Array<{}>,
-    history: historyType,
-}
-type State = {
-    expandedRowKeys: Array<number>,
-}
 
 const getExpandedRowKeys = (e) => {
     const _array = []
@@ -56,7 +43,7 @@ const getExpandedRowKeys = (e) => {
 export default class GoodsCategoryTable extends Component {
     static defaultProps = {
         loading: false,
-        dispatch: dispatchProps,
+
     }
     state = {
         expandedRowKeys: []

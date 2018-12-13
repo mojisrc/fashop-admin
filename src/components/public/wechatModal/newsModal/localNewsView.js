@@ -1,35 +1,34 @@
-
 import React, { Component } from "react";
-import { bindActionCreators } from 'redux';
+
 import { connect } from 'dva';
-import * as actions from "../../../../actions/wechat/material";
+import * as actions from "@/actions/wechat/material";
 import { View } from "react-web-dom";
 import {  Row, Col,  Pagination, Radio, Spin } from "antd";
 import styles from "./index.css";
-import Image from "../../../image";
+import Image from "@/image";
 
 const RadioGroup = Radio.Group
-
-type Props = {
-    changeState:Function,
-    getLocalNewsMaterialList:Function,
-    localNewsCurrentPage:number,
-    localNewsPageSize:number,
-    localNewsMaterialListLoading:boolean,
-    localNewsMaterialList:{
-        list:Array<{
-            media:Array<{
-                cover_pic:string,
-                title:string,
-            }>,
-            id:number
-        }>,
-        total_number:number
-    },
-}
-type State = {
-    checkedValues:string,
-}
+//
+// type Props = {
+//     changeState:Function,
+//     getLocalNewsMaterialList:Function,
+//     localNewsCurrentPage:number,
+//     localNewsPageSize:number,
+//     localNewsMaterialListLoading:boolean,
+//     localNewsMaterialList:{
+//         list:Array<{
+//             media:Array<{
+//                 cover_pic:string,
+//                 title:string,
+//             }>,
+//             id:number
+//         }>,
+//         total_number:number
+//     },
+// }
+// type State = {
+//     checkedValues:string,
+// }
 
 @connect(
     ({view:{material:{
@@ -43,7 +42,7 @@ type State = {
         localNewsPageSize,
         localNewsMaterialListLoading,
     }),
-    dispatch => bindActionCreators(actions,dispatch),
+
 )
 export default class LocalNewsView extends Component {
     state = {

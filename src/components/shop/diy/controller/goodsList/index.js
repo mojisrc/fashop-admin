@@ -1,4 +1,3 @@
-
 import React, { Component } from "react";
 import { View } from "react-web-dom";
 import { Row, Col, Select, Radio, Checkbox } from "antd";
@@ -7,29 +6,28 @@ import styles from "./index.css";
 const Option = Select.Option;
 const RadioGroup = Radio.Group;
 const CheckboxGroup = Checkbox.Group;
-
-type Props = {
-    componentName?: string,
-    getValues: Function,
-    refreshGoods: Function,
-    options: {
-        goods_sort: number,
-        goods_display_num: number,
-        goods_display_field: Array<string>,
-        layout_style: number,
-    },
-    data: Array<{
-        id: number,
-        img: {
-            url: string
-        },
-        title: string,
-        price: number,
-        market_price: number,
-        desc: string
-    }>
-}
-type State = {}
+//
+// type Props = {
+//     componentName?: string,
+//     getValues: Function,
+//     refreshGoods: Function,
+//     options: {
+//         goods_sort: number,
+//         goods_display_num: number,
+//         goods_display_field: Array<string>,
+//         layout_style: number,
+//     },
+//     data: Array<{
+//         id: number,
+//         img: {
+//             url: string
+//         },
+//         title: string,
+//         price: number,
+//         market_price: number,
+//         desc: string
+//     }>
+// }
 
 export default class Index extends Component {
 

@@ -1,17 +1,18 @@
 import React, { Component } from "react";
 import { Table } from "antd";
-import * as ReactDOM from 'react-dom';
+import * as ReactDOM from "react-dom";
 import styles from "./index.css";
 import { View } from "react-web-dom";
-import { connect } from 'dva';
+import { connect } from "dva";
 
-import { dispatchProps } from "@/utils/defaultProps";
+
 import moment from "moment/moment";
-import Image from '../../image'
-import { list } from "../../../models/order";
-import Query from "@/utils/query"
-import EditAddress from "../editAddress"
-import EditPrice from "../editPrice"
+import Image from "../../image";
+import { list } from "@/models/order";
+import Query from "@/utils/query";
+import EditAddress from "../editAddress";
+import EditPrice from "../editPrice";
+
 @connect(({
               view: {
                   order: {
@@ -21,58 +22,57 @@ import EditPrice from "../editPrice"
               }
           }) => ({
     orderList,
-    orderListLoading,
+    orderListLoading
 }))
 
 
-export default class OrderManagementTable extends Component   {
+export default class OrderManagementTable extends Component {
     static defaultProps = {
-        dispatch: dispatchProps,
         orderListLoading: false,
-        orderList: {},
-    }
+        orderList: {}
+    };
     state = {
         orderId: 0,
         visible: false,
         expandedRowKeys: []
-    }
+    };
 
     componentDidMount() {
-        const { dispatch } = this.props
+        const { dispatch } = this.props;
         const params = Query.invokerForListParams([
-            { key: 'state', rule: ['eq', 'all'] },
-            { key: 'keywords_type', rule: ['rely', 'keywords'] },
-        ])
-        if (params['create_time'] !== undefined) {
-            params['create_time'] = [moment(params['create_time'][0]).unix(), moment(params['create_time'][1]).unix()]
+            { key: "state", rule: ["eq", "all"] },
+            { key: "keywords_type", rule: ["rely", "keywords"] }
+        ]);
+        if (params["create_time"] !== undefined) {
+            params["create_time"] = [moment(params["create_time"][0]).unix(), moment(params["create_time"][1]).unix()];
         }
-        dispatch(list({ params }))
+        dispatch(list({ params }));
     }
 
     componentWillReceiveProps(nextProps: Props) {
         if (nextProps.orderList.list !== this.props.orderList.list) {
             this.setState({
                 expandedRowKeys: nextProps.orderList.list.map((item: any) => item.id)
-            })
+            });
         }
     }
 
     onSelectChange = (selectedRowKeys: Array<string>) => {
-    }
+    };
 
     render() {
-        const { orderList, orderListLoading } = this.props
-        const { orderId, expandedRowKeys } = this.state
-        let { list } = orderList
+        const { orderList, orderListLoading } = this.props;
+        const { orderId, expandedRowKeys } = this.state;
+        let { list } = orderList;
         if (list) {
             list.map((item) => {
                 item.extend_order_goods.map((goods) => {
-                    goods["reciver_info"] = item.extend_order_extend.reciver_info
-                    goods["rows"] = item.extend_order_goods.length
-                    return goods
-                })
-                return item
-            })
+                    goods["reciver_info"] = item.extend_order_extend.reciver_info;
+                    goods["rows"] = item.extend_order_goods.length;
+                    return goods;
+                });
+                return item;
+            });
 
         }
 
@@ -80,13 +80,13 @@ export default class OrderManagementTable extends Component   {
             {
                 title: "订单号",
                 dataIndex: "sn",
-                key: "sn",
+                key: "sn"
             }, {
                 title: "下单时间",
                 dataIndex: "create_time",
                 key: "create_time",
                 render: (text) => {
-                    return moment(text, 'X').format('YYYY-MM-DD HH:mm:ss')
+                    return moment(text, "X").format("YYYY-MM-DD HH:mm:ss");
                 }
             }, {
                 title: "订单状态",
@@ -99,27 +99,27 @@ export default class OrderManagementTable extends Component   {
                 dataIndex: "freight_fee",
                 key: "freight_fee",
                 render: (value) => {
-                    return `¥${value}`
+                    return `¥${value}`;
                 }
             }, {
                 title: "商品总额（元）",
                 dataIndex: "amount",
                 key: "amount",
                 render: (value) => {
-                    return `¥${value}`
+                    return `¥${value}`;
                 }
             }, {
-                title: '操作',
-                key: 'operation',
+                title: "操作",
+                key: "operation",
                 render: (record) => <View className={styles.operation}>
                     <a
                         onClick={() => {
-                            const container = document.createElement('div')
+                            const container = document.createElement("div");
                             ReactDOM.render(<EditAddress
                                 orderId={record.id}
                                 visible={true}
                                 onCancel={() => {
-                                    ReactDOM.unmountComponentAtNode(container)
+                                    ReactDOM.unmountComponentAtNode(container);
                                 }}
                             />, container);
                         }}
@@ -128,12 +128,12 @@ export default class OrderManagementTable extends Component   {
                     </a>
                     <a
                         onClick={() => {
-                            const container = document.createElement('div')
+                            const container = document.createElement("div");
                             ReactDOM.render(<EditPrice
                                 orderId={record.id}
                                 visible={true}
                                 onCancel={() => {
-                                    ReactDOM.unmountComponentAtNode(container)
+                                    ReactDOM.unmountComponentAtNode(container);
                                 }}
                             />, container);
                         }}
@@ -142,22 +142,22 @@ export default class OrderManagementTable extends Component   {
                     </a>
                     <a
                         onClick={() => {
-                            this.props.history.push(`/order/list/detail?id=${record.id}`)
+                            this.props.history.push(`/order/list/detail?id=${record.id}`);
                         }}
                     >
                         详情
                     </a>
                     {record.state === 20 ? <a
                         onClick={() => {
-                            this.props.history.push(`/order/list/send?id=${record.id}`)
+                            this.props.history.push(`/order/list/send?id=${record.id}`);
                         }}
                     >
                         发货
-                    </a> : ''}
+                    </a> : ""}
 
                 </View>
             }
-        ]
+        ];
         const expandedRowColumns = [
             {
                 title: "商品图",
@@ -175,16 +175,16 @@ export default class OrderManagementTable extends Component   {
                 title: "商品名称",
                 dataIndex: "goods_title",
                 key: "goods_title",
-                className: `${styles.goodsTitle}`,
+                className: `${styles.goodsTitle}`
             }, {
                 title: "规格",
                 dataIndex: "goods_spec",
                 key: "goods_spec",
                 className: `${styles.goodsSpec}`,
                 render: (goods_spec) => {
-                    return goods_spec[0].id > 0 ? goods_spec.map(function (item) {
-                        return item.value_name + ' '
-                    }) : '-'
+                    return goods_spec[0].id > 0 ? goods_spec.map(function(item) {
+                        return item.value_name + " ";
+                    }) : "-";
                 }
             }, {
                 title: "数量",
@@ -192,7 +192,7 @@ export default class OrderManagementTable extends Component   {
                 key: "goods_num",
                 className: `${styles.goodsNum}`,
                 render: (value) => {
-                    return `${value} 件`
+                    return `${value} 件`;
                 }
             }, {
                 title: "单价",
@@ -200,7 +200,7 @@ export default class OrderManagementTable extends Component   {
                 key: "goods_price",
                 className: `${styles.goodsPrice}`,
                 render: (value) => {
-                    return `¥${value}`
+                    return `¥${value}`;
                 }
             }, {
                 title: "收货人",
@@ -208,28 +208,28 @@ export default class OrderManagementTable extends Component   {
                 key: "reciver",
                 className: `${styles.reciver} ${styles.borderLeft}`,
                 render: (value, row, index) => {
-                    return { children: `${value}`, props: { rowSpan: index === 0 ? row.rows : 0 } }
-                },
+                    return { children: `${value}`, props: { rowSpan: index === 0 ? row.rows : 0 } };
+                }
             }
             , {
-                title: '联系方式',
+                title: "联系方式",
                 dataIndex: "reciver_info.phone",
-                key: 'reciver_phone',
+                key: "reciver_phone",
                 className: `${styles.reciverPhone} ${styles.borderLeft}`,
                 render: (value, row, index) => {
-                    return { children: value, props: { rowSpan: index === 0 ? row.rows : 0 } }
+                    return { children: value, props: { rowSpan: index === 0 ? row.rows : 0 } };
                 }
             },
             {
-                title: '收货地址',
+                title: "收货地址",
                 dataIndex: "reciver_info.address",
-                key: 'reciver_address',
+                key: "reciver_address",
                 className: `${styles.reciverAddress} ${styles.borderLeft}`,
                 render: (value, row, index) => {
-                    return { children: value, props: { rowSpan: index === 0 ? row.rows : 0 } }
+                    return { children: value, props: { rowSpan: index === 0 ? row.rows : 0 } };
                 }
             }
-        ]
+        ];
 
         return (
             <View>
@@ -264,28 +264,28 @@ export default class OrderManagementTable extends Component   {
                         current: orderList.page
                     }}
                     onChange={({ current, pageSize }) => {
-                        this.props.history.push(Query.page(current, pageSize))
+                        this.props.history.push(Query.page(current, pageSize));
                     }}
                     rowKey={record => record.id}
-                /> : ''}
+                /> : ""}
             </View>
-        )
+        );
     }
 
     returnOrderState(state: number) {
         switch (state) {
             case 0:
-                return '已取消'
+                return "已取消";
             case 10:
-                return <span style={{ color: '#ccc' }}>未支付</span>
+                return <span style={{ color: "#ccc" }}>未支付</span>;
             case 20:
-                return <span style={{ color: '#EC9729' }}>待发货</span>
+                return <span style={{ color: "#EC9729" }}>待发货</span>;
             case 30:
-                return <span style={{ color: '#6AEB52' }}>已发货</span>
+                return <span style={{ color: "#6AEB52" }}>已发货</span>;
             case 40:
-                return '已完成'
+                return "已完成";
             default:
-                return ''
+                return "";
         }
     }
 }

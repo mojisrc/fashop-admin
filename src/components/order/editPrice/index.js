@@ -6,7 +6,6 @@ import update from "immutability-helper";
 
 export default class EvaluateListHeader extends Component {
     static defaultProps = {
-        dispatch: dispatchProps,
         onCancel: function () {
         },
         onOk: function () {

@@ -1,18 +1,17 @@
-
 import React, { Component } from "react";
 import { View } from "react-web-dom";
 import { Row, Col } from "antd";
-import ColorPicker from "../../../../public/ColorPicker";
-
-type Props = {
-    componentName?: 'string',
-    options: {
-        background_color: string
-    },
-    data: {},
-    getValues: Function
-}
-type State = {}
+import ColorPicker from "@/public/ColorPicker";
+//
+// type Props = {
+//     componentName?: 'string',
+//     options: {
+//         background_color: string
+//     },
+//     data: {},
+//     getValues: Function
+// }
+// type State = {}
 export default class Index extends Component {
     static defalutProps = {
         componentName: 'goodsSearch'

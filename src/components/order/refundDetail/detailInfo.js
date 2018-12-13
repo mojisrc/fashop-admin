@@ -1,17 +1,9 @@
-
 import React, { Component } from "react";
 
 import styles from "./index.css";
 import { View } from "react-web-dom";
 import InfoColumn from "../../public/info/infoColumn";
 
-type Props = {
-    refund_amount: number,
-    user_reason: string,
-    user_explain: string,
-    user_images: Array<string>,
-}
-type State = {}
 export default class OrderDetailOtherInfo extends Component {
     render() {
         const {

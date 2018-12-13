@@ -6,8 +6,7 @@ import {Button,
     Form,
 } from "antd";
 import { View } from "react-web-dom";
-import { formdDfaultProps } from "@/utils/defaultProps";
-import { connect } from "react-redux";
+import { connect } from "dva";
 const Search = Input.Search;
 const Option = Select.Option;
 const FormItem = Form.Item;
@@ -62,8 +61,6 @@ const order_typeArray = [
     }
 ]
 
-
-
 const categoryTreeData = (list)=>{
     return list.map((e)=>{
         return {
@@ -74,8 +71,6 @@ const categoryTreeData = (list)=>{
         }
     })
 }
-
-
 
 
 @connect(({view:{
@@ -93,9 +88,6 @@ const categoryTreeData = (list)=>{
 }))
 @Form.create()
 export default class GoodsListHeader extends Component<Props>{
-    static defaultProps = {
-        form: formdDfaultProps,
-    }
     handleSubmit = (e: handleSubmitType) => {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {

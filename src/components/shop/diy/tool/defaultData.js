@@ -1,7 +1,7 @@
 export const defaultData = [
     {
         type: 'goods',
-        icon: require('../../../../images/shop/goods.png'),
+        icon: require('@/images/shop/goods.png'),
         title: '商品',
         data: [],
         options: {
@@ -9,7 +9,7 @@ export const defaultData = [
         }
     }, {
         type: 'goods_list',
-        icon: require('../../../../images/shop/goods_list.png'),
+        icon: require('@/images/shop/goods_list.png'),
         title: '商品列表',
         options: {
             goods_sort: 1,
@@ -20,14 +20,14 @@ export const defaultData = [
         data: []
     }, {
         type: 'goods_search',
-        icon: require('../../../../images/shop/goods_search.png'),
+        icon: require('@/images/shop/goods_search.png'),
         title: '商品搜索',
         options: {
             background_color: '#fff'
         }
     }, {
         type: 'separator',
-        icon: require('../../../../images/shop/separator.png'),
+        icon: require('@/images/shop/separator.png'),
         title: '分割线',
         options: {
             color: '#e8e8e8',
@@ -35,14 +35,14 @@ export const defaultData = [
         }
     }, {
         type: 'auxiliary_blank',
-        icon: require('../../../../images/shop/auxiliary_blank.png'),
+        icon: require('@/images/shop/auxiliary_blank.png'),
         title: '辅助空白',
         options: {
             height: 5
         }
     }, {
         type: 'image_ads',
-        icon: require('../../../../images/shop/image_ads.png'),
+        icon: require('@/images/shop/image_ads.png'),
         title: '图片广告',
         options: {
             layout_style: 1,//折叠轮播1、上下平铺2
@@ -50,7 +50,7 @@ export const defaultData = [
         data: [
             {
                 img: {
-                    url: require('../../../../images/page/view/image-ads-default.png')
+                    url: require('@/images/page/view/image-ads-default.png')
                 },
                 title: '',
                 link: {
@@ -61,7 +61,7 @@ export const defaultData = [
         ]
     }, {
         type: 'image_nav',
-        icon: require('../../../../images/shop/image_nav.png'),
+        icon: require('@/images/shop/image_nav.png'),
         title: '图片导航',
         options: {
             rows: 1,
@@ -70,7 +70,7 @@ export const defaultData = [
         data: [
             {
                 img: {
-                    url: require('../../../../images/page/view/image-nav-default.png')
+                    url: require('@/images/page/view/image-nav-default.png')
                 },
                 title: '导航一',
                 link: {
@@ -79,7 +79,7 @@ export const defaultData = [
                 }
             }, {
                 img: {
-                    url: require('../../../../images/page/view/image-nav-default.png')
+                    url: require('@/images/page/view/image-nav-default.png')
                 },
                 title: '导航二',
                 link: {
@@ -88,7 +88,7 @@ export const defaultData = [
                 }
             }, {
                 img: {
-                    url: require('../../../../images/page/view/image-nav-default.png')
+                    url: require('@/images/page/view/image-nav-default.png')
                 },
                 title: '导航三',
                 link: {
@@ -97,7 +97,7 @@ export const defaultData = [
                 }
             }, {
                 img: {
-                    url: require('../../../../images/page/view/image-nav-default.png')
+                    url: require('@/images/page/view/image-nav-default.png')
                 },
                 title: '导航四',
                 link: {
@@ -108,7 +108,7 @@ export const defaultData = [
         ]
     }, {
         type: 'shop_window',
-        icon: require('../../../../images/shop/shop_window.png'),
+        icon: require('@/images/shop/shop_window.png'),
         title: '橱窗',
         options: {
             layout_style: 1,
@@ -116,7 +116,7 @@ export const defaultData = [
         data: [
             {
                 img: {
-                    url: require('../../../../images/page/view/shop-window-1-default.png')
+                    url: require('@/images/page/view/shop-window-1-default.png')
                 },
                 link: {
                     action: 'portal',
@@ -124,7 +124,7 @@ export const defaultData = [
                 }
             }, {
                 img: {
-                    url: require('../../../../images/page/view/shop-window-2-default.png')
+                    url: require('@/images/page/view/shop-window-2-default.png')
                 },
                 link: {
                     action: 'portal',
@@ -132,7 +132,7 @@ export const defaultData = [
                 }
             }, {
                 img: {
-                    url: require('../../../../images/page/view/shop-window-3-default.png')
+                    url: require('@/images/page/view/shop-window-3-default.png')
                 },
                 link: {
                     action: 'portal',
@@ -142,7 +142,7 @@ export const defaultData = [
         ]
     }, {
         type: 'video',
-        icon: require('../../../../images/shop/video.png'),
+        icon: require('@/images/shop/video.png'),
         title: '视频',
         options: null,
         data: {
@@ -150,7 +150,7 @@ export const defaultData = [
         }
     }, {
         type: 'top_menu',
-        icon: require('../../../../images/shop/top_menu.png'),
+        icon: require('@/images/shop/top_menu.png'),
         title: '顶部菜单',
         options: {
             menu_format: 1,
@@ -205,7 +205,7 @@ export const defaultData = [
         ]
     }, {
         type: 'title',
-        icon: require('../../../../images/shop/title.png'),
+        icon: require('@/images/shop/title.png'),
         title: '标题',
         options: {
             title: '猜你喜欢',
@@ -218,7 +218,7 @@ export const defaultData = [
         }
     }, {
         type: 'text_nav',
-        icon: require('../../../../images/shop/text_nav.png'),
+        icon: require('@/images/shop/text_nav.png'),
         title: '文本导航',
         options: null,
         data: [

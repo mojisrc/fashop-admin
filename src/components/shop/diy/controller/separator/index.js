@@ -1,22 +1,20 @@
-
 import React, { Component } from "react";
 import { View } from "react-web-dom";
 import { Row, Col, Radio } from "antd";
 import styles from "./index.css";
-import ColorPicker from "../../../../public/ColorPicker";
-
+import ColorPicker from "@/public/ColorPicker";
 const RadioGroup = Radio.Group;
-
-type Props = {
-    componentName?: string,
-    getValues: Function,
-    options: {
-        color: string,
-        style: string
-    },
-    data: {}
-}
-type State = {}
+//
+// type Props = {
+//     componentName?: string,
+//     getValues: Function,
+//     options: {
+//         color: string,
+//         style: string
+//     },
+//     data: {}
+// }
+// type State = {}
 
 export default class Index extends Component {
 

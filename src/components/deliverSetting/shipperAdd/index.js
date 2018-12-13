@@ -1,30 +1,17 @@
-
 import React,{ Component } from "react";
-import { connect } from "react-redux";
-import { Form, Select, Input, Icon, Button,Upload,message } from 'antd';
+import { connect } from "dva";
+import { Form, Select, Input,  Button } from 'antd';
 import { View } from "react-web-dom";
-import UploadImage from "../@/components/uploadImage";
-import {
-    handleSubmitType,
-    formType,
-    dispatchType,
-    historyType,
-} from "@/utils/flow";
+import UploadImage from "@/components/uploadImage";
 import {
     getGoodsCategoryList,
     addCategory,
-} from "../../../actions/goods/category";
+} from "@/actions/goods/category";
 
 
 const FormItem = Form.Item;
 const Option = Select.Option;
 
-type Props = {
-    list: Array<{id:number,name:string}>,
-    form: formType,
-    dispatch: dispatchType,
-    history: historyType,
-}
 
 @connect(({view:{goodsCategory:{
     list,
@@ -32,7 +19,7 @@ type Props = {
     list,
 }))
 @Form.create()
-export default class CategoryAdd extends Component <Props,{}> {
+export default class CategoryAdd extends Component  {
     componentDidMount() {
         const {
             dispatch,
@@ -60,7 +47,7 @@ export default class CategoryAdd extends Component <Props,{}> {
             form,
             list,
         } = this.props
-        const { getFieldDecorator, getFieldValue } = form
+        const { getFieldDecorator} = form
         const formItemLayout = {
             labelCol: {
                 xs: { span: 24 },

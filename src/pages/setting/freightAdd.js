@@ -3,13 +3,13 @@ import { Input, Radio, Button, Modal, Form, Tree, message } from "antd";
 import { Link } from "react-router-dom";
 import styles from "../../styles/freight/freightAdd.css";
 import Page from "@/components/public/page";
-import { formType, handleSubmitType, dispatchType } from '@/utils/flow'
+
 import FreightAddTable from '@/components/setting/freightAddTable'
 import { connect } from 'dva';
 import { areaList } from "../../actions/setting";
 import { View, ScrollView } from "react-web-dom";
-import { Fetch } from "@/utils";
-import { FreightApi } from "../../config/api/freight";
+
+import { FreightApi } from "@/config/api/freight";
 const RadioGroup = Radio.Group;
 const FormItem = Form.Item;
 const TreeNode = Tree.TreeNode;

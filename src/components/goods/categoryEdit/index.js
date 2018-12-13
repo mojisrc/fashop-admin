@@ -1,45 +1,19 @@
-
 import React, { Component } from "react";
-import { connect } from "react-redux";
+import { connect } from "dva";
 import { Form, Select, Input, Button, message } from 'antd';
-import UploadImage from "../@/components/uploadImage";
-import {
-    handleSubmitType,
-    formType,
-    dispatchType,
-    historyType,
-} from "@/utils/flow";
+import UploadImage from "@/components/uploadImage";
 import {
     getGoodsCategoryList,
     editCategory,
-} from "../../../actions/goods/category";
-import {
-    Fetch,
-    publicFunction,
-} from "@/utils";
-import { GoodsApi } from "../../../config/api/goods";
+} from "@/actions/goods/category";
+
+import GoodsApi from "@/services/goods";
 
 const {
     parseQuery
 } = publicFunction
 const FormItem = Form.Item;
 const Option = Select.Option;
-
-type Props = {
-    categoryList: Array<{ id: number, name: string }>,
-    form: formType,
-    dispatch: dispatchType,
-    location: {
-        state?: {
-            categoryInfo?: { name: string, pid: number, icon: string }
-        },
-        search: string,
-    },
-    history: historyType,
-}
-type State = {
-    categoryInfo: { name?: string, pid?: number, icon?: string } | {}
-}
 
 @connect(({
               view: {

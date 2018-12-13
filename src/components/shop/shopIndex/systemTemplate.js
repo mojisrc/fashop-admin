@@ -1,13 +1,11 @@
 import React, { Component } from "react";
-import { bindActionCreators } from 'redux';
-import { connect } from "react-redux";
-import * as actions from "../../../actions/shop/decorate";
+
+import { connect } from "dva";
+import * as actions from "@/actions/shop/decorate";
 import { View } from "react-web-dom";
 import { Row, Col, Button } from 'antd';
 import styles from './index.css'
 
-type Props = {}
-type State = {}
 @connect(
     ({ view: { shop: { shopPageSystemList, shopPageListLoading } } }) => ({
         shopPageSystemList,
@@ -32,37 +30,37 @@ export default class SystemTemplate extends Component {
             {
                 id: 10001,
                 link: 'http://www.domain.cn/mobile',
-                img: require('../../../images/shop/dianzi.jpg'),
+                img: require('@/images/shop/dianzi.jpg'),
                 title: 'FaShop电子',
             }, {
                 id: 10002,
                 link: 'http://www.domain.cn/mobile',
-                img: require('../../../images/shop/shengxian.jpg'),
+                img: require('@/images/shop/shengxian.jpg'),
                 title: 'FaShop生鲜',
             }, {
                 id: 10003,
                 link: 'http://www.domain.cn/mobile',
-                img: require('../../../images/shop/meizhuang.jpg'),
+                img: require('@/images/shop/meizhuang.jpg'),
                 title: 'FaShop美妆',
             }, {
                 id: 10004,
                 link: 'http://www.domain.cn/mobile',
-                img: require('../../../images/shop/fuzhuang.jpg'),
+                img: require('@/images/shop/fuzhuang.jpg'),
                 title: 'FaShop服装',
             }, {
                 id: 10005,
                 link: 'http://www.domain.cn/mobile',
-                img: require('../../../images/shop/jiaju.jpg'),
+                img: require('@/images/shop/jiaju.jpg'),
                 title: 'FaShop家具',
             }, {
                 id: 10006,
                 link: 'http://www.domain.cn/mobile',
-                img: require('../../../images/shop/qiche.jpg'),
+                img: require('@/images/shop/qiche.jpg'),
                 title: 'FaShop汽车',
             }, {
                 id: 10007,
                 link: 'http://www.domain.cn/mobile',
-                img: require('../../../images/shop/muying.jpg'),
+                img: require('@/images/shop/muying.jpg'),
                 title: 'FaShop母婴',
             }
         ],

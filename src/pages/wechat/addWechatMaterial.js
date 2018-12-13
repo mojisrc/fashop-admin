@@ -1,6 +1,6 @@
 
 import React,{ Component } from 'react'
-import { bindActionCreators } from 'redux';
+
 import { connect } from 'dva';
 import * as actions from "../../actions/wechat/material";
 import { View } from "react-web-dom";
@@ -23,7 +23,7 @@ const { TextArea } = Input;
     ({view:{material:{ wechatMaterialInfo }}}) => ({
         wechatMaterialInfo
     }),
-    dispatch => bindActionCreators(actions,dispatch),
+
 )
 export default class AddMaterial extends Component {
     current:{

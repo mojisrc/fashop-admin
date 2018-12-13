@@ -1,28 +1,27 @@
-
 import React, { Component } from "react";
 import { Icon, Input, Row, Col, Radio } from "antd";
-import ColorPicker from "../../../../public/ColorPicker";
+import ColorPicker from "@/public/ColorPicker";
 import styles from "./index.css";
 import { View } from "react-web-dom";
-import UploadImage from "../../../../uploadImage/index";
+import UploadImage from "@/uploadImage/index";
 
 const RadioGroup = Radio.Group;
-
-type Props = {
-    componentName: string,
-    getValues: Function,
-    options: {
-        title: string,
-        align: string,
-        background_color: string,
-        font_color: string,
-        leading_image: {
-            url: string
-        }
-    },
-    data: {}
-}
-type State = {}
+//
+// type Props = {
+//     componentName: string,
+//     getValues: Function,
+//     options: {
+//         title: string,
+//         align: string,
+//         background_color: string,
+//         font_color: string,
+//         leading_image: {
+//             url: string
+//         }
+//     },
+//     data: {}
+// }
+// type State = {}
 
 export default class Index extends Component {
     static defaultProps = {

@@ -1,30 +1,9 @@
-
 import React, { Component } from "react";
-import { Table, Button } from "antd";
+import { Table, Button,Modal } from "antd";
 import styles from "./index.css";
 import { View } from "react-web-dom";
-import { connect } from "react-redux";
-
-import { dispatchProps } from "@/utils/defaultProps";
-import { getShipperList, delShipper } from "../../../actions/deliver/shipper";
-import { Modal } from "antd/lib/index";
-
-type Props = {
-    history: historyType,
-    dispatch: dispatchType,
-    loading: boolean,
-    listData: {
-        page: number,
-        rows: number,
-        total_number: number,
-        list: Array<{}>,
-    }
-}
-
-type State = {
-    page: number,
-    rows: number
-}
+import { connect } from "dva";
+import { getShipperList, delShipper } from "@/actions/deliver/shipper";
 
 @connect(({
               view: {
@@ -43,7 +22,7 @@ export default class ShipperListTable extends Component  {
         rows: 10
     }
     static defaultProps = {
-        dispatch: dispatchProps,
+
         loading: false,
         listData: {
             page: 1,

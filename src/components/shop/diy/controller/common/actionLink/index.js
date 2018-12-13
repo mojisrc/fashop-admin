@@ -1,29 +1,28 @@
-
 import React, { Component } from "react";
 import styles from "./index.css";
 import { View } from "react-web-dom";
 import { Popover, Tag, Input, Modal } from 'antd';
-import SelectGoods from "../../../../../public/selectGoods/index";
-import SelectPage from "../../../../../public/selectPage/index";
-import SelectGoodsCategory from "../../../../../public/selectGoodsCategory/index";
+import SelectGoods from "@/../public/selectGoods/index";
+import SelectPage from "@/../public/selectPage/index";
+import SelectGoodsCategory from "@/../public/selectGoodsCategory/index";
 
 const { TextArea } = Input;
 
-export type LinkActionType = 'portal' | 'goods' | 'page' | 'url' | 'goods_category'
-type Props = {
-    getValues: Function,
-    type: LinkActionType,
-    value: any
-}
-type State = {
-    urlValue: {
-        url: string
-    },
-    selectGoodsVisible: boolean,
-    selectPageVisible: boolean,
-    selectGoodsCategoryVisible:boolean,
-    inputUrlVisible: boolean,
-}
+// export type LinkActionType = 'portal' | 'goods' | 'page' | 'url' | 'goods_category'
+// type Props = {
+//     getValues: Function,
+//     type: LinkActionType,
+//     value: any
+// }
+// type State = {
+//     urlValue: {
+//         url: string
+//     },
+//     selectGoodsVisible: boolean,
+//     selectPageVisible: boolean,
+//     selectGoodsCategoryVisible:boolean,
+//     inputUrlVisible: boolean,
+// }
 export const linkInfo = {
     portal: {
         type: 'portal',

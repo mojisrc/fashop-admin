@@ -1,5 +1,4 @@
 import styles from './detail.css';
-
 export default function() {
   return (
     <div className={styles.normal}>

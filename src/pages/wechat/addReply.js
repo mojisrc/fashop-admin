@@ -1,5 +1,5 @@
 import React,{ Component } from 'react'
-import { bindActionCreators } from 'redux';
+
 import { connect } from 'dva';
 import * as actions from "../../actions/wechat/autoReply";
 import { View } from "react-web-dom";
@@ -34,7 +34,7 @@ let uuid = 0;
         keyWordsReplyList,
         keyWordsReplyListLoading,
     }),
-    dispatch => bindActionCreators(actions,dispatch),
+
 )
 export default class AddReply extends Component {
     state = {

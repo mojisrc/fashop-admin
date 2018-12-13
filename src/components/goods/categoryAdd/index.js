@@ -1,29 +1,15 @@
-
 import React,{ Component } from "react";
-import { connect } from "react-redux";
+import { connect } from "dva";
 import { Form, Select, Input, Button, } from 'antd';
-import UploadImage from "../@/components/uploadImage";
-import {
-    handleSubmitType,
-    formType,
-    dispatchType,
-    historyType,
-} from "@/utils/flow";
+import UploadImage from "@/components/uploadImage";
 import {
     getGoodsCategoryList,
     addCategory,
-} from "../../../actions/goods/category";
+} from "@/actions/goods/category";
 
 
 const FormItem = Form.Item;
 const Option = Select.Option;
-
-type Props = {
-    categoryList: Array<{id:number,name:string}>,
-    form: formType,
-    dispatch: dispatchType,
-    history: historyType,
-}
 
 @connect(({view:{goods:{
     categoryList,
@@ -31,7 +17,7 @@ type Props = {
     categoryList,
 }))
 @Form.create()
-export default class CategoryAdd extends Component <Props,{}> {
+export default class CategoryAdd extends Component  {
     componentDidMount() {
         const {
             dispatch,

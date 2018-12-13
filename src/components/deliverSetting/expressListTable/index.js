@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import { Table, Button, Tag } from "antd";
 import styles from "./index.css";
 import { View } from "react-web-dom";
-import { connect } from "react-redux";
-import { Modal } from "antd/lib/index";
+import { connect } from "dva";
+import { Modal } from "antd";
 
 @connect(({ express, loading }) => ({
     express,

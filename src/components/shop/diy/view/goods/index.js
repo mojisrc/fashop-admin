@@ -1,15 +1,13 @@
-
 import React, { Component } from "react";
 import styles from "./index.css";
 import { View } from "react-web-dom";
-import Image from "../../../../image/index";
-import type { GoodsOptionsType, GoodsDataType } from "../../../../../interfaces/page"
-
-type Props = {
-    data: GoodsDataType,
-    options: GoodsOptionsType
-}
-type State = {}
+import Image from "@/image/index";
+//
+// type Props = {
+//     data: GoodsDataType,
+//     options: GoodsOptionsType
+// }
+// type State = {}
 export default class Index extends Component  {
     render() {
         const { data, options } = this.props

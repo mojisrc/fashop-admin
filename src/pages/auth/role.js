@@ -18,10 +18,6 @@ import RoleMembersTable from '@/components/auth/roleMembersTable'
 import RoleAuthTable from '@/components/auth/roleAuthTable'
 import GroupEditModal from '@/components/auth/groupEditModal'
 import types from '../../constants'
-import {
-    addGroup,
-    groupDel,
-} from '../../actions/auth/role'
 import EditGroupMemberModal from '@/components/auth/editGroupMemberModal'
 import {AuthCom,authHoc} from '@/components/auth/authRules'
 import authSignConfig from '@/utils/authSignConfig'

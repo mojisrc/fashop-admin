@@ -1,36 +1,15 @@
-
 import React, { Component } from "react";
 import { Table, Button, Switch, Modal, message } from "antd";
 import styles from "./index.css";
 import { View } from "react-web-dom";
-import { connect } from "react-redux";
-
-import { dispatchProps } from "@/utils/defaultProps";
-import { getGoodsList } from "../../../actions/goods";
-import { getGoodsCategoryList } from "../../../actions/goods/category";
+import { connect } from "dva";
+import { getGoodsList } from "@/actions/goods";
+import { getGoodsCategoryList } from "@/actions/goods/category";
 import Image from '../../image'
 import moment from 'moment'
 import Query from "@/utils/query";
-import Fetch from "@/utils/fetch";
-import { GoodsApi } from "../../../config/api/goods";
 
-type Props = {
-    history: historyType,
-    dispatch: dispatchType,
-    loading: boolean,
-    listData: {
-        page: number,
-        rows: number,
-        total_number: number,
-        list: Array<{}>,
-    },
-    categoryList: Array<{ id: number, name: string }>,
-}
-
-type State = {
-    rowSelectionIds: Array<string>,
-    delIds: Array<number>
-}
+import GoodsApi from "@/services/goods";
 
 @connect(({
               view: {
@@ -47,7 +26,6 @@ type State = {
 }))
 export default class GoodsListTable extends Component  {
     static defaultProps = {
-        dispatch: dispatchProps,
         loading: false,
         listData: [],
     }

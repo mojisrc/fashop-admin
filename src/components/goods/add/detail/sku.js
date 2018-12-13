@@ -1,42 +1,16 @@
-
 import React, { Component } from 'react';
 import { Form, InputNumber, Table, Input } from "antd";
 import { View } from "react-web-dom";
 import styles from "./spec.css";
 
 const FormItem = Form.Item;
-type PropsType = {
-    skus: SkusType,
-    specs: SpecsType,
-    onChange: Function
-}
-type SkusType = Array<{
-    id:? number | null,
-    price: number | null,
-    stock: number | null,
-    code: string | null,
-    weight: ? number | null,
-    spec: Array<{
-        id: number,
-        name: string | null,
-        value_id: number,
-        value_name: string | null
-    }>
-}>
-type SpecsType = [] | Array<{
-    id: number,
-    name: null | string,
-    values: Array<{
-        id: number | null,
-        name: string | null,
-    }>,
-}>
-export default class GoodsAddSpec extends Component<PropsType, { skus: SkusType }> {
+
+export default class GoodsAddSpec extends Component {
     state = {
         skus: [],
     }
 
-    renderColumns({ text, record, index, dataIndex }: { text: any, record: any, index: number, dataIndex: any }) {
+    renderColumns({ text, record, index, dataIndex }) {
         const { onChange, skus } = this.props
         return (
             <InputNumber

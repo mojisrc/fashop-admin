@@ -1,16 +1,10 @@
-
 import React,{ Component } from 'react'
-import { Button, Row, Col, TimePicker, Select, Alert } from 'antd'
+import {  Row, Col, TimePicker, Select, Alert } from 'antd'
 import { View } from 'react-web-dom'
-import styles from './index.css'
 import moment from 'moment'
-
 const Option = Select.Option;
 
-type Props = {}
-type State = {}
-
-export default class SendTimingModal extends Component<Props,State> {
+export default class SendTimingModal extends Component {
     state = {
         day:'',
         time:'',

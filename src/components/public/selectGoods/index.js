@@ -1,34 +1,32 @@
-
 import React, { Component } from "react";
 import { View } from "react-web-dom";
 import { Modal, Input, Checkbox, Pagination, Spin,Button } from "antd";
 import styles from "./index.css";
-import { list } from "../../../models/goods";
+import { list } from "@/models/goods";
 import { connect } from 'dva';
 import { ScrollView } from "react-web-dom";
 import Image from '../../image'
-
 const Search = Input.Search;
-type GoodsRowType = { id: number, title: string, price: string, img: { url: string } }
-type Props = {
-    dispatch?: Function,
-    loading?: boolean,
-    listData?: {
-        page: number,
-        rows: number,
-        total_number: number,
-        list: Array<GoodsRowType>,
-    },
-    multiSelect: boolean,
-    visible: boolean,
-    close: Function,
-    onOk: Function,
-}
-type State = {
-    url: string,
-    checkedValues: Array<any>,
-    checkedData: Array<GoodsRowType>
-}
+// type GoodsRowType = { id: number, title: string, price: string, img: { url: string } }
+// type Props = {
+//     dispatch?: Function,
+//     loading?: boolean,
+//     listData?: {
+//         page: number,
+//         rows: number,
+//         total_number: number,
+//         list: Array<GoodsRowType>,
+//     },
+//     multiSelect: boolean,
+//     visible: boolean,
+//     close: Function,
+//     onOk: Function,
+// }
+// type State = {
+//     url: string,
+//     checkedValues: Array<any>,
+//     checkedData: Array<GoodsRowType>
+// }
 @connect(({
               view: {
                   goods: {

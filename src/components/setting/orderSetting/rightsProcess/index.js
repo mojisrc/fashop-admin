@@ -1,56 +1,47 @@
-
-import React,{ Component } from "react";
-import { connect } from "react-redux";
-import { Alert, Form, Input, Row, Col, Button } from 'antd';
+import React, { Component } from "react";
+import { connect } from "dva";
+import { Alert, Form, Input, Row, Col, Button } from "antd";
 import { View } from "react-web-dom";
-import styles from './index.css'
+import styles from "./index.css";
 
 const FormItem = Form.Item;
-
-class RightsProcess extends Component<
-    {
-        location:{state:{state_type:string}},
-        history:{push:Function},
-        form:{
-            validateFieldsAndScroll:Function,
-            getFieldDecorator:Function,
-        }
-    },
-    {}
-> {
+@Form.create()
+@connect()
+export default class RightsProcess extends Component {
     handleSubmit = (e) => {
         e.preventDefault();
         this.props.form.validateFieldsAndScroll((err, values) => {
             if (!err) {
-                console.log('Received values of form: ', values);
+                console.log("Received values of form: ", values);
             }
         });
-    }
+    };
+
     render() {
-        const { location, history, form } = this.props
-        const { getFieldDecorator } = form
+        const { l form } = this.props;
+        const { getFieldDecorator } = form;
 
         const formItemLayout = {
             labelCol: {
                 xs: { span: 24 },
-                sm: { span: 4 },
+                sm: { span: 4 }
             },
             wrapperCol: {
                 xs: { span: 24 },
-                sm: { span: 20 },
-            },
+                sm: { span: 20 }
+            }
         };
         const tailFormItemLayout = {
             wrapperCol: {
                 xs: {
                     span: 24,
-                    offset: 0,
+                    offset: 0
                 },
                 sm: {
                     span: 16,
-                    offset: 4,
-                },
-            },
+                    offset: 4
+                }
+            }
         };
         return (
             <View className={styles.rightsProcess}>
@@ -62,8 +53,8 @@ class RightsProcess extends Component<
                 <Form
                     onSubmit={this.handleSubmit}
                     style={{
-                        width:'88%',
-                        marginTop:48
+                        width: "88%",
+                        marginTop: 48
                     }}
                 >
                     <FormItem
@@ -72,8 +63,8 @@ class RightsProcess extends Component<
                     >
                         <Row gutter={8}>
                             <Col span={11}>
-                                {getFieldDecorator('state_send', {
-                                    rules: [{ required: true, message: 'Please input the captcha you got!' }],
+                                {getFieldDecorator("state_send", {
+                                    rules: [{ required: true, message: "Please input the captcha you got!" }]
                                 })(
                                     <Input />
                                 )}
@@ -92,8 +83,8 @@ class RightsProcess extends Component<
                     >
                         <Row gutter={8}>
                             <Col span={11}>
-                                {getFieldDecorator('state_success', {
-                                    rules: [{ required: true, message: 'Please input the captcha you got!' }],
+                                {getFieldDecorator("state_success", {
+                                    rules: [{ required: true, message: "Please input the captcha you got!" }]
                                 })(
                                     <Input />
                                 )}
@@ -112,8 +103,8 @@ class RightsProcess extends Component<
                     >
                         <Row gutter={8}>
                             <Col span={11}>
-                                {getFieldDecorator('state_success', {
-                                    rules: [{ required: true, message: 'Please input the captcha you got!' }],
+                                {getFieldDecorator("state_success", {
+                                    rules: [{ required: true, message: "Please input the captcha you got!" }]
                                 })(
                                     <Input />
                                 )}
@@ -132,8 +123,8 @@ class RightsProcess extends Component<
                     >
                         <Row gutter={8}>
                             <Col span={11}>
-                                {getFieldDecorator('state_success', {
-                                    rules: [{ required: true, message: 'Please input the captcha you got!' }],
+                                {getFieldDecorator("state_success", {
+                                    rules: [{ required: true, message: "Please input the captcha you got!" }]
                                 })(
                                     <Input />
                                 )}
@@ -156,16 +147,6 @@ class RightsProcess extends Component<
                     </FormItem>
                 </Form>
             </View>
-        )
+        );
     }
 }
-
-RightsProcess = Form.create()(RightsProcess)
-
-const mapStateToProps = ({view}) => {
-    return {
-
-    }
-}
-
-export default connect(mapStateToProps)(RightsProcess)

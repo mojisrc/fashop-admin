@@ -1,27 +1,25 @@
-
 import React, { Component } from "react";
 import { Carousel } from "antd";
 import styles from "./index.css";
 import { View } from "react-web-dom";
-import Image from "../../../../image/index";
-import type { LinkActionType } from "../../controller/common/actionLink"
-
-type Props = {
-    options: {
-        layout_style: number
-    },
-    data: Array<{
-        img: {
-            url: string
-        },
-        title: string,
-        link: {
-            action: LinkActionType,
-            param: {}
-        }
-    }>
-}
-type State = {}
+import Image from "@/image/index";
+//
+// type Props = {
+//     options: {
+//         layout_style: number
+//     },
+//     data: Array<{
+//         img: {
+//             url: string
+//         },
+//         title: string,
+//         link: {
+//             action: LinkActionType,
+//             param: {}
+//         }
+//     }>
+// }
+// type State = {}
 
 export default class Index extends Component {
     render() {

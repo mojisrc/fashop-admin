@@ -1,81 +1,15 @@
-
 import React, { Component } from "react";
-import { connect } from "react-redux";
+import { connect } from "dva";
 import { View } from "react-web-dom";
 import styles from './spec.css'
 import { Modal, Input, Select, Button, Icon, Tag, Popover, Checkbox, message } from "antd";
-import { ThemeStyle } from "../@/utils/style";
+import { ThemeStyle } from "@/utils/style";
 import Sku from "./sku";
-import { Fetch } from "../@/utils";
-import { getGoodsSpecList } from "../../../../actions/goods/spec";
-import { dispatchProps } from "../@/utils/defaultProps";
-import { GoodsApi } from "../../../../config/api/goods";
+import { getGoodsSpecList } from "@/actions/goods/spec";
 
+import GoodsApi from "@/services/goods";
 const confirm = Modal.confirm;
 const Option = Select.Option;
-type SkusType = Array<{
-    price: number | null,
-    stock: number | null,
-    code: string | null,
-    weight: ? number | null,
-    spec: Array<{
-        id: number,
-        name: string | null,
-        value_id: number,
-        value_name: string | null
-    }>
-}>
-type SpecsType = [] | Array<{
-    id: number,
-    name: null | string,
-    values: Array<{
-        id: number | null,
-        name: string | null,
-    }>,
-}>
-type AddSpecInputType = {
-    input: {
-        value: any
-    }
-}
-type AddSpecValueInputType = AddSpecInputType
-type Props = {
-    dispatch: dispatchProps,
-    specList: Array<{
-        id: number,
-        name: string,
-        values: Array<{
-            id: number,
-            name: string,
-        }>
-    }>,
-    reset: Function,
-    reset: Function,
-    onChange: Function,
-    skus: SkusType,
-    onMultiSpecChange: Function,
-}
-type State = {
-    loaded: boolean,
-    loading: boolean,
-    // 自定义规格排序显示？？？
-    customSpecSortShow: boolean,
-    // 添加规格的空空是否显示？？
-    addSpecComVisible: boolean,
-    // 右侧关闭按钮
-    specRowRightCloseBtnHoverIndex: number,
-    // 规格值id集合
-    specValueIds: Array<number>,
-    tagChecked: boolean,
-    // 规格值
-    specs: SpecsType,
-    lastSpecValuesPopoverClick: {
-        index: number,
-        visible: boolean
-    }
-}
-
-
 @connect()
 export default class GoodsSpec extends Component {
     state = {
@@ -90,7 +24,6 @@ export default class GoodsSpec extends Component {
         lastSpecValuesPopoverClick: { index: 0, visible: false }
     }
     static defaultProps = {
-        dispatch: dispatchProps,
         onChange: (e) => {
         }
     }

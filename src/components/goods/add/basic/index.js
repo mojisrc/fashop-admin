@@ -1,26 +1,12 @@
-
 import React, { Component } from "react";
-import { connect } from "react-redux";
+import { connect } from "dva";
 import { View } from "react-web-dom";
 import { Form, Input, TreeSelect } from "antd";
 import styles from './index.css'
-import { UploadGroupImage } from '../../../uploadImage'
-
+import { UploadGroupImage } from '@/uploadImage'
 const FormItem = Form.Item;
 const TreeNode = TreeSelect.TreeNode;
-type Props = {
-    openPhotoGallery: Function,
-    location: { state: { type: string, record: {} }, search: string },
-    history: { push: Function },
-    form: {
-        getFieldDecorator: Function,
-        setFieldsValue: Function,
-    },
-    formItemLayout: {},
-    categoryTree: Array<{}>,
-    openPreviewModal: Function
-}
-type State = {}
+
 @connect()
 export default class Basic extends Component {
     render() {

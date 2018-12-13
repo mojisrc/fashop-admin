@@ -1,4 +1,3 @@
-
 import React, { Component } from "react";
 import { View } from "react-web-dom";
 import styles from './index.css'
@@ -18,23 +17,6 @@ type SkusType = Array<{
         value_name: string | null
     }>
 }>
-type Props = {
-    getFieldDecorator: Function,
-    formItemLayout: {},
-    skus: SkusType,
-    specList: Array<{
-        id: number,
-        name: string,
-        values: Array<{
-            id: number,
-            name: string,
-        }>
-    }>,
-    setSkus: Function,
-    multiSpec: boolean,
-    onMultiSpecChange: Function
-}
-type State = {}
 
 export default class Detail extends Component {
     static defaultProps = {

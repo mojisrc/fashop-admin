@@ -1,27 +1,26 @@
-
 import React, { Component } from "react";
 import styles from "./index.css";
 import { View } from "react-web-dom";
 import InfoColumn from "../../public/info/infoColumn";
 import moment from "moment";
 import { Modal } from "antd";
-import { receive } from "../../../models/refund";
-import { dispatchProps } from "@/utils/defaultProps";
-import connect from "react-redux/es/connect/connect";
+import { receive } from "@/models/refund";
 
-type Props = {
-    dispatch: dispatchProps,
-    id: number,
-    tracking_no: string,
-    tracking_phone: string,
-    tracking_company: string,
-    tracking_explain: string,
-    tracking_time: number,
-    tracking_images: Array<string>,
-    receive: number,
-    receive_time: number,
-}
-type State = {}
+import { connect } from "dva";
+//
+// type Props = {
+//
+//     id: number,
+//     tracking_no: string,
+//     tracking_phone: string,
+//     tracking_company: string,
+//     tracking_explain: string,
+//     tracking_time: number,
+//     tracking_images: Array<string>,
+//     receive: number,
+//     receive_time: number,
+// }
+// type State = {}
 
 @connect()
 export default class TrackingInfo extends Component {

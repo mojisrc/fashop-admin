@@ -1,4 +1,3 @@
-
 import React, { Component } from "react";
 import {
     Table, Tag
@@ -6,20 +5,6 @@ import {
 import styles from "./index.css";
 import { View } from "react-web-dom";
 
-type Props = {
-    goods_id: number,
-    goods_title: string,
-    goods_img: string,
-    goods_spec: Array<{
-        id: number,
-        name: string,
-        value_id: number,
-        value_name: string
-    }>, // 商品规格,
-    goods_num: number,
-    goods_pay_price: number,
-}
-type State = {}
 export default class OrderDetailGoodsInfo extends Component {
     render() {
         const {

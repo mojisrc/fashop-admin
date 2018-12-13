@@ -1,50 +1,45 @@
-
 import React, { Component } from "react";
 import { Table } from "antd";
 import styles from "./index.css";
 import { View } from "react-web-dom";
-import { connect } from "react-redux";
-
-import { dispatchProps } from "@/utils/defaultProps";
+import { connect } from "dva";
 import moment from "moment/moment";
 import Image from '../../image'
-import { getOrderList } from "../../../actions/order";
+import { getOrderList } from "@/actions/order";
 import Query from "@/utils/query"
-
-type Props = {
-    user_id: number,
-    history: historyType,
-    dispatch: dispatchType,
-    orderListLoading: boolean,
-    getOrderList: Function,
-    orderList: {
-        page: number,
-        rows: number,
-        total_number: number,
-        list: Array<{
-            extend_order_extend: {
-                reciver_name: string,
-                reciver_info: {
-                    address: string,
-                    name: string,
-                    phone: string,
-                    rows?: number
-                },
-                remark: string,
-            },
-            extend_order_goods: Array<{
-                reciver_info: {
-                    address: string,
-                    name: string,
-                    phone: string,
-                    rows?: number
-                },
-                rows: number
-            }>
-        }>,
-    },
-}
-type State = {}
+// type Props = {
+//     user_id: number,
+//     history: historyType,
+//     dispatch: dispatchType,
+//     orderListLoading: boolean,
+//     getOrderList: Function,
+//     orderList: {
+//         page: number,
+//         rows: number,
+//         total_number: number,
+//         list: Array<{
+//             extend_order_extend: {
+//                 reciver_name: string,
+//                 reciver_info: {
+//                     address: string,
+//                     name: string,
+//                     phone: string,
+//                     rows?: number
+//                 },
+//                 remark: string,
+//             },
+//             extend_order_goods: Array<{
+//                 reciver_info: {
+//                     address: string,
+//                     name: string,
+//                     phone: string,
+//                     rows?: number
+//                 },
+//                 rows: number
+//             }>
+//         }>,
+//     },
+// }
 @connect(({
               view: {
                   order: {
@@ -58,7 +53,7 @@ type State = {}
 }))
 export default class OrderManagementTable extends Component   {
     static defaultProps = {
-        dispatch: dispatchProps,
+
         orderListLoading: false,
         orderList: {},
     }

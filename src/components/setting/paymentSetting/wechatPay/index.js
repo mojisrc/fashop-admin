@@ -1,37 +1,35 @@
-
 import React, { Component } from "react";
-import { connect } from "react-redux";
+import { connect } from "dva";
 import { Alert, Switch, Form, Input, Button, message, Upload, Icon } from 'antd';
 import { View, Text } from "react-web-dom";
 import styles from './index.css'
-import Fetch from "../@/utils/fetch";
-import { PaymentApi } from "../../../../config/api/payment";
-import { formType } from "../@/utils/flow";
 
-type Props = {
-    form: formType,
-    name: string,
-    action: string,
-    headers: Object
-}
-type States = {
-    checked: boolean,
-    app_id: string,
-    app_secret: string,
-    mini_app_id: string,
-    mini_app_secret: string,
-    mch_id: string,
-    key: string,
-    status: number,
-    apiclient_cert: string,
-    apiclient_key: string,
-    apiclientCert: Array<any>,
-    apiclientKey: Array<any>
-}
+import { PaymentApi } from "@/config/api/payment";
+//
+// type Props = {
+//     form: formType,
+//     name: string,
+//     action: string,
+//     headers: Object
+// }
+// type States = {
+//     checked: boolean,
+//     app_id: string,
+//     app_secret: string,
+//     mini_app_id: string,
+//     mini_app_secret: string,
+//     mch_id: string,
+//     key: string,
+//     status: number,
+//     apiclient_cert: string,
+//     apiclient_key: string,
+//     apiclientCert: Array<any>,
+//     apiclientKey: Array<any>
+// }
 const FormItem = Form.Item;
 @Form.create()
 @connect()
-export default class WechatPay extends Component<Props, States> {
+export default class WechatPay extends Component {
     static defaultProps = {
         form: {},
         name: 'cert',

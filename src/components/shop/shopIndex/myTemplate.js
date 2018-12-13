@@ -1,6 +1,5 @@
-
 import React, { Component } from "react";
-import { connect } from "react-redux";
+import { connect } from "dva";
 import { Input, Button, Table, Switch, Popconfirm, Popover, message } from "antd";
 import moment from "moment";
 import { CopyToClipboard } from 'react-copy-to-clipboard';
@@ -8,26 +7,26 @@ import { View } from "react-web-dom";
 import styles from "./index.css";
 
 import Query from "@/utils/query";
-import { getShopPageList, setShopPagePortal } from "../../../actions/shop/decorate";
-import Fetch from "@/utils/fetch";
-import { PageApi } from "../../../config/api/page";
+import { getShopPageList, setShopPagePortal } from "@/actions/shop/decorate";
+
+import { PageApi } from "@/config/api/page";
 
 const InputGroup = Input.Group
-type Props = {
-    dispatch: dispatchType,
-    history: historyType,
-    addShopPage: Function,
-    getShopPageList: Function,
-    setShopPagePortal: Function,
-    shopPageListLoading: boolean,
-    shopPageList: {
-        page: number,
-        rows: number,
-        total_number: number,
-        list: Array<{}>
-    },
-}
-type State = {}
+// type Props = {
+//     dispatch: dispatchType,
+//     history: historyType,
+//     addShopPage: Function,
+//     getShopPageList: Function,
+//     setShopPagePortal: Function,
+//     shopPageListLoading: boolean,
+//     shopPageList: {
+//         page: number,
+//         rows: number,
+//         total_number: number,
+//         list: Array<{}>
+//     },
+// }
+// type State = {}
 
 @connect(
     ({ view: { shop: { shopPageList, shopPageListLoading } } }) => ({

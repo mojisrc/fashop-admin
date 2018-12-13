@@ -1,32 +1,11 @@
-
 import React, { Component } from "react";
 import { Form, Select, Card, Row, Col, Alert } from 'antd';
 import { View } from "react-web-dom";
 import styles from "./index.css";
-import { formType } from "@/utils/flow";
 
 const FormItem = Form.Item;
 const Option = Select.Option;
-type Props = {
-    onChange?: Function,
-    form: formType,
-    shipperList: Array<{
-        id: number,
-        name: string,
-        combine_detail: string,
-        address: string,
-        contact_number: string,
-        is_default: number
-    }>,
-    deliver_name: string,
-    deliver_phone: string,
-    deliver_address: string,
-    onShipperChange: Function
-}
-type State = {
-    selectVisible: boolean,
-    shipper_id: number
-}
+
 export default class SendAddress extends Component {
     static defaultProps = {
         shipperList: [],

@@ -34,97 +34,6 @@ function type(o) {
     return s.slice(s.indexOf(" ") + 1, s.length - 1).toLowerCase();
 }
 
-initLibraryConfigFunc({
-    Toast: {
-        info: (content, duration, onClose) => {
-            message.info(content, duration, onClose)
-        },
-        error: (content, duration, onClose) => {
-            message.error(content, duration, onClose)
-        },
-        warning: (content, duration, onClose) => {
-            message.warning(content, duration, onClose)
-        },
-        hide: () => {
-            message.destroy()
-        },
-        loading: (content, duration, onClose) => {
-            message.loading(content, duration, onClose)
-        },
-    },
-    Modal: {
-        alert: (title, content, array) => {
-            Modal.confirm({
-                title,
-                content,
-                okText: array[1].text,
-                okType: 'danger',
-                cancelText: array[0].text,
-                onOk() {
-                    array[0].onPress()
-                },
-                onCancel() {
-                    array[1].onPress()
-                },
-            })
-        },
-        info: ({ title, content, onOk }) => {
-            Modal.info({
-                title,
-                content,
-                onOk,
-            })
-        },
-        success: ({ title, content, onOk }) => {
-            Modal.success({
-                title,
-                content,
-                onOk,
-            })
-        },
-        error: ({ title, content, onOk }) => {
-            Modal.error({
-                title,
-                content,
-                onOk,
-            })
-        },
-        warning: ({ title, content, onOk }) => {
-            Modal.warning({
-                title,
-                content,
-                onOk,
-            })
-        },
-    },
-    getLogin: () => {
-        const { member } = store.getState().app
-        const { login } = member
-        return login
-    },
-    pushLogin: () => {
-        // const resetAction = NavigationActions.navigate({ routeName: 'UserLogin'})
-        // store.dispatch(resetAction)
-    },
-    APP_ROOT_CONFIG: {
-        AppName,
-        AppPlatform,
-        errorCollectApi,
-        env,
-    },
-    removeUserInfo: () => {
-        // store.dispatch(userSignOut())
-    },
-    showLoading: () => {
-        // store.dispatch(setIsShowFetchLoading(true))
-        message.loading('loading...', 0)
-    },
-    hideLoading: () => {
-        // store.dispatch(setIsShowFetchLoading(false))
-        message.destroy()
-    },
-    getHeaders,
-})
 
 function getRelation(str1, str2) {
     if (str1 === str2) {
@@ -208,9 +117,7 @@ function parsePrice(price){
 }
 export {
     stateHoc,
-    Fetch,
     imageUpload,
-    publicFunction,
     getHeaders,
     getRoutes,
     getPageQuery,

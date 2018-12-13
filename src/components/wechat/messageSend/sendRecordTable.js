@@ -1,20 +1,18 @@
-
 import React,{ Component } from 'react'
 import { Table, Popconfirm } from 'antd'
 import { View } from 'react-web-dom'
 import styles from './index.css'
 import { sendRecordData} from './testData'
+//
+// type Props = {
+//     broadcastRecord:{
+//         list:Array<{}>,
+//         total_number:number
+//     },
+//     broadcastRecordLoading:boolean
+// }
 
-type Props = {
-    broadcastRecord:{
-        list:Array<{}>,
-        total_number:number
-    },
-    broadcastRecordLoading:boolean
-}
-type State = {}
-
-export default class SendRecordTable extends Component<Props,State> {
+export default class SendRecordTable extends Component {
     render() {
         const { broadcastRecord, broadcastRecordLoading } = this.props
         const { list, total_number } = broadcastRecord

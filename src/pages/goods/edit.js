@@ -7,16 +7,12 @@ import Detail from '@/components/goods/add/detail'
 import Editor from '@/components/goods/add/editor'
 import Freight from '@/components/goods/add/detail/freight'
 import PhotoGallery from '@/components/public/photoGallery'
-import { formType, handleSubmitType, dispatchType } from '@/utils/flow'
-import { list } from '../../actions/goods/category'
-import { info } from '../../actions/goods'
-import { specList } from '../../actions/goods/spec'
-import { list } from '../../actions/deliver/freight'
+
 import { Fetch, publicFunction } from "@/utils";
 import moment from "moment";
-import { GoodsApi } from "../../config/api/goods";
+import GoodsApi from "@/services/goods";
 
-const { parseQuery } = publicFunction
+import { query } from "@/utils/fa"
 
 const FormItem = Form.Item;
 @connect(({
@@ -68,7 +64,7 @@ export default class Add extends Component {
 
     async componentWillMount() {
         const { dispatch, location } = this.props
-        const { id } = parseQuery(location.search)
+        const { id } = query.getParams()
         const response = await info({ params: { id } })
 
         if (response.code === 0) {

@@ -14,7 +14,7 @@ import Video from "./video";
 import TopMenu from "./topMenu";
 import Title from "./title";
 import TextNav from "./textNav";
-import type { optionsType, PageBodyType } from '../../../../interfaces/page'
+import type { optionsType, PageBodyType } from '@/interfaces/page'
 
 type Props = {
     options: optionsType,

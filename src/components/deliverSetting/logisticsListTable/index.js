@@ -7,10 +7,10 @@ import {
 } from "antd";
 import styles from "./index.css";
 import { View } from "react-web-dom";
-import { connect } from "react-redux";
+import { connect } from "dva";
 
-import { dispatchProps } from "@/utils/defaultProps";
-import { getShipperList } from "../../../actions/deliver/shipper";
+
+import { getShipperList } from "@/actions/deliver/shipper";
 
 type Props = {
     history: historyType,
@@ -42,7 +42,7 @@ type State = {
 }))
 export default class ShipperListTable extends Component  {
     static defaultProps = {
-        dispatch: dispatchProps,
+
         loading: false,
         listData: [],
     }

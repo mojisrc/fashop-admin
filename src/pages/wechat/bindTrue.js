@@ -1,5 +1,5 @@
 import React,{ Component } from 'react'
-import { bindActionCreators } from 'redux';
+
 import { connect } from 'dva';
 import * as actions from "../../actions/wechat";
 import { Layout, Menu, Icon, Alert } from 'antd'
@@ -24,13 +24,13 @@ import EditMaterial from './editMaterial'
 import EditServerMaterial from './editServerMaterial'
 
 const { Content, Sider } = Layout
-const { parseQuery } = publicFunction
+import { query } from "@/utils/fa"
 
 @connect(
     ({view:{wechat:{ wechatApiStatus }}}) => ({
         wechatApiStatus
     }),
-    dispatch => bindActionCreators(actions,dispatch),
+
 )
 export default class BindTruePublicAccounts extends Component {
     componentDidMount(){
@@ -38,7 +38,7 @@ export default class BindTruePublicAccounts extends Component {
     }
     render() {
         const { location, history, wechatApiStatus } = this.props
-        const search = parseQuery(location.search)
+        const search = query.getParams()
         const menuList = [
             {
                 title: "自定义菜单",

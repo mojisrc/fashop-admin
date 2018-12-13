@@ -1,25 +1,23 @@
-
 import React,{ Component } from 'react'
-import { Form, Input, Button, Upload, Tooltip, Popover, Icon, Select, Checkbox, message, Spin } from 'antd';
+import { Form, Input, Button, Upload, Tooltip, Popover, Icon, Checkbox, message, Spin } from 'antd';
 import { View } from 'react-web-dom'
-import { formType, handleSubmitType } from '../@/utils/flow'
-import { Fetch } from '../@/utils'
-import { env } from '../../../../config/root'
+
+
+import { env } from '@/config/root'
 
 const FormItem = Form.Item;
 const { TextArea } = Input
-
-type Props = {
-    form:formType,
-    hideModal:Function
-}
-type State = {
-    fileList:Array<{}>,
-    file:{}
-}
+//
+// type Props = {
+//     hideModal:Function
+// }
+// type State = {
+//     fileList:Array<{}>,
+//     file:{}
+// }
 
 @Form.create()
-export default class AddVideoForm extends Component<Props,State> {
+export default class AddVideoForm extends Component {
     state = {
         fileList:[],
         file:{},

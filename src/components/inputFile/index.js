@@ -1,25 +1,14 @@
-
 import React,{ Component } from 'react';
 import styles from './index.css'
 import { Icon } from 'antd'
 import { View } from "react-web-dom";
-import { Fetch } from "@/utils";
-import { env } from "../../config/root";
+import { env } from "@/config/root";
 
-type Props = {
-    uploadUrl:string,
-    uploadFunc:Function,
-    onChange:Function,
-}
-type State = {
-    url:string
-}
-
-export default class InputFile extends Component<Props,State>{
+export default class InputFile extends Component{
     state = {
         url:''
     }
-    handleChange = (e:{target:{files:Array<string>}}) => {
+    handleChange = (e) => {
         const { uploadUrl, uploadFunc } = this.props
         let formData = new FormData()
         formData.append('media',e.target.files[0])

@@ -4,16 +4,15 @@ import { Form, Button, Input } from 'antd';
 import SendAddress from "@/components/order/orderSend/sendAddress";
 import DeliveryWay from "@/components/order/orderSend/deliveryWay";
 import Page from "@/components/public/page";
-import { formType } from "@/utils/flow";
+
 import { Fetch, publicFunction } from "@/utils";
 import { message } from "antd/lib/index";
 
-import { setSend } from "../../actions/order";
-import { OrderApi } from "../../config/api/order";
-import { ExpressApi } from "../../config/api/express";
-import { ShipperApi } from "../../config/api/shipper";
+import { OrderApi } from "@/config/api/order";
+import { ExpressApi } from "@/config/api/express";
+import { ShipperApi } from "@/config/api/shipper";
 const { TextArea } = Input;
-const { parseQuery } = publicFunction
+import { query } from "@/utils/fa"
 const FormItem = Form.Item;
 @Form.create()
 @connect()
@@ -77,7 +76,7 @@ export default class Send extends Component {
 
     async componentDidMount() {
         const { location } = this.props
-        const { id } = parseQuery(location.search)
+        const { id } = query.getParams()
 
         const orderInfo = await Fetch.fetch({
             api: OrderApi.info,

@@ -1,14 +1,9 @@
-
 import React,{ Component } from "react";
-import { connect } from 'dva';
 import { View } from "react-web-dom";
 import { Card, Badge } from 'antd';
 import styles from './index.css'
 
-class SyatemNote extends Component<
-   {},
-   {}
-> {
+export default class SyatemNote extends Component{
    render() {
        const noteList = [
            {
@@ -60,11 +55,3 @@ class SyatemNote extends Component<
        )
    }
 }
-
-const mapStateToProps = ({view}) => {
-   return {
-
-   }
-}
-
-export default connect(mapStateToProps)(SyatemNote)

@@ -7,7 +7,7 @@ import { Row, Col } from "antd";
 import DataDisplay from '@/components/analysis/dataDisplay'
 import Charts from '@/components/analysis/charts'
 
-
+@connect()
 export default class Analysis extends Component {
   render() {
     return (
@@ -22,11 +22,3 @@ export default class Analysis extends Component {
     )
   }
 }
-//
-// const portal = store => {
-//   return {
-//     login: store.app.member.login
-//   }
-// }
-//
-// export default connect(portal)(Index)

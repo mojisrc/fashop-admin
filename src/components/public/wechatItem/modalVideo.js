@@ -1,12 +1,7 @@
-
 import React,{ Component } from "react";
 import { View } from "react-web-dom";
 import styles from "./index.css";
-import Image from '../../image'
 import { Fetch } from '@/utils'
-
-type Props = {}
-type State = {}
 
 export default class ModalVideo extends Component{
     state = {

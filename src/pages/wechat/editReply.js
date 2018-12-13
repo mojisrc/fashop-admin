@@ -1,12 +1,12 @@
 
 import React,{ Component } from 'react'
-import { bindActionCreators } from 'redux';
+
 import { connect } from 'dva';
 import * as actions from "../../actions/wechat/autoReply";
 import { View } from "react-web-dom";
 import { Form, Input, Icon, Button, Select, Radio, Card, Popover, Popconfirm } from "antd";
 import "../../styles/wechat/addReply.less";
-import { Fetch } from "@/utils";
+
 import { formType, historyType, handleSubmitType } from '@/utils/flow'
 
 import RouterBreadcrumb from "@/components/wechat/public/routerBreadcrumb";
@@ -35,7 +35,7 @@ let uuid = 1;
     ({view:{wechatAutoReply:{ autoReplyKeywordsInfo }}}) => ({
         autoReplyKeywordsInfo
     }),
-    dispatch => bindActionCreators(actions,dispatch),
+
 )
 export default class EditReply extends Component {
     state = {
