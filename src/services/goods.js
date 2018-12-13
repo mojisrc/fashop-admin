@@ -80,9 +80,23 @@ export default {
                 method: "POST",
                 data
             });
+        },
+        async edit(data = {}) {
+            return fa.request({
+                url: `goodsspec/edit`,
+                method: "POST",
+                data
+            });
         }
     },
     specValue: {
+        async list(data = {}) {
+            return fa.request({
+                url: `goodsspecvalue/list`,
+                method: "POST",
+                data
+            });
+        },
         async del(data = {}) {
             return fa.request({
                 url: `goodsspecvalue/del`,

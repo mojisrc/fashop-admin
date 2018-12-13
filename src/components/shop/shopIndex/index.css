@@ -1,0 +1,81 @@
+
+.availableListItemWarp{
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+.availableListItemWarp p{
+    font-family: 'PingFangSC-Regular', 'PingFang SC';
+    font-weight: 400;
+    font-style: normal;
+    color: rgba(0, 0, 0, 0.427450980392157);
+    text-align: center;
+    line-height: 44px;
+}
+.imgWarp{
+    position: relative;
+    /* height: 60vh; */
+    max-height: 480px;
+    overflow: hidden;
+    border: 1px solid rgba(0,0,0,0);
+}
+.imgWarp img{
+    width: 100%;
+}
+.hoverShow button:first-child{
+    margin-right: 10px;
+}
+.imgWarp:hover .hoverShow {
+    opacity: 1;
+    -webkit-transition: all .5s;
+    transition: all .5s;
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+}
+.hoverShow ,
+.hoverHide {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    background-color: rgba(0,0,0,.3);
+    opacity: 0;
+    -webkit-transition: all .5s;
+    transition: all .5s;
+    -webkit-transform: translateY(-150%);
+    transform: translateY(-150%);
+}
+
+
+/* myTemplate */
+.myTemplateTop{
+    flex-direction: row;
+    margin:  0 0 20px 0;
+}
+
+.column{
+    text-align: center!important;
+}
+.operation{
+    flex-direction: row;
+    align-items: center;
+}
+.operation a{
+    margin-right: 10px;
+}
+.operation a:last-child{
+    margin-right: 0;
+}
+.portalView > p{
+    margin: 0;
+    font-family: 'PingFangSC-Regular', 'PingFang SC';
+    font-size: 14px;
+    color: rgba(0, 0, 0, 0.427450980392157);
+    margin-bottom: 10px;
+}
+.portalView > p:last-child{
+    margin-top: 12px;
+}

@@ -1,5 +1,5 @@
 import { takeEvery, call, put, select } from 'redux-saga/effects'
-import { Fetch } from '../../utils'
+import { Fetch } from '@/utils'
 import types from '../../constants';
 import { message } from 'antd';
 import { setList } from '../../models/photoGallery';

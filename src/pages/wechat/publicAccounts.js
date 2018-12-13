@@ -1,6 +1,6 @@
 import React,{ Component } from 'react'
 import { bindActionCreators } from 'redux';
-import { connect } from "react-redux";
+import { connect } from 'dva';
 import * as actions from "../../actions/wechat";
 import { View } from "react-web-dom";
 import BindPublicAccountsTrue from "./bindTrue";

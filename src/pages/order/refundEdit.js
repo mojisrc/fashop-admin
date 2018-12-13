@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { View } from "react-web-dom";
-import Page from '../../components/public/page'
+import Page from '@/components/public/page'
 import styles from '../../styles/order/refundEdit.css'
-import RefundDetail from "../../components/order/refundDetail";
-import { publicFunction } from "../../utils";
+import RefundDetail from "@/components/order/refundDetail";
+import { publicFunction } from "@/utils";
 const { parseQuery } = publicFunction
 export default class RefundEdit extends Component {
     render() {

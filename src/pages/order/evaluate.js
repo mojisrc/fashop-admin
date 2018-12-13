@@ -1,18 +1,18 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
-import Page from '../../components/public/page'
+import { connect } from 'dva';
+import Page from '@/components/public/page'
 import Loadable from "react-loadable";
 import { Spin } from "antd";
-import { getRoutes } from "../../utils";
+import { getRoutes } from "@/utils";
 import { Route, Switch } from "react-router-dom";
 const EvaluateListHeader = Loadable({
-    loader: () => import('../../components/order/evaluateListHeader'),
+    loader: () => import('@/components/order/evaluateListHeader'),
     loading: () => {
         return <Spin size="large" className="global-spin" />;
     },
 })
 const EvaluateListTable = Loadable({
-    loader: () => import('../../components/order/evaluateListTable'),
+    loader: () => import('@/components/order/evaluateListTable'),
     loading: () => {
         return <Spin size="large" className="global-spin" />;
     },

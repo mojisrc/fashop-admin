@@ -6,7 +6,7 @@ import InfoColumn from "../../public/info/infoColumn";
 import moment from "moment";
 import { Modal } from "antd";
 import { receive } from "../../../models/refund";
-import { dispatchProps } from "../../../utils/defaultProps";
+import { dispatchProps } from "@/utils/defaultProps";
 import connect from "react-redux/es/connect/connect";
 
 type Props = {

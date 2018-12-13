@@ -1,0 +1,209 @@
+
+.tabs {
+  width: 100%;
+  flex-direction: column;
+  font-size: 14px;
+  border: 1px solid #eeeeee;
+  margin-top:25px;
+}
+
+.oprationView{
+    flex-direction: row;
+    justify-content: center;
+}
+.oprationView a:not(:last-child){
+    margin-right: 10px;
+}
+
+.boxContainers {
+  flex-direction: row;
+  justify-content: space-around;
+  height: 242px;
+}
+
+.imgbox1 {
+  /* width: 43%; */
+  height: 185px;
+  margin:20px 0 23px 0;
+  border: 2px dotted #e4e8eb;
+  cursor: pointer;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.imgbox1:hover {
+  border: 2px dotted #1890ff;
+}
+
+.imgbox1:hover.imgbox1 p {
+  color: #1890ff;
+}
+
+.imgbox1 p {
+  color: #7E8183;
+}
+.smile{
+  margin:10px 20px 9px 20px;
+  font-size:21px;
+  cursor: pointer;
+}
+.smile:hover{
+  color:rgba(250, 164, 16, 0.9);
+
+}
+.title{
+  float:right;
+  margin:10px 20px 9px 20px;
+
+  font-size: 15px;
+}
+.formContainer{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+.view1{
+  flex-direction: row;
+  align-items: center;
+}
+.p1{
+  margin: 0;
+  margin-right: 12px;
+}
+.column{
+  text-align: center !important;
+}
+
+.userClass{
+  flex-direction: column;
+  margin-top: 10px;
+}
+.userList{
+  flex-direction: row;
+  margin-bottom: 20px;
+}
+.div2{
+  /* min-width:64px;
+  min-height: 20px; */
+  padding: 6px 16px;
+  margin-left: 15px;
+  color: #9E9E9E;
+  font-size: 14px;
+  cursor: pointer;
+  align-items:center;
+  justify-content:center;
+  border: 1px solid #fff;
+  overflow: hidden;
+}
+.div2:last-child{
+  margin-right: 0;
+}
+.div2:hover{
+  color:#1890ff;
+}
+.send{
+  width:70px;
+  align-items: flex-end;
+}
+.footerBtn{
+  flex-direction: row;
+  margin-top:35px;
+  align-items: center;
+}
+
+.footerBtn button:not(:last-child){
+  margin-right: 15px;
+}
+.footerView{
+  width: 126px;
+  height: 20px;
+  border-radius: 4px;
+  background-color: rgba(245, 245, 245, 1);
+  border:1px solid rgba(217,217,217,1);
+  justify-content: center;
+  align-items: center;
+  font-size: 10px;
+  cursor: pointer;
+}
+.footerView:hover{
+  background: #fff;
+  color:#111111;
+}
+
+.modalBtn{
+  flex-direction: row;
+  border-top:1px solid #eee;
+  align-items: center;
+  justify-content: flex-end;
+}
+.modalBtn>Button{
+  margin-right: 15px;
+  margin-top: 25px;
+}
+.sendToView{
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 20px;
+}
+.sendToView>span{
+    display: inline-block;
+    font-family: 'PingFangSC-Regular', 'PingFang SC';
+    font-size: 18px;
+    color: rgba(0, 0, 0, 0.847058823529412);
+    text-align: center;
+    margin: 0 10px 0 20px;
+}
+
+
+.itemTitle{
+    align-items: flex-end;
+    justify-content: center;
+    width: 100px;
+    margin-right: 15px;
+    color: rgba(0, 0, 0, 0.647058823529412);
+}
+.broadcastItem{
+    flex-direction: row;
+    align-items: center;
+}
+.broadcastItem button:focus,
+.broadcastItem button{
+    cursor: pointer;
+    display: inline-block;
+    color: rgba(0, 0, 0, 0.447058823529412);
+    padding: 5px 15px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #fff;
+    /* border-color: rgba(216, 216, 216, 1); */
+    border-radius: 4px;
+}
+.broadcastItem .activeSpan:focus,
+.broadcastItem .activeSpan{
+    color: #1890FF;
+    border-color: #1890FF;
+}
+.broadcastItem button:not(:last-child){
+    margin-right: 10px;
+}
+.rangePickerView{
+
+}
+.rangePickerOperation{
+    flex-direction: row;
+    justify-content: flex-end;
+    margin-top: 12px;
+}
+.rangePickerOperation button:first-child{
+    margin-right: 16px;
+}
+.provinceMoreView .broadcastItem:not(:last-child){
+    flex-wrap: wrap;
+    border-bottom: 1px solid #f4f4f4;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+}
+.provinceMoreView .broadcastItem:not(:last-child) button{
+    margin-bottom: 10px;
+}

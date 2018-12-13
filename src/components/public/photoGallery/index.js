@@ -12,9 +12,9 @@ import {
     Spin
 } from "antd";
 import styles from "./index.css";
-import { connect } from "react-redux";
+import { connect } from 'dva';
 import { getPhotoGalleryList } from "../../../models/photoGallery";
-import UploadImage from "../../../components/uploadImage";
+import UploadImage from "../@/components/uploadImage";
 import Image from "../../image";
 
 const TabPane = Tabs.TabPane;

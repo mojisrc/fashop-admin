@@ -1,5 +1,5 @@
 import React,{ Component } from "react";
-import { connect } from "react-redux";
+import { connect } from 'dva';
 import Page from 'components/public/Page'
 import SettingManageConfigHeader from 'components/setting/ManageConfigHeader'
 import SettingManageConfigTable from 'components/setting/ManageConfigTable'

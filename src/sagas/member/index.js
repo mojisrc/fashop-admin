@@ -1,5 +1,5 @@
 import { takeEvery, call, put, } from 'redux-saga/effects'
-import { Fetch, storageModule } from '../../utils'
+import { Fetch, storageModule } from '@/utils'
 import { userLogin, initUserInfoStorage, userSignOut, setUserinfos } from '../../actions/member'
 import types from '../../constants';
 import { replace, push } from 'react-router-redux'

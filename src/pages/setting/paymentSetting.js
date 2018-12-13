@@ -1,11 +1,11 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
+import { connect } from 'dva';
 import {  Tabs } from 'antd';
 import { View } from "react-web-dom";
-import Page from '../../components/public/page'
+import Page from '@/components/public/page'
 import styles from '../../styles/setting/paymentSetting.css'
-import WechatPay from '../../components/setting/paymentSetting/wechatPay'
-import { getHeaders } from '../../utils/index';
+import WechatPay from '@/components/setting/paymentSetting/wechatPay'
+import { getHeaders } from '@/utils/index';
 import { UploadApi } from '../../config/api/upload'
 const TabPane = Tabs.TabPane;
 @connect()

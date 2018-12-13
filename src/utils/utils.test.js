@@ -1,4 +1,4 @@
-import { fixedZero, isUrl } from './utils';
+import { fixedZero, isUrl } from '@/utils';
 
 describe('fixedZero tests', () => {
   it('should not pad large numbers', () => {

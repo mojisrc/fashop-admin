@@ -3,10 +3,10 @@ import React, { Component } from "react";
 import { Row, Col, Button, Input, Select, DatePicker, } from "antd";
 import styles from "./index.css";
 import { View } from "react-web-dom";
-import Query from "../../../utils/query";
+import Query from "@/utils/query";
 import moment from "moment";
 import update from "immutability-helper";
-import { getQueryPath } from "../../../utils";
+import { getQueryPath } from "@/utils";
 
 const InputGroup = Input.Group;
 const Option = Select.Option;

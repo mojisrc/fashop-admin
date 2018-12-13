@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { message } from "antd";
-import OrderDetailView from "../../components/order/orderDetail";
+import OrderDetailView from "@/components/order/orderDetail";
 import { View } from "react-web-dom";
-import { publicFunction } from "../../utils";
+import { publicFunction } from "@/utils";
 import { info } from "../../actions/order"
 const { parseQuery } = publicFunction
 export default class Detail extends Component {

@@ -1,32 +1,25 @@
+import payment from "@/services/payment";
+
 export default {
-  namespace: "payment",
-
-  state: {
-    list: []
-  },
-
-  effects: {
-    * info() {
-      return dispatch => {
-        dispatch({
-          type: types.payment.get_payment_info
-        });
-      };
-    }
-  },
-
-  reducers: {
-    queryList(state, action) {
-      return {
-        ...state,
-        list: action.payload
-      };
+    namespace: "payment",
+    state: {
+        info: {}
     },
-    appendList(state, action) {
-      return {
-        ...state,
-        list: state.list.concat(action.payload)
-      };
+    effects: {
+        * info({ payload }, { call, put }) {
+            const response = yield call(payment.info, payload);
+            yield put({
+                type: "info",
+                payload: response
+            });
+        }
+    },
+    reducers: {
+        info(state, action) {
+            return {
+                ...state,
+                info: action.payload
+            };
+        }
     }
-  }
-}
+};

@@ -1,15 +1,15 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
+import { connect } from 'dva';
 import { Tabs, Row, Col } from 'antd';
 import { View } from "react-web-dom";
-import Page from '../../components/public/page'
+import Page from '@/components/public/page'
 import styles from '../../styles/customer/customerDetail.css'
-import ShoppingInfo from "../../components/user/shoppingInfo";
-import ReceiveInfo from "../../components/user/receiveInfo";
-import Image from "../../components/image";
+import ShoppingInfo from "@/components/user/shoppingInfo";
+import ReceiveInfo from "@/components/user/receiveInfo";
+import Image from "@/components/image";
 import moment from "moment/moment";
 import { info, userStatistics } from "../../actions/user";
-import { publicFunction } from "../../utils";
+import { publicFunction } from "@/utils";
 const { parseQuery } = publicFunction
 
 const TabPane = Tabs.TabPane;

@@ -1,19 +1,19 @@
 import React, { Component } from "react";
 import { bindActionCreators } from 'redux';
 import { View } from "react-web-dom";
-import { connect } from "react-redux";
+import { connect } from 'dva';
 import { Row, Col, Button, Affix, message } from 'antd';
-import Page from '../../components/public/page'
-import PageTool from '../../components/shop/diy/tool'
-import PageView from '../../components/shop/diy/view'
-import PageControl from '../../components/shop/diy/controller'
-import { historyType } from '../../utils/flow'
+import Page from '@/components/public/page'
+import PageTool from '@/components/shop/diy/tool'
+import PageView from '@/components/shop/diy/view'
+import PageControl from '@/components/shop/diy/controller'
+import { historyType } from '@/utils/flow'
 import * as shopDecorateActions from "../../actions/shop/decorate";
 import * as goodsActions from "../../actions/goods";
 import type { optionsType, PageBodyType } from "../../interfaces/page";
-import BaseInfo from '../../components/shop/diy/baseinfo'
+import BaseInfo from '@/components/shop/diy/baseinfo'
 import styles from '../../styles/shop/shopPageEdit.css'
-import Fetch from "../../utils/fetch";
+import Fetch from "@/utils/fetch";
 import { GoodsApi } from "../../config/api/goods";
 @connect(
     ({ view: { goods: { listData }, shop: { shopPageInfo } } }) => ({

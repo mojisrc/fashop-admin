@@ -1,7 +1,7 @@
 
 import React, { Component } from "react";
 import { bindActionCreators } from 'redux';
-import { connect } from "react-redux";
+import { connect } from 'dva';
 import * as actions from "../../../../actions/wechat/material";
 import { View } from "react-web-dom";
 import { Modal, Button, Input, Row, Col, Card, Checkbox, Pagination, Radio, Spin } from "antd";

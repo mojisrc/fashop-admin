@@ -3,9 +3,9 @@ import React, { Component } from "react";
 import { Row, Col, Button, Input, Select, DatePicker } from "antd";
 import styles from "./index.css";
 import { View } from "react-web-dom";
-import { getQueryPath } from "../../../utils"
+import { getQueryPath } from "@/utils"
 import moment from "moment";
-import Query from "../../../utils/query";
+import Query from "@/utils/query";
 import update from 'immutability-helper'
 
 const InputGroup = Input.Group;

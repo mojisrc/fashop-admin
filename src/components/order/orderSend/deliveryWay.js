@@ -1,6 +1,6 @@
 
 import React, { Component } from "react";
-import { connect } from "react-redux";
+import { connect } from 'dva';
 import {
     Form,
     Select,
@@ -10,7 +10,7 @@ import {
 } from 'antd';
 import { View } from "react-web-dom";
 import styles from "./index.css";
-import { formType } from "../../../utils/flow";
+import { formType } from "@/utils/flow";
 
 const FormItem = Form.Item;
 const Option = Select.Option;

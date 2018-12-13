@@ -4,13 +4,13 @@ import { Table, Modal } from "antd";
 import * as ReactDOM from 'react-dom';
 import styles from "./index.css";
 import { View } from "react-web-dom";
-import { connect } from "react-redux";
-import { dispatchType, historyType } from "../../../utils/flow";
-import { dispatchProps } from "../../../utils/defaultProps";
+import { connect } from 'dva';
+
+import { dispatchProps } from "@/utils/defaultProps";
 import moment from "moment/moment";
 import Image from '../../image'
 import { list } from "../../../models/order";
-import Query from "../../../utils/query"
+import Query from "@/utils/query"
 import EditAddress from "../editAddress"
 import EditPrice from "../editPrice"
 

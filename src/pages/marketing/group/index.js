@@ -1,15 +1,15 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
-import Page from '../../../components/public/page/index'
-import { historyType } from '../../../utils/flow'
+import { connect } from 'dva';
+import Page from '../@/components/public/page/index'
+import { historyType } from '@/utils/flow'
 import Loadable from 'react-loadable';
 import { Spin } from "antd";
-import { getRoutes } from "../../../utils/index";
+import { getRoutes } from "@/utils/index";
 import { Redirect, Route, Switch } from "react-router-dom";
-import { dispatchProps } from "../../../utils/defaultProps";
+import { dispatchProps } from "@/utils/defaultProps";
 
 const ListTable = Loadable({
-    loader: () => import('../../../components/marketing/group/listTable/index'),
+    loader: () => import('../@/components/marketing/group/listTable/index'),
     loading: () => {
         return <Spin size="large" className="global-spin" />;
     },

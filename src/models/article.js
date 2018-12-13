@@ -1,33 +1,40 @@
-import { Fetch } from "../utils/index";
-import { ArticleApi } from "../config/api/article";
+import area from "@/services/area";
 
 export default {
-  namespace: "article",
-  state: {
-    list: [],
-    info:[]
-  },
-  effects: {
-    * list({ payload }, { call, put }) {
-      return Fetch.fetch({ api: ArticleApi.list, params });
+    namespace: "article",
+    state: {
+        list: [],
+        info: []
+    },
+    effects: {
+        * list({ payload }, { call, put }) {
+            const response = yield call(area.list, payload);
+            yield put({
+                type: "list",
+                payload: response
+            });
+        },
+        * info({ payload }, { call, put }) {
+            const response = yield call(area.list, payload);
+            yield put({
+                type: "info",
+                payload: response
+            });
+        }
     },
 
-    * info({ payload }, { call, put }) {
-      return Fetch.fetch({ api: ArticleApi.info, params });
+    reducers: {
+        list(state, action) {
+            return {
+                ...state,
+                list: action.payload
+            };
+        },
+        info(state, action) {
+            return {
+                ...state,
+                info: action.payload
+            };
+        }
     }
-  },
-
-  reducers: {
-    queryList(state, action) {
-      return {
-        ...state,
-        list: action.payload
-      };
-    },
-    appendList(state, action) {
-      return {
-        ...state,
-        list: state.list.concat(action.payload)
-      };
-    }
-  }
+}

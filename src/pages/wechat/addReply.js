@@ -1,26 +1,26 @@
 import React,{ Component } from 'react'
 import { bindActionCreators } from 'redux';
-import { connect } from "react-redux";
+import { connect } from 'dva';
 import * as actions from "../../actions/wechat/autoReply";
 import { View } from "react-web-dom";
 import { Form, Input, Icon, Button, Select, Radio, Card, Popover } from "antd";
 import "../../styles/wechat/addReply.less";
-import { formType, historyType, handleSubmitType } from '../../utils/flow'
+import { formType, historyType, handleSubmitType } from '@/utils/flow'
 
-import RouterBreadcrumb from "../../components/wechat/public/routerBreadcrumb";
+import RouterBreadcrumb from "@/components/wechat/public/routerBreadcrumb";
 
-import ModalNews from "../../components/public/wechatItem/modalNews";
-import ModalLocalNews from "../../components/public/wechatItem/modalLocalNews";
-// import ModalVoice from "../../components/public/wechatItem/modalVoice";
-// import ModalVideo from "../../components/public/wechatItem/modalVideo";
+import ModalNews from "@/components/public/wechatItem/modalNews";
+import ModalLocalNews from "@/components/public/wechatItem/modalLocalNews";
+// import ModalVoice from "@/components/public/wechatItem/modalVoice";
+// import ModalVideo from "@/components/public/wechatItem/modalVideo";
 
-import NewsModal from "../../components/public/wechatModal/newsModal";
-import ImageModal from "../../components/public/wechatModal/imageModal";
-import VoiceModal from "../../components/public/wechatModal/voiceModal";
-import VideoModal from "../../components/public/wechatModal/videoModal";
-import TextModal from "../../components/public/wechatModal/textModal";
+import NewsModal from "@/components/public/wechatModal/newsModal";
+import ImageModal from "@/components/public/wechatModal/imageModal";
+import VoiceModal from "@/components/public/wechatModal/voiceModal";
+import VideoModal from "@/components/public/wechatModal/videoModal";
+import TextModal from "@/components/public/wechatModal/textModal";
 
-import Image from "../../components/image";
+import Image from "@/components/image";
 
 const FormItem = Form.Item;
 const InputGroup = Input.Group;

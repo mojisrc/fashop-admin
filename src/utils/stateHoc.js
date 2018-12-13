@@ -4,7 +4,7 @@ import {
     Failure as FailureView,
     Error as ErrorView,
     NullData as NullDataView,
-} from '../components/fetchView';
+} from '@/components/fetchView';
 
 
 const ThisModule = (params = {}) => {

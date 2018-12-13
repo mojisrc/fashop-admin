@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
+import { connect } from 'dva';
 import { Form, Button, Input, Icon } from "antd";
 import { View } from "react-web-dom";
 import styles from '../../styles/user/login.css'

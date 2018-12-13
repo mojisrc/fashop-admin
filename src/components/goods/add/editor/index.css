@@ -1,0 +1,108 @@
+.goodsItem{
+    margin-bottom: 10px;
+}
+.goodsItem h3{
+    font-family: 'PingFangSC-Semibold', 'PingFang SC Semibold', 'PingFang SC', serif;
+    font-weight: 600;
+    font-style: normal;
+    font-size: 16px;
+    color: rgba(0, 0, 0, 0.847058823529412);
+    line-height: 44px;
+}
+.imagesWarp{
+    flex-direction: row;
+}
+.uploadView,
+.imagesItemWarp{
+    width: 104px;
+    height: 104px;
+    border-radius: 4px;
+    border: 1px dashed #ddd;
+    justify-content: center;
+    align-items: center;
+}
+.uploadView{
+    background-color: #fafafa;
+    cursor: pointer;
+}
+.uploadView p{
+    margin: 0;
+}
+.imagesItemWarp{
+    flex-direction: row;
+    margin-left: 10px;
+}
+.imagesItemWarp img{
+    width: 88%;
+    height: 88%;
+}
+.bodyWarp{
+}
+.bodyTop{
+    flex-direction: row;
+    align-items: center;
+}
+.bodyTop p{
+    margin: 0;
+    margin-right: 10px;
+}
+.bodyContentWarp{
+    width: 337px;
+}
+.phoneTop{
+    width: 100%;
+}
+.bodyContent{
+    width: 337px;
+    height: 505px;
+    max-height: 505px;
+    background-color: #f6f6f6;
+    border: 1px solid #e8e8e8;
+    border-bottom: 0;
+    border-top: 0;
+    overflow: hidden;
+}
+.bodyContentScroll{
+    width: 350px;
+    height: 505px;
+    overflow-y: scroll;
+}
+.bodyItem{
+    width: 335px;
+    cursor: pointer;
+    border: 1px dashed rgba(0,0,0,0);
+    position: relative;
+    flex-shrink: 0;
+}
+.bodyItem:hover{
+    border: 1px dashed #188fff;
+}
+.operation{
+    position: absolute;
+    background-color: rgba(0,0,0,0);
+    bottom: 3px;
+    right: 0;
+    flex-direction: row;
+    z-index: 10;
+}
+.operation a{
+    display: inline-block;
+    background-color: rgba(0,0,0,.4);
+    width: 44px;
+    height: 22px;
+    line-height: 22px;
+    color: #fff;
+    margin-right: 3px;
+    border-radius: 2px;
+    text-align: center;
+    font-size: 14px;
+}
+.operation a:hover{
+    background-color: rgba(0,0,0,.2);
+}
+.addModuleBtn{
+    height: 48px;
+    line-height: 48px;
+    border: 1px solid #e8e8e8;
+    border-radius: 0;
+}

@@ -1,10 +1,10 @@
 import React,{ Component } from "react";
-import { connect } from "react-redux";
+import { connect } from 'dva';
 import { Tabs } from 'antd';
 import { View } from "react-web-dom";
-import Page from '../../components/public/page'
+import Page from '@/components/public/page'
 import styles from '../../styles/setting/paymentSetting.css'
-import OrderProcess from '../../components/setting/orderSetting/orderProcess'
+import OrderProcess from '@/components/setting/orderSetting/orderProcess'
 
 const TabPane = Tabs.TabPane;
 

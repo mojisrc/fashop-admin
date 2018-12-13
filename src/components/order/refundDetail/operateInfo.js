@@ -4,7 +4,7 @@ import { Button, Input, InputNumber } from "antd";
 import styles from "./index.css";
 import { View } from "react-web-dom";
 import { handle } from "../../../models/refund";
-import { dispatchProps } from "../../../utils/defaultProps";
+import { dispatchProps } from "@/utils/defaultProps";
 import connect from "react-redux/es/connect/connect";
 const TextArea = Input.TextArea
 const { Fragment } = React

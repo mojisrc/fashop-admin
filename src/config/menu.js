@@ -1,4 +1,4 @@
-import { isUrl } from '../utils/index';
+import { isUrl } from '.@/utils/index';
 
 const menuData = [
     {

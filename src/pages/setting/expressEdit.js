@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { Input, Button, Form, Switch } from 'antd';
-import Page from '../../components/public/page'
-import { connect } from "react-redux";
-import { publicFunction } from "../../utils";
+import Page from '@/components/public/page'
+import { connect } from 'dva';
+import { publicFunction } from "@/utils";
 import { info, edit } from "../../actions/deliver/express";
 const {
     parseQuery

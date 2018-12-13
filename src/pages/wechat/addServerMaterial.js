@@ -1,17 +1,17 @@
 import React,{ Component } from 'react'
 import { bindActionCreators } from 'redux';
-import { connect } from "react-redux";
+import { connect } from 'dva';
 import * as actions from "../../actions/wechat/material";
 import { View } from "react-web-dom";
 import { Row, Col, Card, Form, Input, Button, Upload, Icon, message, Checkbox, Popover, Select } from "antd";
-import RouterBreadcrumb from "../../components/wechat/public/routerBreadcrumb";
+import RouterBreadcrumb from "@/components/wechat/public/routerBreadcrumb";
 import styles from "../../styles/wechat/addServerMaterial.css";
-import { imageUpload } from "../../utils";
+import { imageUpload } from "@/utils";
 import {
     handleSubmitType,
     formType,
     historyType,
-} from "../../utils/flow";
+} from "@/utils/flow";
 
 const FormItem = Form.Item;
 const { TextArea } = Input;

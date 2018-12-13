@@ -1,0 +1,21 @@
+.cardWarp{
+
+}
+.cardWarp>div{
+    margin-bottom: 24px;
+}
+.cardWarp>div:last-child{
+    margin-bottom: 0;
+}
+.addressEmpty{
+    text-align: center;
+}
+.addressEmpty >img{
+    width: 100px;
+    height: 100px;
+    margin: 30px auto 10px auto;
+}
+
+.addressEmpty >p{
+    color: #999999;
+}

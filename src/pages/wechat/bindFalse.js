@@ -1,5 +1,5 @@
 import React from 'react'
-import Page from '../../components/public/page'
+import Page from '@/components/public/page'
 import { View } from 'react-web-dom'
 import styles from '../../../src/styles/wechat/wechatIndex.css'
 import { Button, Table,Icon } from 'antd'

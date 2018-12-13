@@ -1,124 +1,95 @@
+import shop from "@/services/shop";
+
 export default {
-  namespace: "shop",
-  state: {
-    list: []
-  },
-
-  effects: {
-    * info() {
-      return dispatch => {
-        dispatch({
-          type: types.shop.get_shop_info
-        });
-      };
+    namespace: "shop",
+    state: {
+        info: {},
+        setOrderExpires: {},
+        setBaseInfo: {},
+        setGoodsCategoryStyle: {},
+        setColorScheme: {},
+        setPortalTemplate: {}
     },
-
-    * setInfo(state, action) {
-      return dispatch => {
-        dispatch({
-          type: types.shop.save_shop_info,
-          shopInfo: result
-        });
-      };
+    effects: {
+        * info({ payload }, { call, put }) {
+            const response = yield call(shop.info, payload);
+            yield put({
+                type: "info",
+                payload: response
+            });
+        },
+        * setOrderExpires({ payload }, { call, put }) {
+            const response = yield call(shop.setOrderExpires, payload);
+            yield put({
+                type: "setOrderExpires",
+                payload: response
+            });
+        },
+        * setBaseInfo({ payload }, { call, put }) {
+            const response = yield call(shop.setBaseInfo, payload);
+            yield put({
+                type: "setBaseInfo",
+                payload: response
+            });
+        },
+        * setGoodsCategoryStyle({ payload }, { call, put }) {
+            const response = yield call(shop.setGoodsCategoryStyle, payload);
+            yield put({
+                type: "setGoodsCategoryStyle",
+                payload: response
+            });
+        },
+        * setColorScheme({ payload }, { call, put }) {
+            const response = yield call(shop.setColorScheme, payload);
+            yield put({
+                type: "setColorScheme",
+                payload: response
+            });
+        },
+        * setPortalTemplate({ payload }, { call, put }) {
+            const response = yield call(shop.setPortalTemplate, payload);
+            yield put({
+                type: "setPortalTemplate",
+                payload: response
+            });
+        }
     },
-
-    * edit({ payload }, { call, put }) {
-      return dispatch => {
-        dispatch({
-          type: types.shop.edit_shop_info,
-          params
-        });
-      };
-    },
-
-    * editGoodsCategoryStyle({ payload }, { call, put }) {
-      return dispatch => {
-        dispatch({
-          type: types.shop.edit_goods_category_style,
-          params
-        });
-      };
-    },
-
-    * editShopColorScheme({ payload }, { call, put }) {
-      return dispatch => {
-        dispatch({
-          type: types.shop.edit_shop_color_scheme,
-          params
-        });
-      };
-    },
-
-    * editPortalTemplate({ payload }, { call, put }) {
-      return dispatch => {
-        dispatch({
-          type: types.shop.edit_portal_template,
-          params
-        });
-      };
-    },
-
-    * info() {
-      const e = yield call(Fetch.fetch, { api: ShopApi.info });
-      if (e.code === 0) {
-        yield put(setInfo({ result: e.result }));
-      } else {
-        message.warning(e.msg);
-      }
-    },
-
-    * edit({ payload }, { call, put }) {
-      const e = yield call(Fetch.fetch, { api: ShopApi.setBaseInfo, params });
-      if (e.code === 0) {
-        message.success("修改成功！");
-        yield call(info);
-      } else {
-        message.warning(e.msg);
-      }
-    },
-
-    * editGoodsCategoryStyle({ payload }, { call, put }) {
-      const e = yield call(Fetch.fetch, { api: ShopApi.setGoodsCategoryStyle, params });
-      if (e.code === 0) {
-        message.success("成功启用！");
-        yield call(info);
-      } else {
-        message.warning(e.msg);
-      }
-    },
-
-    * editShopColorScheme({ payload }, { call, put }) {
-      const e = yield call(Fetch.fetch, { api: ShopApi.setColorScheme, params });
-      if (e.code === 0) {
-        message.success("操作成功！");
-        yield call(info);
-      } else {
-        message.warning(e.msg);
-      }
-    },
-
-    * editPortalTemplate({ payload }, { call, put }) {
-      const e = yield call(Fetch.fetch, { api: ShopApi.setPortalTemplate, params });
-      if (e.code === 0) {
-        message.success("操作成功！");
-        yield call(info);
-      } else {
-        message.warning(e.msg);
-      }
+    reducers: {
+        info(state, action) {
+            return {
+                ...state,
+                info: action.payload
+            };
+        },
+        setOrderExpires(state, action) {
+            return {
+                ...state,
+                setOrderExpires: action.payload
+            };
+        },
+        setBaseInfo(state, action) {
+            return {
+                ...state,
+                setBaseInfo: action.payload
+            };
+        },
+        setGoodsCategoryStyle(state, action) {
+            return {
+                ...state,
+                setGoodsCategoryStyle: action.payload
+            };
+        },
+        setColorScheme(state, action) {
+            return {
+                ...state,
+                setColorScheme: action.payload
+            };
+        },
+        setPortalTemplate(state, action) {
+            return {
+                ...state,
+                setPortalTemplate: action.payload
+            };
+        }
     }
-  },
-  reducers: {
-    queryList(state, action) {
-      return {
-        ...state,
-        list: action.payload
-      };
-    },
-    appendList(state, action) {
-      return {
-        ...state,
-        list: state.list.concat(action.payload)
-      };
-    }
-  }
 };

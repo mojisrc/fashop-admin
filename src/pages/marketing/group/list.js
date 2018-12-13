@@ -1,12 +1,12 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
-import Page from '../../../components/public/page/index'
-import { dispatchType, historyType } from '../../../utils/flow'
+import { connect } from 'dva';
+import Page from '../@/components/public/page/index'
+import { dispatchType, historyType } from '@/utils/flow'
 import { Button, Divider, Form, Input, Select, Spin, Table } from "antd";
-import { dispatchProps } from "../../../utils/defaultProps";
+import { dispatchProps } from "@/utils/defaultProps";
 import update from "immutability-helper";
-import { getQueryPath } from "../../../utils";
-import Query from "../../../utils/query";
+import { getQueryPath } from "@/utils";
+import Query from "@/utils/query";
 import { View } from "react-web-dom";
 import OrderModel from "../../../models1/order";
 import moment from "moment";

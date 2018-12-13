@@ -1,12 +1,12 @@
 import React,{ Component } from "react";
 import { bindActionCreators } from 'redux';
-import { connect } from "react-redux";
+import { connect } from 'dva';
 import * as actions from "../../actions/shop";
 import { Form, Input,  Button } from 'antd';
 import { View } from "react-web-dom";
-import Page from '../../components/public/page'
-import { formType, handleSubmitType } from '../../utils/flow'
-import UploadImage from "../../components/uploadImage";
+import Page from '@/components/public/page'
+import { formType, handleSubmitType } from '@/utils/flow'
+import UploadImage from "@/components/uploadImage";
 const { TextArea } = Input;
 const FormItem = Form.Item;
 

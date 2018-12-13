@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import {Row,Button} from "antd";
-import Page from "../../components/public/page";
-import MemberTable from "../../components/auth/MemberTable";
-import AddMemberModal from '../../components/auth/addMemberModal'
-import {AuthCom,authHoc} from '../../components/auth/authRules'
-import authSignConfig from '../../utils/authSignConfig'
+import Page from "@/components/public/page";
+import MemberTable from "@/components/auth/MemberTable";
+import AddMemberModal from '@/components/auth/addMemberModal'
+import {AuthCom,authHoc} from '@/components/auth/authRules'
+import authSignConfig from '@/utils/authSignConfig'
 
 @authHoc({
     rules: authSignConfig.auth.member

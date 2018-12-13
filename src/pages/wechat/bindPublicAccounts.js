@@ -1,11 +1,11 @@
 import React,{ Component } from 'react'
 import { bindActionCreators } from 'redux';
-import { connect } from "react-redux";
+import { connect } from 'dva';
 import * as actions from "../../actions/wechat";
 import { Form, Input, Button, Select } from 'antd'
-import Page from '../../components/public/page'
-import UploadImage from "../../components/uploadImage";
-import { formType, historyType } from "../../utils/flow";
+import Page from '@/components/public/page'
+import UploadImage from "@/components/uploadImage";
+import { formType, historyType } from "@/utils/flow";
 
 const { TextArea } = Input
 const FormItem = Form.Item;

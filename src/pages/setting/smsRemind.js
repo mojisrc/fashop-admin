@@ -1,6 +1,6 @@
 import React,{ Component } from "react";
 import {Link} from 'react-router-dom';
-import { connect } from "react-redux";
+import { connect } from 'dva';
 import {Switch,Input,Button,Form, Row, Col, Layout, Table} from 'antd';
 import delivePublic from '../../styles/setting/delivePublic.css'
 import {settingSmspro,sendSmscene} from '../../actions/setting'

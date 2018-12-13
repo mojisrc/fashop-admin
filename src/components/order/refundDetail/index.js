@@ -1,15 +1,15 @@
 
 import React, { Component } from "react";
-import { connect } from "react-redux";
+import { connect } from 'dva';
 import { View } from "react-web-dom";
 import BasicInfo from "./basicInfo";
 import DetailInfo from "./detailInfo";
 import GoodsInfo from "./goodsInfo";
 import OperateInfo from "./operateInfo";
 import TrackingInfo from "./trackingInfo";
-import { publicFunction } from "../../../utils";
+import { publicFunction } from "@/utils";
 import { info } from "../../../models/refund"
-import { dispatchType } from "../../../utils/flow";
+import { dispatchType } from "@/utils/flow";
 import { Spin } from "antd";
 
 const { parseQuery } = publicFunction

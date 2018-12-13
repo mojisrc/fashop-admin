@@ -3,7 +3,7 @@ import {Input,Button,Form, Row, Col, Layout} from 'antd';
 import SmsEdits from '../../styles/setting/smsEdits.css';
 import delivePublic from '../../styles/setting/delivePublic.css';
 import {Link} from 'react-router-dom';
-import { connect } from "react-redux";
+import { connect } from 'dva';
 import { smsScenceedit,sendSmsinfo } from '../../actions/setting'
 import PropTypes from 'prop-types'
 const { Content } = Layout;

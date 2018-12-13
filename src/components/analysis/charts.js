@@ -5,7 +5,7 @@ import styles from './index.css'
 import ReactEcharts from 'echarts-for-react';
 import { StatisticsApi } from "../../config/api/statistics";
 import moment from 'moment'
-import Fetch from "../../utils/fetch";
+import Fetch from "@/utils/fetch";
 
 const TabPane = Tabs.TabPane;
 const { MonthPicker } = DatePicker;

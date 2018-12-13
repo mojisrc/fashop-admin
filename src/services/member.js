@@ -1,9 +1,8 @@
 import fa from "@/fa";
 export default {
-    async del(data = {}) {
+    async list(data = {}) {
         return fa.request({
-            url: `member/del`,
-            method: "POST",
+            method: "GET",
             data
         });
     },
@@ -28,16 +27,17 @@ export default {
             data
         });
     },
-    async list(data = {}) {
-        return fa.request({
-            method: "GET",
-            data
-        });
-    },
     async verifyCode(data = {}) {
         return fa.request({
             url: `member/verifyCode`,
             method: "GET",
+            data
+        });
+    },
+    async del(data = {}) {
+        return fa.request({
+            url: `member/del`,
+            method: "POST",
             data
         });
     },

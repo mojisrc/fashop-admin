@@ -1,21 +1,21 @@
 
 import React,{ Component } from 'react'
 import { bindActionCreators } from 'redux';
-import { connect } from "react-redux";
+import { connect } from 'dva';
 import * as actions from "../../actions/wechat/material";
 import { View } from "react-web-dom";
 import { Row, Col, Card, Form, Input, Button, Upload, Icon, message, Checkbox, Popover } from "antd";
-import RouterBreadcrumb from "../../components/wechat/public/routerBreadcrumb";
+import RouterBreadcrumb from "@/components/wechat/public/routerBreadcrumb";
 import styles from "../../styles/wechat/addMaterial.css";
-import InputFile from "../../components/inputFile";
+import InputFile from "@/components/inputFile";
 import Editor from "react-umeditor";
-import { Fetch } from '../../utils'
+import { Fetch } from '@/utils'
 import { env } from '../../config/root'
 import {
     handleSubmitType,
     formType,
     historyType,
-} from "../../utils/flow";
+} from "@/utils/flow";
 
 const FormItem = Form.Item;
 const { TextArea } = Input;

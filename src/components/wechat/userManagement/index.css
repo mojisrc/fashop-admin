@@ -1,0 +1,64 @@
+.btnGroup {
+    flex-direction: row;
+    justify-content: flex-start;
+    margin-bottom: 24px;
+}
+.btnGroup button:not(:last-child){
+    margin-right: 24px;
+}
+.column{
+    text-align: center !important;
+}
+.tableTitleView{
+    flex-direction: row;
+    justify-content: space-between;
+}
+.tableTitleView p{
+    margin: 0;
+}
+.tableTitleView p:first-child{
+    font-family: 'PingFangSC-Semibold', 'PingFang SC Semibold', 'PingFang SC';
+    font-weight: 650;
+    font-size: 14px;
+    color: rgba(0, 0, 0, 0.847058823529412);
+}
+.tableTitleView p a:not(:last-child){
+    margin-right: 10px;
+}
+
+.paginationView {
+    flex-direction: row;
+    justify-content: flex-end;
+    margin-top: 14px;
+}
+.paginationView a:not(:last-child){
+    margin-right: 24px;
+}
+
+.publicPopoverContentView{
+    padding: 12px 8px;
+}
+.publicPopoverContentBtnGroup{
+    flex-direction: row;
+    justify-content: flex-end;
+    margin-top: 24px;
+}
+.publicPopoverContentBtnGroup button:not(:last-child){
+    margin-right: 24px;
+}
+
+.recordTagView{
+    flex-direction: row;
+    align-items: center;
+}
+.recordTagView>span{
+    margin-right: 8px;
+}
+.avatarView{
+    align-items: center;
+}
+.avatarView img{
+    width: 40px;
+    height: 40px;
+    border-radius: 4px;
+}

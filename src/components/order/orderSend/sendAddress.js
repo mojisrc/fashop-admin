@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import { Form, Select, Card, Row, Col, Alert } from 'antd';
 import { View } from "react-web-dom";
 import styles from "./index.css";
-import { formType } from "../../../utils/flow";
+import { formType } from "@/utils/flow";
 
 const FormItem = Form.Item;
 const Option = Select.Option;

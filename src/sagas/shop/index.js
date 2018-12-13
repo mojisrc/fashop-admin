@@ -3,7 +3,7 @@ import {
     call,
     put
 } from 'redux-saga/effects'
-import { Fetch } from '../../utils'
+import { Fetch } from '@/utils'
 import types from '../../constants';
 import { message } from 'antd';
 import {

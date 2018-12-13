@@ -1,8 +1,8 @@
 import React,{ Component } from "react";
-import { connect } from "react-redux";
-import Page from '../../components/public/page'
-import SettingNodeHeader from '../../components/setting/nodeHeader'
-import SettingNodeTable from '../../components/setting/nodeTable'
+import { connect } from 'dva';
+import Page from '@/components/public/page'
+import SettingNodeHeader from '@/components/setting/nodeHeader'
+import SettingNodeTable from '@/components/setting/nodeTable'
 
 class SettingNode extends Component {
     render() {

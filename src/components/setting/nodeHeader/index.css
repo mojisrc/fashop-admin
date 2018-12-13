@@ -1,0 +1,20 @@
+.div1{
+    padding-left: 12px;
+    padding-right: 12px;
+    margin-bottom: 16px;
+}
+.view1{
+    flex-direction: row;
+    align-items: center;
+}
+.p1{
+    margin-right: 12px;
+}
+.addNodeBtn{
+    flex-direction: row;
+    justify-content: flex-end;
+    padding: 10px;
+}
+.addNodeBtn button:first-child{
+    margin-right: 10px;
+}

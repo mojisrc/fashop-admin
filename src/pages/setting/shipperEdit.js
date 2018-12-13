@@ -1,10 +1,10 @@
 
 import React, { Component } from "react";
 import { Input, Button, Form, Cascader } from 'antd';
-import Page from '../../components/public/page'
+import Page from '@/components/public/page'
 import { cascader } from "../../actions/area";
-import { connect } from "react-redux";
-import { publicFunction } from "../../utils";
+import { connect } from 'dva';
+import { publicFunction } from "@/utils";
 import { info, edit } from "../../actions/deliver/shipper";
 const {
     parseQuery

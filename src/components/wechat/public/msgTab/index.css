@@ -1,0 +1,103 @@
+.tabPaneView{
+    padding: 35px;
+    flex-direction: row;
+}
+.tabPaneView .tabPaneButton{
+    flex: 1;
+    min-height: 180px;
+    border: 1px dashed #ececec;
+    border-radius: 4px;
+}
+.tabPaneView .tabPaneButton:first-child{
+    margin-right: 55px;
+}
+
+.smallTabPaneView{
+    padding: 55px 35px;
+    flex-direction: row;
+}
+.tabPaneButton>span,
+.smallTabPaneButton>span,
+.tabPaneButton>span>div,
+.smallTabPaneButton>span>div,
+.tabPaneButton>span>div>span,
+.smallTabPaneButton>span>div>span{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+.smallTabPaneView .smallTabPaneButton{
+    flex: 1;
+    min-height: 140px;
+    border: 1px dashed #ececec;
+    border-radius: 4px;
+}
+.smallTabPaneView .smallTabPaneButton:first-child{
+    margin-right: 35px;
+}
+
+.textTabView{
+
+}
+.textViewBot{
+    padding: 10px 20px;
+    border-top: 1px solid #f4f4f4;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+.textViewBot p{
+    margin: 0;
+}
+
+.contentItem{
+    border: 1px solid #ececec;
+    border-radius: 4px;
+}
+.contentItem:not(:last-child){
+    margin-bottom: 24px;
+}
+.videoContent{
+    border: 0;
+    flex-direction: row;
+    align-items: center;
+}
+.videoContentIconView{
+    width: 117px;
+    height: 78px;
+    justify-content: center;
+    align-items: center;
+    background-color: #808080;
+}
+.videoContent p{
+    margin-left: 20px;
+}
+.imgContent{
+    width: 208px;
+}
+.newsContent{
+    width: 265px;
+}
+.voiceContent{
+    width: 300px;
+    flex-direction: row;
+    align-items: center;
+    padding: 10px;
+}
+.voiceContent img{
+    width: 70px;
+    height: 70px;
+    border-radius: 4px;
+    background: rgba(246, 246, 246, 1);
+    margin-right: 10px;
+    flex-shrink: 0;
+    cursor: pointer;
+}
+.warp{
+    padding: 20px;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}

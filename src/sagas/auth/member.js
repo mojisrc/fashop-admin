@@ -1,5 +1,5 @@
 import { takeEvery, call, put } from 'redux-saga/effects'
-import { Fetch } from '../../utils'
+import { Fetch } from '@/utils'
 import types from '../../constants';
 import { message } from 'antd';
 import {
@@ -68,7 +68,7 @@ function* editMember({ params, func }) {
 }
 
 
-function* memberDel({ params }) {
+function* delMember({ params }) {
     const e = yield call(Fetch.fetch, { api: MemberApi.del, params })
     if (e.code === 0) {
         message.info('已删除')
@@ -83,7 +83,7 @@ export default function* rootSaga() {
     yield takeEvery(types.member.MEMBER_LIST_LOADING, memberList)
     yield takeEvery(types.member.MEMBER_ADD, addMember)
     yield takeEvery(types.member.MEMBER_EDIT, editMember)
-    yield takeEvery(types.member.MEMBER_DEL, memberDel)
+    yield takeEvery(types.member.MEMBER_DEL, delMember)
 
 
 }

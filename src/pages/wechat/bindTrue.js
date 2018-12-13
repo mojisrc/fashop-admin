@@ -1,20 +1,20 @@
 import React,{ Component } from 'react'
 import { bindActionCreators } from 'redux';
-import { connect } from "react-redux";
+import { connect } from 'dva';
 import * as actions from "../../actions/wechat";
 import { Layout, Menu, Icon, Alert } from 'antd'
 import { View } from 'react-web-dom'
-import Page from '../../components/public/page/index'
+import Page from '@/components/public/page/index'
 import styles from '../../styles/wechat/management.css'
-import { publicFunction } from '../../utils'
+import { publicFunction } from '@/utils'
 
-import SelfMenu from '../../components/wechat/selfMenu'
-import AutoReply from '../../components/wechat/autoReply'
-import MessageSend from '../../components/wechat/message'
-import UserManagement from '../../components/wechat/userManagement'
-import MessageManagement from '../../components/wechat/message'
-import Material from '../../components/wechat/material'
-import PublicAccountsSetting from '../../components/wechat/publicAccountsSetting'
+import SelfMenu from '@/components/wechat/selfMenu'
+import AutoReply from '@/components/wechat/autoReply'
+import MessageSend from '@/components/wechat/message'
+import UserManagement from '@/components/wechat/userManagement'
+import MessageManagement from '@/components/wechat/message'
+import Material from '@/components/wechat/material'
+import PublicAccountsSetting from '@/components/wechat/publicAccountsSetting'
 
 import AddReply from './addReply'
 import EditReply from './editReply'

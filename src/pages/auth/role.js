@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
+import { connect } from 'dva';
 import {
     Tabs,
     Layout,
@@ -14,17 +14,17 @@ import {
 } from "antd";
 import { View } from "react-web-dom";
 import styles from "../../styles/auth/role.css";
-import RoleMembersTable from '../../components/auth/roleMembersTable'
-import RoleAuthTable from '../../components/auth/roleAuthTable'
-import GroupEditModal from '../../components/auth/groupEditModal'
+import RoleMembersTable from '@/components/auth/roleMembersTable'
+import RoleAuthTable from '@/components/auth/roleAuthTable'
+import GroupEditModal from '@/components/auth/groupEditModal'
 import types from '../../constants'
 import {
     addGroup,
     groupDel,
 } from '../../actions/auth/role'
-import EditGroupMemberModal from '../../components/auth/editGroupMemberModal'
-import {AuthCom,authHoc} from '../../components/auth/authRules'
-import authSignConfig from '../../utils/authSignConfig'
+import EditGroupMemberModal from '@/components/auth/editGroupMemberModal'
+import {AuthCom,authHoc} from '@/components/auth/authRules'
+import authSignConfig from '@/utils/authSignConfig'
 const MenuItem = Menu.Item;
 const { Header, Content, Sider } = Layout;
 const TabPane = Tabs.TabPane;

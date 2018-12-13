@@ -1,19 +1,19 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
-import Page from '../../components/public/page'
-import { historyType } from '../../utils/flow'
+import { connect } from 'dva';
+import Page from '@/components/public/page'
+import { historyType } from '@/utils/flow'
 import Loadable from 'react-loadable';
 import { Spin } from "antd";
-import { getRoutes } from "../../utils";
+import { getRoutes } from "@/utils";
 import { Route, Switch } from "react-router-dom";
 const OrderHeader = Loadable({
-    loader: () => import('../../components/order/orderListHeader'),
+    loader: () => import('@/components/order/orderListHeader'),
     loading: () => {
         return <Spin size="large" className="global-spin" />;
     },
 })
 const OrderTable = Loadable({
-    loader: () => import('../../components/order/orderListTable'),
+    loader: () => import('@/components/order/orderListTable'),
     loading: () => {
         return <Spin size="large" className="global-spin" />;
     },

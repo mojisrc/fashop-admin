@@ -2,7 +2,7 @@
 import React, { Component } from "react";
 import { View } from "react-web-dom";
 import { Modal, Tree } from "antd";
-import { connect } from "react-redux";
+import { connect } from 'dva';
 import { list } from "../../../actions/goods/category";
 
 const TreeNode = Tree.TreeNode;

@@ -1,5 +1,5 @@
 import { takeEvery, call, put, select } from 'redux-saga/effects'
-import { Fetch } from '../../utils'
+import { Fetch } from '@/utils'
 import types from '../../constants';
 import { saveList, saveInfo } from '../../models/express'
 import { message } from 'antd';

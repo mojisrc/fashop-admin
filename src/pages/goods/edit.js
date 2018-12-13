@@ -1,18 +1,18 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
+import { connect } from 'dva';
 import { Form, Button, Modal, message } from "antd";
-import Page from '../../components/public/page'
-import Basic from '../../components/goods/add/basic'
-import Detail from '../../components/goods/add/detail'
-import Editor from '../../components/goods/add/editor'
-import Freight from '../../components/goods/add/detail/freight'
-import PhotoGallery from '../../components/public/photoGallery'
-import { formType, handleSubmitType, dispatchType } from '../../utils/flow'
+import Page from '@/components/public/page'
+import Basic from '@/components/goods/add/basic'
+import Detail from '@/components/goods/add/detail'
+import Editor from '@/components/goods/add/editor'
+import Freight from '@/components/goods/add/detail/freight'
+import PhotoGallery from '@/components/public/photoGallery'
+import { formType, handleSubmitType, dispatchType } from '@/utils/flow'
 import { list } from '../../actions/goods/category'
 import { info } from '../../actions/goods'
 import { specList } from '../../actions/goods/spec'
 import { list } from '../../actions/deliver/freight'
-import { Fetch, publicFunction } from "../../utils";
+import { Fetch, publicFunction } from "@/utils";
 import moment from "moment";
 import { GoodsApi } from "../../config/api/goods";
 

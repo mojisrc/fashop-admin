@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Icon, Upload, message } from 'antd';
 import { View } from "react-web-dom";
 import styles from './index.css'
-import { imageUpload } from "../../utils";
+import { imageUpload } from "@/utils";
 import ImageGroup from "./imageGroup";
 
 export default class UploadImage extends Component {

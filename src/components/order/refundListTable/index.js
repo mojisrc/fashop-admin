@@ -4,9 +4,9 @@ import { Table, Button, } from "antd";
 import styles from "./index.css";
 import { View } from "react-web-dom";
 import moment from 'moment'
-import Query from "../../../utils/query";
+import Query from "@/utils/query";
 import { list } from "../../../models/refund";
-import { dispatchProps } from "../../../utils/defaultProps";
+import { dispatchProps } from "@/utils/defaultProps";
 import connect from "react-redux/es/connect/connect";
 
 type Props = {

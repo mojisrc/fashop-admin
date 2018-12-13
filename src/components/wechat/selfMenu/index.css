@@ -1,0 +1,23 @@
+/* jumpWebpage */
+.JumpAppletCardView{
+    min-height: 238px;
+    justify-content: center;
+    align-items: center;
+}
+.JumpAppletCardView p,
+.cardView p{
+    padding-bottom: 10px;
+}
+.cardView p{
+    color: #8d8d8d;
+}
+.cardView a{
+    margin: 10px 0 0 80px;
+}
+.jumpWebpageView{
+    flex-direction: row;
+    align-items: center;
+}
+.jumpWebpageView span{
+    margin-right: 24px;
+}

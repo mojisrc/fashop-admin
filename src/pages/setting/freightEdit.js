@@ -2,13 +2,13 @@ import React, { Component } from "react";
 import { Input,  Button, Modal, Form, Tree, message } from "antd";
 import { Link } from "react-router-dom";
 import styles from "../../styles/freight/freightAdd.css";
-import Page from "../../components/public/page";
-import { formType, handleSubmitType, dispatchType } from '../../utils/flow'
-import FreightAddTable from '../../components/setting/freightAddTable'
-import { connect } from "react-redux";
+import Page from "@/components/public/page";
+import { formType, handleSubmitType, dispatchType } from '@/utils/flow'
+import FreightAddTable from '@/components/setting/freightAddTable'
+import { connect } from 'dva';
 import { areaList } from "../../actions/setting";
 import { View, ScrollView } from "react-web-dom";
-import { Fetch, publicFunction } from "../../utils";
+import { Fetch, publicFunction } from "@/utils";
 import { info } from "../../actions/deliver/freight";
 import {FreightApi} from "../../config/api/freight";
 const {

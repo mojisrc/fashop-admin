@@ -1,0 +1,18 @@
+.imgView{
+    width: 117px;
+    height: 78px;
+    justify-content: center;
+    align-items: center;
+    background-color: #808080;
+}
+.imgView i{
+    color: #666;
+    font-weight: 500;
+    font-size: 18px;
+}
+.operation{
+    flex-direction: row;
+}
+.operation a:not(:last-child){
+    margin-right: 10px;
+}

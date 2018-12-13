@@ -1,11 +1,11 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
+import { connect } from 'dva';
 import { Form, Button, Input } from 'antd';
-import SendAddress from "../../components/order/orderSend/sendAddress";
-import DeliveryWay from "../../components/order/orderSend/deliveryWay";
-import Page from "../../components/public/page";
-import { formType } from "../../utils/flow";
-import { Fetch, publicFunction } from "../../utils";
+import SendAddress from "@/components/order/orderSend/sendAddress";
+import DeliveryWay from "@/components/order/orderSend/deliveryWay";
+import Page from "@/components/public/page";
+import { formType } from "@/utils/flow";
+import { Fetch, publicFunction } from "@/utils";
 import { message } from "antd/lib/index";
 
 import { setSend } from "../../actions/order";

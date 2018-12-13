@@ -1,6 +1,6 @@
 
 import React,{ Component } from "react";
-import { connect } from "react-redux";
+import { connect } from 'dva';
 import { View } from "react-web-dom";
 import styles from './index.css'
 import echarts from 'echarts';

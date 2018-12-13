@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import GoodsCategoryTable from '../../components/goods/categoryTable'
+import GoodsCategoryTable from '@/components/goods/categoryTable'
 import { Route, Switch } from "react-router-dom";
-import { getRoutes } from "../../utils";
-import Page from "../../components/public/page";
+import { getRoutes } from "@/utils";
+import Page from "@/components/public/page";
 export default class GoodsCategory extends Component {
     render() {
         const { match, routerData } = this.props;

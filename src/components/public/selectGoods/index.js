@@ -4,7 +4,7 @@ import { View } from "react-web-dom";
 import { Modal, Input, Checkbox, Pagination, Spin,Button } from "antd";
 import styles from "./index.css";
 import { list } from "../../../models/goods";
-import { connect } from "react-redux";
+import { connect } from 'dva';
 import { ScrollView } from "react-web-dom";
 import Image from '../../image'
 

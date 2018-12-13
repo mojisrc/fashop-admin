@@ -5,12 +5,12 @@ import styles from "./index.css";
 import Image from "../../image";
 import { View } from "react-web-dom";
 import moment from "moment";
-import Query from "../../../utils/query";
+import Query from "@/utils/query";
 import connect from "react-redux/es/connect/connect";
 import { list } from "../../../models/evaluate";
-import { dispatchType } from "../../../utils/flow";
-import PhotoGallery from "../../../components/photoGallery"
-import Fetch from "../../../utils/fetch";
+import { dispatchType } from "@/utils/flow";
+import PhotoGallery from "../@/components/photoGallery"
+import Fetch from "@/utils/fetch";
 import { GoodsApi } from "../../../config/api/goods";
 
 const { TextArea } = Input;

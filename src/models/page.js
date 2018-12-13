@@ -1,6 +1,4 @@
-import Fetch from "@/utils/fetch";
-import { PageApi } from "@/config/api/page";
-
+import area from "@/services/area";
 export default {
   namespace: "page",
 
@@ -69,17 +67,45 @@ export default {
   },
 
   reducers: {
-    queryList(state, action) {
-      return {
-        ...state,
-        list: action.payload
-      };
-    },
-    appendList(state, action) {
-      return {
-        ...state,
-        list: state.list.concat(action.payload)
-      };
-    }
+      * list(state, action) {
+          return {
+              ...state,
+              list: action.payload
+          };
+      },
+
+      * saveList(state, action) {
+          return {
+              ...state,
+              list: action.payload
+          };
+      },
+
+
+      * add(state, action) {
+          return {
+              ...state,
+              list: action.payload
+          };
+      },
+
+      * edit(state, action) {
+          return {
+              ...state,
+              list: action.payload
+          };
+      },
+
+
+      * info(state, action) {
+          return Fetch.fetch({ api: PageApi.info, params });
+      },
+
+      * saveInfo(state, action) {
+          return {
+              ...state,
+              list: action.payload
+          };
+      }
   }
 }

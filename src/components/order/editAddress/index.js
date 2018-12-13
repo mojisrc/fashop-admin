@@ -3,10 +3,10 @@ import React, { Component } from "react";
 import {
     Form, Input, Cascader, message, Spin, Modal
 } from 'antd';
-import { dispatchType, formType } from "../../../utils/flow";
+import { dispatchType, formType } from "@/utils/flow";
 import { cascader } from "../../../models/area";
 import { info } from "../../../models/order";
-import { dispatchProps } from "../../../utils/defaultProps";
+import { dispatchProps } from "@/utils/defaultProps";
 const FormItem = Form.Item;
 
 const formItemLayout = {

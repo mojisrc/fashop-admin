@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
+import { connect } from 'dva';
 import { Tabs } from 'antd';
 import {
     Route,
@@ -7,7 +7,7 @@ import {
     Switch,
 } from "react-router-dom";
 //可配送区域
-import { getRoutes } from "../../utils"
+import { getRoutes } from "@/utils"
 import * as routerRedux from 'react-router-redux';
 const TabPane = Tabs.TabPane;
 @connect()

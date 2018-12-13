@@ -2,7 +2,7 @@
 import React, { Component } from "react";
 import { View } from "react-web-dom";
 import { Modal, Table, Button } from "antd";
-import { connect } from "react-redux";
+import { connect } from 'dva';
 import { list } from "../../../models/decorate";
 import moment from "moment";
 
