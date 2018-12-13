@@ -1,111 +1,86 @@
-import area from "@/services/area";
+import page from "@/services/page";
+
 export default {
-  namespace: "page",
-
-  state: {
-    list: []
-  },
-
-  effects: {
-    * list({ payload }, { call, put }) {
-      return dispatch => {
-        dispatch({
-          type: types.shop.get_shop_page_list,
-          params
-        });
-      };
+    namespace: "page",
+    state: {
+        list: {},
+        info: {},
+        setPagePortal: {},
+        add: {},
+        edit: {}
     },
-
-    * saveList(state, action) {
-      const { page, rows } = params;
-      const { total_number, list } = result;
-      return dispatch => {
-        dispatch({
-          type: types.shop.save_shop_page_list,
-          shopPageList: {
-            page,
-            rows,
-            total_number,
-            list
-          }
-        });
-      };
+    effects: {
+        * list({ payload, callback }, { call, put }) {
+            const response = yield call(page.list, payload);
+            yield put({
+                type: "list",
+                payload: response
+            });
+            if (callback) callback();
+        },
+        * info({ payload, callback }, { call, put }) {
+            const response = yield call(page.info, payload);
+            yield put({
+                type: "info",
+                payload: response
+            });
+            if (callback) callback();
+        },
+        * setPagePortal({ payload, callback }, { call, put }) {
+            const response = yield call(page.setPagePortal, payload);
+            yield put({
+                type: "setPagePortal",
+                payload: response
+            });
+            if (callback) callback();
+        },
+        * add({ payload, callback }, { call, put }) {
+            const response = yield call(page.add, payload);
+            yield put({
+                type: "add",
+                payload: response
+            });
+            if (callback) callback();
+        },
+        * edit({ payload, callback }, { call, put }) {
+            const response = yield call(page.edit, payload);
+            yield put({
+                type: "edit",
+                payload: response
+            });
+            if (callback) callback();
+        }
     },
-
-
-    * add({ payload }, { call, put }) {
-      return dispatch => {
-        dispatch({
-          type: types.shop.add_shop_page,
-          params
-        });
-      };
-    },
-
-    * edit({ payload }, { call, put }) {
-      return dispatch => {
-        dispatch({
-          type: types.shop.edit_shop_page,
-          params
-        });
-      };
-    },
-
-
-    * info({ payload }, { call, put }) {
-      return Fetch.fetch({ api: PageApi.info, params });
-    },
-
-    * saveInfo(state, action) {
-      return dispatch => {
-        dispatch({
-          type: types.shop.set_shop_page_info,
-          shopPageInfo: result
-        });
-      };
+    reducers: {
+        list(state, action) {
+            return {
+                ...state,
+                list: action.payload
+            };
+        },
+        info(state, action) {
+            return {
+                ...state,
+                info: action.payload
+            };
+        },
+        setPagePortal(state, action) {
+            return {
+                ...state,
+                setPagePortal: action.payload
+            };
+        },
+        add(state, action) {
+            return {
+                ...state,
+                add: action.payload
+            };
+        },
+        edit(state, action) {
+            return {
+                ...state,
+                edit: action.payload
+            };
+        }
     }
-  },
-
-  reducers: {
-      * list(state, action) {
-          return {
-              ...state,
-              list: action.payload
-          };
-      },
-
-      * saveList(state, action) {
-          return {
-              ...state,
-              list: action.payload
-          };
-      },
-
-
-      * add(state, action) {
-          return {
-              ...state,
-              list: action.payload
-          };
-      },
-
-      * edit(state, action) {
-          return {
-              ...state,
-              list: action.payload
-          };
-      },
-
-
-      * info(state, action) {
-          return Fetch.fetch({ api: PageApi.info, params });
-      },
-
-      * saveInfo(state, action) {
-          return {
-              ...state,
-              list: action.payload
-          };
-      }
-  }
-}
+};

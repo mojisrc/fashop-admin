@@ -7,19 +7,21 @@ export default {
         info: []
     },
     effects: {
-        * list({ payload }, { call, put }) {
+        * list({ payload, callback }, { call, put }) {
             const response = yield call(area.list, payload);
             yield put({
                 type: "list",
                 payload: response
             });
+            if (callback) callback();
         },
-        * info({ payload }, { call, put }) {
+        * info({ payload, callback }, { call, put }) {
             const response = yield call(area.list, payload);
             yield put({
                 type: "info",
                 payload: response
             });
+            if (callback) callback();
         }
     },
 

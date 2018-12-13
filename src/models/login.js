@@ -13,7 +13,7 @@ export default {
   },
 
   effects: {
-    *login({ payload }, { call, put }) {
+    *login({ payload, callback }, { call, put }) {
       const response = yield call(fakeAccountLogin, payload);
       yield put({
         type: 'changeLoginStatus',
@@ -41,7 +41,7 @@ export default {
       }
     },
 
-    *getCaptcha({ payload }, { call }) {
+    *getCaptcha({ payload, callback }, { call }) {
       yield call(getFakeCaptcha, payload);
     },
 
@@ -66,7 +66,7 @@ export default {
   },
 
   reducers: {
-    changeLoginStatus(state, { payload }) {
+    changeLoginStatus(state, { payload, callback }) {
       setAuthority(payload.currentAuthority);
       return {
         ...state,

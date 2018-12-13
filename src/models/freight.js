@@ -10,40 +10,45 @@ export default {
         del: {}
     },
     effects: {
-        * list({ payload }, { call, put }) {
+        * list({ payload, callback }, { call, put }) {
             const response = yield call(freight.list, payload);
             yield put({
                 type: "list",
                 payload: response
             });
+            if (callback) callback();
         },
-        * info({ payload }, { call, put }) {
+        * info({ payload, callback }, { call, put }) {
             const response = yield call(freight.info, payload);
             yield put({
                 type: "info",
                 payload: response
             });
+            if (callback) callback();
         },
-        * add({ payload }, { call, put }) {
+        * add({ payload, callback }, { call, put }) {
             const response = yield call(freight.add, payload);
             yield put({
                 type: "add",
                 payload: response
             });
+            if (callback) callback();
         },
-        * edit({ payload }, { call, put }) {
+        * edit({ payload, callback }, { call, put }) {
             const response = yield call(freight.edit, payload);
             yield put({
                 type: "edit",
                 payload: response
             });
+            if (callback) callback();
         },
-        * del({ payload }, { call, put }) {
+        * del({ payload, callback }, { call, put }) {
             const response = yield call(freight.del, payload);
             yield put({
                 type: "del",
                 payload: response
             });
+            if (callback) callback();
         }
     },
     reducers: {

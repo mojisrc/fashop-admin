@@ -3,21 +3,11 @@ import { Table, Button, Tag } from "antd";
 import styles from "./index.css";
 import { View } from "react-web-dom";
 import { connect } from "react-redux";
-import { dispatchProps } from "@/utils/defaultProps";
-import { getExpressList, delExpress, setExpressIsCommonlyUse } from "../../../actions/deliver/express";
 import { Modal } from "antd/lib/index";
-import express from "@sservices/express";
 
-@connect(({
-              view: {
-                  express: {
-                      loading,
-                      listData
-                  }
-              }
-          }) => ({
-    loading,
-    listData
+@connect(({ express, loading }) => ({
+    express,
+    loading: loading.models.express,
 }))
 export default class ExpressListTable extends Component {
     state = {
@@ -25,7 +15,6 @@ export default class ExpressListTable extends Component {
         rows: 10
     };
     static defaultProps = {
-        dispatch: dispatchProps,
         loading: false,
         listData: {
             page: 1,
@@ -37,6 +26,9 @@ export default class ExpressListTable extends Component {
 
     getList() {
         const { dispatch } = this.props;
+        dispatch({
+            type: 'express/list',
+        });
         dispatch(getExpressList({ params: { page: this.state.page, rows: this.state.rows } }));
     }
 

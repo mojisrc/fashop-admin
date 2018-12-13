@@ -11,47 +11,53 @@ export default {
         setPortalTemplate: {}
     },
     effects: {
-        * info({ payload }, { call, put }) {
+        * info({ payload, callback }, { call, put }) {
             const response = yield call(shop.info, payload);
             yield put({
                 type: "info",
                 payload: response
             });
+            if (callback) callback();
         },
-        * setOrderExpires({ payload }, { call, put }) {
+        * setOrderExpires({ payload, callback }, { call, put }) {
             const response = yield call(shop.setOrderExpires, payload);
             yield put({
                 type: "setOrderExpires",
                 payload: response
             });
+            if (callback) callback();
         },
-        * setBaseInfo({ payload }, { call, put }) {
+        * setBaseInfo({ payload, callback }, { call, put }) {
             const response = yield call(shop.setBaseInfo, payload);
             yield put({
                 type: "setBaseInfo",
                 payload: response
             });
+            if (callback) callback();
         },
-        * setGoodsCategoryStyle({ payload }, { call, put }) {
+        * setGoodsCategoryStyle({ payload, callback }, { call, put }) {
             const response = yield call(shop.setGoodsCategoryStyle, payload);
             yield put({
                 type: "setGoodsCategoryStyle",
                 payload: response
             });
+            if (callback) callback();
         },
-        * setColorScheme({ payload }, { call, put }) {
+        * setColorScheme({ payload, callback }, { call, put }) {
             const response = yield call(shop.setColorScheme, payload);
             yield put({
                 type: "setColorScheme",
                 payload: response
             });
+            if (callback) callback();
         },
-        * setPortalTemplate({ payload }, { call, put }) {
+        * setPortalTemplate({ payload, callback }, { call, put }) {
             const response = yield call(shop.setPortalTemplate, payload);
             yield put({
                 type: "setPortalTemplate",
                 payload: response
             });
+            if (callback) callback();
         }
     },
     reducers: {

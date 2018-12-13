@@ -10,33 +10,37 @@ export default {
         del: {}
     },
     effects: {
-        * list({ payload }, { call, put }) {
+        * list({ payload, callback }, { call, put }) {
             const response = yield call(spec.list, payload);
             yield put({
                 type: "list",
                 payload: response
             });
+            if (callback) callback();
         },
-        * add({ payload }, { call, put }) {
+        * add({ payload, callback }, { call, put }) {
             const response = yield call(spec.add, payload);
             yield put({
                 type: "add",
                 payload: response
             });
+            if (callback) callback();
         },
-        * edit({ payload }, { call, put }) {
+        * edit({ payload, callback }, { call, put }) {
             const response = yield call(spec.edit, payload);
             yield put({
                 type: "edit",
                 payload: response
             });
+            if (callback) callback();
         },
-        * del({ payload }, { call, put }) {
+        * del({ payload, callback }, { call, put }) {
             const response = yield call(spec.del, payload);
             yield put({
                 type: "del",
                 payload: response
             });
+            if (callback) callback();
         }
     },
     reducers: {

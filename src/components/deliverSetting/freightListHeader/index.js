@@ -1,23 +1,13 @@
-
 import React, { Component } from "react";
-import {
-    Button,
+import {Button,
     Input,
     Select,
     TreeSelect,
     Form,
 } from "antd";
 import { View } from "react-web-dom";
-import { formType,handleSubmitType } from "@/utils/flow";
 import { formdDfaultProps } from "@/utils/defaultProps";
 import { connect } from "react-redux";
-import {
-    getGoodsList,
-} from "../../../actions/goods";
-import { dispatchType } from "@/utils/flow";
-
-
-
 const Search = Input.Search;
 const Option = Select.Option;
 const FormItem = Form.Item;
@@ -85,18 +75,6 @@ const categoryTreeData = (list)=>{
     })
 }
 
-
-type Props = {
-    form: formType,
-    dispatch: dispatchType,
-    listData: {
-        page: number,
-        rows: number,
-        total_number: number,
-    },
-    loading: boolean,
-    list: Array<{name:string,id:number,children:any}>,
-}
 
 
 

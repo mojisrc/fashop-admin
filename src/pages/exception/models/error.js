@@ -9,7 +9,7 @@ export default {
   },
 
   effects: {
-    *query({ payload }, { call, put }) {
+    *query({ payload, callback }, { call, put }) {
       yield call(queryError, payload.code);
       yield put({
         type: 'trigger',

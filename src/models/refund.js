@@ -10,33 +10,37 @@ export default {
         receive: {}
     },
     effects: {
-        * list({ payload }, { call, put }) {
+        * list({ payload, callback }, { call, put }) {
             const response = yield call(refund.list, payload);
             yield put({
                 type: "list",
                 payload: response
             });
+            if (callback) callback();
         },
-        * info({ payload }, { call, put }) {
+        * info({ payload, callback }, { call, put }) {
             const response = yield call(refund.info, payload);
             yield put({
                 type: "info",
                 payload: response
             });
+            if (callback) callback();
         },
-        * handle({ payload }, { call, put }) {
+        * handle({ payload, callback }, { call, put }) {
             const response = yield call(refund.handle, payload);
             yield put({
                 type: "handle",
                 payload: response
             });
+            if (callback) callback();
         },
-        * receive({ payload }, { call, put }) {
+        * receive({ payload, callback }, { call, put }) {
             const response = yield call(refund.receive, payload);
             yield put({
                 type: "receive",
                 payload: response
             });
+            if (callback) callback();
         }
     },
     reducers: {

@@ -11,47 +11,52 @@ export default {
         setIsCommonlyUse: {}
     },
     effects: {
-        * list({ payload }, { call, put }) {
+        * list({ payload, callback }, { call, put }) {
             const response = yield call(express.list, payload);
             yield put({
                 type: "list",
                 payload: response
             });
+            if (callback) callback();
         },
-        * info({ payload }, { call, put }) {
+        * info({ payload, callback }, { call, put }) {
             const response = yield call(express.info, payload);
             yield put({
                 type: "info",
                 payload: response
             });
+            if (callback) callback();
         },
-        * add({ payload }, { call, put }) {
+        * add({ payload, callback }, { call, put }) {
             const response = yield call(express.add, payload);
             yield put({
                 type: "add",
                 payload: response
             });
+            if (callback) callback();
         },
-        * edit({ payload }, { call, put }) {
+        * edit({ payload, callback }, { call, put }) {
             const response = yield call(express.edit, payload);
             yield put({
                 type: "edit",
                 payload: response
             });
+            if (callback) callback();
         },
-        * del({ payload }, { call, put }) {
+        * del({ payload, callback }, { call, put }) {
             const response = yield call(express.del, payload);
             yield put({
                 type: "del",
                 payload: response
             });
         },
-        * setIsCommonlyUse({ payload }, { call, put }) {
+        * setIsCommonlyUse({ payload, callback }, { call, put }) {
             const response = yield call(express.setIsCommonlyUse, payload);
             yield put({
                 type: "setIsCommonlyUse",
                 payload: response
             });
+            if (callback) callback();
         }
     },
     reducers: {

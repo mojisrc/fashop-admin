@@ -6,14 +6,15 @@ export default {
         cascader: []
     },
     effects: {
-        * list({ payload }, { call, put }) {
+        * list({ payload, callback }, { call, put }) {
             const response = yield call(area.list, payload);
             yield put({
                 type: "list",
                 payload: response
             });
+            if (callback) callback();
         },
-        * cascader({ payload }, { call, put }) {
+        * cascader({ payload, callback }, { call, put }) {
             const response = yield call(area.list, { level: 2, tree: 1 });
             let result;
             if (response instanceof Error) {
@@ -43,6 +44,7 @@ export default {
                 type: "cascader",
                 payload: result
             });
+            if (callback) callback();
         }
     },
 

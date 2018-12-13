@@ -9,26 +9,29 @@ export default {
         display: {}
     },
     effects: {
-        * list({ payload }, { call, put }) {
+        * list({ payload, callback }, { call, put }) {
             const response = yield call(evaluate.list, payload);
             yield put({
                 type: "list",
                 payload: response
             });
+            if (callback) callback();
         },
-        * reply({ payload }, { call, put }) {
+        * reply({ payload, callback }, { call, put }) {
             const response = yield call(evaluate.reply, payload);
             yield put({
                 type: "reply",
                 payload: response
             });
+            if (callback) callback();
         },
-        * display({ payload }, { call, put }) {
+        * display({ payload, callback }, { call, put }) {
             const response = yield call(evaluate.display, payload);
             yield put({
                 type: "display",
                 payload: response
             });
+            if (callback) callback();
         }
     },
     reducers: {

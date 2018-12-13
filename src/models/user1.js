@@ -9,33 +9,37 @@ export default {
         statistics: {}
     },
     effects: {
-        * list({ payload }, { call, put }) {
+        * list({ payload, callback }, { call, put }) {
             const response = yield call(user.list, payload);
             yield put({
                 type: "list",
                 payload: response
             });
+            if (callback) callback();
         },
-        * info({ payload }, { call, put }) {
+        * info({ payload, callback }, { call, put }) {
             const response = yield call(user.info, payload);
             yield put({
                 type: "info",
                 payload: response
             });
+            if (callback) callback();
         },
-        * address({ payload }, { call, put }) {
+        * address({ payload, callback }, { call, put }) {
             const response = yield call(user.address, payload);
             yield put({
                 type: "address",
                 payload: response
             });
+            if (callback) callback();
         },
-        * statistics({ payload }, { call, put }) {
+        * statistics({ payload, callback }, { call, put }) {
             const response = yield call(user.statistics, payload);
             yield put({
                 type: "statistics",
                 payload: response
             });
+            if (callback) callback();
         }
     },
     reducers: {

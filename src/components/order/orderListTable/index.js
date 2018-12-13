@@ -1,6 +1,5 @@
-
 import React, { Component } from "react";
-import { Table, Modal } from "antd";
+import { Table } from "antd";
 import * as ReactDOM from 'react-dom';
 import styles from "./index.css";
 import { View } from "react-web-dom";
@@ -13,43 +12,6 @@ import { list } from "../../../models/order";
 import Query from "@/utils/query"
 import EditAddress from "../editAddress"
 import EditPrice from "../editPrice"
-
-type Props = {
-    history: historyType,
-    dispatch: dispatchType,
-    orderListLoading: boolean,
-    list: Function,
-    orderList: {
-        page: number,
-        rows: number,
-        total_number: number,
-        list: Array<{
-            extend_order_extend: {
-                reciver_name: string,
-                reciver_info: {
-                    address: string,
-                    name: string,
-                    phone: string,
-                    rows?: number
-                },
-                remark: string,
-            },
-            extend_order_goods: Array<{
-                reciver_info: {
-                    address: string,
-                    name: string,
-                    phone: string,
-                    rows?: number
-                },
-                rows: number,
-            }>
-        }>,
-    },
-}
-type State = {
-    orderId: number,
-    expandedRowKeys: Array<string>
-}
 @connect(({
               view: {
                   order: {
@@ -71,7 +33,6 @@ export default class OrderManagementTable extends Component   {
     }
     state = {
         orderId: 0,
-        visible: false,
         visible: false,
         expandedRowKeys: []
     }

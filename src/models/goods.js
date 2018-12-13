@@ -12,47 +12,53 @@ export default {
     },
 
     effects: {
-        * list({ payload }, { call, put }) {
+        * list({ payload, callback }, { call, put }) {
             const response = yield call(goods.list, payload);
             yield put({
                 type: "list",
                 payload: response
             });
+            if (callback) callback();
         },
-        * info({ payload }, { call, put }) {
+        * info({ payload, callback }, { call, put }) {
             const response = yield call(goods.info, payload);
             yield put({
                 type: "info",
                 payload: response
             });
+            if (callback) callback();
         },
-        * offSale({ payload }, { call, put }) {
+        * offSale({ payload, callback }, { call, put }) {
             const response = yield call(goods.offSale, payload);
             yield put({
                 type: "offSale",
                 payload: response
             });
+            if (callback) callback();
         },
-        * onSale({ payload }, { call, put }) {
+        * onSale({ payload, callback }, { call, put }) {
             const response = yield call(goods.onSale, payload);
             yield put({
                 type: "onSale",
                 payload: response
             });
+            if (callback) callback();
         },
-        * batchDownshelf({ payload }, { call, put }) {
+        * batchDownshelf({ payload, callback }, { call, put }) {
             const response = yield call(goods.batchDownshelf, payload);
             yield put({
                 type: "batchDownshelf",
                 payload: response
             });
+            if (callback) callback();
         },
-        * batchUpshelf({ payload }, { call, put }) {
+        * batchUpshelf({ payload, callback }, { call, put }) {
             const response = yield call(goods.batchUpshelf, payload);
             yield put({
                 type: "batchUpshelf",
                 payload: response
             });
+            if (callback) callback();
         }
 
     },

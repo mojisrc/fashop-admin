@@ -25,7 +25,7 @@ export default {
         }
       });
     },
-    * clearNotices({ payload }, { put, select }) {
+    * clearNotices({ payload, callback }, { put, select }) {
       yield put({
         type: "saveClearedNotices",
         payload
@@ -42,7 +42,7 @@ export default {
         }
       });
     },
-    * changeNoticeReadState({ payload }, { put, select }) {
+    * changeNoticeReadState({ payload, callback }, { put, select }) {
       const notices = yield select(state =>
         state.global.notices.map(item => {
           const notice = { ...item };
@@ -67,19 +67,19 @@ export default {
   },
 
   reducers: {
-    changeLayoutCollapsed(state, { payload }) {
+    changeLayoutCollapsed(state, { payload, callback }) {
       return {
         ...state,
         collapsed: payload
       };
     },
-    saveNotices(state, { payload }) {
+    saveNotices(state, { payload, callback }) {
       return {
         ...state,
         notices: payload
       };
     },
-    saveClearedNotices(state, { payload }) {
+    saveClearedNotices(state, { payload, callback }) {
       return {
         ...state,
         notices: state.notices.filter(item => item.type !== payload)

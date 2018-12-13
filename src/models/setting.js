@@ -90,7 +90,7 @@ export default {
                 ...setting
             };
         },
-        changeSetting(state, { payload }) {
+        changeSetting(state, { payload, callback }) {
             const urlParams = new URL(window.location.href);
             Object.keys(defaultSettings).forEach(key => {
                 if (urlParams.searchParams.has(key)) {

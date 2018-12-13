@@ -16,75 +16,85 @@ export default {
     },
 
     effects: {
-        * list({ payload }, { call, put }) {
+        * list({ payload, callback }, { call, put }) {
             const response = yield call(member.list, payload);
             yield put({
                 type: "list",
                 payload: response
             });
+            if (callback) callback();
         },
-        * token({ payload }, { call, put }) {
+        * token({ payload, callback }, { call, put }) {
             const response = yield call(member.token, payload);
             yield put({
                 type: "token",
                 payload: response
             });
+            if (callback) callback();
         },
-        * selfEdit({ payload }, { call, put }) {
+        * selfEdit({ payload, callback }, { call, put }) {
             const response = yield call(member.selfEdit, payload);
             yield put({
                 type: "selfEdit",
                 payload: response
             });
+            if (callback) callback();
         },
-        * add({ payload }, { call, put }) {
+        * add({ payload, callback }, { call, put }) {
             const response = yield call(member.add, payload);
             yield put({
                 type: "add",
                 payload: response
             });
+            if (callback) callback();
         },
-        * verifyCode({ payload }, { call, put }) {
+        * verifyCode({ payload, callback }, { call, put }) {
             const response = yield call(member.verifyCode, payload);
             yield put({
                 type: "verifyCode",
                 payload: response
             });
+            if (callback) callback();
         },
-        * del({ payload }, { call, put }) {
+        * del({ payload, callback }, { call, put }) {
             const response = yield call(member.del, payload);
             yield put({
                 type: "del",
                 payload: response
             });
+            if (callback) callback();
         },
-        * logout({ payload }, { call, put }) {
+        * logout({ payload, callback }, { call, put }) {
             const response = yield call(member.logout, payload);
             yield put({
                 type: "logout",
                 payload: response
             });
+            if (callback) callback();
         },
-        * self({ payload }, { call, put }) {
+        * self({ payload, callback }, { call, put }) {
             const response = yield call(member.self, payload);
             yield put({
                 type: "self",
                 payload: response
             });
+            if (callback) callback();
         },
-        * selfPassword({ payload }, { call, put }) {
+        * selfPassword({ payload, callback }, { call, put }) {
             const response = yield call(member.selfPassword, payload);
             yield put({
                 type: "selfPassword",
                 payload: response
             });
+            if (callback) callback();
         },
-        * login({ payload }, { call, put }) {
+        * login({ payload, callback }, { call, put }) {
             const response = yield call(member.login, payload);
             yield put({
                 type: "login",
                 payload: response
             });
+            if (callback) callback();
         }
 
     },

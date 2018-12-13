@@ -6,12 +6,13 @@ export default {
         info: {}
     },
     effects: {
-        * info({ payload }, { call, put }) {
+        * info({ payload, callback }, { call, put }) {
             const response = yield call(payment.info, payload);
             yield put({
                 type: "info",
                 payload: response
             });
+            if (callback) callback();
         }
     },
     reducers: {

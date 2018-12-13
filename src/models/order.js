@@ -9,33 +9,37 @@ export default {
         setOrderExpires: {}
     },
     effects: {
-        * list({ payload }, { call, put }) {
+        * list({ payload, callback }, { call, put }) {
             const response = yield call(order.list, payload);
             yield put({
                 type: "list",
                 payload: response
             });
+            if (callback) callback();
         },
-        * info({ payload }, { call, put }) {
+        * info({ payload, callback }, { call, put }) {
             const response = yield call(order.info, payload);
             yield put({
                 type: "info",
                 payload: response
             });
+            if (callback) callback();
         },
-        * setSend({ payload }, { call, put }) {
+        * setSend({ payload, callback }, { call, put }) {
             const response = yield call(order.setSend, payload);
             yield put({
                 type: "setSend",
                 payload: response
             });
+            if (callback) callback();
         },
-        * setOrderExpires({ payload }, { call, put }) {
+        * setOrderExpires({ payload, callback }, { call, put }) {
             const response = yield call(order.setOrderExpires, payload);
             yield put({
                 type: "setOrderExpires",
                 payload: response
             });
+            if (callback) callback();
         }
     },
     reducers: {

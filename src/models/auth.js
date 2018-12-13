@@ -14,61 +14,69 @@ export default {
         groupMemberList: {}
     },
     effects: {
-        * groupAuthorise({ payload }, { call, put }) {
+        * groupAuthorise({ payload, callback }, { call, put }) {
             const response = yield call(auth.groupAuthorise, payload);
             yield put({
                 type: "groupAuthorise",
                 payload: response
             });
+            if (callback) callback();
         },
-        * ruleTree({ payload }, { call, put }) {
+        * ruleTree({ payload, callback }, { call, put }) {
             const response = yield call(auth.ruleTree, payload);
             yield put({
                 type: "ruleTree",
                 payload: response
             });
+            if (callback) callback();
         },
-        * groupList({ payload }, { call, put }) {
+        * groupList({ payload, callback }, { call, put }) {
             const response = yield call(auth.groupList, payload);
             yield put({
                 type: "groupList",
                 payload: response
             });
+            if (callback) callback();
         },
-        * groupInfo({ payload }, { call, put }) {
+        * groupInfo({ payload, callback }, { call, put }) {
             const response = yield call(auth.groupInfo, payload);
             yield put({
                 type: "groupInfo",
                 payload: response
             });
+            if (callback) callback();
         },
-        * groupAdd({ payload }, { call, put }) {
+        * groupAdd({ payload, callback }, { call, put }) {
             const response = yield call(auth.groupAdd, payload);
             yield put({
                 type: "groupAdd",
                 payload: response
             });
+            if (callback) callback();
         },
-        * groupEdit({ payload }, { call, put }) {
+        * groupEdit({ payload, callback }, { call, put }) {
             const response = yield call(auth.groupEdit, payload);
             yield put({
                 type: "groupEdit",
                 payload: response
             });
+            if (callback) callback();
         },
-        * groupDel({ payload }, { call, put }) {
+        * groupDel({ payload, callback }, { call, put }) {
             const response = yield call(auth.groupDel, payload);
             yield put({
                 type: "groupDel",
                 payload: response
             });
+            if (callback) callback();
         },
-        * groupMemberList({ payload }, { call, put }) {
+        * groupMemberList({ payload, callback }, { call, put }) {
             const response = yield call(auth.groupMemberList, payload);
             yield put({
                 type: "groupMemberList",
                 payload: response
             });
+            if (callback) callback();
         }
     },
 
