@@ -3,7 +3,7 @@ import fa from "@/fa";
 export default {
     provider: {
         async edit(data = {}) {
-            return await fa.request({
+            return fa.request({
                 url: `Smsprovider/edit`,
                 method: "POST",
                 data
@@ -12,7 +12,7 @@ export default {
     },
     scene: {
         async edit(data = {}) {
-            return await fa.request({
+            return fa.request({
                 url: `Smsscene/edit`,
                 method: "POST",
                 data
@@ -20,7 +20,7 @@ export default {
 
         },
         async info(data = {}) {
-            return await fa.request({
+            return fa.request({
                 url: `Smsscene/info`,
                 method: "GET",
                 data
@@ -28,14 +28,14 @@ export default {
 
         },
         async list(data = {}) {
-            return await fa.request({
+            return fa.request({
                 url: `Smsscene/list`,
                 method: "GET",
                 data
             });
         },
         async add(data = {}) {
-            return await fa.request({
+            return fa.request({
                 url: `goods/add`,
                 method: "POST",
                 data
