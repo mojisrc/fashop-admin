@@ -2,7 +2,7 @@
 /* eslint-disable no-restricted-globals */
 workbox.core.setCacheNameDetails({
   prefix: 'fashop',
-  suffix: 'v1',
+  suffix: 'v2',
 });
 // Control all opened tabs ASAP
 workbox.clientsClaim();
