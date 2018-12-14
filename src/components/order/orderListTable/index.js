@@ -16,8 +16,7 @@ import router from "umi/router";
     orderList: list.result,
     orderListLoading: loading.effects["order/list"]
 }))
-
-export default class OrderListTable extends Component {
+class OrderListTable extends Component {
     static defaultProps = {
         orderListLoading: false,
         orderList: {}
@@ -239,7 +238,7 @@ export default class OrderListTable extends Component {
                     columns={columns}
                     expandedRowRender={record => (
                         <Table
-                            dataSource={record.extend_order_goods ? record.extend_order_goods : []}
+                            dataSource={record.extend_order_goods}
                             columns={expandedRowColumns}
                             pagination={false}
                             defaultExpandAllRows={true}
@@ -247,11 +246,7 @@ export default class OrderListTable extends Component {
                         />
                     )}
                     onExpand={(expanded, record) => {
-                        if (expanded) {
-                            expandedRowKeys.push(record.id);
-                        } else {
-                            expandedRowKeys = expandedRowKeys.filter(v => v !== record.id);
-                        }
+                        expanded ? expandedRowKeys.push(record.id) : expandedRowKeys = expandedRowKeys.filter(v => v !== record.id);
                         this.setState({ expandedRowKeys });
                     }}
                     expandedRowKeys={expandedRowKeys}
@@ -289,3 +284,5 @@ export default class OrderListTable extends Component {
         }
     }
 }
+
+export default OrderListTable;
