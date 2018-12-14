@@ -2,7 +2,7 @@ import fetch from "dva/fetch";
 import { notification } from "antd";
 import router from "umi/router";
 import hash from "hash.js";
-import { isAntdPro } from "@/utils";
+// import { isAntdPro } from "@/utils";
 
 const codeMessage = {
     200: "服务器成功返回请求的数据。",
@@ -65,7 +65,7 @@ const cachedSave = (response, hashcode) => {
  */
 export default function request(url, option) {
     const options = {
-        expirys: isAntdPro(),
+        // expirys: isAntdPro(),
         ...option
     };
     /**
@@ -130,13 +130,12 @@ export default function request(url, option) {
             return response.json();
         })
         .catch(e => {
-            console.log(e)
             const status = e.name;
             if (status === 401) {
                 // @HACK
                 /* eslint-disable no-underscore-dangle */
                 // window.g_app._store.dispatch({
-                //     type: "login/logout"
+                //     type: "member/logout"
                 // });
                 return;
             }
@@ -152,6 +151,6 @@ export default function request(url, option) {
             if (status >= 404 && status < 422) {
                 // router.push("/exception/404");
             }
-            return e
+            return e;
         });
 }

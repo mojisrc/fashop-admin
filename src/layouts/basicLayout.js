@@ -59,12 +59,17 @@ class BasicLayout extends React.PureComponent {
 
     componentDidMount() {
         const {
+            member,
             dispatch,
             route: { routes, authority }
         } = this.props;
         dispatch({
-            type: "user/fetchCurrent"
+            type: "member/self",
+            callback:()=>{
+                console.log(member)
+            }
         });
+        console.log('componentDidMount')
         dispatch({
             type: "setting/getSetting"
         });
@@ -220,7 +225,7 @@ class BasicLayout extends React.PureComponent {
     }
 }
 
-export default connect(({ global, setting, menu }) => ({
+export default connect(({ global, setting, menu,member}) => ({
     collapsed: global.collapsed,
     layout: setting.layout,
     menuData: menu.menuData,

@@ -1,12 +1,25 @@
 import request from "@/utils/request";
 import Query from "@/utils/query";
+import qs from "qs";
+
 export default {
-    query : new Query(),
+    query: new Query(),
     async request(options) {
-        return request(`https://127.0.0.1/admin/${options.url}`, {
-            "Access-Token": "xxx",
-            "method": options.method,
-            "body": options.data
-        });
+        const url = `${options.url}${options.data ? (options.url.indexOf("?") === -1 ? "?" : "&") + qs.stringify(options.data) : ""}`;
+        const token = JSON.parse(localStorage.getItem("token")) ?? null;
+
+        const data = {
+            method: options.method,
+            ...(options.method === "GET") ? {} : { body: options.data },
+            ...(token === null ? {} : { headers: { "Access-Token": token.accessToken } })
+        };
+        const result = await request(url, data);
+        if (result.code === 10005) {
+            window.g_app._store.dispatch({
+                type: "member/logout"
+            });
+        } else {
+            return result;
+        }
     }
 };

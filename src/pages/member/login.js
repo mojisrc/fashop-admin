@@ -3,7 +3,6 @@ import { connect } from 'dva';
 import { Form, Button, Input, Icon } from "antd";
 import { View } from "react-web-dom";
 import styles from '@/styles/user/login.css'
-import types from '../../constants';
 
 const FormItem = Form.Item
 

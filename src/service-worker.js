@@ -1,7 +1,7 @@
 /* globals workbox */
 /* eslint-disable no-restricted-globals */
 workbox.core.setCacheNameDetails({
-  prefix: 'antd-pro',
+  prefix: 'fashop',
   suffix: 'v1',
 });
 // Control all opened tabs ASAP
