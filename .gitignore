@@ -5,9 +5,7 @@ npm-debug.log*
 # umi
 .umi
 .umi-production
-.vscode
 .vscode/settings.json
-package-lock.json
 # dependencies
 /node_modules
 # testing
@@ -26,8 +24,6 @@ yarn-debug.log*
 *.ipr
 *svn/
 .idea/
-*.jar
-yarn.lock
-yarn-error.log
 /build/*
 /dist/*
+.temp/*
