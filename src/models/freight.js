@@ -16,7 +16,7 @@ export default {
                 type: "list",
                 payload: response
             });
-            if (callback) callback();
+            if (callback) callback(response);
         },
         * info({ payload, callback }, { call, put }) {
             const response = yield call(freight.info, payload);
@@ -24,7 +24,7 @@ export default {
                 type: "info",
                 payload: response
             });
-            if (callback) callback();
+            if (callback) callback(response);
         },
         * add({ payload, callback }, { call, put }) {
             const response = yield call(freight.add, payload);
@@ -32,7 +32,7 @@ export default {
                 type: "add",
                 payload: response
             });
-            if (callback) callback();
+            if (callback) callback(response);
         },
         * edit({ payload, callback }, { call, put }) {
             const response = yield call(freight.edit, payload);
@@ -40,7 +40,7 @@ export default {
                 type: "edit",
                 payload: response
             });
-            if (callback) callback();
+            if (callback) callback(response);
         },
         * del({ payload, callback }, { call, put }) {
             const response = yield call(freight.del, payload);
@@ -48,7 +48,7 @@ export default {
                 type: "del",
                 payload: response
             });
-            if (callback) callback();
+            if (callback) callback(response);
         }
     },
     reducers: {

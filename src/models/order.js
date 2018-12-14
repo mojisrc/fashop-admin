@@ -12,56 +12,56 @@ export default {
         * list({ payload, callback }, { call, put }) {
             const response = yield call(order.list, payload);
             yield put({
-                type: "list",
+                type: "_list",
                 payload: response
             });
-            if (callback) callback();
+            if (callback) callback(response);
         },
         * info({ payload, callback }, { call, put }) {
             const response = yield call(order.info, payload);
             yield put({
-                type: "info",
+                type: "_info",
                 payload: response
             });
-            if (callback) callback();
+            if (callback) callback(response);
         },
         * setSend({ payload, callback }, { call, put }) {
             const response = yield call(order.setSend, payload);
             yield put({
-                type: "setSend",
+                type: "_setSend",
                 payload: response
             });
-            if (callback) callback();
+            if (callback) callback(response);
         },
         * setOrderExpires({ payload, callback }, { call, put }) {
             const response = yield call(order.setOrderExpires, payload);
             yield put({
-                type: "setOrderExpires",
+                type: "_setOrderExpires",
                 payload: response
             });
-            if (callback) callback();
+            if (callback) callback(response);
         }
     },
     reducers: {
-        list(state, action) {
+        _list(state, action) {
             return {
                 ...state,
                 list: action.payload
             };
         },
-        info(state, action) {
+        _info(state, action) {
             return {
                 ...state,
                 info: action.payload
             };
         },
-        setSend(state, action) {
+        _setSend(state, action) {
             return {
                 ...state,
                 setSend: action.payload
             };
         },
-        setOrderExpires(state, action) {
+        _setOrderExpires(state, action) {
             return {
                 ...state,
                 setOrderExpires: action.payload

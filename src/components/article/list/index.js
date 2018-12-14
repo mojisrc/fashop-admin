@@ -5,7 +5,7 @@ import styles from "./index.css";
 import moment from "moment";
 import Image from "../../image";
 
-import { GoodsApi } from "@/config/api/article";
+import { GoodsApi } from "@/services/article";
 import Query from "@/utils/query";
 
 export default class TableList extends Component {

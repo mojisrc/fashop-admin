@@ -12,7 +12,7 @@ export default {
                 type: "list",
                 payload: response
             });
-            if (callback) callback();
+            if (callback) callback(response);
         },
         * cascader({ payload, callback }, { call, put }) {
             const response = yield call(area.list, { level: 2, tree: 1 });
@@ -44,7 +44,7 @@ export default {
                 type: "cascader",
                 payload: result
             });
-            if (callback) callback();
+            if (callback) callback(response);
         }
     },
 

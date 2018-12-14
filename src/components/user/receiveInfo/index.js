@@ -4,7 +4,7 @@ import { View } from "react-web-dom";
 import { Card, Pagination } from 'antd';
 import styles from './index.css'
 import InfoRow from '../../public/info/infoRow'
-import { UserApi } from "@/config/api/user";
+import { UserApi } from "@/services/user";
 //
 // type Props = {
 //     user_id: number,

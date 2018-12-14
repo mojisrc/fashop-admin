@@ -9,7 +9,7 @@ import styles from "./index.css";
 import Query from "@/utils/query";
 import { getShopPageList, setShopPagePortal } from "@/actions/shop/decorate";
 
-import { PageApi } from "@/config/api/page";
+import { PageApi } from "@/services/page";
 
 const InputGroup = Input.Group
 // type Props = {

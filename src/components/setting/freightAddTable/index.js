@@ -56,7 +56,7 @@ import styles from './index.css'
 
 export default class FreightAddTable extends Component {
 
-    componentWillReceiveProps(nextProps: Props) {
+    componentWillReceiveProps(nextProps) {
         if (this.props.dataSource !== nextProps.dataSource) {
             const { onChange } = this.props
             if (typeof onChange === 'function') {

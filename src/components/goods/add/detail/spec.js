@@ -28,7 +28,7 @@ export default class GoodsSpec extends Component {
         }
     }
 
-    componentWillReceiveProps(nextProps: Props) {
+    componentWillReceiveProps(nextProps) {
         if (this.state.loaded === false && nextProps.skus !== this.props.skus) {
             this.setState({
                 loaded: true

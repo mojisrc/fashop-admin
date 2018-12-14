@@ -27,7 +27,7 @@ export default {
                 type: "_list",
                 payload: response
             });
-            if (callback) callback();
+            if (callback) callback(response);
         },
         * token({ payload, callback }, { call, put }) {
             const response = yield call(member.token, payload);
@@ -35,7 +35,7 @@ export default {
                 type: "_token",
                 payload: response
             });
-            if (callback) callback();
+            if (callback) callback(response);
         },
         * selfEdit({ payload, callback }, { call, put }) {
             const response = yield call(member.selfEdit, payload);
@@ -43,7 +43,7 @@ export default {
                 type: "_selfEdit",
                 payload: response
             });
-            if (callback) callback();
+            if (callback) callback(response);
         },
         * add({ payload, callback }, { call, put }) {
             const response = yield call(member.add, payload);
@@ -51,7 +51,7 @@ export default {
                 type: "_add",
                 payload: response
             });
-            if (callback) callback();
+            if (callback) callback(response);
         },
         * verifyCode({ payload, callback }, { call, put }) {
             const response = yield call(member.verifyCode, payload);
@@ -59,7 +59,7 @@ export default {
                 type: "_verifyCode",
                 payload: response
             });
-            if (callback) callback();
+            if (callback) callback(response);
         },
         * del({ payload, callback }, { call, put }) {
             const response = yield call(member.del, payload);
@@ -67,7 +67,7 @@ export default {
                 type: "_del",
                 payload: response
             });
-            if (callback) callback();
+            if (callback) callback(response);
         },
         * logout({ payload, callback }, { call, put }) {
             reloadAuthorized();
@@ -80,7 +80,7 @@ export default {
                 })
             );
             localStorage.setItem("token", null);
-            if (callback) callback();
+            if (callback) callback(response);
         },
         * self({ payload, callback }, { call, put }) {
             const response = yield call(member.self, payload);
@@ -88,15 +88,15 @@ export default {
                 type: "_self",
                 payload: response
             });
-            if (callback) callback();
+            if (callback) callback(response);
         },
         * selfPassword({ payload, callback }, { call, put }) {
             const response = yield call(member.selfPassword, payload);
             yield put({
-                type: "selfPassword",
+                type: "_selfPassword",
                 payload: response
             });
-            if (callback) callback();
+            if (callback) callback(response);
         },
         * login({ payload, callback }, { call, put }) {
             const response = yield call(member.login, payload);
@@ -129,7 +129,7 @@ export default {
                 }
                 yield put(routerRedux.replace(redirect || '/'));
             }
-            if (callback) callback();
+            if (callback) callback(response);
         }
 
     },

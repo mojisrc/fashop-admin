@@ -25,7 +25,7 @@ export default class DeliveryWay extends Component {
         deliver_address: '',
     }
 
-    componentWillReceiveProps(nextProps: Props) {
+    componentWillReceiveProps(nextProps) {
         const { express_id, tracking_no ,need_express} = this.props
         if (express_id !== nextProps.express_id || tracking_no !== nextProps.tracking_no || need_express !== nextProps.need_express) {
             const { onChange } = this.props

@@ -40,7 +40,7 @@ const Search = Input.Search;
 }))
 export default class SelectGoods extends Component {
 
-    constructor(props: Props) {
+    constructor(props) {
         super(props);
         this.state = {
             multiSelect: props.multiSelect ? props.multiSelect : false,

@@ -40,7 +40,7 @@ type State = {
     })
 )
 export default class SelectPage extends Component {
-    constructor(props: Props) {
+    constructor(props) {
         super(props);
         this.state = {
             value: props.value ? props.value : null

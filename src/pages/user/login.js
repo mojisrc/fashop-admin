@@ -12,8 +12,7 @@ const { UserName, Password, Submit } = Login;
     submitting: loading.effects["member/login"]
 }))
 class LoginPage extends Component {
-    state = {
-    };
+    state = {};
 
     handleSubmit = (err, values) => {
         const { type } = this.state;

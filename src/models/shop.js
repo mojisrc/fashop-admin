@@ -17,7 +17,7 @@ export default {
                 type: "info",
                 payload: response
             });
-            if (callback) callback();
+            if (callback) callback(response);
         },
         * setOrderExpires({ payload, callback }, { call, put }) {
             const response = yield call(shop.setOrderExpires, payload);
@@ -25,7 +25,7 @@ export default {
                 type: "setOrderExpires",
                 payload: response
             });
-            if (callback) callback();
+            if (callback) callback(response);
         },
         * setBaseInfo({ payload, callback }, { call, put }) {
             const response = yield call(shop.setBaseInfo, payload);
@@ -33,7 +33,7 @@ export default {
                 type: "setBaseInfo",
                 payload: response
             });
-            if (callback) callback();
+            if (callback) callback(response);
         },
         * setGoodsCategoryStyle({ payload, callback }, { call, put }) {
             const response = yield call(shop.setGoodsCategoryStyle, payload);
@@ -41,7 +41,7 @@ export default {
                 type: "setGoodsCategoryStyle",
                 payload: response
             });
-            if (callback) callback();
+            if (callback) callback(response);
         },
         * setColorScheme({ payload, callback }, { call, put }) {
             const response = yield call(shop.setColorScheme, payload);
@@ -49,7 +49,7 @@ export default {
                 type: "setColorScheme",
                 payload: response
             });
-            if (callback) callback();
+            if (callback) callback(response);
         },
         * setPortalTemplate({ payload, callback }, { call, put }) {
             const response = yield call(shop.setPortalTemplate, payload);
@@ -57,7 +57,7 @@ export default {
                 type: "setPortalTemplate",
                 payload: response
             });
-            if (callback) callback();
+            if (callback) callback(response);
         }
     },
     reducers: {

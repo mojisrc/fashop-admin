@@ -43,7 +43,7 @@ export default class OrderDetailBasicInfo extends Component {
         );
     }
 
-    returnRefundType(type: number) {
+    returnRefundType(type) {
         switch (type) {
             case 1:
                 return '仅退款'
@@ -55,7 +55,7 @@ export default class OrderDetailBasicInfo extends Component {
         }
     }
 
-    returnRefundState(state: number) {
+    returnRefundState(state) {
         switch (state) {
             case 0:
                 return '未处理'

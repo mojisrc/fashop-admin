@@ -16,7 +16,7 @@ export default {
                 type: "list",
                 payload: response
             });
-            if (callback) callback();
+            if (callback) callback(response);
         },
         * info({ payload, callback }, { call, put }) {
             const response = yield call(refund.info, payload);
@@ -24,7 +24,7 @@ export default {
                 type: "info",
                 payload: response
             });
-            if (callback) callback();
+            if (callback) callback(response);
         },
         * handle({ payload, callback }, { call, put }) {
             const response = yield call(refund.handle, payload);
@@ -32,7 +32,7 @@ export default {
                 type: "handle",
                 payload: response
             });
-            if (callback) callback();
+            if (callback) callback(response);
         },
         * receive({ payload, callback }, { call, put }) {
             const response = yield call(refund.receive, payload);
@@ -40,7 +40,7 @@ export default {
                 type: "receive",
                 payload: response
             });
-            if (callback) callback();
+            if (callback) callback(response);
         }
     },
     reducers: {

@@ -54,7 +54,7 @@ export default class GoodsCategoryTable extends Component {
         dispatch(getGoodsCategoryList())
     }
 
-    componentWillReceiveProps(nextProps: Props) {
+    componentWillReceiveProps(nextProps) {
         if (nextProps.categoryTree !== this.props.categoryTree) {
             this.setState({
                 expandedRowKeys: getExpandedRowKeys(nextProps.categoryTree)

@@ -20,7 +20,7 @@ export default {
                 type: "groupAuthorise",
                 payload: response
             });
-            if (callback) callback();
+            if (callback) callback(response);
         },
         * ruleTree({ payload, callback }, { call, put }) {
             const response = yield call(auth.ruleTree, payload);
@@ -28,7 +28,7 @@ export default {
                 type: "ruleTree",
                 payload: response
             });
-            if (callback) callback();
+            if (callback) callback(response);
         },
         * groupList({ payload, callback }, { call, put }) {
             const response = yield call(auth.groupList, payload);
@@ -36,7 +36,7 @@ export default {
                 type: "groupList",
                 payload: response
             });
-            if (callback) callback();
+            if (callback) callback(response);
         },
         * groupInfo({ payload, callback }, { call, put }) {
             const response = yield call(auth.groupInfo, payload);
@@ -44,7 +44,7 @@ export default {
                 type: "groupInfo",
                 payload: response
             });
-            if (callback) callback();
+            if (callback) callback(response);
         },
         * groupAdd({ payload, callback }, { call, put }) {
             const response = yield call(auth.groupAdd, payload);
@@ -52,7 +52,7 @@ export default {
                 type: "groupAdd",
                 payload: response
             });
-            if (callback) callback();
+            if (callback) callback(response);
         },
         * groupEdit({ payload, callback }, { call, put }) {
             const response = yield call(auth.groupEdit, payload);
@@ -60,7 +60,7 @@ export default {
                 type: "groupEdit",
                 payload: response
             });
-            if (callback) callback();
+            if (callback) callback(response);
         },
         * groupDel({ payload, callback }, { call, put }) {
             const response = yield call(auth.groupDel, payload);
@@ -68,7 +68,7 @@ export default {
                 type: "groupDel",
                 payload: response
             });
-            if (callback) callback();
+            if (callback) callback(response);
         },
         * groupMemberList({ payload, callback }, { call, put }) {
             const response = yield call(auth.groupMemberList, payload);
@@ -76,7 +76,7 @@ export default {
                 type: "groupMemberList",
                 payload: response
             });
-            if (callback) callback();
+            if (callback) callback(response);
         }
     },
 

@@ -207,7 +207,7 @@ export default class RefundHeader extends Component  {
         );
     }
 
-    returnSearchValue(serachValue: string) {
+    returnSearchValue(serachValue) {
         switch (serachValue) {
             case 'goods_name':
                 return '商品名称'

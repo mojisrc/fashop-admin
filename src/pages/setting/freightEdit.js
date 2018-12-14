@@ -8,9 +8,9 @@ import FreightAddTable from '@/components/setting/freightAddTable'
 import { connect } from 'dva';
 import { areaList } from "../../actions/setting";
 import { View, ScrollView } from "react-web-dom";
-import { Fetch, publicFunction } from "@/utils";
+
 import { info } from "../../actions/deliver/freight";
-import {FreightApi} from "@/config/api/freight";
+import {FreightApi} from "@/services/freight";
 const {
     parseQuery
 } = publicFunction

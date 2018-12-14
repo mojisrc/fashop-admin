@@ -18,7 +18,7 @@ export default {
                 type: "list",
                 payload: response
             });
-            if (callback) callback();
+            if (callback) callback(response);
         },
         * info({ payload, callback }, { call, put }) {
             const response = yield call(category.info, payload);
@@ -26,7 +26,7 @@ export default {
                 type: "info",
                 payload: response
             });
-            if (callback) callback();
+            if (callback) callback(response);
         },
         * add({ payload, callback }, { call, put }) {
             const response = yield call(category.add, payload);
@@ -34,7 +34,7 @@ export default {
                 type: "add",
                 payload: response
             });
-            if (callback) callback();
+            if (callback) callback(response);
         },
         * edit({ payload, callback }, { call, put }) {
             const response = yield call(category.edit, payload);
@@ -42,7 +42,7 @@ export default {
                 type: "edit",
                 payload: response
             });
-            if (callback) callback();
+            if (callback) callback(response);
         },
         * del({ payload, callback }, { call, put }) {
             const response = yield call(category.del, payload);
@@ -50,7 +50,7 @@ export default {
                 type: "del",
                 payload: response
             });
-            if (callback) callback();
+            if (callback) callback(response);
         },
         * sort({ payload, callback }, { call, put }) {
             const response = yield call(category.sort, payload);
@@ -58,7 +58,7 @@ export default {
                 type: "sort",
                 payload: response
             });
-            if (callback) callback();
+            if (callback) callback(response);
         }
     },
     reducers: {

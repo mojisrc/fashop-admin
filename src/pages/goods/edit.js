@@ -8,7 +8,7 @@ import Editor from '@/components/goods/add/editor'
 import Freight from '@/components/goods/add/detail/freight'
 import PhotoGallery from '@/components/public/photoGallery'
 
-import { Fetch, publicFunction } from "@/utils";
+
 import moment from "moment";
 import GoodsApi from "@/services/goods";
 

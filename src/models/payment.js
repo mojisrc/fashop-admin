@@ -12,7 +12,7 @@ export default {
                 type: "info",
                 payload: response
             });
-            if (callback) callback();
+            if (callback) callback(response);
         }
     },
     reducers: {

@@ -4,7 +4,7 @@ import { Alert, Switch, Form, Input, Button, message, Upload, Icon } from 'antd'
 import { View, Text } from "react-web-dom";
 import styles from './index.css'
 
-import { PaymentApi } from "@/config/api/payment";
+import { PaymentApi } from "@/services/payment";
 //
 // type Props = {
 //     form: formType,

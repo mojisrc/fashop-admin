@@ -16,7 +16,7 @@ export default {
                 type: "list",
                 payload: response
             });
-            if (callback) callback();
+            if (callback) callback(response);
         },
         * info({ payload, callback }, { call, put }) {
             const response = yield call(page.info, payload);
@@ -24,7 +24,7 @@ export default {
                 type: "info",
                 payload: response
             });
-            if (callback) callback();
+            if (callback) callback(response);
         },
         * setPagePortal({ payload, callback }, { call, put }) {
             const response = yield call(page.setPagePortal, payload);
@@ -32,7 +32,7 @@ export default {
                 type: "setPagePortal",
                 payload: response
             });
-            if (callback) callback();
+            if (callback) callback(response);
         },
         * add({ payload, callback }, { call, put }) {
             const response = yield call(page.add, payload);
@@ -40,7 +40,7 @@ export default {
                 type: "add",
                 payload: response
             });
-            if (callback) callback();
+            if (callback) callback(response);
         },
         * edit({ payload, callback }, { call, put }) {
             const response = yield call(page.edit, payload);
@@ -48,7 +48,7 @@ export default {
                 type: "edit",
                 payload: response
             });
-            if (callback) callback();
+            if (callback) callback(response);
         }
     },
     reducers: {

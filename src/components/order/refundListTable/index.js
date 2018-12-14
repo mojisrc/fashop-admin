@@ -51,11 +51,11 @@ export default class RefundTable extends Component {
         dispatch(list({ params }))
     }
 
-    onSelectChange = (selectedRowKeys: Array<string>) => {
+    onSelectChange = (selectedRowKeys) => {
         this.setState({ selectedRowKeys });
     }
 
-    returnRefundState(state: number) {
+    returnRefundState(state) {
         switch (state) {
             case 0:
                 return <span style={{ color: 'red' }}>未处理</span>

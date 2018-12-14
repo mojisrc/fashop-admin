@@ -15,7 +15,7 @@ export default {
                 type: "list",
                 payload: response
             });
-            if (callback) callback();
+            if (callback) callback(response);
         },
         * reply({ payload, callback }, { call, put }) {
             const response = yield call(evaluate.reply, payload);
@@ -23,7 +23,7 @@ export default {
                 type: "reply",
                 payload: response
             });
-            if (callback) callback();
+            if (callback) callback(response);
         },
         * display({ payload, callback }, { call, put }) {
             const response = yield call(evaluate.display, payload);
@@ -31,7 +31,7 @@ export default {
                 type: "display",
                 payload: response
             });
-            if (callback) callback();
+            if (callback) callback(response);
         }
     },
     reducers: {

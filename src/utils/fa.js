@@ -5,7 +5,7 @@ import qs from "qs";
 export default {
     query: new Query(),
     async request(options) {
-        const url = `${options.url}${options.data ? (options.url.indexOf("?") === -1 ? "?" : "&") + qs.stringify(options.data) : ""}`;
+        const url = `${options.url}${Object.keys(options.data).length > 0 ? (options.url.indexOf("?") === -1 ? "?" : "&") + qs.stringify(options.data) : ""}`;
         const token = JSON.parse(localStorage.getItem("token")) ?? null;
 
         const data = {

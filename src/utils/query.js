@@ -94,7 +94,7 @@ export default class Query {
 
     static page(page = 1, rows = 10) {
         const { historyPrefix } = window.fashop
-        const path = Query.getPath(window.location.pathname.replace(__DEV__ ? historyPrefix : historyPrefix, ''), {
+        const path = Query.getPath(window.location.pathname.replace(process.env.NODE_ENV === "production" && APP_TYPE !== "site" ? historyPrefix : historyPrefix, ''), {
             ...Query.getQuery(),
             page,
             rows

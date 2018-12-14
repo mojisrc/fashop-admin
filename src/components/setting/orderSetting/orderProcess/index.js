@@ -4,7 +4,7 @@ import { Alert, Form, InputNumber, Row, Col, Button, message } from 'antd';
 import { View } from "react-web-dom";
 import { sendOrderSet } from '@/actions/order';
 import styles from './index.css'
-import { ShopApi } from "@/config/api/shop";
+import { ShopApi } from "@/services/shop";
 
 const FormItem = Form.Item;
 // type Props = {

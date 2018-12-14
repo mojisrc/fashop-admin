@@ -13,7 +13,7 @@ export default {
                 type: "list",
                 payload: response
             });
-            if (callback) callback();
+            if (callback) callback(response);
         },
         * add({ payload, callback }, { call, put }) {
             const response = yield call(image.add, payload);
@@ -21,7 +21,7 @@ export default {
                 type: "add",
                 payload: response
             });
-            if (callback) callback();
+            if (callback) callback(response);
         }
     },
     reducers: {

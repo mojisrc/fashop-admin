@@ -15,7 +15,7 @@ export default {
                 type: "list",
                 payload: response
             });
-            if (callback) callback();
+            if (callback) callback(response);
         },
         * info({ payload, callback }, { call, put }) {
             const response = yield call(user.info, payload);
@@ -23,7 +23,7 @@ export default {
                 type: "info",
                 payload: response
             });
-            if (callback) callback();
+            if (callback) callback(response);
         },
         * address({ payload, callback }, { call, put }) {
             const response = yield call(user.address, payload);
@@ -31,7 +31,7 @@ export default {
                 type: "address",
                 payload: response
             });
-            if (callback) callback();
+            if (callback) callback(response);
         },
         * statistics({ payload, callback }, { call, put }) {
             const response = yield call(user.statistics, payload);
@@ -39,7 +39,7 @@ export default {
                 type: "statistics",
                 payload: response
             });
-            if (callback) callback();
+            if (callback) callback(response);
         }
     },
     reducers: {

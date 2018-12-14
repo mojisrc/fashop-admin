@@ -16,7 +16,7 @@ export default {
                 type: "list",
                 payload: response
             });
-            if (callback) callback();
+            if (callback) callback(response);
         },
         * add({ payload, callback }, { call, put }) {
             const response = yield call(spec.add, payload);
@@ -24,7 +24,7 @@ export default {
                 type: "add",
                 payload: response
             });
-            if (callback) callback();
+            if (callback) callback(response);
         },
         * edit({ payload, callback }, { call, put }) {
             const response = yield call(spec.edit, payload);
@@ -32,7 +32,7 @@ export default {
                 type: "edit",
                 payload: response
             });
-            if (callback) callback();
+            if (callback) callback(response);
         },
         * del({ payload, callback }, { call, put }) {
             const response = yield call(spec.del, payload);
@@ -40,7 +40,7 @@ export default {
                 type: "del",
                 payload: response
             });
-            if (callback) callback();
+            if (callback) callback(response);
         }
     },
     reducers: {

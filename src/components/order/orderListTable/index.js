@@ -4,29 +4,20 @@ import * as ReactDOM from "react-dom";
 import styles from "./index.css";
 import { View } from "react-web-dom";
 import { connect } from "dva";
-
-
 import moment from "moment/moment";
 import Image from "../../image";
 import { list } from "@/models/order";
 import Query from "@/utils/query";
 import EditAddress from "../editAddress";
 import EditPrice from "../editPrice";
+import router from "umi/router";
 
-@connect(({
-              view: {
-                  order: {
-                      orderList,
-                      orderListLoading
-                  }
-              }
-          }) => ({
-    orderList,
-    orderListLoading
+@connect(({ order: { list }, loading }) => ({
+    orderList: list.result,
+    orderListLoading: loading.effects["order/list"]
 }))
 
-
-export default class OrderManagementTable extends Component {
+export default class OrderListTable extends Component {
     static defaultProps = {
         orderListLoading: false,
         orderList: {}
@@ -34,37 +25,47 @@ export default class OrderManagementTable extends Component {
     state = {
         orderId: 0,
         visible: false,
-        expandedRowKeys: []
+        expandedRowKeys: [],
+        get: {}
     };
 
     componentDidMount() {
+        this.initList();
+    }
+
+    initList() {
         const { dispatch } = this.props;
-        const params = Query.invokerForListParams([
+        const get = Query.invokerForListParams([
             { key: "state", rule: ["eq", "all"] },
             { key: "keywords_type", rule: ["rely", "keywords"] }
         ]);
-        if (params["create_time"] !== undefined) {
-            params["create_time"] = [moment(params["create_time"][0]).unix(), moment(params["create_time"][1]).unix()];
+        if (get["create_time"] !== undefined) {
+            get["create_time"] = [moment(get["create_time"][0]).unix(), moment(get["create_time"][1]).unix()];
         }
-        dispatch(list({ params }));
+        dispatch({
+            type: "order/list",
+            payload: {
+                page: get.page,
+                rows: get.rows
+            },
+            callback: (response) => {
+                const { result: { list } } = response;
+                this.setState({
+                    get,
+                    expandedRowKeys: Array.isArray(list) ? list.map((item) => item.id) : []
+                });
+            }
+        });
     }
 
-    componentWillReceiveProps(nextProps: Props) {
-        if (nextProps.orderList.list !== this.props.orderList.list) {
-            this.setState({
-                expandedRowKeys: nextProps.orderList.list.map((item: any) => item.id)
-            });
-        }
-    }
-
-    onSelectChange = (selectedRowKeys: Array<string>) => {
+    onSelectChange = (selectedRowKeys) => {
     };
 
     render() {
         const { orderList, orderListLoading } = this.props;
-        const { orderId, expandedRowKeys } = this.state;
+        let { expandedRowKeys, get } = this.state;
         let { list } = orderList;
-        if (list) {
+        if (Array.isArray(list)) {
             list.map((item) => {
                 item.extend_order_goods.map((goods) => {
                     goods["reciver_info"] = item.extend_order_extend.reciver_info;
@@ -73,7 +74,6 @@ export default class OrderManagementTable extends Component {
                 });
                 return item;
             });
-
         }
 
         const columns = [
@@ -233,7 +233,7 @@ export default class OrderManagementTable extends Component {
 
         return (
             <View>
-                {orderList.list ? <Table
+                <Table
                     loading={orderListLoading}
                     dataSource={orderList.list ? orderList.list : []}
                     columns={columns}
@@ -247,7 +247,6 @@ export default class OrderManagementTable extends Component {
                         />
                     )}
                     onExpand={(expanded, record) => {
-                        let expandedRowKeys = this.state.expandedRowKeys;
                         if (expanded) {
                             expandedRowKeys.push(record.id);
                         } else {
@@ -259,20 +258,21 @@ export default class OrderManagementTable extends Component {
                     pagination={{
                         showSizeChanger: false,
                         showQuickJumper: false,
-                        pageSize: orderList.rows,
-                        total: orderList.total_number,
-                        current: orderList.page
+                        current: get.page,
+                        pageSize: get.rows,
+                        total: orderList.total_number
                     }}
                     onChange={({ current, pageSize }) => {
-                        this.props.history.push(Query.page(current, pageSize));
+                        router.push(Query.page(current, pageSize));
+                        this.initList();
                     }}
                     rowKey={record => record.id}
-                /> : ""}
+                />
             </View>
         );
     }
 
-    returnOrderState(state: number) {
+    returnOrderState(state) {
         switch (state) {
             case 0:
                 return "已取消";

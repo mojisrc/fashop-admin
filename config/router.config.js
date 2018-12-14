@@ -32,9 +32,15 @@ export default [
             {
                 path: "/order",
                 routes: [
-                    { path: "/order/detail", component: "/order/detail" }
+                    { path: "/order", redirect: "/order/list" },
+                    { path: "/order/list", component: "/order/list" },
+                    { path: "/order/detail", component: "/order/detail" },
+                    { path: "/order/evaluate", component: "/order/evaluate" },
+                    { path: "/order/refund", component: "/order/refund" },
+                    { path: "/order/refundEdit", component: "/order/refundEdit" },
+                    { path: "/order/send", component: "/order/send" },
                 ]
-            }
+            },
         ]
     }
 ];

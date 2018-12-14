@@ -219,7 +219,7 @@ export default class ListTable extends Component   {
         )
     }
 
-    returnOrderState(state: number) {
+    returnOrderState(state) {
         switch (state) {
             case 0:
                 return '已取消'

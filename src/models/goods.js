@@ -18,7 +18,7 @@ export default {
                 type: "list",
                 payload: response
             });
-            if (callback) callback();
+            if (callback) callback(response);
         },
         * info({ payload, callback }, { call, put }) {
             const response = yield call(goods.info, payload);
@@ -26,7 +26,7 @@ export default {
                 type: "info",
                 payload: response
             });
-            if (callback) callback();
+            if (callback) callback(response);
         },
         * offSale({ payload, callback }, { call, put }) {
             const response = yield call(goods.offSale, payload);
@@ -34,7 +34,7 @@ export default {
                 type: "offSale",
                 payload: response
             });
-            if (callback) callback();
+            if (callback) callback(response);
         },
         * onSale({ payload, callback }, { call, put }) {
             const response = yield call(goods.onSale, payload);
@@ -42,7 +42,7 @@ export default {
                 type: "onSale",
                 payload: response
             });
-            if (callback) callback();
+            if (callback) callback(response);
         },
         * batchDownshelf({ payload, callback }, { call, put }) {
             const response = yield call(goods.batchDownshelf, payload);
@@ -50,7 +50,7 @@ export default {
                 type: "batchDownshelf",
                 payload: response
             });
-            if (callback) callback();
+            if (callback) callback(response);
         },
         * batchUpshelf({ payload, callback }, { call, put }) {
             const response = yield call(goods.batchUpshelf, payload);
@@ -58,7 +58,7 @@ export default {
                 type: "batchUpshelf",
                 payload: response
             });
-            if (callback) callback();
+            if (callback) callback(response);
         }
 
     },

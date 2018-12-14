@@ -20,7 +20,7 @@ export default class EvaluateListHeader extends Component {
         goods: []
     }
 
-    async componentWillReceiveProps(nextProps: Props) {
+    async componentWillReceiveProps(nextProps) {
         if (nextProps.orderId !== this.props.orderId) {
             await this.initOrderInfo()
         }

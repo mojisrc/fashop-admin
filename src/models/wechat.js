@@ -62,7 +62,7 @@ export default {
                 type: "getConf",
                 payload: response
             });
-            if (callback) callback();
+            if (callback) callback(response);
         },
         * checkApiStatus({ payload, callback }, { call, put }) {
             const response = yield call(wechat.checkApiStatus, payload);
@@ -70,7 +70,7 @@ export default {
                 type: "checkApiStatus",
                 payload: response
             });
-            if (callback) callback();
+            if (callback) callback(response);
         },
         * confSet({ payload, callback }, { call, put }) {
             const response = yield call(wechat.confSet, payload);
@@ -78,7 +78,7 @@ export default {
                 type: "confSet",
                 payload: response
             });
-            if (callback) callback();
+            if (callback) callback(response);
         },
         * menuList({ payload, callback }, { call, put }) {
             const response = yield call(wechat.confSet, payload);
@@ -86,7 +86,7 @@ export default {
                 type: "confSet",
                 payload: response
             });
-            if (callback) callback();
+            if (callback) callback(response);
         },
         * menuCurrent({ payload, callback }, { call, put }) {
             const response = yield call(wechat.menuCurrent, payload);
@@ -94,7 +94,7 @@ export default {
                 type: "menuCurrent",
                 payload: response
             });
-            if (callback) callback();
+            if (callback) callback(response);
         },
         * menuCreate({ payload, callback }, { call, put }) {
             const response = yield call(wechat.menuCreate, payload);
@@ -102,7 +102,7 @@ export default {
                 type: "menuCreate",
                 payload: response
             });
-            if (callback) callback();
+            if (callback) callback(response);
         },
         * menuDelete({ payload, callback }, { call, put }) {
             const response = yield call(wechat.menuDelete, payload);
@@ -110,7 +110,7 @@ export default {
                 type: "menuDelete",
                 payload: response
             });
-            if (callback) callback();
+            if (callback) callback(response);
         },
         * autoReplyStatusSet({ payload, callback }, { call, put }) {
             const response = yield call(wechat.autoReplyStatusSet, payload);
@@ -118,7 +118,7 @@ export default {
                 type: "autoReplyStatusSet",
                 payload: response
             });
-            if (callback) callback();
+            if (callback) callback(response);
         },
         * autoReplyStatusGet({ payload, callback }, { call, put }) {
             const response = yield call(wechat.autoReplyStatusGet, payload);
@@ -126,7 +126,7 @@ export default {
                 type: "autoReplyStatusGet",
                 payload: response
             });
-            if (callback) callback();
+            if (callback) callback(response);
         },
         * autoReplySubscribeGet({ payload, callback }, { call, put }) {
             const response = yield call(wechat.autoReplySubscribeGet, payload);
@@ -134,7 +134,7 @@ export default {
                 type: "autoReplySubscribeGet",
                 payload: response
             });
-            if (callback) callback();
+            if (callback) callback(response);
         },
         * autoReplySubscribeSet({ payload, callback }, { call, put }) {
             const response = yield call(wechat.autoReplySubscribeSet, payload);
@@ -142,7 +142,7 @@ export default {
                 type: "autoReplySubscribeSet",
                 payload: response
             });
-            if (callback) callback();
+            if (callback) callback(response);
         },
         * replyKeywordsList({ payload, callback }, { call, put }) {
             const response = yield call(wechat.replyKeywordsList, payload);
@@ -150,7 +150,7 @@ export default {
                 type: "replyKeywordsList",
                 payload: response
             });
-            if (callback) callback();
+            if (callback) callback(response);
         },
         * autoReplyKeywordsAdd({ payload, callback }, { call, put }) {
             const response = yield call(wechat.autoReplyKeywordsAdd, payload);
@@ -158,7 +158,7 @@ export default {
                 type: "autoReplyKeywordsAdd",
                 payload: response
             });
-            if (callback) callback();
+            if (callback) callback(response);
         },
         * autoReplyKeywordsEdit({ payload, callback }, { call, put }) {
             const response = yield call(wechat.autoReplyKeywordsEdit, payload);
@@ -166,7 +166,7 @@ export default {
                 type: "autoReplyKeywordsEdit",
                 payload: response
             });
-            if (callback) callback();
+            if (callback) callback(response);
         },
         * autoReplyKeywordsDel({ payload, callback }, { call, put }) {
             const response = yield call(wechat.autoReplyKeywordsDel, payload);
@@ -174,7 +174,7 @@ export default {
                 type: "autoReplyKeywordsDel",
                 payload: response
             });
-            if (callback) callback();
+            if (callback) callback(response);
         },
         * autoReplyKeywordsInfo({ payload, callback }, { call, put }) {
             const response = yield call(wechat.autoReplyKeywordsInfo, payload);
@@ -182,7 +182,7 @@ export default {
                 type: "autoReplyKeywordsInfo",
                 payload: response
             });
-            if (callback) callback();
+            if (callback) callback(response);
         },
         * userList({ payload, callback }, { call, put }) {
             const response = yield call(wechat.userList, payload);
@@ -190,7 +190,7 @@ export default {
                 type: "userList",
                 payload: response
             });
-            if (callback) callback();
+            if (callback) callback(response);
         },
         * userBlackList({ payload, callback }, { call, put }) {
             const response = yield call(wechat.userBlackList, payload);
@@ -198,7 +198,7 @@ export default {
                 type: "userBlackList",
                 payload: response
             });
-            if (callback) callback();
+            if (callback) callback(response);
         },
         * userSelect({ payload, callback }, { call, put }) {
             const response = yield call(wechat.userSelect, payload);
@@ -206,7 +206,7 @@ export default {
                 type: "userSelect",
                 payload: response
             });
-            if (callback) callback();
+            if (callback) callback(response);
         },
         * userBlock({ payload, callback }, { call, put }) {
             const response = yield call(wechat.userBlock, payload);
@@ -214,7 +214,7 @@ export default {
                 type: "userBlock",
                 payload: response
             });
-            if (callback) callback();
+            if (callback) callback(response);
         },
         * userUnblock({ payload, callback }, { call, put }) {
             const response = yield call(wechat.userUnblock, payload);
@@ -222,7 +222,7 @@ export default {
                 type: "userUnblock",
                 payload: response
             });
-            if (callback) callback();
+            if (callback) callback(response);
         },
         * userRemark({ payload, callback }, { call, put }) {
             const response = yield call(wechat.userRemark, payload);
@@ -230,7 +230,7 @@ export default {
                 type: "userRemark",
                 payload: response
             });
-            if (callback) callback();
+            if (callback) callback(response);
         },
         * userTagList({ payload, callback }, { call, put }) {
             const response = yield call(wechat.userTagList, payload);
@@ -238,7 +238,7 @@ export default {
                 type: "userTagList",
                 payload: response
             });
-            if (callback) callback();
+            if (callback) callback(response);
         },
         * getToken({ payload, callback }, { call, put }) {
             const response = yield call(wechat.getToken, payload);
@@ -246,7 +246,7 @@ export default {
                 type: "getToken",
                 payload: response
             });
-            if (callback) callback();
+            if (callback) callback(response);
         },
         * userTagCreate({ payload, callback }, { call, put }) {
             const response = yield call(wechat.userTagCreate, payload);
@@ -254,7 +254,7 @@ export default {
                 type: "userTagCreate",
                 payload: response
             });
-            if (callback) callback();
+            if (callback) callback(response);
         },
         * userTagUpdate({ payload, callback }, { call, put }) {
             const response = yield call(wechat.userTagUpdate, payload);
@@ -262,7 +262,7 @@ export default {
                 type: "userTagUpdate",
                 payload: response
             });
-            if (callback) callback();
+            if (callback) callback(response);
         },
         * userTagDelete({ payload, callback }, { call, put }) {
             const response = yield call(wechat.userTagDelete, payload);
@@ -270,7 +270,7 @@ export default {
                 type: "userTagDelete",
                 payload: response
             });
-            if (callback) callback();
+            if (callback) callback(response);
         },
         * userTagsByOpenid({ payload, callback }, { call, put }) {
             const response = yield call(wechat.userTagsByOpenid, payload);
@@ -278,7 +278,7 @@ export default {
                 type: "userTagsByOpenid",
                 payload: response
             });
-            if (callback) callback();
+            if (callback) callback(response);
         },
         * userTagUsersOfTag({ payload, callback }, { call, put }) {
             const response = yield call(wechat.userTagUsersOfTag, payload);
@@ -286,7 +286,7 @@ export default {
                 type: "userTagUsersOfTag",
                 payload: response
             });
-            if (callback) callback();
+            if (callback) callback(response);
         },
         * userTagTagUsers({ payload, callback }, { call, put }) {
             const response = yield call(wechat.userTagTagUsers, payload);
@@ -294,7 +294,7 @@ export default {
                 type: "userTagTagUsers",
                 payload: response
             });
-            if (callback) callback();
+            if (callback) callback(response);
         },
         * userTagUntagUsers({ payload, callback }, { call, put }) {
             const response = yield call(wechat.userTagUntagUsers, payload);
@@ -302,7 +302,7 @@ export default {
                 type: "userTagUntagUsers",
                 payload: response
             });
-            if (callback) callback();
+            if (callback) callback(response);
         },
         * broadcastRecords({ payload, callback }, { call, put }) {
             const response = yield call(wechat.broadcastRecords, payload);
@@ -310,7 +310,7 @@ export default {
                 type: "broadcastRecords",
                 payload: response
             });
-            if (callback) callback();
+            if (callback) callback(response);
         },
         * broadcastUserSearch({ payload, callback }, { call, put }) {
             const response = yield call(wechat.broadcastUserSearch, payload);
@@ -318,7 +318,7 @@ export default {
                 type: "broadcastUserSearch",
                 payload: response
             });
-            if (callback) callback();
+            if (callback) callback(response);
         },
         * broadcastCreate({ payload, callback }, { call, put }) {
             const response = yield call(wechat.broadcastCreate, payload);
@@ -326,7 +326,7 @@ export default {
                 type: "broadcastCreate",
                 payload: response
             });
-            if (callback) callback();
+            if (callback) callback(response);
         },
         * broadcastSurplus({ payload, callback }, { call, put }) {
             const response = yield call(wechat.broadcastSurplus, payload);
@@ -334,7 +334,7 @@ export default {
                 type: "broadcastSurplus",
                 payload: response
             });
-            if (callback) callback();
+            if (callback) callback(response);
         },
         * broadcastRecordsDel({ payload, callback }, { call, put }) {
             const response = yield call(wechat.broadcastRecordsDel, payload);
@@ -342,7 +342,7 @@ export default {
                 type: "broadcastRecordsDel",
                 payload: response
             });
-            if (callback) callback();
+            if (callback) callback(response);
         },
         * wechatMaterialList({ payload, callback }, { call, put }) {
             const response = yield call(wechat.wechatMaterialList, payload);
@@ -350,7 +350,7 @@ export default {
                 type: "list",
                 payload: response
             });
-            if (callback) callback();
+            if (callback) callback(response);
         },
         * materialUploadThumb({ payload, callback }, { call, put }) {
             const response = yield call(wechat.materialUploadThumb, payload);
@@ -358,7 +358,7 @@ export default {
                 type: "materialUploadThumb",
                 payload: response
             });
-            if (callback) callback();
+            if (callback) callback(response);
         },
         * materialUploadArticle({ payload, callback }, { call, put }) {
             const response = yield call(wechat.materialUploadArticle, payload);
@@ -366,7 +366,7 @@ export default {
                 type: "materialUploadArticle",
                 payload: response
             });
-            if (callback) callback();
+            if (callback) callback(response);
         },
         * materialUpdateArticle({ payload, callback }, { call, put }) {
             const response = yield call(wechat.materialUpdateArticle, payload);
@@ -374,7 +374,7 @@ export default {
                 type: "materialUpdateArticle",
                 payload: response
             });
-            if (callback) callback();
+            if (callback) callback(response);
         },
         * materialGet({ payload, callback }, { call, put }) {
             const response = yield call(wechat.materialGet, payload);
@@ -382,7 +382,7 @@ export default {
                 type: "materialGet",
                 payload: response
             });
-            if (callback) callback();
+            if (callback) callback(response);
         },
         * materialUploadArticleImage({ payload, callback }, { call, put }) {
             const response = yield call(wechat.materialUploadArticleImage, payload);
@@ -390,7 +390,7 @@ export default {
                 type: "materialUploadArticleImage",
                 payload: response
             });
-            if (callback) callback();
+            if (callback) callback(response);
         },
         * materialUploadImage({ payload, callback }, { call, put }) {
             const response = yield call(wechat.materialUploadImage, payload);
@@ -398,7 +398,7 @@ export default {
                 type: "materialUploadImage",
                 payload: response
             });
-            if (callback) callback();
+            if (callback) callback(response);
         },
         * materialUploadVoice({ payload, callback }, { call, put }) {
             const response = yield call(wechat.materialUploadVoice, payload);
@@ -406,7 +406,7 @@ export default {
                 type: "materialUploadVoice",
                 payload: response
             });
-            if (callback) callback();
+            if (callback) callback(response);
         },
         * materialUploadVideo({ payload, callback }, { call, put }) {
             const response = yield call(wechat.materialUploadVideo, payload);
@@ -414,7 +414,7 @@ export default {
                 type: "materialUploadVideo",
                 payload: response
             });
-            if (callback) callback();
+            if (callback) callback(response);
         },
         * localNews({ payload, callback }, { call, put }) {
             const response = yield call(wechat.localNews, payload);
@@ -422,7 +422,7 @@ export default {
                 type: "localNews",
                 payload: response
             });
-            if (callback) callback();
+            if (callback) callback(response);
         },
         * localNewsInfo({ payload, callback }, { call, put }) {
             const response = yield call(wechat.localNewsInfo, payload);
@@ -430,7 +430,7 @@ export default {
                 type: "localNewsInfo",
                 payload: response
             });
-            if (callback) callback();
+            if (callback) callback(response);
         },
         * localNewsAdd({ payload, callback }, { call, put }) {
             const response = yield call(wechat.localNewsAdd, payload);
@@ -438,7 +438,7 @@ export default {
                 type: "localNewsAdd",
                 payload: response
             });
-            if (callback) callback();
+            if (callback) callback(response);
         },
         * localNewsEdit({ payload, callback }, { call, put }) {
             const response = yield call(wechat.localNewsEdit, payload);
@@ -446,7 +446,7 @@ export default {
                 type: "localNewsEdit",
                 payload: response
             });
-            if (callback) callback();
+            if (callback) callback(response);
         },
         * localNewsDel({ payload, callback }, { call, put }) {
             const response = yield call(wechat.localNewsDel, payload);
@@ -454,7 +454,7 @@ export default {
                 type: "localNewsDel",
                 payload: response
             });
-            if (callback) callback();
+            if (callback) callback(response);
         },
         * materialDelete({ payload, callback }, { call, put }) {
             const response = yield call(wechat.materialDelete, payload);
@@ -462,7 +462,7 @@ export default {
                 type: "materialDelete",
                 payload: response
             });
-            if (callback) callback();
+            if (callback) callback(response);
         }
     },
     reducers: {

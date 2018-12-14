@@ -146,7 +146,7 @@ export default class ListHeader extends Component {
         );
     }
 
-    returnKeywordsType(serachValue: string) {
+    returnKeywordsType(serachValue) {
         switch (serachValue) {
             case 'goods_name':
                 return '商品名称'

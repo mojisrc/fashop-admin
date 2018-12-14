@@ -4,7 +4,7 @@ import { Alert, Form, Switch, Input, Button, message } from 'antd';
 import { View } from "react-web-dom";
 import styles from './index.css'
 
-import { PaymentApi } from "@/config/api/payment";
+import { PaymentApi } from "@/services/payment";
 const FormItem = Form.Item;
 
 //

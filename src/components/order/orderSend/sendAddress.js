@@ -19,7 +19,7 @@ export default class SendAddress extends Component {
         shipper_id: 0
     }
 
-    componentWillReceiveProps(nextProps: Props) {
+    componentWillReceiveProps(nextProps) {
         this.setState({
             selectVisible: nextProps.deliver_phone === null
         })

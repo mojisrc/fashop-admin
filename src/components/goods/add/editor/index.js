@@ -69,7 +69,7 @@ class EditorContent extends Component<{},
         loaded: false
     }
 
-    componentWillReceiveProps(nextProps: Props) {
+    componentWillReceiveProps(nextProps) {
         if (this.state.loaded === false && nextProps.data !== this.props.data) {
             this.setState({
                 loaded: true,

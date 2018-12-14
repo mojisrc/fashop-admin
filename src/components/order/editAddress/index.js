@@ -28,7 +28,7 @@ export default class EditAddress extends Component {
         spinning: true
     };
 
-    async componentWillReceiveProps(nextProps: Props) {
+    async componentWillReceiveProps(nextProps) {
         if (nextProps.orderId !== this.props.orderId) {
             await this.initOrderInfo();
         }

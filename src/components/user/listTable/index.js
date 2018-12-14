@@ -21,7 +21,7 @@ import Image from "../../image";
 //     }
 // }
 // type State = {
-//     selectedRowKeys: Array<string>,
+//     selectedRowKeys,
 //     customerVisible: boolean,
 //     currentUser: {},
 // }
@@ -47,7 +47,7 @@ export default class UserListTable extends Component {
         userListLoading: false,
         userList: [],
     }
-    onSelectChange = (selectedRowKeys: Array<string>) => {
+    onSelectChange = (selectedRowKeys) => {
         this.setState({ selectedRowKeys });
     }
 

@@ -14,14 +14,14 @@ export default class OrderDetailOperateInfo extends Component {
         dispatch: () => {
         }
     }
-    componentWillReceiveProps(nextProps:Props) {
+    componentWillReceiveProps(nextProps) {
         if(nextProps.id!==this.state.id){
             this.setState({
                 handle_message: nextProps.handle_message
             })
         }
     }
-    constructor(props: Props) {
+    constructor(props) {
         super()
         this.state = {
             handle_message: props.handle_message

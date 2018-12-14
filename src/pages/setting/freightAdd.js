@@ -8,7 +8,7 @@ import FreightAddTable from '@/components/setting/freightAddTable'
 import { connect } from 'dva';
 import { View, ScrollView } from "react-web-dom";
 
-import { FreightApi } from "@/config/api/freight";
+import { FreightApi } from "@/services/freight";
 const RadioGroup = Radio.Group;
 const FormItem = Form.Item;
 const TreeNode = Tree.TreeNode;

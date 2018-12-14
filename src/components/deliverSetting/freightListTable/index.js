@@ -199,7 +199,7 @@ export default class FreightListTable extends Component   {
         )
     }
 
-    static getPayType(pay_type: number) {
+    static getPayType(pay_type) {
         switch (pay_type) {
             case 1:
                 return <Tag color="green">件数计费</Tag>

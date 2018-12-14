@@ -40,7 +40,7 @@ type State = {
     })
 )
 export default class SelectGoodsCategory extends Component {
-    constructor(props: Props) {
+    constructor(props) {
         super(props);
         this.state = {
             expandedKeys: [],
