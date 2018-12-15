@@ -8,7 +8,8 @@ import moment from "moment";
 const Option = Select.Option;
 const RadioGroup = Radio.Group;
 const FormItem = Form.Item;
-export default class M extends Component {
+
+class Freight extends Component {
     render() {
         const { getFieldDecorator, formItemLayout, shippingTemplateList, shippingCostSelect, refreshShippingTemplateList, freight_fee, sale_time } = this.props;
         return (
@@ -53,7 +54,7 @@ export default class M extends Component {
         );
     }
 
-    freightValidator = (rule: any, value: { value: number, key: string }, callback: Function) => {
+    freightValidator = (rule, value, callback) => {
         if (value) {
             if (value.key === "freight") {
                 if (value.value >= 0) {
@@ -72,7 +73,7 @@ export default class M extends Component {
             callback("请选择运费模式");
         }
     };
-    saleTimeValidator = (rule: any, value: { value: number, key: string }, callback: Function) => {
+    saleTimeValidator = (rule, value, callback) => {
         if (value) {
             if (value.key === 0) {
                 callback();
@@ -89,14 +90,12 @@ export default class M extends Component {
     };
 }
 
+//
+//  onChange: Function
+// immediateSale: 1 | 0 | null,
+// sale_time: number | null
 
-class GoodsSaleTime extends Component<{
-    onChange: Function
-}, {
-    immediateSale: 1 | 0 | null,
-    sale_time: number | null
-
-}> {
+class GoodsSaleTime extends Component {
     constructor(props) {
         super(props);
         const value = props.value || {};
@@ -176,26 +175,26 @@ class GoodsSaleTime extends Component<{
     }
 }
 
+//
+// type FreightProps = {
+//     shippingCostSelect: string | null,
+//     shippingTemplateList: Array<{
+//         id: number,
+//         name: string
+//     }>,
+//     refreshShippingTemplateList: Function,
+//     onChange: Function,
+//     freight_fee: number,
+// }
+//
+// type FreightState = {
+//     loading: boolean,
+//     shippingCostSelect: string | null,
+//     freight: number,
+//     freight_id: number | null,
+// }
 
-type FreightProps = {
-    shippingCostSelect: string | null,
-    shippingTemplateList: Array<{
-        id: number,
-        name: string
-    }>,
-    refreshShippingTemplateList: Function,
-    onChange: Function,
-    freight_fee: number,
-}
-
-type FreightState = {
-    loading: boolean,
-    shippingCostSelect: string | null,
-    freight: number,
-    freight_id: number | null,
-}
-
-class GoodsFreight extends Component<FreightProps, FreightState> {
+class GoodsFreight extends Component {
     state = {
         loading: false,
         shippingCostSelect: "freight",
@@ -318,3 +317,5 @@ class GoodsFreight extends Component<FreightProps, FreightState> {
         );
     }
 }
+
+export default Freight;

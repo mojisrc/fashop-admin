@@ -1,16 +1,15 @@
 import React, { Component } from "react";
-import { setGoodsDetailData } from '@/actions/goods/detail'
+import { setGoodsDetailData } from "@/actions/goods/detail";
 import { View } from "react-web-dom";
 import { Form, Button, Row, Col, Modal, message } from "antd";
-import styles from './index.css'
-import { abledata } from './testData'
-
-import TextDetail from './text'
-import Img from './img'
-import Video from './video'
-import Goods from './goods'
-import Line from './line'
-import Blank from './blank'
+import styles from "./index.css";
+import { abledata } from "./testData";
+import TextDetail from "./text";
+import Img from "./img";
+import Video from "./video";
+import Goods from "./goods";
+import Line from "./line";
+import Blank from "./blank";
 
 const FormItem = Form.Item;
 
@@ -23,7 +22,7 @@ export default class Editor extends Component {
             getFieldValue,
             openPhotoGallery,
             body
-        } = this.props
+        } = this.props;
         return (
             <View className={styles.goodsItem}>
                 <h3>商品详情</h3>
@@ -31,35 +30,29 @@ export default class Editor extends Component {
                     {...formItemLayout}
                     label='商品详情'
                 >
-                    {getFieldDecorator('body', {
-                        rules: [{ required: true, message: '请添加商品详情!' }],
+                    {getFieldDecorator("body", {
+                        rules: [{ required: true, message: "请添加商品详情!" }],
                         initialValue: body
                     })(
                         <EditorContent
                             data={body}
                             getFieldValue={() => {
                                 return {
-                                    title: getFieldValue('title'),
-                                    images: getFieldValue('images'),
-                                }
+                                    title: getFieldValue("title"),
+                                    images: getFieldValue("images")
+                                };
                             }}
                             openPhotoGallery={openPhotoGallery}
                         />
                     )}
                 </FormItem>
             </View>
-        )
+        );
     }
 }
 
 
-class EditorContent extends Component<{},
-    {
-        hoverShow: number,
-        addModuleShow: boolean,
-        addPosition: number,
-        data: Array<{ type: string, url: string, title: string }>
-    }> {
+class EditorContent extends Component{
     state = {
         hoverShow: -1,
         addModuleShow: false,
@@ -67,21 +60,21 @@ class EditorContent extends Component<{},
         data: [],
         images: [],
         loaded: false
-    }
+    };
 
     componentWillReceiveProps(nextProps) {
         if (this.state.loaded === false && nextProps.data !== this.props.data) {
             this.setState({
                 loaded: true,
                 data: nextProps.data
-            })
+            });
         }
     }
 
     render() {
-        const { hoverShow, addModuleShow, addPosition, data } = this.state
-        console.log(data)
-        const { openPhotoGallery, } = this.props
+        const { hoverShow, addModuleShow, addPosition, data } = this.state;
+        console.log(data);
+        const { openPhotoGallery } = this.props;
         return (
             <View className={styles.bodyWarp}>
                 <View className={styles.bodyTop}>
@@ -90,16 +83,16 @@ class EditorContent extends Component<{},
                         onClick={() => {
                             if (data.length) {
                                 Modal.confirm({
-                                    title: '确定自动生成商品详情？',
-                                    content: '该操作会清空当前的商品详情，并用最新的商品图标和标题生成新的商品详情。',
+                                    title: "确定自动生成商品详情？",
+                                    content: "该操作会清空当前的商品详情，并用最新的商品图标和标题生成新的商品详情。",
                                     onOk: () => {
-                                        this.autoSetGoodsDetailData()
+                                        this.autoSetGoodsDetailData();
                                     },
                                     onCancel() {
-                                    },
+                                    }
                                 });
                             } else {
-                                this.autoSetGoodsDetailData()
+                                this.autoSetGoodsDetailData();
                             }
                         }}
                     >
@@ -111,7 +104,7 @@ class EditorContent extends Component<{},
                         <View className={styles.bodyContentWarp}>
                             <img
                                 className={styles.phoneTop}
-                                src={require('@/assets/images/shop/diyPhone.png')}
+                                src={require("@/assets/images/shop/diyPhone.png")}
                                 alt='diyPhone'
                             />
                             <View className={styles.bodyContent}>
@@ -123,10 +116,10 @@ class EditorContent extends Component<{},
                                                     key={index}
                                                     className={styles.bodyItem}
                                                     onMouseEnter={() => {
-                                                        this.setState({ hoverShow: index })
+                                                        this.setState({ hoverShow: index });
                                                     }}
                                                     onMouseLeave={() => {
-                                                        this.setState({ hoverShow: -1 })
+                                                        this.setState({ hoverShow: -1 });
                                                     }}
                                                 >
                                                     {
@@ -137,7 +130,7 @@ class EditorContent extends Component<{},
                                                             this.returnOperation(index, item) : null
                                                     }
                                                 </View>
-                                            )
+                                            );
                                         })
                                     }
                                 </View>
@@ -148,7 +141,7 @@ class EditorContent extends Component<{},
                                     this.setState({
                                         addModuleShow: true,
                                         addPosition: data.length
-                                    })
+                                    });
                                 }}
                                 disabled={addModuleShow}
                             >
@@ -164,7 +157,7 @@ class EditorContent extends Component<{},
                                     data={this.state.data}
                                     addPosition={addPosition}
                                     closeAddModule={() => {
-                                        this.setState({ addModuleShow: false })
+                                        this.setState({ addModuleShow: false });
                                     }}
                                     openPhotoGallery={openPhotoGallery}
                                 /> : false
@@ -172,67 +165,67 @@ class EditorContent extends Component<{},
                     </Col>
                 </Row>
             </View>
-        )
+        );
     }
 
     setGoodsDetailData = (e) => {
         const {
             onChange
-        } = this.props
+        } = this.props;
         this.setState({
             data: e
         }, () => {
-            onChange(e)
-        })
-    }
+            onChange(e);
+        });
+    };
 
     autoSetGoodsDetailData() {
         const {
             getFieldValue
-        } = this.props
+        } = this.props;
         const {
             title,
-            images,
-        } = getFieldValue()
-        const newArray = []
+            images
+        } = getFieldValue();
+        const newArray = [];
         if (title && title.length) {
             const item = abledata.find((e) => {
-                return e.type === 'text'
-            })
+                return e.type === "text";
+            });
             if (item) {
                 newArray.push({
                     type: item.type,
-                    value: item.getValue(title),
-                })
+                    value: item.getValue(title)
+                });
             } else {
-                message.error('text类型匹配异常')
+                message.error("text类型匹配异常");
             }
         }
         if (images.length) {
             const item = abledata.find((e) => {
-                return e.type === 'image'
-            })
+                return e.type === "image";
+            });
             if (item) {
                 images.map((e) => {
                     newArray.push({
                         type: item.type,
-                        value: item.getValue(e),
-                    })
-                })
+                        value: item.getValue(e)
+                    });
+                });
             } else {
-                message.error('image类型匹配异常')
+                message.error("image类型匹配异常");
             }
         }
-        this.setGoodsDetailData(newArray)
+        this.setGoodsDetailData(newArray);
     }
 
     returnOperation(index, item) {
-        const { data } = this.state
+        const { data } = this.state;
         return (
             <View
                 className={styles.operation}
                 onClick={(e) => {
-                    e.stopPropagation()
+                    e.stopPropagation();
                 }}
             >
                 <a
@@ -240,7 +233,7 @@ class EditorContent extends Component<{},
                         this.setState({
                             addModuleShow: true,
                             addPosition: index + 1
-                        })
+                        });
                     }}
                 >
                     添加
@@ -249,10 +242,10 @@ class EditorContent extends Component<{},
                     index > 0 ?
                         <a
                             onClick={() => {
-                                let newdata = data.concat()
-                                let add = [newdata[index], newdata[index - 1]]
-                                newdata.splice(index - 1, 2, ...add)
-                                this.setGoodsDetailData(newdata)
+                                let newdata = data.concat();
+                                let add = [newdata[index], newdata[index - 1]];
+                                newdata.splice(index - 1, 2, ...add);
+                                this.setGoodsDetailData(newdata);
                             }}
                         >
                             上移
@@ -262,10 +255,10 @@ class EditorContent extends Component<{},
                     index < data.length - 1 ?
                         <a
                             onClick={() => {
-                                let newdata = data.concat()
-                                let add = [newdata[index + 1], newdata[index]]
-                                newdata.splice(index, 2, ...add)
-                                this.setGoodsDetailData(newdata)
+                                let newdata = data.concat();
+                                let add = [newdata[index + 1], newdata[index]];
+                                newdata.splice(index, 2, ...add);
+                                this.setGoodsDetailData(newdata);
                             }}
                         >
                             下移
@@ -274,23 +267,23 @@ class EditorContent extends Component<{},
                 <a
                     onClick={() => {
                         Modal.confirm({
-                            title: '确认删除？',
-                            okText: '确认',
-                            okType: 'danger',
-                            cancelText: '取消',
+                            title: "确认删除？",
+                            okText: "确认",
+                            okType: "danger",
+                            cancelText: "取消",
                             onOk: () => {
-                                let _array = data.concat()
-                                _array.splice(index, 1)
-                                this.setGoodsDetailData(_array)
-                            },
+                                let _array = data.concat();
+                                _array.splice(index, 1);
+                                this.setGoodsDetailData(_array);
+                            }
 
-                        })
+                        });
                     }}
                 >
                     删除
                 </a>
             </View>
-        )
+        );
     }
 
     returnContain(item, index) {
@@ -298,19 +291,19 @@ class EditorContent extends Component<{},
             data: this.state.data,
             setGoodsDetailData: this.setGoodsDetailData,
             index,
-            item,
-        }
+            item
+        };
         switch (item.type) {
-            case 'text':
-                return <TextDetail {...props} />
-            case 'image':
-                return <Img {...props} />
-            case 'video':
-                return <Video {...props} />
-            case 'goods':
-                return <Goods {...props} />
-            case 'separator':
-                return <Line {...props} />
+            case "text":
+                return <TextDetail {...props} />;
+            case "image":
+                return <Img {...props} />;
+            case "video":
+                return <Video {...props} />;
+            case "goods":
+                return <Goods {...props} />;
+            case "separator":
+                return <Line {...props} />;
             default:
         }
     }

@@ -5,7 +5,7 @@ import styles from "./spec.css";
 
 const FormItem = Form.Item;
 
-export default class GoodsAddSpec extends Component {
+class GoodsAddSpec extends Component {
     state = {
         skus: [],
     }
@@ -182,3 +182,4 @@ export default class GoodsAddSpec extends Component {
         onChange(_dataSource)
     }
 }
+export default GoodsAddSpec
