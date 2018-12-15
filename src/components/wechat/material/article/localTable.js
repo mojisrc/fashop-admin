@@ -99,7 +99,7 @@ export default class LocalArticleTable extends Component {
                                             <View className={styles.operation}>
                                                 <a
                                                     onClick={() => {
-                                                        history.push({
+                                                        router.push({
                                                             search:`?menu=6&router=editServerMaterial&id=${itemItem.id}`
                                                         })
                                                     }}

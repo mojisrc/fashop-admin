@@ -20,7 +20,7 @@ export default class AddVideoForm extends Component {
         file:{},
         loading:false
     }
-    handleSubmit = (e:handleSubmitType) => {
+    handleSubmit = (e) => {
         e.preventDefault();
         const { form, hideModal } = this.props
         form.validateFieldsAndScroll((err, values) => {

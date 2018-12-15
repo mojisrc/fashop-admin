@@ -1,5 +1,3 @@
-
-
 import React, { Component } from "react";
 import {
     Table,
@@ -11,23 +9,23 @@ import { connect } from "dva";
 
 
 import { getShipperList } from "@/actions/deliver/shipper";
-
-type Props = {
-    history: historyType,
-    dispatch: dispatchType,
-    loading: boolean,
-    listData: {
-        page: number,
-        rows: number,
-        total_number: number,
-        list: Array<{}>,
-    },
-    categoryList: Array<{ id: number, name: string }>,
-}
-
-type State = {
-    rowSelectionIds: Array<string>,
-}
+//
+// type Props = {
+//     history: historyType,
+//     dispatch: dispatchType,
+//     loading: boolean,
+//     listData: {
+//         page: number,
+//         rows: number,
+//         total_number: number,
+//         list: Array<{}>,
+//     },
+//     categoryList: Array<{ id: number, name: string }>,
+// }
+//
+// type State = {
+//     rowSelectionIds: Array<string>,
+// }
 
 @connect(({
               view: {
@@ -91,7 +89,7 @@ export default class ShipperListTable extends Component  {
             render: (record) => <View className={styles.operation}>
                 <a
                     onClick={() => {
-                        // this.props.history.push({
+                        // router.push({
                         //     pathname:`/order/refundEdit`,
                         //     search:`?id=${record.id}`,
                         //     state:{
@@ -112,7 +110,7 @@ export default class ShipperListTable extends Component  {
                     <Button
                         type='primary'
                         onClick={() => {
-                            history.push('/deliver/shipperAdd')
+                            router.push('/deliver/shipperAdd')
                         }}
                     >
                         新增地址

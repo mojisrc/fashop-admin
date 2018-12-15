@@ -4,8 +4,8 @@ import { Tabs, Row, Col } from 'antd';
 import { View } from "react-web-dom";
 import Page from '@/components/public/page'
 import styles from '@/styles/customer/customerDetail.css'
-import ShoppingInfo from "@/components/user/shoppingInfo";
-import ReceiveInfo from "@/components/user/receiveInfo";
+import ShoppingInfo from "@/components/user/detail/shoppingInfo";
+import ReceiveInfo from "@/components/user/detail/receiveInfo";
 import Image from "@/components/image";
 import moment from "moment/moment";
 import { publicFunction } from "@/utils";

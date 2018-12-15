@@ -8,7 +8,7 @@ import { Route, Switch } from "react-router-dom";
 import Loadable from "react-loadable";
 import { Spin } from "antd";
 const UserListTable = Loadable({
-    loader: () => import('@/components/user/listTable'),
+    loader: () => import('@/components/user/list/listTable'),
     loading: () => {
         return <Spin size="large" className="global-spin" />;
     },

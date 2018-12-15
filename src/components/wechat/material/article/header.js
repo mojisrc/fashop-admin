@@ -72,7 +72,7 @@ export default class ArticleHeader extends Component {
     }
     pushFunc({num}:{num:string}){
         const { articleType, history } = this.props
-        history.push({
+        router.push({
             search:`?menu=6&router=${articleType==='wechat' ? 'addWechatMaterial' : 'addServerMaterial'}&num=${num}`
         })
     }

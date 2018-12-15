@@ -85,7 +85,7 @@ export default class NotBindPublicAccounts extends React.Component {
                         type="primary"
                         className={styles.bindBtn}
                         onClick={()=>{
-                            this.props.history.push('/wechat/bindPublicAccounts')
+                            router.push('/wechat/bindPublicAccounts')
                         }}
                     >
                         绑定微信公众号

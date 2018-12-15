@@ -12,7 +12,7 @@ const { TextArea } = Input;
 // type Props = {
 //     getValues: Function,
 //     type: LinkActionType,
-//     value: any
+//     value
 // }
 // type State = {
 //     urlValue: {

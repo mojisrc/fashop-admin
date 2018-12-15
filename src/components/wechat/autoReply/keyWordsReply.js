@@ -70,7 +70,7 @@ export default class KeyWordsReply extends React.Component {
                     <a
                         style={{marginRight:12}}
                         onClick={()=>{
-                            history.push({
+                            router.push({
                                 search:`?menu=2&router=editReply&editReplyId=${record.id}`
                             })
                         }}

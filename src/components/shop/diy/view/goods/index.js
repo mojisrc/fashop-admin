@@ -36,7 +36,7 @@ export default class Index extends Component  {
         title: string,
         market_price: number,
         price: number,
-    }, index: number) {
+    }, index) {
         const imgWidth = (375 - 18 - 2) / 2 + 'px'
         return (
             <View
@@ -66,7 +66,7 @@ export default class Index extends Component  {
         title: string,
         market_price: number,
         price: number,
-    }, index: number) {
+    }, index) {
         return (
             <View
                 className={styles.bigWarp}
@@ -93,7 +93,7 @@ export default class Index extends Component  {
         title: string,
         market_price: number,
         price: number,
-    }, index: number) {
+    }, index) {
         const imgWidth = (375 - 18 - 2) / 2 + 'px'
         return (
             <View
@@ -136,7 +136,7 @@ export default class Index extends Component  {
         title: string,
         market_price: number,
         price: number,
-    }, index: number) {
+    }, index) {
         return (
             <View
                 className={styles.listWarp}

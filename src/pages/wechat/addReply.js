@@ -66,7 +66,7 @@ export default class AddReply extends Component {
         });
     }
 
-    handleSubmit = (e:handleSubmitType) => {
+    handleSubmit = (e) => {
         e.preventDefault();
         const { form, addAutoReplyKeywords } = this.props
         form.validateFields((err, values) => {

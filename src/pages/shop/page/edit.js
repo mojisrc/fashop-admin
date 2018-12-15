@@ -144,7 +144,7 @@ export default class Edit extends Component {
             this.phoneHeaderClick()
         }
     }
-    getControlValues = (value: any) => {
+    getControlValues = (value) => {
         let { options, body } = this.state
         let { index } = options
         body[index].options = value.options

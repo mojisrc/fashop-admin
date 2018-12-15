@@ -6,13 +6,13 @@ import { getRoutes } from "@/utils";
 import {  Route, Switch } from "react-router-dom";
 
 const GoodsListHeader = Loadable({
-    loader: () => import('@/components/goods/listHeader'),
+    loader: () => import('@/components/goods/list/header'),
     loading: () => {
         return <Spin size="large" className="global-spin" />;
     },
 })
 const GoodsListTable = Loadable({
-    loader: () => import('@/components/goods/listTable'),
+    loader: () => import('@/components/goods/list/table'),
     loading: () => {
         return <Spin size="large" className="global-spin" />;
     },

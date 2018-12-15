@@ -219,7 +219,7 @@ export default class GoodsSpec extends Component {
         this.setState({ customSpecSortShow: true })
     }
 
-    onSpecSelectChange(specId: number, index: number) {
+    onSpecSelectChange(specId: number, index) {
         const { specList, onChange } = this.props;
         const { specs, } = this.state
 
@@ -252,7 +252,7 @@ export default class GoodsSpec extends Component {
     AddSpecInput: AddSpecInputType = { input: { value: null } }
     AddSpecValueInput: AddSpecValueInputType = { input: { value: null } }
 
-    renderSpecValuePopoverContent(activeItem: { id: number }, index: number) {
+    renderSpecValuePopoverContent(activeItem: { id: number }, index) {
         const { specList, onChange, } = this.props
         const { specValueIds, specs, addSpecComVisible } = this.state
         const useModelData = specList.find((value) => {

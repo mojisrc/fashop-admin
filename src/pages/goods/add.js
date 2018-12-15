@@ -29,7 +29,7 @@ const FormItem = Form.Item;
 export default class Add extends Component {
     state = {
         photoGalleryVisible: false,
-        photoGalleryOnOk: (e: any) => {
+        photoGalleryOnOk: (e) => {
         },
         previewVisible: false,
         previewImage: '',
@@ -82,7 +82,7 @@ export default class Add extends Component {
             photoGalleryVisible: false
         })
     }
-    onOkPhotoGallery = (e: any) => {
+    onOkPhotoGallery = (e) => {
         this.state.photoGalleryOnOk(e)
         this.onCancelPhotoGallery()
     }

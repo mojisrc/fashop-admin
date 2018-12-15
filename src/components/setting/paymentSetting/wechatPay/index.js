@@ -38,7 +38,7 @@ export default class WechatPay extends Component {
             'Access-Token': ''
         }
     }
-    onApiclientCertChange = (info: any) => {
+    onApiclientCertChange = (info) => {
         let fileList = info.fileList;
         fileList = fileList.slice(-1);
         fileList = fileList.map((file) => {
@@ -56,7 +56,7 @@ export default class WechatPay extends Component {
         });
         this.setState({ apiclientCert: fileList });
     }
-    onApiclientKeyChange = (info: any) => {
+    onApiclientKeyChange = (info) => {
         let fileList = info.fileList;
         fileList = fileList.slice(-1);
         fileList = fileList.map((file) => {
@@ -88,7 +88,7 @@ export default class WechatPay extends Component {
         apiclientCert: [],
         apiclientKey: []
     }
-    handleSubmit = (e: any) => {
+    handleSubmit = (e) => {
         e.preventDefault()
         this.props.form.validateFieldsAndScroll(async (err, values) => {
             const { apiclientCert, apiclientKey } = this.state

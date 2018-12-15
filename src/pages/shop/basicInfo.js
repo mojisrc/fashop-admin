@@ -18,7 +18,7 @@ export default class BasicInfo extends Component {
     componentDidMount(){
         this.props.info()
     }
-    handleSubmit = (e:handleSubmitType) => {
+    handleSubmit = (e) => {
         e.preventDefault()
         this.props.form.validateFields((err, values) => {
             if (!err) {

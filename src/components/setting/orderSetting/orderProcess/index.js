@@ -32,7 +32,7 @@ export default class OrderProcess extends Component {
         order_auto_confirm_expires_day: 0,
         order_auto_close_refound_expires_day: 0
     }
-    handleSubmit = async (e: any) => {
+    handleSubmit = async (e) => {
         e.preventDefault()
         const { form } = this.props
         form.validateFieldsAndScroll(async (err, values) => {

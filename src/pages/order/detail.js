@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import OrderDetailView from "@/components/order/orderDetail";
+import OrderDetailView from "@/components/order/detail";
 import { connect } from "dva";
 
 @connect(({ info, loading }) => ({

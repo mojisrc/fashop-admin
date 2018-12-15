@@ -66,7 +66,7 @@ export default class Edit extends Component {
         }
     }
 
-    changeTableDataSource = (index: any, key: any, value: any) => {
+    changeTableDataSource = (index: any, key: any, value) => {
         const { tableDataSource } = this.state
         const _tableDataSource = [...tableDataSource]
         _tableDataSource[index][key] = value
@@ -78,14 +78,14 @@ export default class Edit extends Component {
             checkedAreaKeys: [],
         })
     }
-    editAreaList = (e: IdsType, index: number) => {
+    editAreaList = (e: IdsType, index) => {
         this.setState({
             visible: true,
             checkedAreaKeys: e,
             editAreaTableIndex: index,
         })
     }
-    delAreaList = (index: number) => {
+    delAreaList = (index) => {
         const {tableDataSource} = this.state
         const newArray = [...tableDataSource]
         newArray.splice(index, 1)
@@ -187,7 +187,7 @@ export default class Edit extends Component {
                     if (e.code === 0) {
                         resetFields()
                         message.success('保存成功')
-                        history.push('/setting/deliver/freight')
+                        router.push('/setting/deliver/freight')
                     } else {
                         this.setState({ loading: false })
                         message.warn(e.msg)

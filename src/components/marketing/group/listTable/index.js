@@ -113,7 +113,7 @@ export default class ListTable extends Component   {
                 render: (record) => <div>
                     <a
                         onClick={() => {
-                            this.props.history.push(`/order/list/detail?id=${record.id}`)
+                            router.push(`/order/list/detail?id=${record.id}`)
                         }}
                     >
                         详情
@@ -121,7 +121,7 @@ export default class ListTable extends Component   {
                     <Divider type="vertical" />
                      <a
                         onClick={() => {
-                            this.props.history.push(`/order/list/send?id=${record.id}`)
+                            router.push(`/order/list/send?id=${record.id}`)
                         }}
                     >
                         发货
@@ -183,7 +183,7 @@ export default class ListTable extends Component   {
                                     state_type,
                                     order_kind,
                                 })
-                                this.props.history.push(path)
+                                router.push(path)
                             }}
                             style={{ marginRight: 14 }}
                         >
@@ -192,7 +192,7 @@ export default class ListTable extends Component   {
                         <Button
                             onClick={() => {
                                 const path = getQueryPath('/order/list')
-                                this.props.history.push(path)
+                                router.push(path)
                             }}
                         >
                             清空筛选
@@ -211,7 +211,7 @@ export default class ListTable extends Component   {
                         current: this.state.page
                     }}
                     onChange={({ current, pageSize }) => {
-                        this.props.history.push(Query.page(current, pageSize))
+                        router.push(Query.page(current, pageSize))
                     }}
                     rowKey={record => record.id}
                 /> : ''}

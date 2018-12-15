@@ -9,7 +9,7 @@ export default class UploadImage extends Component {
     static defaultProps = {
         is_save: 0,
     }
-    triggerChange = (e: { origin: { path: string } }) => {
+    triggerChange = (e) => {
         const {
             onChange
         } = this.props
@@ -77,7 +77,7 @@ export class UploadGroupImage extends Component{
         onChange: (e) => {
         }
     }
-    triggerChange = (e: { origin: { path: string } }) => {
+    triggerChange = (e) => {
         const { onChange, url } = this.props
         if (onChange) {
             onChange([...url ? url : [], e.origin.path])

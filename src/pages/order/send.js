@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "dva";
 import { Form, Button, Input } from "antd";
-import SendAddress from "@/components/order/orderSend/sendAddress";
-import DeliveryWay from "@/components/order/orderSend/deliveryWay";
+import SendAddress from "@/components/order/send/sendAddress";
+import DeliveryWay from "@/components/order/send/deliveryWay";
 import Page from "@/components/public/page";
 import { message } from "antd/lib/index";
 

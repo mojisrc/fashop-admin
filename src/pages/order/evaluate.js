@@ -6,13 +6,13 @@ import { Spin } from "antd";
 import { getRoutes } from "@/utils";
 import { Route, Switch } from "react-router-dom";
 const EvaluateListHeader = Loadable({
-    loader: () => import('@/components/order/evaluateListHeader'),
+    loader: () => import('@/components/order/evaluate/list/header'),
     loading: () => {
         return <Spin size="large" className="global-spin" />;
     },
 })
 const EvaluateListTable = Loadable({
-    loader: () => import('@/components/order/evaluateListTable'),
+    loader: () => import('@/components/order/evaluate/list/table'),
     loading: () => {
         return <Spin size="large" className="global-spin" />;
     },

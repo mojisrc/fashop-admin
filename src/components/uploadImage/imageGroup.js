@@ -37,7 +37,7 @@ export default class ImageGroup extends Component{
     onSortStart = (param, event) => {
     }
 
-    removeCard = (index: number) => {
+    removeCard = (index) => {
         const { url, onChange, } = this.props
         onChange(update(url, {
             $splice: [[index, 1]],

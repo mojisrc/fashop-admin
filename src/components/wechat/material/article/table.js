@@ -100,7 +100,7 @@ export default class ArticleTable extends Component {
                                                     onClick={() => {
                                                         itemItem.content.news_item.length>1 ?
                                                         message.warn('请选择单个图文进行修改！') :
-                                                        history.push({
+                                                        router.push({
                                                             search:`?menu=6&router=editWechatMaterial&media_id=${itemItem.media_id}`
                                                         })
                                                     }}
@@ -186,7 +186,7 @@ export default class ArticleTable extends Component {
                                 color:'#fff'
                             }}
                             onClick={() => {
-                                this.props.history.push({
+                                router.push({
                                     search:`?menu=6&router=editWechatMaterial&media_id=${media_id}&index=0`
                                 })
                             }}
@@ -223,7 +223,7 @@ export default class ArticleTable extends Component {
                                         color:'#fff'
                                     }}
                                     onClick={() => {
-                                        this.props.history.push({
+                                        router.push({
                                             search:`?menu=6&router=editWechatMaterial&media_id=${media_id}&index=${index}`
                                         })
                                     }}

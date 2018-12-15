@@ -50,7 +50,7 @@ export default class Index extends Component {
         )
     }
 
-    small(item: goodsItem, index: number, showTitle: boolean, showPrice: boolean, showMarketPrice: boolean) {
+    small(item: goodsItem, index, showTitle: boolean, showPrice: boolean, showMarketPrice: boolean) {
         const imgWidth = (375 - 18 - 2) / 2 + 'px'
         return (
             <View
@@ -72,7 +72,7 @@ export default class Index extends Component {
         )
     }
 
-    big(item: goodsItem, index: number, showTitle: boolean, showPrice: boolean, showMarketPrice: boolean) {
+    big(item: goodsItem, index, showTitle: boolean, showPrice: boolean, showMarketPrice: boolean) {
         return (
             <View
                 className={styles.bigWarp}
@@ -92,7 +92,7 @@ export default class Index extends Component {
         )
     }
 
-    oneBigTwoSmall(item: goodsItem, index: number, showTitle: boolean, showPrice: boolean, showMarketPrice: boolean) {
+    oneBigTwoSmall(item: goodsItem, index, showTitle: boolean, showPrice: boolean, showMarketPrice: boolean) {
         const imgWidth = (375 - 18 - 2) / 2 + 'px'
         return (
             <View
@@ -131,7 +131,7 @@ export default class Index extends Component {
         )
     }
 
-    list(item: goodsItem, index: number, showTitle: boolean, showPrice: boolean, showMarketPrice: boolean) {
+    list(item: goodsItem, index, showTitle: boolean, showPrice: boolean, showMarketPrice: boolean) {
         return (
             <View
                 className={styles.listWarp}

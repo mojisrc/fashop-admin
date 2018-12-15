@@ -31,7 +31,7 @@ class Index extends Component{
                     activeKey={location.state ? location.state.type : 'order'}
                     onChange={(key)=>{
                         // console.log('key',key)
-                        history.push({
+                        router.push({
                             pathname:'/setting/orderSetting',
                             state:{
                                 type:key

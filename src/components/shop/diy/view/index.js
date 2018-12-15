@@ -44,12 +44,12 @@ type State = {
     actioning: boolean
 }
 type SortEndType = { oldIndex: number, newIndex: number }
-type SortStartType = { node: any, index: number, collection: any }
+type SortStartType = { node: any, index, collection: any }
 type EventType = {
     target: {
         innerHTML: string,
         dataset: {
-            index: number
+            index
         }
     }
 }
@@ -271,7 +271,7 @@ export default class PageView extends Component {
         )
     }
 
-    returnContain(item: { type: string, title: string }, index: number) {
+    returnContain(item: { type: string, title: string }, index) {
         const { body } = this.props
         const { options, data } = body[index]
         switch (item.type) {

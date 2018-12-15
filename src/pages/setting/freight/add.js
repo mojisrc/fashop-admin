@@ -51,7 +51,7 @@ export default class Add extends Component {
         }
     }
 
-    changeTableDataSource = (index: any, key: any, value: any) => {
+    changeTableDataSource = (index: any, key: any, value) => {
         const {
             tableDataSource
         } = this.state
@@ -67,14 +67,14 @@ export default class Add extends Component {
             checkedAreaKeys: [],
         })
     }
-    editAreaList = (e: IdsType, index: number) => {
+    editAreaList = (e: IdsType, index) => {
         this.setState({
             visible: true,
             checkedAreaKeys: e,
             editAreaTableIndex: index,
         })
     }
-    delAreaList = (index: number) => {
+    delAreaList = (index) => {
         const {
             tableDataSource
         } = this.state
@@ -176,7 +176,7 @@ export default class Add extends Component {
                     if (e.code === 0) {
                         resetFields()
                         message.success('添加成功')
-                        history.push('/setting/deliver/freight')
+                        router.push('/setting/deliver/freight')
                         this.setState({
                             tableDataSource: [],
                             loading: false

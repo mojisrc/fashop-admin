@@ -58,7 +58,7 @@ const onFieldsChange = (props, fields)=>{
     onFieldsChange,
 })
 export default class RightCol extends Component{
-    handleSubmit = (e:handleSubmitType) => {
+    handleSubmit = (e) => {
         e.preventDefault();
         const { form, wechatMenuList, createWechatMenuList } = this.props
         form.validateFields((err, values) => {

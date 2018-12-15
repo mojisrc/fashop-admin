@@ -26,7 +26,7 @@ export default class KeyWordsReplyHeader extends Component {
                 <Button
                     type="primary"
                     onClick={()=>{
-                        history.push({
+                        router.push({
                             search:`?menu=2&router=addReply`
                         })
                     }}

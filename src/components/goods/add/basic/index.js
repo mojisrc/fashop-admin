@@ -97,7 +97,7 @@ export default class Basic extends Component {
                     )}
                     <a
                         onClick={() => {
-                            history.push('/goods/category/add')
+                            router.push('/goods/category/add')
                         }}
                     >
                         新增分类

@@ -127,7 +127,7 @@ export default class ListHeader extends Component {
                                 state_type,
                                 order_kind,
                             })
-                            this.props.history.push(path)
+                            router.push(path)
                         }}
                         style={{ marginRight: 14 }}
                     >
@@ -136,7 +136,7 @@ export default class ListHeader extends Component {
                     <Button
                         onClick={() => {
                             const path = getQueryPath('/order/list')
-                            this.props.history.push(path)
+                            router.push(path)
                         }}
                     >
                         清空筛选

@@ -29,7 +29,7 @@ export default class Index extends Component {
                 <Tabs
                     activeKey={location.state ? location.state.type : 'wechat_pay'}
                     onChange={(key) => {
-                        history.push({
+                        router.push({
                             pathname: '/setting/paymentSetting',
                             state: {
                                 type: key

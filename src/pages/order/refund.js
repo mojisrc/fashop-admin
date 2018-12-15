@@ -5,13 +5,13 @@ import Loadable from "react-loadable";
 import { Spin } from "antd";
 
 const RefundListHeader = Loadable({
-    loader: () => import("@/components/order/refundListHeader"),
+    loader: () => import("@/components/order/refund/list/header"),
     loading: () => {
         return <Spin size="large" className="global-spin" />;
     }
 });
 const RefundListTable = Loadable({
-    loader: () => import("@/components/order/refundListTable"),
+    loader: () => import("@/components/order/refund/list/table"),
     loading: () => {
         return <Spin size="large" className="global-spin" />;
     }

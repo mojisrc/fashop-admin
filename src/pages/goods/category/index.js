@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import GoodsCategoryTable from '@/components/goods/categoryTable/index'
+import GoodsCategoryTable from '@/components/goods/category/list/table/index'
 import { Route, Switch } from "react-router-dom";
 import { getRoutes } from "@/utils/index";
 import Page from "@/components/public/page/index";

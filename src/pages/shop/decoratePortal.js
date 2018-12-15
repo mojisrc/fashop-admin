@@ -2,7 +2,7 @@ import React,{ Component } from "react";
 import { View } from "react-web-dom";
 import Page from '@/components/public/page'
 import { CopyToClipboard } from 'react-copy-to-clipboard';
-import ShopIndexBot from '@/components/shop/shopIndex';
+import ShopIndexBot from '@/components/shop/index';
 import { connect } from 'dva';
 @connect(
     ({ view: { shop: { shopInfo } } }) => ({

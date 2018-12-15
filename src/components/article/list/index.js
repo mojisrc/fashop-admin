@@ -53,7 +53,7 @@ export default class TableList extends Component {
                 render: (record) => <View className={styles.operation}>
                     <a
                         onClick={() => {
-                            this.props.history.push({
+                            router.push({
                                 pathname: `/article/list/edit`,
                                 search: `?id=${record.id}`,
                                 state: {
@@ -97,7 +97,7 @@ export default class TableList extends Component {
                     <Button
                         type='primary'
                         onClick={() => {
-                            history.push("/article/list/add");
+                            router.push("/article/list/add");
                         }}
                     >
                         添加文章
@@ -116,7 +116,7 @@ export default class TableList extends Component {
                         current: page
                     }}
                     onChange={({ current, pageSize }) => {
-                        this.props.history.push(Query.page(current, pageSize));
+                        router.push(Query.page(current, pageSize));
                     }}
                 />
             </View>

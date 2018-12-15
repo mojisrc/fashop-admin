@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import {Button, Input,Select, TreeSelect,Form, } from "antd";
 import { View } from "react-web-dom";
 import { connect } from "dva";
-import { getGoodsList, } from "@/actions/goods";
 
 const Search = Input.Search;
 const Option = Select.Option;
@@ -104,7 +103,7 @@ export default class GoodsListHeader extends Component<Props>{
     static defaultProps = {
         form: formdDfaultProps,
     }
-    handleSubmit = (e: handleSubmitType) => {
+    handleSubmit = (e) => {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
             if (!err) {
