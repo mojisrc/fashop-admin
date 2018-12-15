@@ -111,7 +111,7 @@ class EditorContent extends Component<{},
                         <View className={styles.bodyContentWarp}>
                             <img
                                 className={styles.phoneTop}
-                                src={require('@/images/shop/diyPhone.png')}
+                                src={require('@/assets/images/shop/diyPhone.png')}
                                 alt='diyPhone'
                             />
                             <View className={styles.bodyContent}>

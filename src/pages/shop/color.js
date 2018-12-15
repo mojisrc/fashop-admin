@@ -9,51 +9,51 @@ export default class Color extends Component {
             {
                 color:['#ff595d','#f39802','#fff'],
                 example:[
-                    require('../../images/shop/color1-1.jpg'),
-                    require('../../images/shop/color1-2.jpg'),
-                    require('../../images/shop/color1-3.jpg'),
+                    require('../../assets/images/shop/color1-1.jpg'),
+                    require('../../assets/images/shop/color1-2.jpg'),
+                    require('../../assets/images/shop/color1-3.jpg'),
                 ],
             }, {
                 color:['#ff547a','#ffe6e8','#fff'],
                 example:[
-                    require('../../images/shop/color2-1.jpg'),
-                    require('../../images/shop/color2-2.jpg'),
-                    require('../../images/shop/color2-3.jpg'),
+                    require('../../assets/images/shop/color2-1.jpg'),
+                    require('../../assets/images/shop/color2-2.jpg'),
+                    require('../../assets/images/shop/color2-3.jpg'),
                 ],
             }, {
                 color:['#ff4444','#545454','#fff'],
                 example:[
-                    require('../../images/shop/color3-1.jpg'),
-                    require('../../images/shop/color3-2.jpg'),
-                    require('../../images/shop/color3-3.jpg'),
+                    require('../../assets/images/shop/color3-1.jpg'),
+                    require('../../assets/images/shop/color3-2.jpg'),
+                    require('../../assets/images/shop/color3-3.jpg'),
                 ],
             }, {
                 color:['#fcc602','#1d2630','#fff'],
                 example:[
-                    require('../../images/shop/color4-1.jpg'),
-                    require('../../images/shop/color4-2.jpg'),
-                    require('../../images/shop/color4-3.jpg'),
+                    require('../../assets/images/shop/color4-1.jpg'),
+                    require('../../assets/images/shop/color4-2.jpg'),
+                    require('../../assets/images/shop/color4-3.jpg'),
                 ],
             }, {
                 color:['#64c4a9','#ddf1eb','#fff'],
                 example:[
-                    require('../../images/shop/color5-1.jpg'),
-                    require('../../images/shop/color5-2.jpg'),
-                    require('../../images/shop/color5-3.jpg'),
+                    require('../../assets/images/shop/color5-1.jpg'),
+                    require('../../assets/images/shop/color5-2.jpg'),
+                    require('../../assets/images/shop/color5-3.jpg'),
                 ],
             }, {
                 color:['#c3a869','#f3eee3','#fff'],
                 example:[
-                    require('../../images/shop/color6-1.jpg'),
-                    require('../../images/shop/color6-2.jpg'),
-                    require('../../images/shop/color6-3.jpg'),
+                    require('../../assets/images/shop/color6-1.jpg'),
+                    require('../../assets/images/shop/color6-2.jpg'),
+                    require('../../assets/images/shop/color6-3.jpg'),
                 ],
             }, {
                 color:['#00bc07','#373737','#fff'],
                 example:[
-                    require('../../images/shop/color7-1.jpg'),
-                    require('../../images/shop/color7-2.jpg'),
-                    require('../../images/shop/color7-3.jpg'),
+                    require('../../assets/images/shop/color7-1.jpg'),
+                    require('../../assets/images/shop/color7-2.jpg'),
+                    require('../../assets/images/shop/color7-3.jpg'),
                 ],
             }
         ],

@@ -12,7 +12,7 @@
     margin-bottom: 10px;
 }
 .factUpdata{
-    background: url('../../images/pao.png' )no-repeat;
+    background: url('../../assets/images/pao.png')no-repeat;
     height: 500px;
     background-position: left bottom;
     background-size: contain;
@@ -30,9 +30,9 @@
             display: block;
 }
 .test span.bot{
-    border-width:10px; 
-    border-style:solid dashed dashed; 
-    border-color:#dfdfe4 transparent transparent; 
-    left:20px; 
+    border-width:10px;
+    border-style:solid dashed dashed;
+    border-color:#dfdfe4 transparent transparent;
+    left:20px;
     bottom:-20px;
 }

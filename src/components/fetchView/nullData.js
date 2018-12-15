@@ -29,7 +29,7 @@ export default class NullData extends Component{
                 }
             >
                 <img
-                    src={require('../../images/fetchStatus/nullData.png')}
+                    src={require('../../assets/images/fetchStatus/nullData.png')}
                     alt={'loading'}
                     style={
                         Object.assign({},styles.loaddingImage,

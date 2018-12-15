@@ -138,7 +138,7 @@ export default class ImageTable extends React.Component {
             <View className={styles.emptyImageView}>
                 <img
                     alt=''
-                    src={require('@/images/fetchStatus/emptyImage.png')}
+                    src={require('@/assets/images/fetchStatus/emptyImage.png')}
                 />
                 <strong>暂时还没有图片资源</strong>
                 <Upload

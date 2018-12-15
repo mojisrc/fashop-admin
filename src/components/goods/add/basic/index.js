@@ -2,22 +2,24 @@ import React, { Component } from "react";
 import { connect } from "dva";
 import { View } from "react-web-dom";
 import { Form, Input, TreeSelect } from "antd";
-import styles from './index.css'
-import { UploadGroupImage } from '@/uploadImage'
+import styles from "./index.css";
+import { UploadGroupImage } from "@/components/uploadImage";
+import router from "umi/router";
+
 const FormItem = Form.Item;
 const TreeNode = TreeSelect.TreeNode;
 
 @connect()
 export default class Basic extends Component {
     render() {
-        const { form, formItemLayout, history, openPhotoGallery, categoryTree, openPreviewModal, title, images, categoryIds } = this.props
-        const { getFieldDecorator, setFieldsValue } = form
+        const { form, formItemLayout, openPhotoGallery, categoryTree, openPreviewModal, title, images, categoryIds } = this.props;
+        const { getFieldDecorator, setFieldsValue } = form;
         // TreeSelect 只接受string
-        let _categoryIds = []
-        if(Array.isArray(categoryIds) && categoryIds.length>0){
+        let _categoryIds = [];
+        if (Array.isArray(categoryIds) && categoryIds.length > 0) {
             _categoryIds = categoryIds.map((item) => {
-                return item + ''
-            })
+                return item + "";
+            });
         }
         return (
             <View className={styles.goodsItem}>
@@ -26,24 +28,24 @@ export default class Basic extends Component {
                     {...formItemLayout}
                     label='商品图'
                 >
-                    {getFieldDecorator('images', {
-                        rules: [{ required: true, message: '请选择商品图!' }],
-                        valuePropName: 'url',
-                        initialValue: images,
+                    {getFieldDecorator("images", {
+                        rules: [{ required: true, message: "请选择商品图!" }],
+                        valuePropName: "url",
+                        initialValue: images
                     })(
                         <UploadGroupImage
                             onClick={(onChange, values) => {
-                                values = values ? values : []
+                                values = values ? values : [];
                                 openPhotoGallery({
                                     photoGalleryOnOk: (e) => {
-                                        onChange([...e, ...values])
+                                        onChange([...e, ...values]);
                                     }
-                                })
+                                });
                             }}
                             preview={(previewImage) => {
                                 openPreviewModal({
-                                    previewImage,
-                                })
+                                    previewImage
+                                });
                             }}
                         />
                     )}
@@ -52,9 +54,9 @@ export default class Basic extends Component {
                     {...formItemLayout}
                     label='商品名称'
                 >
-                    {getFieldDecorator('title', {
-                        rules: [{ required: true, message: '请输入商品名称!' }],
-                        initialValue: title,
+                    {getFieldDecorator("title", {
+                        rules: [{ required: true, message: "请输入商品名称!" }],
+                        initialValue: title
                     })(
                         <Input
                             placeholder="请输入商品名称"
@@ -65,13 +67,13 @@ export default class Basic extends Component {
                     {...formItemLayout}
                     label='商品分类'
                 >
-                    {getFieldDecorator('category_ids', {
+                    {getFieldDecorator("category_ids", {
                         initialValue: _categoryIds,
-                        rules: [{ required: true, message: '请选择商品分类!' }],
+                        rules: [{ required: true, message: "请选择商品分类!" }]
                     })(
                         <TreeSelect
                             showSearch
-                            dropdownStyle={{ maxHeight: 400, overflow: 'auto' }}
+                            dropdownStyle={{ maxHeight: 400, overflow: "auto" }}
                             placeholder="请选择商品分类"
                             allowClear
                             multiple
@@ -79,7 +81,7 @@ export default class Basic extends Component {
                             onChange={(value) => {
                                 setFieldsValue({
                                     category_ids: value
-                                })
+                                });
                             }}
                         >
                             {
@@ -97,13 +99,13 @@ export default class Basic extends Component {
                     )}
                     <a
                         onClick={() => {
-                            router.push('/goods/category/add')
+                            router.push("/goods/category/add");
                         }}
                     >
                         新增分类
                     </a>
                 </FormItem>
             </View>
-        )
+        );
     }
 }

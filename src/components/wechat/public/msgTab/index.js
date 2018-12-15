@@ -409,7 +409,7 @@ export default class MsgTab extends Component {
             <View className={styles.warp}>
                 <View className={`${styles.contentItem} ${styles.voiceContent}`}>
                     <img
-                        src={require('@/images/wechat/voice.png')}
+                        src={require('@/assets/images/wechat/voice.png')}
                         style={{
                             width:70,
                             height:70,

@@ -29,7 +29,7 @@ export default class Failure extends Component{
                 }
             >
                 <img
-                    src={require('../../images/fetchStatus/failure.png')}
+                    src={require('../../assets/images/fetchStatus/failure.png')}
                     alt={'loading'}
                     style={
                         Object.assign({},styles.loaddingImage,

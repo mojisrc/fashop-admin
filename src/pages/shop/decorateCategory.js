@@ -18,15 +18,15 @@ export default class DecorateCategory extends Component {
         availableList : [
             {
                 link:'http://www.domain.cn/mobile',
-                img:require('../../images/shop/fen_chaoshi.jpg'),
+                img:require('../../assets/images/shop/fen_chaoshi.jpg'),
                 title:'超市1',
             }, {
                 link:'http://www.domain.cn/mobile',
-                img:require('../../images/shop/fen_dianzi.jpg'),
+                img:require('../../assets/images/shop/fen_dianzi.jpg'),
                 title:'电子1',
             }, {
                 link:'http://www.domain.cn/mobile',
-                img:require('../../images/shop/fen_meizhuang.jpg'),
+                img:require('../../assets/images/shop/fen_meizhuang.jpg'),
                 title:'美妆1',
             }
         ],

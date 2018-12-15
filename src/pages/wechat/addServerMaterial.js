@@ -60,7 +60,7 @@ export default class AddServerMaterial extends Component {
                         <View className={styles.leftTop}>
                             <img
                                 alt=''
-                                src={(require('../../images/wechat/diyPhone.png'))}
+                                src={(require('../../assets/images/wechat/diyPhone.png'))}
                             />
                         </View>
                         <View className={styles.leftContent}>

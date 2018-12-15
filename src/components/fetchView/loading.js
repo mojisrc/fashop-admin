@@ -42,7 +42,7 @@ export default class Loading extends Component{
                         )
                     }
                 >
-                    <use xlinkHref={require('../../images/loading.svg')}/>
+                    <use xlinkHref={require('../../assets/images/loading.svg')}/>
                 </svg>
 
             </View>

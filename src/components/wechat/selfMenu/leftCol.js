@@ -36,7 +36,7 @@ export default class LeftCol extends Component{
                 <View className={styles.diyPhoneTop}>
                     <img
                         alt=''
-                        src={require('@/images/wechat/diyPhone.png')}
+                        src={require('@/assets/images/wechat/diyPhone.png')}
                     />
                 </View>
                 <View className={styles.diyPhoneBody}/>
@@ -44,7 +44,7 @@ export default class LeftCol extends Component{
                     <View className={styles.botLeftView}>
                         <img
                             alt=''
-                            src={require('@/images/wechat/mobile_foot.png')}
+                            src={require('@/assets/images/wechat/mobile_foot.png')}
                         />
                     </View>
                     {

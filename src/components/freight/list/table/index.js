@@ -4,7 +4,6 @@ import styles from "./index.css";
 import { View } from "react-web-dom";
 import { connect } from "dva";
 import moment from "moment/moment";
-import { getKeyAreaList } from "@/actions/area";
 import { Modal } from "antd";
 import Query from "@/utils/query";
 import router from "umi/router";

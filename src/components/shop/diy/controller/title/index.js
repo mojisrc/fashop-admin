@@ -3,7 +3,7 @@ import { Icon, Input, Row, Col, Radio } from "antd";
 import ColorPicker from "@/public/ColorPicker";
 import styles from "./index.css";
 import { View } from "react-web-dom";
-import UploadImage from "@/uploadImage/index";
+import UploadImage from "@/components/uploadImage";
 
 const RadioGroup = Radio.Group;
 //

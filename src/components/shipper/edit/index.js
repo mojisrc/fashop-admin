@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "dva";
 import { Form, Select, Input, Button,  message } from 'antd';
 import { View } from "react-web-dom";
-import UploadImage from "@/components/uploadImage/index";
+import UploadImage from "@/components/uploadImage";
 import {
     getGoodsCategoryList,
     editCategory,

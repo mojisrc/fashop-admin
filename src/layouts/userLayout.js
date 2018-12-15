@@ -4,7 +4,7 @@ import Link from "umi/link";
 import { Icon } from "antd";
 import GlobalFooter from "@/components/globalFooter";
 import styles from "./userLayout.less";
-import logo from "@/images/loginLogo.png";
+import logo from "@/assets/images/loginLogo.png";
 
 const links = [
 ];

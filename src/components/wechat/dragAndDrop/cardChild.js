@@ -87,7 +87,7 @@ export default class Card extends Component<{
                 <div style={{ ...style, opacity }}>
                     <img
                         alt='drag'
-                        src={require('@/images/wechat/drag.png')}
+                        src={require('@/assets/images/wechat/drag.png')}
                         style={{
                             width: '14px',
                             marginRight: '5px',

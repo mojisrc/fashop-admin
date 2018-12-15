@@ -285,7 +285,7 @@ export default class EditReply extends Component {
                                             replyItem.type==='voice' ?
                                             <View className={`voiceContent contentItem`}>
                                                 <img
-                                                    src={require('../../images/wechat/voice.png')}
+                                                    src={require('../../assets/images/wechat/voice.png')}
                                                     style={{
                                                         width:70,
                                                         height:70,

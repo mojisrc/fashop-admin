@@ -8,8 +8,8 @@ export default class NetWorkImage extends PureComponent {
 
         const { src, style, className, type, onClick } = this.props
         let unloaderSrc = type && type === 'avatar' ?
-            require('../../images/default_avatar.png') : type && type === 'goods' ?
-                require('../../images/default_goods_img.png') : require('../../images/networkImageError.png')
+            require('../../assets/images/default_avatar.png') : type && type === 'goods' ?
+                require('../../assets/images/default_goods_img.png') : require('../../assets/images/networkImageError.png')
         return (
             <Img
                 src={src}

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Icon, Input, Row, Col, Radio, Modal, message } from "antd";
 import styles from "./index.css";
 import { View } from "react-web-dom";
-import UploadImage from "@/uploadImage/index";
+import UploadImage from "@/components/uploadImage";
 import ActionLink, { linkInfo } from "../common/actionLink"
 
 const RadioGroup = Radio.Group;

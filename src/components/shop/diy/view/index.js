@@ -257,7 +257,7 @@ export default class PageView extends Component {
                 >
                     <span>设置页面信息</span>
                     <img
-                        src={require('@/images/shop/page-setting.png')}
+                        src={require('@/assets/images/shop/page-setting.png')}
                         alt='diyPhone'
                     />
                 </View>

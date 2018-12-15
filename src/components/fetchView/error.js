@@ -29,7 +29,7 @@ export default class Error extends Component{
                 }
             >
                 <img
-                    src={require('../../images/fetchStatus/error.png')}
+                    src={require('../../assets/images/fetchStatus/error.png')}
                     alt={'loading'}
                     style={
                         Object.assign({},styles.loaddingImage,

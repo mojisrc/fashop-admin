@@ -76,14 +76,14 @@ export default class VoiceTable extends React.Component {
                                             {
                                                 voiceActive===item.media_id ?
                                                 <img
-                                                    src={require('@/images/wechat/voiceing.gif')}
+                                                    src={require('@/assets/images/wechat/voiceing.gif')}
                                                     style={{
                                                         width:'100%',
                                                         height:'100%',
                                                     }}
                                                 /> :
                                                 <img
-                                                    src={require('@/images/wechat/voice.png')}
+                                                    src={require('@/assets/images/wechat/voice.png')}
                                                     style={{
                                                         width:'100%',
                                                         height:'100%',

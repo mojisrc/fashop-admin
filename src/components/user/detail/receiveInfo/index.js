@@ -101,7 +101,7 @@ export default class ReceiveInfo extends Component {
                     }}
                 /> : <View className={styles.addressEmpty}>
                     <img
-                        src={require('@/images/fetchStatus/emptySearch.png')}
+                        src={require('@/assets/images/fetchStatus/emptySearch.png')}
                     />
                     <p>该用户还没有添加收货地址</p>
                 </View>}

@@ -93,7 +93,7 @@ export default class RightCol extends Component{
                 <View className={styles.emptyImgView}>
                     <img
                         alt='empty'
-                        src={require('@/images/fetchStatus/emptyMenu.png')}
+                        src={require('@/assets/images/fetchStatus/emptyMenu.png')}
                     />
                 </View>
                 <strong>还没有菜单，点击左图进行操作</strong>
