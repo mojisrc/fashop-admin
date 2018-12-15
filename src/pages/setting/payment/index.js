@@ -2,14 +2,14 @@ import React, { Component } from "react";
 import { connect } from 'dva';
 import {  Tabs } from 'antd';
 import { View } from "react-web-dom";
-import Page from '@/components/public/page'
+import Page from '@/components/public/page/index'
 import styles from '@/styles/setting/paymentSetting.css'
-import WechatPay from '@/components/setting/paymentSetting/wechatPay'
+import WechatPay from '@/components/setting/paymentSetting/wechatPay/index'
 import { getHeaders } from '@/utils/index';
 import { UploadApi } from '../../config/api/upload'
 const TabPane = Tabs.TabPane;
 @connect()
-export default class PaymentSetting extends Component {
+export default class Index extends Component {
 
     render() {
         const { location, history } = this.props

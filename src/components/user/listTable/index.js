@@ -53,7 +53,7 @@ export default class UserListTable extends Component {
 
     componentDidMount() {
         const { dispatch } = this.props
-        const params = Query.invokerForListParams([])
+        const params = Query.make([])
         dispatch(getUserList({ params }))
     }
 

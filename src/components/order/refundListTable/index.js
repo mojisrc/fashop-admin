@@ -39,7 +39,7 @@ export default class RefundTable extends Component {
 
     componentDidMount() {
         const { dispatch } = this.props
-        const params = Query.invokerForListParams([
+        const params = Query.make([
             { key: 'refund_type', rule: ['eq', 'all'] },
             { key: 'refund_state', rule: ['eq', 'all'] },
             { key: 'order_type', rule: ['eq', 'all'] },

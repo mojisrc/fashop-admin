@@ -39,7 +39,7 @@ export default class GoodsListTable extends Component  {
     }
     getGoodsList(){
         const { dispatch, categoryList, } = this.props
-        const params = Query.invokerForListParams([
+        const params = Query.make([
             { key: 'sale_state', rule: ['eq', 'all'] },
             { key: 'order_type', rule: ['eq', 'all'] },
         ])

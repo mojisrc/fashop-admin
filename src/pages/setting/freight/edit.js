@@ -1,23 +1,32 @@
 import React, { Component } from "react";
-import { Input, Radio, Button, Modal, Form, Tree, message } from "antd";
+import { Input,  Button, Modal, Form, Tree, message } from "antd";
 import { Link } from "react-router-dom";
 import styles from "@/styles/freight/freightAdd.css";
-import Page from "@/components/public/page";
+import Page from "@/components/public/page/index";
 
-import FreightAddTable from '@/components/setting/freightAddTable'
+import FreightAddTable from '@/components/setting/freightAddTable/index'
 import { connect } from 'dva';
+import { areaList } from "../../actions/setting";
 import { View, ScrollView } from "react-web-dom";
 
-import { FreightApi } from "@/services/freight";
-const RadioGroup = Radio.Group;
+import { info } from "../../actions/deliver/freight";
+import {FreightApi} from "@/services/freight";
+const {
+    parseQuery
+} = publicFunction
+
 const FormItem = Form.Item;
 const TreeNode = Tree.TreeNode;
-@connect(({ app: { setting: { areaList } } }) => ({
-    areaList
-}))
+@connect(({ app: { setting: { areaList } } }) => ({ areaList }))
 @Form.create()
-export default class FreightAdd extends Component {
+export default class Edit extends Component {
     state = {
+        info: {
+            id: 0,
+            name: '',
+            pay_type: 1,
+            areas: []
+        },
         payType: 1,
         visible: false,
         expandedKeys: [],
@@ -40,26 +49,28 @@ export default class FreightAdd extends Component {
         loading: false,
     }
 
-    componentDidMount() {
-        const {
-            areaList,
-            dispatch,
-        } = this.props
-
+    async componentDidMount() {
+        const { areaList, dispatch, location } = this.props
+        const { id } = query.getParams()
+        const e = await info({ params: { id } })
+        if (e.code === 0) {
+            const { info } = e.result
+            this.setState({
+                info,
+                tableDataSource: info.areas,
+                payType: info.pay_type
+            })
+        }
         if (!areaList.length) {
             dispatch(areaList())
         }
     }
 
     changeTableDataSource = (index: any, key: any, value: any) => {
-        const {
-            tableDataSource
-        } = this.state
-        const newArray = [...tableDataSource]
-        newArray[index][key] = value
-        this.setState({
-            tableDataSource: newArray
-        })
+        const { tableDataSource } = this.state
+        const _tableDataSource = [...tableDataSource]
+        _tableDataSource[index][key] = value
+        this.setState({tableDataSource: _tableDataSource})
     }
     changeAreaListModal = (e: boolean) => {
         this.setState({
@@ -75,9 +86,7 @@ export default class FreightAdd extends Component {
         })
     }
     delAreaList = (index: number) => {
-        const {
-            tableDataSource
-        } = this.state
+        const {tableDataSource} = this.state
         const newArray = [...tableDataSource]
         newArray.splice(index, 1)
         this.setState({
@@ -163,24 +172,22 @@ export default class FreightAdd extends Component {
             validateFieldsAndScroll,
             resetFields,
         } = this.props.form
+        const { info } = this.state
         const { history } = this.props
+
         validateFieldsAndScroll((err, values) => {
             if (!err) {
                 this.setState({
                     loading: true
                 }, async () => {
                     const e = await Fetch.fetch({
-                        api: FreightApi.add,
-                        params: values
+                        api: FreightApi.edit,
+                        params: { ...values, ...{ id: info.id } }
                     })
                     if (e.code === 0) {
                         resetFields()
-                        message.success('添加成功')
+                        message.success('保存成功')
                         history.push('/setting/deliver/freight')
-                        this.setState({
-                            tableDataSource: [],
-                            loading: false
-                        })
                     } else {
                         this.setState({ loading: false })
                         message.warn(e.msg)
@@ -193,7 +200,7 @@ export default class FreightAdd extends Component {
     render() {
         const {
             form,
-            areaList,
+            areaList
         } = this.props
         const {
             visible,
@@ -202,7 +209,8 @@ export default class FreightAdd extends Component {
             checkedKeys2,
             tableDataSource,
             loading,
-            payType
+            payType,
+            info
         } = this.state
         const { getFieldDecorator } = form;
         const formItemLayout = {
@@ -237,6 +245,7 @@ export default class FreightAdd extends Component {
                         label='模板名称'
                     >
                         {getFieldDecorator('name', {
+                            initialValue: info.name,
                             rules: [{
                                 required: true,
                                 message: '请输入模板名称!',
@@ -249,28 +258,14 @@ export default class FreightAdd extends Component {
                         {...formItemLayout}
                         label='计费方式'
                     >
-                        {getFieldDecorator('pay_type', {
-                            initialValue: payType,
-                            rules: [{
-                                required: true,
-                                message: '请选择计费方式!',
-                            }],
-                        })(
-                            <RadioGroup onChange={(e) => {
-                                this.setState({
-                                    payType: e.target.value
-                                })
-                            }}>
-                                <Radio value={1}>按件数</Radio>
-                                <Radio value={2}>按重量</Radio>
-                            </RadioGroup>
-                        )}
+                        <View>{info.pay_type === 1 ? '按件数' : '按重量'}</View>
                     </FormItem>
                     <FormItem
                         {...formItemLayout}
                         label='可配送区域'
                     >
                         {getFieldDecorator('areas', {
+                            initialValue: info.areas,
                             rules: [{
                                 message: '请选择配送区域!',
                                 required: true

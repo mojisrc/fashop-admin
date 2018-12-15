@@ -60,7 +60,7 @@ export default class OrderManagementTable extends Component   {
 
     componentDidMount() {
         const { dispatch, user_id } = this.props
-        const params = Query.invokerForListParams([
+        const params = Query.make([
             { key: 'state', rule: ['eq', 'all'] },
             { key: 'keywords_type', rule: ['rely', 'keywords'] },
         ])

@@ -1,16 +1,31 @@
 import React, { Component } from "react";
 import { Input, Button, Form, Cascader } from 'antd';
-import Page from '@/components/public/page'
+import Page from '@/components/public/page/index'
 import { connect } from 'dva';
 const FormItem = Form.Item;
 @Form.create()
 @connect()
-export default class ShipperAdd extends Component {
+export default class Edit extends Component {
     state = {
-        areaList: []
+        areaList: [],
+        info: {
+            id: 0,
+            name: '',
+            province_id: 0,
+            city_id: 0,
+            area_id: 0,
+            address: '',
+            contact_number: ''
+        }
     }
 
     async componentDidMount() {
+        const { id } = query.getParams()
+        const e = await info({ params: { id } })
+        if (e.code === 0) {
+            const { info } = e.result
+            this.setState({ info })
+        }
         this.setState({
             areaList: await cascader()
         })
@@ -21,19 +36,22 @@ export default class ShipperAdd extends Component {
         this.props.form.validateFields((err, values) => {
             if (!err) {
                 const { dispatch } = this.props
+                const { id } = parseQuery(this.props.location.search)
                 let params = {
+                    id,
                     name: values.name,
                     contact_number: values.contact_number,
                     area_id: values.areas[2],
                     address: values.address
                 }
-                dispatch(add({ params }))
+                dispatch(edit({ params }))
             }
         });
     }
 
     render() {
-        const { areaList } = this.state
+        const { areaList, info } = this.state
+        const { name, contact_number, province_id, city_id, area_id, address } = info
         const { getFieldDecorator } = this.props.form
         return (
             <Page>
@@ -44,6 +62,7 @@ export default class ShipperAdd extends Component {
                         label='联系人'
                     >
                         {getFieldDecorator('name', {
+                            initialValue: name,
                             rules: [{ required: true, message: '请输入联系人' }],
                         })(
                             <Input
@@ -57,6 +76,7 @@ export default class ShipperAdd extends Component {
                         label='联系方式'
                     >
                         {getFieldDecorator('contact_number', {
+                            initialValue: contact_number,
                             rules: [{ required: true, message: '请输入联系方式' }],
                         })(
                             <Input
@@ -70,6 +90,7 @@ export default class ShipperAdd extends Component {
                         label="所在地区"
                     >
                         {getFieldDecorator('areas', {
+                            initialValue: [province_id, city_id, area_id],
                             rules: [{
                                 type: 'array',
                                 required: true,
@@ -85,6 +106,7 @@ export default class ShipperAdd extends Component {
                         label='详细地址'
                     >
                         {getFieldDecorator('address', {
+                            initialValue: address,
                             rules: [{ required: true, message: '请输入详细地址' }],
                         })(
                             <Input
@@ -99,7 +121,7 @@ export default class ShipperAdd extends Component {
                             type="primary"
                             htmlType="submit"
                         >
-                            添加
+                            保存
                         </Button>
                     </FormItem>
                 </Form>

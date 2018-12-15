@@ -67,7 +67,7 @@ export default class Query {
      * @param delCondition
      * @returns {*}
      */
-    static invokerForListParams(delCondition = []) {
+    static make(delCondition = []) {
         const QueryClass = new Query()
         return QueryClass.parse().delEmptyParams().withPageParams().delParams(delCondition).getParams()
     }

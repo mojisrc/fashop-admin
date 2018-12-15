@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import { Input, Button, Form, Switch } from 'antd';
-import Page from '@/components/public/page'
+import Page from '@/components/public/page/index'
 import { connect } from 'dva';
 const FormItem = Form.Item;
 @Form.create()
 @connect()
-export default class ExpressAdd extends Component {
+export default class Add extends Component {
     state = {}
 
     handleSubmit = (e) => {

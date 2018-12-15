@@ -19,7 +19,7 @@ let modelId = "您的验证码为：$(code)，该验证码 5 分钟内有效，�
      }) => ({ getInfo }),
     { smsScenceedit, sendSmsinfo }
 )
-export default class SmsEdit extends Component {
+export default class Edit extends Component {
     static propTypes = {
         smsScenceedit: PropTypes.func.isRequired,
         sendSmsinfo: PropTypes.func.isRequired

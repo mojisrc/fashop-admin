@@ -34,7 +34,7 @@ class OrderListTable extends Component {
 
     initList() {
         const { dispatch } = this.props;
-        const get = Query.invokerForListParams([
+        const get = Query.make([
             { key: "state", rule: ["eq", "all"] },
             { key: "keywords_type", rule: ["rely", "keywords"] }
         ]);

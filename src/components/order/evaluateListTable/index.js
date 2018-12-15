@@ -43,7 +43,7 @@ export default class EvaluateListTable extends Component {
 
     getGoodsEvaluateList() {
         const { dispatch } = this.props
-        let params = Query.invokerForListParams([
+        let params = Query.make([
             { key: 'type', rule: ['eq', 'all'] },
             { key: 'keywords_type', rule: ['rely', 'keywords'] },
         ])

@@ -2,12 +2,12 @@ import React, { Component } from "react";
 import { View } from "react-web-dom";
 import { connect } from 'dva';
 import { Row, Col, Button, Affix, message } from 'antd';
-import Page from '@/components/public/page'
-import PageTool from '@/components/shop/diy/tool'
-import PageView from '@/components/shop/diy/view'
-import PageControl from '@/components/shop/diy/controller'
-import { publicFunction } from '@/utils'
-import BaseInfo from '@/components/shop/diy/baseinfo'
+import Page from '@/components/public/page/index'
+import PageTool from '@/components/shop/diy/tool/index'
+import PageView from '@/components/shop/diy/view/index'
+import PageControl from '@/components/shop/diy/controller/index'
+import { publicFunction } from '@/utils/index'
+import BaseInfo from '@/components/shop/diy/baseinfo/index'
 import styles from '@/styles/shop/shopPageEdit.css'
 import GoodsApi from "@/services/goods";
 
@@ -20,7 +20,7 @@ import { query } from "@/utils/fa"
     dispatch => bindActionCreators(Object.assign(shopDecorateActions, goodsActions), dispatch)
 )
 
-export default class PageEdit extends Component {
+export default class Edit extends Component {
     state = {
         id: 0,
         name: '',

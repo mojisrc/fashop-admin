@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import ShipperListTable from '@/components/deliverSetting/shipperListTable'
-import Page from '@/components/public/page'
-export default class Shipper extends Component {
+import ShipperListTable from '@/components/deliverSetting/shipperListTable/index'
+import Page from '@/components/public/page/index'
+export default class List extends Component {
     render() {
         return (
             <Page>

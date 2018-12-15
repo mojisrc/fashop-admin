@@ -1,8 +1,8 @@
 import React,{ Component } from "react";
 import {Tabs} from 'antd';
-import SmsRemind from "./smsRemind";
+import Remind from "./smsRemind";
 const TabPane = Tabs.TabPane;
-export default class SmsSetting extends Component{
+export default class Setting extends Component{
   render(){
     const TabsStyle = {
          tab:{
@@ -16,7 +16,7 @@ export default class SmsSetting extends Component{
         <div>
             <Tabs defaultActiveKey="1" tabBarStyle={TabsStyle.tab}>
                 <TabPane tab="短信提醒" key="1" >
-                    <SmsRemind/>
+                    <Remind/>
                 </TabPane>
                 <TabPane tab="位置预留" key="2">
                     位置预留

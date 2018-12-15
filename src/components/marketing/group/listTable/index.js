@@ -44,7 +44,7 @@ export default class ListTable extends Component   {
     }
 
     async componentDidMount() {
-        const params = Query.invokerForListParams([
+        const params = Query.make([
             { key: 'state', rule: ['eq', 'all'] },
             { key: 'keywords_type', rule: ['rely', 'keywords'] },
         ])

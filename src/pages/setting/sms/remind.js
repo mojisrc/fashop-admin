@@ -14,7 +14,7 @@ let checkSwitchs = true;
     }) => ({sceneList}),
     {settingSmspro,sendSmscene}
 )
-export default class SmsRemind extends Component{
+export default class Remind extends Component{
     static propTypes = {
         settingSmspro: PropTypes.func.isRequired,
     }

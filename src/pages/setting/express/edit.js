@@ -1,15 +1,15 @@
 import React, { Component } from "react";
 import { Input, Button, Form, Switch } from 'antd';
-import Page from '@/components/public/page'
+import Page from '@/components/public/page/index'
 import { connect } from 'dva';
-import { publicFunction } from "@/utils";
+import { publicFunction } from "@/utils/index";
 const {
     parseQuery
 } = publicFunction
 const FormItem = Form.Item;
 @Form.create()
 @connect()
-export default class ExpressEdit extends Component {
+export default class Edit extends Component {
     state = {
         areaList: [],
         info: {

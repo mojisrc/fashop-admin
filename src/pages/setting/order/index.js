@@ -2,13 +2,13 @@ import React,{ Component } from "react";
 import { connect } from 'dva';
 import { Tabs } from 'antd';
 import { View } from "react-web-dom";
-import Page from '@/components/public/page'
+import Page from '@/components/public/page/index'
 import styles from '@/styles/setting/paymentSetting.css'
-import OrderProcess from '@/components/setting/orderSetting/orderProcess'
+import OrderProcess from '@/components/setting/orderSetting/orderProcess/index'
 
 const TabPane = Tabs.TabPane;
 
-class OrderSetting extends Component{
+class Index extends Component{
     render() {
         const { location, history } = this.props
         const tabsList = [
@@ -62,4 +62,4 @@ const mapStateToProps = ({view}) => {
     }
 }
 
-export default connect(mapStateToProps)(OrderSetting)
+export default connect(mapStateToProps)(Index)

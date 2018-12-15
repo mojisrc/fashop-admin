@@ -41,7 +41,7 @@ export default class MyTemplate extends Component {
 
     getPageList() {
         const { dispatch } = this.props
-        const params = Query.invokerForListParams()
+        const params = Query.make()
         dispatch(getShopPageList({ params }))
     }
 

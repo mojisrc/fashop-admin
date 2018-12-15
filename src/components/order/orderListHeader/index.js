@@ -22,6 +22,9 @@ export default class OrderManagementHeader extends Component {
     };
 
     componentDidMount() {
+        this.initQueryParams()
+    }
+    initQueryParams(){
         const params = Query.getQuery();
         this.setState({
             queryParams: {
