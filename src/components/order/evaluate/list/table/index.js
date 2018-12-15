@@ -13,8 +13,8 @@ import router from "umi/router";
 const { TextArea } = Input;
 const { Fragment } = React;
 
-@connect(({ evaluate: { list }, loading }) => ({
-    evaluateList: list.result,
+@connect(({ evaluate, loading }) => ({
+    evaluateList: evaluate.result,
     evaluateListLoading: loading.effects["evaluate/list"]
 }))
 export default class EvaluateListTable extends Component {
@@ -60,6 +60,7 @@ export default class EvaluateListTable extends Component {
     render() {
         const { reply_content } = this.state;
         const { evaluateList, evaluateListLoading } = this.props;
+        const { list } = evaluateList;
         return (
             <Spin tip="Loading..." spinning={evaluateListLoading}>
                 <PhotoGallery ref={(e) => {
@@ -67,7 +68,7 @@ export default class EvaluateListTable extends Component {
                 }} />
                 <View className={"EvaluateListTable"}>
                     {
-                        list && list.map((item, e) =>
+                        Array.isArray(list) && list.map((item, e) =>
                             <Row key={e}>
                                 <Col span={1}>
                                     <Image
@@ -288,8 +289,8 @@ export default class EvaluateListTable extends Component {
                     }
                     <View className={styles.pageView}>
                         <Pagination
-                            current={get.page}
-                            pageSize={get.rows}
+                            current={this.get.page}
+                            pageSize={this.get.rows}
                             total={evaluateList.total_number}
                             onChange={({ current, pageSize }) => {
                                 router.push(Query.page(current, pageSize));

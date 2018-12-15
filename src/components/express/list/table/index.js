@@ -7,8 +7,8 @@ import { Modal } from "antd";
 import Query from "@/utils/query";
 import router from "umi/router";
 
-@connect(({ express: { list }, loading }) => ({
-    expressList: list.result,
+@connect(({ express, loading }) => ({
+    expressList: express.result,
     expressListLoading: loading.effects["express/list"]
 }))
 export default class ExpressListTable extends Component {
@@ -66,7 +66,15 @@ export default class ExpressListTable extends Component {
                                 okType: "danger",
                                 cancelText: "取消",
                                 onOk() {
-                                    dispatch(setExpressIsCommonlyUse({ params: { id: record.id } }));
+                                    dispatch({
+                                        type: "express/setIsCommonlyUse",
+                                        payload: {
+                                            id: record.id
+                                        },
+                                        callback: () => {
+                                            this.initList();
+                                        }
+                                    });
                                 }
                             });
                         }}
@@ -119,10 +127,10 @@ export default class ExpressListTable extends Component {
                     </Button>
                 </View>
                 <Table
-                    dataSource={expressList}
                     columns={columns}
-                    rowKey={record => record.id}
+                    dataSource={expressList.list}
                     loading={expressListLoading}
+                    rowKey={record => record.id}
                     onChange={({ current, pageSize }) => {
                         router.push(Query.page(current, pageSize));
                         this.initList();
@@ -130,8 +138,8 @@ export default class ExpressListTable extends Component {
                     pagination={{
                         showSizeChanger: false,
                         showQuickJumper: false,
-                        current: get.page,
-                        pageSize: get.rows,
+                        current: this.get.page,
+                        pageSize: this.get.rows,
                         total: expressList.total_number
                     }}
 

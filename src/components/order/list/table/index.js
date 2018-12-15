@@ -12,8 +12,8 @@ import EditAddress from "../editAddress/index";
 import EditPrice from "../editPrice/index";
 import router from "umi/router";
 
-@connect(({ order: { list }, loading }) => ({
-    orderList: list.result,
+@connect(({ order, loading }) => ({
+    orderList: order.result,
     orderListLoading: loading.effects["order/list"]
 }))
 class OrderListTable extends Component {

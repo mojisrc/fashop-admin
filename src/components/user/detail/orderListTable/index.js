@@ -205,13 +205,13 @@ export default class OrderManagementTable extends Component   {
         return (
             <View>
                 {orderList.list ? <Table
-                    className="tableGoodsNested"
+
                     loading={orderListLoading}
                     dataSource={orderList.list ? orderList.list : []}
                     columns={columns}
                     expandedRowRender={record => (
                         <Table
-                            className="tableGoodsNestedChild"
+
                             dataSource={record.extend_order_goods ? record.extend_order_goods : []}
                             columns={expandedRowColumns}
                             pagination={false}

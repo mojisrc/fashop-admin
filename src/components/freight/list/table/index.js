@@ -1,72 +1,78 @@
 import React, { Component } from "react";
-import {
-    Table,
-    Button,
-    Tag
-} from "antd";
+import { Table, Button, Tag } from "antd";
 import styles from "./index.css";
 import { View } from "react-web-dom";
 import { connect } from "dva";
 import moment from "moment/moment";
-import { getFreightList, delFreight } from "@/actions/deliver/freight";
-import { getKeyAreaList } from "@/actions/area"
+import { getKeyAreaList } from "@/actions/area";
 import { Modal } from "antd";
+import Query from "@/utils/query";
+import router from "umi/router";
 
-@connect(({
-              view: {
-                  freight: {
-                      loading,
-                      listData,
-                  },
-              }
-          }) => ({
-    loading,
-    listData,
+@connect(({ freight: { list }, area, loading }) => ({
+    freightList: list.result,
+    freightListLoading: loading.effects["freight/list"],
+    areaList: areaList.result.list,
+    areaListLoading: loading.effects["area/list"]
 }))
-export default class FreightListTable extends Component   {
-    state = {
-        page: 1,
-        rows: 10,
-        areaList: []
-    }
+export default class FreightListTable extends Component {
     static defaultProps = {
+        freightList: [],
+        freightListLoading: false,
+        areaList: [],
+        areaListLoading: false
+    };
+    state = {
+        get: {},
+        areaListByKey: {}
+    };
 
-        loading: false,
-        listData: [],
+    componentDidMount() {
+        this.initArea();
+        this.initList();
     }
 
-    getList() {
-        const { dispatch } = this.props
-        dispatch(getFreightList({ params: { page: this.state.page, rows: this.state.rows } }))
+    initArea() {
+        const { dispatch } = this.props;
+        dispatch({
+            type: "area/list",
+            callback: (response) => {
+                var areaListByKey = {};
+                response.result.list.forEach(function(item) {
+                    areaListByKey[item.id] = item;
+                });
+                this.setState({
+                    areaListByKey
+                });
+            }
+        });
     }
 
-    async componentDidMount() {
-        this.getList()
-        this.setState({
-            areaList: await getKeyAreaList()
-        })
+    initList() {
+        const { dispatch } = this.props;
+        const get = Query.make();
+        dispatch({
+            type: "freight/list",
+            payload: {
+                page: get.page,
+                rows: get.rows
+            },
+            callback: () => {
+                this.setState({
+                    get
+                });
+            }
+        });
     }
 
     render() {
-        const { areaList, page, rows } = this.state
-        const {
-            loading,
-            listData,
-            history,
-            dispatch
-        } = this.props
-
-        const {
-            list,
-            total_number
-        } = listData
-
-
+        const { areaListByKey } = this.state;
+        const { freightList, freightListLoading } = this.props;
         const columns = [
             {
                 title: "模板名称",
                 dataIndex: "name",
-                key: "name",
+                key: "name"
             }, {
                 title: "计算方式",
                 dataIndex: "pay_type",
@@ -78,17 +84,17 @@ export default class FreightListTable extends Component   {
                 dataIndex: "create_time",
                 key: "create_time",
                 render: (text) => {
-                    return moment(text, 'X').format('YYYY-MM-DD HH:mm:ss')
+                    return moment(text, "X").format("YYYY-MM-DD HH:mm:ss");
                 }
             },
             {
-                title: '操作',
-                key: 'operation',
+                title: "操作",
+                key: "operation",
                 className: `${styles.operationTh}`,
                 render: (record) => <View className={styles.operation}>
                     <a
                         onClick={() => {
-                            router.push(`/setting/deliver/freightEdit?id=${record.id}`)
+                            router.push(`/setting/freight/edit?id=${record.id}`);
                         }}
                     >
                         编辑
@@ -96,19 +102,27 @@ export default class FreightListTable extends Component   {
                     <a
                         onClick={() => {
                             Modal.confirm({
-                                title: '确认删除？',
-                                okText: '确认',
-                                okType: 'danger',
-                                cancelText: '取消',
+                                title: "确认删除？",
+                                okText: "确认",
+                                okType: "danger",
+                                cancelText: "取消",
                                 onOk() {
-                                    dispatch(delFreight({ params: { id: record.id } }))
+                                    dispatch({
+                                        type: "freight/del",
+                                        payload: {
+                                            id: record.id
+                                        },
+                                        callback: () => {
+                                            this.initList();
+                                        }
+                                    });
                                 }
-                            })
+                            });
                         }}
                     >删除</a>
                 </View>
             }
-        ]
+        ];
         const areaColumns = [
             {
                 title: "可配送区域",
@@ -118,11 +132,11 @@ export default class FreightListTable extends Component   {
                 render: (area_ids) => {
                     if (area_ids && area_ids.length > 0) {
                         const areaNames = area_ids.map((id) => {
-                            return (typeof areaList[id] !== "undefined" && typeof areaList[id]['name'] !== "undefined") ? areaList[id].name : 'x'
-                        })
-                        return areaNames.join(',')
+                            return (typeof areaListByKey[id] !== "undefined" && typeof areaListByKey[id]["name"] !== "undefined") ? areaListByKey[id].name : "x";
+                        });
+                        return areaNames.join(",");
                     } else {
-                        return '-'
+                        return "-";
                     }
                 }
             }
@@ -130,19 +144,19 @@ export default class FreightListTable extends Component   {
                 title: "首(件/重)",
                 dataIndex: "first_amount",
                 key: "first_amount",
-                className: `${styles.firstAmount}`,
+                className: `${styles.firstAmount}`
             }, {
                 title: "运费（元）",
                 dataIndex: "first_fee",
                 key: "first_fee",
-                className: `${styles.firstFee}`,
+                className: `${styles.firstFee}`
             }, {
                 title: "续（件/重）",
                 dataIndex: "additional_amount",
                 key: "additional_amount",
                 className: `${styles.additionalAmount}`,
                 render: (value) => {
-                    return `${value} 件`
+                    return `${value} 件`;
                 }
             }, {
                 title: "续费（元）",
@@ -150,30 +164,28 @@ export default class FreightListTable extends Component   {
                 key: "additional_fee",
                 className: `${styles.additionalFee}`,
                 render: (value) => {
-                    return `¥${value}`
+                    return `¥${value}`;
                 }
             }
-        ]
+        ];
         return (
             <View>
                 <View className={styles.batchView}>
                     <Button
                         type='primary'
                         onClick={() => {
-                            router.push('/setting/deliver/freightAdd')
+                            router.push("/setting/freight/add");
                         }}
                     >
                         新增运费模板
                     </Button>
                 </View>
-                {list ? <Table
-                    loading={loading}
-                    className="tableGoodsNested"
-                    dataSource={list}
+                <Table
+                    loading={freightListLoading}
+                    dataSource={freightList.list}
                     columns={columns}
                     expandedRowRender={record => (
                         <Table
-                            className="tableGoodsNestedChild"
                             dataSource={record.areas ? record.areas : []}
                             columns={areaColumns}
                             pagination={false}
@@ -182,29 +194,31 @@ export default class FreightListTable extends Component   {
                     )}
                     rowKey={record => record.id}
                     pagination={{
-                        total: total_number,
-                        current: page,
-                        pageSize: rows
+                        showSizeChanger: false,
+                        showQuickJumper: false,
+                        current: this.get.page,
+                        pageSize: this.get.rows,
+                        total: freightList.total_number
                     }}
                     onChange={({ current, pageSize }) => {
                         this.setState({
                             page: current,
                             rows: pageSize
                         }, () => {
-                            this.getList()
-                        })
+                            this.getList();
+                        });
                     }}
-                /> : ''}
+                />
             </View>
-        )
+        );
     }
 
     static getPayType(pay_type) {
         switch (pay_type) {
             case 1:
-                return <Tag color="green">件数计费</Tag>
+                return <Tag color="green">件数计费</Tag>;
             case 2:
-                return <Tag color="red">重量计费</Tag>
+                return <Tag color="red">重量计费</Tag>;
             default:
         }
     }

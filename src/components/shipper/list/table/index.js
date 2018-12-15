@@ -1,74 +1,60 @@
 import React, { Component } from "react";
-import { Table, Button,Modal } from "antd";
+import { Table, Button, Modal } from "antd";
 import styles from "./index.css";
 import { View } from "react-web-dom";
 import { connect } from "dva";
-import { getShipperList, delShipper } from "@/actions/deliver/shipper";
+import Query from "@/utils/query";
+import router from "umi/router";
 
-@connect(({
-              view: {
-                  shipper: {
-                      loading,
-                      listData,
-                  },
-              }
-          }) => ({
-    loading,
-    listData,
+@connect(({ shopper, loading }) => ({
+    shopperList: shopper.result,
+    shopperListLoading: loading.effects["shopper/list"]
 }))
-export default class ShipperListTable extends Component  {
-    state = {
-        page: 1,
-        rows: 10
-    }
+export default class ShipperListTable extends Component {
     static defaultProps = {
-
-        loading: false,
-        listData: {
-            page: 1,
-            rows: 10,
-            total_number: 0,
-            list: []
-        },
-    }
-
-    getList() {
-        const { dispatch } = this.props
-        dispatch(getShipperList({ params: { page: this.state.page, rows: this.state.rows } }))
-    }
+        shopperListLoading: false,
+        shopperList: {}
+    };
+    state = {
+        get: {}
+    };
 
     componentDidMount() {
-        this.getList()
+        this.initList();
+    }
+
+    initList() {
+        const { dispatch } = this.props;
+        const get = Query.make();
+        dispatch({
+            type: "shopper/list",
+            payload: {
+                page: get.page,
+                rows: get.rows
+            },
+            callback: () => {
+                this.setState({
+                    get
+                });
+            }
+        });
     }
 
     render() {
-        const { page, rows } = this.state
-
-        const {
-            loading,
-            listData,
-            dispatch,
-            history,
-        } = this.props
-
-        const {
-            list,
-            total_number
-        } = listData
-
+        const { shopperList, shopperListLoading } = this.props;
         const columns = [
             {
-                title: '联系人',
-                dataIndex: 'name',
-                key: 'name',
+                title: "联系人",
+                dataIndex: "name",
+                key: "name"
             }, {
-                title: '联系方式',
-                dataIndex: 'contact_number',
-                key: 'contact_number',
+                title: "联系方式",
+                dataIndex: "contact_number",
+                key: "contact_number"
             }, {
-                title: '收货地址',
-                dataIndex: 'combine_detail',
-                key: 'combine_detail',
+                title: "收货地址",
+                dataIndex: "combine_detail",
+                key: "combine_detail"
             },
             // {
             //     title: '地址类型',
@@ -77,16 +63,16 @@ export default class ShipperListTable extends Component  {
             //     render: (value) => value === 1 ? <Tag color="red">默认收货地址</Tag> : null
             // },
             {
-                title: '操作',
-                dataIndex: 'operating',
-                key: 'operating',
+                title: "操作",
+                dataIndex: "operating",
+                key: "operating",
                 render: (value, record) => <View className={styles.operation}>
                     <a
                         onClick={() => {
                             router.push({
-                                pathname: `/setting/deliver/shipperEdit`,
+                                pathname: `/setting/shipper/edit`,
                                 search: `?id=${record.id}`
-                            })
+                            });
                         }}
                     >
                         编辑
@@ -94,14 +80,22 @@ export default class ShipperListTable extends Component  {
                     <a
                         onClick={() => {
                             Modal.confirm({
-                                title: '确认删除？',
-                                okText: '确认',
-                                okType: 'danger',
-                                cancelText: '取消',
+                                title: "确认删除？",
+                                okText: "确认",
+                                okType: "danger",
+                                cancelText: "取消",
                                 onOk() {
-                                    dispatch(delShipper({ params: { id: record.id } }))
+                                    dispatch({
+                                        type: "shopper/del",
+                                        payload: {
+                                            id: record.id
+                                        },
+                                        callback: () => {
+                                            this.initList();
+                                        }
+                                    });
                                 }
-                            })
+                            });
                         }}
                     >删除</a>
                 </View>
@@ -114,33 +108,31 @@ export default class ShipperListTable extends Component  {
                     <Button
                         type='primary'
                         onClick={() => {
-                            router.push('/setting/deliver/shipperAdd')
+                            router.push("/setting/shipper/add");
                         }}
                     >
                         新增地址
                     </Button>
                 </View>
                 <Table
-                    dataSource={list}
                     columns={columns}
+                    dataSource={shopperList.list}
+                    loading={shopperListLoading}
                     rowKey={record => record.id}
-                    loading={loading}
                     onChange={({ current, pageSize }) => {
-                        this.setState({
-                            page: current,
-                            rows: pageSize
-                        }, () => {
-                            this.getList()
-                        })
+                        router.push(Query.page(current, pageSize));
+                        this.initList();
                     }}
                     pagination={{
-                        total: total_number,
-                        current: page,
-                        pageSize: rows
+                        showSizeChanger: false,
+                        showQuickJumper: false,
+                        current: this.get.page,
+                        pageSize: this.get.rows,
+                        total: shopperList.total_number
                     }}
 
                 />
             </View>
-        )
+        );
     }
 }
