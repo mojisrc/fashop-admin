@@ -5,7 +5,7 @@ import styles from "./index.css";
 import { View } from "react-web-dom";
 import { connect } from "dva";
 import moment from "moment/moment";
-import Image from "../../../image/index";
+import Image from "@/components/image/index";
 import { list } from "@/models/order";
 import Query from "@/utils/query";
 import EditAddress from "../editAddress/index";
@@ -25,7 +25,7 @@ class OrderListTable extends Component {
         orderId: 0,
         visible: false,
         expandedRowKeys: [],
-        get: {}
+        get: { page : 1 , rows :10 }
     };
 
     componentDidMount() {
@@ -253,8 +253,8 @@ class OrderListTable extends Component {
                     pagination={{
                         showSizeChanger: false,
                         showQuickJumper: false,
-                        current: this.get.page,
-                        pageSize: this.get.rows,
+                        current: this.state.get.page,
+                        pageSize: this.state.get.rows,
                         total: orderList.total_number
                     }}
                     onChange={({ current, pageSize }) => {

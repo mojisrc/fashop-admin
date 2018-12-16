@@ -22,7 +22,7 @@ export default class FreightListTable extends Component {
         areaListLoading: false
     };
     state = {
-        get: {},
+        get: { page : 1 , rows :10 },
         areaListByKey: {}
     };
 
@@ -195,8 +195,8 @@ export default class FreightListTable extends Component {
                     pagination={{
                         showSizeChanger: false,
                         showQuickJumper: false,
-                        current: this.get.page,
-                        pageSize: this.get.rows,
+                        current: this.state.get.page,
+                        pageSize: this.state.get.rows,
                         total: freightList.total_number
                     }}
                     onChange={({ current, pageSize }) => {

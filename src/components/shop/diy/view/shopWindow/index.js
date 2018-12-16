@@ -1,8 +1,7 @@
 import React,{ Component } from "react";
 import styles from "./index.css";
 import { View } from "react-web-dom";
-import Image from "@/image/index";
-import type { LinkActionType } from "../../controller/common/actionLink"
+import Image from "@/components/image/index";
 //
 // type Props = {
 //         options: {

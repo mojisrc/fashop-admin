@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { Icon } from "antd";
 import styles from "./index.css";
 import { View } from "react-web-dom";
-import type { LinkActionType } from "../../controller/common/actionLink"
 //
 // type Props = {
 //         options: any,

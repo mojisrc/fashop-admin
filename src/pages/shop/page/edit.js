@@ -57,15 +57,15 @@ export default class Edit extends Component {
             }
         })
     }
-
-    goodsListRefreshGoods = async (values: {
-        options: {
-            goods_sort: number,
-            goods_display_num: number,
-            goods_display_field: Array<string>,
-            layout_style: number,
-        }
-    }) => {
+// : {
+//     options: {
+//         goods_sort: number,
+//         goods_display_num: number,
+//         goods_display_field: Array<string>,
+//         layout_style: number,
+//     }
+// }
+    goodsListRefreshGoods = async (values) => {
         let order_type = 8
         switch (values.options.goods_sort) {
             case 1:
@@ -95,7 +95,7 @@ export default class Edit extends Component {
             return []
         }
     }
-    onToolItemClick = (item: any) => {
+    onToolItemClick = (item) => {
         const { goodsListData } = this.props
         let { body } = this.state
         // delete _item.icon
@@ -135,7 +135,8 @@ export default class Edit extends Component {
             baseInfoVisible: true,
         })
     }
-    setPage = (info: { options: optionsType, body: PageBodyType }) => {
+// : { options: optionsType, body: PageBodyType }
+    setPage = (info) => {
         this.setState({
             options: info.options,
             body: info.body

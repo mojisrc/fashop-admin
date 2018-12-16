@@ -5,7 +5,7 @@ export default {
     state: {
         list: {},
         info: {},
-        setPagePortal: {},
+        setPortal: {},
         add: {},
         edit: {}
     },
@@ -26,10 +26,10 @@ export default {
             });
             if (callback) callback(response);
         },
-        * setPagePortal({ payload, callback }, { call, put }) {
-            const response = yield call(page.setPagePortal, payload);
+        * setPortal({ payload, callback }, { call, put }) {
+            const response = yield call(page.setPortal, payload);
             yield put({
-                type: "_setPagePortal",
+                type: "_setPortal",
                 payload: response
             });
             if (callback) callback(response);
@@ -64,10 +64,10 @@ export default {
                 info: action.payload
             };
         },
-        _setPagePortal(state, action) {
+        _setPortal(state, action) {
             return {
                 ...state,
-                setPagePortal: action.payload
+                setPortal: action.payload
             };
         },
         _add(state, action) {

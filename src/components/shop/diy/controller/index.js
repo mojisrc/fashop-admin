@@ -1,4 +1,3 @@
-
 import React, { Component } from "react";
 import { View, ScrollView } from "react-web-dom";
 import styles from "./index.css";
@@ -14,16 +13,15 @@ import Video from "./video";
 import TopMenu from "./topMenu";
 import Title from "./title";
 import TextNav from "./textNav";
-import type { optionsType, PageBodyType } from '@/interfaces/page'
 
-type Props = {
-    options: optionsType,
-    body: PageBodyType,
-    setPage: Function,
-    getValues: Function,
-    goodsListRefreshGoods: Function
-}
-type State = {}
+// type Props = {
+//     options: optionsType,
+//     body: PageBodyType,
+//     setPage: Function,
+//     getValues: Function,
+//     goodsListRefreshGoods: Function
+// }
+// type State = {}
 
 export default class PageControl extends Component {
     render() {

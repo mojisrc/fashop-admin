@@ -3,7 +3,7 @@ import { View } from "react-web-dom";
 import { Row, Col, Button, Modal, Input, message } from "antd";
 import styles from "./blank.css";
 import { abledata } from "./testData";
-import SelectGoods from "@/public/selectGoods";
+import SelectGoods from "@/components/public/selectGoods";
 
 // setGoodsDetailData: Function,
 //     closeAddModule: Function,

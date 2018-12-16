@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { View } from "react-web-dom";
 import { Row, Col } from "antd";
-import ColorPicker from "@/public/ColorPicker";
+import ColorPicker from "@/components/public/ColorPicker";
 //
 // type Props = {
 //     componentName?: 'string',

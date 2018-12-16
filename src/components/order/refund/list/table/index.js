@@ -176,8 +176,8 @@ export default class RefundTable extends Component {
                     pagination={{
                         showSizeChanger: false,
                         showQuickJumper: false,
-                        current: this.get.page,
-                        pageSize: this.get.rows,
+                        current: this.state.get.page,
+                        pageSize: this.state.get.rows,
                         total: refundList.total_number
                     }}
                     onChange={({ current, pageSize }) => {

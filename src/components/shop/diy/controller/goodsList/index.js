@@ -35,7 +35,7 @@ export default class Index extends Component {
         componentName: 'goodsList'
     }
 
-    formatGoodsList(goodsListData: any) {
+    formatGoodsList(goodsListData) {
         return Array.isArray(goodsListData) && goodsListData.length > 0 ? goodsListData.list.map((goods) => {
             return {
                 id: goods.id,

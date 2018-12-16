@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import { connect } from 'dva';
 import { View } from "react-web-dom";
-import BasicInfo from "./info/basicInfo";
-import DetailInfo from "./info/detailInfo";
-import GoodsInfo from "./info/goodsInfo";
-import OperateInfo from "./info/operateInfo";
-import Tracking from "./info/trackingInfo";
+import BasicInfo from "./info/basic";
+import DetailInfo from "./info/detail";
+import GoodsInfo from "./info/goods";
+import OperateInfo from "./info/operate";
+import Tracking from "./info/tracking";
 import { publicFunction } from "@/utils/index";
 import { info } from "@/models/refund"
 import { Spin } from "antd";

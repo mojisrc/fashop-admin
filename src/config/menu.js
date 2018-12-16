@@ -30,7 +30,7 @@ const menuData = [
                 hideInMenu: true,
             }, {
                 path: 'pageAdd',
-                name: '新增模板',
+                name: '新增页面',
                 hideInMenu: true,
             }
         ]

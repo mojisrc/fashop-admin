@@ -226,7 +226,7 @@ export default class Index extends Component {
                     onClick={() => {
                         let _data = [...data, {
                             img: {
-                                url: require('@/../images/page/view/image-ads-default.png')
+                                url: require('@/assets/images/page/view/image-ads-default.png')
                             },
                             title: '',
                             link: {

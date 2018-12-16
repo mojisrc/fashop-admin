@@ -254,7 +254,7 @@ export default class Index extends Component {
                             ...data,
                             {
                                 img: {
-                                    url: require('@/../images/page/view/image-nav-default.png')
+                                    url: require('@/assets/images/page/view/image-nav-default.png')
                                 },
                                 title: '文字',
                                 link: {

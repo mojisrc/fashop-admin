@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import styles from "./index.css";
 import { View } from "react-web-dom";
-import Image from "@/image/index";
+import Image from "@/components/image/index";
 //
 // type Props = {
 //     data: GoodsDataType,
@@ -30,13 +30,13 @@ export default class Index extends Component  {
             </View>
         )
     }
-
-    small(item: {
-        img: string,
-        title: string,
-        market_price: number,
-        price: number,
-    }, index) {
+// : {
+//     img: string,
+//     title: string,
+//     market_price: number,
+//     price: number,
+// }
+    small(item, index) {
         const imgWidth = (375 - 18 - 2) / 2 + 'px'
         return (
             <View
@@ -60,13 +60,13 @@ export default class Index extends Component  {
             </View>
         )
     }
-
-    big(item: {
-        img: string,
-        title: string,
-        market_price: number,
-        price: number,
-    }, index) {
+// : {
+//     img: string,
+//     title: string,
+//     market_price: number,
+//     price: number,
+// }
+    big(item, index) {
         return (
             <View
                 className={styles.bigWarp}
@@ -87,13 +87,13 @@ export default class Index extends Component  {
             </View>
         )
     }
-
-    oneBigTwoSmall(item: {
-        img: string,
-        title: string,
-        market_price: number,
-        price: number,
-    }, index) {
+// : {
+//     img: string,
+//     title: string,
+//     market_price: number,
+//     price: number,
+// }
+    oneBigTwoSmall(item, index) {
         const imgWidth = (375 - 18 - 2) / 2 + 'px'
         return (
             <View
@@ -130,13 +130,13 @@ export default class Index extends Component  {
             </View>
         )
     }
-
-    list(item: {
-        img: string,
-        title: string,
-        market_price: number,
-        price: number,
-    }, index) {
+    // item: {
+    //     img: string,
+    //     title: string,
+    //     market_price: number,
+    //     price: number,
+    // }
+    list(item, index) {
         return (
             <View
                 className={styles.listWarp}

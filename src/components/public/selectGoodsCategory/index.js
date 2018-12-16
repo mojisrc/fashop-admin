@@ -1,84 +1,68 @@
-
 import React, { Component } from "react";
 import { View } from "react-web-dom";
 import { Modal, Tree } from "antd";
-import { connect } from 'dva';
-import { list } from "@/actions/goods/category";
+import { connect } from "dva";
+import tree from "smart-arraytotree";
 
 const TreeNode = Tree.TreeNode;
 
-type CategoryRowType = {
-    id: number,
-    name: string,
-    icon: string,
-    pid: number,
-    children: Array<any>
-}
-type CategoryType = {
-    id: number,
-    name: string,
-    icon: string,
-    pid: number,
-}
-type Props = {
-    visible: boolean,
-    close: Function,
-    getState: Function,
-    dispatch?: Function,
-    categoryTree?: Array<CategoryRowType>,
-    value?: CategoryRowType | null,
-    categoryList?: Array<CategoryType>,
-}
-type State = {
-    expandedKeys: Array<any>,
-    autoExpandParent: boolean,
-    value: CategoryType | null
-}
-@connect(
-    ({ view: { goods: { categoryTree, categoryList } } }) => ({
-        categoryTree, categoryList
-    })
-)
+@connect(({ goodsCategory, loading }) => ({
+    goodsCategory: goodsCategory.result.list,
+    goodsCategoryLoading: loading.effects["goodsCategory/list"]
+}))
 export default class SelectGoodsCategory extends Component {
+    static defaultProps = {
+        goodsCategory: [],
+        goodsCategoryLoading: true
+    };
+    state = {
+        categoryTree: []
+    };
+
     constructor(props) {
         super(props);
         this.state = {
             expandedKeys: [],
             autoExpandParent: true,
             value: props.value ? props.value : null
-        }
+        };
     }
 
-    onExpand = (expandedKeys: Array<any>) => {
+    onExpand = (expandedKeys) => {
         this.setState({
             expandedKeys,
-            autoExpandParent: false,
+            autoExpandParent: false
         });
-    }
+    };
 
 
     componentDidMount() {
-        const { dispatch } = this.props
-        if (dispatch) {
-            dispatch(list())
-        }
+        const { dispatch } = this.props;
+        dispatch({
+            type: "goodsCategory/list",
+            callback: (response) => {
+                const categoryTree = tree(response.result.list);
+                this.setState({ categoryTree });
+            }
+        });
     }
 
-    onSelect = (selectedKeys: any, e: { selected: boolean, selectedNodes: Array<any>, node: any, event: any }) => {
-        const key = selectedKeys[0]
-        const { categoryList } = this.props
+    onSelect = (selectedKeys) => {
+        const key = selectedKeys[0];
+        const { categoryList } = this.props;
         if (Array.isArray(categoryList)) {
             const category = categoryList.find((value) => {
-                return Number(key) === Number(value.id)
-            })
+                return Number(key) === Number(value.id);
+            });
             this.setState({
                 value: category ? category : null
-            })
+            });
         }
-    }
+    };
 
     render() {
-        const { visible, categoryTree } = this.props
+        const { visible } = this.props;
+        const { categoryTree } = this.state;
         if (categoryTree) {
             const { expandedKeys, autoExpandParent } = this.state;
             const loop = categoryTree => categoryTree.map((item) => {
@@ -97,15 +81,15 @@ export default class SelectGoodsCategory extends Component {
                     title="选择商品分类页面"
                     visible={visible}
                     onCancel={() => {
-                        this.props.close()
+                        this.props.close();
                     }}
                     style={{ top: 20 }}
                     width={756}
-                    okType={'primary'}
-                    okText={'确定'}
-                    cancelText={'取消'}
+                    okType={"primary"}
+                    okText={"确定"}
+                    cancelText={"取消"}
                     onOk={() => {
-                        this.props.getState(this.state)
+                        this.props.getState(this.state);
                     }}
                     okButtonProps={{ disabled: this.state.value === null }}
                 >
@@ -120,9 +104,9 @@ export default class SelectGoodsCategory extends Component {
                         </Tree>
                     </View>
                 </Modal>
-            )
+            );
         } else {
-            return null
+            return null;
         }
     }
 }

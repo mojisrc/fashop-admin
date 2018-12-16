@@ -3,9 +3,7 @@ import { Table, Button, Switch, Modal } from "antd";
 import styles from "./index.css";
 import { View } from "react-web-dom";
 import { connect } from "dva";
-import { initList } from "@/actions/goods";
-import { getGoodsCategoryList } from "@/actions/goods/category";
-import Image from "../../../image/index";
+import Image from "@/components/image";
 import moment from "moment";
 import Query from "@/utils/query";
 import GoodsApi from "@/services/goods";
@@ -20,13 +18,13 @@ import router from "umi/router";
 export default class GoodsListTable extends Component {
     static defaultProps = {
         goodList: { total_number, list },
-        goodsListLoading: false,
+        goodsListLoading: true,
         goodsCategory: [],
-        goodsCategoryLoading: false
+        goodsCategoryLoading: true
     };
     state = {
         rowSelectionIds: [],
-        get: {}
+        get: { page : 1 , rows :10 }
     };
 
     componentDidMount() {
@@ -34,7 +32,7 @@ export default class GoodsListTable extends Component {
     }
 
     initList() {
-        const { dispatch, goodsCategoryList } = this.props;
+        const { dispatch, goodsCategory } = this.props;
         const get = Query.make([
             { key: "sale_state", rule: ["eq", "all"] },
             { key: "order_type", rule: ["eq", "all"] }
@@ -43,7 +41,7 @@ export default class GoodsListTable extends Component {
             type: "goods/list",
             payload: get
         });
-        if (!goodsCategoryList.length) {
+        if (!goodsCategory.length) {
             dispatch({
                 type: "goodsCategory/list"
             });
@@ -54,7 +52,7 @@ export default class GoodsListTable extends Component {
     }
 
     render() {
-        const { goodsListLoading, goodsList, goodsCategoryList } = this.props;
+        const { goodsListLoading, goodsList, goodsCategory } = this.props;
 
         const columns = [
             {
@@ -89,9 +87,9 @@ export default class GoodsListTable extends Component {
                 dataIndex: "category_ids",
                 render: (e) => {
                     const textArray = e ? e.map((a) => {
-                        const index = goodsCategoryList.findIndex((c) => c.id === Number(a));
+                        const index = goodsCategory.findIndex((c) => c.id === Number(a));
                         if (index !== -1) {
-                            return goodsCategoryList[index].name;
+                            return goodsCategory[index].name;
                         } else {
                             return null;
                         }
@@ -185,8 +183,8 @@ export default class GoodsListTable extends Component {
                     pagination={{
                         showSizeChanger: false,
                         showQuickJumper: false,
-                        current: this.get.page,
-                        pageSize: this.get.rows,
+                        current: this.state.get.page,
+                        pageSize: this.state.get.rows,
                         total: goodsList.total_number
                     }}
                     onChange={({ current, pageSize }) => {

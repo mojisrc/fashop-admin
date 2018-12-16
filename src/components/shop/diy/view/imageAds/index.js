@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Carousel } from "antd";
 import styles from "./index.css";
 import { View } from "react-web-dom";
-import Image from "@/image/index";
+import Image from "@/components/image/index";
 //
 // type Props = {
 //     options: {

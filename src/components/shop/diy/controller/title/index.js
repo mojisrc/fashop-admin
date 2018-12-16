@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Icon, Input, Row, Col, Radio } from "antd";
-import ColorPicker from "@/public/ColorPicker";
+import ColorPicker from "@/components/public/ColorPicker";
 import styles from "./index.css";
 import { View } from "react-web-dom";
 import UploadImage from "@/components/uploadImage";

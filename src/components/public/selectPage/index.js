@@ -1,74 +1,86 @@
-
 import React, { Component } from "react";
 import { View } from "react-web-dom";
 import { Modal, Table, Button } from "antd";
-import { connect } from 'dva';
-import { list } from "@/models/decorate";
+import { connect } from "dva";
 import moment from "moment";
-
-type PageRowType = {
-    id: number,
-    name: string,
-    description: string,
-    is_system: number,
-    is_portal: number,
-    type: string,
-    create_time: number,
-    update_time: number
-}
-type Props = {
-    visible: boolean,
-    close: Function,
-    getState: Function,
-    dispatch?: Function,
-    shopPageListLoading?: boolean,
-    shopPageList?: {
-        page: number,
-        rows: number,
-        total_number: number,
-        list: Array<PageRowType>,
-    },
-    value?: PageRowType | null
-}
-type State = {
-    value: PageRowType | null
-}
-@connect(
-    ({ view: { shop: { shopPageList, shopPageListLoading } } }) => ({
-        shopPageList,
-        shopPageListLoading,
-    })
-)
+import Query from "@/utils/query";
+//
+// type PageRowType = {
+//     id: number,
+//     name: string,
+//     description: string,
+//     is_system: number,
+//     is_portal: number,
+//     type: string,
+//     create_time: number,
+//     update_time: number
+// }
+// type Props = {
+//     visible: boolean,
+//     close: Function,
+//     getState: Function,
+//     dispatch?: Function,
+//     pageListLoading?: boolean,
+//     pageList?: {
+//         page: number,
+//         rows: number,
+//         total_number: number,
+//         list: Array<PageRowType>,
+//     },
+//     value?: PageRowType | null
+// }
+// type State = {
+//     value: PageRowType | null
+// }
+@connect(({ page, loading }) => ({
+    pageList: page.list.result,
+    pageListLoading: loading.effects["page/list"]
+}))
 export default class SelectPage extends Component {
+    static defaultProps = {
+        pageListLoading: true,
+        pageList: {
+            list: [],
+            total_number: 0
+        }
+    };
+
     constructor(props) {
         super(props);
         this.state = {
+            page: 1, rows: 10,
             value: props.value ? props.value : null
-        }
+        };
     }
 
     componentDidMount() {
-        const { dispatch } = this.props
-        if (dispatch) {
-            dispatch(list({ params: { page: 1, rows: 5 } }))
-        }
+        this.initList();
+    }
+
+    initList() {
+        const { dispatch } = this.props;
+        dispatch({
+            type: "page/list",
+            payload: {
+                page: this.state.page,
+                rows: this.state.rows
+            }
+        });
     }
 
     render() {
-        const { visible, shopPageList, shopPageListLoading, dispatch } = this.props
-        if (shopPageList) {
-            const { page, rows, list, total_number } = shopPageList
-
+        const { visible, pageList, pageListLoading } = this.props;
+        if (pageList) {
             const columns = [{
                 title: "页面ID",
-                dataIndex: "id",
+                dataIndex: "id"
             }, {
                 title: "页面名称",
-                dataIndex: "name",
+                dataIndex: "name"
             }, {
                 title: "最后编辑",
                 dataIndex: "update_time",
-                render: text => text ? moment(text, 'X').format('YYYY-MM-DD HH:mm') : '-'
+                render: text => text ? moment(text, "X").format("YYYY-MM-DD HH:mm") : "-"
             }, {
                 title: "",
                 dataIndex: "is_portal",
@@ -76,16 +88,16 @@ export default class SelectPage extends Component {
                     this.setState({
                         value: record
                     }, () => {
-                        this.props.getState(this.state)
-                    })
+                        this.props.getState(this.state);
+                    });
                 }}>选择</Button>
-            }]
+            }];
             return (
                 <Modal
                     title="选择自定义页面"
                     visible={visible}
-                    onCancel={()=>{
-                        this.props.close()
+                    onCancel={() => {
+                        this.props.close();
                     }}
                     style={{ top: 20 }}
                     width={756}
@@ -93,32 +105,34 @@ export default class SelectPage extends Component {
                 >
                     <View>
                         <Table
-                            loading={shopPageListLoading}
-                            dataSource={list}
+                            loading={pageListLoading}
+                            dataSource={pageList.list}
                             columns={columns}
                             rowKey={record => record.id}
                             pagination={{
                                 showSizeChanger: false,
                                 showQuickJumper: false,
-                                pageSize: rows,
-                                total: total_number,
-                                current: page,
+                                pageSize: this.state.rows,
+                                total: pageList.total_number,
+                                current: this.state.page
                             }}
                             onChange={({ current, pageSize }) => {
-                                if (dispatch) {
-                                    dispatch(list({ params: { page: current, rows: pageSize } }))
-                                }
+                                this.setState({
+                                    page: current, rows: pageSize
+                                }, () => {
+                                    this.initList();
+                                });
                             }}
                         />
                     </View>
                 </Modal>
-            )
-        }else{
-            return null
+            );
+        } else {
+            return null;
         }
     }
 
     init() {
-        this.setState({ value: null })
+        this.setState({ value: null, page: 1, rows: 10 });
     }
 }

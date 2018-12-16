@@ -59,17 +59,12 @@ class BasicLayout extends React.PureComponent {
 
     componentDidMount() {
         const {
-            member,
             dispatch,
             route: { routes, authority }
         } = this.props;
         dispatch({
-            type: "member/self",
-            callback:()=>{
-                console.log(member)
-            }
+            type: "member/self"
         });
-        console.log('componentDidMount')
         dispatch({
             type: "setting/getSetting"
         });
@@ -123,10 +118,11 @@ class BasicLayout extends React.PureComponent {
         if (!currRouterData) {
             return "FaShop 商城系统 - Power By FaShop ( www.fashop.cn )";
         }
-        const pageName = formatMessage({
-            id: currRouterData.locale || currRouterData.name,
-            defaultMessage: currRouterData.name
-        });
+        // const pageName = formatMessage({
+        //     id: currRouterData.locale || currRouterData.name,
+        //     defaultMessage: currRouterData.name
+        // });
+        const pageName = currRouterData.name;
 
         return `${pageName} - FaShop 商城系统 - Power By FaShop ( www.fashop.cn )`;
     };

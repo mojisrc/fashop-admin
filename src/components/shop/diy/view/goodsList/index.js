@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import styles from "./index.css";
 import { View } from "react-web-dom";
-import Image from "@/image/index";
+import Image from "@/components/image/index";
 //
 // type goodsItem = {
 //     id: number,
@@ -49,8 +49,8 @@ export default class Index extends Component {
             </View>
         )
     }
-
-    small(item: goodsItem, index, showTitle: boolean, showPrice: boolean, showMarketPrice: boolean) {
+    // small(item: goodsItem, index, showTitle, showPrice, showMarketPrice) {
+    small(item, index, showTitle, showPrice, showMarketPrice) {
         const imgWidth = (375 - 18 - 2) / 2 + 'px'
         return (
             <View
@@ -72,7 +72,7 @@ export default class Index extends Component {
         )
     }
 
-    big(item: goodsItem, index, showTitle: boolean, showPrice: boolean, showMarketPrice: boolean) {
+    big(item, index, showTitle, showPrice, showMarketPrice) {
         return (
             <View
                 className={styles.bigWarp}
@@ -92,7 +92,7 @@ export default class Index extends Component {
         )
     }
 
-    oneBigTwoSmall(item: goodsItem, index, showTitle: boolean, showPrice: boolean, showMarketPrice: boolean) {
+    oneBigTwoSmall(item, index, showTitle, showPrice, showMarketPrice) {
         const imgWidth = (375 - 18 - 2) / 2 + 'px'
         return (
             <View
@@ -131,7 +131,7 @@ export default class Index extends Component {
         )
     }
 
-    list(item: goodsItem, index, showTitle: boolean, showPrice: boolean, showMarketPrice: boolean) {
+    list(item, index, showTitle, showPrice, showMarketPrice) {
         return (
             <View
                 className={styles.listWarp}

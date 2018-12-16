@@ -290,8 +290,8 @@ export default class EvaluateListTable extends Component {
                     }
                     <View className={styles.pageView}>
                         <Pagination
-                            current={this.get.page}
-                            pageSize={this.get.rows}
+                            current={this.state.get.page}
+                            pageSize={this.state.get.rows}
                             total={evaluateList.total_number}
                             onChange={({ current, pageSize }) => {
                                 router.push(Query.page(current, pageSize));

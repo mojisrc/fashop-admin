@@ -1,10 +1,12 @@
 import React, { Component } from "react";
 import OrderDetailView from "@/components/order/detail";
 import { connect } from "dva";
+import { getPageQuery } from "@/utils/utils";
+import { Spin } from "antd";
 
-@connect(({ info, loading }) => ({
-    info,
-    loading: loading.models.info
+@connect(({ order, loading }) => ({
+    orderInfo: order.info,
+    orderInfoLoading: loading.effects["order/info"]
 }))
 export default class Detail extends Component {
     state = {
@@ -37,32 +39,28 @@ export default class Detail extends Component {
         }
     };
 
-    async componentWillMount() {
-        const { id } = query.getParams();
+    componentDidMount() {
+        const { id } = getPageQuery();
         const { dispatch } = this.props;
         dispatch({
-            type: "order/detail",
+            type: "order/info",
             payload: {
                 id
             },
-            callback: () => {
-                if (this.props.loading === true) {
-                    this.setState({
-                        info: this.props.info
-                    });
-                }
-
+            callback: (response) => {
+                this.setState({
+                    info: response.result.info
+                });
             }
         });
     }
 
     render() {
-        const { history, loading } = this.props;
-        const { info } = this.state;
+        const { orderInfoLoading, orderInfo } = this.props;
         return (
-            <div>
-                {loading ? <OrderDetailView orderInfo={info.result.info} history={history} /> : null}
-            </div>
+            <Spin size="large" className="globalSpin" spinning={orderInfoLoading}>
+                <OrderDetailView orderInfo={orderInfo.result} />
+            </Spin>
         );
     }
 }

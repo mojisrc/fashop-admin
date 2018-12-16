@@ -4,7 +4,7 @@ import { Tabs } from 'antd';
 import { View } from "react-web-dom";
 import Page from '@/components/public/page/index'
 import styles from '@/styles/setting/paymentSetting.css'
-import OrderProcess from '@/components/setting/orderSetting/orderProcess/index'
+import OrderProcess from '@/components/setting/order/process/index'
 
 const TabPane = Tabs.TabPane;
 

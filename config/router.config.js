@@ -26,9 +26,12 @@ export default [
                 path: "/shop",
                 name: "店铺",
                 routes: [
-                    { path: "/shop", redirect: "/order/list" },
-                    { path: "/shop/decorate", name: "店铺装修", component: "/shop/decorate" },
-                    { path: "/shop/setting", name: "店铺设置", component: "/shop/setting" }
+                    { path: "/shop", redirect: "/shop/info" },
+                    { path: "/shop/info", name: "基本信息", component: "/shop/info" },
+                    { path: "/shop/page", name: "制作页面", component: "/shop/page/list" },
+                    { path: "/shop/page/add",  component: "/shop/page/add" },
+                    { path: "/shop/page/edit", component: "/shop/page/edit" },
+                    { path: "/shop/category", name: "分类页面",component: "/shop/category" },
                 ]
             },
             {
@@ -37,7 +40,7 @@ export default [
                 routes: [
                     { path: "/order", redirect: "/order/list" },
                     { path: "/order/list", name: "订单管理", component: "/order/list" },
-                    { path: "/order/detail", component: "/order/detail" },
+                    { path: "/order/list/detail", component: "/order/detail" },
                     { path: "/order/evaluate", name: "评价管理", component: "/order/evaluate" },
                     { path: "/order/refund", name: "退款售后", component: "/order/refund" },
                     { path: "/order/refundEdit", component: "/order/refundEdit" },
@@ -66,8 +69,7 @@ export default [
                 name: "设置",
                 routes: [
                     { path: "/setting", redirect: "/setting/index" },
-                    { path: "/setting/shipper", name: "设置", component: "/setting/index" },
-                    { path: "/setting/shipper", name: "配送设置", component: "/setting/shipper" },
+                    { path: "/setting/index", name: "配送设置", component: "/setting/index" },
                     { path: "/setting/order", name: "订单设置", component: "/setting/order" },
                     { path: "/setting/payment", name: "支付设置", component: "/setting/payment" }
                 ]

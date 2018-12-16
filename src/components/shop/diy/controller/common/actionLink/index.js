@@ -2,9 +2,9 @@ import React, { Component } from "react";
 import styles from "./index.css";
 import { View } from "react-web-dom";
 import { Popover, Tag, Input, Modal } from 'antd';
-import SelectGoods from "@/../public/selectGoods/index";
-import SelectPage from "@/../public/selectPage/index";
-import SelectGoodsCategory from "@/../public/selectGoodsCategory/index";
+import SelectGoods from "@/components/public/selectGoods/index";
+import SelectPage from "@/components/public/selectPage/index";
+import SelectGoodsCategory from "@/components/public/selectGoodsCategory/index";
 
 const { TextArea } = Input;
 
@@ -61,7 +61,7 @@ export default class Index extends Component {
         selectGoodsCategoryVisible:false,
         inputUrlVisible: false
     }
-    onClick = (linkAction: LinkActionType) => {
+    onClick = (linkAction) => {
         const props = { ...this.props }
         switch (linkAction) {
             case 'portal':

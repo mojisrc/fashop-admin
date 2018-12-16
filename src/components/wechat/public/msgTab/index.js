@@ -10,12 +10,12 @@ import {
 } from 'antd'
 import { View } from 'react-web-dom'
 import styles from './index.css'
-import Emoji from "@/public/emoji";
-import ModalNews from "@/public/wechatItem/modalNews";
-import NewsModal from "@/public/wechatModal/newsModal";
-import ImageModal from "@/public/wechatModal/imageModal";
-import VoiceModal from "@/public/wechatModal/voiceModal";
-import VideoModal from "@/public/wechatModal/videoModal";
+import Emoji from "@/components/public/emoji";
+import ModalNews from "@/components/public/wechatItem/modalNews";
+import NewsModal from "@/components/public/wechatModal/newsModal";
+import ImageModal from "@/components/public/wechatModal/imageModal";
+import VoiceModal from "@/components/public/wechatModal/voiceModal";
+import VideoModal from "@/components/public/wechatModal/videoModal";
 import AddVideoForm from '../../material/video/addVideoForm'
 import Image from "@/image";
 

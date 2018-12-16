@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { View } from "react-web-dom";
 import { Row, Col, Radio } from "antd";
 import styles from "./index.css";
-import ColorPicker from "@/public/ColorPicker";
+import ColorPicker from "@/components/public/ColorPicker";
 const RadioGroup = Radio.Group;
 //
 // type Props = {

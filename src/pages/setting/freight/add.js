@@ -400,7 +400,7 @@ export default class Add extends Component {
         )
     }
 
-    onExpand = (expandedKeys: IdsType) => {
+    onExpand = (expandedKeys) => {
         this.setState({
             expandedKeys,
             autoExpandParent: false

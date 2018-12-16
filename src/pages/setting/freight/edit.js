@@ -6,14 +6,10 @@ import Page from "@/components/public/page/index";
 
 import FreightAddTable from '@/components/setting/freightAddTable/index'
 import { connect } from 'dva';
-import { areaList } from "../../actions/setting";
 import { View, ScrollView } from "react-web-dom";
 
 import { info } from "../../actions/deliver/freight";
-import {FreightApi} from "@/services/freight";
-const {
-    parseQuery
-} = publicFunction
+import FreightApi from "@/services/freight";
 
 const FormItem = Form.Item;
 const TreeNode = Tree.TreeNode;
@@ -395,7 +391,7 @@ export default class Edit extends Component {
         )
     }
 
-    onExpand = (expandedKeys: IdsType) => {
+    onExpand = (expandedKeys) => {
         this.setState({
             expandedKeys,
             autoExpandParent: false

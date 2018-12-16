@@ -1,40 +1,41 @@
 import React, { Component } from "react";
-import { connect } from 'dva';
-import {  Tabs } from 'antd';
+import { connect } from "dva";
+import { Tabs } from "antd";
 import { View } from "react-web-dom";
-import Page from '@/components/public/page/index'
-import styles from '@/styles/setting/paymentSetting.css'
-import WechatPay from '@/components/setting/paymentSetting/wechatPay/index'
-import { getHeaders } from '@/utils/index';
-import { UploadApi } from '../../config/api/upload'
+import Page from "@/components/public/page/index";
+import styles from "@/styles/setting/paymentSetting.css";
+import WechatPay from "@/components/setting/payment/wechatPay/index";
+import { getHeaders } from "@/utils/index";
+import UploadApi from "@/services/upload";
+
 const TabPane = Tabs.TabPane;
 @connect()
 export default class Index extends Component {
 
     render() {
-        const { location, history } = this.props
+        const { location } = this.props;
         const tabsList = [
             {
                 id: `1`,
-                tab: '微信支付',
-                type: 'wechat_pay',
+                tab: "微信支付",
+                type: "wechat_pay",
                 view: () => <WechatPay
                     action={UploadApi.addCert.url}
                     headers={getHeaders()}
                 />
             }
-        ]
+        ];
         return (
             <View className={`${styles.paymentSettingWarp} paymentSetting`}>
                 <Tabs
-                    activeKey={location.state ? location.state.type : 'wechat_pay'}
+                    activeKey={location.state ? location.state.type : "wechat_pay"}
                     onChange={(key) => {
                         router.push({
-                            pathname: '/setting/paymentSetting',
+                            pathname: "/setting/payment",
                             state: {
                                 type: key
                             }
-                        })
+                        });
                     }}
                 >
                     {
@@ -50,7 +51,7 @@ export default class Index extends Component {
                     }
                 </Tabs>
             </View>
-        )
+        );
     }
 
 }

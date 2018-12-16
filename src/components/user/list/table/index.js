@@ -4,7 +4,6 @@ import styles from "./index.css";
 import { View } from "react-web-dom";
 import { connect } from "dva";
 import Query from "@/utils/query";
-import { getUserList } from "@/actions/user";
 import moment from "moment/moment";
 import Image from "@/components/image/index";
 import router from "umi/router";
@@ -36,7 +35,7 @@ export default class UserListTable extends Component {
         selectedRowKeys: [],
         customerVisible: false,
         currentUser: {},
-        get: {}
+        get: { page : 1 , rows :10 }
     };
     static defaultProps = {
         userListLoading: false,
@@ -135,7 +134,7 @@ export default class UserListTable extends Component {
                     <a
                         onClick={() => {
                             router.push({
-                                pathname: `/user/list/detail`,
+                                pathname: `/user/detail`,
                                 search: `?id=${record.id}`
                             });
                         }}

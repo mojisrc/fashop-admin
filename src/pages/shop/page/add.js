@@ -1,144 +1,147 @@
 import React, { Component } from "react";
 import { View } from "react-web-dom";
-import { connect } from 'dva';
-import { Row, Col, Button, Affix, message } from 'antd';
-import Page from '@/components/public/page/index'
-import PageTool from '@/components/shop/diy/tool/index'
-import PageView from '@/components/shop/diy/view/index'
-import PageControl from '@/components/shop/diy/controller/index'
-import BaseInfo from '@/components/shop/diy/baseinfo/index'
-import styles from '@/styles/shop/shopPageEdit.css'
-
+import { connect } from "dva";
+import { Row, Col, Button, Affix, message } from "antd";
+import Page from "@/components/public/page/index";
+import PageTool from "@/components/shop/diy/tool/index";
+import PageView from "@/components/shop/diy/view/index";
+import PageControl from "@/components/shop/diy/controller/index";
+import BaseInfo from "@/components/shop/diy/baseinfo/index";
+import styles from "@/styles/shop/shopPageEdit.css";
 import GoodsApi from "@/services/goods";
-@connect(
-    ({ view: { goods: { listData }, shop: { shopPageInfo } } }) => ({
-        goodsListData: listData,
-        shopPageInfo,
-    }),
-    dispatch => bindActionCreators(Object.assign(shopDecorateActions, goodsActions), dispatch)
-)
 
+@connect(({ goods, page, loading }) => ({
+    goodList: goods.list.result,
+    goodsListLoading: loading.effects["goods/list"],
+    pageInfo: page.info.result,
+    pageInfoLoading: loading.effects["page/info"]
+}))
 export default class Add extends Component {
+    static defaultProps = {
+        goodList: { total_number, list },
+        goodsListLoading: true,
+        pageInfo: { info },
+        pageInfoLoading: true
+    };
     state = {
-        name: '',
-        description: '',
-        background_color: '#FFFFFF',
+        name: "",
+        description: "",
+        background_color: "#FFFFFF",
         body: [],
         options: {
-            type: '',
-            index: 0,
+            type: "",
+            index: 0
         },
         baseInfoVisible: true
-    }
+    };
 
     async componentDidMount() {
-        const { list } = this.props
+        const { list } = this.props;
         list({
             params: {
                 page: 1,
                 rows: 6,
-                order_type: 8,
+                order_type: 8
             }
-        })
+        });
     }
 
+// : {
+//     options: {
+//         goods_sort: number,
+//         goods_display_num: number,
+//         goods_display_field: Array<string>,
+//         layout_style: number,
+//     }
+// }
 
-    goodsListRefreshGoods = async (values: {
-        options: {
-            goods_sort: number,
-            goods_display_num: number,
-            goods_display_field: Array<string>,
-            layout_style: number,
-        }
-    }) => {
-        let order_type = 8
+    goodsListRefreshGoods = async (values) => {
+        let order_type = 8;
         switch (values.options.goods_sort) {
             case 1:
-                order_type = 8
-                break
+                order_type = 8;
+                break;
             case 2:
-                order_type = 3
-                break
+                order_type = 3;
+                break;
             case 3:
-                order_type = 9
-                break
+                order_type = 9;
+                break;
         }
 
-        const goodsListResult = await Fetch.fetch({
-            api: GoodsApi.list,
-            params: {
-                page: 1,
-                rows: values.options.goods_display_num,
-                order_type,
-            }
-        })
+        const goodsListResult = await GoodsApi.list({
+            page: 1,
+            rows: values.options.goods_display_num,
+            order_type
+        });
 
         if (goodsListResult.code === 0) {
-            return goodsListResult.result.list
+            return goodsListResult.result.list;
         } else {
-            message.warning(goodsListResult.msg)
-            return []
+            message.warning(goodsListResult.msg);
+            return [];
         }
-    }
-    onToolItemClick = (item: any) => {
-        const { goodsListData } = this.props
-        let { body } = this.state
+    };
+    onToolItemClick = (item) => {
+        const { goodsListData } = this.props;
+        let { body } = this.state;
         // delete _item.icon
-        if (item.type === 'goods_list') {
-            let _goods = []
+        if (item.type === "goods_list") {
+            let _goods = [];
             goodsListData.list.map((sub, subindex) => (
                 subindex < 6 && _goods.push({
                     id: sub.id,
                     img: sub.img,
                     title: sub.title,
                     price: sub.price,
-                    market_price: sub.market_price ? sub.market_price : '',
-                    desc: sub.desc ? sub.desc : ''
+                    market_price: sub.market_price ? sub.market_price : "",
+                    desc: sub.desc ? sub.desc : ""
                 })
-            ))
-            item.data = _goods
+            ));
+            item.data = _goods;
         }
         this.setState({
             baseInfoVisible: false,
             options: {
                 type: item.type,
-                index: body.length,
+                index: body.length
             },
             body: [...body, { ...item }]
-        })
-    }
+        });
+    };
 
     onViewItemClick = () => {
         this.setState({
             baseInfoVisible: false
-        })
-    }
+        });
+    };
 
     phoneHeaderClick = () => {
         this.setState({
-            baseInfoVisible: true,
-        })
-    }
-    setPage = (info: { options: optionsType, body: PageBodyType }) => {
+            baseInfoVisible: true
+        });
+    };
+// : { options: optionsType, body: PageBodyType }
+    setPage = (info) => {
         this.setState({
             options: info.options,
             body: info.body
-        })
-        if(Array.isArray(info.body) && info.body.length === 0){
-            this.phoneHeaderClick()
+        });
+        if (Array.isArray(info.body) && info.body.length === 0) {
+            this.phoneHeaderClick();
         }
-    }
+    };
     getControlValues = (value) => {
-        let { options, body } = this.state
-        let { index } = options
-        body[index].options = value.options
-        body[index].data = value.data
-        this.setState({ options, body })
-    }
+        let { options, body } = this.state;
+        let { index } = options;
+        body[index].options = value.options;
+        body[index].data = value.data;
+        this.setState({ options, body });
+    };
 
     render() {
-        const { add, history } = this.props
-        let { options, body, baseInfoVisible, name, description, background_color } = this.state
+        const { add, history } = this.props;
+        let { options, body, baseInfoVisible, name, description, background_color } = this.state;
         return (
             body ? <Page>
                 <View className={styles.shopPageEditMain}>
@@ -180,8 +183,8 @@ export default class Add extends Component {
                                             this.setState({
                                                 name: value.name,
                                                 background_color: value.backgroundColor,
-                                                description: value.description,
-                                            })
+                                                description: value.description
+                                            });
                                         }}
                                     />
                             }
@@ -199,11 +202,11 @@ export default class Add extends Component {
                                     description,
                                     background_color,
                                     body,
-                                    module: 'mobile',
-                                }
+                                    module: "mobile"
+                                };
                                 add({
                                     params
-                                })
+                                });
                             }}
                         >
                             保存
@@ -212,7 +215,7 @@ export default class Add extends Component {
                     <Col span={2}>
                         <Button
                             onClick={() => {
-                                history.goBack()
+                                history.goBack();
                             }}
                         >
                             返回

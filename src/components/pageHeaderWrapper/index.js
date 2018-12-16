@@ -3,9 +3,9 @@ import { FormattedMessage } from 'umi/locale';
 import Link from 'umi/link';
 import PageHeader from '@/components/pageHeader';
 import { connect } from 'dva';
-import GridContent from './GridContent';
+import GridContent from './gridContent';
 import styles from './index.less';
-import MenuContext from '@/layouts/MenuContext';
+import MenuContext from '@/layouts/menuContext';
 
 const PageHeaderWrapper = ({ children, contentWidth, wrapperClassName, top, ...restProps }) => (
   <div style={{ margin: '-24px -24px 0' }} className={wrapperClassName}>

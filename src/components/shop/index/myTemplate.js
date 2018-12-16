@@ -1,67 +1,71 @@
 import React, { Component } from "react";
 import { connect } from "dva";
-import { Input, Button, Table, Switch, Popconfirm, Popover, message } from "antd";
+import { Input, Button, Table, Switch, message,Popconfirm } from "antd";
 import moment from "moment";
-import { CopyToClipboard } from 'react-copy-to-clipboard';
+import { CopyToClipboard } from "react-copy-to-clipboard";
 import { View } from "react-web-dom";
 import styles from "./index.css";
-
 import Query from "@/utils/query";
-import { getShopPageList, setShopPagePortal } from "@/actions/shop/decorate";
+import PageApi from "@/services/page";
+import router from "umi/router";
+const InputGroup = Input.Group;
 
-import { PageApi } from "@/services/page";
-
-const InputGroup = Input.Group
-// type Props = {
-//     dispatch: dispatchType,
-//     history: historyType,
-//     addShopPage: Function,
-//     getShopPageList: Function,
-//     setShopPagePortal: Function,
-//     shopPageListLoading: boolean,
-//     shopPageList: {
-//         page: number,
-//         rows: number,
-//         total_number: number,
-//         list: Array<{}>
-//     },
-// }
-// type State = {}
-
-@connect(
-    ({ view: { shop: { shopPageList, shopPageListLoading } } }) => ({
-        shopPageList,
-        shopPageListLoading,
-    }),
-)
+@connect(({ page, loading }) => ({
+    pageList: page.list.result,
+    pageListLoading: loading.effects["page/list"]
+}))
 export default class MyTemplate extends Component {
+    static defaultProps = {
+        pageListLoading: true,
+        pageList: {
+            list:[],
+            total_number:0
+        }
+    };
+    state = {
+        get: { page: 1, rows: 10 }
+    };
+
     componentDidMount() {
-        this.getPageList()
+        this.initList();
     }
 
-    getPageList() {
-        const { dispatch } = this.props
-        const params = Query.make()
-        dispatch(getShopPageList({ params }))
+
+    initList() {
+        const { dispatch } = this.props;
+        const get = Query.make();
+        dispatch({
+            type: "page/list",
+            payload: {
+                page: get.page,
+                rows: get.rows
+            },
+            callback: () => {
+                this.setState({
+                    get
+                });
+            }
+        });
+
     }
 
     render() {
-        const { shopPageList, shopPageListLoading, history, dispatch } = this.props
-        const { page, rows, total_number, list } = shopPageList
+        const { pageList, pageListLoading, dispatch } = this.props;
+        const { list } = pageList;
         const columns = [{
             title: "页面ID",
-            dataIndex: "id",
+            dataIndex: "id"
         }, {
             title: "页面名称",
-            dataIndex: "name",
+            dataIndex: "name"
         }, {
             title: "创建时间",
             dataIndex: "create_time",
-            render: text => moment(text, 'X').format('YYYY-MM-DD HH:mm:ss')
+            render: text => moment(text, "X").format("YYYY-MM-DD HH:mm:ss")
         }, {
             title: "最后编辑",
             dataIndex: "update_time",
-            render: text => text ? moment(text, 'X').format('YYYY-MM-DD HH:mm:ss') : '-'
+            render: text => text ? moment(text, "X").format("YYYY-MM-DD HH:mm:ss") : "-"
         }, {
             title: "设为主页",
             dataIndex: "is_portal",
@@ -69,21 +73,25 @@ export default class MyTemplate extends Component {
                 checked={!!text}
                 onChange={(checked) => {
                     if (checked) {
-                        dispatch(setShopPagePortal({
-                            params: {
+                        dispatch({
+                            type: "page/setPortal",
+                            payload: {
                                 id: record.id
+                            },
+                            callback: () => {
+                                this.initList();
                             }
-                        }))
+                        });
                     }
                 }}
             />
         }, {
-            title: '操作',
-            key: 'operation',
+            title: "操作",
+            key: "operation",
             render: (record) => <View className={styles.operation}>
                 <a
                     onClick={() => {
-                        router.push(`/shop/decorate/edit?id=${record.id}`)
+                        router.push(`/shop/page/edit?id=${record.id}`);
                     }}
                 >
                     编辑
@@ -93,19 +101,16 @@ export default class MyTemplate extends Component {
                     okText="确定"
                     cancelText="取消"
                     onConfirm={async () => {
-                        const response = await Fetch.fetch({
-                            api: PageApi.add,
-                            params: {
-                                name: `${record.name}副本`,
-                                description: record.description,
-                                background_color: record.background_color,
-                                body: record.body,
-                                module: record.module,
-                                clone_from_id: record.id,
-                            }
-                        })
+                        const response = await PageApi.add({
+                            name: `${record.name}副本`,
+                            description: record.description,
+                            background_color: record.background_color,
+                            body: record.body,
+                            module: record.module,
+                            clone_from_id: record.id
+                        });
                         if (response.code === 0) {
-                            this.getPageList()
+                            this.initList();
                         }
                     }}
                 >
@@ -126,7 +131,7 @@ export default class MyTemplate extends Component {
                 {/*</Popover>*/}
             </View>
         }
-        ]
+        ];
         return (
             <View>
                 <View className={styles.myTemplateTop}>
@@ -138,35 +143,34 @@ export default class MyTemplate extends Component {
                     <Button
                         type='primary'
                         onClick={() => {
-                            router.push('/shop/decorate/add')
+                            router.push("/shop/page/add");
                         }}
                     >
-                        新增模板
+                        新增页面
                     </Button>
                 </View>
                 <Table
-                    loading={shopPageListLoading}
+                    loading={pageListLoading}
                     dataSource={list}
                     columns={columns}
                     rowKey={record => record.id}
                     pagination={{
                         showSizeChanger: false,
                         showQuickJumper: false,
-                        pageSize: rows,
-                        total: total_number,
-                        current: page,
+                        current: this.state.get.page,
+                        pageSize: this.state.get.rows,
+                        total: pageList.total_number
                     }}
                     onChange={({ current, pageSize }) => {
-                        router.push(Query.page(current, pageSize))
+                        router.push(Query.page(current, pageSize));
+                        this.initList();
                     }}
                 />
             </View>
-        )
+        );
     }
 
-    popoverView(record: {
-        is_portal: number,
-    }) {
+    popoverView(record) {
         return (
             <View>
                 {
@@ -180,7 +184,7 @@ export default class MyTemplate extends Component {
                             />
                             <CopyToClipboard
                                 text="http://www.fashop.cn/wap"
-                                onCopy={() => message.success('复制成功！', 1)}
+                                onCopy={() => message.success("复制成功！", 1)}
                             >
                                 <Button>复制</Button>
                             </CopyToClipboard>
@@ -196,12 +200,12 @@ export default class MyTemplate extends Component {
                     />
                     <CopyToClipboard
                         text="http://www.fashop.cn/page/1002dassd"
-                        onCopy={() => message.success('复制成功！', 1)}
+                        onCopy={() => message.success("复制成功！", 1)}
                     >
                         <Button>复制</Button>
                     </CopyToClipboard>
                 </InputGroup>
             </View>
-        )
+        );
     }
 }

@@ -17,7 +17,7 @@ export default class ExpressListTable extends Component {
         expressList: {}
     };
     state = {
-        get: {}
+        get: { page : 1 , rows :10 }
     };
 
     componentDidMount() {
@@ -138,8 +138,8 @@ export default class ExpressListTable extends Component {
                     pagination={{
                         showSizeChanger: false,
                         showQuickJumper: false,
-                        current: this.get.page,
-                        pageSize: this.get.rows,
+                        current: this.state.get.page,
+                        pageSize: this.state.get.rows,
                         total: expressList.total_number
                     }}
 

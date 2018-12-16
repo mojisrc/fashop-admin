@@ -35,7 +35,7 @@ import styles from './index.css'
 //     payType: number,
 //     visible: boolean,
 //     checkedAreaKeys: IdsType,
-//     expandedKeys: IdsType,
+//     expandedKeys,
 //     checkedKeys: IdsType,
 //     editAreaTableIndex: number | null,
 //     loading: boolean,

@@ -1,11 +1,11 @@
 import React, { Component } from "react";
-import {Table,Button, Popconfirm,} from "antd";
+import { Table, Button, Popconfirm } from "antd";
 import styles from "./index.css";
 import { View } from "react-web-dom";
 import { connect } from "dva";
-import CategorySort from "@/components/category/sort";
+import CategorySort from "@/components/goods/category/sort";
 import Image from "@/components/image";
-import tree from "smart-arraytotree"
+import tree from "smart-arraytotree";
 
 @connect(({ goodsCategory, loading }) => ({
     goodsCategory: goodsCategory.list.result.list,
@@ -14,19 +14,21 @@ import tree from "smart-arraytotree"
 export default class GoodsCategoryTable extends Component {
     static defaultProps = {
         goodsCategoryLoading: false,
-        goodsCategory:[]
+        goodsCategory: []
 
-    }
+    };
     state = {
         expandedRowKeys: []
-    }
+    };
+
     componentDidMount() {
         this.initList();
     }
+
     initList() {
         const { dispatch } = this.props;
         dispatch({
-            type: "goodsCategory/list",
+            type: "goodsCategory/list"
         });
     }
 
@@ -34,14 +36,14 @@ export default class GoodsCategoryTable extends Component {
         if (nextProps.goodsCategory !== this.props.goodsCategory) {
             this.setState({
                 expandedRowKeys: Array.isArray(goodsCategory) ? goodsCategory.map((item) => item.id) : []
-            })
+            });
         }
     }
 
     render() {
-        const {goodsCategoryLoading, goodsCategory,dispatch,} = this.props
-        const categoryTree = tree(goodsCategory.list)
-        const { expandedRowKeys } = this.state
+        const { goodsCategoryLoading, goodsCategory, dispatch } = this.props;
+        const categoryTree = tree(goodsCategory.list);
+        const { expandedRowKeys } = this.state;
         const columns = [
             {
                 title: "",
@@ -58,13 +60,13 @@ export default class GoodsCategoryTable extends Component {
                 title: "图标",
                 dataIndex: "icon",
                 key: "icon",
-                render: (icon) => <Image src={icon} style={{ height: '20px' }} />,
+                render: (icon) => <Image src={icon} style={{ height: "20px" }} />,
                 width: 60
             },
             {
                 title: "分类名称",
                 dataIndex: "name",
-                key: "name",
+                key: "name"
             },
             // {
             //     title: "使用商品",
@@ -73,8 +75,8 @@ export default class GoodsCategoryTable extends Component {
             //     render: (text) => <a>{text}</a>
             // },
             {
-                title: '操作',
-                key: 'operation',
+                title: "操作",
+                key: "operation",
                 className: styles.column,
                 render: (record) => <View className={styles.operation}>
                     <a
@@ -83,9 +85,9 @@ export default class GoodsCategoryTable extends Component {
                                 pathname: `/goods/category/edit`,
                                 search: `?id=${record.id}`,
                                 state: {
-                                    categoryData: record,
+                                    categoryData: record
                                 }
-                            })
+                            });
                         }}
                     >
                         编辑
@@ -110,14 +112,14 @@ export default class GoodsCategoryTable extends Component {
                     </Popconfirm>
                 </View>
             }
-        ]
+        ];
         return (
             <View>
                 <View className={styles.batchView}>
                     <Button
                         type='primary'
                         onClick={() => {
-                            router.push('/goods/category/add')
+                            router.push("/goods/category/add");
                         }}
                     >
                         添加分类
@@ -126,7 +128,7 @@ export default class GoodsCategoryTable extends Component {
                         onClick={() => {
                             this.setState({
                                 expandedRowKeys: Array.isArray(goodsCategory) ? goodsCategory.map((item) => item.id) : []
-                            })
+                            });
                         }}
                     >
                         全部展开
@@ -135,7 +137,7 @@ export default class GoodsCategoryTable extends Component {
                         onClick={() => {
                             this.setState({
                                 expandedRowKeys: []
-                            })
+                            });
                         }}
                     >
                         全部折叠
@@ -154,18 +156,18 @@ export default class GoodsCategoryTable extends Component {
                         if (bool) {
                             this.setState({
                                 expandedRowKeys: [...expandedRowKeys, row.id]
-                            })
+                            });
                         } else {
-                            const index = expandedRowKeys.findIndex((e) => e === row.id)
-                            const newArray = [...expandedRowKeys]
-                            newArray.splice(index, 1)
+                            const index = expandedRowKeys.findIndex((e) => e === row.id);
+                            const newArray = [...expandedRowKeys];
+                            newArray.splice(index, 1);
                             this.setState({
                                 expandedRowKeys: newArray
-                            })
+                            });
                         }
                     }}
                 />
             </View>
-        )
+        );
     }
 }

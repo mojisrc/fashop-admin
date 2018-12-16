@@ -4,7 +4,6 @@ import { Form, Input, Button } from "antd";
 import { View } from "react-web-dom";
 import Page from "@/components/public/page";
 import UploadImage from "@/components/uploadImage";
-
 const { TextArea } = Input;
 const FormItem = Form.Item;
 @Form.create()
@@ -12,9 +11,20 @@ const FormItem = Form.Item;
     shopInfo: shop.info.result,
     shopInfoLoading: loading.effects["shop/info"]
 }))
-export default class BasicInfo extends Component {
+export default class Info extends Component {
+    static defaultProps = {
+        shopInfo: {
+            info: {}
+        },
+        shopInfoLoading: true
+    };
+
     componentDidMount() {
-        this.props.info();
+        const { dispatch } = this.props;
+        dispatch({
+            type:'shop/info'
+        })
+
     }
 
     handleSubmit = (e) => {
