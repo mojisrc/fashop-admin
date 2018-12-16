@@ -1,58 +1,16 @@
 .dataDisplayWarp,
 .indexChartWarp,
-.systemInfoWarp {
-    width: 100%;
-    background-color: #fff;
-    border-radius: 4px;
-}
-
 .dataDisplayWarp,
-.systemInfoWarp {
-    padding: 20px;
-}
 
-.loginInfoWarp,
-.versionInfoWarp,
 .dataDisplayWarp,
 .indexChartWarp {
     margin-bottom: 24px;
     width: 100%;
 }
 
-.loginInfoWarp p,
-.versionInfoWarp p {
-    font-family: 'PingFangSC-Regular', 'PingFang SC';
-    font-weight: 400;
-    font-style: normal;
-    line-height: 22px;
-    color: rgba(0, 0, 0, 0.447058823529412);
-    margin-bottom: 20px;
-}
-
-.loginInfoWarp p:last-child,
-.versionInfoWarp p:last-child {
-    margin-bottom: 0;
-}
-
-.loginInfoWarp p > span,
-.versionInfoWarp p > span {
-    color: rgba(0, 0, 0, 0.647058823529412);
-}
-
-.versionImgWarp {
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 24px;
-}
-
-.versionImgWarp img {
-    width: 139px;
-    height: 90px;
-}
-
 /* dataDisplay */
 .dataDisplay {
+    display: flex;
     flex-direction: row;
 }
 

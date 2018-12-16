@@ -31,7 +31,7 @@ const Search = Input.Search;
 
 @connect(({ goods, loading }) => ({
     goodsList: goods.list.result,
-    goodsListLoading: loading.effects["image/list"]
+    goodsListLoading: loading.effects["goods/list"]
 }))
 export default class SelectGoods extends Component {
     static defaultProps = {

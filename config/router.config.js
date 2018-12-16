@@ -53,7 +53,9 @@ export default [
                 routes: [
                     { path: "/goods", redirect: "/goods/list" },
                     { path: "/goods/list", name: "商品管理", component: "/goods/list" },
-                    { path: "/goods/category", name: "分类管理", component: "/goods/category" }
+                    { path: "/goods/category", name: "分类管理", component: "/goods/category" },
+                    { path: "/goods/category/add", component: "/goods/category/add" },
+                    { path: "/goods/category/edit", component: "/goods/category/edit" }
                 ]
             },
             {

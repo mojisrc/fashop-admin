@@ -1,24 +1,28 @@
-import React, { Component } from "react";
-import { Table, Button, Popconfirm } from "antd";
+import React, { Component,Fragment } from "react";
+import { Table, Button, Popconfirm ,Divider} from "antd";
 import styles from "./index.css";
-import { View } from "react-web-dom";
+import { View } from "@/components/public/dom";
 import { connect } from "dva";
 import CategorySort from "@/components/goods/category/sort";
 import Image from "@/components/image";
-import tree from "smart-arraytotree";
+import Arr from "@/utils/array";
+import router from "umi/router";
 
 @connect(({ goodsCategory, loading }) => ({
-    goodsCategory: goodsCategory.list.result.list,
+    goodsCategory: goodsCategory.list.result,
     goodsCategoryLoading: loading.effects["goodsCategory/list"]
 }))
 export default class GoodsCategoryTable extends Component {
     static defaultProps = {
-        goodsCategoryLoading: false,
-        goodsCategory: []
+        goodsCategoryLoading: true,
+        goodsCategory: {
+            list: []
+        }
 
     };
     state = {
-        expandedRowKeys: []
+        expandedRowKeys: [],
+        categoryTree: []
     };
 
     componentDidMount() {
@@ -28,22 +32,25 @@ export default class GoodsCategoryTable extends Component {
     initList() {
         const { dispatch } = this.props;
         dispatch({
-            type: "goodsCategory/list"
+            type: "goodsCategory/list",
+            callback: (response) => {
+                const categoryTree = Arr.toTree(response.result.list);
+                this.setState({ categoryTree });
+            }
         });
     }
 
     componentWillReceiveProps(nextProps) {
-        if (nextProps.goodsCategory !== this.props.goodsCategory) {
+        if (nextProps.goodsCategory.list !== this.props.goodsCategory.list) {
             this.setState({
-                expandedRowKeys: Array.isArray(goodsCategory) ? goodsCategory.map((item) => item.id) : []
+                expandedRowKeys: Array.isArray(this.props.goodsCategory.list) ? this.props.goodsCategory.list.map((item) => item.id) : []
             });
         }
     }
 
     render() {
         const { goodsCategoryLoading, goodsCategory, dispatch } = this.props;
-        const categoryTree = tree(goodsCategory.list);
-        const { expandedRowKeys } = this.state;
+        const { expandedRowKeys, categoryTree } = this.state;
         const columns = [
             {
                 title: "",
@@ -78,7 +85,7 @@ export default class GoodsCategoryTable extends Component {
                 title: "操作",
                 key: "operation",
                 className: styles.column,
-                render: (record) => <View className={styles.operation}>
+                render: (record) => <Fragment>
                     <a
                         onClick={() => {
                             router.push({
@@ -92,6 +99,7 @@ export default class GoodsCategoryTable extends Component {
                     >
                         编辑
                     </a>
+                    <Divider type="vertical" />
                     <Popconfirm
                         title="确认删除？"
                         okText="确认"
@@ -110,12 +118,12 @@ export default class GoodsCategoryTable extends Component {
                     >
                         <a>删除</a>
                     </Popconfirm>
-                </View>
+                </Fragment>
             }
         ];
         return (
             <View>
-                <View className={styles.batchView}>
+                <div className={styles.batchView}>
                     <Button
                         type='primary'
                         onClick={() => {
@@ -127,7 +135,7 @@ export default class GoodsCategoryTable extends Component {
                     <Button
                         onClick={() => {
                             this.setState({
-                                expandedRowKeys: Array.isArray(goodsCategory) ? goodsCategory.map((item) => item.id) : []
+                                expandedRowKeys: Array.isArray(goodsCategory.list) ? goodsCategory.list.map((item) => item.id) : []
                             });
                         }}
                     >
@@ -143,7 +151,7 @@ export default class GoodsCategoryTable extends Component {
                         全部折叠
                     </Button>
                     <CategorySort dataSource={categoryTree} dispatch={dispatch} />
-                </View>
+                </div>
                 <Table
                     defaultExpandAllRows={true}
                     dataSource={categoryTree}

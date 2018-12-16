@@ -3,7 +3,6 @@ import { View } from "react-web-dom";
 import { Modal, Table, Button } from "antd";
 import { connect } from "dva";
 import moment from "moment";
-import Query from "@/utils/query";
 //
 // type PageRowType = {
 //     id: number,

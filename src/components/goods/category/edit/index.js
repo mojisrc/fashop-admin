@@ -5,44 +5,49 @@ import UploadImage from "@/components/uploadImage";
 import GoodsApi from "@/services/goods";
 import router from "umi/router";
 import { query } from "@/utils/fa";
+import { getPageQuery } from "@/utils/utils";
 
 const FormItem = Form.Item;
 const Option = Select.Option;
 
 @Form.create()
 @connect(({ goodsCategory, loading }) => ({
-    goodsCategory: goodsCategory.result.list,
+    goodsCategory: goodsCategory.list.result,
     goodsCategoryLoading: loading.effects["goodsCategory/list"]
 }))
 export default class CategoryEdit extends Component {
+    static defaultProps = {
+        goodsCategoryLoading: true,
+        goodsCategory: {
+            list: []
+        }
+
+    };
     state = {
-        categoryInfo: this.props.location.state ? this.props.location.state.categoryInfo : null
+        categoryInfo: {}
     };
 
     async componentDidMount() {
-        const {
-            dispatch, goodsCategory,
-            location: {
-                state
-            }
-        } = this.props;
-        if (!goodsCategory.length) {
-            dispatch(getGoodsCategoryList());
-        }
-        const { id } = query.getParams();
+        this.initList();
+        const { id } = getPageQuery();
         if (!id) {
             return message.error("缺少必要参数，history异常");
         }
-        if (!state || !state.categoryInfo) {
-            const e = await GoodsApi.category.info({ id });
-            this.setState({
-                categoryInfo: e.result.info
-            });
-        }
+        const e = await GoodsApi.category.info({ id });
+        this.setState({
+            categoryInfo: e.result.info
+        });
+    }
+
+    initList() {
+        const { dispatch } = this.props;
+        dispatch({
+            type: "goodsCategory/list"
+        });
     }
 
     handleSubmit = (e) => {
-        const { id } = query.getParams();
+        const { id } = getPageQuery();
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
             if (!err) {
@@ -64,7 +69,7 @@ export default class CategoryEdit extends Component {
     };
 
     render() {
-        const { form,  goodsCategory } = this.props;
+        const { form, goodsCategory } = this.props;
         const { categoryInfo } = this.state;
         const { name, pid, icon } = categoryInfo || {};
         const { getFieldDecorator } = form;
@@ -92,8 +97,8 @@ export default class CategoryEdit extends Component {
         };
         let hasChild = false;
         // 如果存在子分类不可以设所属
-        if (categoryInfo && Array.isArray(goodsCategory) && goodsCategory.length > 0) {
-            goodsCategory.map((e, i) => {
+        if (categoryInfo && Array.isArray(goodsCategory.list) && goodsCategory.list.length > 0) {
+            goodsCategory.list.map((e, i) => {
                 (hasChild === false && e.pid === categoryInfo.id) ? hasChild = true : null;
             });
             return (
@@ -126,12 +131,12 @@ export default class CategoryEdit extends Component {
                                 placeholder="请输入分类名称"
                                 style={{ width: "100%" }}
                             >
-                                <Option value={0} key={0}>设为一级分类</Option>
+                                <Option value={0} key={"null"}>设为一级分类</Option>
                                 {
-                                    (Array.isArray(goodsCategory) && goodsCategory.length > 0) ? goodsCategory.map((e, i) => {
+                                    goodsCategory.list.map((e, i) => {
                                         return e.id !== categoryInfo.id ?
                                             <Option value={e.id} key={i}>{e.name}</Option> : null;
-                                    }) : null
+                                    })
                                 }
                             </Select>
                         )}

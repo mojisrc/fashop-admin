@@ -9,6 +9,16 @@ import moment from "moment";
 const TabPane = Tabs.TabPane;
 const { MonthPicker } = DatePicker;
 export default class Charts extends Component {
+    state = {
+        activeKey: '月销售额',
+        chartDate: moment(`${moment().format('YYYY')}-${moment().format('MM')}`),
+        monthSaleChartList: [],
+        monthOrderChartList: [],
+        customerGrowthChartList: [],
+        newCustomerCostList: [],
+        xAxisData: [],
+        yAxisData: [],
+    }
     componentDidMount() {
         const { activeKey, chartDate } = this.state;
         this.initChart(moment(chartDate).format("YYYY-MM"), activeKey);

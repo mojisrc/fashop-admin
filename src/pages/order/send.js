@@ -75,7 +75,7 @@ export default class Send extends Component {
     };
 
     async componentDidMount() {
-        const { id } = query.getParams();
+        const { id } = getPageQuery();
         const orderInfo = await OrderApi.info({ id });
         if (orderInfo.code === 0) {
             const { deliver_name, deliver_phone, deliver_address, express_id, tracking_no, remark, need_express } = orderInfo.result.info.extend_order_extend;

@@ -2,8 +2,7 @@ import React, { Component } from "react";
 import { View } from "react-web-dom";
 import { Modal, Tree } from "antd";
 import { connect } from "dva";
-import tree from "smart-arraytotree";
-
+import Arr from "@/utils/array"
 const TreeNode = Tree.TreeNode;
 
 @connect(({ goodsCategory, loading }) => ({
@@ -12,11 +11,9 @@ const TreeNode = Tree.TreeNode;
 }))
 export default class SelectGoodsCategory extends Component {
     static defaultProps = {
+        visible:false,
         goodsCategory: { list: [] },
         goodsCategoryLoading: true
-    };
-    state = {
-        categoryTree: []
     };
 
     constructor(props) {
@@ -24,7 +21,8 @@ export default class SelectGoodsCategory extends Component {
         this.state = {
             expandedKeys: [],
             autoExpandParent: true,
-            value: props.value ? props.value : null
+            value: props.value ? props.value : null,
+            categoryTree: []
         };
     }
 
@@ -35,14 +33,12 @@ export default class SelectGoodsCategory extends Component {
         });
     };
 
-
     componentDidMount() {
         const { dispatch } = this.props;
         dispatch({
             type: "goodsCategory/list",
             callback: (response) => {
-                const categoryTree = tree(response.result.list);
-                this.setState({ categoryTree });
+                this.setState({ categoryTree:Arr.toTree(response.result.list) });
             }
         });
     }

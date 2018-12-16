@@ -8,10 +8,18 @@ const FormItem = Form.Item;
 const Option = Select.Option;
 @Form.create()
 @connect(({ goodsCategory, loading }) => ({
-    goodsCategory: goodsCategory.result.list,
+    goodsCategory: goodsCategory.list.result,
     goodsCategoryLoading: loading.effects["goodsCategory/list"]
 }))
 export default class CategoryAdd extends Component {
+    static defaultProps = {
+        goodsCategoryLoading: true,
+        goodsCategory: {
+            list: []
+        }
+
+    };
+
     componentDidMount() {
         this.initList();
     }
@@ -94,10 +102,13 @@ export default class CategoryAdd extends Component {
                             placeholder="请输入分类名称"
                             style={{ width: "100%" }}
                         >
+                            <Option value={0} key={"null"}>设为一级分类</Option>
                             {
-                                goodsCategory.map((e, i) => (
-                                    <Option value={e.id} key={i}>{e.name}</Option>
-                                ))
+                                Array.isArray(goodsCategory.list) && goodsCategory.list.map((item, i) => {
+                                    if (item.pid === 0) {
+                                        return <Option value={item.id} key={i}>{item.name}</Option>;
+                                    }
+                                })
                             }
                         </Select>
                     )}

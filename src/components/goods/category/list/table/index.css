@@ -14,7 +14,6 @@
 }
 .batchView{
     margin-bottom: 24px;
-    flex-direction: row;
 }
 .batchView button{
     margin-right: 24px;

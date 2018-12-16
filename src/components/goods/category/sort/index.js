@@ -1,11 +1,12 @@
-import React, { Component } from "react";
+import React, { Component,Fragment } from "react";
 import { Button, Modal, Tree, message } from "antd";
-import { View } from "react-web-dom";
+import {View} from "@/components/public/dom";
+import { connect } from "dva";
 
 const TreeNode = Tree.TreeNode;
 @connect(({ goodsCategory, loading }) => ({
     goodsCategorySort: goodsCategory.sort,
-    goodsCategoryLoading: loading.effects["goodsCategory/sort"]
+    goodsCategorySortLoading: loading.effects["goodsCategory/sort"]
 }))
 export default class CategorySort extends Component {
     state = {
@@ -24,7 +25,7 @@ export default class CategorySort extends Component {
     render() {
         const { dataSource } = this.state;
         return (
-            <div>
+            <Fragment>
                 <Button
                     type="primary"
                     className="margin-right"
@@ -61,7 +62,7 @@ export default class CategorySort extends Component {
                         }
                     </Tree>
                 </Modal>
-            </div>
+            </Fragment>
         );
     }
 
