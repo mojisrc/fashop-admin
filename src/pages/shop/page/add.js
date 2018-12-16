@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { View } from "react-web-dom";
 import { connect } from "dva";
-import { Row, Col, Button, Affix, message } from "antd";
+import { Row, Col, Button, Affix, message, Spin } from "antd";
 import Page from "@/components/public/page/index";
 import PageTool from "@/components/shop/diy/tool/index";
 import PageView from "@/components/shop/diy/view/index";
@@ -12,16 +12,12 @@ import GoodsApi from "@/services/goods";
 
 @connect(({ goods, page, loading }) => ({
     goodList: goods.list.result,
-    goodsListLoading: loading.effects["goods/list"],
-    pageInfo: page.info.result,
-    pageInfoLoading: loading.effects["page/info"]
+    goodsListLoading: loading.effects["goods/list"]
 }))
 export default class Add extends Component {
     static defaultProps = {
-        goodList: { total_number, list },
-        goodsListLoading: true,
-        pageInfo: { info },
-        pageInfoLoading: true
+        goodList: { total_number: 0, list: [] },
+        goodsListLoading: true
     };
     state = {
         name: "",
@@ -36,9 +32,10 @@ export default class Add extends Component {
     };
 
     async componentDidMount() {
-        const { list } = this.props;
-        list({
-            params: {
+        const { dispatch } = this.props;
+        dispatch({
+            type: "goods/list",
+            payload: {
                 page: 1,
                 rows: 6,
                 order_type: 8
@@ -83,12 +80,12 @@ export default class Add extends Component {
         }
     };
     onToolItemClick = (item) => {
-        const { goodsListData } = this.props;
+        const { goodsList } = this.props;
         let { body } = this.state;
         // delete _item.icon
         if (item.type === "goods_list") {
             let _goods = [];
-            goodsListData.list.map((sub, subindex) => (
+            Array.isArray(goodsList) && goodsList.list.map((sub, subindex) => (
                 subindex < 6 && _goods.push({
                     id: sub.id,
                     img: sub.img,
@@ -140,89 +137,91 @@ export default class Add extends Component {
     };
 
     render() {
-        const { add, history } = this.props;
+        const { add, history, goodsListLoading } = this.props;
         let { options, body, baseInfoVisible, name, description, background_color } = this.state;
         return (
-            body ? <Page>
-                <View className={styles.shopPageEditMain}>
-                    <View className={styles.shopPageEditToolMain}>
-                        <Affix offsetTop={15} style={{ zIndex: 1 }}>
-                            <PageTool
-                                onToolItemClick={this.onToolItemClick}
+            <Spin size="large" className="globalSpin" spinning={goodsListLoading}>
+                <Page>
+                    <View className={styles.shopPageEditMain}>
+                        <View className={styles.shopPageEditToolMain}>
+                            <Affix offsetTop={15} style={{ zIndex: 1 }}>
+                                <PageTool
+                                    onToolItemClick={this.onToolItemClick}
+                                />
+                            </Affix>
+                        </View>
+                        <View className={styles.shopPageEditViewMain}>
+                            <PageView
+                                options={options}
+                                body={body}
+                                backgroundColor={background_color}
+                                onViewItemClick={this.onViewItemClick}
+                                onHeaderClick={this.phoneHeaderClick}
+                                setPage={this.setPage}
                             />
-                        </Affix>
+                        </View>
+                        <View className={styles.shopPageEditControllerMain}>
+                            <Affix offsetTop={15} style={{ zIndex: 1 }}>
+                                {
+                                    baseInfoVisible === false
+                                        ?
+                                        <PageControl
+                                            options={options}
+                                            body={body}
+                                            setPage={this.setPage}
+                                            getValues={this.getControlValues}
+                                            goodsListRefreshGoods={this.goodsListRefreshGoods}
+                                        />
+                                        :
+                                        <BaseInfo
+                                            name={name}
+                                            backgroundColor={background_color}
+                                            description={description}
+                                            getValues={(value) => {
+                                                this.setState({
+                                                    name: value.name,
+                                                    background_color: value.backgroundColor,
+                                                    description: value.description
+                                                });
+                                            }}
+                                        />
+                                }
+                            </Affix>
+                        </View>
                     </View>
-                    <View className={styles.shopPageEditViewMain}>
-                        <PageView
-                            options={options}
-                            body={body}
-                            backgroundColor={background_color}
-                            onViewItemClick={this.onViewItemClick}
-                            onHeaderClick={this.phoneHeaderClick}
-                            setPage={this.setPage}
-                        />
-                    </View>
-                    <View className={styles.shopPageEditControllerMain}>
-                        <Affix offsetTop={15} style={{ zIndex: 1 }}>
-                            {
-                                baseInfoVisible === false
-                                    ?
-                                    <PageControl
-                                        options={options}
-                                        body={body}
-                                        setPage={this.setPage}
-                                        getValues={this.getControlValues}
-                                        goodsListRefreshGoods={this.goodsListRefreshGoods}
-                                    />
-                                    :
-                                    <BaseInfo
-                                        name={name}
-                                        backgroundColor={background_color}
-                                        description={description}
-                                        getValues={(value) => {
-                                            this.setState({
-                                                name: value.name,
-                                                background_color: value.backgroundColor,
-                                                description: value.description
-                                            });
-                                        }}
-                                    />
-                            }
-                        </Affix>
-                    </View>
-                </View>
-                <Row className={styles.shopPageEditFooter}>
-                    <Col span={10} />
-                    <Col span={2}>
-                        <Button
-                            type='primary'
-                            onClick={() => {
-                                let params = {
-                                    name,
-                                    description,
-                                    background_color,
-                                    body,
-                                    module: "mobile"
-                                };
-                                add({
-                                    params
-                                });
-                            }}
-                        >
-                            保存
-                        </Button>
-                    </Col>
-                    <Col span={2}>
-                        <Button
-                            onClick={() => {
-                                history.goBack();
-                            }}
-                        >
-                            返回
-                        </Button>
-                    </Col>
-                </Row>
-            </Page> : null
+                    <Row className={styles.shopPageEditFooter}>
+                        <Col span={10} />
+                        <Col span={2}>
+                            <Button
+                                type='primary'
+                                onClick={() => {
+                                    let params = {
+                                        name,
+                                        description,
+                                        background_color,
+                                        body,
+                                        module: "mobile"
+                                    };
+                                    add({
+                                        params
+                                    });
+                                }}
+                            >
+                                保存
+                            </Button>
+                        </Col>
+                        <Col span={2}>
+                            <Button
+                                onClick={() => {
+                                    history.goBack();
+                                }}
+                            >
+                                返回
+                            </Button>
+                        </Col>
+                    </Row>
+                </Page>
+            </Spin>
         );
     }
 }

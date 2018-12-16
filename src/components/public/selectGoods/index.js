@@ -34,6 +34,11 @@ const Search = Input.Search;
     goodsListLoading: loading.effects["image/list"]
 }))
 export default class SelectGoods extends Component {
+    static defaultProps = {
+        goodList: { total_number: 0, list: [] },
+        goodsListLoading: true
+    };
+
     constructor(props) {
         super(props);
         this.state = {
@@ -59,19 +64,14 @@ export default class SelectGoods extends Component {
                 rows: this.state.rows
             }
         });
-        this.setState({
-            get
-        });
     }
 
 
     render() {
         const { visible, close, onOk, multiSelect, goodsList, goodsListLoading, dispatch } = this.props;
-
         if (goodsList) {
             const { total_number, list } = goodsList;
-            const { page, rows } = this.state;
-            const { checkedData } = this.state;
+            const { page, rows, checkedData } = this.state;
             return (
                 <Modal
                     title="添加商品"

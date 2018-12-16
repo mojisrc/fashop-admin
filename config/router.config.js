@@ -29,9 +29,9 @@ export default [
                     { path: "/shop", redirect: "/shop/info" },
                     { path: "/shop/info", name: "基本信息", component: "/shop/info" },
                     { path: "/shop/page", name: "制作页面", component: "/shop/page/list" },
-                    { path: "/shop/page/add",  component: "/shop/page/add" },
+                    { path: "/shop/page/add", component: "/shop/page/add" },
                     { path: "/shop/page/edit", component: "/shop/page/edit" },
-                    { path: "/shop/category", name: "分类页面",component: "/shop/category" },
+                    { path: "/shop/category", name: "分类页面", component: "/shop/category" }
                 ]
             },
             {

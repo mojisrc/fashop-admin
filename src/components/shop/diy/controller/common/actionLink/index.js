@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import styles from "./index.css";
 import { View } from "react-web-dom";
-import { Popover, Tag, Input, Modal } from 'antd';
+import { Popover, Tag, Input, Modal } from "antd";
 import SelectGoods from "@/components/public/selectGoods/index";
 import SelectPage from "@/components/public/selectPage/index";
 import SelectGoodsCategory from "@/components/public/selectGoodsCategory/index";
@@ -25,79 +25,79 @@ const { TextArea } = Input;
 // }
 export const linkInfo = {
     portal: {
-        type: 'portal',
-        name: '首页链接',
-        alias: '首页'
+        type: "portal",
+        name: "首页链接",
+        alias: "首页"
     },
     goods: {
-        type: 'goods',
-        name: '商品链接',
-        alias: '商品'
+        type: "goods",
+        name: "商品链接",
+        alias: "商品"
     },
     page: {
-        type: 'page',
-        name: '自定义页面',
-        alias: '自定义页面'
+        type: "page",
+        name: "自定义页面",
+        alias: "自定义页面"
     },
     url: {
-        type: 'url',
-        name: '自定义链接',
-        alias: '链接地址'
+        type: "url",
+        name: "自定义链接",
+        alias: "链接地址"
     },
     goods_category: {
-        type: 'goods_category',
-        name: '商品分类链接',
-        alias: '商品分类'
+        type: "goods_category",
+        name: "商品分类链接",
+        alias: "商品分类"
     }
-}
+};
 
 export default class Index extends Component {
     state = {
         urlValue: {
-            url: ''
+            url: ""
         },
         selectGoodsVisible: false,
         selectPageVisible: false,
-        selectGoodsCategoryVisible:false,
+        selectGoodsCategoryVisible: false,
         inputUrlVisible: false
-    }
+    };
     onClick = (linkAction) => {
-        const props = { ...this.props }
+        const props = { ...this.props };
         switch (linkAction) {
-            case 'portal':
+            case "portal":
                 props.getValues({
                     ...props, ...{ type: linkAction }
-                })
+                });
                 break;
-            case 'goods':
+            case "goods":
                 this.setState({
                     selectGoodsVisible: true
-                })
+                });
                 break;
-            case 'page':
+            case "page":
                 this.setState({
                     selectPageVisible: true
-                })
+                });
                 break;
-            case 'goods_category':
+            case "goods_category":
                 this.setState({
                     selectGoodsCategoryVisible: true
-                })
+                });
                 break;
             // TODO
-            case 'url':
+            case "url":
                 this.setState({
                     inputUrlVisible: true
-                })
+                });
                 break;
         }
-    }
+    };
 
 
     render() {
-        const props = { ...this.props }
-        const { type, getValues } = props
-        const { selectGoodsVisible, selectPageVisible,selectGoodsCategoryVisible, inputUrlVisible, urlValue } = this.state
+        const props = { ...this.props };
+        const { type, getValues } = props;
+        const { selectGoodsVisible, selectPageVisible, selectGoodsCategoryVisible, inputUrlVisible, urlValue } = this.state;
         return (
             <View>
                 <View>
@@ -106,19 +106,19 @@ export default class Index extends Component {
                         content={
                             <View className={`${styles.actionLinkPopoverContent}`}>
                                 <a onClick={() => {
-                                    this.onClick('portal')
+                                    this.onClick("portal");
                                 }}>{linkInfo.portal.name}</a>
                                 <a onClick={() => {
-                                    this.onClick('goods')
+                                    this.onClick("goods");
                                 }}>{linkInfo.goods.name}</a>
                                 <a onClick={() => {
-                                    this.onClick('goods_category')
+                                    this.onClick("goods_category");
                                 }}>{linkInfo.goods_category.name}</a>
                                 <a onClick={() => {
-                                    this.onClick('page')
+                                    this.onClick("page");
                                 }}>{linkInfo.page.name}</a>
                                 <a onClick={() => {
-                                    this.onClick('url')
+                                    this.onClick("url");
                                 }}>{linkInfo.url.name}</a>
                             </View>
                         }
@@ -133,7 +133,7 @@ export default class Index extends Component {
                     close={() => {
                         this.setState({
                             selectGoodsVisible: false
-                        })
+                        });
                     }}
                     onOk={(state) => {
                         this.setState({
@@ -141,13 +141,13 @@ export default class Index extends Component {
                         }, () => {
                             getValues({
                                 ...props, ...{
-                                    type: 'goods',
+                                    type: "goods",
                                     value: {
                                         id: state.checkedData[0].id
                                     }
                                 }
-                            })
-                        })
+                            });
+                        });
                     }}
                 />
                 <SelectPage
@@ -155,7 +155,7 @@ export default class Index extends Component {
                     close={() => {
                         this.setState({
                             selectPageVisible: false
-                        })
+                        });
                     }}
                     getState={(state) => {
                         this.setState({
@@ -163,13 +163,13 @@ export default class Index extends Component {
                         }, () => {
                             getValues({
                                 ...props, ...{
-                                    type: 'page',
+                                    type: "page",
                                     value: {
                                         id: state.value.id
-                                    },
+                                    }
                                 }
-                            })
-                        })
+                            });
+                        });
                     }}
                 />
                 <SelectGoodsCategory
@@ -177,7 +177,7 @@ export default class Index extends Component {
                     close={() => {
                         this.setState({
                             selectGoodsCategoryVisible: false
-                        })
+                        });
                     }}
                     getState={(state) => {
                         this.setState({
@@ -185,13 +185,13 @@ export default class Index extends Component {
                         }, () => {
                             getValues({
                                 ...props, ...{
-                                    type: 'goods_category',
+                                    type: "goods_category",
                                     value: {
                                         id: state.value.id
-                                    },
+                                    }
                                 }
-                            })
-                        })
+                            });
+                        });
                     }}
                 />
                 <Modal
@@ -200,7 +200,7 @@ export default class Index extends Component {
                     onCancel={() => {
                         this.setState({
                             inputUrlVisible: false
-                        })
+                        });
                     }}
                     onOk={(e) => {
                         this.setState({
@@ -208,11 +208,11 @@ export default class Index extends Component {
                         }, () => {
                             getValues({
                                 ...props, ...{
-                                    type: 'url',
+                                    type: "url",
                                     value: urlValue
                                 }
-                            })
-                        })
+                            });
+                        });
                     }}
                     style={{ top: 20 }}
                     width={756}
@@ -220,16 +220,16 @@ export default class Index extends Component {
                     <TextArea
                         placeholder="请输入自定义链接"
                         autosize={{ minRows: 2, maxRows: 6 }}
-                        value={urlValue && typeof(urlValue['url']) !== "undefined" ? urlValue.url : ''}
+                        value={urlValue && typeof(urlValue["url"]) !== "undefined" ? urlValue.url : ""}
                         onChange={(e) => {
                             this.setState({
                                 urlValue: {
                                     url: e.target.value
                                 }
-                            })
+                            });
                         }} />
                 </Modal>
             </View>
-        )
+        );
     }
 }

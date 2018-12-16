@@ -7,12 +7,12 @@ import tree from "smart-arraytotree";
 const TreeNode = Tree.TreeNode;
 
 @connect(({ goodsCategory, loading }) => ({
-    goodsCategory: goodsCategory.result.list,
+    goodsCategory: goodsCategory.list.result,
     goodsCategoryLoading: loading.effects["goodsCategory/list"]
 }))
 export default class SelectGoodsCategory extends Component {
     static defaultProps = {
-        goodsCategory: [],
+        goodsCategory: { list: [] },
         goodsCategoryLoading: true
     };
     state = {
