@@ -1,12 +1,14 @@
 import React, { Component } from "react";
-import { Table, } from "antd";
+import { Table } from "antd";
 import styles from "./index.css";
 import { View } from "react-web-dom";
 import { connect } from "dva";
 import Query from "@/utils/query";
 import { getUserList } from "@/actions/user";
 import moment from "moment/moment";
-import Image from "../../../image/index";
+import Image from "@/components/image/index";
+import router from "umi/router";
+
 //
 // type Props = {
 //     history: historyType,
@@ -25,50 +27,59 @@ import Image from "../../../image/index";
 //     customerVisible: boolean,
 //     currentUser: {},
 // }
-@connect(({
-              view: {
-                  user: {
-                      userList,
-                      userListLoading
-                  }
-              }
-          }) => ({
-    userList,
-    userListLoading,
+@connect(({ user, loading }) => ({
+    userList: user.list.result,
+    userListLoading: loading.effects["user/list"]
 }))
 export default class UserListTable extends Component {
     state = {
         selectedRowKeys: [],
         customerVisible: false,
-        currentUser: {}
-    }
+        currentUser: {},
+        get: {}
+    };
     static defaultProps = {
-
         userListLoading: false,
-        userList: [],
-    }
+        userList: []
+    };
     onSelectChange = (selectedRowKeys) => {
         this.setState({ selectedRowKeys });
-    }
+    };
+
 
     componentDidMount() {
-        const { dispatch } = this.props
-        const params = Query.make([])
-        dispatch(getUserList({ params }))
+        this.initList();
+    }
+
+    initList() {
+        const { dispatch } = this.props;
+        const get = Query.make();
+        dispatch({
+            type: "user/list",
+            payload: {
+                page: get.page,
+                rows: get.rows
+            },
+            callback: () => {
+                this.setState({
+                    get
+                });
+            }
+        });
     }
 
     render() {
-        const { selectedRowKeys } = this.state;
-        const rowSelection = {
-            selectedRowKeys,
-            onChange: this.onSelectChange,
-        };
-        const { userList, userListLoading } = this.props
+        // const { selectedRowKeys } = this.state;
+        // const rowSelection = {
+        //     selectedRowKeys,
+        //     onChange: this.onSelectChange
+        // };
+        const { userList, userListLoading } = this.props;
         const columns = [
             {
                 title: "ID",
                 dataIndex: "id",
-                key: "id",
+                key: "id"
             },
             {
                 title: "头像",
@@ -84,19 +95,19 @@ export default class UserListTable extends Component {
             }, {
                 title: "昵称",
                 dataIndex: "nickname",
-                key: "nickname",
+                key: "nickname"
             }, {
                 title: "手机号",
                 dataIndex: "phone",
-                key: "phone",
+                key: "phone"
             }, {
                 title: "购买次数",
                 dataIndex: "buy_times",
-                key: "buy_times",
+                key: "buy_times"
             }, {
                 title: "累计消费（元）",
                 dataIndex: "cost_total",
-                key: "cost_total",
+                key: "cost_total"
             }, {
                 title: "客单价（元）",
                 dataIndex: "cost_average",
@@ -107,18 +118,18 @@ export default class UserListTable extends Component {
                 dataIndex: "last_cost_time",
                 key: "last_cost_time",
                 render: (text) => {
-                    return text > 0 ? moment(text, 'X').format('YYYY-MM-DD HH:mm:ss') : '-'
+                    return text > 0 ? moment(text, "X").format("YYYY-MM-DD HH:mm:ss") : "-";
                 }
             }, {
                 title: "注册时间",
                 dataIndex: "create_time",
                 key: "create_time",
                 render: (text) => {
-                    return text > 0 ? moment(text, 'X').format('YYYY-MM-DD HH:mm:ss') : '-'
+                    return text > 0 ? moment(text, "X").format("YYYY-MM-DD HH:mm:ss") : "-";
                 }
             }, {
-                title: '操作',
-                key: 'operation',
+                title: "操作",
+                key: "operation",
                 className: styles.column,
                 render: (record) => <View className={styles.operation}>
                     <a
@@ -126,14 +137,14 @@ export default class UserListTable extends Component {
                             router.push({
                                 pathname: `/user/list/detail`,
                                 search: `?id=${record.id}`
-                            })
+                            });
                         }}
                     >
                         详情
                     </a>
                 </View>
             }
-        ]
+        ];
         return (
             <View>
                 {/*<View className={styles.batchView}>*/}
@@ -178,11 +189,11 @@ export default class UserListTable extends Component {
                         current: userList.page
                     }}
                     onChange={({ current, pageSize }) => {
-                        router.push(Query.page(current, pageSize))
+                        router.push(Query.page(current, pageSize));
                     }}
                     // rowSelection={rowSelection}
                 />
             </View>
-        )
+        );
     }
 }

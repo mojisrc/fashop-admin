@@ -10,7 +10,7 @@ export default {
         * list({ payload, callback }, { call, put }) {
             const response = yield call(image.list, payload);
             yield put({
-                type: "list",
+                type: "_list",
                 payload: response
             });
             if (callback) callback(response);
@@ -18,20 +18,20 @@ export default {
         * add({ payload, callback }, { call, put }) {
             const response = yield call(image.add, payload);
             yield put({
-                type: "add",
+                type: "_add",
                 payload: response
             });
             if (callback) callback(response);
         }
     },
     reducers: {
-        list(state, action) {
+        _list(state, action) {
             return {
                 ...state,
                 list: action.payload
             };
         },
-        add(state, action) {
+        _add(state, action) {
             return {
                 ...state,
                 add: action.payload

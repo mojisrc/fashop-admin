@@ -1,21 +1,21 @@
-import React,{ Component } from "react";
-import { Tabs } from 'antd';
+import React, { Component } from "react";
 import SystemTemplate from "./systemTemplate";
 import MyTemplate from "./myTemplate";
+
 export default class ShopIndex extends Component {
     render() {
         const tabList = [
             {
-                key:1,
-                tab:'我的模板',
-                main:() => <MyTemplate {...this.props} />
+                key: 1,
+                tab: "我的模板",
+                main: () => <MyTemplate {...this.props} />
             },
             {
-                key:2,
-                tab:'系统模板',
-                main:() => <SystemTemplate {...this.props} />
+                key: 2,
+                tab: "系统模板",
+                main: () => <SystemTemplate {...this.props} />
             }
-        ]
+        ];
         return (
             <MyTemplate {...this.props} />
             // <Tabs defaultActiveKey="1">
@@ -29,6 +29,6 @@ export default class ShopIndex extends Component {
             //         )
             //     }
             // </Tabs>
-        )
+        );
     }
 }

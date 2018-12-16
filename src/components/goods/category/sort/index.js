@@ -1,31 +1,28 @@
 import React, { Component } from "react";
-import {
-    Button,
-    Modal,
-    Tree,
-    message,
-} from "antd";
+import { Button, Modal, Tree, message } from "antd";
 import { View } from "react-web-dom";
-import { sortCategory } from "@/actions/goods/category";
 
 const TreeNode = Tree.TreeNode;
-
+@connect(({ goodsCategory, loading }) => ({
+    goodsCategorySort: goodsCategory.sort,
+    goodsCategoryLoading: loading.effects["goodsCategory/sort"]
+}))
 export default class CategorySort extends Component {
     state = {
         visible: false,
-        dataSource: this.props.dataSource,
+        dataSource: this.props.dataSource
     };
+
     componentWillReceiveProps(nextProps) {
-        if(nextProps.dataSource!==this.props.dataSource){
+        if (nextProps.dataSource !== this.props.dataSource) {
             this.setState({
                 dataSource: nextProps.dataSource
-            })
+            });
         }
     }
+
     render() {
-        const {
-            dataSource,
-        } = this.state
+        const { dataSource } = this.state;
         return (
             <div>
                 <Button
@@ -48,15 +45,15 @@ export default class CategorySort extends Component {
                     <Tree
                         draggable
                         onDrop={this.onDrop}
-                        autoExpandParent = {false}
-                        defaultExpandedKeys = {['节点']}
+                        autoExpandParent={false}
+                        defaultExpandedKeys={["节点"]}
                     >
                         {
-                            dataSource.map((data,i)=>(
+                            dataSource.map((data, i) => (
                                 <TreeNode title={data.name} key={data.id} data={data} index={i}>
                                     {
-                                        data.children&&data.children.map((item,j)=>(
-                                            <TreeNode title={item.name} key={item.id} data={item} index={j}/>
+                                        data.children && data.children.map((item, j) => (
+                                            <TreeNode title={item.name} key={item.id} data={item} index={j} />
                                         ))
                                     }
                                 </TreeNode>
@@ -67,74 +64,68 @@ export default class CategorySort extends Component {
             </div>
         );
     }
-    handleOk = (e) => {
-        const {
-            dispatch
-        } = this.props
-        const {
-            dataSource
-        } = this.state
-        let index = 0
-        let newArray = []
-        dataSource.map((e)=>{
+
+    handleOk = () => {
+        const { dispatch } = this.props;
+        const { dataSource } = this.state;
+        let index = 0;
+        let newArray = [];
+        dataSource.map((e) => {
             newArray.push({
                 id: e.id,
-                index,
-            })
-            index++
-            e.children.map((a)=>{
+                index
+            });
+            index++;
+            e.children.map((a) => {
                 newArray.push({
                     id: a.id,
-                    index,
-                })
-                index++
-            })
-        })
-        dispatch(sortCategory({
-            params: {
-                sorts: newArray
-            },
-            func: ()=>{
+                    index
+                });
+                index++;
+            });
+        });
+        dispatch({
+            type: "goodsCategory/sort",
+            payload: { sorts: newArray },
+            callback: () => {
                 this.setState({
                     visible: false
-                })
+                });
             }
-        }))
-    }
-    handleCancel = (e) => {
-        this.setState({
-          visible: false,
         });
-    }
+    };
+    handleCancel = () => {
+        this.setState({
+            visible: false
+        });
+    };
     onDrop = (info) => {
-        const {
-            dataSource
-        } = this.state
-        const startData = info.dragNode.props.data
-        const endData = info.node.props.data
-        const startIndex = info.dragNode.props.index
-        if(startData.pid===endData.pid){
-            if(startData.pid===0){
-                const newArray = [...dataSource]
-                newArray.splice(startIndex,1);
-                const endIndex = newArray.findIndex((e)=>e.id===endData.id)
-                newArray.splice(endIndex,0,startData);
+        const { dataSource } = this.state;
+        const startData = info.dragNode.props.data;
+        const endData = info.node.props.data;
+        const startIndex = info.dragNode.props.index;
+        if (startData.pid === endData.pid) {
+            if (startData.pid === 0) {
+                const newArray = [...dataSource];
+                newArray.splice(startIndex, 1);
+                const endIndex = newArray.findIndex((e) => e.id === endData.id);
+                newArray.splice(endIndex, 0, startData);
                 this.setState({
                     dataSource: newArray
-                })
-            }else {
-                const oneLevelIndex = dataSource.findIndex((e)=>e.id===startData.pid)
-                const newArray = [...dataSource]
-                newArray[oneLevelIndex].children.splice(startIndex,1);
-                const endIndex = newArray[oneLevelIndex].children.findIndex((e)=>e.id===endData.id)
-                newArray[oneLevelIndex].children.splice(endIndex,0,startData);
+                });
+            } else {
+                const oneLevelIndex = dataSource.findIndex((e) => e.id === startData.pid);
+                const newArray = [...dataSource];
+                newArray[oneLevelIndex].children.splice(startIndex, 1);
+                const endIndex = newArray[oneLevelIndex].children.findIndex((e) => e.id === endData.id);
+                newArray[oneLevelIndex].children.splice(endIndex, 0, startData);
                 this.setState({
                     dataSource: newArray
-                })
+                });
             }
-        }else {
-            message.warning('必须更改同一层级')
+        } else {
+            message.warning("必须更改同一层级");
         }
 
-    }
+    };
 }

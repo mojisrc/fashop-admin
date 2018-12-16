@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import styles from "./index.css";
 import { View } from "react-web-dom";
-import InfoRow from "../../../public/info/infoRow";
+import InfoRow from "@/components/public/info/infoRow";
 import moment from "moment";
 
 export default class DeliverInfo extends Component {

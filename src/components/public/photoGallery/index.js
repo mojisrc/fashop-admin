@@ -1,20 +1,12 @@
 import React, { Component } from "react";
 import { View } from "react-web-dom";
-import {
-    Modal,
-    Tabs,
-    Button,
-    Row,
-    Col,
-    Checkbox,
-    Pagination,
-    Spin
-} from "antd";
+import { Modal, Tabs, Button, Row, Col, Checkbox, Pagination, Spin } from "antd";
 import styles from "./index.css";
-import { connect } from 'dva';
-import { getPhotoGalleryList } from "@/models/photoGallery";
+import { connect } from "dva";
+import { initList } from "@/models/photoGallery";
 import UploadImage from "@/components/uploadImage";
-import Image from "../../image";
+import Image from "@/components/image";
+import Query from "@/utils/query";
 
 const TabPane = Tabs.TabPane;
 const CheckboxGroup = Checkbox.Group;
@@ -31,41 +23,50 @@ const CheckboxGroup = Checkbox.Group;
 //     checkedValues: Array<string>
 // };
 
-@connect(({ app: { app: { imageList } } }) => ({
-    imageList
+@connect(({ image, loading }) => ({
+    imageList: image.list.result,
+    imageListLoading: loading.effects["image/list"]
 }))
 export default class PhotoGallery extends Component {
     static defaultProps = {
         imageList: {
-            page: 1,
-            rows: 20,
             total_number: 0,
-            list: [],
-            loading: true
+            list: []
         }
     };
     state = {
+        page: 1,
+        rows: 18,
         url: "",
         checkedValues: []
     };
+
     componentDidMount() {
-        this.getPhotoGalleryList()
+        this.initList();
     }
-    getPhotoGalleryList = ()=>{
-        const { dispatch, imageList } = this.props;
-        const { rows } = imageList;
-        dispatch(getPhotoGalleryList({ params: { page: 1, rows } }))
+
+    initList() {
+        const { dispatch } = this.props;
+        dispatch({
+            type: "image/list",
+            payload: {
+                page: this.state.page,
+                rows: this.state.rows
+            }
+        });
     }
-    clearCheckedValues = ()=>{
+
+    clearCheckedValues = () => {
         this.setState({
             checkedValues: []
-        })
-    }
+        });
+    };
+
     render() {
         const {
             visible,
             onCancel,
-            onOk,
+            onOk
         } = this.props;
         return (
             <Modal
@@ -80,11 +81,11 @@ export default class PhotoGallery extends Component {
                 width={800}
                 onCancel={() => {
                     onCancel();
-                    this.clearCheckedValues()
+                    this.clearCheckedValues();
                 }}
                 onOk={() => {
                     onOk(this.state.checkedValues);
-                    this.clearCheckedValues()
+                    this.clearCheckedValues();
                 }}
             >
                 <Tabs>
@@ -95,16 +96,17 @@ export default class PhotoGallery extends Component {
             </Modal>
         );
     }
+
     returnImgList() {
         const { checkedValues } = this.state;
-        const { imageList, dispatch } = this.props;
-        const { page, rows, total_number, list, loading } = imageList;
+        const { imageList } = this.props;
+        const { list } = imageList;
         return (
             <View className={styles.imgList}>
                 <View className={styles.imgListTop}>
                     <UploadImage
-                        onChange={(e)=>{
-                            this.getPhotoGalleryList()
+                        onChange={(e) => {
+                            this.initList();
                         }}
                         is_save={1}
                     >
@@ -120,7 +122,7 @@ export default class PhotoGallery extends Component {
                         style={{ display: "block" }}
                     >
                         <View className={styles.imgContent}>
-                            <Row gutter={30} type={'flex'}>
+                            <Row gutter={30} type={"flex"}>
                                 {list.map((item, index) => (
                                     <Col
                                         span={4}
@@ -138,18 +140,18 @@ export default class PhotoGallery extends Component {
                                                         item.id
                                                     ) > -1
                                                         ? {
-                                                              borderColor:
-                                                                  "#188fff"
-                                                          }
+                                                            borderColor:
+                                                                "#188fff"
+                                                        }
                                                         : {}
                                                 }
                                             >
                                                 <p>{item.title}</p>
                                                 <div>
-                                                <Image
-                                                    src={item.url}
-                                                    style={{minHeight:101.33}}
-                                                />
+                                                    <Image
+                                                        src={item.url}
+                                                        style={{ minHeight: 101.33 }}
+                                                    />
                                                 </div>
                                             </View>
                                         </Checkbox>
@@ -164,13 +166,18 @@ export default class PhotoGallery extends Component {
                         size="small"
                         showSizeChanger={false}
                         showQuickJumper={false}
-                        current={page}
-                        pageSize={rows}
-                        total={total_number}
+                        current={this.state.page}
+                        pageSize={this.state.rows}
+                        total={imageList.total_number}
                         onChange={(page, rows) => {
-                            dispatch(getPhotoGalleryList({ params: { page,rows}}))
+                            this.setState({
+                                page,
+                                rows
+                            }, () => {
+                                this.initList();
+                            });
                         }}
-                        pageSizeOptions={['18']}
+                        pageSizeOptions={[`${this.state.rows}`]}
                     />
                 </View>
             </View>

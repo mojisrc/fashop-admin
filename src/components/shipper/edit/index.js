@@ -13,7 +13,7 @@ const {
 } = publicFunction
 const FormItem = Form.Item;
 const Option = Select.Option;
-
+// TODO
 @connect(({
               view: {
                   goodsCategory: {
@@ -187,7 +187,7 @@ export default class CategoryEdit extends Component  {
                     </Button>
                     <Button
                         onClick={() => {
-                            this.props.history.goBack()
+                            router.goBack()
                         }}
                     >
                         返回

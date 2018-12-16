@@ -1,157 +1,136 @@
 import React, { Component } from "react";
 import { connect } from "dva";
-import { Form, Select, Input, Button, message } from 'antd';
+import { Form, Select, Input, Button, message } from "antd";
 import UploadImage from "@/components/uploadImage";
-import {
-    getGoodsCategoryList,
-    editCategory,
-} from "@/actions/goods/category";
-
 import GoodsApi from "@/services/goods";
+import router from "umi/router";
+import { query } from "@/utils/fa";
 
-const {
-    parseQuery
-} = publicFunction
 const FormItem = Form.Item;
 const Option = Select.Option;
 
-@connect(({
-              view: {
-                  goods: {
-                      categoryList,
-                  }
-              }
-          }) => ({
-    categoryList,
-}))
 @Form.create()
-export default class CategoryEdit extends Component  {
+@connect(({ goodsCategory, loading }) => ({
+    goodsCategory: goodsCategory.result.list,
+    goodsCategoryLoading: loading.effects["goodsCategory/list"]
+}))
+export default class CategoryEdit extends Component {
     state = {
         categoryInfo: this.props.location.state ? this.props.location.state.categoryInfo : null
-    }
+    };
 
     async componentDidMount() {
         const {
-            dispatch,
-            categoryList,
+            dispatch, goodsCategory,
             location: {
-                state,
-                search,
-            },
-        } = this.props
-        if (!categoryList.length) {
-            dispatch(getGoodsCategoryList())
+                state
+            }
+        } = this.props;
+        if (!goodsCategory.length) {
+            dispatch(getGoodsCategoryList());
         }
-        const {
-            id
-        } = parseQuery(search)
+        const { id } = query.getParams();
         if (!id) {
-            return message.error('缺少必要参数，history异常')
+            return message.error("缺少必要参数，history异常");
         }
         if (!state || !state.categoryInfo) {
-            const e = await Fetch.fetch({
-                api: GoodsApi.category.info,
-                params: {
-                    id
-                }
-            })
+            const e = await GoodsApi.category.info({ id });
             this.setState({
                 categoryInfo: e.result.info
-            })
+            });
         }
     }
 
     handleSubmit = (e) => {
-        const {
-            id
-        } = parseQuery(this.props.location.search)
+        const { id } = query.getParams();
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
             if (!err) {
-                const {
-                    dispatch
-                } = this.props
-                dispatch(editCategory({
-                    params: {
+                const { dispatch } = this.props;
+                dispatch({
+                    type: "goodsCategory/edit",
+                    payload: {
                         ...values,
                         ...{ id }
                     },
-                }))
+                    callback: (response) => {
+                        if (response.code === 0) {
+                            router.goBack();
+                        }
+                    }
+                });
             }
-        })
-    }
+        });
+    };
 
     render() {
-        const {
-            form,
-            categoryList,
-        } = this.props
-        const { categoryInfo } = this.state
-        const { name, pid, icon } = categoryInfo || {}
-        const { getFieldDecorator } = form
+        const { form,  goodsCategory } = this.props;
+        const { categoryInfo } = this.state;
+        const { name, pid, icon } = categoryInfo || {};
+        const { getFieldDecorator } = form;
         const formItemLayout = {
             labelCol: {
                 xs: { span: 24 },
-                sm: { span: 6 },
+                sm: { span: 6 }
             },
             wrapperCol: {
                 xs: { span: 24 },
-                sm: { span: 18 },
-            },
+                sm: { span: 18 }
+            }
         };
         const tailFormItemLayout = {
             wrapperCol: {
                 xs: {
                     span: 24,
-                    offset: 0,
+                    offset: 0
                 },
                 sm: {
                     span: 16,
-                    offset: 6,
-                },
-            },
+                    offset: 6
+                }
+            }
         };
-        let hasChild = false
+        let hasChild = false;
         // 如果存在子分类不可以设所属
-        if (categoryInfo && Array.isArray(categoryList) && categoryList.length > 0) {
-            categoryList.map((e, i) => {
-                 (hasChild === false && e.pid === categoryInfo.id) ? hasChild = true : null
-            })
+        if (categoryInfo && Array.isArray(goodsCategory) && goodsCategory.length > 0) {
+            goodsCategory.map((e, i) => {
+                (hasChild === false && e.pid === categoryInfo.id) ? hasChild = true : null;
+            });
             return (
-                <Form onSubmit={this.handleSubmit} style={{ maxWidth: '600px' }}>
+                <Form onSubmit={this.handleSubmit} style={{ maxWidth: "600px" }}>
                     <FormItem
                         label="分类名称"
                         {...formItemLayout}
                     >
-                        {getFieldDecorator('name', {
+                        {getFieldDecorator("name", {
                             initialValue: name,
                             rules: [{
                                 required: true,
-                                message: '请输入分类名称!'
-                            }],
+                                message: "请输入分类名称!"
+                            }]
                         })(
                             <Input
                                 placeholder='请输入分类名称'
-                                style={{ width: '100%' }}
+                                style={{ width: "100%" }}
                             />
                         )}
                     </FormItem>
-                    { hasChild === false ? <FormItem
+                    {hasChild === false ? <FormItem
                         label="上级分类"
                         {...formItemLayout}
                     >
-                        {getFieldDecorator('pid', {
-                            initialValue: pid === 0 ? 0 : pid,
+                        {getFieldDecorator("pid", {
+                            initialValue: pid === 0 ? 0 : pid
                         })(
                             <Select
                                 placeholder="请输入分类名称"
-                                style={{ width: '100%' }}
+                                style={{ width: "100%" }}
                             >
                                 <Option value={0} key={0}>设为一级分类</Option>
                                 {
-                                    (Array.isArray(categoryList) && categoryList.length > 0) ? categoryList.map((e, i) => {
+                                    (Array.isArray(goodsCategory) && goodsCategory.length > 0) ? goodsCategory.map((e, i) => {
                                         return e.id !== categoryInfo.id ?
-                                            <Option value={e.id} key={i}>{e.name}</Option> : null
+                                            <Option value={e.id} key={i}>{e.name}</Option> : null;
                                     }) : null
                                 }
                             </Select>
@@ -162,12 +141,12 @@ export default class CategoryEdit extends Component  {
                         extra="分类展示图，建议尺寸：140*140 像素"
                         label="上传分类图"
                     >
-                        {getFieldDecorator('icon', {
+                        {getFieldDecorator("icon", {
                             initialValue: icon,
                             rules: [{
-                                message: '请上传分类图!',
+                                message: "请上传分类图!"
                             }],
-                            valuePropName: 'url',
+                            valuePropName: "url"
                         })(
                             <UploadImage />
                         )}
@@ -187,16 +166,16 @@ export default class CategoryEdit extends Component  {
                         </Button>
                         <Button
                             onClick={() => {
-                                this.props.history.goBack()
+                                router.goBack();
                             }}
                         >
                             返回
                         </Button>
                     </FormItem>
                 </Form>
-            )
-        }else{
-            return ''
+            );
+        } else {
+            return "";
         }
 
 

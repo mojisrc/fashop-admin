@@ -12,7 +12,7 @@ export default {
         * list({ payload, callback }, { call, put }) {
             const response = yield call(user.list, payload);
             yield put({
-                type: "list",
+                type: "_list",
                 payload: response
             });
             if (callback) callback(response);
@@ -20,7 +20,7 @@ export default {
         * info({ payload, callback }, { call, put }) {
             const response = yield call(user.info, payload);
             yield put({
-                type: "info",
+                type: "_info",
                 payload: response
             });
             if (callback) callback(response);
@@ -28,7 +28,7 @@ export default {
         * address({ payload, callback }, { call, put }) {
             const response = yield call(user.address, payload);
             yield put({
-                type: "address",
+                type: "_address",
                 payload: response
             });
             if (callback) callback(response);
@@ -36,32 +36,32 @@ export default {
         * statistics({ payload, callback }, { call, put }) {
             const response = yield call(user.statistics, payload);
             yield put({
-                type: "statistics",
+                type: "_statistics",
                 payload: response
             });
             if (callback) callback(response);
         }
     },
     reducers: {
-        list(state, action) {
+        _list(state, action) {
             return {
                 ...state,
                 list: action.payload
             };
         },
-        info(state, action) {
+        _info(state, action) {
             return {
                 ...state,
                 info: action.payload
             };
         },
-        address(state, action) {
+        _address(state, action) {
             return {
                 ...state,
                 address: action.payload
             };
         },
-        statistics(state, action) {
+        _statistics(state, action) {
             return {
                 ...state,
                 statistics: action.payload

@@ -4,9 +4,9 @@ import styles from "./index.css";
 import { View } from "react-web-dom";
 import { connect } from "dva";
 import moment from "moment/moment";
-import Image from '../../../image/index'
+import Image from "@/components/image/index";
 import { getOrderList } from "@/actions/order";
-import Query from "@/utils/query"
+import Query from "@/utils/query";
 // type Props = {
 //     user_id: number,
 //     history: historyType,
@@ -40,61 +40,76 @@ import Query from "@/utils/query"
 //         }>,
 //     },
 // }
-@connect(({
-              view: {
-                  order: {
-                      orderList,
-                      orderListLoading
-                  }
-              }
-          }) => ({
-    orderList,
-    orderListLoading,
+@connect(({ order, loading }) => ({
+    orderList: order.list.result,
+    orderListLoading: loading.effects["order/list"]
 }))
-export default class OrderManagementTable extends Component   {
+export default class OrderManagementTable extends Component {
     static defaultProps = {
-
         orderListLoading: false,
-        orderList: {},
-    }
+        orderList: {}
+    };
+    state = {
+        page: 1,
+        rows: 10,
+        expandedRowKeys: []
+    };
 
     componentDidMount() {
-        const { dispatch, user_id } = this.props
-        const params = Query.make([
-            { key: 'state', rule: ['eq', 'all'] },
-            { key: 'keywords_type', rule: ['rely', 'keywords'] },
-        ])
-        params['user_ids'] = [user_id]
-        if (params['create_time'] !== undefined) {
-            params['create_time'] = [moment(params['create_time'][0]).unix(), moment(params['create_time'][1]).unix()]
+        this.initList();
+    }
+
+    initList() {
+        const { dispatch, user_id } = this.props;
+        const get = Query.make([
+            { key: "state", rule: ["eq", "all"] },
+            { key: "keywords_type", rule: ["rely", "keywords"] }
+        ]);
+        if (get["create_time"] !== undefined) {
+            get["create_time"] = [moment(get["create_time"][0]).unix(), moment(get["create_time"][1]).unix()];
         }
-        dispatch(getOrderList({ params }))
+        params["user_ids"] = [user_id];
+
+        dispatch({
+            type: "order/list",
+            payload: {
+                page: get.page,
+                rows: get.rows
+            },
+            callback: (response) => {
+                const { result: { list } } = response;
+                this.setState({
+                    get,
+                    expandedRowKeys: Array.isArray(list) ? list.map((item) => item.id) : []
+                });
+            }
+        });
     }
 
     render() {
-        const { orderList, orderListLoading ,history} = this.props
-        let { list } = orderList
+        const { orderList, orderListLoading } = this.props;
+        let { list } = orderList;
         if (list) {
             list.map((item) => {
                 item.extend_order_goods.map((goods) => {
-                    goods["reciver_info"] = item.extend_order_extend.reciver_info
-                    goods["rows"] = item.extend_order_goods.length
-                    return goods
-                })
-                return item
-            })
+                    goods["reciver_info"] = item.extend_order_extend.reciver_info;
+                    goods["rows"] = item.extend_order_goods.length;
+                    return goods;
+                });
+                return item;
+            });
         }
         const columns = [
             {
                 title: "订单号",
                 dataIndex: "sn",
-                key: "sn",
+                key: "sn"
             }, {
                 title: "下单时间",
                 dataIndex: "create_time",
                 key: "create_time",
                 render: (text) => {
-                    return moment(text, 'X').format('YYYY-MM-DD HH:mm:ss')
+                    return moment(text, "X").format("YYYY-MM-DD HH:mm:ss");
                 }
             }, {
                 title: "订单状态",
@@ -107,29 +122,29 @@ export default class OrderManagementTable extends Component   {
                 dataIndex: "freight_fee",
                 key: "freight_fee",
                 render: (value) => {
-                    return `¥${value}`
+                    return `¥${value}`;
                 }
             }, {
                 title: "商品总额（元）",
                 dataIndex: "amount",
                 key: "amount",
                 render: (value) => {
-                    return `¥${value}`
+                    return `¥${value}`;
                 }
             }, {
-                title: '操作',
-                key: 'operation',
+                title: "操作",
+                key: "operation",
                 render: (record) => <View className={styles.operation}>
                     <a
                         onClick={() => {
-                            router.push(`/order/list/detail?id=${record.id}`)
+                            router.push(`/order/list/detail?id=${record.id}`);
                         }}
                     >
                         详情
                     </a>
                 </View>
             }
-        ]
+        ];
         const expandedRowColumns = [
             {
                 title: "商品图",
@@ -147,16 +162,16 @@ export default class OrderManagementTable extends Component   {
                 title: "商品名称",
                 dataIndex: "goods_title",
                 key: "goods_title",
-                className: `${styles.goodsTitle}`,
+                className: `${styles.goodsTitle}`
             }, {
                 title: "规格",
                 dataIndex: "goods_spec",
                 key: "goods_spec",
                 className: `${styles.goodsSpec}`,
                 render: (goods_spec) => {
-                    return goods_spec[0].id > 0 ? goods_spec.map(function (item) {
-                        return item.value_name + ' '
-                    }) : '-'
+                    return goods_spec[0].id > 0 ? goods_spec.map(function(item) {
+                        return item.value_name + " ";
+                    }) : "-";
                 }
             }, {
                 title: "数量",
@@ -164,7 +179,7 @@ export default class OrderManagementTable extends Component   {
                 key: "goods_num",
                 className: `${styles.goodsNum}`,
                 render: (value) => {
-                    return `${value} 件`
+                    return `${value} 件`;
                 }
             }, {
                 title: "单价",
@@ -172,7 +187,7 @@ export default class OrderManagementTable extends Component   {
                 key: "goods_price",
                 className: `${styles.goodsPrice}`,
                 render: (value) => {
-                    return `¥${value}`
+                    return `¥${value}`;
                 }
             }, {
                 title: "收货人",
@@ -180,32 +195,31 @@ export default class OrderManagementTable extends Component   {
                 key: "reciver",
                 className: `${styles.reciver} ${styles.borderLeft}`,
                 render: (value, row, index) => {
-                    return { children: `${value}`, props: { rowSpan: index === 0 ? row.rows : 0 } }
-                },
+                    return { children: `${value}`, props: { rowSpan: index === 0 ? row.rows : 0 } };
+                }
             }
             , {
-                title: '联系方式',
+                title: "联系方式",
                 dataIndex: "reciver_info.phone",
-                key: 'reciver_phone',
+                key: "reciver_phone",
                 className: `${styles.reciverPhone} ${styles.borderLeft}`,
                 render: (value, row, index) => {
-                    return { children: value, props: { rowSpan: index === 0 ? row.rows : 0 } }
+                    return { children: value, props: { rowSpan: index === 0 ? row.rows : 0 } };
                 }
             },
             {
-                title: '收货地址',
+                title: "收货地址",
                 dataIndex: "reciver_info.address",
-                key: 'reciver_address',
+                key: "reciver_address",
                 className: `${styles.reciverAddress} ${styles.borderLeft}`,
                 render: (value, row, index) => {
-                    return { children: value, props: { rowSpan: index === 0 ? row.rows : 0 } }
+                    return { children: value, props: { rowSpan: index === 0 ? row.rows : 0 } };
                 }
             }
-        ]
+        ];
         return (
             <View>
                 {orderList.list ? <Table
-
                     loading={orderListLoading}
                     dataSource={orderList.list ? orderList.list : []}
                     columns={columns}
@@ -222,35 +236,40 @@ export default class OrderManagementTable extends Component   {
                     pagination={{
                         showSizeChanger: false,
                         showQuickJumper: false,
-                        pageSize: orderList.rows,
+                        pageSize: this.state.rows,
                         total: orderList.total_number,
-                        current: orderList.page
+                        current: this.state.page
                     }}
                     onChange={({ current, pageSize }) => {
-                        router.push(Query.page(current, pageSize))
+                        // this.setState({
+                        //     page:current,
+                        //     rows:pageSize
+                        // })
+                        // this.initList()
+                        router.push(Query.page(current, pageSize));
                     }}
                     rowKey={record => record.id}
-                /> : ''}
+                /> : ""}
             </View>
-        )
+        );
     }
 
     returnOrderState(text: string) {
         switch (text) {
-            case 'state_new':
-                return '待支付'
-            case 'state_pay':
-                return '待发货'
-            case 'state_send':
-                return '待收货'
-            case 'state_success':
-                return '已完成'
-            case 'state_noeval':
-                return '待评价'
-            case 'state_cancel':
-                return '已取消'
+            case "state_new":
+                return "待支付";
+            case "state_pay":
+                return "待发货";
+            case "state_send":
+                return "待收货";
+            case "state_success":
+                return "已完成";
+            case "state_noeval":
+                return "待评价";
+            case "state_cancel":
+                return "已取消";
             default:
-                return ''
+                return "";
         }
     }
 }

@@ -17,7 +17,7 @@ export default {
         * groupAuthorise({ payload, callback }, { call, put }) {
             const response = yield call(auth.groupAuthorise, payload);
             yield put({
-                type: "groupAuthorise",
+                type: "_groupAuthorise",
                 payload: response
             });
             if (callback) callback(response);
@@ -25,7 +25,7 @@ export default {
         * ruleTree({ payload, callback }, { call, put }) {
             const response = yield call(auth.ruleTree, payload);
             yield put({
-                type: "ruleTree",
+                type: "_ruleTree",
                 payload: response
             });
             if (callback) callback(response);
@@ -33,7 +33,7 @@ export default {
         * groupList({ payload, callback }, { call, put }) {
             const response = yield call(auth.groupList, payload);
             yield put({
-                type: "groupList",
+                type: "_groupList",
                 payload: response
             });
             if (callback) callback(response);
@@ -41,7 +41,7 @@ export default {
         * groupInfo({ payload, callback }, { call, put }) {
             const response = yield call(auth.groupInfo, payload);
             yield put({
-                type: "groupInfo",
+                type: "_groupInfo",
                 payload: response
             });
             if (callback) callback(response);
@@ -49,7 +49,7 @@ export default {
         * groupAdd({ payload, callback }, { call, put }) {
             const response = yield call(auth.groupAdd, payload);
             yield put({
-                type: "groupAdd",
+                type: "_groupAdd",
                 payload: response
             });
             if (callback) callback(response);
@@ -57,7 +57,7 @@ export default {
         * groupEdit({ payload, callback }, { call, put }) {
             const response = yield call(auth.groupEdit, payload);
             yield put({
-                type: "groupEdit",
+                type: "_groupEdit",
                 payload: response
             });
             if (callback) callback(response);
@@ -65,7 +65,7 @@ export default {
         * groupDel({ payload, callback }, { call, put }) {
             const response = yield call(auth.groupDel, payload);
             yield put({
-                type: "groupDel",
+                type: "_groupDel",
                 payload: response
             });
             if (callback) callback(response);
@@ -73,7 +73,7 @@ export default {
         * groupMemberList({ payload, callback }, { call, put }) {
             const response = yield call(auth.groupMemberList, payload);
             yield put({
-                type: "groupMemberList",
+                type: "_groupMemberList",
                 payload: response
             });
             if (callback) callback(response);
@@ -81,55 +81,55 @@ export default {
     },
 
     reducers: {
-        setRuleTree(state, action) {
+        _setRuleTree(state, action) {
             return {
                 ...state,
                 setRuleTree: action.payload
             };
         },
-        groupAuthorise(state, action) {
+        _groupAuthorise(state, action) {
             return {
                 ...state,
                 groupAuthorise: action.payload
             };
         },
-        ruleTree(state, action) {
+        _ruleTree(state, action) {
             return {
                 ...state,
                 ruleTree: action.payload
             };
         },
-        groupList(state, action) {
+        _groupList(state, action) {
             return {
                 ...state,
                 groupList: action.payload
             };
         },
-        groupInfo(state, action) {
+        _groupInfo(state, action) {
             return {
                 ...state,
                 groupInfo: action.payload
             };
         },
-        groupAdd(state, action) {
+        _groupAdd(state, action) {
             return {
                 ...state,
                 groupAdd: action.payload
             };
         },
-        groupEdit(state, action) {
+        _groupEdit(state, action) {
             return {
                 ...state,
                 groupEdit: action.payload
             };
         },
-        groupDel(state, action) {
+        _groupDel(state, action) {
             return {
                 ...state,
                 groupDel: action.payload
             };
         },
-        groupMemberList(state, action) {
+        _groupMemberList(state, action) {
             return {
                 ...state,
                 groupMemberList: action.payload

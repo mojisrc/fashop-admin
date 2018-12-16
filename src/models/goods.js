@@ -15,7 +15,7 @@ export default {
         * list({ payload, callback }, { call, put }) {
             const response = yield call(goods.list, payload);
             yield put({
-                type: "list",
+                type: "_list",
                 payload: response
             });
             if (callback) callback(response);
@@ -23,7 +23,7 @@ export default {
         * info({ payload, callback }, { call, put }) {
             const response = yield call(goods.info, payload);
             yield put({
-                type: "info",
+                type: "_info",
                 payload: response
             });
             if (callback) callback(response);
@@ -31,7 +31,7 @@ export default {
         * offSale({ payload, callback }, { call, put }) {
             const response = yield call(goods.offSale, payload);
             yield put({
-                type: "offSale",
+                type: "_offSale",
                 payload: response
             });
             if (callback) callback(response);
@@ -39,7 +39,7 @@ export default {
         * onSale({ payload, callback }, { call, put }) {
             const response = yield call(goods.onSale, payload);
             yield put({
-                type: "onSale",
+                type: "_onSale",
                 payload: response
             });
             if (callback) callback(response);
@@ -47,7 +47,7 @@ export default {
         * batchDownshelf({ payload, callback }, { call, put }) {
             const response = yield call(goods.batchDownshelf, payload);
             yield put({
-                type: "batchDownshelf",
+                type: "_batchDownshelf",
                 payload: response
             });
             if (callback) callback(response);
@@ -55,7 +55,7 @@ export default {
         * batchUpshelf({ payload, callback }, { call, put }) {
             const response = yield call(goods.batchUpshelf, payload);
             yield put({
-                type: "batchUpshelf",
+                type: "_batchUpshelf",
                 payload: response
             });
             if (callback) callback(response);
@@ -63,37 +63,37 @@ export default {
 
     },
     reducers: {
-        list(state, action) {
+        _list(state, action) {
             return {
                 ...state,
                 list: action.payload
             };
         },
-        info(state, action) {
+        _info(state, action) {
             return {
                 ...state,
                 info: action.payload
             };
         },
-        onSale(state, action) {
+        _onSale(state, action) {
             return {
                 ...state,
                 onSale: action.payload
             };
         },
-        offSale(state, action) {
+        _offSale(state, action) {
             return {
                 ...state,
                 offSale: action.payload
             };
         },
-        batchDownshelf(state, action) {
+        _batchDownshelf(state, action) {
             return {
                 ...state,
                 batchDownshelf: action.payload
             };
         },
-        batchUpshelf(state, action) {
+        _batchUpshelf(state, action) {
             return {
                 ...state,
                 batchUpshelf: action.payload

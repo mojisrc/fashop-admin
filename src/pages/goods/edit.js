@@ -134,7 +134,7 @@ export default class Add extends Component {
                 })
                 if (e.code === 0) {
                     message.success('修改成功')
-                    this.props.history.goBack()
+                    router.goBack()
                 } else {
                     message.warn(e.msg)
                 }

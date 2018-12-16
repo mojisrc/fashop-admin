@@ -13,7 +13,7 @@ export default {
         * list({ payload, callback }, { call, put }) {
             const response = yield call(page.list, payload);
             yield put({
-                type: "list",
+                type: "_list",
                 payload: response
             });
             if (callback) callback(response);
@@ -21,7 +21,7 @@ export default {
         * info({ payload, callback }, { call, put }) {
             const response = yield call(page.info, payload);
             yield put({
-                type: "info",
+                type: "_info",
                 payload: response
             });
             if (callback) callback(response);
@@ -29,7 +29,7 @@ export default {
         * setPagePortal({ payload, callback }, { call, put }) {
             const response = yield call(page.setPagePortal, payload);
             yield put({
-                type: "setPagePortal",
+                type: "_setPagePortal",
                 payload: response
             });
             if (callback) callback(response);
@@ -37,7 +37,7 @@ export default {
         * add({ payload, callback }, { call, put }) {
             const response = yield call(page.add, payload);
             yield put({
-                type: "add",
+                type: "_add",
                 payload: response
             });
             if (callback) callback(response);
@@ -45,38 +45,38 @@ export default {
         * edit({ payload, callback }, { call, put }) {
             const response = yield call(page.edit, payload);
             yield put({
-                type: "edit",
+                type: "_edit",
                 payload: response
             });
             if (callback) callback(response);
         }
     },
     reducers: {
-        list(state, action) {
+        _list(state, action) {
             return {
                 ...state,
                 list: action.payload
             };
         },
-        info(state, action) {
+        _info(state, action) {
             return {
                 ...state,
                 info: action.payload
             };
         },
-        setPagePortal(state, action) {
+        _setPagePortal(state, action) {
             return {
                 ...state,
                 setPagePortal: action.payload
             };
         },
-        add(state, action) {
+        _add(state, action) {
             return {
                 ...state,
                 add: action.payload
             };
         },
-        edit(state, action) {
+        _edit(state, action) {
             return {
                 ...state,
                 edit: action.payload

@@ -6,7 +6,7 @@ import styles from '@/styles/shop/shopSetting.css'
 import ShopBasicInfo from './basicInfo'
 const TabPane = Tabs.TabPane;
 @connect()
-export default class Setting extends Component{
+class Setting extends Component{
     render() {
         const tabsList = [
             {
@@ -32,12 +32,4 @@ export default class Setting extends Component{
         )
     }
 }
-//
-// const mapStateToProps = ({ view }) => {
-//     return {
-//         options: view.shop.options,
-//         body: view.shop.body,
-//     }
-// }
-//
-// export default connect(mapStateToProps, { setDiyData })(Setting)
+export default Setting

@@ -14,7 +14,7 @@ const { TextArea } = Input;
 const { Fragment } = React;
 
 @connect(({ evaluate, loading }) => ({
-    evaluateList: evaluate.result,
+    evaluateList: evaluate.list.result,
     evaluateListLoading: loading.effects["evaluate/list"]
 }))
 export default class EvaluateListTable extends Component {
@@ -26,7 +26,8 @@ export default class EvaluateListTable extends Component {
             keywords: null,
             create_time: [],
             type: "all"
-        }
+        },
+        get:{}
     };
     PhotoGallery;
 

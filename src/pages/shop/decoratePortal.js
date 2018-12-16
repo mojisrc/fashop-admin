@@ -4,12 +4,10 @@ import Page from '@/components/public/page'
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import ShopIndexBot from '@/components/shop/index';
 import { connect } from 'dva';
-@connect(
-    ({ view: { shop: { shopInfo } } }) => ({
-        shopInfo
-    }),
-    dispatch => bindActionCreators(actions, dispatch),
-)
+@connect(({ shop, loading }) => ({
+    shopInfo: shop.info.result,
+    shopInfoLoading: loading.effects["shop/info"]
+}))
 export default class DecoratePortal extends Component {
     componentDidMount() {
         this.props.info()

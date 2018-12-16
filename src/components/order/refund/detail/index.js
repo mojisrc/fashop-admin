@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import { connect } from 'dva';
 import { View } from "react-web-dom";
-import BasicInfo from "./basicInfo";
-import DetailInfo from "./detailInfo";
-import GoodsInfo from "./goodsInfo";
-import OperateInfo from "./operateInfo";
-import TrackingInfo from "./trackingInfo";
+import BasicInfo from "./info/basicInfo";
+import DetailInfo from "./info/detailInfo";
+import GoodsInfo from "./info/goodsInfo";
+import OperateInfo from "./info/operateInfo";
+import Tracking from "./info/trackingInfo";
 import { publicFunction } from "@/utils/index";
 import { info } from "@/models/refund"
 import { Spin } from "antd";
@@ -129,7 +129,7 @@ export default class RefundDetail extends Component {
                     user_explain={user_explain}
                     user_images={user_images}
                 />
-                {tracking_time > 0 ? <TrackingInfo
+                {tracking_time > 0 ? <Tracking
                     id={id}
                     tracking_no={tracking_no}
                     tracking_phone={tracking_phone}

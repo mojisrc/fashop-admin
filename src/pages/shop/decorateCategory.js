@@ -5,14 +5,10 @@ import styles from '@/styles/shop/shopSort.css'
 import Page from '@/components/public/page'
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { connect } from "dva";
-import { bindActionCreators } from "redux";
-import * as actions from "../../actions/shop";
-@connect(
-    ({ view: { shop: { shopInfo } } }) => ({
-        shopInfo
-    }),
-    dispatch => bindActionCreators(actions, dispatch),
-)
+@connect(({ shop, loading }) => ({
+    shopInfo: shop.info.result,
+    shopInfoLoading: loading.effects["shop/info"]
+}))
 export default class DecorateCategory extends Component {
     state = {
         availableList : [

@@ -6,6 +6,7 @@ import Query from "@/utils/query";
 import moment from "moment";
 import update from "immutability-helper";
 import { getQueryPath } from "@/utils/index";
+import router from "umi/router";
 
 const InputGroup = Input.Group;
 const Option = Select.Option;

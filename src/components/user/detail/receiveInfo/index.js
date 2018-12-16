@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import { connect } from "dva";
 import { View } from "react-web-dom";
-import { Card, Pagination } from 'antd';
-import styles from './index.css'
-import InfoRow from '../../../public/info/infoRow'
-import { UserApi } from "@/services/user";
+import { Card, Pagination } from "antd";
+import styles from "./index.css";
+import InfoRow from "../../../public/info/infoRow";
+import UserApi from "@/services/user";
 //
 // type Props = {
 //     user_id: number,
@@ -30,26 +30,26 @@ export default class ReceiveInfo extends Component {
         page: 1,
         rows: 10,
         total_number: 0
-    }
+    };
 
     async componentWillMount() {
-        await this.getAddressList()
+        await this.getAddressList();
     }
 
     async getAddressList() {
-        const { user_id } = this.props
-        const response = await Fetch.fetch({ api: UserApi.address, params: { id: user_id } })
+        const { user_id } = this.props;
+        const response = await UserApi.address({ id: user_id });
         if (response.code === 0) {
-            const { list, total_number } = response.result
+            const { list, total_number } = response.result;
             this.setState({
                 list,
                 total_number
-            })
+            });
         }
     }
 
     render() {
-        const { list, page, rows, total_number } = this.state
+        const { list, page, rows, total_number } = this.state;
         return (
             <View className={styles.cardWarp}>
                 {
@@ -61,7 +61,7 @@ export default class ReceiveInfo extends Component {
                             extra={
                                 <span>
                                     {
-                                        item.is_default ? '默认地址' : ''
+                                        item.is_default ? "默认地址" : ""
                                     }
                                 </span>
                             }
@@ -69,17 +69,17 @@ export default class ReceiveInfo extends Component {
                             <InfoRow
                                 infoList={[
                                     {
-                                        title: '联系人',
-                                        info: item.truename,
+                                        title: "联系人",
+                                        info: item.truename
                                     }, {
-                                        title: '联系电话',
-                                        info: item.mobile_phone,
+                                        title: "联系电话",
+                                        info: item.mobile_phone
                                     }, {
-                                        title: '所在地区',
-                                        info: item.combine_detail,
+                                        title: "所在地区",
+                                        info: item.combine_detail
                                     }, {
-                                        title: '详细地址',
-                                        info: item.address,
+                                        title: "详细地址",
+                                        info: item.address
                                     }
                                 ]}
                             />
@@ -96,16 +96,16 @@ export default class ReceiveInfo extends Component {
                         this.setState({
                             page
                         }, () => {
-                            this.getAddressList()
-                        })
+                            this.getAddressList();
+                        });
                     }}
                 /> : <View className={styles.addressEmpty}>
                     <img
-                        src={require('@/assets/images/fetchStatus/emptySearch.png')}
+                        src={require("@/assets/images/fetchStatus/emptySearch.png")}
                     />
                     <p>该用户还没有添加收货地址</p>
                 </View>}
             </View>
-        )
+        );
     }
 }

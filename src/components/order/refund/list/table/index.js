@@ -2,92 +2,89 @@ import React, { Component } from "react";
 import { Table } from "antd";
 import styles from "./index.css";
 import { View } from "react-web-dom";
-import moment from 'moment'
+import moment from "moment";
 import Query from "@/utils/query";
 import { list } from "@/models/refund";
-
+import router from "umi/router";
 import { connect } from "dva";
 
-@connect(({
-              view: {
-                  order: {
-                      orderRefundList,
-                      orderRefundListLoading
-                  }
-              }
-          }) => ({
-    orderRefundList,
-    orderRefundListLoading,
+@connect(({ refund, loading }) => ({
+    refundList: refund.list.result,
+    refundListLoading: loading.effects["refund/list"]
 }))
 export default class RefundTable extends Component {
     state = {
         selectedRowKeys: [],
         queryParams: {
-            keywords_type: 'goods_name',
+            keywords_type: "goods_name",
             keywords: null,
             create_time: [],
-            refund_type: 'all',
-            refund_state: 'all',
-            order_type: 'all',
+            refund_type: "all",
+            refund_state: "all",
+            order_type: "all"
         }
-    }
+    };
     static defaultProps = {
 
-        orderRefundListLoading: false,
-        orderRefundList: [],
-    }
+        refundListLoading: false,
+        refundList: {}
+    };
 
     componentDidMount() {
-        const { dispatch } = this.props
-        const params = Query.make([
-            { key: 'refund_type', rule: ['eq', 'all'] },
-            { key: 'refund_state', rule: ['eq', 'all'] },
-            { key: 'order_type', rule: ['eq', 'all'] },
-            { key: 'keywords_type', rule: ['rely', 'keywords'] },
-        ])
-        if (params['create_time'] !== undefined) {
-            params['create_time'] = [moment(params['create_time'][0]).unix(), moment(params['create_time'][1]).unix()]
-        }
-        dispatch(list({ params }))
+        this.initList();
     }
 
-    onSelectChange = (selectedRowKeys) => {
-        this.setState({ selectedRowKeys });
+    initList() {
+        const { dispatch } = this.props;
+        const get = Query.make([
+            { key: "refund_type", rule: ["eq", "all"] },
+            { key: "refund_state", rule: ["eq", "all"] },
+            { key: "order_type", rule: ["eq", "all"] },
+            { key: "keywords_type", rule: ["rely", "keywords"] }
+        ]);
+        if (get["create_time"] !== undefined) {
+            get["create_time"] = [moment(get["create_time"][0]).unix(), moment(get["create_time"][1]).unix()];
+        }
+        dispatch({
+            type: "order/list",
+            payload: {
+                page: get.page,
+                rows: get.rows
+            }
+        });
+        this.setState({
+            get
+        });
     }
 
     returnRefundState(state) {
         switch (state) {
             case 0:
-                return <span style={{ color: 'red' }}>未处理</span>
+                return <span style={{ color: "red" }}>未处理</span>;
             case 10:
-                return '已拒绝退款'
+                return "已拒绝退款";
             case 20:
-                return '已同意退款'
+                return "已同意退款";
             case 30:
-                return '已完成'
+                return "已完成";
             case 50:
-                return '用户主动撤销'
+                return "用户主动撤销";
             case 51:
-                return '用户主动收货'
+                return "用户主动收货";
             default:
-                return '-'
+                return "-";
 
         }
     }
 
     render() {
-        const { orderRefundList, orderRefundListLoading } = this.props;
-        const { page, rows, total_number, list } = orderRefundList
-        // const { selectedRowKeys } = this.state;
-        // const rowSelection = {
-        //     selectedRowKeys,
-        //     onChange: this.onSelectChange,
-        // };
+        const { refundList, refundListLoading } = this.props;
+
         const columns = [
             {
                 title: "退款编号",
                 dataIndex: "refund_sn",
-                key: "refund_sn",
+                key: "refund_sn"
             }, {
                 title: "退款方式",
                 dataIndex: "refund_type",
@@ -95,11 +92,11 @@ export default class RefundTable extends Component {
                 render: (text) => {
                     switch (text) {
                         case 1:
-                            return '仅退款'
+                            return "仅退款";
                         case 2:
-                            return '退货退款'
+                            return "退货退款";
                         default:
-                            return '-'
+                            return "-";
 
                     }
                 }
@@ -107,25 +104,26 @@ export default class RefundTable extends Component {
                 title: "退款状态",
                 dataIndex: "handle_state",
                 key: "handle_state",
-                render: (text,record) => {
+                render: (text, record) => {
                     return <div>
-                        {record.tracking_time > 0 && record.receive === 1 ? <span><span style={{color:'red'}}>待签收</span>，</span> : ''}
-                        {record.tracking_time > 0 && record.receive === 2 ? '已经签收，' : ''}
+                        {record.tracking_time > 0 && record.receive === 1 ?
+                            <span><span style={{ color: "red" }}>待签收</span>，</span> : ""}
+                        {record.tracking_time > 0 && record.receive === 2 ? "已经签收，" : ""}
                         {this.returnRefundState(text)}
-                    </div>
+                    </div>;
                 }
             }, {
                 title: "申请时间",
                 dataIndex: "create_time",
                 key: "create_time",
-                render: text => moment(text, 'X').format('YYYY-MM-DD HH:mm:ss')
+                render: text => moment(text, "X").format("YYYY-MM-DD HH:mm:ss")
             }, {
                 title: "订单号",
                 dataIndex: "order_sn",
-                render: (text,record) =>
+                render: (text, record) =>
                     <a
                         onClick={() => {
-                            router.push(`/order/list/detail?id=${record.order_id}`)
+                            router.push(`/order/list/detail?id=${record.order_id}`);
                         }}
                     >
                         {text}
@@ -138,29 +136,29 @@ export default class RefundTable extends Component {
             }, {
                 title: "收货人",
                 dataIndex: "reciver_name",
-                key: "reciver_name",
+                key: "reciver_name"
             }, {
                 title: "退款原因",
                 dataIndex: "user_reason",
-                key: "user_reason",
+                key: "user_reason"
             }, {
-                title: '操作',
-                key: 'operation',
+                title: "操作",
+                key: "operation",
                 className: styles.column,
                 render: (record) => <View className={styles.operation}>
                     <a
                         onClick={() => {
                             router.push({
                                 pathname: `/order/refund/edit`,
-                                search: `?id=${record.id}&order_id=${record.order_id}`,
-                            })
+                                search: `?id=${record.id}&order_id=${record.order_id}`
+                            });
                         }}
                     >
                         详情
                     </a>
                 </View>
             }
-        ]
+        ];
         return (
             <View>
                 {/*<View className={styles.batchView}>*/}
@@ -171,23 +169,23 @@ export default class RefundTable extends Component {
                 {/*</Button>*/}
                 {/*</View>*/}
                 <Table
-                    loading={orderRefundListLoading}
-                    dataSource={list}
+                    loading={refundListLoading}
+                    dataSource={refundList.list}
                     columns={columns}
                     rowKey={record => record.id}
                     pagination={{
-                        showQuickJumper: false,
                         showSizeChanger: false,
-                        pageSize: rows,
-                        current: page,
-                        total: total_number
+                        showQuickJumper: false,
+                        current: this.get.page,
+                        pageSize: this.get.rows,
+                        total: refundList.total_number
                     }}
-                    // rowSelection={rowSelection}
                     onChange={({ current, pageSize }) => {
-                        router.push(Query.page(current, pageSize))
+                        router.push(Query.page(current, pageSize));
+                        this.initList();
                     }}
                 />
             </View>
-        )
+        );
     }
 }

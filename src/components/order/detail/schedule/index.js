@@ -1,9 +1,5 @@
 import React, { Component } from "react";
-import {
-    Card,
-    Steps,
-    Popover
-} from "antd";
+import { Card, Steps, Popover } from "antd";
 import styles from "./index.css";
 import { View } from "react-web-dom";
 const Step = Steps.Step;
@@ -16,7 +12,7 @@ export default class OrderDetailSchedule extends Component {
         const setpList = [
             {
                 title:'已付款',
-                description:'2017-12-25 14:27:01',
+                description:'0000-0000-0000 00:00:00',
             },{
                 title:'待发货',
                 description:'',

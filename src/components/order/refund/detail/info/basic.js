@@ -1,11 +1,13 @@
 import React, { Component } from "react";
-import styles from "./index.css";
+import styles from "../index.css";
 import { View } from "react-web-dom";
-import InfoRow from "../../../public/info/infoRow";
+import InfoRow from "@/components/public/info/infoRow";
 import moment from 'moment'
+import router from "umi/router";
+
 export default class OrderDetailBasicInfo extends Component {
     render() {
-        const { refund_sn, refund_type, handle_state, handle_message, create_time, order_id, order_sn, history } = this.props
+        const { refund_sn, refund_type, handle_state, handle_message, create_time, order_id, order_sn } = this.props
         return (
             <View className={styles.infoWarp}>
                 <p className={styles.infoTitle}>基本信息</p>

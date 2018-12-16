@@ -13,7 +13,7 @@ export default {
         * list({ payload, callback }, { call, put }) {
             const response = yield call(refund.list, payload);
             yield put({
-                type: "list",
+                type: "_list",
                 payload: response
             });
             if (callback) callback(response);
@@ -21,7 +21,7 @@ export default {
         * info({ payload, callback }, { call, put }) {
             const response = yield call(refund.info, payload);
             yield put({
-                type: "info",
+                type: "_info",
                 payload: response
             });
             if (callback) callback(response);
@@ -29,7 +29,7 @@ export default {
         * handle({ payload, callback }, { call, put }) {
             const response = yield call(refund.handle, payload);
             yield put({
-                type: "handle",
+                type: "_handle",
                 payload: response
             });
             if (callback) callback(response);
@@ -37,32 +37,32 @@ export default {
         * receive({ payload, callback }, { call, put }) {
             const response = yield call(refund.receive, payload);
             yield put({
-                type: "receive",
+                type: "_receive",
                 payload: response
             });
             if (callback) callback(response);
         }
     },
     reducers: {
-        list(state, action) {
+        _list(state, action) {
             return {
                 ...state,
                 list: action.payload
             };
         },
-        info(state, action) {
+        _info(state, action) {
             return {
                 ...state,
                 info: action.payload
             };
         },
-        handle(state, action) {
+        _handle(state, action) {
             return {
                 ...state,
                 handle: action.payload
             };
         },
-        receive(state, action) {
+        _receive(state, action) {
             return {
                 ...state,
                 receive: action.payload

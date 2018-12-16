@@ -1,36 +1,38 @@
 import React, { Component } from "react";
 import { Button, Input, InputNumber } from "antd";
-import styles from "./index.css";
+import styles from "../index.css";
 import { View } from "react-web-dom";
 import { handle } from "@/models/refund";
-
 import { connect } from "dva";
-const TextArea = Input.TextArea
-const { Fragment } = React
+
+const TextArea = Input.TextArea;
+const { Fragment } = React;
 
 @connect()
 export default class OrderDetailOperateInfo extends Component {
     static defaultProps = {
         dispatch: () => {
         }
-    }
+    };
+
     componentWillReceiveProps(nextProps) {
-        if(nextProps.id!==this.state.id){
+        if (nextProps.id !== this.state.id) {
             this.setState({
                 handle_message: nextProps.handle_message
-            })
-        }
-    }
-    constructor(props) {
-        super()
-        this.state = {
-            handle_message: props.handle_message
+            });
         }
     }
 
+    constructor(props) {
+        super();
+        this.state = {
+            handle_message: props.handle_message
+        };
+    }
+
     render() {
-        const { id, refund_amount, handle_state, dispatch } = this.props
-        const { handle_message } = this.state
+        const { id, refund_amount, handle_state, dispatch } = this.props;
+        const { handle_message } = this.state;
         return (
             <Fragment>
                 <View className={styles.infoWarp}>
@@ -53,11 +55,11 @@ export default class OrderDetailOperateInfo extends Component {
                         placeholder="请输入备注"
                         autosize={{ minRows: 4, maxRows: 8 }}
                         value={handle_message}
-                        disabled={handle_state!==0}
+                        disabled={handle_state !== 0}
                         onChange={(e) => {
                             this.setState({
                                 handle_message: e.currentTarget.value
-                            })
+                            });
                         }}
                     />
                     </View>
@@ -69,15 +71,33 @@ export default class OrderDetailOperateInfo extends Component {
                         <Button
                             type='primary'
                             onClick={() => {
-                                dispatch(handle({ params: { id, handle_state: 20, handle_message } }))
+                                dispatch({
+                                    type: "refund/handle",
+                                    payload: { id, handle_state: 20, handle_message },
+                                    callback: () => {
+                                        dispatch({
+                                            type: "refund/detail",
+                                            payload: { id }
+                                        });
+                                    }
+                                });
                             }}
                         >
                             同意申请
                         </Button>
 
-                       <Button
+                        <Button
                             onClick={() => {
-                                dispatch(handle({ params: { id, handle_state: 10, handle_message } }))
+                                dispatch({
+                                    type: "refund/handle",
+                                    payload: { id, handle_state: 10, handle_message },
+                                    callback: () => {
+                                        dispatch({
+                                            type: "refund/detail",
+                                            payload: { id }
+                                        });
+                                    }
+                                });
                             }}
                         >
                             拒绝退款

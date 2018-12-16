@@ -9,14 +9,14 @@ export default {
         * info({ payload, callback }, { call, put }) {
             const response = yield call(payment.info, payload);
             yield put({
-                type: "info",
+                type: "_info",
                 payload: response
             });
             if (callback) callback(response);
         }
     },
     reducers: {
-        info(state, action) {
+        _info(state, action) {
             return {
                 ...state,
                 info: action.payload

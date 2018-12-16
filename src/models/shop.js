@@ -14,7 +14,7 @@ export default {
         * info({ payload, callback }, { call, put }) {
             const response = yield call(shop.info, payload);
             yield put({
-                type: "info",
+                type: "_info",
                 payload: response
             });
             if (callback) callback(response);
@@ -22,7 +22,7 @@ export default {
         * setOrderExpires({ payload, callback }, { call, put }) {
             const response = yield call(shop.setOrderExpires, payload);
             yield put({
-                type: "setOrderExpires",
+                type: "_setOrderExpires",
                 payload: response
             });
             if (callback) callback(response);
@@ -30,7 +30,7 @@ export default {
         * setBaseInfo({ payload, callback }, { call, put }) {
             const response = yield call(shop.setBaseInfo, payload);
             yield put({
-                type: "setBaseInfo",
+                type: "_setBaseInfo",
                 payload: response
             });
             if (callback) callback(response);
@@ -38,7 +38,7 @@ export default {
         * setGoodsCategoryStyle({ payload, callback }, { call, put }) {
             const response = yield call(shop.setGoodsCategoryStyle, payload);
             yield put({
-                type: "setGoodsCategoryStyle",
+                type: "_setGoodsCategoryStyle",
                 payload: response
             });
             if (callback) callback(response);
@@ -46,7 +46,7 @@ export default {
         * setColorScheme({ payload, callback }, { call, put }) {
             const response = yield call(shop.setColorScheme, payload);
             yield put({
-                type: "setColorScheme",
+                type: "_setColorScheme",
                 payload: response
             });
             if (callback) callback(response);
@@ -54,44 +54,44 @@ export default {
         * setPortalTemplate({ payload, callback }, { call, put }) {
             const response = yield call(shop.setPortalTemplate, payload);
             yield put({
-                type: "setPortalTemplate",
+                type: "_setPortalTemplate",
                 payload: response
             });
             if (callback) callback(response);
         }
     },
     reducers: {
-        info(state, action) {
+        _info(state, action) {
             return {
                 ...state,
                 info: action.payload
             };
         },
-        setOrderExpires(state, action) {
+        _setOrderExpires(state, action) {
             return {
                 ...state,
                 setOrderExpires: action.payload
             };
         },
-        setBaseInfo(state, action) {
+        _setBaseInfo(state, action) {
             return {
                 ...state,
                 setBaseInfo: action.payload
             };
         },
-        setGoodsCategoryStyle(state, action) {
+        _setGoodsCategoryStyle(state, action) {
             return {
                 ...state,
                 setGoodsCategoryStyle: action.payload
             };
         },
-        setColorScheme(state, action) {
+        _setColorScheme(state, action) {
             return {
                 ...state,
                 setColorScheme: action.payload
             };
         },
-        setPortalTemplate(state, action) {
+        _setPortalTemplate(state, action) {
             return {
                 ...state,
                 setPortalTemplate: action.payload

@@ -10,7 +10,7 @@ export default {
         * list({ payload, callback }, { call, put }) {
             const response = yield call(area.list, payload);
             yield put({
-                type: "list",
+                type: "_list",
                 payload: response
             });
             if (callback) callback(response);
@@ -18,7 +18,7 @@ export default {
         * info({ payload, callback }, { call, put }) {
             const response = yield call(area.list, payload);
             yield put({
-                type: "info",
+                type: "_info",
                 payload: response
             });
             if (callback) callback(response);
@@ -26,13 +26,13 @@ export default {
     },
 
     reducers: {
-        list(state, action) {
+        _list(state, action) {
             return {
                 ...state,
                 list: action.payload
             };
         },
-        info(state, action) {
+        _info(state, action) {
             return {
                 ...state,
                 info: action.payload

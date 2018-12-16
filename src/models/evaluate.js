@@ -12,7 +12,7 @@ export default {
         * list({ payload, callback }, { call, put }) {
             const response = yield call(evaluate.list, payload);
             yield put({
-                type: "list",
+                type: "_list",
                 payload: response
             });
             if (callback) callback(response);
@@ -20,7 +20,7 @@ export default {
         * reply({ payload, callback }, { call, put }) {
             const response = yield call(evaluate.reply, payload);
             yield put({
-                type: "reply",
+                type: "_reply",
                 payload: response
             });
             if (callback) callback(response);
@@ -28,26 +28,26 @@ export default {
         * display({ payload, callback }, { call, put }) {
             const response = yield call(evaluate.display, payload);
             yield put({
-                type: "display",
+                type: "_display",
                 payload: response
             });
             if (callback) callback(response);
         }
     },
     reducers: {
-        list(state, action) {
+        _list(state, action) {
             return {
                 ...state,
                 list: action.payload
             };
         },
-        reply(state, action) {
+        _reply(state, action) {
             return {
                 ...state,
                 reply: action.payload
             };
         },
-        display(state, action) {
+        _display(state, action) {
             return {
                 ...state,
                 display: action.payload

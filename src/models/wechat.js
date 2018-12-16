@@ -59,7 +59,7 @@ export default {
         * getConf({ payload, callback }, { call, put }) {
             const response = yield call(wechat.getConf, payload);
             yield put({
-                type: "getConf",
+                type: "_getConf",
                 payload: response
             });
             if (callback) callback(response);
@@ -67,7 +67,7 @@ export default {
         * checkApiStatus({ payload, callback }, { call, put }) {
             const response = yield call(wechat.checkApiStatus, payload);
             yield put({
-                type: "checkApiStatus",
+                type: "_checkApiStatus",
                 payload: response
             });
             if (callback) callback(response);
@@ -75,7 +75,7 @@ export default {
         * confSet({ payload, callback }, { call, put }) {
             const response = yield call(wechat.confSet, payload);
             yield put({
-                type: "confSet",
+                type: "_confSet",
                 payload: response
             });
             if (callback) callback(response);
@@ -83,7 +83,7 @@ export default {
         * menuList({ payload, callback }, { call, put }) {
             const response = yield call(wechat.confSet, payload);
             yield put({
-                type: "confSet",
+                type: "_confSet",
                 payload: response
             });
             if (callback) callback(response);
@@ -91,7 +91,7 @@ export default {
         * menuCurrent({ payload, callback }, { call, put }) {
             const response = yield call(wechat.menuCurrent, payload);
             yield put({
-                type: "menuCurrent",
+                type: "_menuCurrent",
                 payload: response
             });
             if (callback) callback(response);
@@ -99,7 +99,7 @@ export default {
         * menuCreate({ payload, callback }, { call, put }) {
             const response = yield call(wechat.menuCreate, payload);
             yield put({
-                type: "menuCreate",
+                type: "_menuCreate",
                 payload: response
             });
             if (callback) callback(response);
@@ -107,7 +107,7 @@ export default {
         * menuDelete({ payload, callback }, { call, put }) {
             const response = yield call(wechat.menuDelete, payload);
             yield put({
-                type: "menuDelete",
+                type: "_menuDelete",
                 payload: response
             });
             if (callback) callback(response);
@@ -115,7 +115,7 @@ export default {
         * autoReplyStatusSet({ payload, callback }, { call, put }) {
             const response = yield call(wechat.autoReplyStatusSet, payload);
             yield put({
-                type: "autoReplyStatusSet",
+                type: "_autoReplyStatusSet",
                 payload: response
             });
             if (callback) callback(response);
@@ -123,7 +123,7 @@ export default {
         * autoReplyStatusGet({ payload, callback }, { call, put }) {
             const response = yield call(wechat.autoReplyStatusGet, payload);
             yield put({
-                type: "autoReplyStatusGet",
+                type: "_autoReplyStatusGet",
                 payload: response
             });
             if (callback) callback(response);
@@ -131,7 +131,7 @@ export default {
         * autoReplySubscribeGet({ payload, callback }, { call, put }) {
             const response = yield call(wechat.autoReplySubscribeGet, payload);
             yield put({
-                type: "autoReplySubscribeGet",
+                type: "_autoReplySubscribeGet",
                 payload: response
             });
             if (callback) callback(response);
@@ -139,7 +139,7 @@ export default {
         * autoReplySubscribeSet({ payload, callback }, { call, put }) {
             const response = yield call(wechat.autoReplySubscribeSet, payload);
             yield put({
-                type: "autoReplySubscribeSet",
+                type: "_autoReplySubscribeSet",
                 payload: response
             });
             if (callback) callback(response);
@@ -147,7 +147,7 @@ export default {
         * replyKeywordsList({ payload, callback }, { call, put }) {
             const response = yield call(wechat.replyKeywordsList, payload);
             yield put({
-                type: "replyKeywordsList",
+                type: "_replyKeywordsList",
                 payload: response
             });
             if (callback) callback(response);
@@ -155,7 +155,7 @@ export default {
         * autoReplyKeywordsAdd({ payload, callback }, { call, put }) {
             const response = yield call(wechat.autoReplyKeywordsAdd, payload);
             yield put({
-                type: "autoReplyKeywordsAdd",
+                type: "_autoReplyKeywordsAdd",
                 payload: response
             });
             if (callback) callback(response);
@@ -163,7 +163,7 @@ export default {
         * autoReplyKeywordsEdit({ payload, callback }, { call, put }) {
             const response = yield call(wechat.autoReplyKeywordsEdit, payload);
             yield put({
-                type: "autoReplyKeywordsEdit",
+                type: "_autoReplyKeywordsEdit",
                 payload: response
             });
             if (callback) callback(response);
@@ -171,7 +171,7 @@ export default {
         * autoReplyKeywordsDel({ payload, callback }, { call, put }) {
             const response = yield call(wechat.autoReplyKeywordsDel, payload);
             yield put({
-                type: "autoReplyKeywordsDel",
+                type: "_autoReplyKeywordsDel",
                 payload: response
             });
             if (callback) callback(response);
@@ -179,7 +179,7 @@ export default {
         * autoReplyKeywordsInfo({ payload, callback }, { call, put }) {
             const response = yield call(wechat.autoReplyKeywordsInfo, payload);
             yield put({
-                type: "autoReplyKeywordsInfo",
+                type: "_autoReplyKeywordsInfo",
                 payload: response
             });
             if (callback) callback(response);
@@ -187,7 +187,7 @@ export default {
         * userList({ payload, callback }, { call, put }) {
             const response = yield call(wechat.userList, payload);
             yield put({
-                type: "userList",
+                type: "_userList",
                 payload: response
             });
             if (callback) callback(response);
@@ -195,7 +195,7 @@ export default {
         * userBlackList({ payload, callback }, { call, put }) {
             const response = yield call(wechat.userBlackList, payload);
             yield put({
-                type: "userBlackList",
+                type: "_userBlackList",
                 payload: response
             });
             if (callback) callback(response);
@@ -203,7 +203,7 @@ export default {
         * userSelect({ payload, callback }, { call, put }) {
             const response = yield call(wechat.userSelect, payload);
             yield put({
-                type: "userSelect",
+                type: "_userSelect",
                 payload: response
             });
             if (callback) callback(response);
@@ -211,7 +211,7 @@ export default {
         * userBlock({ payload, callback }, { call, put }) {
             const response = yield call(wechat.userBlock, payload);
             yield put({
-                type: "userBlock",
+                type: "_userBlock",
                 payload: response
             });
             if (callback) callback(response);
@@ -219,7 +219,7 @@ export default {
         * userUnblock({ payload, callback }, { call, put }) {
             const response = yield call(wechat.userUnblock, payload);
             yield put({
-                type: "userUnblock",
+                type: "_userUnblock",
                 payload: response
             });
             if (callback) callback(response);
@@ -227,7 +227,7 @@ export default {
         * userRemark({ payload, callback }, { call, put }) {
             const response = yield call(wechat.userRemark, payload);
             yield put({
-                type: "userRemark",
+                type: "_userRemark",
                 payload: response
             });
             if (callback) callback(response);
@@ -235,7 +235,7 @@ export default {
         * userTagList({ payload, callback }, { call, put }) {
             const response = yield call(wechat.userTagList, payload);
             yield put({
-                type: "userTagList",
+                type: "_userTagList",
                 payload: response
             });
             if (callback) callback(response);
@@ -243,7 +243,7 @@ export default {
         * getToken({ payload, callback }, { call, put }) {
             const response = yield call(wechat.getToken, payload);
             yield put({
-                type: "getToken",
+                type: "_getToken",
                 payload: response
             });
             if (callback) callback(response);
@@ -251,7 +251,7 @@ export default {
         * userTagCreate({ payload, callback }, { call, put }) {
             const response = yield call(wechat.userTagCreate, payload);
             yield put({
-                type: "userTagCreate",
+                type: "_userTagCreate",
                 payload: response
             });
             if (callback) callback(response);
@@ -259,7 +259,7 @@ export default {
         * userTagUpdate({ payload, callback }, { call, put }) {
             const response = yield call(wechat.userTagUpdate, payload);
             yield put({
-                type: "userTagUpdate",
+                type: "_userTagUpdate",
                 payload: response
             });
             if (callback) callback(response);
@@ -267,7 +267,7 @@ export default {
         * userTagDelete({ payload, callback }, { call, put }) {
             const response = yield call(wechat.userTagDelete, payload);
             yield put({
-                type: "userTagDelete",
+                type: "_userTagDelete",
                 payload: response
             });
             if (callback) callback(response);
@@ -275,7 +275,7 @@ export default {
         * userTagsByOpenid({ payload, callback }, { call, put }) {
             const response = yield call(wechat.userTagsByOpenid, payload);
             yield put({
-                type: "userTagsByOpenid",
+                type: "_userTagsByOpenid",
                 payload: response
             });
             if (callback) callback(response);
@@ -283,7 +283,7 @@ export default {
         * userTagUsersOfTag({ payload, callback }, { call, put }) {
             const response = yield call(wechat.userTagUsersOfTag, payload);
             yield put({
-                type: "userTagUsersOfTag",
+                type: "_userTagUsersOfTag",
                 payload: response
             });
             if (callback) callback(response);
@@ -291,7 +291,7 @@ export default {
         * userTagTagUsers({ payload, callback }, { call, put }) {
             const response = yield call(wechat.userTagTagUsers, payload);
             yield put({
-                type: "userTagTagUsers",
+                type: "_userTagTagUsers",
                 payload: response
             });
             if (callback) callback(response);
@@ -299,7 +299,7 @@ export default {
         * userTagUntagUsers({ payload, callback }, { call, put }) {
             const response = yield call(wechat.userTagUntagUsers, payload);
             yield put({
-                type: "userTagUntagUsers",
+                type: "_userTagUntagUsers",
                 payload: response
             });
             if (callback) callback(response);
@@ -307,7 +307,7 @@ export default {
         * broadcastRecords({ payload, callback }, { call, put }) {
             const response = yield call(wechat.broadcastRecords, payload);
             yield put({
-                type: "broadcastRecords",
+                type: "_broadcastRecords",
                 payload: response
             });
             if (callback) callback(response);
@@ -315,7 +315,7 @@ export default {
         * broadcastUserSearch({ payload, callback }, { call, put }) {
             const response = yield call(wechat.broadcastUserSearch, payload);
             yield put({
-                type: "broadcastUserSearch",
+                type: "_broadcastUserSearch",
                 payload: response
             });
             if (callback) callback(response);
@@ -323,7 +323,7 @@ export default {
         * broadcastCreate({ payload, callback }, { call, put }) {
             const response = yield call(wechat.broadcastCreate, payload);
             yield put({
-                type: "broadcastCreate",
+                type: "_broadcastCreate",
                 payload: response
             });
             if (callback) callback(response);
@@ -331,7 +331,7 @@ export default {
         * broadcastSurplus({ payload, callback }, { call, put }) {
             const response = yield call(wechat.broadcastSurplus, payload);
             yield put({
-                type: "broadcastSurplus",
+                type: "_broadcastSurplus",
                 payload: response
             });
             if (callback) callback(response);
@@ -339,7 +339,7 @@ export default {
         * broadcastRecordsDel({ payload, callback }, { call, put }) {
             const response = yield call(wechat.broadcastRecordsDel, payload);
             yield put({
-                type: "broadcastRecordsDel",
+                type: "_broadcastRecordsDel",
                 payload: response
             });
             if (callback) callback(response);
@@ -347,7 +347,7 @@ export default {
         * wechatMaterialList({ payload, callback }, { call, put }) {
             const response = yield call(wechat.wechatMaterialList, payload);
             yield put({
-                type: "list",
+                type: "_list",
                 payload: response
             });
             if (callback) callback(response);
@@ -355,7 +355,7 @@ export default {
         * materialUploadThumb({ payload, callback }, { call, put }) {
             const response = yield call(wechat.materialUploadThumb, payload);
             yield put({
-                type: "materialUploadThumb",
+                type: "_materialUploadThumb",
                 payload: response
             });
             if (callback) callback(response);
@@ -363,7 +363,7 @@ export default {
         * materialUploadArticle({ payload, callback }, { call, put }) {
             const response = yield call(wechat.materialUploadArticle, payload);
             yield put({
-                type: "materialUploadArticle",
+                type: "_materialUploadArticle",
                 payload: response
             });
             if (callback) callback(response);
@@ -371,7 +371,7 @@ export default {
         * materialUpdateArticle({ payload, callback }, { call, put }) {
             const response = yield call(wechat.materialUpdateArticle, payload);
             yield put({
-                type: "materialUpdateArticle",
+                type: "_materialUpdateArticle",
                 payload: response
             });
             if (callback) callback(response);
@@ -379,7 +379,7 @@ export default {
         * materialGet({ payload, callback }, { call, put }) {
             const response = yield call(wechat.materialGet, payload);
             yield put({
-                type: "materialGet",
+                type: "_materialGet",
                 payload: response
             });
             if (callback) callback(response);
@@ -387,7 +387,7 @@ export default {
         * materialUploadArticleImage({ payload, callback }, { call, put }) {
             const response = yield call(wechat.materialUploadArticleImage, payload);
             yield put({
-                type: "materialUploadArticleImage",
+                type: "_materialUploadArticleImage",
                 payload: response
             });
             if (callback) callback(response);
@@ -395,7 +395,7 @@ export default {
         * materialUploadImage({ payload, callback }, { call, put }) {
             const response = yield call(wechat.materialUploadImage, payload);
             yield put({
-                type: "materialUploadImage",
+                type: "_materialUploadImage",
                 payload: response
             });
             if (callback) callback(response);
@@ -403,7 +403,7 @@ export default {
         * materialUploadVoice({ payload, callback }, { call, put }) {
             const response = yield call(wechat.materialUploadVoice, payload);
             yield put({
-                type: "materialUploadVoice",
+                type: "_materialUploadVoice",
                 payload: response
             });
             if (callback) callback(response);
@@ -411,7 +411,7 @@ export default {
         * materialUploadVideo({ payload, callback }, { call, put }) {
             const response = yield call(wechat.materialUploadVideo, payload);
             yield put({
-                type: "materialUploadVideo",
+                type: "_materialUploadVideo",
                 payload: response
             });
             if (callback) callback(response);
@@ -419,7 +419,7 @@ export default {
         * localNews({ payload, callback }, { call, put }) {
             const response = yield call(wechat.localNews, payload);
             yield put({
-                type: "localNews",
+                type: "_localNews",
                 payload: response
             });
             if (callback) callback(response);
@@ -427,7 +427,7 @@ export default {
         * localNewsInfo({ payload, callback }, { call, put }) {
             const response = yield call(wechat.localNewsInfo, payload);
             yield put({
-                type: "localNewsInfo",
+                type: "_localNewsInfo",
                 payload: response
             });
             if (callback) callback(response);
@@ -435,7 +435,7 @@ export default {
         * localNewsAdd({ payload, callback }, { call, put }) {
             const response = yield call(wechat.localNewsAdd, payload);
             yield put({
-                type: "localNewsAdd",
+                type: "_localNewsAdd",
                 payload: response
             });
             if (callback) callback(response);
@@ -443,7 +443,7 @@ export default {
         * localNewsEdit({ payload, callback }, { call, put }) {
             const response = yield call(wechat.localNewsEdit, payload);
             yield put({
-                type: "localNewsEdit",
+                type: "_localNewsEdit",
                 payload: response
             });
             if (callback) callback(response);
@@ -451,7 +451,7 @@ export default {
         * localNewsDel({ payload, callback }, { call, put }) {
             const response = yield call(wechat.localNewsDel, payload);
             yield put({
-                type: "localNewsDel",
+                type: "_localNewsDel",
                 payload: response
             });
             if (callback) callback(response);
@@ -459,314 +459,314 @@ export default {
         * materialDelete({ payload, callback }, { call, put }) {
             const response = yield call(wechat.materialDelete, payload);
             yield put({
-                type: "materialDelete",
+                type: "_materialDelete",
                 payload: response
             });
             if (callback) callback(response);
         }
     },
     reducers: {
-        getConf(state, action) {
+        _getConf(state, action) {
             return {
                 ...state,
                 edit: action.payload
             };
         },
-        checkApiStatus(state, action) {
+        _checkApiStatus(state, action) {
             return {
                 ...state,
                 getConf: action.payload
             };
         },
-        confSet(state, action) {
+        _confSet(state, action) {
             return {
                 ...state,
                 confSet: action.payload
             };
         },
-        menuList(state, action) {
+        _menuList(state, action) {
             return {
                 ...state,
                 menuList: action.payload
             };
         },
-        menuCurrent(state, action) {
+        _menuCurrent(state, action) {
             return {
                 ...state,
                 menuCurrent: action.payload
             };
         },
-        menuCreate(state, action) {
+        _menuCreate(state, action) {
             return {
                 ...state,
                 menuCreate: action.payload
             };
         },
-        menuDelete(state, action) {
+        _menuDelete(state, action) {
             return {
                 ...state,
                 menuDelete: action.payload
             };
         },
-        autoReplyStatusSet(state, action) {
+        _autoReplyStatusSet(state, action) {
             return {
                 ...state,
                 autoReplyStatusSet: action.payload
             };
         },
-        autoReplyStatusGet(state, action) {
+        _autoReplyStatusGet(state, action) {
             return {
                 ...state,
                 autoReplyStatusGet: action.payload
             };
         },
-        autoReplySubscribeGet(state, action) {
+        _autoReplySubscribeGet(state, action) {
             return {
                 ...state,
                 autoReplySubscribeGet: action.payload
             };
         },
-        autoReplySubscribeSet(state, action) {
+        _autoReplySubscribeSet(state, action) {
             return {
                 ...state,
                 autoReplySubscribeSet: action.payload
             };
         },
-        replyKeywordsList(state, action) {
+        _replyKeywordsList(state, action) {
             return {
                 ...state,
                 replyKeywordsList: action.payload
             };
         },
-        autoReplyKeywordsAdd(state, action) {
+        _autoReplyKeywordsAdd(state, action) {
             return {
                 ...state,
                 autoReplyKeywordsAdd: action.payload
             };
         },
-        autoReplyKeywordsEdit(state, action) {
+        _autoReplyKeywordsEdit(state, action) {
             return {
                 ...state,
                 autoReplyKeywordsEdit: action.payload
             };
         },
-        autoReplyKeywordsDel(state, action) {
+        _autoReplyKeywordsDel(state, action) {
             return {
                 ...state,
                 autoReplyKeywordsDel: action.payload
             };
         },
-        autoReplyKeywordsInfo(state, action) {
+        _autoReplyKeywordsInfo(state, action) {
             return {
                 ...state,
                 autoReplyKeywordsInfo: action.payload
             };
         },
-        userList(state, action) {
+        _userList(state, action) {
             return {
                 ...state,
                 userList: action.payload
             };
         },
-        userBlackList(state, action) {
+        _userBlackList(state, action) {
             return {
                 ...state,
                 userBlackList: action.payload
             };
         },
-        userSelect(state, action) {
+        _userSelect(state, action) {
             return {
                 ...state,
                 userSelect: action.payload
             };
         },
-        userBlock(state, action) {
+        _userBlock(state, action) {
             return {
                 ...state,
                 userBlock: action.payload
             };
         },
-        userUnblock(state, action) {
+        _userUnblock(state, action) {
             return {
                 ...state,
                 userUnblock: action.payload
             };
         },
-        userRemark(state, action) {
+        _userRemark(state, action) {
             return {
                 ...state,
                 userRemark: action.payload
             };
         },
-        userTagList(state, action) {
+        _userTagList(state, action) {
             return {
                 ...state,
                 userTagList: action.payload
             };
         },
-        getToken(state, action) {
+        _getToken(state, action) {
             return {
                 ...state,
                 getToken: action.payload
             };
         },
-        userTagCreate(state, action) {
+        _userTagCreate(state, action) {
             return {
                 ...state,
                 userTagCreate: action.payload
             };
         },
-        userTagUpdate(state, action) {
+        _userTagUpdate(state, action) {
             return {
                 ...state,
                 userTagUpdate: action.payload
             };
         },
-        userTagDelete(state, action) {
+        _userTagDelete(state, action) {
             return {
                 ...state,
                 userTagDelete: action.payload
             };
         },
-        userTagsByOpenid(state, action) {
+        _userTagsByOpenid(state, action) {
             return {
                 ...state,
                 userTagsByOpenid: action.payload
             };
         },
-        userTagUsersOfTag(state, action) {
+        _userTagUsersOfTag(state, action) {
             return {
                 ...state,
                 userTagUsersOfTag: action.payload
             };
         },
-        userTagTagUsers(state, action) {
+        _userTagTagUsers(state, action) {
             return {
                 ...state,
                 userTagTagUsers: action.payload
             };
         },
-        userTagUntagUsers(state, action) {
+        _userTagUntagUsers(state, action) {
             return {
                 ...state,
                 userTagUntagUsers: action.payload
             };
         },
-        broadcastRecords(state, action) {
+        _broadcastRecords(state, action) {
             return {
                 ...state,
                 broadcastRecords: action.payload
             };
         },
-        broadcastUserSearch(state, action) {
+        _broadcastUserSearch(state, action) {
             return {
                 ...state,
                 broadcastUserSearch: action.payload
             };
         },
-        broadcastCreate(state, action) {
+        _broadcastCreate(state, action) {
             return {
                 ...state,
                 broadcastCreate: action.payload
             };
         },
-        broadcastSurplus(state, action) {
+        _broadcastSurplus(state, action) {
             return {
                 ...state,
                 broadcastSurplus: action.payload
             };
         },
-        broadcastRecordsDel(state, action) {
+        _broadcastRecordsDel(state, action) {
             return {
                 ...state,
                 broadcastRecordsDel: action.payload
             };
         },
-        wechatMaterialList(state, action) {
+        _wechatMaterialList(state, action) {
             return {
                 ...state,
                 wechatMaterialList: action.payload
             };
         },
-        materialUploadThumb(state, action) {
+        _materialUploadThumb(state, action) {
             return {
                 ...state,
                 materialUploadThumb: action.payload
             };
         },
-        materialUploadArticle(state, action) {
+        _materialUploadArticle(state, action) {
             return {
                 ...state,
                 materialUploadArticle: action.payload
             };
         },
-        materialUpdateArticle(state, action) {
+        _materialUpdateArticle(state, action) {
             return {
                 ...state,
                 materialUpdateArticle: action.payload
             };
         },
-        materialGet(state, action) {
+        _materialGet(state, action) {
             return {
                 ...state,
                 materialGet: action.payload
             };
         },
-        materialUploadArticleImage(state, action) {
+        _materialUploadArticleImage(state, action) {
             return {
                 ...state,
                 materialUploadArticleImage: action.payload
             };
         },
-        materialUploadImage(state, action) {
+        _materialUploadImage(state, action) {
             return {
                 ...state,
                 materialUploadImage: action.payload
             };
         },
-        materialUploadVoice(state, action) {
+        _materialUploadVoice(state, action) {
             return {
                 ...state,
                 materialUploadVoice: action.payload
             };
         },
-        materialUploadVideo(state, action) {
+        _materialUploadVideo(state, action) {
             return {
                 ...state,
                 materialUploadVideo: action.payload
             };
         },
-        localNews(state, action) {
+        _localNews(state, action) {
             return {
                 ...state,
                 localNews: action.payload
             };
         },
-        localNewsInfo(state, action) {
+        _localNewsInfo(state, action) {
             return {
                 ...state,
                 localNewsInfo: action.payload
             };
         },
-        localNewsAdd(state, action) {
+        _localNewsAdd(state, action) {
             return {
                 ...state,
                 localNewsAdd: action.payload
             };
         },
-        localNewsEdit(state, action) {
+        _localNewsEdit(state, action) {
             return {
                 ...state,
                 localNewsEdit: action.payload
             };
         },
-        localNewsDel(state, action) {
+        _localNewsDel(state, action) {
             return {
                 ...state,
                 localNewsDel: action.payload
             };
         },
-        materialDelete(state, action) {
+        _materialDelete(state, action) {
             return {
                 ...state,
                 materialDelete: action.payload

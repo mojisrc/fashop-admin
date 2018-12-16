@@ -11,7 +11,7 @@ import {
 
 const FormItem = Form.Item;
 const Option = Select.Option;
-
+// TODO
 
 @connect(({view:{goodsCategory:{
     list,
@@ -138,7 +138,7 @@ export default class CategoryAdd extends Component  {
                     </Button>
                     <Button
                         onClick={()=>{
-                            this.props.history.goBack()
+                            router.goBack()
                         }}
                     >
                         返回

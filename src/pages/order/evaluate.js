@@ -1,22 +1,23 @@
 import React, { Component } from "react";
-import { connect } from 'dva';
-import Page from '@/components/public/page'
+import { connect } from "dva";
+import Page from "@/components/public/page";
 import Loadable from "react-loadable";
 import { Spin } from "antd";
 import { getRoutes } from "@/utils";
 import { Route, Switch } from "react-router-dom";
+
 const EvaluateListHeader = Loadable({
-    loader: () => import('@/components/order/evaluate/list/header'),
+    loader: () => import("@/components/order/evaluate/list/header"),
     loading: () => {
         return <Spin size="large" className="global-spin" />;
-    },
-})
+    }
+});
 const EvaluateListTable = Loadable({
-    loader: () => import('@/components/order/evaluate/list/table'),
+    loader: () => import("@/components/order/evaluate/list/table"),
     loading: () => {
         return <Spin size="large" className="global-spin" />;
-    },
-})
+    }
+});
 @connect()
 export default class Evaluate extends Component {
     render() {
@@ -25,7 +26,7 @@ export default class Evaluate extends Component {
         return (
             <Switch>
                 {routes.map((item) => {
-                    return <Route key={item.key} path={item.path} component={item.component} exact={item.exact} />
+                    return <Route key={item.key} path={item.path} component={item.component} exact={item.exact} />;
                 })}
                 <Route key="/evaluate" render={() => (
                     <Page>
@@ -34,6 +35,6 @@ export default class Evaluate extends Component {
                     </Page>
                 )} />
             </Switch>
-        )
+        );
     }
 }

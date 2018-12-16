@@ -1,73 +1,46 @@
 import React, { Component } from "react";
-import {
-    Table,
-    Button,
-    Popconfirm,
-} from "antd";
+import {Table,Button, Popconfirm,} from "antd";
 import styles from "./index.css";
 import { View } from "react-web-dom";
 import { connect } from "dva";
-import {
-    getGoodsCategoryList,
-    delCategory,
-} from "@/actions/goods/category";
-import CategorySort from "../../sort/index";
-import Image from "@/components/image/index";
+import CategorySort from "@/components/category/sort";
+import Image from "@/components/image";
+import tree from "smart-arraytotree"
 
-
-const getExpandedRowKeys = (e) => {
-    const _array = []
-    const getListKey = (list) => {
-        list.map((a) => {
-            _array.push(a.id)
-            if (a.children && a.children.length) {
-                getListKey(a.children)
-            }
-        })
-    }
-    getListKey(e)
-    return _array
-}
-
-@connect(({
-              view: {
-                  goods: {
-                      loading,
-                      categoryTree,
-                  }
-              }
-          }) => ({
-    loading,
-    categoryTree,
+@connect(({ goodsCategory, loading }) => ({
+    goodsCategory: goodsCategory.list.result.list,
+    goodsCategoryLoading: loading.effects["goodsCategory/list"]
 }))
 export default class GoodsCategoryTable extends Component {
     static defaultProps = {
-        loading: false,
+        goodsCategoryLoading: false,
+        goodsCategory:[]
 
     }
     state = {
         expandedRowKeys: []
     }
-
     componentDidMount() {
-        const { dispatch } = this.props
-        dispatch(getGoodsCategoryList())
+        this.initList();
+    }
+    initList() {
+        const { dispatch } = this.props;
+        dispatch({
+            type: "goodsCategory/list",
+        });
     }
 
     componentWillReceiveProps(nextProps) {
-        if (nextProps.categoryTree !== this.props.categoryTree) {
+        if (nextProps.goodsCategory !== this.props.goodsCategory) {
             this.setState({
-                expandedRowKeys: getExpandedRowKeys(nextProps.categoryTree)
+                expandedRowKeys: Array.isArray(goodsCategory) ? goodsCategory.map((item) => item.id) : []
             })
         }
     }
 
     render() {
-        const {
-            loading,
-            categoryTree,
-            dispatch,
-        } = this.props
+        const {goodsCategoryLoading, goodsCategory,dispatch,} = this.props
+        const categoryTree = tree(goodsCategory.list)
         const { expandedRowKeys } = this.state
         const columns = [
             {
@@ -122,8 +95,15 @@ export default class GoodsCategoryTable extends Component {
                         okText="确认"
                         cancelText="取消"
                         onConfirm={() => {
-                            dispatch(delCategory({ params: { id: record.id } }))
-
+                            dispatch({
+                                type: "goodsCategory/del",
+                                payload: {
+                                    id: record.id
+                                },
+                                callback: () => {
+                                    this.initList();
+                                }
+                            });
                         }}
                     >
                         <a>删除</a>
@@ -145,7 +125,7 @@ export default class GoodsCategoryTable extends Component {
                     <Button
                         onClick={() => {
                             this.setState({
-                                expandedRowKeys: getExpandedRowKeys(categoryTree)
+                                expandedRowKeys: Array.isArray(goodsCategory) ? goodsCategory.map((item) => item.id) : []
                             })
                         }}
                     >
@@ -168,7 +148,7 @@ export default class GoodsCategoryTable extends Component {
                     columns={columns}
                     rowKey={record => record.id}
                     pagination={false}
-                    loading={loading}
+                    goodsCategoryLoading={goodsCategoryLoading}
                     expandedRowKeys={expandedRowKeys}
                     onExpand={(bool, row) => {
                         if (bool) {

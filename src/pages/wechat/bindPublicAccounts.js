@@ -29,7 +29,7 @@ export default class BindOfficialAccounts extends Component {
                 editConfig({
                     params:values
                 })
-                this.props.history.goBack()
+                router.goBack()
             }
         });
     }
@@ -256,7 +256,7 @@ export default class BindOfficialAccounts extends Component {
                         </Button>
                         <Button
                             onClick={()=>{
-                                this.props.history.goBack()
+                                router.goBack()
                             }}
                         >
                             返回

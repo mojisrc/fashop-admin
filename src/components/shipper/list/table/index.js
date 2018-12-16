@@ -7,7 +7,7 @@ import Query from "@/utils/query";
 import router from "umi/router";
 
 @connect(({ shopper, loading }) => ({
-    shopperList: shopper.result,
+    shopperList: shopper.list.result,
     shopperListLoading: loading.effects["shopper/list"]
 }))
 export default class ShipperListTable extends Component {

@@ -6,61 +6,63 @@ import Query from "@/utils/query";
 import moment from "moment";
 import update from "immutability-helper";
 import { getQueryPath } from "@/utils/index";
-const { Fragment } = React
+import router from "umi/router";
+
+const { Fragment } = React;
 const InputGroup = Input.Group;
 const { RangePicker } = DatePicker;
 const Option = Select.Option;
-export default class RefundHeader extends Component  {
+export default class RefundHeader extends Component {
     state = {
         queryParams: {
-            keywords_type: 'goods_name',
+            keywords_type: "goods_name",
             keywords: null,
             create_time: [],
-            refund_type: 'all',
-            refund_state: 'all',
-            order_type: 'all',
+            refund_type: "all",
+            refund_state: "all",
+            order_type: "all"
         }
-    }
+    };
 
     componentDidMount() {
-        const params = Query.getQuery()
+        const params = Query.getQuery();
         this.setState({
             queryParams: {
-                keywords_type: params['keywords_type'] !== undefined ? params['keywords_type'] : 'goods_name',
-                keywords: params['keywords'] !== undefined ? params['keywords'] : null,
-                create_time: params['create_time'] !== undefined ? params['create_time'] : [],
-                refund_type: params['refund_type'] !== undefined ? params['refund_type'] : 'all',
-                refund_state: params['refund_state'] !== undefined ? params['refund_state'] : 'all',
-                order_type: params['order_type'] !== undefined ? params['order_type'] : 'all',
+                keywords_type: params["keywords_type"] !== undefined ? params["keywords_type"] : "goods_name",
+                keywords: params["keywords"] !== undefined ? params["keywords"] : null,
+                create_time: params["create_time"] !== undefined ? params["create_time"] : [],
+                refund_type: params["refund_type"] !== undefined ? params["refund_type"] : "all",
+                refund_state: params["refund_state"] !== undefined ? params["refund_state"] : "all",
+                order_type: params["order_type"] !== undefined ? params["order_type"] : "all"
             }
-        })
+        });
     }
 
     render() {
-        const { queryParams } = this.state
-        const { keywords_type, keywords, create_time, refund_type, refund_state, order_type } = queryParams
-        let create_time_moment = []
+        const { queryParams } = this.state;
+        const { keywords_type, keywords, create_time, refund_type, refund_state, order_type } = queryParams;
+        let create_time_moment = [];
         if (create_time.length > 0) {
-            create_time_moment = [moment(create_time[0]), moment(create_time[1])]
+            create_time_moment = [moment(create_time[0]), moment(create_time[1])];
         }
         return (
             <Fragment>
                 <Row
                     gutter={16}
                     style={{
-                        paddingBottom: '24px',
+                        paddingBottom: "24px"
                     }}
                 >
                     <Col span={6}>
                         <InputGroup compact>
                             <Select
-                                style={{ minWidth: '36%' }}
+                                style={{ minWidth: "36%" }}
                                 placeholder="搜索条件"
                                 value={keywords_type}
                                 onChange={(keywords_type) => {
                                     this.setState(update(this.state, {
                                         queryParams: { keywords_type: { $set: keywords_type } }
-                                    }))
+                                    }));
                                 }}
                             >
                                 <Option value="all">全部</Option>
@@ -71,14 +73,14 @@ export default class RefundHeader extends Component  {
                                 <Option value="courier_number">联系方式</Option>
                             </Select>
                             <Input
-                                placeholder={`请输入${keywords ? this.returnSearchValue(keywords_type) : ''}`}
+                                placeholder={`请输入${keywords ? this.returnSearchValue(keywords_type) : ""}`}
                                 value={keywords}
                                 onChange={(e) => {
                                     this.setState(update(this.state, {
                                         queryParams: { keywords: { $set: e.target.value } }
-                                    }))
+                                    }));
                                 }}
-                                style={{ width: '56%' }}
+                                style={{ width: "56%" }}
                             />
                         </InputGroup>
                     </Col>
@@ -92,7 +94,7 @@ export default class RefundHeader extends Component  {
                                 onChange={(refund_type) => {
                                     this.setState(update(this.state, {
                                         queryParams: { refund_type: { $set: refund_type } }
-                                    }))
+                                    }));
                                 }}
                             >
                                 <Option value="all">全部</Option>
@@ -111,7 +113,7 @@ export default class RefundHeader extends Component  {
                                 onChange={(refund_state) => {
                                     this.setState(update(this.state, {
                                         queryParams: { refund_state: { $set: refund_state } }
-                                    }))
+                                    }));
                                 }}
                             >
                                 <Option value="all">全部</Option>
@@ -128,9 +130,9 @@ export default class RefundHeader extends Component  {
                 <Row
                     gutter={16}
                     style={{
-                        paddingBottom: '24px',
-                        marginBottom: '24px',
-                        borderBottom: '1px dashed #ededed'
+                        paddingBottom: "24px",
+                        marginBottom: "24px",
+                        borderBottom: "1px dashed #ededed"
                     }}
                 >
                     <Col span={6} className={styles.div1}>
@@ -141,7 +143,7 @@ export default class RefundHeader extends Component  {
                                 onChange={(dates, create_time) => {
                                     this.setState(update(this.state, {
                                         queryParams: { create_time: { $set: create_time } }
-                                    }))
+                                    }));
                                 }}
                                 value={create_time_moment}
                             />
@@ -158,7 +160,7 @@ export default class RefundHeader extends Component  {
                                 onChange={(order_type) => {
                                     this.setState(update(this.state, {
                                         queryParams: { order_type: { $set: order_type } }
-                                    }))
+                                    }));
                                 }}
                             >
                                 <Option value="all">默认</Option>
@@ -170,13 +172,13 @@ export default class RefundHeader extends Component  {
                     <Col span={4}>
                         <View
                             style={{
-                                flexDirection: "row",
+                                flexDirection: "row"
                             }}
                         >
                             <Button
                                 type="primary"
                                 onClick={() => {
-                                    const path = getQueryPath('/order/refund', {
+                                    const path = getQueryPath("/order/refund", {
                                         page: 1,
                                         rows: 10,
                                         keywords_type,
@@ -184,9 +186,9 @@ export default class RefundHeader extends Component  {
                                         create_time,
                                         refund_type,
                                         refund_state,
-                                        order_type,
-                                    })
-                                    router.push(path)
+                                        order_type
+                                    });
+                                    router.push(path);
                                 }}
                                 style={{ marginRight: 10 }}
                             >
@@ -194,8 +196,8 @@ export default class RefundHeader extends Component  {
                             </Button>
                             <Button
                                 onClick={() => {
-                                    const path = getQueryPath('/order/refund')
-                                    router.push(path)
+                                    const path = getQueryPath("/order/refund");
+                                    router.push(path);
                                 }}
                             >
                                 清空筛选
@@ -209,18 +211,18 @@ export default class RefundHeader extends Component  {
 
     returnSearchValue(serachValue) {
         switch (serachValue) {
-            case 'goods_name':
-                return '商品名称'
-            case 'order_no':
-                return '订单号'
-            case 'receiver_name':
-                return '退款编号'
-            case 'receiver_phone':
-                return '收货人'
-            case 'courier_number':
-                return '联系方式'
+            case "goods_name":
+                return "商品名称";
+            case "order_no":
+                return "订单号";
+            case "receiver_name":
+                return "退款编号";
+            case "receiver_phone":
+                return "收货人";
+            case "courier_number":
+                return "联系方式";
             default:
-                return ''
+                return "";
         }
     }
 }

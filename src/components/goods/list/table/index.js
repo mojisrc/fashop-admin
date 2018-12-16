@@ -1,70 +1,65 @@
 import React, { Component } from "react";
-import { Table, Button, Switch, Modal, message } from "antd";
+import { Table, Button, Switch, Modal } from "antd";
 import styles from "./index.css";
 import { View } from "react-web-dom";
 import { connect } from "dva";
-import { getGoodsList } from "@/actions/goods";
+import { initList } from "@/actions/goods";
 import { getGoodsCategoryList } from "@/actions/goods/category";
-import Image from '../../../image/index'
-import moment from 'moment'
+import Image from "../../../image/index";
+import moment from "moment";
 import Query from "@/utils/query";
-
 import GoodsApi from "@/services/goods";
+import router from "umi/router";
 
-@connect(({
-              view: {
-                  goods: {
-                      loading,
-                      listData,
-                      categoryList
-                  }
-              }
-          }) => ({
-    loading,
-    listData,
-    categoryList,
+@connect(({ goods, goodsCategory, loading }) => ({
+    goodList: goods.list.result,
+    goodsListLoading: loading.effects["goods/list"],
+    goodsCategory: goodsCategory.result.list,
+    goodsCategoryLoading: loading.effects["goodsCategory/list"]
 }))
-export default class GoodsListTable extends Component  {
+export default class GoodsListTable extends Component {
     static defaultProps = {
-        loading: false,
-        listData: [],
-    }
+        goodList: { total_number, list },
+        goodsListLoading: false,
+        goodsCategory: [],
+        goodsCategoryLoading: false
+    };
     state = {
         rowSelectionIds: [],
-        delIds: [],
-    }
+        get: {}
+    };
 
     componentDidMount() {
-        this.getGoodsList()
+        this.initList();
     }
-    getGoodsList(){
-        const { dispatch, categoryList, } = this.props
-        const params = Query.make([
-            { key: 'sale_state', rule: ['eq', 'all'] },
-            { key: 'order_type', rule: ['eq', 'all'] },
-        ])
-        dispatch(getGoodsList({ params }))
-        if (!categoryList.length) {
-            dispatch(getGoodsCategoryList())
+
+    initList() {
+        const { dispatch, goodsCategoryList } = this.props;
+        const get = Query.make([
+            { key: "sale_state", rule: ["eq", "all"] },
+            { key: "order_type", rule: ["eq", "all"] }
+        ]);
+        dispatch({
+            type: "goods/list",
+            payload: get
+        });
+        if (!goodsCategoryList.length) {
+            dispatch({
+                type: "goodsCategory/list"
+            });
         }
+        this.setState({
+            get
+        });
     }
 
     render() {
-        const { loading, listData, categoryList, history, } = this.props
-        const { page, rows, total_number, list, } = listData
-        const { delIds } = this.state
-        let goodsList = []
-
-        Array.isArray(list) && list.length > 0 && list.map((goods) => {
-            if (delIds.indexOf(goods.id) === -1) {
-                goodsList.push(goods)
-            }
-        })
+        const { goodsListLoading, goodsList, goodsCategoryList } = this.props;
 
         const columns = [
             {
                 title: "商品图",
-                dataIndex: 'img',
+                dataIndex: "img",
                 width: 50,
                 render: (e) => (
                     <Image
@@ -80,37 +75,37 @@ export default class GoodsListTable extends Component  {
             }, {
                 title: "价格（元）",
                 dataIndex: "price",
-                width: 120,
+                width: 120
             }, {
                 title: "销量",
                 dataIndex: "base_sale_num",
-                width: 80,
+                width: 80
             }, {
                 title: "库存",
                 dataIndex: "stock",
-                width: 80,
+                width: 80
             }, {
                 title: "分类",
                 dataIndex: "category_ids",
                 render: (e) => {
                     const textArray = e ? e.map((a) => {
-                        const index = categoryList.findIndex((c) => c.id === Number(a))
+                        const index = goodsCategoryList.findIndex((c) => c.id === Number(a));
                         if (index !== -1) {
-                            return categoryList[index].name
+                            return goodsCategoryList[index].name;
                         } else {
-                            return null
+                            return null;
                         }
-                    }) : []
-                    const newArray = textArray.filter((e) => e)
-                    return newArray.join('，')
+                    }) : [];
+                    const newArray = textArray.filter((e) => e);
+                    return newArray.join("，");
                 },
-                width: 200,
+                width: 200
 
             }, {
                 title: "创建时间",
                 dataIndex: "create_time",
-                render: e => moment(e * 1000).format('YYYY-MM-DD hh:mm'),
-                width: 200,
+                render: e => moment(e * 1000).format("YYYY-MM-DD hh:mm"),
+                width: 200
             }, {
                 title: "上架状态",
                 dataIndex: "is_on_sale",
@@ -118,27 +113,21 @@ export default class GoodsListTable extends Component  {
                     defaultChecked={!!text}
                     onChange={async (checked) => {
                         if (checked) {
-                            const response = await Fetch.fetch({
-                                api: GoodsApi.onSale,
-                                params: { ids: [record.id] }
-                            })
+                            const response = await GoodsApi.onSale({ ids: [record.id] });
                             if (response.code === 0) {
-                                this.getGoodsList()
+                                this.initList();
                             }
                         } else {
-                            const response = await Fetch.fetch({
-                                api: GoodsApi.offSale,
-                                params: { ids: [record.id] }
-                            })
+                            const response = await GoodsApi.offSale({ ids: [record.id] });
                             if (response.code === 0) {
-                                this.getGoodsList()
+                                this.initList();
                             }
                         }
                     }}
                 />
             }, {
-                title: '操作',
-                key: 'operation',
+                title: "操作",
+                key: "operation",
                 className: styles.column,
                 width: 100,
                 render: (record) => <View className={styles.operation}>
@@ -148,9 +137,9 @@ export default class GoodsListTable extends Component  {
                                 pathname: `/goods/list/edit`,
                                 search: `?id=${record.id}`,
                                 state: {
-                                    record,
+                                    record
                                 }
-                            })
+                            });
                         }}
                     >
                         编辑
@@ -158,60 +147,54 @@ export default class GoodsListTable extends Component  {
                     <a
                         onClick={async () => {
                             Modal.confirm({
-                                title: '确认删除？',
-                                okText: '确认',
-                                okType: 'danger',
-                                cancelText: '取消',
+                                title: "确认删除？",
+                                okText: "确认",
+                                okType: "danger",
+                                cancelText: "取消",
                                 onOk: async () => {
-                                    const response = await Fetch.fetch({
-                                        api: GoodsApi.del,
-                                        params: { ids: [record.id] }
-                                    })
+                                    const response = await GoodsApi.del({ ids: [record.id] });
                                     if (response.code === 0) {
-                                        this.setState({
-                                            delIds: [...delIds, record.id]
-                                        }, () => {
-                                            message.success('已删除', 1)
-                                        })
+                                        this.initList();
                                     }
                                 }
-                            })
+                            });
 
                         }}
                     >删除</a>
                 </View>
             }
-        ]
+        ];
         return (
             <View>
                 <View className={styles.batchView}>
                     <Button
                         type='primary'
                         onClick={() => {
-                            router.push('/goods/list/add')
+                            router.push("/goods/list/add");
                         }}
                     >
                         添加商品
                     </Button>
                 </View>
                 <Table
+                    loading={goodsListLoading}
                     defaultExpandAllRows
-                    dataSource={goodsList}
+                    dataSource={goodsList.list}
                     columns={columns}
                     rowKey={record => record.id}
                     pagination={{
                         showSizeChanger: false,
                         showQuickJumper: false,
-                        pageSize: rows,
-                        total: total_number,
-                        current: page,
+                        current: this.get.page,
+                        pageSize: this.get.rows,
+                        total: goodsList.total_number
                     }}
-                    loading={loading}
                     onChange={({ current, pageSize }) => {
-                        router.push(Query.page(current, pageSize))
+                        router.push(Query.page(current, pageSize));
+                        this.initList();
                     }}
                 />
             </View>
-        )
+        );
     }
 }

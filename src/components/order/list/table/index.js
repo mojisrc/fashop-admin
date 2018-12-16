@@ -13,7 +13,7 @@ import EditPrice from "../editPrice/index";
 import router from "umi/router";
 
 @connect(({ order, loading }) => ({
-    orderList: order.result,
+    orderList: order.list.result,
     orderListLoading: loading.effects["order/list"]
 }))
 class OrderListTable extends Component {
@@ -253,8 +253,8 @@ class OrderListTable extends Component {
                     pagination={{
                         showSizeChanger: false,
                         showQuickJumper: false,
-                        current: get.page,
-                        pageSize: get.rows,
+                        current: this.get.page,
+                        pageSize: this.get.rows,
                         total: orderList.total_number
                     }}
                     onChange={({ current, pageSize }) => {

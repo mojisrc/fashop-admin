@@ -1,88 +1,86 @@
-import React,{ Component } from "react";
+import React, { Component } from "react";
 import { connect } from "dva";
-import { Form, Select, Input, Button, } from 'antd';
+import { Form, Select, Input, Button } from "antd";
 import UploadImage from "@/components/uploadImage";
-import {
-    getGoodsCategoryList,
-    addCategory,
-} from "@/actions/goods/category";
-
+import router from "umi/router";
 
 const FormItem = Form.Item;
 const Option = Select.Option;
-
-@connect(({view:{goods:{
-    categoryList,
-}}})=>({
-    categoryList,
-}))
 @Form.create()
-export default class CategoryAdd extends Component  {
+@connect(({ goodsCategory, loading }) => ({
+    goodsCategory: goodsCategory.result.list,
+    goodsCategoryLoading: loading.effects["goodsCategory/list"]
+}))
+export default class CategoryAdd extends Component {
     componentDidMount() {
-        const {
-            dispatch,
-            categoryList,
-        } = this.props
-        if(!categoryList.length){
-            dispatch(getGoodsCategoryList())
-        }
+        this.initList();
     }
+
+    initList() {
+        const { dispatch } = this.props;
+        dispatch({
+            type: "goodsCategory/list"
+        });
+    }
+
     handleSubmit = (e) => {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
             if (!err) {
-                const {
-                    dispatch
-                } = this.props
-                dispatch(addCategory({
-                    params: values
-                }))
+                const { dispatch } = this.props;
+                dispatch({
+                    type: "goodsCategory/add",
+                    payload: values,
+                    callback: (response) => {
+                        if (response.code === 0) {
+                            router.goBack();
+                        }
+                    }
+                });
             }
-        })
-    }
+        });
+    };
+
     render() {
-        const {
-            form,
-            categoryList,
-        } = this.props
-        const { getFieldDecorator } = form
+        const { form, goodsCategory } = this.props;
+        const { getFieldDecorator } = form;
         const formItemLayout = {
             labelCol: {
                 xs: { span: 24 },
-                sm: { span: 6 },
+                sm: { span: 6 }
             },
             wrapperCol: {
                 xs: { span: 24 },
-                sm: { span: 18 },
-            },
+                sm: { span: 18 }
+            }
         };
         const tailFormItemLayout = {
             wrapperCol: {
                 xs: {
                     span: 24,
-                    offset: 0,
+                    offset: 0
                 },
                 sm: {
                     span: 16,
-                    offset: 6,
-                },
-            },
+                    offset: 6
+                }
+            }
         };
         return (
-            <Form onSubmit={this.handleSubmit} style={{maxWidth: '600px'}}>
+            <Form onSubmit={this.handleSubmit} style={{ maxWidth: "600px" }}>
                 <FormItem
                     label="分类名称"
                     {...formItemLayout}
                 >
-                    {getFieldDecorator('name', {
+                    {getFieldDecorator("name", {
                         rules: [{
                             required: true,
-                            message: '请输入分类名称!'
-                        }],
+                            message: "请输入分类名称!"
+                        }]
                     })(
                         <Input
                             placeholder='请输入分类名称'
-                            style={{ width: '100%' }}
+                            style={{ width: "100%" }}
                         />
                     )}
                 </FormItem>
@@ -91,15 +89,13 @@ export default class CategoryAdd extends Component  {
                     extra='如不选择，则默认为一级分类'
                     {...formItemLayout}
                 >
-                    {getFieldDecorator('pid',{
-
-                    })(
+                    {getFieldDecorator("pid", {})(
                         <Select
                             placeholder="请输入分类名称"
-                            style={{ width: '100%' }}
+                            style={{ width: "100%" }}
                         >
                             {
-                                categoryList.map((e,i)=>(
+                                goodsCategory.map((e, i) => (
                                     <Option value={e.id} key={i}>{e.name}</Option>
                                 ))
                             }
@@ -111,13 +107,13 @@ export default class CategoryAdd extends Component  {
                     extra="分类展示图，建议尺寸：140*140 像素"
                     label="上传分类图"
                 >
-                    {getFieldDecorator('icon', {
+                    {getFieldDecorator("icon", {
                         rules: [{
-                            message: '请上传分类图!',
+                            message: "请上传分类图!"
                         }],
-                        valuePropName: 'url',
+                        valuePropName: "url"
                     })(
-                        <UploadImage/>
+                        <UploadImage />
                     )}
                 </FormItem>
                 <FormItem {...tailFormItemLayout}>
@@ -125,23 +121,23 @@ export default class CategoryAdd extends Component  {
                         type="primary"
                         htmlType="submit"
                         style={{
-                            marginRight:10
+                            marginRight: 10
                         }}
-                        onClick={()=>{
+                        onClick={() => {
 
                         }}
                     >
                         保存
                     </Button>
                     <Button
-                        onClick={()=>{
-                            this.props.history.goBack()
+                        onClick={() => {
+                            router.goBack();
                         }}
                     >
                         返回
                     </Button>
                 </FormItem>
             </Form>
-        )
+        );
     }
 }

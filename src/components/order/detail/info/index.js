@@ -1,19 +1,20 @@
 import React, { Component } from "react";
 
-import BasicInfo from "./basicInfo";
-import AddressInfo from "./addressInfo";
-import DeliverInfo from "./deliverInfo";
-import OtherInfo from "./otherInfo";
-import GoodsInfo from "./goodsInfo";
-import OperateInfo from "./operateInfo";
-import Page from "../../../public/page/index";
+import BasicInfo from "./basic";
+import AddressInfo from "./address";
+import DeliverInfo from "./deliver";
+import OtherInfo from "./other";
+import GoodsInfo from "./goods";
+import OperateInfo from "./operate";
+import Page from "@/components/public/page/index";
+
 export default class OrderDetailInfo extends Component {
     render() {
-        const { orderInfo } = this.props
-        const { info } = orderInfo
-        const { extend_order_extend, create_time, sn, trade_no, state, extend_order_goods, amount, freight_fee, } = info
-        const { reciver_name, reciver_info, message, deliver_name, deliver_phone, deliver_address, tracking_time, tracking_no, remark } = extend_order_extend
-        const { history } = this.props
+        const { orderInfo } = this.props;
+        const { info } = orderInfo;
+        const { extend_order_extend, create_time, sn, trade_no, state, extend_order_goods, amount, freight_fee } = info;
+        const { reciver_name, reciver_info, message, deliver_name, deliver_phone, deliver_address, tracking_time, tracking_no, remark } = extend_order_extend;
+        const { history } = this.props;
         return (
             <Page>
                 <BasicInfo
@@ -25,10 +26,10 @@ export default class OrderDetailInfo extends Component {
                 />
                 <AddressInfo
                     reciver_info={reciver_info ? reciver_info : {
-                        address: '',
-                        name: '',
-                        phone: '',
-                        combine_detail: ''
+                        address: "",
+                        name: "",
+                        phone: "",
+                        combine_detail: ""
                     }}
                 />
                 {state >= 30 ? <DeliverInfo

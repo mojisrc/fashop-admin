@@ -174,7 +174,7 @@ export default class Send extends Component {
                         </Button>
                         <Button
                             onClick={() => {
-                                this.props.history.goBack();
+                                router.goBack();
                             }}
                         >
                             返回
