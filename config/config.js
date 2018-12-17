@@ -68,6 +68,7 @@ export default {
     // https://ant.design/docs/react/customize-theme-cn
     theme: {
         'primary-color': defaultSettings.primaryColor,
+        'layout-header-background':'#000',
         'menu-bg':'#000',
         'menu-dark-bg':'#000',
         'menu-dark-submenu-bg':'#151515'

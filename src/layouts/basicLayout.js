@@ -10,7 +10,7 @@ import pathToRegexp from "path-to-regexp";
 import Media from "react-media";
 import { formatMessage } from "umi/locale";
 import Authorized from "@/utils/authorized";
-import logo from "@/assets/logo.svg";
+import logo from "@/assets/images/logo.png";
 import Footer from "./footer";
 import Header from "./header";
 import Context from "./menuContext";
@@ -131,7 +131,7 @@ class BasicLayout extends React.PureComponent {
         const { fixSiderbar, isMobile, collapsed, layout } = this.props;
         if (fixSiderbar && layout !== "topmenu" && !isMobile) {
             return {
-                paddingLeft: collapsed ? "80px" : "256px"
+                paddingLeft: collapsed ? "80px" : "200px"
             };
         }
         return null;
