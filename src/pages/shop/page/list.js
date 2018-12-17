@@ -16,7 +16,7 @@ export default class DecoratePortal extends Component {
 
     render() {
         return (
-            <PageHeaderWrapper>
+            <PageHeaderWrapper hiddenBreadcrumb={true}>
             <Card bordered={false}>
                 <MyTemplate {...this.props} />
             </Card>

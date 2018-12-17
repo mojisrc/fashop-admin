@@ -10,7 +10,7 @@ import { Card } from "antd";
 class List extends Component {
     render() {
         return (
-            <PageHeaderWrapper>
+            <PageHeaderWrapper hiddenBreadcrumb={true}>
             <Card bordered={false}>
                 <OrderListHeader {...this.props} />
                 <OrderListTable {...this.props} />

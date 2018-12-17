@@ -19,7 +19,7 @@ export class View extends React.Component {
             <div
                 {...this.props}
                 style={this.props.style}
-                className={classNames(styles.View,this.props.className)}
+                className={classNames(this.props.className,styles.view)}
             >
                 {this.props.children}
             </div>

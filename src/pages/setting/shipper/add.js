@@ -36,7 +36,7 @@ export default class Add extends Component {
         const { areaList } = this.state
         const { getFieldDecorator } = this.props.form
         return (
-            <PageHeaderWrapper>
+            <PageHeaderWrapper hiddenBreadcrumb={true}>
             <Card bordered={false}>
                 <Form onSubmit={this.handleSubmit} style={{ width: 1000 }}>
                     <FormItem

@@ -38,6 +38,7 @@ class SearchList extends Component {
         tabList={tabList}
         tabActiveKey={location.pathname.replace(`${match.path}/`, '')}
         onTabChange={this.handleTabChange}
+        hiddenBreadcrumb={true}
       >
         {children}
       </PageHeaderWrapper>

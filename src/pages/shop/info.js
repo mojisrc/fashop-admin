@@ -64,7 +64,7 @@ export default class Info extends Component {
             }
         };
         return (
-            <PageHeaderWrapper>
+            <PageHeaderWrapper hiddenBreadcrumb={true}>
             <Card bordered={false}>
                 {/* <h3>店铺信息</h3> */}
                 <Form onSubmit={this.handleSubmit} style={{ maxWidth: "600px" }}>

@@ -5,7 +5,7 @@ import { Card } from "antd";
 export default class Deliver extends Component {
     render() {
         return (
-            <PageHeaderWrapper>
+            <PageHeaderWrapper hiddenBreadcrumb={true}>
             <Card bordered={false}>
                 <FreightListTable {...this.props} />
             </Card>

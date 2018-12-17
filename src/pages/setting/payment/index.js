@@ -11,7 +11,7 @@ export default class Index extends Component {
 
     render() {
         return (
-            <PageHeaderWrapper>
+            <PageHeaderWrapper hiddenBreadcrumb={true}>
                 <Card bordered={false}>
                     <WechatPay
                         action={UploadApi.addCert.url}

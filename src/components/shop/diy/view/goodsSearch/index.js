@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { View } from "react-web-dom";
 import { Input } from 'antd';
 import styles from "./index.css";
 
@@ -17,12 +16,12 @@ export default class Index extends Component {
     render() {
         const { background_color } = this.props.options
         return (
-            <View className={styles.goodsSearchPhoneWarp}
+            <div className={styles.goodsSearchPhoneWarp}
                   style={{ backgroundColor: background_color }}>
                 <Search
                     placeholder="商品搜索：请输入商品关键词"
                 />
-            </View>
+            </div>
         )
     }
 }

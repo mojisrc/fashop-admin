@@ -162,7 +162,7 @@ export default class Edit extends Component {
         let { id, options, body, baseInfoVisible, name, description, background_color } = this.state;
         return (
             <Spin size="large" className="globalSpin" spinning={goodsListLoading}>
-                <PageHeaderWrapper>
+                <PageHeaderWrapper hiddenBreadcrumb={true}>
                     <Card bordered={false}>
                         <View className={styles.shopPageEditMain}>
                             <View className={styles.shopPageEditToolMain}>

@@ -154,7 +154,7 @@ export default class Add extends Component {
             },
         };
         return (
-            <PageHeaderWrapper>
+            <PageHeaderWrapper hiddenBreadcrumb={true}>
             <Card bordered={false}>
                 <Form onSubmit={this.handleSubmit} style={{ width: 1000 }}>
                     <Basic

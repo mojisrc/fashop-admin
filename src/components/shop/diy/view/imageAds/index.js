@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Carousel } from "antd";
 import styles from "./index.css";
-import { View } from "react-web-dom";
 import Image from "@/components/image/index";
 //
 // type Props = {
@@ -27,25 +26,25 @@ export default class Index extends Component {
         const { layout_style } = options
         let _ads = data
         return (
-            <View className={styles.imageAdsPhoneWarp}>
+            <div className={styles.imageAdsPhoneWarp}>
                 {
                     layout_style === 1 ?
                         <Carousel autoplay={_ads.length > 1}>
                             {
                                 _ads.map((item, index) => {
-                                    return <View key={index} className={styles.carouselItem}>
+                                    return <div key={index} className={styles.carouselItem}>
                                         <Image src={item.img.url} />
-                                    </View>
+                                    </div>
                                 })
                             }
                         </Carousel> :
                         _ads.map((item, index) => {
-                            return <View key={index} className={styles.carouselItem}>
+                            return <div key={index} className={styles.carouselItem}>
                                 <Image src={item.img.url} />
-                            </View>
+                            </div>
                         })
                 }
-            </View>
+            </div>
         )
     }
 }

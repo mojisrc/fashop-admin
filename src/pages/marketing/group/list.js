@@ -130,7 +130,7 @@ export default class List extends Component {
             }
         ];
         return (
-            <PageHeaderWrapper>
+            <PageHeaderWrapper hiddenBreadcrumb={true}>
             <Card bordered={false}>
                 <View>
                     <Form

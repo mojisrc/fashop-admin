@@ -233,7 +233,7 @@ export default class Edit extends Component {
         const selectTreeNodesData = this.getSelectTreeNodesData(areaList, checkedAreaKeys)
         const filterOutAreaList = this.filterAreaList(areaList)
         return (
-            <PageHeaderWrapper>
+            <PageHeaderWrapper hiddenBreadcrumb={true}>
             <Card bordered={false}>
                 <Form onSubmit={this.handleSubmit}>
                     <FormItem

@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Icon } from "antd";
 import styles from "./index.css";
-import { View } from "react-web-dom";
 //
 // type Props = {
 //         options: any,
@@ -21,19 +20,19 @@ export default class Index extends Component {
     render() {
         const { data } = this.props
         return (
-            <View className={styles.textNavPhoneWarp}>
+            <div className={styles.textNavPhoneWarp}>
                 {
                     data.map((listItem, index) => {
-                        return <View
+                        return <div
                             className={styles.textNavPhoneItem}
                             key={index}
                         >
                             <p>{listItem.title}</p>
                             <Icon type='right' />
-                        </View>
+                        </div>
                     })
                 }
-            </View>
+            </div>
         )
     }
 }

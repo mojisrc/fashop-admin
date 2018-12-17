@@ -1,5 +1,8 @@
 /* shopWindowPhone */
 .shopWindowPhoneWarp{
+    display: flex;
+    align-items: initial;
+    justify-content: flex-start;
     flex-direction: row;
 }
 .shopWindowPhoneItem{

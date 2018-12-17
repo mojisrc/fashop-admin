@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import styles from "./index.css";
-import { View } from "react-web-dom";
 import Image from "@/components/image/index";
 //
 // type Props = {
@@ -13,7 +12,7 @@ export default class Index extends Component  {
         const { data, options } = this.props
         const { layout_direction } = options
         return (
-            <View className={styles.goodsPhoneWarp}>
+            <div className={styles.goodsPhoneWarp}>
                 {
                     data.map((item, index) => {
                         if (layout_direction === 1) {
@@ -27,7 +26,7 @@ export default class Index extends Component  {
                         }
                     })
                 }
-            </View>
+            </div>
         )
     }
 // : {

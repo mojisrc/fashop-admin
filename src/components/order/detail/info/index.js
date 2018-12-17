@@ -1,12 +1,11 @@
 import React, { Component } from "react";
-
 import BasicInfo from "./basic";
 import AddressInfo from "./address";
 import DeliverInfo from "./deliver";
 import OtherInfo from "./other";
 import GoodsInfo from "./goods";
 import OperateInfo from "./operate";
-import PageHeaderWrapper from '@/components/pageHeaderWrapper';
+import { Card } from "antd";
 
 export default class OrderDetailInfo extends Component {
     render() {

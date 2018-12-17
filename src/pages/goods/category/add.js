@@ -6,7 +6,7 @@ import { Card } from "antd";
 export default class GoodsCategoryAdd extends Component {
     render() {
         return (
-            <PageHeaderWrapper>
+            <PageHeaderWrapper hiddenBreadcrumb={true}>
                 <Card bordered={false}>
                     <CategoryAdd {...this.props} />
                 </Card>

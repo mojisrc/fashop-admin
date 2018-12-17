@@ -47,9 +47,10 @@ export default class PageHeader extends PureComponent {
             active
             paragraph={{ rows: 3 }}
             avatar={{ size: 'large', shape: 'circle' }}
+
           >
-            {hiddenBreadcrumb ? null : <BreadcrumbView {...this.props} />}
-            <div className={styles.detail}>
+            {hiddenBreadcrumb ? null : <BreadcrumbView {...this.props} style={{paddingTop:16}}/>}
+            <div className={styles.detail} >
               {logo && <div className={styles.logo}>{logo}</div>}
               <div className={styles.main}>
                 <div className={styles.row}>

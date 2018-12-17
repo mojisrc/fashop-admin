@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { View } from "react-web-dom";
 import styles from "./index.css";
 //
 // type Props = {
@@ -15,13 +14,13 @@ export default class Index extends Component {
         const { options } = this.props
         const { color, style } = options
         return (
-            <View className={styles.separatorPhoneWarp}>
+            <div className={styles.separatorPhoneWarp}>
                 <p style={{
                     borderBottomStyle: `${style}`,
                     borderBottomColor: `${color}`
                 }}
                 />
-            </View>
+            </div>
         )
     }
 }
