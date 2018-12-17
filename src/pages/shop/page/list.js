@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import { View } from "react-web-dom";
-import Page from "@/components/public/page/index";
+import PageHeaderWrapper from '@/components/pageHeaderWrapper';
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { connect } from "dva";
+import { Card } from "antd";
 import MyTemplate from "@/components/shop/index/myTemplate";
 @connect()
 export default class DecoratePortal extends Component {
@@ -15,9 +16,11 @@ export default class DecoratePortal extends Component {
 
     render() {
         return (
-            <Page>
+            <PageHeaderWrapper>
+            <Card bordered={false}>
                 <MyTemplate {...this.props} />
-            </Page>
+            </Card>
+            </PageHeaderWrapper>
         );
     }
 }

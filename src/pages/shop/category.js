@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import { Row, Col, Button } from "antd";
+import { Row, Col, Button,Card } from "antd";
 import { View } from "react-web-dom";
 import styles from "@/styles/shop/shopSort.css";
-import Page from "@/components/public/page";
+import PageHeaderWrapper from '@/components/pageHeaderWrapper';
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { connect } from "dva";
 
@@ -47,7 +47,8 @@ export default class Category extends Component {
         const { availableList } = this.state;
         const { shopInfo, editGoodsCategoryStyle } = this.props;
         return (
-            <Page>
+            <PageHeaderWrapper>
+            <Card bordered={false}>
                 <Row gutter={16}>
                     <Col span={16}>
                         <View>
@@ -105,7 +106,8 @@ export default class Category extends Component {
                         </View>
                     </Col>
                 </Row>
-            </Page>
+            </Card>
+            </PageHeaderWrapper>
         );
     }
 }

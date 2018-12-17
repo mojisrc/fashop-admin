@@ -10,28 +10,35 @@ import GoodsApi from "@/services/goods";
 import router from "umi/router";
 
 @connect(({ goods, goodsCategory, loading }) => ({
-    goodList: goods.list.result,
+    goodsList: goods.list.result,
     goodsListLoading: loading.effects["goods/list"],
-    goodsCategory: goodsCategory.result.list,
+    goodsCategory: goodsCategory.result,
     goodsCategoryLoading: loading.effects["goodsCategory/list"]
 }))
 export default class GoodsListTable extends Component {
     static defaultProps = {
-        goodList: { total_number, list },
+        goodsList: {
+            total_number: 0,
+            list: []
+        },
         goodsListLoading: true,
-        goodsCategory: [],
+        goodsCategory: {
+            list: []
+        },
         goodsCategoryLoading: true
     };
     state = {
         rowSelectionIds: [],
-        get: { page : 1 , rows :10 }
+        get: { page: 1, rows: 10 }
     };
 
     componentDidMount() {
+        console.log('componentDidMount')
         this.initList();
     }
 
     initList() {
+        console.log('initList')
         const { dispatch, goodsCategory } = this.props;
         const get = Query.make([
             { key: "sale_state", rule: ["eq", "all"] },
@@ -39,9 +46,12 @@ export default class GoodsListTable extends Component {
         ]);
         dispatch({
             type: "goods/list",
-            payload: get
+            payload: get,
+            callback:(res)=>{
+                console.log(res)
+            }
         });
-        if (!goodsCategory.length) {
+        if (!goodsCategory.list.length) {
             dispatch({
                 type: "goodsCategory/list"
             });
@@ -53,7 +63,6 @@ export default class GoodsListTable extends Component {
 
     render() {
         const { goodsListLoading, goodsList, goodsCategory } = this.props;
-
         const columns = [
             {
                 title: "商品图",
@@ -87,9 +96,9 @@ export default class GoodsListTable extends Component {
                 dataIndex: "category_ids",
                 render: (e) => {
                     const textArray = e ? e.map((a) => {
-                        const index = goodsCategory.findIndex((c) => c.id === Number(a));
+                        const index = goodsCategory.list.findIndex((c) => c.id === Number(a));
                         if (index !== -1) {
-                            return goodsCategory[index].name;
+                            return goodsCategory.list[index].name;
                         } else {
                             return null;
                         }

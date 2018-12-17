@@ -1,13 +1,11 @@
 import React, { Component } from "react";
 import { connect } from "dva";
-import Page from "@/components/public/page";
 import { Spin } from "antd";
-import { getRoutes } from "@/utils";
-import { Route, Switch } from "react-router-dom";
 import Loadable from "react-loadable";
 import Query from "@/utils/query";
 import moment from "moment/moment";
 import article from "@/services/article";
+import { Card } from "antd";
 
 const TableList = Loadable({
     loader: () => import("@/components/article/list"),
@@ -50,24 +48,17 @@ export default class List extends Component {
     }
 
     render() {
-        const { match, routerData } = this.props;
         const { articleList } = this.state;
-        const routes = getRoutes(match.path, routerData);
-
         return (
-            <Switch>
-                {routes.map((item) => {
-                    return <Route key={item.key} path={item.path} component={item.component} exact={item.exact} />;
-                })}
-                <Route key="/list" render={() => (
-                    <Page>
-                        <TableList
-                            articleList={articleList}
-                            {...this.props}
-                        />
-                    </Page>
+            <PageHeaderWrapper>
+                <Card bordered={false}>
+                    <TableList
+                        articleList={articleList}
+                        {...this.props}
+                    />
+                </Card>
                 )} />
-            </Switch>
+            </PageHeaderWrapper>
         );
     }
 }

@@ -1,7 +1,7 @@
 import React,{ Component } from "react";
 import { View } from "react-web-dom";
-import { Row, Col, Button } from 'antd';
-import Page from '@/components/public/page'
+import { Row, Col, Button,Card } from 'antd';
+import PageHeaderWrapper from '@/components/pageHeaderWrapper';
 import styles from '@/styles/shop/shopColor.css'
 export default class Color extends Component {
     state = {
@@ -67,7 +67,7 @@ export default class Color extends Component {
             return index===newCurrentColor
         })[0]
         return (
-            <Page>
+            <Card bordered={false}>
                 <h3>配色方案</h3>
                 <Row type="flex" justify="start">
                     {
@@ -125,7 +125,7 @@ export default class Color extends Component {
                         保存
                     </Button>
                 </View>
-            </Page>
+            </Card>
         )
     }
 }

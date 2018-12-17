@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { Input, Button, Form, Cascader } from 'antd';
-import Page from '@/components/public/page/index'
+import { Input, Button, Form, Cascader,Card } from 'antd';
+import PageHeaderWrapper from '@/components/pageHeaderWrapper';
 import { connect } from 'dva';
 const FormItem = Form.Item;
 @Form.create()
@@ -54,7 +54,8 @@ export default class Edit extends Component {
         const { name, contact_number, province_id, city_id, area_id, address } = info
         const { getFieldDecorator } = this.props.form
         return (
-            <Page>
+            <PageHeaderWrapper>
+            <Card bordered={false}>
                 <Form onSubmit={this.handleSubmit} style={{ width: 1000 }}>
                     <FormItem
                         labelCol={{ span: 3 }}
@@ -125,7 +126,8 @@ export default class Edit extends Component {
                         </Button>
                     </FormItem>
                 </Form>
-            </Page>
+            </Card>
+            </PageHeaderWrapper>
         )
     }
 }

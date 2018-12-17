@@ -1,24 +1,27 @@
 import React, { Component } from "react";
 import { View } from "react-web-dom";
-import Page from '@/components/public/page'
+import PageHeaderWrapper from '@/components/pageHeaderWrapper';
 import styles from '@/styles/order/refundEdit.css'
 import RefundDetail from "@/components/order/refund/detail";
 import { query } from "@/utils/fa"
+import { Card } from "antd";
 export default class RefundEdit extends Component {
     render() {
         const { location, history } = this.props
         const { id } = query.getParams()
 
         return (
+            <PageHeaderWrapper>
             <View className={`${styles.refundEditWarp} refundEdit`}>
-                <Page>
+                <Card bordered={false}>
                     <RefundDetail
                         id={id}
                         history={history}
                         location={location}
                     />
-                </Page>
+                </Card>
             </View>
+            </PageHeaderWrapper>
         )
     }
 }

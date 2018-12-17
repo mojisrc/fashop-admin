@@ -1,14 +1,13 @@
 import React, { Component } from "react";
 import { connect } from "dva";
-import { Button, Divider, Form, Input, Select, Table } from "antd";
-
+import { Button, Divider, Form, Input, Select, Table,Card } from "antd";
 import update from "immutability-helper";
 import { getQueryPath } from "@/utils";
 import Query from "@/utils/query";
 import { View } from "react-web-dom";
 import OrderModel from "@/models1/order";
 import moment from "moment";
-
+import PageHeaderWrapper from "@/components/pageHeaderWrapper";
 const FormItem = Form.Item;
 const Option = Select.Option;
 const orderModel = new OrderModel();
@@ -131,7 +130,8 @@ export default class List extends Component {
             }
         ];
         return (
-            <Page>
+            <PageHeaderWrapper>
+            <Card bordered={false}>
                 <View>
                     <Form
                         layout="inline"
@@ -217,7 +217,8 @@ export default class List extends Component {
                         rowKey={record => record.id}
                     /> : ""}
                 </View>
-            </Page>
+            </Card>
+            </PageHeaderWrapper>
         );
     }
 

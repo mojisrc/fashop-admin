@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "dva";
-import { Form, Input, Button } from "antd";
+import { Form, Input, Button ,Card} from "antd";
 import { View } from "react-web-dom";
-import Page from "@/components/public/page";
+import PageHeaderWrapper from '@/components/pageHeaderWrapper';
 import UploadImage from "@/components/uploadImage";
 const { TextArea } = Input;
 const FormItem = Form.Item;
@@ -64,7 +64,8 @@ export default class Info extends Component {
             }
         };
         return (
-            <Page>
+            <PageHeaderWrapper>
+            <Card bordered={false}>
                 {/* <h3>店铺信息</h3> */}
                 <Form onSubmit={this.handleSubmit} style={{ maxWidth: "600px" }}>
                     {/*<FormItem*/}
@@ -145,7 +146,8 @@ export default class Info extends Component {
                         <Button type="primary" htmlType="submit">保存</Button>
                     </FormItem>
                 </Form>
-            </Page>
+            </Card>
+            </PageHeaderWrapper>
         );
     }
 }

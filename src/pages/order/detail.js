@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import OrderDetailView from "@/components/order/detail";
 import { connect } from "dva";
 import { getPageQuery } from "@/utils/utils";
-import { Spin } from "antd";
+import { Spin, Card } from "antd";
 
 @connect(({ order, loading }) => ({
     orderInfo: order.info,
@@ -58,9 +58,13 @@ export default class Detail extends Component {
     render() {
         const { orderInfoLoading, orderInfo } = this.props;
         return (
-            <Spin size="large" className="globalSpin" spinning={orderInfoLoading}>
-                <OrderDetailView orderInfo={orderInfo.result} />
-            </Spin>
+            <PageHeaderWrapper>
+                <Card bordered={false}>
+                    <Spin size="large" className="globalSpin" spinning={orderInfoLoading}>
+                        <OrderDetailView orderInfo={orderInfo.result} />
+                    </Spin>
+                </Card>
+            </PageHeaderWrapper>
         );
     }
 }

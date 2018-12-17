@@ -6,7 +6,7 @@ import DeliverInfo from "./deliver";
 import OtherInfo from "./other";
 import GoodsInfo from "./goods";
 import OperateInfo from "./operate";
-import Page from "@/components/public/page/index";
+import PageHeaderWrapper from '@/components/pageHeaderWrapper';
 
 export default class OrderDetailInfo extends Component {
     render() {
@@ -16,7 +16,7 @@ export default class OrderDetailInfo extends Component {
         const { reciver_name, reciver_info, message, deliver_name, deliver_phone, deliver_address, tracking_time, tracking_no, remark } = extend_order_extend;
         const { history } = this.props;
         return (
-            <Page>
+            <Card bordered={false}>
                 <BasicInfo
                     sn={sn}
                     reciver_name={reciver_name}
@@ -49,7 +49,7 @@ export default class OrderDetailInfo extends Component {
                     freight_fee={freight_fee ? freight_fee : 0}
                 />
                 {state === 20 ? <OperateInfo history={history} info={info} /> : null}
-            </Page>
+            </Card>
         );
 
     }

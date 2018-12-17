@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from 'dva';
 import { View } from "react-web-dom";
-import Page from '@/components/public/page'
+import PageHeaderWrapper from '@/components/pageHeaderWrapper';
 import styles from '@/styles/user/userInfo.css'
 import UploadImage from '@/components/uploadImage'
 import types from '../../constants'
@@ -38,7 +38,7 @@ export default class Self extends Component{
                         <p>仅支持JPG,GIF,PNG格式上传</p>
                     </View>
                 </View>
-            </Page>
+            </Card>
         )
     }
 }

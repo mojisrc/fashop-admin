@@ -7,7 +7,6 @@ import Query from "@/utils/query";
 import moment from "moment/moment";
 import Image from "@/components/image/index";
 import router from "umi/router";
-
 //
 // type Props = {
 //     history: historyType,
@@ -31,15 +30,18 @@ import router from "umi/router";
     userListLoading: loading.effects["user/list"]
 }))
 export default class UserListTable extends Component {
+    static defaultProps = {
+        userListLoading: true,
+        userList: {
+            list: [],
+            total_number: 0
+        }
+    };
     state = {
         selectedRowKeys: [],
         customerVisible: false,
         currentUser: {},
-        get: { page : 1 , rows :10 }
-    };
-    static defaultProps = {
-        userListLoading: false,
-        userList: []
+        get: { page: 1, rows: 10 }
     };
     onSelectChange = (selectedRowKeys) => {
         this.setState({ selectedRowKeys });
@@ -183,12 +185,13 @@ export default class UserListTable extends Component {
                     pagination={{
                         showSizeChanger: false,
                         showQuickJumper: false,
-                        pageSize: userList.rows,
-                        total: userList.total_number,
-                        current: userList.page
+                        current: this.state.get.page,
+                        pageSize: this.state.get.rows,
+                        total: userList.total_number
                     }}
                     onChange={({ current, pageSize }) => {
                         router.push(Query.page(current, pageSize));
+                        this.initList();
                     }}
                     // rowSelection={rowSelection}
                 />

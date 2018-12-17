@@ -1,11 +1,10 @@
 import React, { Component } from "react";
 import { connect } from "dva";
-import { Form, Button, Input } from "antd";
+import { Form, Button, Input,Card } from "antd";
 import SendAddress from "@/components/order/send/sendAddress";
 import DeliveryWay from "@/components/order/send/deliveryWay";
-import Page from "@/components/public/page";
+import PageHeaderWrapper from '@/components/pageHeaderWrapper';
 import { message } from "antd/lib/index";
-
 import OrderApi from "@/services/order";
 import ExpressApi from "@/services/express";
 import ShipperApi from "@/services/shipper";
@@ -118,7 +117,8 @@ export default class Send extends Component {
             getFieldDecorator("tracking_no", { initialValue: tracking_no });
         }
         return (
-            <Page>
+            <PageHeaderWrapper>
+            <Card bordered={false}>
                 <Form onSubmit={this.handleSubmit}>
                     <SendAddress
                         form={this.props.form}
@@ -181,7 +181,8 @@ export default class Send extends Component {
                         </Button>
                     </FormItem>
                 </Form>
-            </Page>
+            </Card>
+            </PageHeaderWrapper>
         );
     }
 }

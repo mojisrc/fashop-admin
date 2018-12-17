@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import {Row,Button} from "antd";
-import Page from "@/components/public/page";
+import PageHeaderWrapper from '@/components/pageHeaderWrapper';
 import MemberTable from "@/components/auth/MemberTable";
 import AddMemberModal from '@/components/auth/addMemberModal'
 import {AuthCom,authHoc} from '@/components/auth/authRules'
 import authSignConfig from '@/utils/authSignConfig'
-
+import { Card } from "antd";
 @authHoc({
     rules: authSignConfig.auth.member
 })
@@ -24,7 +24,7 @@ export default class Member extends Component {
         } = this.state
 
         return(
-            <Page>
+            <Card bordered={false}>
                 <AuthCom rules={['member/add']}>
                     <Row
                         style={{
@@ -53,7 +53,7 @@ export default class Member extends Component {
                         this.changeRoleMembersModalVisible(false)
                     }}
                 />
-            </Page>
+            </Card>
         )
     }
 }

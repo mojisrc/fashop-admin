@@ -22,12 +22,18 @@ export default class RefundTable extends Component {
             refund_type: "all",
             refund_state: "all",
             order_type: "all"
+        },
+        get:{
+            page:1,
+            rows:10
         }
     };
     static defaultProps = {
-
-        refundListLoading: false,
-        refundList: {}
+        refundListLoading: true,
+        refundList: {
+            list:[],
+            total_number:0
+        }
     };
 
     componentDidMount() {
@@ -46,7 +52,7 @@ export default class RefundTable extends Component {
             get["create_time"] = [moment(get["create_time"][0]).unix(), moment(get["create_time"][1]).unix()];
         }
         dispatch({
-            type: "order/list",
+            type: "refund/list",
             payload: {
                 page: get.page,
                 rows: get.rows
@@ -79,7 +85,6 @@ export default class RefundTable extends Component {
 
     render() {
         const { refundList, refundListLoading } = this.props;
-
         const columns = [
             {
                 title: "退款编号",

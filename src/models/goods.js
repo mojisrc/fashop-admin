@@ -14,6 +14,7 @@ export default {
     effects: {
         * list({ payload, callback }, { call, put }) {
             const response = yield call(goods.list, payload);
+            console.log(response)
             yield put({
                 type: "_list",
                 payload: response

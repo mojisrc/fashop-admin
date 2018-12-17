@@ -1,14 +1,13 @@
 import React, { Component } from "react";
-import { Input,  Button, Modal, Form, Tree, message } from "antd";
+import { Input,  Button, Modal, Form, Tree, message,Card } from "antd";
 import { Link } from "react-router-dom";
 import styles from "@/styles/freight/freightAdd.css";
-import Page from "@/components/public/page/index";
+import PageHeaderWrapper from '@/components/pageHeaderWrapper';
 
 import FreightAddTable from '@/components/setting/freightAddTable/index'
 import { connect } from 'dva';
 import { View, ScrollView } from "react-web-dom";
 
-import { info } from "../../actions/deliver/freight";
 import FreightApi from "@/services/freight";
 
 const FormItem = Form.Item;
@@ -234,7 +233,8 @@ export default class Edit extends Component {
         const selectTreeNodesData = this.getSelectTreeNodesData(areaList, checkedAreaKeys)
         const filterOutAreaList = this.filterAreaList(areaList)
         return (
-            <Page>
+            <PageHeaderWrapper>
+            <Card bordered={false}>
                 <Form onSubmit={this.handleSubmit}>
                     <FormItem
                         {...formItemLayout}
@@ -387,7 +387,8 @@ export default class Edit extends Component {
                         </View>
                     </View>
                 </Modal>
-            </Page>
+            </Card>
+            </PageHeaderWrapper>
         )
     }
 

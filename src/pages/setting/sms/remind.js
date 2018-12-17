@@ -1,7 +1,7 @@
 import React,{ Component } from "react";
 import {Link} from 'react-router-dom';
 import { connect } from 'dva';
-import {Switch,Input,Button,Form, Row, Col, Layout, Table} from 'antd';
+import {Switch,Input,Button,Form, Row, Col, Layout, Table,Card} from 'antd';
 import delivePublic from '@/styles/setting/delivePublic.css'
 import PropTypes from 'prop-types'
 const {  Footer} = Layout;

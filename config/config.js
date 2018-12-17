@@ -67,7 +67,10 @@ export default {
     // Theme for antd
     // https://ant.design/docs/react/customize-theme-cn
     theme: {
-        "primary-color": defaultSettings.primaryColor
+        'primary-color': defaultSettings.primaryColor,
+        'menu-bg':'#000',
+        'menu-dark-bg':'#000',
+        'menu-dark-submenu-bg':'#151515'
     },
     externals: {
         "@antv/data-set": "DataSet"

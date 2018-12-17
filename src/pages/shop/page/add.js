@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { View } from "react-web-dom";
 import { connect } from "dva";
-import { Row, Col, Button, Affix, message, Spin } from "antd";
-import Page from "@/components/public/page/index";
+import { Row, Col, Button, Affix, message, Spin,Card } from "antd";
+import PageHeaderWrapper from '@/components/pageHeaderWrapper';
 import PageTool from "@/components/shop/diy/tool/index";
 import PageView from "@/components/shop/diy/view/index";
 import PageControl from "@/components/shop/diy/controller/index";
@@ -141,7 +141,7 @@ export default class Add extends Component {
         let { options, body, baseInfoVisible, name, description, background_color } = this.state;
         return (
             <Spin size="large" className="globalSpin" spinning={goodsListLoading}>
-                <Page>
+                <Card bordered={false}>
                     <View className={styles.shopPageEditMain}>
                         <View className={styles.shopPageEditToolMain}>
                             <Affix offsetTop={15} style={{ zIndex: 1 }}>
@@ -220,7 +220,7 @@ export default class Add extends Component {
                             </Button>
                         </Col>
                     </Row>
-                </Page>
+                </Card>
             </Spin>
         );
     }

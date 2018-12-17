@@ -3,7 +3,7 @@ import React,{ Component } from 'react'
 import { connect } from 'dva';
 import * as actions from "../../actions/wechat";
 import { Form, Input, Button, Select } from 'antd'
-import Page from '@/components/public/page'
+import PageHeaderWrapper from '@/components/pageHeaderWrapper';
 import UploadImage from "@/components/uploadImage";
 import { formType, historyType } from "@/utils/flow";
 
@@ -263,7 +263,7 @@ export default class BindOfficialAccounts extends Component {
                         </Button>
                     </FormItem>
                 </Form>
-            </Page>
+            </Card>
         )
     }
 }

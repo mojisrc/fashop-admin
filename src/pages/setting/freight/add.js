@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import { Input, Radio, Button, Modal, Form, Tree, message } from "antd";
+import { Input, Radio, Button, Modal, Form, Tree, message,Card } from "antd";
 import { Link } from "react-router-dom";
 import styles from "@/styles/freight/freightAdd.css";
-import Page from "@/components/public/page/index";
+import PageHeaderWrapper from '@/components/pageHeaderWrapper';
 
 import FreightAddTable from '@/components/setting/freightAddTable/index'
 import { connect } from 'dva';
@@ -230,7 +230,8 @@ export default class Add extends Component {
         const selectTreeNodesData = this.getSelectTreeNodesData(areaList, checkedAreaKeys)
         const filterOutAreaList = this.filterAreaList(areaList)
         return (
-            <Page>
+            <PageHeaderWrapper>
+            <Card bordered={false}>
                 <Form onSubmit={this.handleSubmit}>
                     <FormItem
                         {...formItemLayout}
@@ -396,7 +397,8 @@ export default class Add extends Component {
                         </View>
                     </View>
                 </Modal>
-            </Page>
+            </Card>
+            </PageHeaderWrapper>
         )
     }
 

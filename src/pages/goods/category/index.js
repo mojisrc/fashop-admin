@@ -1,14 +1,18 @@
 import React, { Component } from "react";
 import GoodsCategoryTable from "@/components/goods/category/list/table/index";
-import Page from "@/components/public/page/index";
+import PageHeaderWrapper from "@/components/pageHeaderWrapper";
 import { connect } from "dva";
+import { Card } from "antd";
+
 @connect()
 export default class GoodsCategory extends Component {
     render() {
         return (
-            <Page>
-                <GoodsCategoryTable {...this.props} />
-            </Page>
+            <PageHeaderWrapper>
+                <Card bordered={false}>
+                    <GoodsCategoryTable {...this.props} />
+                </Card>
+            </PageHeaderWrapper>
         );
     }
 }

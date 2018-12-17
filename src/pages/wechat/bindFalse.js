@@ -1,5 +1,5 @@
 import React from 'react'
-import Page from '@/components/public/page'
+import PageHeaderWrapper from '@/components/pageHeaderWrapper';
 import { View } from 'react-web-dom'
 import styles from '@/src/styles/wechat/wechatIndex.css'
 import { Button, Table,Icon } from 'antd'
@@ -115,7 +115,7 @@ export default class NotBindPublicAccounts extends React.Component {
                         pagination={false}
                     />
                 </div>
-            </Page>
+            </Card>
         )
     }
 }

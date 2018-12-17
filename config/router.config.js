@@ -1,11 +1,10 @@
 export default [
     // user
     {
-        path: "/user",
+        path: "/login",
         component: "../layouts/userLayout",
         routes: [
-            { path: "/user", redirect: "/user/login" },
-            { path: "/user/login", component: "./user/login" }
+            { path: "/login", component: "/user/login" }
         ]
     },
     // app
@@ -70,8 +69,19 @@ export default [
                 path: "/setting",
                 name: "设置",
                 routes: [
-                    { path: "/setting", redirect: "/setting/index" },
-                    { path: "/setting/index", name: "配送设置", component: "/setting/index" },
+                    { path: "/setting", redirect: "/setting/deliver/shipper" },
+                    {
+                        path: "/setting/deliver",
+                        name: "配送设置",
+                        component: "/setting/deliverLayout",
+                        routes: [
+                            { path: "/setting/deliver", redirect: "/setting/deliver/shipper" },
+                            { path: "/setting/deliver/shipper", component: "/setting/shipper/list" },
+                            { path: "/setting/deliver/express", component: "/setting/express/list" },
+                            { path: "/setting/deliver/freight", component: "/setting/freight/list" }
+                        ]
+
+                    },
                     { path: "/setting/order", name: "订单设置", component: "/setting/order" },
                     { path: "/setting/payment", name: "支付设置", component: "/setting/payment" }
                 ]

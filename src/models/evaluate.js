@@ -2,7 +2,7 @@ import goods from "@/services/goods";
 
 const evaluate = goods.evaluate;
 export default {
-    namespace: "evaluate",
+    namespace: "goodsEvaluate",
     state: {
         list: {},
         reply: {},

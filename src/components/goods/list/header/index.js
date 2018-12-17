@@ -3,7 +3,7 @@ import { Button, Input, Select, TreeSelect, Form } from "antd";
 import { connect } from "dva";
 import Query from "@/utils/query";
 import { getQueryPath } from "@/utils/index";
-import tree from "smart-arraytotree";
+import Arr from "@/utils/array";
 
 const Option = Select.Option;
 const FormItem = Form.Item;
@@ -59,8 +59,8 @@ const order_typeArray = [
         title: "排序低到高"
     }
 ];
-const categoryTreeData = (categoryList) => {
-    return categoryList.map((e) => {
+const categoryTreeData = (list) => {
+    return list.map((e) => {
         return {
             title: e.name,
             value: `${e.id}`,
@@ -72,10 +72,16 @@ const categoryTreeData = (categoryList) => {
 
 @Form.create()
 @connect(({ goodsCategory, loading }) => ({
-    goodsCategory: goodsCategory.result.list,
+    goodsCategory: goodsCategory.list.result,
     goodsCategoryLoading: loading.effects["goodsCategory/list"]
 }))
 export default class GoodsListHeader extends Component {
+    static defaultProps = {
+        goodsCategory:{
+            list:[]
+        },
+        goodsCategoryLoading: true
+    };
     state = {
         queryParams: {
             sale_state: "all",
@@ -113,10 +119,10 @@ export default class GoodsListHeader extends Component {
     };
 
     render() {
-        const { form, categoryList, loading } = this.props;
+        const { form, goodsCategory, loading } = this.props;
         const { getFieldDecorator } = form;
         const { sale_state, title, category_ids, order_type } = this.state.queryParams;
-        const treeData = categoryTreeData(tree(categoryList));
+        const treeData = categoryTreeData(Arr.toTree(goodsCategory.list));
         // TreeSelect 只接受string
         let _category_ids = category_ids && category_ids.length ? [...category_ids] : [];
         return (

@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Tabs, Row, Col } from "antd";
+import { Tabs, Row, Col, Card } from "antd";
 import { View } from "react-web-dom";
-import Page from "@/components/public/page";
+import PageHeaderWrapper from '@/components/pageHeaderWrapper';
 import styles from "@/styles/customer/customerDetail.css";
 import ShoppingInfo from "@/components/user/shopping";
 import ReceiveInfo from "@/components/user/receive";
@@ -84,7 +84,7 @@ export default class Detail extends Component {
             {
                 key: `1`,
                 name: "交易状况",
-                render: () => <Page>
+                render: () => <Card bordered={false}>
                     <ShoppingInfo
                         user_id={id}
                         history={history}
@@ -94,15 +94,15 @@ export default class Detail extends Component {
                         cost_average={cost_average}
                         cost_total={cost_total}
                     />
-                </Page>
+                </Card>
             }, {
                 key: `2`,
                 name: "收货信息",
-                render: () => <Page>
+                render: () => <Card bordered={false}>
                     <ReceiveInfo
                         user_id={id}
                     />
-                </Page>
+                </Card>
             }
         ];
         return (

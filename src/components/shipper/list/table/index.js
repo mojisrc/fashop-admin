@@ -6,17 +6,20 @@ import { connect } from "dva";
 import Query from "@/utils/query";
 import router from "umi/router";
 
-@connect(({ shopper, loading }) => ({
-    shopperList: shopper.list.result,
-    shopperListLoading: loading.effects["shopper/list"]
+@connect(({ shipper, loading }) => ({
+    shipperList: shipper.list.result,
+    shipperListLoading: loading.effects["shipper/list"]
 }))
 export default class ShipperListTable extends Component {
     static defaultProps = {
-        shopperListLoading: false,
-        shopperList: {}
+        shipperListLoading: true,
+        shipperList: {
+            list: [],
+            total_number: 0
+        }
     };
     state = {
-        get: { page : 1 , rows :10 }
+        get: { page: 1, rows: 10 }
     };
 
     componentDidMount() {
@@ -27,7 +30,7 @@ export default class ShipperListTable extends Component {
         const { dispatch } = this.props;
         const get = Query.make();
         dispatch({
-            type: "shopper/list",
+            type: "shipper/list",
             payload: {
                 page: get.page,
                 rows: get.rows
@@ -41,7 +44,7 @@ export default class ShipperListTable extends Component {
     }
 
     render() {
-        const { shopperList, shopperListLoading } = this.props;
+        const { shipperList, shipperListLoading } = this.props;
         const columns = [
             {
                 title: "联系人",
@@ -70,7 +73,7 @@ export default class ShipperListTable extends Component {
                     <a
                         onClick={() => {
                             router.push({
-                                pathname: `/setting/shipper/edit`,
+                                pathname: `/setting/deliver/shipper/edit`,
                                 search: `?id=${record.id}`
                             });
                         }}
@@ -86,7 +89,7 @@ export default class ShipperListTable extends Component {
                                 cancelText: "取消",
                                 onOk() {
                                     dispatch({
-                                        type: "shopper/del",
+                                        type: "shipper/del",
                                         payload: {
                                             id: record.id
                                         },
@@ -108,7 +111,7 @@ export default class ShipperListTable extends Component {
                     <Button
                         type='primary'
                         onClick={() => {
-                            router.push("/setting/shipper/add");
+                            router.push("/setting/deliver/shipper/add");
                         }}
                     >
                         新增地址
@@ -116,8 +119,8 @@ export default class ShipperListTable extends Component {
                 </View>
                 <Table
                     columns={columns}
-                    dataSource={shopperList.list}
-                    loading={shopperListLoading}
+                    dataSource={shipperList.list}
+                    loading={shipperListLoading}
                     rowKey={record => record.id}
                     onChange={({ current, pageSize }) => {
                         router.push(Query.page(current, pageSize));
@@ -128,7 +131,7 @@ export default class ShipperListTable extends Component {
                         showQuickJumper: false,
                         current: this.state.get.page,
                         pageSize: this.state.get.rows,
-                        total: shopperList.total_number
+                        total: shipperList.total_number
                     }}
 
                 />

@@ -1,13 +1,12 @@
 import React, { Component } from "react";
 import { connect } from 'dva';
-import { Form, Button, Modal, message } from "antd";
-import Page from '@/components/public/page'
+import { Form, Button, Modal, message,Card } from "antd";
+import PageHeaderWrapper from '@/components/pageHeaderWrapper';
 import Basic from '@/components/goods/add/basic'
 import Detail from '@/components/goods/add/detail'
 import Editor from '@/components/goods/add/editor'
 import Freight from '@/components/goods/add/detail/freight'
 import PhotoGallery from '@/components/public/photoGallery'
-
 
 import moment from "moment";
 import GoodsApi from "@/services/goods";
@@ -173,7 +172,8 @@ export default class Add extends Component {
             return null
         }
         return (
-            <Page>
+            <PageHeaderWrapper>
+            <Card bordered={false}>
                 <Form onSubmit={this.handleSubmit} style={{ width: 1000 }}>
                     <Basic
                         location={this.props.location}
@@ -241,7 +241,8 @@ export default class Add extends Component {
                 <Modal visible={previewVisible} footer={null} onCancel={this.previewCancel}>
                     <img alt="example" style={{ width: '100%' }} src={previewImage} />
                 </Modal>
-            </Page>
+            </Card>
+            </PageHeaderWrapper>
         )
     }
 }

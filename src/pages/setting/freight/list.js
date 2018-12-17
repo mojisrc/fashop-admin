@@ -1,12 +1,15 @@
 import React, { Component } from "react";
 import FreightListTable from '@/components/freight/list/table/index'
-import Page from '@/components/public/page/index'
+import PageHeaderWrapper from '@/components/pageHeaderWrapper';
+import { Card } from "antd";
 export default class Deliver extends Component {
     render() {
         return (
-            <Page>
+            <PageHeaderWrapper>
+            <Card bordered={false}>
                 <FreightListTable {...this.props} />
-            </Page>
+            </Card>
+            </PageHeaderWrapper>
         )
     }
 }

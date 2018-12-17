@@ -1,8 +1,0 @@
-import styles from './detail.css';
-export default function() {
-  return (
-    <div className={styles.normal}>
-      <h1>Page users</h1>
-    </div>
-  );
-}

@@ -1,12 +1,16 @@
-import React,{ Component } from "react";
-import Page from '@/components/public/page/index'
-import CategoryEdit from '@/components/goods/category/edit/index'
+import React, { Component } from "react";
+import PageHeaderWrapper from "@/components/pageHeaderWrapper";
+import CategoryEdit from "@/components/goods/category/edit/index";
+import { Card } from "antd";
+
 export default class GoodsCategoryEdit extends Component {
-   render() {
-       return (
-           <Page>
-               <CategoryEdit {...this.props}/>
-           </Page>
-       )
-   }
+    render() {
+        return (
+            <PageHeaderWrapper>
+                <Card bordered={false}>
+                    <CategoryEdit {...this.props} />
+                </Card>
+            </PageHeaderWrapper>
+        );
+    }
 }

@@ -2,7 +2,9 @@ import React, { Component } from "react";
 import { connect } from "dva";
 import { View } from "react-web-dom";
 import styles from "@/styles/index/index.css";
-import { Row, Col } from "antd";
+import { Row, Col,Card } from "antd";
+import PageHeaderWrapper from '@/components/pageHeaderWrapper';
+
 import Quantity from "@/components/analysis/quantity";
 import Charts from "@/components/analysis/charts";
 
@@ -10,14 +12,14 @@ import Charts from "@/components/analysis/charts";
 class Analysis extends Component {
     render() {
         return (
-            <View className={styles.indexWarp}>
+            <Card className={styles.indexWarp}  bordered={false}>
                 <Row gutter={24}>
                     <Col span={17 + 7}>
                         <Quantity {...this.props} />
                         <Charts {...this.props} />
                     </Col>
                 </Row>
-            </View>
+            </Card>
         );
     }
 }

@@ -13,12 +13,20 @@ import router from "umi/router";
 const { TextArea } = Input;
 const { Fragment } = React;
 
-@connect(({ evaluate, loading }) => ({
-    evaluateList: evaluate.list.result,
-    evaluateListLoading: loading.effects["evaluate/list"]
+
+@connect(({ goodsEvaluate, loading }) => ({
+    evaluateList: goodsEvaluate.list.result,
+    evaluateListLoading: loading.effects["goodsEvaluate/list"]
 }))
 export default class EvaluateListTable extends Component {
+    static defaultProps = {
+        evaluateListLoading: true,
+        evaluateList: {
+            list: [],
+            total_number: 0
+        }
 
+    };
     state = {
         reply_content: [],
         queryParams: {
@@ -27,7 +35,10 @@ export default class EvaluateListTable extends Component {
             create_time: [],
             type: "all"
         },
-        get:{}
+        get: {
+            page:1,
+            rows:10,
+        }
     };
     PhotoGallery;
 
@@ -45,7 +56,7 @@ export default class EvaluateListTable extends Component {
             get["create_time"] = [moment(get["create_time"][0]).unix(), moment(get["create_time"][1]).unix()];
         }
         dispatch({
-            type: "evaluate/list",
+            type: "goodsEvaluate/list",
             payload: {
                 page: get.page,
                 rows: get.rows
@@ -288,17 +299,19 @@ export default class EvaluateListTable extends Component {
                             </Row>
                         )
                     }
-                    <View className={styles.pageView}>
+                    <div className={styles.pageView}>
                         <Pagination
+                            showSizeChanger={false}
+                            showQuickJumper={false}
                             current={this.state.get.page}
                             pageSize={this.state.get.rows}
                             total={evaluateList.total_number}
-                            onChange={({ current, pageSize }) => {
-                                router.push(Query.page(current, pageSize));
+                            onChange={(page, pageSize) => {
+                                router.push(Query.page(page, pageSize));
                                 this.initList();
                             }}
                         />
-                    </View>
+                    </div>
                 </View>
             </Spin>
         );

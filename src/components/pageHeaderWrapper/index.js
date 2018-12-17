@@ -6,9 +6,9 @@ import { connect } from 'dva';
 import GridContent from './gridContent';
 import styles from './index.less';
 import MenuContext from '@/layouts/menuContext';
-
+// style={{ margin: '-24px -24px 0' }}
 const PageHeaderWrapper = ({ children, contentWidth, wrapperClassName, top, ...restProps }) => (
-  <div style={{ margin: '-24px -24px 0' }} className={wrapperClassName}>
+  <div className={wrapperClassName}>
     {top}
     <MenuContext.Consumer>
       {value => (
