@@ -1,0 +1,30 @@
+.column{
+    text-align: center!important;
+}
+.operation{
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+.operation a{
+    margin-right: 10px;
+}
+.operation a:last-child{
+    margin-right: 0;
+}
+.batchView{
+    margin-bottom: 24px;
+    flex-direction: row;
+}
+.batchView button{
+    margin-right: 24px;
+}
+.imgView{
+    width: 40px;
+    height: 40px;
+}
+.imgView img{
+    max-width: 100%;
+    max-height: 100%;
+    border-radius: 4px;
+}

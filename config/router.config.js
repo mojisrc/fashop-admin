@@ -85,6 +85,17 @@ export default [
                     { path: "/setting/order", name: "订单设置", component: "/setting/order" },
                     { path: "/setting/payment", name: "支付设置", component: "/setting/payment" }
                 ]
+            },
+            {
+                path: "/marketing",
+                name: "营销",
+                routes: [
+                    { path: "/marketing", redirect: "/marketing/coupon/list" },
+                    { path: "/marketing/coupon", redirect: "/marketing/coupon/list" },
+                    { path: "/marketing/coupon/list", name: "优惠券", component: "/marketing/coupon/list" },
+                    { path: "/marketing/freebie", redirect: "/marketing/freebie/list" },
+                    { path: "/marketing/freebie/list", name: "赠品", component: "/marketing/freebie/list" },
+                ]
             }
         ]
     }
