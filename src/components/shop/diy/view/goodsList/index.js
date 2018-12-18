@@ -77,7 +77,7 @@ export default class Index extends Component {
                 className={styles.bigWarp}
                 key={index}
             >
-                <div className={styles.smallImgWarp}>
+                <div className={styles.bigImgWarp}>
                     <Image src={item.img} />
                 </div>
                 <div className={styles.smallBot}>

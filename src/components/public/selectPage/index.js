@@ -53,7 +53,10 @@ export default class SelectPage extends Component {
     }
 
     componentDidMount() {
-        this.initList();
+        const { pageList, pageListLoading } = this.props;
+        if (pageList.list.length === 0 && pageListLoading === false) {
+            this.initList();
+        }
     }
 
     initList() {

@@ -1,8 +1,8 @@
 /*imgNavCtrl*/
 .imgNavCtrlItem,.imgNavCtrlItemAdd{
     border: 1px solid #e8e8e8;
-    border-radius: 4px;
-    margin-bottom: 16px;
+    margin-bottom: -1px;
+    border-radius: 0;
 }
 .imgNavCtrlItemAdd{
     padding: 16px;
@@ -11,6 +11,7 @@
     justify-content: center;
     align-items: center;
     border: 1px dashed #e8e8e8;
+    display: flex;
 }
 .imgNavCtrlItemTop{
     margin: 0;
@@ -24,18 +25,18 @@
     margin-right: 10px;
 }
 .imgNavCtrlItemBot{
-    padding: 16px;
+    display: flex;
     flex-direction: row;
 }
 .imgNavCtrlItemLeft{
     width: 80px;
     height: 80px;
+    display: flex;
     justify-content: center;
     align-items: center;
     border: 1px dashed #e5e5e5;
     border-radius: 5px;
     position: relative;
-    margin-right: 15px;
 }
 .avatarInput{
     opacity: 0;

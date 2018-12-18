@@ -6,5 +6,8 @@ export const formItemLayout = {
     wrapperCol: {
         xs: { span: 24 },
         sm: { span: 19 }
+    },
+    style:{
+        marginBottom:5
     }
 };

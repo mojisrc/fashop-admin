@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Icon, Input,  Radio, Modal, message, Form } from "antd";
+import { Icon, Input, Radio, Modal, message, Form } from "antd";
 import styles from "./index.css";
 import { View } from "react-web-dom";
 import UploadImage from "@/components/uploadImage";
@@ -8,31 +8,29 @@ import { formItemLayout } from "@/components/shop/diy/formLayout";
 
 const RadioGroup = Radio.Group;
 const FormItem = Form.Item;
-
 // type LinkActionType = 'portal' | 'goods' | 'page' | 'url'
-//
-// type Props = {
-//     componentName?: string,
-//     options: {
-//         layout_style: number
-//     },
-//     data: Array<{
-//         img: {
-//             url: string
-//         },
-//         title: string,
-//         link: {
-//             action: LinkActionType,
-//             param: {}
-//         }
-//     }>,
-//     getValues: Function
-// }
-// type State = {}
-
 export default class Index extends Component {
     static defalutProps = {
-        componentName: "imageAds"
+        componentName: "imageAds",
+        options: {
+            layout_style: 1
+        },
+        data: [
+            {
+                title: "首页",
+                img: {
+                    url: ""
+                },
+                link: {
+                    action: "portal",
+                    param: {
+                        id: ""
+                    }
+                }
+            }
+        ],
+        getValues: () => {
+        }
     };
 
     render() {
@@ -196,7 +194,7 @@ export default class Index extends Component {
                                             selectGoodsVisible={false}
                                             selectPageVisible={false}
                                             inputUrlVisible={false}
-                                            getValues={(state) => {
+                                            onChange={(state) => {
                                                 let _data = data;
                                                 _data[index].link.action = state.type;
                                                 _data[index].link.param = state.value;

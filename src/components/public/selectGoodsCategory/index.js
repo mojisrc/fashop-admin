@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import { View } from "react-web-dom";
 import { Modal, Tree } from "antd";
 import { connect } from "dva";
-import Arr from "@/utils/array"
+import Arr from "@/utils/array";
+
 const TreeNode = Tree.TreeNode;
 
 @connect(({ goodsCategory, loading }) => ({
@@ -11,7 +12,7 @@ const TreeNode = Tree.TreeNode;
 }))
 export default class SelectGoodsCategory extends Component {
     static defaultProps = {
-        visible:false,
+        visible: false,
         goodsCategory: { list: [] },
         goodsCategoryLoading: true
     };
@@ -34,13 +35,15 @@ export default class SelectGoodsCategory extends Component {
     };
 
     componentDidMount() {
-        const { dispatch } = this.props;
-        dispatch({
-            type: "goodsCategory/list",
-            callback: (response) => {
-                this.setState({ categoryTree:Arr.toTree(response.result.list) });
-            }
-        });
+        const { dispatch, goodsCategory,goodsCategoryLoading } = this.props;
+        if (goodsCategory.list.length === 0 && !goodsCategoryLoading) {
+            dispatch({
+                type: "goodsCategory/list",
+                callback: (response) => {
+                    this.setState({ categoryTree: Arr.toTree(response.result.list) });
+                }
+            });
+        }
     }
 
     onSelect = (selectedKeys) => {

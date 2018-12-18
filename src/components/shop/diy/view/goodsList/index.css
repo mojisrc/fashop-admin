@@ -84,14 +84,17 @@
 .bigWarp:last-child .smallBot{
     margin-bottom: 0;
 }
-
+.bigImgWarp{
+    width: 100%;
+    height: 375px;
+    overflow: hidden;
+}
 /* small */
 .smallWarp{
 }
 
 .smallImgWarp{
     width: 100%;
-    height: 375px;
     overflow: hidden;
 }
 .smallImgWarp img{

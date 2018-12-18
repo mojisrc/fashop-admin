@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-import { Slider, Card } from "antd";
+import { Slider, Form } from "antd";
 import { formItemLayout } from "@/components/shop/diy/formLayout";
+const FormItem = Form.Item
 // type Props = {
 //     componentName?:string,
 //     getValues: Function,

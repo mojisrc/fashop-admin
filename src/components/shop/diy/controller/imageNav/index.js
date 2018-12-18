@@ -1,10 +1,10 @@
 import React, { Component } from "react";
-import { Icon, Input, Modal, message, Radio, Form } from "antd";
+import { Icon, Radio, Form, Card } from "antd";
 import styles from "./index.css";
 import { View } from "react-web-dom";
-import UploadImage from "@/components/uploadImage";
-import ActionLink, { linkInfo } from "../common/actionLink";
 import { formItemLayout } from "@/components/shop/diy/formLayout";
+import ClickSort from "@/components/shop/diy/controller/common/clickSort";
+import ListCard from "@/components/shop/diy/controller/common/listCard";
 
 const FormItem = Form.Item;
 const RadioGroup = Radio.Group;
@@ -89,7 +89,6 @@ export default class Index extends Component {
                 <FormItem
                     {...formItemLayout}
                     label="设置图片"
-                    help="建议图片像素为40 x 40"
                 >
                     <RadioGroup
                         value={each_row_display}
@@ -111,165 +110,41 @@ export default class Index extends Component {
                 </FormItem>
                 {
                     data.map((listItem, index) => (
-                        <View
+                        <Card
                             className={styles.imgNavCtrlItem}
-                            key={index}
-                        >
-                            <p className={styles.imgNavCtrlItemTop}>
-                                {
-                                    index > 0 ?
-                                        <a
-                                            onClick={() => {
-                                                let _data = data;
-                                                let add = [_data[index], _data[index - 1]];
-                                                _data.splice(index - 1, 2, ...add);
-                                                getValues({
-                                                    options,
-                                                    data: _data
-                                                });
-                                            }}
-                                        >
-                                            上移
-                                        </a> : null
-                                }
-                                {
-                                    index < data.length - 1 ?
-                                        <a
-                                            onClick={() => {
-                                                let _data = data;
-                                                let add = [_data[index + 1], _data[index]];
-                                                _data.splice(index, 2, ...add);
-                                                getValues({
-                                                    options,
-                                                    data: _data
-                                                });
-                                            }}
-                                        >
-                                            下移
-                                        </a> : null
-                                }
-                                <a
-                                    onClick={() => {
-                                        Modal.confirm({
-                                            title: "确认删除？",
-                                            content: (
-                                                <View>
-                                                    <p>
-                                                        图片：
-                                                        {
-                                                            listItem.img.url.length ?
-                                                                <img
-                                                                    alt=''
-                                                                    src={listItem.img.url}
-                                                                    style={{ height: 35 }}
-                                                                /> : "未添加"
-                                                        }
-                                                    </p>
-                                                    <p>
-                                                        链接：{linkInfo[listItem.link.action].alias}
-                                                    </p>
-                                                </View>
-                                            ),
-                                            okText: "确认",
-                                            okType: "danger",
-                                            cancelText: "取消",
-                                            onOk() {
-                                                let _data = data;
-                                                _data.splice(index, 1);
-                                                getValues({
-                                                    options,
-                                                    data: _data
-                                                });
-                                                message.success("已删除", 1);
-                                            },
-                                            onCancel() {
-                                            }
+                            // title={'建议图片像素为40 x 40'}
+                            key={`card${index}`}
+                            type={"inner"}
+                            extra={
+                                <ClickSort
+                                    index={index}
+                                    data={data}
+                                    onChange={(data) => {
+                                        getValues({
+                                            options,
+                                            data
                                         });
                                     }}
-                                >
-                                    删除
-                                </a>
-                            </p>
-                            <View className={styles.imgNavCtrlItemBot}>
-                                <View className={styles.imgNavCtrlItemLeft}>
-                                    <UploadImage
-                                        onChange={(e) => {
-                                            let _data = data;
-                                            _data[index].img = { url: e };
-                                            getValues({
-                                                options,
-                                                data: _data
-                                            });
-                                        }}
-                                        is_save={1}
-                                    >
-                                        {
-                                            listItem.img.url.length ?
-                                                <img
-                                                    src={listItem.img.url}
-                                                    alt=''
-                                                    style={{ width: "80px" }}
-                                                /> :
-                                                <View className={styles.uploadBtn}>
-                                                    <Icon type='plus' />
-                                                    <p>上传图标</p>
-                                                </View>
-                                        }
-                                    </UploadImage>
-                                </View>
-                                <View className={styles.imageNavCtrlItemRight}>
-                                    <p>
-                                        <span>标题：</span>
-                                        <Input
-                                            style={{ width: 240 }}
-                                            placeholder='标题必填'
-                                            value={listItem.title}
-                                            onChange={(e) => {
-                                                let _data = data;
-                                                _data[index].title = e.target.value;
-                                                getValues({
-                                                    options,
-                                                    data: _data
-                                                });
-                                            }}
-                                        />
-                                    </p>
-                                    <div className={styles.imageNavCtrlItemRightRow}>
-                                        <span>链接：</span>
-                                        <ActionLink
-                                            type={listItem.link.action}
-                                            selectGoodsVisible={false}
-                                            selectPageVisible={false}
-                                            inputUrlVisible={false}
-                                            getValues={(state) => {
-                                                let _data = data;
-                                                _data[index].link.action = state.type;
-                                                _data[index].link.param = state.value;
-                                                getValues({
-                                                    options,
-                                                    data: _data
-                                                });
-                                            }}
-                                            value={() => {
-                                                switch (listItem.link.action) {
-                                                    case "portal":
-                                                        return;
-                                                    case "goods":
-                                                        return listItem.link.param;
-                                                    case "page":
-                                                        return listItem.link.param;
-                                                    case "url":
-                                                        return listItem.link.param;
-                                                }
-                                            }}
-                                        />
-                                    </div>
-                                </View>
-                            </View>
-                        </View>
+                                />
+                            }
+                        >
+                            { listItem.map((sub, subIndex) => <ListCard
+                                img={sub.img}
+                                title={sub.title}
+                                link={sub.link}
+                                onChange={(response) => {
+                                    let _data = data;
+                                    _data[index][subIndex] = response;
+                                    getValues({
+                                        options,
+                                        data: _data
+                                    });
+                                }}
+                            />)}
+                        </Card>
                     ))
                 }
-                <View
+                <div
                     className={styles.imgNavCtrlItemAdd}
                     onClick={() => {
                         let _data = [
@@ -292,7 +167,7 @@ export default class Index extends Component {
                     }}
                 >
                     <Icon type='plus' /> 添加
-                </View>
+                </div>
             </Form>
         );
     }

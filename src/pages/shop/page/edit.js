@@ -158,7 +158,7 @@ export default class Edit extends Component {
     };
 
     render() {
-        const { edit, history, goodsListLoading } = this.props;
+        const {  history, goodsListLoading } = this.props;
         let { id, options, body, baseInfoVisible, name, description, background_color } = this.state;
         return (
             <Spin size="large" className="globalSpin" spinning={goodsListLoading}>
@@ -217,16 +217,19 @@ export default class Edit extends Component {
                                 <Button
                                     type='primary'
                                     onClick={() => {
-                                        let params = {
-                                            id,
-                                            name,
-                                            description,
-                                            background_color,
-                                            body,
-                                            module: "mobile"
-                                        };
-                                        edit({
-                                            params
+                                        this.props.dispatch({
+                                            type: "page/edit",
+                                            payload: {
+                                                id,
+                                                name,
+                                                description,
+                                                background_color,
+                                                body,
+                                                module: "mobile"
+                                            },
+                                            callback: () => {
+                                                message.success("已保存");
+                                            }
                                         });
                                     }}
                                 >
