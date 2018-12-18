@@ -91,6 +91,8 @@
 
 .smallImgWarp{
     width: 100%;
+    height: 375px;
+    overflow: hidden;
 }
 .smallImgWarp img{
     width: 100%;

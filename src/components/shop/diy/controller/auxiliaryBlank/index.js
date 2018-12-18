@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { View } from "@/components/flexView";
-import { Slider, Row, Col } from "antd";
+import { Slider, Card } from "antd";
+import { formItemLayout } from "@/components/shop/diy/formLayout";
 // type Props = {
 //     componentName?:string,
 //     getValues: Function,
@@ -20,25 +20,25 @@ export default class Index extends Component {
         const { options, data, getValues } = this.props;
         const { height } = options;
         return (
-            <View className={`auxiliaryBlankCtrlWarp`}>
-                <Row gutter={16}>
-                    <Col span={4}>高度：</Col>
-                    <Col span={16}>
-                        <Slider
-                            value={height}
-                            onChange={(height) => {
-                                getValues({
-                                    options: {
-                                        height
-                                    },
-                                    data
-                                });
-                            }}
-                        />
-                    </Col>
-                    <Col span={4}>{height}</Col>
-                </Row>
-            </View>
+            <Form>
+                <FormItem
+                    {...formItemLayout}
+                    label="高度"
+                >
+                    <Slider
+                        value={height}
+                        onChange={(height) => {
+                            getValues({
+                                options: {
+                                    height
+                                },
+                                data
+                            });
+                        }}
+                    />
+                    <span>{height}</span>
+                </FormItem>
+            </Form>
         );
     }
 }

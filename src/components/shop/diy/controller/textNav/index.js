@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import { Icon, Input, Row, Col, Modal, message } from "antd";
+import { Icon, Input, Row, Col, Modal, message, Form } from "antd";
 import styles from "./index.css";
-import { View } from "@/components/flexView";
-import ActionLink, { linkInfo } from "../common/actionLink"
+import { View } from "react-web-dom";
+import ActionLink, { linkInfo } from "../common/actionLink";
 // type Props = {
 //     componentName: string,
 //     getValues: Function,
@@ -22,13 +22,13 @@ import ActionLink, { linkInfo } from "../common/actionLink"
 export default class Index extends Component {
 
     static defaultProps = {
-        componentName: 'textNav'
-    }
+        componentName: "textNav"
+    };
 
     render() {
-        const { options, data, getValues } = this.props
+        const { options, data, getValues } = this.props;
         return (
-            <View className={`${styles.textNavCtrlWarp} textNavCtrlWarp`}>
+            <Form>
                 {
                     data.map((listItem, index) => {
                         return <View
@@ -40,13 +40,13 @@ export default class Index extends Component {
                                     index > 0 ?
                                         <a
                                             onClick={() => {
-                                                let _data = [...data]
-                                                let add = [_data[index], _data[index - 1]]
-                                                _data.splice(index - 1, 2, ...add)
+                                                let _data = [...data];
+                                                let add = [_data[index], _data[index - 1]];
+                                                _data.splice(index - 1, 2, ...add);
                                                 getValues({
                                                     options,
                                                     data: _data
-                                                })
+                                                });
                                             }}
                                         >
                                             上移
@@ -56,13 +56,13 @@ export default class Index extends Component {
                                     index < data.length - 1 ?
                                         <a
                                             onClick={() => {
-                                                let _data = [...data]
-                                                let add = [_data[index + 1], _data[index]]
-                                                _data.splice(index, 2, ...add)
+                                                let _data = [...data];
+                                                let add = [_data[index + 1], _data[index]];
+                                                _data.splice(index, 2, ...add);
                                                 getValues({
                                                     options,
                                                     data: _data
-                                                })
+                                                });
                                             }}
                                         >
                                             下移
@@ -71,13 +71,13 @@ export default class Index extends Component {
                                 <a
                                     onClick={() => {
                                         Modal.confirm({
-                                            title: '确认删除？',
+                                            title: "确认删除？",
                                             content: (
                                                 <View>
                                                     <p>
                                                         标题：
                                                         {
-                                                            listItem.title.length ? listItem.title : '未添加'
+                                                            listItem.title.length ? listItem.title : "未添加"
                                                         }
                                                     </p>
                                                     <p>
@@ -85,21 +85,21 @@ export default class Index extends Component {
                                                     </p>
                                                 </View>
                                             ),
-                                            okText: '确认',
-                                            okType: 'danger',
-                                            cancelText: '取消',
+                                            okText: "确认",
+                                            okType: "danger",
+                                            cancelText: "取消",
                                             onOk() {
-                                                let _data = [...data]
-                                                _data.splice(index, 1)
+                                                let _data = [...data];
+                                                _data.splice(index, 1);
                                                 getValues({
                                                     options,
                                                     data: _data
-                                                })
-                                                message.success('已删除', 1)
+                                                });
+                                                message.success("已删除", 1);
                                             },
                                             onCancel() {
-                                            },
-                                        })
+                                            }
+                                        });
                                     }}
                                 >
                                     删除
@@ -115,12 +115,12 @@ export default class Index extends Component {
                                                 placeholder='标题必填'
                                                 value={listItem.title}
                                                 onChange={(e) => {
-                                                    let _data = [...data]
-                                                    _data[index].title = e.target.value
+                                                    let _data = [...data];
+                                                    _data[index].title = e.target.value;
                                                     getValues({
                                                         options,
                                                         data: _data
-                                                    })
+                                                    });
                                                 }}
                                             />
                                         </Col>
@@ -132,24 +132,24 @@ export default class Index extends Component {
                                                 <ActionLink
                                                     type={listItem.link.action}
                                                     getValues={(state) => {
-                                                        let _data = [...data]
-                                                        _data[index].link.action = state.type
-                                                        _data[index].link.param = state.value
+                                                        let _data = [...data];
+                                                        _data[index].link.action = state.type;
+                                                        _data[index].link.param = state.value;
                                                         getValues({
                                                             options,
                                                             data: _data
-                                                        })
+                                                        });
                                                     }}
                                                     value={() => {
                                                         switch (listItem.link.action) {
-                                                            case 'portal':
-                                                                return
-                                                            case 'goods':
-                                                                return listItem.link.param
-                                                            case 'page':
-                                                                return listItem.link.param
-                                                            case 'url':
-                                                                return listItem.link.param
+                                                            case "portal":
+                                                                return;
+                                                            case "goods":
+                                                                return listItem.link.param;
+                                                            case "page":
+                                                                return listItem.link.param;
+                                                            case "url":
+                                                                return listItem.link.param;
                                                         }
                                                     }}
                                                 />
@@ -158,7 +158,7 @@ export default class Index extends Component {
                                     </Row>
                                 </View>
                             </View>
-                        </View>
+                        </View>;
                     })
                 }
                 <View
@@ -167,24 +167,24 @@ export default class Index extends Component {
                         let _data = [
                             ...data,
                             {
-                                title: '这是标题',
+                                title: "这是标题",
                                 link: {
-                                    action: 'portal',
+                                    action: "portal",
                                     param: {}
                                 },
-                                background_color: '#FFFFFF',
-                                font_color: '#333333'
+                                background_color: "#FFFFFF",
+                                font_color: "#333333"
                             }
-                        ]
+                        ];
                         getValues({
                             options,
                             data: _data
-                        })
+                        });
                     }}
                 >
                     <Icon type='plus' /> 添加
                 </View>
-            </View>
-        )
+            </Form>
+        );
     }
 }

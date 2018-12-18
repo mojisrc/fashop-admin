@@ -1,7 +1,11 @@
 import React, { Component } from "react";
-import { View } from "@/components/flexView";
-import { Row, Col } from "antd";
+import { View } from "react-web-dom";
+import { Form } from "antd";
 import ColorPicker from "@/components/public/ColorPicker";
+import { formItemLayout } from "@/components/shop/diy/formLayout";
+
+const FormItem = Form.Item;
+
 //
 // type Props = {
 //     componentName?: 'string',
@@ -14,28 +18,28 @@ import ColorPicker from "@/components/public/ColorPicker";
 // type State = {}
 export default class Index extends Component {
     static defalutProps = {
-        componentName: 'goodsSearch'
-    }
+        componentName: "goodsSearch"
+    };
 
     render() {
-        const { options, data, getValues } = this.props
+        const { options, data, getValues } = this.props;
         return (
-            <View className={`goodsSearchCtrlWarp`}>
-                <Row>
-                    <Col span={5}>背景颜色：</Col>
-                    <Col span={19}>
-                        <ColorPicker
-                            color={options.background_color}
-                            colorChange={(color) => {
-                                getValues({
-                                    options: { ...options, ...{ background_color: color.hex } },
-                                    data
-                                })
-                            }}
-                        />
-                    </Col>
-                </Row>
-            </View>
-        )
+            <Form>
+                <FormItem
+                    {...formItemLayout}
+                    label="背景颜色"
+                >
+                    <ColorPicker
+                        color={options.background_color}
+                        colorChange={(color) => {
+                            getValues({
+                                options: { ...options, ...{ background_color: color.hex } },
+                                data
+                            });
+                        }}
+                    />
+                </FormItem>
+            </Form>
+        );
     }
 }

@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import { View } from "@/components/flexView";
-import { Row, Col, Radio } from "antd";
-import styles from "./index.css";
+import { Radio, Form } from "antd";
 import ColorPicker from "@/components/public/ColorPicker";
+import { formItemLayout } from "@/components/shop/diy/formLayout";
+const FormItem = Form.Item;
 const RadioGroup = Radio.Group;
 //
 // type Props = {
@@ -19,46 +19,46 @@ const RadioGroup = Radio.Group;
 export default class Index extends Component {
 
     static defalutProps = {
-        componentName: 'separator'
-    }
+        componentName: "separator"
+    };
 
     render() {
-        const { options, data, getValues } = this.props
-        const { color, style } = options
+        const { options, data, getValues } = this.props;
+        const { color, style } = options;
         return (
-            <View className={`${styles.separatorCtrlWarp} separatorCtrlWarp`}>
-                <Row>
-                    <Col span={5}>颜色：</Col>
-                    <Col span={19}>
-                        <ColorPicker
-                            color={color}
-                            colorChange={(color) => {
-                                getValues({
-                                    options: { ...options, ...{ color: color.hex } },
-                                    data
-                                })
-                            }}
-                        />
-                    </Col>
-                </Row>
-                <Row>
-                    <Col span={5}>样式：</Col>
-                    <Col span={19}>
-                        <RadioGroup
-                            value={style}
-                            onChange={(e) => {
-                                getValues({
-                                    options: { ...options, ...{ style: e.target.value } },
-                                    data
-                                })
-                            }}
-                        >
-                            <Radio value={'dashed'}>虚线</Radio>
-                            <Radio value={'solid'}>实线</Radio>
-                        </RadioGroup>
-                    </Col>
-                </Row>
-            </View>
-        )
+            <Form>
+                <FormItem
+                    {...formItemLayout}
+                    label="颜色"
+                >
+                    <ColorPicker
+                        color={color}
+                        colorChange={(color) => {
+                            getValues({
+                                options: { ...options, ...{ color: color.hex } },
+                                data
+                            });
+                        }}
+                    />
+                </FormItem>
+                <FormItem
+                    {...formItemLayout}
+                    label="样式"
+                >
+                    <RadioGroup
+                        value={style}
+                        onChange={(e) => {
+                            getValues({
+                                options: { ...options, ...{ style: e.target.value } },
+                                data
+                            });
+                        }}
+                    >
+                        <Radio value={"dashed"}>虚线</Radio>
+                        <Radio value={"solid"}>实线</Radio>
+                    </RadioGroup>
+                </FormItem>
+            </Form>
+        );
     }
 }
