@@ -1,7 +1,10 @@
 import React, { Component } from "react";
 import { View } from "react-web-dom";
-import { Row, Col, Input } from "antd";
-import styles from "../separator/index.css";
+import { Input, Form } from "antd";
+import { formItemLayout } from "@/components/shop/diy/formLayout";
+
+const FormItem = Form.Item;
+
 //
 // type Props = {
 //     componentName: string,
@@ -10,39 +13,34 @@ import styles from "../separator/index.css";
 //     data: { url: string }
 // }
 // type State = {}
+/*<p>目前只支持腾讯视频，请填写完整的带有vid或者sid的视频地址，如：http://v.qq.com/xxx.html?vid=xxxx，默认用我们的广告视频</p>*/
 
 export default class Index extends Component {
 
     static defaultProps = {
-        componentName: 'video'
-    }
+        componentName: "video"
+    };
 
     render() {
-        const { options, data, getValues } = this.props
-        const { url } = data
+        const { options, data, getValues } = this.props;
+        const { url } = data;
         return (
-            <View className={`${styles.dataCtrlWarp} dataCtrlWarp`}>
-                <Row>
-                    <Col span={5}>视频地址：</Col>
-                    <Col span={19}>
-                        <Input
-                            value={url}
-                            onChange={(e) => {
-                                getValues({
-                                    options,
-                                    data: { ...data, ...{ url: e.target.value } }
-                                })
-                            }}
-                        />
-                    </Col>
-                </Row>
-                {/*<Row>*/}
-                    {/*<Col span={5} />*/}
-                    {/*<Col span={19}>*/}
-                        {/*<p>目前只支持腾讯视频，请填写完整的带有vid或者sid的视频地址，如：http://v.qq.com/xxx.html?vid=xxxx，默认用我们的广告视频</p>*/}
-                    {/*</Col>*/}
-                {/*</Row>*/}
-            </View>
-        )
+            <Form>
+                <FormItem
+                    {...formItemLayout}
+                    label="视频地址"
+                >
+                    <Input
+                        value={url}
+                        onChange={(e) => {
+                            getValues({
+                                options,
+                                data: { ...data, ...{ url: e.target.value } }
+                            });
+                        }}
+                    />
+                </FormItem>
+            </Form>
+        );
     }
 }

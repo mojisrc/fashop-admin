@@ -1,9 +1,12 @@
 import React, { Component } from "react";
-import { Row, Col, Icon, Modal, message, Radio } from "antd";
+import { Col, Icon, Modal, message, Radio, Form } from "antd";
 import styles from "./index.css";
 import SeleceGoods from "@/components/public/selectGoods/index";
 import { View } from "react-web-dom";
 import Image from "@/components/image/index";
+import { formItemLayout } from "@/components/shop/diy/formLayout";
+
+const FormItem = Form.Item;
 
 const RadioGroup = Radio.Group;
 //
@@ -31,22 +34,44 @@ const RadioGroup = Radio.Group;
 //     currentId: number,
 // }
 
-export default class Index extends Component  {
+export default class Index extends Component {
     state = {
         delectShow: false,
         addGoodsVisible: false,
         currentId: 0
-    }
-    static defaultProps ={
-        componentName: 'goods',
-    }
+    };
+    static defaultProps = {
+        componentName: "goods"
+    };
+
     render() {
-        const { delectShow, addGoodsVisible, currentId } = this.state
-        const { options, data, getValues } = this.props
-        const { layout_direction } = options
+        const { delectShow, addGoodsVisible, currentId } = this.state;
+        const { options, data, getValues } = this.props;
+        const { layout_direction } = options;
         return (
-            <View className={styles.goodsCtrlWarp}>
-                <Row gutter={16} style={{ marginBottom: 20 }}>
+            <Form>
+                <FormItem
+                    {...formItemLayout}
+                    label="展现形式"
+                >
+                    <RadioGroup
+                        value={layout_direction}
+                        onChange={(e) => {
+                            getValues({
+                                options: { ...options, ...{ layout_direction: e.target.value } },
+                                data
+                            });
+                        }}
+                    >
+                        <Radio value={1}>小图</Radio>
+                        <Radio value={2}>大图</Radio>
+                        <Radio value={3}>一大两小</Radio>
+                        <Radio value={4}>列表</Radio>
+                    </RadioGroup>
+                </FormItem>
+                <FormItem
+                    {...formItemLayout}
+                >
                     {
                         data.map((listItem, index) => (
                             <Col
@@ -56,15 +81,15 @@ export default class Index extends Component  {
                                     this.setState({
                                         delectShow: true,
                                         currentId: listItem.id
-                                    })
+                                    });
                                 }}
                                 onMouseLeave={() => {
                                     this.setState({
                                         delectShow: false,
                                         currentId: listItem.id
-                                    })
+                                    });
                                 }}
-                                style={{ position: 'relative' }}
+                                style={{ position: "relative" }}
                             >
                                 <View className={`${styles.goodsCtrlImgItemWarp} ${styles.goodsCtrlImgWarp}`}>
                                     <Image
@@ -77,7 +102,7 @@ export default class Index extends Component  {
                                         <a
                                             onClick={() => {
                                                 Modal.confirm({
-                                                    title: '确认删除?',
+                                                    title: "确认删除?",
                                                     content: (
                                                         <View className={styles.goodsCtrlConfirmDelete}>
                                                             <Image src={listItem.img} />
@@ -86,20 +111,20 @@ export default class Index extends Component  {
                                                         </View>
                                                     ),
                                                     maskClosable: true,
-                                                    okText: '确认',
-                                                    okType: 'danger',
-                                                    cancelText: '取消',
+                                                    okText: "确认",
+                                                    okType: "danger",
+                                                    cancelText: "取消",
                                                     onOk: () => {
                                                         let _data = data.filter((dataItem) => {
-                                                            return dataItem.id !== listItem.id
-                                                        })
+                                                            return dataItem.id !== listItem.id;
+                                                        });
                                                         getValues({
                                                             options,
                                                             data: _data
-                                                        })
-                                                        message.success('已删除', 1)
+                                                        });
+                                                        message.success("已删除", 1);
                                                     }
-                                                })
+                                                });
                                             }}
                                         >
                                             删除
@@ -109,67 +134,48 @@ export default class Index extends Component  {
                             </Col>
                         ))
                     }
-                    <Col span={6}>
-                        <View
-                            className={`${styles.goodsCtrlImgItemWarp} ${styles.goodsCtrlAddWarp}`}
-                            onClick={() => {
-                                this.setState({
-                                    addGoodsVisible: true
-                                })
-                            }}
-                        >
-                            <Icon type="plus" />
-                            <span>添加</span>
-                        </View>
-                    </Col>
+                    <View
+                        className={`${styles.goodsCtrlImgItemWarp} ${styles.goodsCtrlAddWarp}`}
+                        onClick={() => {
+                            this.setState({
+                                addGoodsVisible: true
+                            });
+                        }}
+                    >
+                        <Icon type="plus" />
+                        <span>添加</span>
+                    </View>
                     <SeleceGoods
                         visible={addGoodsVisible}
                         close={() => {
-                            this.setState({ addGoodsVisible: false })
+                            this.setState({ addGoodsVisible: false });
                         }}
                         multiSelect={true}
                         onOk={(goodsList) => {
-                            const _data = data
+                            const _data = data;
                             goodsList.map((item) =>
                                 _data.push({
                                     id: item.id,
                                     img: item.img,
                                     title: item.title,
-                                    price: item.price,
+                                    price: item.price
                                     // market_price: item.price,
                                     // desc: item.desc ? item.desc : ''
                                 })
-                            )
+                            );
                             this.setState({
                                 addGoodsVisible: false
                             }, () => {
                                 getValues({
                                     options,
                                     data: _data
-                                })
-                            })
+                                });
+                            });
                         }}
                     />
-                </Row>
-                <Row>
-                    <Col span={24}>
-                        <RadioGroup
-                            value={layout_direction}
-                            onChange={(e) => {
-                                getValues({
-                                    options: { ...options, ...{ layout_direction: e.target.value } },
-                                    data
-                                })
-                            }}
-                        >
-                            <Radio value={1}>小图</Radio>
-                            <Radio value={2}>大图</Radio>
-                            <Radio value={3}>一大两小</Radio>
-                            <Radio value={4}>列表</Radio>
-                        </RadioGroup>
-                    </Col>
-                </Row>
-            </View>
-        )
+                </FormItem>
+
+            </Form>
+        );
     }
 }

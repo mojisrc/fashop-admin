@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { ScrollView } from "react-web-dom";
-import styles from "./index.css";
+import { Card} from "antd";
 import Goods from "./goods";
 import ImageNav from "./imageNav";
 import GoodsList from "./goodsList";
@@ -75,8 +75,8 @@ export default class PageControl extends Component {
             }
         }
         return (
-                <ScrollView style={{height:'80vh'}} block={true} className={styles.dragCtrlWarp}>
-                    {item}
+                <ScrollView style={{height:'80vh'}} block={true}>
+                    <Card>{item}</Card>
                 </ScrollView>
         )
     }

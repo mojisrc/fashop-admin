@@ -1,11 +1,14 @@
 import React, { Component } from "react";
-import { Icon, Input, Row, Col, Radio, Modal, message } from "antd";
+import { Icon, Input,  Radio, Modal, message, Form } from "antd";
 import styles from "./index.css";
 import { View } from "react-web-dom";
 import UploadImage from "@/components/uploadImage";
-import ActionLink, { linkInfo } from "../common/actionLink"
+import ActionLink, { linkInfo } from "../common/actionLink";
+import { formItemLayout } from "@/components/shop/diy/formLayout";
 
 const RadioGroup = Radio.Group;
+const FormItem = Form.Item;
+
 // type LinkActionType = 'portal' | 'goods' | 'page' | 'url'
 //
 // type Props = {
@@ -29,37 +32,37 @@ const RadioGroup = Radio.Group;
 
 export default class Index extends Component {
     static defalutProps = {
-        componentName: 'imageAds'
-    }
+        componentName: "imageAds"
+    };
 
     render() {
-        let { options, data, getValues } = this.props
-        const { layout_style } = options
+        let { options, data, getValues } = this.props;
+        const { layout_style } = options;
         return (
-            <View className={`${styles.imageAdsCtrlWarp} imageAdsCtrlWarp`}>
-                <Row>
-                    <Col span={5}>显示形式：</Col>
-                    <Col span={19}>
-                        <RadioGroup
-                            value={layout_style}
-                            onChange={(e) => {
-                                getValues({
-                                    options: { ...options, ...{ layout_style: e.target.value } },
-                                    data
-                                })
-                            }}
-                        >
-                            <Radio value={1}>折叠轮播</Radio>
-                            <Radio value={2}>上下平铺</Radio>
-                        </RadioGroup>
-                    </Col>
-                </Row>
-                <Row>
-                    <Col span={5}>设置图片：</Col>
-                    <Col span={19}>
-                        <p>建议图片最大宽度不超过640px</p>
-                    </Col>
-                </Row>
+            <Form>
+                <FormItem
+                    {...formItemLayout}
+                    label="显示形式"
+                >
+                    <RadioGroup
+                        value={layout_style}
+                        onChange={(e) => {
+                            getValues({
+                                options: { ...options, ...{ layout_style: e.target.value } },
+                                data
+                            });
+                        }}
+                    >
+                        <Radio value={1}>折叠轮播</Radio>
+                        <Radio value={2}>上下平铺</Radio>
+                    </RadioGroup>
+                </FormItem>
+                <FormItem
+                    {...formItemLayout}
+                    label="设置图片"
+                    help="建议图片最大宽度不超过640px"
+                >
+                </FormItem>
                 {
                     Array.isArray(data) && data.length > 0 ? data.map((listItem, index) => (
                         <View
@@ -71,13 +74,13 @@ export default class Index extends Component {
                                     index > 0 ?
                                         <a
                                             onClick={() => {
-                                                let _data = data
-                                                let add = [_data[index], _data[index - 1]]
-                                                _data.splice(index - 1, 2, ...add)
+                                                let _data = data;
+                                                let add = [_data[index], _data[index - 1]];
+                                                _data.splice(index - 1, 2, ...add);
                                                 getValues({
                                                     options,
                                                     data: _data
-                                                })
+                                                });
                                             }}
                                         >
                                             上移
@@ -87,14 +90,14 @@ export default class Index extends Component {
                                     index < data.length - 1 ?
                                         <a
                                             onClick={() => {
-                                                let _data = data
-                                                let add = [_data[index + 1], _data[index]]
-                                                _data.splice(index, 2, ...add)
-                                                _data.splice(index - 1, 2, ...add)
+                                                let _data = data;
+                                                let add = [_data[index + 1], _data[index]];
+                                                _data.splice(index, 2, ...add);
+                                                _data.splice(index - 1, 2, ...add);
                                                 getValues({
                                                     options,
                                                     data: _data
-                                                })
+                                                });
                                             }}
                                         >
                                             下移
@@ -103,7 +106,7 @@ export default class Index extends Component {
                                 <a
                                     onClick={() => {
                                         Modal.confirm({
-                                            title: '确认删除？',
+                                            title: "确认删除？",
                                             content: (
                                                 <View>
                                                     <p>
@@ -114,7 +117,7 @@ export default class Index extends Component {
                                                                     alt=''
                                                                     src={listItem.img.url}
                                                                     style={{ width: 80 }}
-                                                                /> : '未添加'
+                                                                /> : "未添加"
                                                         }
                                                     </p>
                                                     <p>
@@ -122,21 +125,21 @@ export default class Index extends Component {
                                                     </p>
                                                 </View>
                                             ),
-                                            okText: '确认',
-                                            okType: 'danger',
-                                            cancelText: '取消',
+                                            okText: "确认",
+                                            okType: "danger",
+                                            cancelText: "取消",
                                             onOk() {
-                                                let _data = data
-                                                _data.splice(index, 1)
+                                                let _data = data;
+                                                _data.splice(index, 1);
                                                 getValues({
                                                     options,
                                                     data: _data
-                                                })
-                                                message.success('已删除', 1)
+                                                });
+                                                message.success("已删除", 1);
                                             },
                                             onCancel() {
-                                            },
-                                        })
+                                            }
+                                        });
                                     }}
                                 >
                                     删除
@@ -146,21 +149,21 @@ export default class Index extends Component {
                                 <View className={styles.imageAdsCtrlItemLeft}>
                                     <UploadImage
                                         onChange={(e) => {
-                                            let _data = data
-                                            _data[index].img = { url: e }
+                                            let _data = data;
+                                            _data[index].img = { url: e };
                                             getValues({
                                                 options,
                                                 data: _data
-                                            })
+                                            });
                                         }}
                                         is_save={1}
                                     >
                                         {
-                                            typeof listItem.img.url === 'string' && listItem.img.url.indexOf('http') > -1 ?
+                                            typeof listItem.img.url === "string" && listItem.img.url.indexOf("http") > -1 ?
                                                 <img
                                                     src={listItem.img.url}
                                                     alt=''
-                                                    style={{ width: '80px' }}
+                                                    style={{ width: "80px" }}
                                                 /> :
                                                 <View className={styles.uploadBtn}>
                                                     <Icon type='plus' />
@@ -177,12 +180,12 @@ export default class Index extends Component {
                                             placeholder='标题可以不设置'
                                             value={listItem.title}
                                             onChange={(e) => {
-                                                let _data = data
-                                                _data[index].title = e.target.value
+                                                let _data = data;
+                                                _data[index].title = e.target.value;
                                                 getValues({
                                                     options,
                                                     data: _data
-                                                })
+                                                });
                                             }}
                                         />
                                     </p>
@@ -194,24 +197,24 @@ export default class Index extends Component {
                                             selectPageVisible={false}
                                             inputUrlVisible={false}
                                             getValues={(state) => {
-                                                let _data = data
-                                                _data[index].link.action = state.type
-                                                _data[index].link.param = state.value
+                                                let _data = data;
+                                                _data[index].link.action = state.type;
+                                                _data[index].link.param = state.value;
                                                 getValues({
                                                     options,
                                                     data: _data
-                                                })
+                                                });
                                             }}
                                             value={() => {
                                                 switch (listItem.link.action) {
-                                                    case 'portal':
-                                                        return
-                                                    case 'goods':
-                                                        return listItem.link.param
-                                                    case 'page':
-                                                        return listItem.link.param
-                                                    case 'url':
-                                                        return listItem.link.param
+                                                    case "portal":
+                                                        return;
+                                                    case "goods":
+                                                        return listItem.link.param;
+                                                    case "page":
+                                                        return listItem.link.param;
+                                                    case "url":
+                                                        return listItem.link.param;
                                                 }
                                             }}
                                         />
@@ -226,23 +229,23 @@ export default class Index extends Component {
                     onClick={() => {
                         let _data = [...data, {
                             img: {
-                                url: require('@/assets/images/page/view/image-ads-default.png')
+                                url: require("@/assets/images/page/view/image-ads-default.png")
                             },
-                            title: '',
+                            title: "",
                             link: {
-                                action: 'portal',
+                                action: "portal",
                                 param: {}
                             }
-                        }]
+                        }];
                         getValues({
                             options,
                             data: _data
-                        })
+                        });
                     }}
                 >
                     <Icon type='plus' /> 添加
                 </View>
-            </View>
-        )
+            </Form>
+        );
     }
 }
