@@ -5,3 +5,6 @@
     padding: 16px;
     background-color: #ffffff;
 }
+.dragCtrlWarp .ant-row{
+    margin-bottom: 5px;
+}

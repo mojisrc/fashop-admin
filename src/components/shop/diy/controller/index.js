@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, ScrollView } from "react-web-dom";
+import { ScrollView } from "react-web-dom";
 import styles from "./index.css";
 import Goods from "./goods";
 import ImageNav from "./imageNav";
