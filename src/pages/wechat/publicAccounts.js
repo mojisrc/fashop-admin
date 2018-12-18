@@ -2,7 +2,7 @@ import React,{ Component } from 'react'
 
 import { connect } from 'dva';
 import * as actions from "../../actions/wechat";
-import { View } from "react-web-dom";
+import { View } from "@/components/flexView";
 import BindPublicAccountsTrue from "./bindTrue";
 import BindPublicAccountsFalse from "./bindFalse";
 @connect(

@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from "dva";
 import * as actions from "@/actions/wechat/material";
 import { Popconfirm, Row, Col, Pagination, Spin } from 'antd';
-import { View } from 'react-web-dom'
+import { View } from '@/components/flexView'
 import styles from './index.css'
 import EmptyView from '../emptyView'
 import moment from 'moment'

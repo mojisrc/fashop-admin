@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Row, Col, Button, Input, Rate, Switch, Pagination, Spin } from "antd";
 import styles from "./index.css";
 import Image from "@/components/image/index";
-import { View } from "react-web-dom";
+import { View } from "@/components/flexView";
 import moment from "moment";
 import { connect } from "dva";
 import PhotoGallery from "@/components/photoGallery/index";

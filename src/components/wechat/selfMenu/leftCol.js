@@ -1,6 +1,6 @@
 import React,{ Component } from 'react'
 import { Button, Icon, Popover, Modal } from 'antd'
-import { View } from 'react-web-dom'
+import { View } from '@/components/flexView'
 import styles from './leftCol.css'
 import DragAndDrop from '../dragAndDrop'
 //

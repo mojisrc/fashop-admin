@@ -4,7 +4,7 @@ import { Card } from "antd";
 
 export default class CouponEdit extends Component {
     render() {
-        return <PageHeaderWrapper>
+        return <PageHeaderWrapper hiddenBreadcrumb={true}>
             <Card></Card>
         </PageHeaderWrapper>
     }

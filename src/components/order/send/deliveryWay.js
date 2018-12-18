@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "dva";
 import { Form, Select, Radio, Card, Input } from "antd";
-import { View } from "react-web-dom";
+import { View } from "@/components/flexView";
 import styles from "./index.css";
 
 const FormItem = Form.Item;

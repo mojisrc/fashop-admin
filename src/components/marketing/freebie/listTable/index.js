@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Table, Button, Switch, Modal, Divider } from "antd";
 import styles from "./index.css";
-import { View } from "react-web-dom";
+import { View } from "@/components/flexView";
 import { connect } from "dva";
 import Image from "@/components/image";
 import moment from "moment";
@@ -74,13 +74,13 @@ export default class FreebieListTable extends Component {
                 width: 230
             }, {
                 title: "活动状态",
-                dataIndex: "title",
+                dataIndex: "status",
             }, {
                 title: "已赠送",
-                dataIndex: "title",
+                dataIndex: "go",
             }, {
                 title: "已领取",
-                dataIndex: "title",
+                dataIndex: "get",
             }, {
                 title: "操作",
                 key: "operation",

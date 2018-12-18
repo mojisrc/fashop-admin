@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View } from "react-web-dom";
+import { View } from "@/components/flexView";
 import { Slider, Row, Col } from "antd";
 // type Props = {
 //     componentName?:string,

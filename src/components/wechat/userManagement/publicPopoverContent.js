@@ -1,5 +1,5 @@
 import React,{ Component } from 'react'
-import { View } from 'react-web-dom'
+import { View } from '@/components/flexView'
 import { Button, Input } from 'antd'
 import styles from './index.css'
 

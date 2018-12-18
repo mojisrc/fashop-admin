@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Input, Row, Col } from "antd";
 import ColorPicker from "@/components/public/ColorPicker";
 import styles from "../controller/title/index.css";
-import { View } from "react-web-dom";
+import { View } from "@/components/flexView";
 const { TextArea } = Input;
 
 // type Props = {

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from 'dva';
-import { View } from "react-web-dom";
+import { View } from "@/components/flexView";
 import PageHeaderWrapper from '@/components/pageHeaderWrapper';
 import styles from '@/styles/user/userInfo.css'
 import UploadImage from '@/components/uploadImage'

@@ -1,8 +1,8 @@
-import React, { PureComponent, PropTypes } from "react";
+import React, { PureComponent } from "react";
 import Img from "react-image";
 import { Icon } from "antd";
 import styles from "./index.css";
-import { View } from "react-web-dom";
+import { View } from "@/components/flexView";
 
 export default class NetWorkImage extends PureComponent {
     render() {

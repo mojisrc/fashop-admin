@@ -1,7 +1,7 @@
 import React,{ Component } from "react";
 import { connect } from "dva";
 import { Form, Select, Input,  Button } from 'antd';
-import { View } from "react-web-dom";
+import { View } from "@/components/flexView";
 import UploadImage from "@/components/uploadImage";
 import {
     getGoodsCategoryList,

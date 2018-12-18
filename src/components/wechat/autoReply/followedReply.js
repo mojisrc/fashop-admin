@@ -3,7 +3,7 @@ import React,{ Component } from 'react'
 import { connect } from "dva";
 import * as actions from "@/actions/wechat/autoReply";
 import { Button, Modal } from 'antd'
-import { View } from 'react-web-dom'
+import { View } from '@/components/flexView'
 import styles from './index.css'
 import MsgTab from '../public/msgTab'
 //

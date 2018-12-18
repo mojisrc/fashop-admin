@@ -3,7 +3,7 @@ import React,{ Component } from 'react'
 
 import { connect } from 'dva';
 import * as actions from "../../actions/wechat/autoReply";
-import { View } from "react-web-dom";
+import { View } from "@/components/flexView";
 import { Form, Input, Icon, Button, Select, Radio, Card, Popover, Popconfirm } from "antd";
 import "@/styles/wechat/addReply.less";
 

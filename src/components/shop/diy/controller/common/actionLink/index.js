@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import styles from "./index.css";
-import { View } from "react-web-dom";
+import { View } from "@/components/flexView";
 import { Popover, Tag, Input, Modal } from "antd";
 import SelectGoods from "@/components/public/selectGoods/index";
 import SelectPage from "@/components/public/selectPage/index";

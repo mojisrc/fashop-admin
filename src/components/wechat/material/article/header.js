@@ -1,6 +1,6 @@
 import React,{ Component } from 'react'
 import { Button, Radio, Popover } from 'antd';
-import { View } from 'react-web-dom'
+import { View } from '@/components/flexView'
 import styles from '../index.css'
 //
 // type Props = {

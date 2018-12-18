@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Tabs, Row, Col, Card } from "antd";
-import { View } from "react-web-dom";
+import { View } from "@/components/flexView";
 import PageHeaderWrapper from '@/components/pageHeaderWrapper';
 import styles from "@/styles/customer/customerDetail.css";
 import ShoppingInfo from "@/components/user/shopping";

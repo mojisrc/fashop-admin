@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Table, Button, Modal } from "antd";
 import styles from "./index.css";
-import { View } from "react-web-dom";
+import { View } from "@/components/flexView";
 import { connect } from "dva";
 import Query from "@/utils/query";
 import router from "umi/router";

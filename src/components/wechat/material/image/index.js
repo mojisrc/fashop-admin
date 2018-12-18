@@ -1,5 +1,5 @@
 import React,{ Component } from 'react'
-import { View } from 'react-web-dom'
+import { View } from '@/components/flexView'
 import ImageHeader from './header'
 import ImageTable from './table'
 export default class Image extends Component {

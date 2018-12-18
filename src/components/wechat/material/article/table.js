@@ -3,7 +3,7 @@ import React,{ Component } from 'react'
 import { connect } from "dva";
 import * as actions from "@/actions/wechat/material";
 import { Popconfirm, Row, Col, Spin, Pagination, message } from 'antd';
-import { View } from 'react-web-dom'
+import { View } from '@/components/flexView'
 import styles from './index.css'
 
 import Image from '@/image'

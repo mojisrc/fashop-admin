@@ -1,5 +1,5 @@
 import React,{ Component } from "react";
-import { View } from "react-web-dom";
+import { View } from "@/components/flexView";
 import { Redirect, Route, Switch } from "react-router-dom";
 import { getRoutes } from "@/utils";
 export default class Index extends Component {

@@ -8,7 +8,7 @@ import {
     Upload,
     Modal,
 } from 'antd'
-import { View } from 'react-web-dom'
+import { View } from '@/components/flexView'
 import styles from './index.css'
 import Emoji from "@/components/public/emoji";
 import ModalNews from "@/components/public/wechatItem/modalNews";

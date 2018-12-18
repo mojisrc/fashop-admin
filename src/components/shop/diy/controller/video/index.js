@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View } from "react-web-dom";
+import { View } from "@/components/flexView";
 import { Row, Col, Input } from "antd";
 import styles from "../separator/index.css";
 //

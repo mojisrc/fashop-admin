@@ -4,7 +4,7 @@ import { Button, Divider, Form, Input, Select, Table,Card } from "antd";
 import update from "immutability-helper";
 import { getQueryPath } from "@/utils";
 import Query from "@/utils/query";
-import { View } from "react-web-dom";
+import { View } from "@/components/flexView";
 import OrderModel from "@/models1/order";
 import moment from "moment";
 import PageHeaderWrapper from "@/components/pageHeaderWrapper";

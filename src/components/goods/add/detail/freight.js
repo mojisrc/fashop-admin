@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View } from "react-web-dom";
+import { View } from "@/components/flexView";
 import { Select, Radio, InputNumber, Form, Button, DatePicker } from "antd";
 import Wstyles from "./index.css";
 import { Link } from "react-router-dom";

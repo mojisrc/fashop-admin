@@ -8,7 +8,7 @@ import {
     DatePicker,
 } from "antd";
 import styles from "./index.css";
-import { View } from "react-web-dom";
+import { View } from "@/components/flexView";
 
 const InputGroup = Input.Group;
 const Search = Input.Search;

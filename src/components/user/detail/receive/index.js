@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "dva";
-import { View } from "react-web-dom";
+import { View } from "@/components/flexView";
 import { Card, Pagination } from "antd";
 import styles from "./index.css";
 import InfoRow from "../../../public/info/infoRow";

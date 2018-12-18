@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View } from "react-web-dom";
+import { View } from "@/components/flexView";
 import { Modal, Tabs, Button, Row, Col, Checkbox, Pagination, Spin } from "antd";
 import styles from "./index.css";
 import { connect } from "dva";

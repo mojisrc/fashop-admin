@@ -9,7 +9,7 @@ import {
     getWechatUserTagList,
 } from "@/actions/wechat/userTags";
 import { Modal, Button, Tag, Popover, DatePicker, Radio, message } from 'antd'
-import { View } from 'react-web-dom'
+import { View } from '@/components/flexView'
 import styles from './index.css'
 import { data } from './testData'
 import MsgTab from '../public/msgTab'

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Row, Col, Icon, Modal, message, Radio } from "antd";
 import styles from "./index.css";
 import SeleceGoods from "@/components/public/selectGoods/index";
-import { View } from "react-web-dom";
+import { View } from "@/components/flexView";
 import Image from "@/components/image/index";
 
 const RadioGroup = Radio.Group;

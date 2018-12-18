@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "dva";
-import { View } from "react-web-dom";
+import { View } from "@/components/flexView";
 import styles from "./spec.css";
 import { Modal, Input, Select, Button, Icon, Tag, Popover, Checkbox, message } from "antd";
 import { ThemeStyle } from "@/utils/style";

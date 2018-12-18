@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Table, Divider, Input, Select, Button, Form } from "antd";
-import { View } from "react-web-dom";
+import { View } from "@/components/flexView";
 import moment from "moment/moment";
 import Query from "@/utils/query"
 import OrderModel from "@/models1/order"

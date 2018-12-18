@@ -3,7 +3,7 @@ import {
     Button
 } from "antd";
 import styles from "./index.css";
-import { View } from "react-web-dom";
+import { View } from "@/components/flexView";
 import router from "umi/router";
 
 export default class OrderDetailOperateInfo extends Component {

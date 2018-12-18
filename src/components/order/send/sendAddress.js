@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Form, Select, Card, Row, Col, Alert } from "antd";
-import { View } from "react-web-dom";
+import { View } from "@/components/flexView";
 import styles from "./index.css";
 import { connect } from "dva";
 

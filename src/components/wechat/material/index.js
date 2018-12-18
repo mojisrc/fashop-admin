@@ -1,6 +1,6 @@
 import React,{ Component } from 'react'
 import { Tabs } from 'antd'
-import { View } from 'react-web-dom'
+import { View } from '@/components/flexView'
 import Article from './article'
 import Image from './image'
 import Voice from './voice'

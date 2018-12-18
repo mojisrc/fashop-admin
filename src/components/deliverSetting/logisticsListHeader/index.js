@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import {Button, Input,Select, TreeSelect,Form, } from "antd";
-import { View } from "react-web-dom";
+import { View } from "@/components/flexView";
 import { connect } from "dva";
 
 const Search = Input.Search;

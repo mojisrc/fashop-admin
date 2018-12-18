@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View } from "react-web-dom";
+import { View } from "@/components/flexView";
 import { Modal, Table, Button } from "antd";
 import { connect } from "dva";
 import moment from "moment";

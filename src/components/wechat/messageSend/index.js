@@ -1,6 +1,6 @@
 import React,{ Component } from 'react'
 import { Tabs } from 'antd'
-import { View } from 'react-web-dom'
+import { View } from '@/components/flexView'
 import SendTable from './sendTable'
 import SendRecord from './sendRecord'
 

@@ -6,7 +6,7 @@ import PageHeaderWrapper from '@/components/pageHeaderWrapper';
 
 import FreightAddTable from '@/components/setting/freightAddTable/index'
 import { connect } from 'dva';
-import { View, ScrollView } from "react-web-dom";
+import { View, ScrollView } from "@/components/flexView";
 
 import { FreightApi } from "@/services/freight";
 const RadioGroup = Radio.Group;

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Row, Col, Button } from 'antd';
 import styles from "./index.css";
-import { View } from "react-web-dom";
+import { View } from "@/components/flexView";
 import { defaultData } from "./defaultData";
 //
 // type Props = {

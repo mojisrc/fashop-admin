@@ -1,6 +1,6 @@
 import React,{ Component } from 'react'
 import { Input, Button, Select, Row, Col, Checkbox } from 'antd';
-import { View } from 'react-web-dom'
+import { View } from '@/components/flexView'
 import styles from './index.css'
 const Search = Input.Search;
 const Option = Select.Option;

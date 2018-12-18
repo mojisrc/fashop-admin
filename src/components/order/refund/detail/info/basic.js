@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import styles from "../index.css";
-import { View } from "react-web-dom";
+import { View } from "@/components/flexView";
 import InfoRow from "@/components/public/info/infoRow";
 import moment from 'moment'
 import router from "umi/router";

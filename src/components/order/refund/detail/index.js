@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from 'dva';
-import { View } from "react-web-dom";
+import { View } from "@/components/flexView";
 import BasicInfo from "./info/basic";
 import DetailInfo from "./info/detail";
 import GoodsInfo from "./info/goods";

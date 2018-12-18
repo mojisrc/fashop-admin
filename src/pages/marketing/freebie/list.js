@@ -8,7 +8,7 @@ import { Card } from "antd";
 @connect()
 class Freebie extends Component {
     render() {
-        return <PageHeaderWrapper>
+        return <PageHeaderWrapper hiddenBreadcrumb={true}>
             <Card bordered={false}>
                 <FreebieListHeader {...this.props} />
                 <FreebieListTable {...this.props} />

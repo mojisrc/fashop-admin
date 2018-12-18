@@ -17,7 +17,7 @@ import {
     tagWechatUser,
     untagWechatUser,
 } from "@/actions/wechat/userTags";
-import { View } from 'react-web-dom'
+import { View } from '@/components/flexView'
 import { Row, Col, Button, Table, Menu, Pagination, Popover, Popconfirm, Icon } from 'antd'
 import styles from './index.css'
 import AvatarPopover from '../public/avatarPopover'
