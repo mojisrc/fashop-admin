@@ -1,11 +1,11 @@
-import React, { PureComponent, Fragment } from "react";
-import { Divider, Popover, Row, Col } from "antd";
+import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import styles from "@/components/shop/diy/controller/imageNav/index.css";
 import UploadImage from "@/components/uploadImage";
 import { formItemLayout } from "@/components/shop/diy/formLayout";
 import ActionLink from "@/components/shop/diy/controller/common/actionLink";
 import ColorPicker from "@/components/public/colorPicker";
+import styles from "./index.css";
+
 // 返回组内一条的数据格式
 const _response = {
     title: "",
@@ -19,7 +19,7 @@ const _response = {
     background_color: "#FFFFFF",
     font_color: "#333333"
 };
-export default class ClickSort extends PureComponent {
+export default class Item extends PureComponent {
     static propTypes = {
         title: PropTypes.object,
         img: PropTypes.object,

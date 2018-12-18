@@ -1,9 +1,7 @@
 import React, { Component } from "react";
-import { Icon, Radio, Form, Card } from "antd";
-import styles from "./index.css";
+import { Radio, Form } from "antd";
 import { View } from "react-web-dom";
 import { formItemLayout } from "@/components/shop/diy/formLayout";
-import ClickSort from "@/components/shop/diy/controller/common/clickSort";
 import ListCard from "@/components/shop/diy/controller/common/listCard";
 
 const FormItem = Form.Item;
@@ -85,7 +83,6 @@ export default class Index extends Component {
                         <Radio value={5}>5 个</Radio>
                     </RadioGroup>
                 </FormItem>
-
                 <FormItem
                     {...formItemLayout}
                     label="设置图片"
@@ -108,66 +105,25 @@ export default class Index extends Component {
                         <Radio value={5}>5 个</Radio>
                     </RadioGroup>
                 </FormItem>
-                {
-                    data.map((listItem, index) => (
-                        <Card
-                            className={styles.imgNavCtrlItem}
-                            // title={'建议图片像素为40 x 40'}
-                            key={`card${index}`}
-                            type={"inner"}
-                            extra={
-                                <ClickSort
-                                    index={index}
-                                    data={data}
-                                    onChange={(data) => {
-                                        getValues({
-                                            options,
-                                            data
-                                        });
-                                    }}
-                                />
-                            }
-                        >
-                            { listItem.map((sub, subIndex) => <ListCard
-                                img={sub.img}
-                                title={sub.title}
-                                link={sub.link}
-                                onChange={(response) => {
-                                    let _data = data;
-                                    _data[index][subIndex] = response;
-                                    getValues({
-                                        options,
-                                        data: _data
-                                    });
-                                }}
-                            />)}
-                        </Card>
-                    ))
-                }
-                <div
-                    className={styles.imgNavCtrlItemAdd}
-                    onClick={() => {
-                        let _data = [
-                            ...data,
-                            {
-                                img: {
-                                    url: require("@/assets/images/page/view/image-nav-default.png")
-                                },
-                                title: "文字",
-                                link: {
-                                    action: "portal",
-                                    param: {}
-                                }
-                            }
-                        ];
+                <ListCard.Make
+                    defaultValue={{
+                        img: {
+                            url: require("@/assets/images/page/view/image-nav-default.png")
+                        },
+                        title: "文字",
+                        link: {
+                            action: "portal",
+                            param: {}
+                        }
+                    }}
+                    dataSource={data}
+                    onChange={(data)=>{
                         getValues({
                             options,
-                            data: _data
+                            data
                         });
                     }}
-                >
-                    <Icon type='plus' /> 添加
-                </div>
+                />
             </Form>
         );
     }

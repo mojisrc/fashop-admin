@@ -1,5 +1,5 @@
 import React, { PureComponent, Fragment } from "react";
-import { Divider, Popover,Row,Col } from "antd";
+import { Divider, Popover} from "antd";
 import PropTypes from "prop-types";
 
 export default class ClickSort extends PureComponent {
