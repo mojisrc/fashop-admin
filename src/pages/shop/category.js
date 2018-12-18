@@ -47,7 +47,7 @@ export default class Category extends Component {
         const { availableList } = this.state;
         const { shopInfo, editGoodsCategoryStyle } = this.props;
         return (
-            <PageHeaderWrapper>
+            <PageHeaderWrapper hiddenBreadcrumb={true}>
             <Card bordered={false}>
                 <Row gutter={16}>
                     <Col span={16}>

@@ -41,6 +41,7 @@ class SearchList extends Component {
 
         return (
             <PageHeaderWrapper
+                hiddenBreadcrumb={true}
                 tabList={tabList}
                 tabActiveKey={location.pathname.replace(`${match.path}/`, '')}
                 onTabChange={this.handleTabChange}

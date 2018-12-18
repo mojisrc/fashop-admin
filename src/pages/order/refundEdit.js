@@ -11,7 +11,7 @@ export default class RefundEdit extends Component {
         const { id } = query.getParams()
 
         return (
-            <PageHeaderWrapper>
+            <PageHeaderWrapper hiddenBreadcrumb={true}>
             <View className={`${styles.refundEditWarp} refundEdit`}>
                 <Card bordered={false}>
                     <RefundDetail

@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { View } from "react-web-dom";
 //
 // type Props = {
 //     options: {
@@ -13,12 +12,12 @@ export default class Index extends Component {
         const { options } = this.props
         const { height } = options
         return (
-            <View
+            <div
                 style={{
                     height: `${height}px`
                 }}
             >
-            </View>
+            </div>
         )
     }
 }

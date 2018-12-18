@@ -8,23 +8,11 @@ const FooterView = () => (
     <GlobalFooter
       links={[
         {
-          key: 'Pro 首页',
-          title: 'Pro 首页',
-          href: 'https://pro.ant.design',
-          blankTarget: true,
-        },
-        {
           key: 'github',
           title: <Icon type="github" />,
-          href: 'https://github.com/ant-design/ant-design-pro',
+          href: 'https://github.com/mojisrc/fashop-admin',
           blankTarget: true,
-        },
-        {
-          key: 'FaShop',
-          title: 'FaShop',
-          href: 'https://ant.design',
-          blankTarget: true,
-        },
+        }
       ]}
       copyright={
         <Fragment>

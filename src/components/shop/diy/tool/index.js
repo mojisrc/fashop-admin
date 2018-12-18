@@ -17,13 +17,13 @@ export default class PageTool extends Component {
             <View className={styles.dragModuleWarp}>
                 <Row>
                     <Col span={24}>
-                        <p className={styles.dragModuleTitle}>添加模块</p>
+                        <p className={styles.dragModuleTitle}>基础模块</p>
                     </Col>
                 </Row>
                 <Row className={styles.itemRow}>
                     {
                         defaultData.length > 0 ? defaultData.map((item, index) => {
-                            return <Col span={12} key={index} className={styles.buttonCol}>
+                            return <Col span={8} key={index} className={styles.buttonCol}>
                                 <Button
                                     className={styles.moduleItem}
                                     onClick={() => {

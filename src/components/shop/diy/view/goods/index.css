@@ -1,5 +1,8 @@
 /*goodsPhone*/
 .goodsPhoneWarp {
+    display: flex;
+    align-items: initial;
+    justify-content: flex-start;
     flex-direction: row;
     flex-wrap: wrap;
     padding: 0 6px;

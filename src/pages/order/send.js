@@ -117,7 +117,7 @@ export default class Send extends Component {
             getFieldDecorator("tracking_no", { initialValue: tracking_no });
         }
         return (
-            <PageHeaderWrapper>
+            <PageHeaderWrapper hiddenBreadcrumb={true}>
             <Card bordered={false}>
                 <Form onSubmit={this.handleSubmit}>
                     <SendAddress

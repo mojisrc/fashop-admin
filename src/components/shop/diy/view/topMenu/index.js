@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import styles from "./index.css";
-import { View } from "react-web-dom";
 //
 // type Props = {
 //     options: {
@@ -27,10 +26,10 @@ export default class Index extends Component {
         const { data, options } = this.props
         const { menu_format, menu_space } = options
         return (
-            <View className={styles.topMenuPhoneWarp}>
+            <div className={styles.topMenuPhoneWarp}>
                 {
                     data.map((item, index) => {
-                        return <View
+                        return <div
                             key={index}
                             className={styles.topMenuPhoneItem}
                             style={{
@@ -56,10 +55,10 @@ export default class Index extends Component {
                             >
                                 {item.title}
                             </p>
-                        </View>
+                        </div>
                     })
                 }
-            </View>
+            </div>
         )
     }
 }

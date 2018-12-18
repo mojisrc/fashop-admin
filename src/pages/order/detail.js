@@ -3,7 +3,7 @@ import OrderDetailView from "@/components/order/detail";
 import { connect } from "dva";
 import { getPageQuery } from "@/utils/utils";
 import { Spin, Card } from "antd";
-
+import PageHeaderWrapper from '@/components/pageHeaderWrapper';
 @connect(({ order, loading }) => ({
     orderInfo: order.info,
     orderInfoLoading: loading.effects["order/info"]
@@ -58,7 +58,7 @@ export default class Detail extends Component {
     render() {
         const { orderInfoLoading, orderInfo } = this.props;
         return (
-            <PageHeaderWrapper>
+            <PageHeaderWrapper hiddenBreadcrumb={true}>
                 <Card bordered={false}>
                     <Spin size="large" className="globalSpin" spinning={orderInfoLoading}>
                         <OrderDetailView orderInfo={orderInfo.result} />

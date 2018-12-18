@@ -1,5 +1,9 @@
 /* imageAdsPhone */
 .imageAdsPhoneWarp{
+    display: flex;
+    align-items: initial;
+    justify-content: flex-start;
+    flex-direction: column;
     width: 100%;
 }
 .carouselItem{
@@ -7,6 +11,7 @@
     height: 187.5px!important;
     overflow: hidden;
     display: initial!important;
+
 }
 .carouselItem img{
     width: 100%;

@@ -8,7 +8,7 @@ import { Card } from "antd";
 export default class Evaluate extends Component {
     render() {
         return (
-            <PageHeaderWrapper>
+            <PageHeaderWrapper hiddenBreadcrumb={true}>
             <Card bordered={false}>
                 <EvaluateListHeader {...this.props} />
                 <EvaluateListTable {...this.props} />

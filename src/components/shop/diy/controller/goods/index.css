@@ -11,6 +11,8 @@
     align-items: center;
     justify-content: center;
     cursor: pointer;
+    display: flex;
+    text-align: center;
 }
 
 .goodsCtrlImgWarp {

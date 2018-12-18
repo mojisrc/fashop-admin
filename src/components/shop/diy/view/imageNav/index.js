@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import styles from "./index.css";
-import { View } from "react-web-dom";
 //
 // type Props = {
 //     options: {
@@ -25,22 +24,22 @@ export default class Index extends Component {
         const { data,options } = this.props
         const {each_row_display} = options
         return (
-            <View
+            <div
                 className={styles.imgNavPhoneWarp}
             >
                 {
                     data.map((item, index) => {
-                        return <View
+                        return <div
                             key={index}
                             className={styles.imgNavPhonItem}
                             style={{ width: 100 / each_row_display + '%' ,marginTop:(index+1 > each_row_display ) ? 5 :0  }}
                         >
                             <img alt='' src={item.img.url} />
                             <p>{item.title}</p>
-                        </View>
+                        </div>
                     })
                 }
-            </View>
+            </div>
         )
     }
 }

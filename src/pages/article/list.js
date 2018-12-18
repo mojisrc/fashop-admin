@@ -50,7 +50,7 @@ export default class List extends Component {
     render() {
         const { articleList } = this.state;
         return (
-            <PageHeaderWrapper>
+            <PageHeaderWrapper hiddenBreadcrumb={true}>
                 <Card bordered={false}>
                     <TableList
                         articleList={articleList}

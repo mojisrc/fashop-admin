@@ -6,7 +6,7 @@ import { Card } from "antd";
 class Order extends Component {
     render() {
         return (
-            <PageHeaderWrapper>
+            <PageHeaderWrapper hiddenBreadcrumb={true}>
                 <Card bordered={false}>
                     <OrderProcess {...this.props} />
                 </Card>

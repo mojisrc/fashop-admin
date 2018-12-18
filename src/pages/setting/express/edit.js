@@ -52,7 +52,7 @@ export default class Edit extends Component {
         console.log(is_commonly_use)
         const { getFieldDecorator } = this.props.form
         return (
-            <PageHeaderWrapper>
+            <PageHeaderWrapper hiddenBreadcrumb={true}>
             <Card bordered={false}>
                 <Form onSubmit={this.handleSubmit} style={{ width: 1000 }}>
                     <FormItem

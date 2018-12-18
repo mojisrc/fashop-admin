@@ -8,7 +8,7 @@ import { Card } from "antd";
 export default class GoodsCategory extends Component {
     render() {
         return (
-            <PageHeaderWrapper>
+            <PageHeaderWrapper hiddenBreadcrumb={true}>
                 <Card bordered={false}>
                     <GoodsCategoryTable {...this.props} />
                 </Card>

@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-import { View } from "react-web-dom";
-import styles from "../separator/index.css";
+import styles from "./index.css";
 //
 // type Props = {
 //     options: any,
@@ -13,7 +12,7 @@ export default class Index extends Component {
         const { data } = this.props
         const { url } = data
         return (
-            <View className={styles.videoPhoneWarp}>
+            <div className={styles.videoPhoneWarp}>
                 <video src={url} controls="controls">
                     您的浏览器不支持 video 标签。
                 </video>
@@ -27,7 +26,7 @@ export default class Index extends Component {
                         type="video/mp4"
                     />
                 </video> */}
-            </View>
+            </div>
         )
     }
 }

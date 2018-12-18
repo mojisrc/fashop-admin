@@ -5,7 +5,7 @@
 .fetchLoading{
     flex: 1;
 }
-.View{
+.view{
     display: flex;
     align-items: initial;
     justify-content: flex-start;

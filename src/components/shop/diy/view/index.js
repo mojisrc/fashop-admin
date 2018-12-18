@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Modal, message } from "antd";
-import { View } from "react-web-dom";
 import { SortableContainer, SortableElement, arrayMove } from "react-sortable-hoc";
 import Goods from "./goods";
 import GoodsList from "./goodsList";
@@ -207,7 +206,7 @@ export default class PageView extends Component {
         const { body, options, onHeaderClick, backgroundColor } = this.props;
 
         const items = body.length > 0 ? body.map((item, index) => (
-            <View
+            <div
                 key={index}
                 className={styles.phoneItem}
                 style={
@@ -230,7 +229,7 @@ export default class PageView extends Component {
                 }
                 {
                     (options.index === index) || (hoverShow === index && hoverShow !== options.index) ?
-                        <View
+                        <div
                             className={styles.operation}
                             onClick={(e) => {
                                 e.stopPropagation();
@@ -244,14 +243,14 @@ export default class PageView extends Component {
                             }
                             <a data-index={index}>编辑</a>
                             <a data-index={index}>删除</a>
-                        </View>
+                        </div>
                         : null
                 }
-            </View>
+            </div>
         )) : [];
         return (
-            <View className={styles.dragPhoneWarp}>
-                <View
+            <div className={styles.dragPhoneWarp}>
+                <div
                     className={styles.dragPhoneHeader}
                     onClick={onHeaderClick}
                 >
@@ -260,14 +259,14 @@ export default class PageView extends Component {
                         src={require("@/assets/images/shop/page-setting.png")}
                         alt='diyPhone'
                     />
-                </View>
-                <View
+                </div>
+                <div
                     className={styles.dragPhoneContain}
                     style={backgroundColor ? { backgroundColor } : { backgroundColor: "#FFFFFF" }}
                 >
                     <SortableList items={items} onSortEnd={this.onSortEnd} onSortStart={this.onSortStart} />
-                </View>
-            </View>
+                </div>
+            </div>
         );
     }
 // : { typ, title }

@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import styles from "./index.css";
-import { View } from "react-web-dom";
 import Image from "@/components/image/index";
 //
 // type goodsItem = {
@@ -32,7 +31,7 @@ export default class Index extends Component {
         let showPrice = goods_display_field.indexOf('price') > -1
         let showMarketPrice = goods_display_field.indexOf('market_price') > -1
         return (
-            <View className={styles[`goodsListWarp${layout_style}`]}>
+            <div className={styles[`goodsListWarp${layout_style}`]}>
                 {
                     data.map((item, index) => {
                         if (layout_style === 1) {
@@ -46,56 +45,56 @@ export default class Index extends Component {
                         }
                     })
                 }
-            </View>
+            </div>
         )
     }
     // small(item: goodsItem, index, showTitle, showPrice, showMarketPrice) {
     small(item, index, showTitle, showPrice, showMarketPrice) {
         const imgWidth = (375 - 18 - 2) / 2 + 'px'
         return (
-            <View
+            <div
                 className={styles.smallWarp}
                 key={index}
                 style={{ width: imgWidth, marginRight: index % 2 === 0 ? '6px' : 0 }}
             >
-                <View className={styles.smallImgWarp}>
+                <div className={styles.smallImgWarp}>
                     <Image src={item.img} style={{ width: imgWidth, height: imgWidth }} />
-                </View>
-                <View className={styles.smallBot}>
+                </div>
+                <div className={styles.smallBot}>
                     <p className={styles.smallTitle}>{showTitle ? item.title : ''}</p>
                     <p className={styles.smallPrice}>
                         {/*<span>{showMarketPrice ? `￥${item.market_price}` : ''}</span>*/}
                         {showPrice ? `￥${item.price}` : ''}
                     </p>
-                </View>
-            </View>
+                </div>
+            </div>
         )
     }
 
     big(item, index, showTitle, showPrice, showMarketPrice) {
         return (
-            <View
+            <div
                 className={styles.bigWarp}
                 key={index}
             >
-                <View className={styles.smallImgWarp}>
+                <div className={styles.smallImgWarp}>
                     <Image src={item.img} />
-                </View>
-                <View className={styles.smallBot}>
+                </div>
+                <div className={styles.smallBot}>
                     <p className={styles.smallTitle}>{showTitle ? item.title : ''}</p>
                     <p className={styles.smallPrice}>
                         {/*<span>{showMarketPrice ? `￥${item.market_price}` : ''}</span>*/}
                         {showPrice ? `￥${item.price}` : ''}
                     </p>
-                </View>
-            </View>
+                </div>
+            </div>
         )
     }
 
     oneBigTwoSmall(item, index, showTitle, showPrice, showMarketPrice) {
         const imgWidth = (375 - 18 - 2) / 2 + 'px'
         return (
-            <View
+            <div
                 key={index}
                 style={{
                     width: `${
@@ -107,7 +106,7 @@ export default class Index extends Component {
 
                 }}
             >
-                <View className={styles.smallImgWarp}>
+                <div className={styles.smallImgWarp}>
                     <Image src={item.img}
                     style={{
                         width: `${
@@ -119,35 +118,35 @@ export default class Index extends Component {
                     }}
 
                     />
-                </View>
-                <View className={styles.smallBot}>
+                </div>
+                <div className={styles.smallBot}>
                     <p className={styles.smallTitle}>{showTitle ? item.title : ''}</p>
                     <p className={styles.smallPrice}>
                         {/*<span>{showMarketPrice ? `￥${item.market_price}` : ''}</span>*/}
                         {showPrice ? `￥${item.price}` : ''}
                     </p>
-                </View>
-            </View>
+                </div>
+            </div>
         )
     }
 
     list(item, index, showTitle, showPrice, showMarketPrice) {
         return (
-            <View
+            <div
                 className={styles.listWarp}
                 key={index}
             >
-                <View className={styles.listImgWarp}>
+                <div className={styles.listImgWarp}>
                     <Image src={item.img} />
-                </View>
-                <View className={styles.listRight}>
+                </div>
+                <div className={styles.listRight}>
                     <p className={styles.listTitle}>{showTitle ? item.title : ''}</p>
                     <p className={styles.listPrice}>
                         {/*<span>{showMarketPrice ? `￥${item.market_price}` : ''}</span>*/}
                         {showPrice ? `￥${item.price}` : ''}
                     </p>
-                </View>
-            </View>
+                </div>
+            </div>
         )
     }
 }

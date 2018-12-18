@@ -5,7 +5,7 @@ import { Card } from "antd";
 export default class List extends Component {
     render() {
         return (
-            <PageHeaderWrapper>
+            <PageHeaderWrapper hiddenBreadcrumb={true}>
             <Card bordered={false}>
                 <ExpressListTable history={this.props.history} />
             </Card>
