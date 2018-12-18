@@ -93,8 +93,12 @@ export default [
                     { path: "/marketing", redirect: "/marketing/coupon/list" },
                     { path: "/marketing/coupon", redirect: "/marketing/coupon/list" },
                     { path: "/marketing/coupon/list", name: "优惠券", component: "/marketing/coupon/list" },
+                    { path: "/marketing/coupon/add", name: "优惠券添加", component: "/marketing/coupon/add", hideInMenu: true },
+                    { path: "/marketing/coupon/edit", name: "优惠券编辑", component: "/marketing/coupon/edit", hideInMenu: true },
                     { path: "/marketing/freebie", redirect: "/marketing/freebie/list" },
                     { path: "/marketing/freebie/list", name: "赠品", component: "/marketing/freebie/list" },
+                    { path: "/marketing/freebie/add", name: "赠品添加", component: "/marketing/freebie/add", hideInMenu: true },
+                    { path: "/marketing/freebie/edit", name: "赠品编辑", component: "/marketing/freebie/edit", hideInMenu: true },
                 ]
             }
         ]

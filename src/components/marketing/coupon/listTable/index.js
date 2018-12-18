@@ -97,7 +97,17 @@ export default class CouponListTable extends Component {
                 className: styles.column,
                 width: 200,
                 render: (record) => <View className={styles.operation}>
-                    <a href="#">编辑</a>
+                    <a
+                        onClick={()=>{
+                            router.push({
+                                pathname: `/marketing/coupon/edit`,
+                                search: `?id=${record.id}`,
+                                state: {
+                                    record
+                                }
+                            });
+                        }}
+                    >编辑</a>
                     <Divider type="vertical" />
                     <a
                         onClick={async () => {
@@ -118,38 +128,6 @@ export default class CouponListTable extends Component {
                         }}
                     >停止</a>
                 </View>
-                // render: (record) => <View className={styles.operation}>
-                //     <a
-                //         onClick={() => {
-                //             router.push({
-                //                 pathname: `/goods/list/edit`,
-                //                 search: `?id=${record.id}`,
-                //                 state: {
-                //                     record
-                //                 }
-                //             });
-                //         }}
-                //     >
-                //         编辑
-                //     </a>
-                //     <a
-                //         onClick={async () => {
-                //             Modal.confirm({
-                //                 title: "确认删除？",
-                //                 okText: "确认",
-                //                 okType: "danger",
-                //                 cancelText: "取消",
-                //                 onOk: async () => {
-                //                     const response = await GoodsApi.del({ ids: [record.id] });
-                //                     if (response.code === 0) {
-                //                         this.initList();
-                //                     }
-                //                 }
-                //             });
-
-                //         }}
-                //     >删除</a>
-                // </View>
             }
         ];
         return (
@@ -158,7 +136,7 @@ export default class CouponListTable extends Component {
                     <Button
                         type='primary'
                         onClick={() => {
-                            // router.push("/goods/list/add");
+                            router.push("/marketing/coupon/add");
                         }}
                     >
                         添加优惠券
