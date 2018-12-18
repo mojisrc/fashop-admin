@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Table, Button, Switch, Modal, Divider } from "antd";
 import styles from "./index.css";
-import { View } from "react-web-dom";
+import { View } from "@/components/flexView";
 import { connect } from "dva";
 import Image from "@/components/image";
 import moment from "moment";
@@ -75,29 +75,39 @@ export default class CouponListTable extends Component {
                 )
             }, {
                 title: "类型",
-                dataIndex: "title",
+                dataIndex: "type",
             }, {
                 title: "内容",
-                dataIndex: "price",
+                dataIndex: "desc",
             }, {
                 title: "已领取/剩余",
-                dataIndex: "base_sale_num",
+                dataIndex: "end",
             }, {
                 title: "已使用",
-                dataIndex: "stock",
+                dataIndex: "use",
             }, {
                 title: "支付金额（元）",
-                dataIndex: "stock",
+                dataIndex: "amount",
             }, {
                 title: "客单件（元）",
-                dataIndex: "stock",
+                dataIndex: "price",
             }, {
                 title: "操作",
                 key: "operation",
                 className: styles.column,
                 width: 200,
                 render: (record) => <View className={styles.operation}>
-                    <a href="#">编辑</a>
+                    <a
+                        onClick={()=>{
+                            router.push({
+                                pathname: `/marketing/coupon/edit`,
+                                search: `?id=${record.id}`,
+                                state: {
+                                    record
+                                }
+                            });
+                        }}
+                    >编辑</a>
                     <Divider type="vertical" />
                     <a
                         onClick={async () => {
@@ -118,51 +128,45 @@ export default class CouponListTable extends Component {
                         }}
                     >停止</a>
                 </View>
-                // render: (record) => <View className={styles.operation}>
-                //     <a
-                //         onClick={() => {
-                //             router.push({
-                //                 pathname: `/goods/list/edit`,
-                //                 search: `?id=${record.id}`,
-                //                 state: {
-                //                     record
-                //                 }
-                //             });
-                //         }}
-                //     >
-                //         编辑
-                //     </a>
-                //     <a
-                //         onClick={async () => {
-                //             Modal.confirm({
-                //                 title: "确认删除？",
-                //                 okText: "确认",
-                //                 okType: "danger",
-                //                 cancelText: "取消",
-                //                 onOk: async () => {
-                //                     const response = await GoodsApi.del({ ids: [record.id] });
-                //                     if (response.code === 0) {
-                //                         this.initList();
-                //                     }
-                //                 }
-                //             });
-
-                //         }}
-                //     >删除</a>
-                // </View>
             }
         ];
+        const addList = [
+            {
+                title: "满减券",
+                desc: <p className={styles.addDesc}>例：满100元减20元<br/>便于合理控制活动成本</p>,
+                type: "reward"
+            }, {
+                title: "折扣券",
+                desc: <p className={styles.addDesc}>例：满100元打9折<br/>提高店铺销量和客单价</p>,
+                type: "discount"
+            }, {
+                title: "随机金额券",
+                desc: <p className={styles.addDesc}>获得金额随机的优惠券<br/>增加活动趣味性</p>,
+                type: "random"
+            }
+        ]
         return (
             <View>
-                <View className={styles.batchView}>
-                    <Button
-                        type='primary'
-                        onClick={() => {
-                            // router.push("/goods/list/add");
-                        }}
-                    >
-                        添加优惠券
-                    </Button>
+                <View className={styles.addList}>
+                    {
+                        addList.map((item,index)=>(
+                            <View className={styles.addItem} key={index}>
+                                <p className={styles.addTitle}>{item.title}</p>
+                                {item.desc}
+                                <Button
+                                    type='primary'
+                                    onClick={() => {
+                                        router.push({
+                                            pathname: `/marketing/coupon/add`,
+                                            search: `?type=${item.type}`,
+                                        });
+                                    }}
+                                >
+                                    立即新建
+                                </Button>
+                            </View>
+                        ))
+                    }
                 </View>
                 <Table
                     loading={goodsListLoading}

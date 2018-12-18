@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Button, Table, Modal } from "antd";
-import { View } from "react-web-dom";
+import { View } from "@/components/flexView";
 import styles from "./index.css";
 import moment from "moment";
 import Image from "../../image";

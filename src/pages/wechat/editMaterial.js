@@ -2,7 +2,7 @@
 import React,{ Component } from 'react'
 
 import { connect } from 'dva';
-import { View } from "react-web-dom";
+import { View } from "@/components/flexView";
 import { Row, Col, Card, Form, Input, Button, Upload, Icon, message, Checkbox, Popover } from "antd";
 import RouterBreadcrumb from "@/components/wechat/public/routerBreadcrumb";
 import styles from "@/styles/wechat/addMaterial.css";

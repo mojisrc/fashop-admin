@@ -1,5 +1,5 @@
 import React,{ Component } from 'react'
-import { View } from 'react-web-dom'
+import { View } from '@/components/flexView'
 import { Popover, Button, Input, Tag, Checkbox, Row, Col } from 'antd'
 import styles from './index.css'
 

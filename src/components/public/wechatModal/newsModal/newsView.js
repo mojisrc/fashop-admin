@@ -3,7 +3,7 @@ import React, { Component } from "react";
 
 import { connect } from 'dva';
 import * as actions from "@/actions/wechat/material";
-import { View } from "react-web-dom";
+import { View } from "@/components/flexView";
 import { Modal, Button, Input, Row, Col, Card, Checkbox, Pagination, Radio, Spin } from "antd";
 import styles from "./index.css";
 import ModalNews from "../../wechatItem/modalNews";

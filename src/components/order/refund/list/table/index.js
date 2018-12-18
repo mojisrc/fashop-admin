@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Table } from "antd";
 import styles from "./index.css";
-import { View } from "react-web-dom";
+import { View } from "@/components/flexView";
 import moment from "moment";
 import Query from "@/utils/query";
 import { list } from "@/models/refund";

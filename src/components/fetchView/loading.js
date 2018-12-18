@@ -1,6 +1,6 @@
 import React,{ Component } from 'react';
 import {windowWidth} from '@/utils/style';
-import { View } from "react-web-dom";
+import { View } from "@/components/flexView";
 import PropTypes from 'prop-types';
 
 export default class Loading extends Component{

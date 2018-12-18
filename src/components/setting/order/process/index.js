@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "dva";
 import { Alert, Form, InputNumber, Row, Col, Button, message } from "antd";
-import { View } from "react-web-dom";
+import { View } from "@/components/flexView";
 import styles from "./index.css";
 import ShopApi from "@/services/shop";
 

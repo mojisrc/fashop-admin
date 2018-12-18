@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Icon, Input, Radio, Modal, message, Form } from "antd";
 import styles from "./index.css";
-import { View } from "react-web-dom";
+import { View } from "@/components/flexView";
 import UploadImage from "@/components/uploadImage";
 import ActionLink, { linkInfo } from "../common/actionLink";
 import { formItemLayout } from "@/components/shop/diy/formLayout";

@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from "dva";
 import { Popconfirm, Row, Col, Pagination, Spin, Button, Upload, message } from 'antd';
-import { View } from 'react-web-dom'
+import { View } from '@/components/flexView'
 import styles from './index.css'
 
 import Image from '@/image'

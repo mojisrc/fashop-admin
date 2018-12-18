@@ -13,7 +13,7 @@ import {
     Modal,
     Card
 } from "antd";
-import { View } from "react-web-dom";
+import { View } from "@/components/flexView";
 import styles from "@/styles/auth/role.css";
 import RoleMembersTable from '@/components/auth/roleMembersTable'
 import RoleAuthTable from '@/components/auth/roleAuthTable'

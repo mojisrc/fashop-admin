@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import {  Table, Alert, message, InputNumber, Modal, Spin } from "antd";
 import styles from "./index.css";
-import { View, Text } from "react-web-dom";
+import { View, Text } from "@/components/flexView";
 import update from "immutability-helper";
 
 export default class EvaluateListHeader extends Component {

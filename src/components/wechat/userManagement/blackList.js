@@ -1,6 +1,6 @@
 import React,{ Component } from 'react'
 import { connect } from "dva";
-import { View } from 'react-web-dom'
+import { View } from '@/components/flexView'
 import { Button, Table, Popover, Popconfirm } from 'antd'
 import styles from './index.css'
 import PublicPopoverContent from './publicPopoverContent'

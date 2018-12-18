@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import {  Button, Input, Select,  Form } from "antd";
-import { View } from "react-web-dom";
+import { View } from "@/components/flexView";
 import { getQueryPath } from "@/utils"
 import moment from "moment";
 import Query from "@/utils/query";

@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./index.css";
-import { View } from 'react-web-dom'
+import { View } from '@/components/flexView'
 
 const EmptyView = ()=>(
     <View className={styles.emptyView}>

@@ -1,5 +1,5 @@
 import React,{ Component } from 'react'
-import { View } from 'react-web-dom'
+import { View } from '@/components/flexView'
 import VoiceHeader from './header'
 import VoiceTable from './table'
 

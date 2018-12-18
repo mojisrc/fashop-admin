@@ -6,12 +6,12 @@
     justify-content: center;
     align-items: center;
 }
-.operation a{
+/* .operation a{
     margin-right: 10px;
 }
 .operation a:last-child{
     margin-right: 0;
-}
+} */
 .batchView{
     margin-bottom: 24px;
     flex-direction: row;

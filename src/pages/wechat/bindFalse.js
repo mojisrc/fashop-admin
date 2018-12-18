@@ -1,6 +1,6 @@
 import React from 'react'
 import PageHeaderWrapper from '@/components/pageHeaderWrapper';
-import { View } from 'react-web-dom'
+import { View } from '@/components/flexView'
 import styles from '@/src/styles/wechat/wechatIndex.css'
 import { Button, Table,Icon } from 'antd'
 

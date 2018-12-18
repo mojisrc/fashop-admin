@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from 'dva';
 import { Form, Button, Input, Icon } from "antd";
-import { View } from "react-web-dom";
+import { View } from "@/components/flexView";
 import styles from '@/styles/user/login.css'
 
 const FormItem = Form.Item

@@ -1,6 +1,6 @@
 import React,{ Component } from 'react'
 import { Button, Radio, Modal } from 'antd';
-import { View } from 'react-web-dom'
+import { View } from '@/components/flexView'
 import styles from '../index.css'
 import AddVideoForm from './addVideoForm'
 

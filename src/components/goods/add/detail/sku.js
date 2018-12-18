@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Form, InputNumber, Table, Input } from "antd";
-import { View } from "react-web-dom";
+import { View } from "@/components/flexView";
 import styles from "./spec.css";
 
 const FormItem = Form.Item;

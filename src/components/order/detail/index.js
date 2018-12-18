@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import OrderDetailInfo from "./info";
-import { View } from "react-web-dom";
+import { View } from "@/components/flexView";
 
 export default class OrderDetail extends Component {
     render() {

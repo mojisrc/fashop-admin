@@ -3,7 +3,7 @@ import { connect } from "dva";
 import { Input, Button, Table, Switch, message,Popconfirm } from "antd";
 import moment from "moment";
 import { CopyToClipboard } from "react-copy-to-clipboard";
-import { View } from "react-web-dom";
+import { View } from "@/components/flexView";
 import styles from "./index.css";
 import Query from "@/utils/query";
 import PageApi from "@/services/page";

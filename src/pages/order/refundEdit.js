@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View } from "react-web-dom";
+import { View } from "@/components/flexView";
 import PageHeaderWrapper from '@/components/pageHeaderWrapper';
 import styles from '@/styles/order/refundEdit.css'
 import RefundDetail from "@/components/order/refund/detail";

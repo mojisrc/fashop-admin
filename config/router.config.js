@@ -94,8 +94,12 @@ export default [
                     { path: "/marketing", redirect: "/marketing/coupon/list" },
                     { path: "/marketing/coupon", redirect: "/marketing/coupon/list" },
                     { path: "/marketing/coupon/list", name: "优惠券", component: "/marketing/coupon/list" },
+                    { path: "/marketing/coupon/add", component: "/marketing/coupon/add" },
+                    { path: "/marketing/coupon/edit", component: "/marketing/coupon/edit" },
                     { path: "/marketing/freebie", redirect: "/marketing/freebie/list" },
                     { path: "/marketing/freebie/list", name: "赠品", component: "/marketing/freebie/list" },
+                    { path: "/marketing/freebie/add", component: "/marketing/freebie/add" },
+                    { path: "/marketing/freebie/edit", component: "/marketing/freebie/edit" },
                 ]
             }
         ]

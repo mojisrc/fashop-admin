@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Row, Col, Button,Card } from "antd";
-import { View } from "react-web-dom";
+import { View } from "@/components/flexView";
 import styles from "@/styles/shop/shopSort.css";
 import PageHeaderWrapper from '@/components/pageHeaderWrapper';
 import { CopyToClipboard } from "react-copy-to-clipboard";

@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { Icon } from 'antd';
-import { View } from "react-web-dom";
+import { View } from "@/components/flexView";
 import styles from './index.css'
 import update from 'immutability-helper'
 import { SortableContainer, SortableElement, arrayMove } from 'react-sortable-hoc';

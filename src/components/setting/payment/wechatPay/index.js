@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "dva";
 import { Alert, Switch, Form, Input, Button, message, Upload, Icon } from 'antd';
-import { View, Text } from "react-web-dom";
+import { View, Text } from "@/components/flexView";
 import styles from './index.css'
 
 import { PaymentApi } from "@/services/payment";

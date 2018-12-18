@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Row, Col, Button, Input, Select, DatePicker } from "antd";
 import styles from "./index.css";
-import { View } from "react-web-dom";
+import { View } from "@/components/flexView";
 import Query from "@/utils/query";
 import moment from "moment";
 import update from "immutability-helper";

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import { Table, Button, Switch, Modal } from "antd";
+import { Table, Button, Switch, Modal, Divider } from "antd";
 import styles from "./index.css";
-import { View } from "react-web-dom";
+import { View } from "@/components/flexView";
 import { connect } from "dva";
 import Image from "@/components/image";
 import moment from "moment";
@@ -65,104 +65,72 @@ export default class FreebieListTable extends Component {
         const { goodsListLoading, goodsList, goodsCategory } = this.props;
         const columns = [
             {
-                title: "商品图",
-                dataIndex: "img",
-                width: 50,
-                render: (e) => (
-                    <Image
-                        type='goods'
-                        src={e}
-                        style={{ width: 50, height: 50 }}
-                    />
-                )
-            }, {
-                title: "商品标题",
+                title: "活动名称",
                 dataIndex: "title",
-                width: 230
             }, {
-                title: "价格（元）",
-                dataIndex: "price",
-                width: 120
-            }, {
-                title: "销量",
-                dataIndex: "base_sale_num",
-                width: 80
-            }, {
-                title: "库存",
-                dataIndex: "stock",
-                width: 80
-            }, {
-                title: "分类",
-                dataIndex: "category_ids",
-                render: (e) => {
-                    const textArray = e ? e.map((a) => {
-                        const index = goodsCategory.list.findIndex((c) => c.id === Number(a));
-                        if (index !== -1) {
-                            return goodsCategory.list[index].name;
-                        } else {
-                            return null;
-                        }
-                    }) : [];
-                    const newArray = textArray.filter((e) => e);
-                    return newArray.join("，");
-                },
-                width: 200
-
-            }, {
-                title: "创建时间",
+                title: "有效时间",
                 dataIndex: "create_time",
                 render: e => moment(e * 1000).format("YYYY-MM-DD hh:mm"),
-                width: 200
+                width: 230
             }, {
-                title: "上架状态",
-                dataIndex: "is_on_sale",
-                render: (text, record) => <Switch
-                    defaultChecked={!!text}
-                    onChange={async (checked) => {
-                        if (checked) {
-                            const response = await GoodsApi.onSale({ ids: [record.id] });
-                            if (response.code === 0) {
-                                this.initList();
-                            }
-                        } else {
-                            const response = await GoodsApi.offSale({ ids: [record.id] });
-                            if (response.code === 0) {
-                                this.initList();
-                            }
-                        }
-                    }}
-                />
+                title: "活动状态",
+                dataIndex: "status",
+            }, {
+                title: "已赠送",
+                dataIndex: "go",
+            }, {
+                title: "已领取",
+                dataIndex: "get",
             }, {
                 title: "操作",
                 key: "operation",
                 className: styles.column,
-                width: 100,
+                width: 300,
                 render: (record) => <View className={styles.operation}>
                     <a
                         onClick={() => {
                             router.push({
-                                pathname: `/goods/list/edit`,
+                                pathname: `/marketing/freebie/edit`,
                                 search: `?id=${record.id}`,
                                 state: {
                                     record
                                 }
                             });
                         }}
-                    >
-                        编辑
-                    </a>
+                    >编辑</a>
+                    <Divider type="vertical" />
                     <a
                         onClick={async () => {
                             Modal.confirm({
-                                title: "确认删除？",
+                                title: "停止发券",
+                                content: "停止发券后，买家之前领取的优惠券，在可用时间内还能继续使用，但无法再编辑优惠券内容。确定停止发券？",
                                 okText: "确认",
                                 okType: "danger",
                                 cancelText: "取消",
                                 onOk: async () => {
-                                    const response = await GoodsApi.del({ ids: [record.id] });
-                                    if (response.code === 0) {
-                                        this.initList();
-                                    }
+                                    // const response = await GoodsApi.del({ ids: [record.id] });
+                                    // if (response.code === 0) {
+                                    //     this.initList();
+                                    // }
+                                }
+                            });
+
+                        }}
+                    >使失效</a>
+                    <Divider type="vertical" />
+                    <a
+                        onClick={async () => {
+                            Modal.confirm({
+                                title: "停止发券",
+                                content: "停止发券后，买家之前领取的优惠券，在可用时间内还能继续使用，但无法再编辑优惠券内容。确定停止发券？",
+                                okText: "确认",
+                                okType: "danger",
+                                cancelText: "取消",
+                                onOk: async () => {
+                                    // const response = await GoodsApi.del({ ids: [record.id] });
+                                    // if (response.code === 0) {
+                                    //     this.initList();
+                                    // }
                                 }
                             });
 
@@ -177,7 +145,7 @@ export default class FreebieListTable extends Component {
                     <Button
                         type='primary'
                         onClick={() => {
-                            router.push("/goods/list/add");
+                            router.push("/marketing/freebie/add");
                         }}
                     >
                         添加赠品
@@ -186,7 +154,7 @@ export default class FreebieListTable extends Component {
                 <Table
                     loading={goodsListLoading}
                     defaultExpandAllRows
-                    dataSource={goodsList.list}
+                    dataSource={[{}]}
                     columns={columns}
                     rowKey={record => record.id}
                     pagination={{

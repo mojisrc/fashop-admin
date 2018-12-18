@@ -1,6 +1,6 @@
 import React,{ Component } from 'react'
 import {  Row, Col, TimePicker, Select, Alert } from 'antd'
-import { View } from 'react-web-dom'
+import { View } from '@/components/flexView'
 import moment from 'moment'
 const Option = Select.Option;
 

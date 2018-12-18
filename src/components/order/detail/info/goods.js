@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Table, Tag } from "antd";
 import styles from "./index.css";
-import { View } from "react-web-dom";
+import { View } from "@/components/flexView";
 
 export default class OrderDetailGoodsInfo extends Component {
     render() {

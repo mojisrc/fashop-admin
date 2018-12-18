@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from 'dva';
-import { View } from "react-web-dom";
+import { View } from "@/components/flexView";
 import { Modal, Button,  Row, Col, Pagination, Radio, Spin, Upload, message } from "antd";
 import styles from "./index.css";
 import ModalImg from "../../wechatItem/modalImg";

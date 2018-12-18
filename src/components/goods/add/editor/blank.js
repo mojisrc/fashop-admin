@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View } from "react-web-dom";
+import { View } from "@/components/flexView";
 import { Row, Col, Button, Modal, Input, message } from "antd";
 import styles from "./blank.css";
 import { abledata } from "./testData";

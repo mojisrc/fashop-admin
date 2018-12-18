@@ -1,10 +1,10 @@
 import React, { Component } from "react";
-import { View } from "react-web-dom";
+import { View } from "@/components/flexView";
 import { Modal, Input, Checkbox, Pagination, Spin, Button } from "antd";
 import styles from "./index.css";
 import { list } from "@/models/goods";
 import { connect } from "dva";
-import { ScrollView } from "react-web-dom";
+import { ScrollView } from "@/components/flexView";
 import Image from "@/components/image";
 
 const Search = Input.Search;

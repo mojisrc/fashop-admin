@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import styles from "./index.css";
 import { Icon } from "antd";
-import { View } from "react-web-dom";
+import { View } from "@/components/flexView";
 
 export default class InputFile extends Component {
     state = {

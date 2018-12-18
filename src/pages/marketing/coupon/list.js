@@ -8,7 +8,7 @@ import { Card } from "antd";
 @connect()
 class Coupon extends Component {
     render() {
-        return <PageHeaderWrapper>
+        return <PageHeaderWrapper hiddenBreadcrumb={true}>
             <Card bordered={false}>
                 <CouponListHeader {...this.props} />
                 <CouponListTable {...this.props} />

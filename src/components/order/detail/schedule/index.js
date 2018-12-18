@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Card, Steps, Popover } from "antd";
 import styles from "./index.css";
-import { View } from "react-web-dom";
+import { View } from "@/components/flexView";
 const Step = Steps.Step;
 export default class OrderDetailSchedule extends Component {
     state = {

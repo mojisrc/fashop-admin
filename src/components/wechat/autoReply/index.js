@@ -3,7 +3,7 @@ import { bindActionCreators } from "redux";
 import { connect } from "dva";
 import * as actions from "@/actions/wechat/autoReply";
 import { Tabs, Alert, Switch } from "antd";
-import { View } from "react-web-dom";
+import { View } from "@/components/flexView";
 import styles from "./index.css";
 import KeyWordsReplyTable from "./keyWordsReply";
 import FollowedReply from "./followedReply";

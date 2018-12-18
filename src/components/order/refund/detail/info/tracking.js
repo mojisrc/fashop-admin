@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import styles from "../index.css";
-import { View } from "react-web-dom";
+import { View } from "@/components/flexView";
 import InfoColumn from "@/components/public/info/infoColumn";
 import moment from "moment";
 import { Modal } from "antd";

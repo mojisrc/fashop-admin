@@ -1,7 +1,7 @@
 import React,{ Component } from 'react'
 import { connect } from "dva";
 import { Button, Radio, Upload, message } from 'antd';
-import { View } from 'react-web-dom'
+import { View } from '@/components/flexView'
 import styles from '../index.css'
 @connect(
     ({view:{material:{ imageMaterialList }}}) => ({

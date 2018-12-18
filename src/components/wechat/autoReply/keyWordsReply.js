@@ -3,7 +3,7 @@ import React from 'react'
 import { connect } from "dva";
 import * as actions from "@/actions/wechat/autoReply";
 import { Table, Popconfirm } from 'antd';
-import { View } from 'react-web-dom'
+import { View } from '@/components/flexView'
 import KeyWordsReplyHeader from './KeyWordsReplyHeader'
 import styles from './index.css'
 // type Props = {

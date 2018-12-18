@@ -1,6 +1,6 @@
 import React,{ Component } from 'react'
 import { Tabs } from 'antd'
-import { View } from 'react-web-dom'
+import { View } from '@/components/flexView'
 
 import FollowTable from './follow'
 import BlackList from './blackList'

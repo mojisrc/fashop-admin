@@ -1,5 +1,5 @@
 import React from 'react'
-import { View } from 'react-web-dom'
+import { View } from '@/components/flexView'
 import { Icon, Table,  Alert, Popover, Input, Popconfirm, Select, Upload, message, Modal } from 'antd'
 import styles from './index.css'
 import { imageUpload } from "@/utils";

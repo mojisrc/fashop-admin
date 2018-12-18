@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "dva";
-import { View } from "react-web-dom";
+import { View } from "@/components/flexView";
 import { Form, Input, TreeSelect } from "antd";
 import styles from "./index.css";
 import { UploadGroupImage } from "@/components/uploadImage";

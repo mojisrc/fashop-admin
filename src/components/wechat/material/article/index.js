@@ -1,5 +1,5 @@
 import React,{ Component } from 'react'
-import { View } from 'react-web-dom'
+import { View } from '@/components/flexView'
 import ArticleHeader from './header'
 import ArticleTable from './table'
 import LocalArticleTable from './localTable'

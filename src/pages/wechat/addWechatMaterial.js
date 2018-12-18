@@ -3,7 +3,7 @@ import React,{ Component } from 'react'
 
 import { connect } from 'dva';
 import * as actions from "../../actions/wechat/material";
-import { View } from "react-web-dom";
+import { View } from "@/components/flexView";
 import { Row, Col, Card, Form, Input, Button, Upload, Icon, message, Checkbox, Popover } from "antd";
 import RouterBreadcrumb from "@/components/wechat/public/routerBreadcrumb";
 import InputFile from "@/components/inputFile";

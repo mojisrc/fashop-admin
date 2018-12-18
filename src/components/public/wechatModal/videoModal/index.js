@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 import { connect } from 'dva';
 import * as actions from "@/actions/wechat/material";
-import { View } from "react-web-dom";
+import { View } from "@/components/flexView";
 import { Modal, Button, Radio, Table, Icon } from "antd";
 import styles from "./index.css";
 import moment from 'moment'

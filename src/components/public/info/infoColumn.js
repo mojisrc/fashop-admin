@@ -3,7 +3,7 @@ import { Row, Col } from "antd";
 import styles from "./index.css";
 import PhotoGallery from "@/components/photoGallery";
 import Image from "@/components/image";
-import { View } from "react-web-dom";
+import { View } from "@/components/flexView";
 
 export default class InfoColumn extends Component {
     render() {
