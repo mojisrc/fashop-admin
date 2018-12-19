@@ -2,32 +2,17 @@ import React, { Component } from "react";
 import { Radio, Form } from "antd";
 import { View } from "react-web-dom";
 import { formItemLayout } from "@/components/shop/diy/formLayout";
-import ListCard from "@/components/shop/diy/controller/common/listCard";
+import GroupCard from "@/components/shop/diy/controller/common/groupCard";
 
 const FormItem = Form.Item;
 const RadioGroup = Radio.Group;
 
-// type LinkActionType = 'portal' | 'goods' | 'page' | 'url'
-//
 // type Props = {
-//     componentName?: string,
-//     getValues: Function,
 //     options: {
 //         rows: number,
 //         each_row_display: number,
 //     },
-//     data: Array<{
-//         img: {
-//             url: string
-//         },
-//         title: string,
-//         link: {
-//             action: LinkActionType,
-//             param: {}
-//         }
-//     }>
 // }
-// type State = {}
 
 export default class Index extends Component {
 
@@ -105,7 +90,7 @@ export default class Index extends Component {
                         <Radio value={5}>5 个</Radio>
                     </RadioGroup>
                 </FormItem>
-                <ListCard.Make
+                <GroupCard.Make
                     defaultValue={{
                         img: {
                             url: require("@/assets/images/page/view/image-nav-default.png")

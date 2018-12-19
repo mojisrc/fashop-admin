@@ -2,7 +2,7 @@ import React, { PureComponent, Fragment } from "react";
 import { Divider, Popover} from "antd";
 import PropTypes from "prop-types";
 
-export default class ClickSort extends PureComponent {
+export default class GroupCardSort extends PureComponent {
     static propTypes = {
         index: PropTypes.number.isRequired,
         data: PropTypes.array.isRequired,

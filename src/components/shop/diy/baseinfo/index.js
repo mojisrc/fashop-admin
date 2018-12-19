@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Input, Form, Card } from "antd";
-import ColorPicker from "@/components/public/ColorPicker";
+import ColorPicker from "@/components/public/colorPicker";
 import { formItemLayout } from "@/components/shop/diy/formLayout";
 
 const { TextArea } = Input;

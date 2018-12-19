@@ -12,8 +12,8 @@ import Video from "@/components/shop/diy/controller/video";
 import TopMenu from "@/components/shop/diy/controller/topMenu";
 import Title from "@/components/shop/diy/controller/title";
 import TextNav from "@/components/shop/diy/controller/textNav";
-import {Card ,Row,Col} from "antd";
-import styles from "./demo.css"
+import { Card, Row, Col } from "antd";
+import styles from "./demo.css";
 
 export default class Demo extends Component {
     static defaultProps = {
@@ -32,6 +32,56 @@ export default class Demo extends Component {
                 "data": [],
                 "type": "goods_search",
                 "options": { "background_color": "#fff" }
+            }, {
+                "data": [{
+                    "img": { "url": "https://testfile.xiaokeduo.com/system/StoreAdmin/Shop/PublicMob/images/ind3_1.png" },
+                    "link": { "param": [], "action": "portal" },
+                    "title": "首页",
+                    "font_color": "#fff",
+                    "background_color": "#07a0e7"
+                }, {
+                    "img": { "url": "https://testfile.xiaokeduo.com/system/StoreAdmin/Shop/PublicMob/images/ind3_2.png" },
+                    "link": { "param": [], "action": "portal" },
+                    "title": "新品",
+                    "font_color": "#fff",
+                    "background_color": "#71c201"
+                }, {
+                    "img": { "url": "https://testfile.xiaokeduo.com/system/StoreAdmin/Shop/PublicMob/images/ind3_3.png" },
+                    "link": { "param": [], "action": "portal" },
+                    "title": "热卖",
+                    "font_color": "#fff",
+                    "background_color": "#ffaa00"
+                }, {
+                    "img": { "url": "https://testfile.xiaokeduo.com/system/StoreAdmin/Shop/PublicMob/images/ind3_4.png" },
+                    "link": { "param": [], "action": "portal" },
+                    "title": "推荐",
+                    "font_color": "#fff",
+                    "background_color": "#d50303"
+                }], "type": "top_menu", "options": { "menu_space": 1, "menu_format": 1 }
+            }, {
+                "data": [],
+                "type": "title",
+                "options": {
+                    "align": "left",
+                    "title": "猜你喜欢",
+                    "font_color": "#999",
+                    "leading_image": { "url": "https://avatars2.githubusercontent.com/u/5318333?s=40&v=4" },
+                    "background_color": "#fff"
+                }
+            }, {
+                "data": [{
+                    "img": { "url": "https://img11.360buyimg.com/mobilecms/s350x250_jfs/t1/25082/17/883/132021/5c0dde98E08b30ecb/f2891b8e23ab699b.jpeg!q90!cc_350x250.webp" },
+                    "link": { "param": [], "action": "portal" },
+                    "title": ""
+                }, {
+                    "img": { "url": "https://img11.360buyimg.com/mobilecms/s350x250_jfs/t1/25082/17/883/132021/5c0dde98E08b30ecb/f2891b8e23ab699b.jpeg!q90!cc_350x250.webp" },
+                    "link": { "param": [], "action": "portal" },
+                    "title": ""
+                }, {
+                    "img": { "url": "https://img11.360buyimg.com/mobilecms/s350x250_jfs/t1/25082/17/883/132021/5c0dde98E08b30ecb/f2891b8e23ab699b.jpeg!q90!cc_350x250.webp" },
+                    "link": { "param": [], "action": "portal" },
+                    "title": ""
+                }], "type": "shop_window", "options": { "layout_style": 1 }
             }, {
                 "data": [{
                     "img": { "url": "https://img11.360buyimg.com/mobilecms/s350x250_jfs/t1/25082/17/883/132021/5c0dde98E08b30ecb/f2891b8e23ab699b.jpeg!q90!cc_350x250.webp" },
@@ -464,32 +514,6 @@ export default class Demo extends Component {
                     "goods_display_num": 6,
                     "goods_display_field": ["title", "price"]
                 }
-            }, {
-                "data": [{
-                    "img": { "url": "https://testfile.xiaokeduo.com/system/StoreAdmin/Shop/PublicMob/images/ind3_1.png" },
-                    "link": { "param": [], "action": "portal" },
-                    "title": "首页",
-                    "font_color": "#fff",
-                    "background_color": "#07a0e7"
-                }, {
-                    "img": { "url": "https://testfile.xiaokeduo.com/system/StoreAdmin/Shop/PublicMob/images/ind3_2.png" },
-                    "link": { "param": [], "action": "portal" },
-                    "title": "新品",
-                    "font_color": "#fff",
-                    "background_color": "#71c201"
-                }, {
-                    "img": { "url": "https://testfile.xiaokeduo.com/system/StoreAdmin/Shop/PublicMob/images/ind3_3.png" },
-                    "link": { "param": [], "action": "portal" },
-                    "title": "热卖",
-                    "font_color": "#fff",
-                    "background_color": "#ffaa00"
-                }, {
-                    "img": { "url": "https://testfile.xiaokeduo.com/system/StoreAdmin/Shop/PublicMob/images/ind3_4.png" },
-                    "link": { "param": [], "action": "portal" },
-                    "title": "推荐",
-                    "font_color": "#fff",
-                    "background_color": "#d50303"
-                }], "type": "top_menu", "options": { "menu_space": 1, "menu_format": 1 }
             }, { "data": [], "type": "separator", "options": { "color": "#e8e8e8", "style": 0 } }, {
                 "data": [],
                 "type": "auxiliary_blank",
@@ -519,33 +543,9 @@ export default class Demo extends Component {
                     "title": "导航四"
                 }], "type": "image_nav", "options": { "rows": 1, "each_row_display": 4 }
             }, {
-                "data": [{
-                    "img": { "url": "https://img11.360buyimg.com/mobilecms/s350x250_jfs/t1/25082/17/883/132021/5c0dde98E08b30ecb/f2891b8e23ab699b.jpeg!q90!cc_350x250.webp" },
-                    "link": { "param": [], "action": "portal" },
-                    "title": ""
-                }, {
-                    "img": { "url": "https://img11.360buyimg.com/mobilecms/s350x250_jfs/t1/25082/17/883/132021/5c0dde98E08b30ecb/f2891b8e23ab699b.jpeg!q90!cc_350x250.webp" },
-                    "link": { "param": [], "action": "portal" },
-                    "title": ""
-                }, {
-                    "img": { "url": "https://img11.360buyimg.com/mobilecms/s350x250_jfs/t1/25082/17/883/132021/5c0dde98E08b30ecb/f2891b8e23ab699b.jpeg!q90!cc_350x250.webp" },
-                    "link": { "param": [], "action": "portal" },
-                    "title": ""
-                }], "type": "shop_window", "options": { "layout_style": 1 }
-            }, {
                 "data": { "url": "http://220.194.79.149/vlive.qqvideo.tc.qq.com/A44f-7Bd5gEvD4wYTtCGBOEFPrcIWRFdfQsr8BDJWOWI/q0165pxycze.p702.1.mp4?sdtfrom=v1010&guid=224fe29557094643a3b5c045c75fa598&vkey=ADE1E90A794A80EF494CA002FD512294CD5552FA16A31B753DB404AF4898902228AA0B105EA8211A4E8205DB1C5605FD5413F744FDD8845A998D012FC84AC908ACD0761136BC6F015252E71AB2161D11D569E4D4F0EE86A61B5464CA365ED752950731DFD7F6DA2890CB74FFFF6E312FC98F301E630E60D4" },
                 "type": "video",
                 "options": null
-            }, {
-                "data": [],
-                "type": "title",
-                "options": {
-                    "align": "left",
-                    "title": "猜你喜欢",
-                    "font_color": "#999",
-                    "leading_image": { "url": "https://avatars2.githubusercontent.com/u/5318333?s=40&v=4" },
-                    "background_color": "#fff"
-                }
             }, {
                 "data": [{
                     "img": { "url": "" },
@@ -572,52 +572,69 @@ export default class Demo extends Component {
     render() {
         const { pageInfo } = this.state;
         return <div className={styles.main}><Row>
-            <Col span={12} >
+            <Col span={12}>
                 <Card>
-                    {pageInfo.body.map((item,index) => {
-                        let content
+                    {pageInfo.body.map((item, index) => {
+                        let content;
                         switch (item.type) {
                             case "goods":
-                                content = <Goods options={item.options} data={item.data} getValues={this.props.getValues} key={index} />;
+                                content =
+                                    <Goods options={item.options} data={item.data} getValues={this.props.getValues}
+                                           key={index} />;
                                 break;
                             case "goods_list":
                                 content = <GoodsList
                                     options={item.options} data={item.data}
                                     getValues={this.props.getValues}
-                                    refreshGoods={this.props.goodsListRefreshGoods}  key={index}/>;
+                                    refreshGoods={this.props.goodsListRefreshGoods} key={index} />;
                                 break;
                             case "goods_search":
-                                content = <GoodsSearch options={item.options} data={{}} getValues={this.props.getValues} key={index} />;
+                                content = <GoodsSearch options={item.options} data={{}} getValues={this.props.getValues}
+                                                       key={index} />;
                                 break;
                             case "separator":
-                                content = <Separator options={item.options} data={{}} getValues={this.props.getValues} key={index} />;
+                                content = <Separator options={item.options} data={{}} getValues={this.props.getValues}
+                                                     key={index} />;
                                 break;
                             case "auxiliary_blank":
-                                content = <AuxiliaryBlank options={item.options} data={{}} getValues={this.props.getValues} key={index} />;
+                                content =
+                                    <AuxiliaryBlank options={item.options} data={{}} getValues={this.props.getValues}
+                                                    key={index} />;
                                 break;
                             case "image_ads":
                                 content =
-                                    <ImageAds options={item.options} data={item.data} getValues={this.props.getValues} key={index} />;
+                                    <ImageAds options={item.options} data={item.data} getValues={this.props.getValues}
+                                              key={index} />;
                                 break;
                             case "image_nav":
                                 content =
-                                    <ImageNav options={item.options} data={item.data} getValues={this.props.getValues} key={index} />;
+                                    <ImageNav options={item.options} data={item.data} getValues={this.props.getValues}
+                                              key={index} />;
                                 break;
                             case "shop_window":
                                 content =
-                                    <ShopWindow options={item.options} data={item.data} getValues={this.props.getValues} key={index} />;
+                                    <ShopWindow options={item.options} data={item.data} getValues={this.props.getValues}
+                                                key={index} />;
                                 break;
                             case "video":
-                                content = <Video options={item.options} data={item.data} getValues={this.props.getValues} key={index} />;
+                                content =
+                                    <Video options={item.options} data={item.data} getValues={this.props.getValues}
+                                           key={index} />;
                                 break;
                             case "top_menu":
-                                content = <TopMenu options={item.options} data={item.data} getValues={this.props.getValues} key={index} />;
+                                content =
+                                    <TopMenu options={item.options} data={item.data} getValues={this.props.getValues}
+                                             key={index} />;
                                 break;
                             case "title":
-                                content = <Title options={item.options} data={item.data} getValues={this.props.getValues} key={index} />;
+                                content =
+                                    <Title options={item.options} data={item.data} getValues={this.props.getValues}
+                                           key={index} />;
                                 break;
                             case "text_nav":
-                                content = <TextNav options={item.options} data={item.data} getValues={this.props.getValues} key={index} />;
+                                content =
+                                    <TextNav options={item.options} data={item.data} getValues={this.props.getValues}
+                                             key={index} />;
                                 break;
                             default:
 
@@ -626,7 +643,7 @@ export default class Demo extends Component {
                     })}
                 </Card>
             </Col>
-        </Row></div>
+        </Row></div>;
 
     }
 }

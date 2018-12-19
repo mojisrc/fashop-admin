@@ -23,6 +23,7 @@ const { TextArea } = Input;
 //     selectGoodsCategoryVisible:boolean,
 //     inputUrlVisible: boolean,
 // }
+// todo onChange() :xxx 约束
 export const linkInfo = {
     portal: {
         type: "portal",
@@ -51,7 +52,7 @@ export const linkInfo = {
     }
 };
 
-export default class Index extends Component {
+export default class ActionLink extends Component {
     state = {
         urlValue: {
             url: ""
@@ -65,8 +66,9 @@ export default class Index extends Component {
         const props = { ...this.props };
         switch (linkAction) {
             case "portal":
-                props.getValues({
-                    ...props, ...{ type: linkAction }
+                props.onChange({
+                    action: "portal",
+                    param: {}
                 });
                 break;
             case "goods":
@@ -140,10 +142,10 @@ export default class Index extends Component {
                             selectGoodsVisible: false
                         }, () => {
                             onChange({
-                                    action: "goods",
-                                    param: {
-                                        id: state.checkedData[0].id
-                                    }
+                                action: "goods",
+                                param: {
+                                    id: state.checkedData[0].id
+                                }
                             });
                         });
                     }}
@@ -160,10 +162,10 @@ export default class Index extends Component {
                             selectPageVisible: false
                         }, () => {
                             onChange({
-                                    action: "page",
-                                    param: {
-                                        id: state.value.id
-                                    }
+                                action: "page",
+                                param: {
+                                    id: state.value.id
+                                }
                             });
                         });
                     }}
@@ -180,10 +182,10 @@ export default class Index extends Component {
                             selectGoodsCategoryVisible: false
                         }, () => {
                             onChange({
-                                    action: "goods_category",
-                                    param: {
-                                        id: state.value.id
-                                    }
+                                action: "goods_category",
+                                param: {
+                                    id: state.value.id
+                                }
                             });
                         });
                     }}
@@ -201,8 +203,8 @@ export default class Index extends Component {
                             inputUrlVisible: false
                         }, () => {
                             onChange({
-                                    link: "url",
-                                    param:urlValue
+                                link: "url",
+                                param: urlValue
                             });
                         });
                     }}

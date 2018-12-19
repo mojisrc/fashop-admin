@@ -5,7 +5,8 @@ import { formItemLayout } from "@/components/shop/diy/formLayout";
 import ActionLink from "@/components/shop/diy/controller/common/actionLink";
 import ColorPicker from "@/components/public/colorPicker";
 import styles from "./index.css";
-
+import { Form,Input,Icon} from "antd";
+const FormItem = Form.Item
 // 返回组内一条的数据格式
 const _response = {
     title: "",
@@ -19,13 +20,13 @@ const _response = {
     background_color: "#FFFFFF",
     font_color: "#333333"
 };
-export default class Item extends PureComponent {
+export default class GroupCardItem extends PureComponent {
     static propTypes = {
-        title: PropTypes.object,
+        title: PropTypes.string,
         img: PropTypes.object,
         link: PropTypes.object,
-        backgroundColor: PropTypes.object,
-        fontColor: PropTypes.object,
+        backgroundColor: PropTypes.string,
+        fontColor: PropTypes.string,
         onChange: PropTypes.func.isRequired
     };
     // 传值、返回的值根据后端接口返回规律进行正确返回，临时解决方案
@@ -91,16 +92,16 @@ export default class Item extends PureComponent {
                             <img
                                 src={img.url}
                                 alt=''
-                                style={{ width: "80px" }}
+                                style={{ width: "80px" ,backgroundColor}}
                             /> :
-                            <View className={styles.uploadBtn}>
+                            <div className={styles.uploadBtn}>
                                 <Icon type='plus' />
                                 <p>上传图标</p>
-                            </View>
+                            </div>
                     }
                 </UploadImage>
             </div> : null}
-            <View className={styles.itemRight}>
+            <div style={{flex:1}}>
                 {title ? <FormItem
                     {...formItemLayout}
                     label="标题"
@@ -108,7 +109,7 @@ export default class Item extends PureComponent {
                     <Input
                         style={{ width: 240 }}
                         placeholder='标题必填'
-                        value={listItem.title}
+                        value={title}
                         onChange={(e) => {
                             this.setResponse("title", e.target.value);
                         }}
@@ -119,14 +120,14 @@ export default class Item extends PureComponent {
                     label="链接"
                 >
                     <ActionLink
-                        type={listItem.link.action}
+                        type={link.action}
                         selectGoodsVisible={false}
                         selectPageVisible={false}
                         inputUrlVisible={false}
-                        onChange={(state) => {
+                        onChange={(res) => {
                             this.setResponse("link", {
-                                action: state.type,
-                                param: state.value
+                                action: res.action,
+                                param: res.param
                             });
                         }}
                         value={() => {
@@ -148,7 +149,7 @@ export default class Item extends PureComponent {
                     label="背景颜色"
                 >
                     <ColorPicker
-                        color={backgroundColor.background_color}
+                        color={backgroundColor}
                         colorChange={(color) => {
                             this.setResponse("background_color", color.hex);
                         }}
@@ -159,13 +160,13 @@ export default class Item extends PureComponent {
                     label="文字颜色"
                 >
                     <ColorPicker
-                        color={fontColor.background_color}
+                        color={fontColor}
                         colorChange={(color) => {
                             this.setResponse("font_color", color.hex);
                         }}
                     />
                 </FormItem> : null}
-            </View>
+            </div>
         </div>;
     }
 

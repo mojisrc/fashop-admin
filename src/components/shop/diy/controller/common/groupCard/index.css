@@ -34,10 +34,7 @@
     margin: 0;
 }
 
-.itemRight {
-    margin-left: 16px;
-    flex: 1;
-}
+
 
 .itemRight > p {
     display: flex;

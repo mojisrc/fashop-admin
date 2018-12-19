@@ -1,8 +1,9 @@
 import React, { PureComponent, } from "react";
 import PropTypes from "prop-types";
 import styles from "./index.css";
+import {Icon} from "antd";
 
-export default class Add extends PureComponent {
+export default class GroupCardAdd extends PureComponent {
     static propTypes = {
         onClick: PropTypes.func.isRequired,
     };
