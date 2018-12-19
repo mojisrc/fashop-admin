@@ -1,5 +1,5 @@
-import React, { Component,Fragment } from "react";
-import { Table, Button, Popconfirm ,Divider} from "antd";
+import React, { Component, Fragment } from "react";
+import { Table, Button, Popconfirm, Divider } from "antd";
 import styles from "./index.css";
 import { View } from "@/components/public/dom";
 import { connect } from "dva";
@@ -53,34 +53,16 @@ export default class GoodsCategoryTable extends Component {
         const { expandedRowKeys, categoryTree } = this.state;
         const columns = [
             {
-                title: "",
-                key: "_id",
-                width: 100
-            },
-            {
-                title: "分类ID",
-                dataIndex: "id",
-                key: "id",
-                width: 100
-            },
-            {
-                title: "图标",
-                dataIndex: "icon",
-                key: "icon",
-                render: (icon) => <Image src={icon} style={{ height: "20px" }} />,
-                width: 60
-            },
-            {
-                title: "分类名称",
+                title: "ID - 分类名称",
                 dataIndex: "name",
-                key: "name"
+                key: "name",
+                render: (value, row) => {
+                    return <span><span style={{ marginRight: 15 }}><span
+                        style={{ color: "#ccc", fontSize: 10 }}>{row.id} - </span>{value}</span><span><Image
+                        src={row.icon} style={{ height: "20px" }} /></span></span>;
+                }
             },
-            // {
-            //     title: "使用商品",
-            //     dataIndex: "goods_number",
-            //     key: "goods_number",
-            //     render: (text) => <a>{text}</a>
-            // },
+
             {
                 title: "操作",
                 key: "operation",
@@ -153,9 +135,9 @@ export default class GoodsCategoryTable extends Component {
                     <CategorySort dataSource={categoryTree} dispatch={dispatch} />
                 </div>
                 <Table
-                    defaultExpandAllRows={true}
-                    dataSource={categoryTree}
                     columns={columns}
+                    dataSource={categoryTree}
+                    defaultExpandAllRows={true}
                     rowKey={record => record.id}
                     pagination={false}
                     goodsCategoryLoading={goodsCategoryLoading}

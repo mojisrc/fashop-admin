@@ -28,6 +28,7 @@ export default {
             if (callback) callback(response);
         },
         * setBaseInfo({ payload, callback }, { call, put }) {
+            console.log('111')
             const response = yield call(shop.setBaseInfo, payload);
             yield put({
                 type: "_setBaseInfo",

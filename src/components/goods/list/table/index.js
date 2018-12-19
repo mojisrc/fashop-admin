@@ -64,6 +64,11 @@ export default class GoodsListTable extends Component {
     render() {
         const { goodsListLoading, goodsList, goodsCategory } = this.props;
         const columns = [
+             {
+                title: "ID",
+                dataIndex: "id",
+                width: 50
+            },
             {
                 title: "商品图",
                 dataIndex: "img",
