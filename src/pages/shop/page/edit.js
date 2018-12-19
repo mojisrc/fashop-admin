@@ -1,23 +1,20 @@
 import React, { Component } from "react";
-import { View } from "@/components/flexView";
 import { connect } from "dva";
-import { Row, Col, Button, Affix, message, Spin, Card, Layout } from "antd";
+import { Row, Col, Button, message, Spin } from "antd";
 import PageTool from "@/components/shop/diy/tool/index";
 import PageView from "@/components/shop/diy/view/index";
 import PageControl from "@/components/shop/diy/controller/index";
 import BaseInfo from "@/components/shop/diy/baseinfo/index";
-import styles from "@/styles/shop/shopPageEdit.css";
 import GoodsApi from "@/services/goods";
-import PageApi from "@/services/page";
 import { query } from "@/utils/fa";
 import { getPageQuery } from "@/utils/utils";
+import styles from "./edit.css";
+import Scrollbar from "react-scrollbars-custom";
 
-const {
-    Header, Content, Footer, Sider
-} = Layout;
 @connect(({ goods, page, loading }) => ({
     goodList: goods.list.result,
     goodsListLoading: loading.effects["goods/list"],
+    pageEditLoading: loading.effects["page/edit"],
     pageInfo: page.info.result,
     pageInfoLoading: loading.effects["page/info"]
 }))
@@ -27,7 +24,8 @@ export default class Edit extends Component {
         goodList: { total_number: 0, list: [] },
         goodsListLoading: true,
         pageInfo: { info: {} },
-        pageInfoLoading: true
+        pageInfoLoading: true,
+        pageEditLoading: false
     };
     state = {
         id: 0,
@@ -45,17 +43,22 @@ export default class Edit extends Component {
     async componentDidMount() {
         const { dispatch } = this.props;
         const { id } = getPageQuery();
-        const e = await PageApi.info({ id });
-        if (e.code === 0) {
-            const { info } = e.result;
-            this.setState({
-                id: info.id,
-                name: info.name,
-                description: info.description,
-                background_color: info.background_color,
-                body: info.body
-            });
-        }
+        dispatch({
+            type: "page/info",
+            payload: { id },
+            callback: (response) => {
+                if (response.code === 0) {
+                    const { info } = response.result;
+                    this.setState({
+                        id: info.id,
+                        name: info.name,
+                        description: info.description,
+                        background_color: info.background_color,
+                        body: info.body
+                    });
+                }
+            }
+        });
         dispatch({
             type: "goods/list",
             payload: {
@@ -160,20 +163,17 @@ export default class Edit extends Component {
     };
 
     render() {
-        const {  goodsListLoading } = this.props;
+        const { pageEditLoading, pageInfoLoading } = this.props;
         let { id, options, body, baseInfoVisible, name, description, background_color } = this.state;
         return (
-            <Spin size="large" className="globalSpin" spinning={goodsListLoading}>
-                <Row type="flex" justify="space-between">
-                    <Col span={4}>
-                        <Affix offsetTop={0}>
+            <Spin size="large" className="globalSpin" spinning={pageInfoLoading}>
+                <Row type="flex" justify="space-between" style={{ minHeight: "100vh", overflow: "hidden" }}>
+                    <Col span={4} className={styles.container}>
+                        <Scrollbar style={{ width: "100%", height: "100%", minHeight: 300 }}>
                             <PageTool
                                 onToolItemClick={this.onToolItemClick}
                             />
-                            <PageTool
-                                onToolItemClick={this.onToolItemClick}
-                            />
-                        </Affix>
+                        </Scrollbar>
                     </Col>
                     <Col span={12}>
                         <PageView
@@ -185,6 +185,8 @@ export default class Edit extends Component {
                             setPage={this.setPage}
                         >
                             <Button
+                                loading={pageEditLoading}
+                                disabled={pageInfoLoading}
                                 type='primary'
                                 onClick={() => {
                                     this.props.dispatch({
@@ -197,8 +199,12 @@ export default class Edit extends Component {
                                             body,
                                             module: "mobile"
                                         },
-                                        callback: () => {
-                                            message.success("已保存");
+                                        callback: (response) => {
+                                            if (response.code === 0) {
+                                                message.success("已保存");
+                                            } else {
+                                                message.error(response.msg);
+                                            }
                                         }
                                     });
                                 }}
@@ -207,8 +213,8 @@ export default class Edit extends Component {
                             </Button>
                         </PageView>
                     </Col>
-                    <Col span={8}>
-                        <Affix offsetTop={0}>
+                    <Col span={8} className={styles.container}>
+                        <Scrollbar style={{ width: "100%", height: "100%", minHeight: 300 }}>
                             {
                                 baseInfoVisible === false
                                     ?
@@ -233,7 +239,7 @@ export default class Edit extends Component {
                                         }}
                                     />
                             }
-                        </Affix>
+                        </Scrollbar>
                     </Col>
                 </Row>
             </Spin>

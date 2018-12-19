@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Modal, message ,Icon} from "antd";
+import { Modal, message, Icon } from "antd";
 import { SortableContainer, SortableElement, arrayMove } from "react-sortable-hoc";
 import Goods from "./goods";
 import GoodsList from "./goodsList";
@@ -14,6 +14,7 @@ import Title from "./title";
 import TextNav from "./textNav";
 import AuxiliaryBlank from "./auxiliaryBlank";
 import styles from "./index.css";
+import Scrollbar from "react-scrollbars-custom";
 
 const SortableItem = SortableElement(({ value }) =>
     <li className={styles.sortableListLi}>{value}</li>
@@ -203,7 +204,7 @@ export default class PageView extends Component {
 
     render() {
         const { hoverShow } = this.state;
-        const { body, options, onHeaderClick, backgroundColor,children } = this.props;
+        const { body, options, onHeaderClick, backgroundColor, children } = this.props;
 
         const items = body.length > 0 ? body.map((item, index) => (
             <div
@@ -250,23 +251,33 @@ export default class PageView extends Component {
         )) : [];
         return (
             <div className={styles.dragPhoneWarp}>
-                <div
-                    className={styles.dragPhoneHeader}
-                >
+                <div className={styles.dragPhoneHeader}>
                     <div onClick={onHeaderClick}>
-                        <Icon type="edit" /><a href="javascript:void(0)" style={{marginLeft:15}}>编辑页面基本信息</a>
+                        <Icon type="edit" /><a href="javascript:void(0)" style={{ marginLeft: 15 }}>编辑页面基本信息</a>
                     </div>
                     {children}
                 </div>
-                <div
-                    className={styles.dragPhoneContain}
-                    style={backgroundColor ? { backgroundColor } : { backgroundColor: "#FFFFFF" }}
+                <Scrollbar style={{ width: "100%", height: "100%", minHeight: 600 }} noScrollX={true}
+                           wrapperRenderer={
+                               props => {
+                                   const { elementRef, ...restProps } = props;
+                                   return <div {...restProps}
+                                                className="pageDiyViewScrollWrapper"
+                                                ref={elementRef} />;
+                               }
+                           }
                 >
-                    <SortableList items={items} onSortEnd={this.onSortEnd} onSortStart={this.onSortStart} />
-                </div>
+                    <div
+                        className={styles.dragPhoneContain}
+                        style={backgroundColor ? { backgroundColor } : { backgroundColor: "#FFFFFF" }}
+                    >
+                        <SortableList items={items} onSortEnd={this.onSortEnd} onSortStart={this.onSortStart} />
+                    </div>
+                </Scrollbar>
             </div>
         );
     }
+
 // : { typ, title }
     returnContain(item, index) {
         const { body } = this.props;

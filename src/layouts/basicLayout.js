@@ -167,6 +167,7 @@ class BasicLayout extends React.PureComponent {
             fixedHeader
         } = this.props;
 
+
         const isTop = PropsLayout === "topmenu";
         const routerConfig = this.getRouterAuthority(pathname, routes);
         const contentStyle = !fixedHeader ? { paddingTop: 0 } : {};
@@ -200,7 +201,7 @@ class BasicLayout extends React.PureComponent {
                             {children}
                         </Authorized>
                     </Content>
-                    <Footer />
+                    {pathname === '/shop/page/add' || pathname === '/shop/page/edit' ? null : <Footer />}
                 </Layout>
             </Layout>
         );

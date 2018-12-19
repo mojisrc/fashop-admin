@@ -24,7 +24,7 @@ export default class PageTool extends Component {
             <Card title={"基础模块"} type={'inner'} bordered={false}>
                 {
                     defaultData.length > 0 ? defaultData.map((item, index) => {
-                        return <Card.Grid style={gridStyle}>
+                        return <Card.Grid style={gridStyle} key={index}>
                             <Button
                                 className={styles.moduleItem}
                                 onClick={() => {
