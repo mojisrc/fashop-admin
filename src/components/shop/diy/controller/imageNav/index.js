@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Radio, Form } from "antd";
-import { View } from "react-web-dom";
 import { formItemLayout } from "@/components/shop/diy/formLayout";
 import GroupCard from "@/components/shop/diy/controller/common/groupCard";
 

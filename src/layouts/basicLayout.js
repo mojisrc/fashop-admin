@@ -188,13 +188,13 @@ class BasicLayout extends React.PureComponent {
                         minHeight: "100vh"
                     }}
                 >
-                    <Header
-                        menuData={menuData}
-                        handleMenuCollapse={this.handleMenuCollapse}
-                        logo={logo}
-                        isMobile={isMobile}
-                        {...this.props}
-                    />
+                    {/*<Header*/}
+                        {/*menuData={menuData}*/}
+                        {/*handleMenuCollapse={this.handleMenuCollapse}*/}
+                        {/*logo={logo}*/}
+                        {/*isMobile={isMobile}*/}
+                        {/*{...this.props}*/}
+                    {/*/>*/}
                     <Content className={styles.content} style={contentStyle}>
                         <Authorized authority={routerConfig} noMatch={<Exception403 />}>
                             {children}

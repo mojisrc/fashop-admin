@@ -4,33 +4,19 @@
     justify-content: flex-start;
     flex-direction: column;
     width: 375px;
+    margin: 0 auto;
 }
 .dragPhoneHeader{
     width: 375px;
     cursor: pointer;
     height: 54px;
     background-color: #ffffff;
-    border: 1px solid #f1f1f1;
-    text-align: center;
-    position: relative;
     display: flex;
-    align-items: initial;
-    justify-content: flex-start;
-    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 15px;
 }
-.dragPhoneHeader>span{
-    line-height: 54px;
-    color: #999;
-    font-size: 18px;
-    margin: 0;
-}
-.dragPhoneHeader img{
-    width: 22px;
-    height: 22px;
-    position: absolute;
-    right: 15px;
-    top: 15px;
-}
+
 .dragPhoneContain{
     display: flex;
     align-items: initial;

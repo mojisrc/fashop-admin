@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import { View } from "@/components/flexView";
 import { connect } from "dva";
-import { Row, Col, Button, Affix, message, Spin, Card } from "antd";
-import PageHeaderWrapper from "@/components/pageHeaderWrapper";
+import { Row, Col, Button, Affix, message, Spin, Card, Layout } from "antd";
 import PageTool from "@/components/shop/diy/tool/index";
 import PageView from "@/components/shop/diy/view/index";
 import PageControl from "@/components/shop/diy/controller/index";
@@ -13,6 +12,9 @@ import PageApi from "@/services/page";
 import { query } from "@/utils/fa";
 import { getPageQuery } from "@/utils/utils";
 
+const {
+    Header, Content, Footer, Sider
+} = Layout;
 @connect(({ goods, page, loading }) => ({
     goodList: goods.list.result,
     goodsListLoading: loading.effects["goods/list"],
@@ -158,96 +160,82 @@ export default class Edit extends Component {
     };
 
     render() {
-        const {  history, goodsListLoading } = this.props;
+        const {  goodsListLoading } = this.props;
         let { id, options, body, baseInfoVisible, name, description, background_color } = this.state;
         return (
             <Spin size="large" className="globalSpin" spinning={goodsListLoading}>
-                <PageHeaderWrapper hiddenBreadcrumb={true}>
-                    <Card bordered={false}>
-                        <View className={styles.shopPageEditMain}>
-                            <View className={styles.shopPageEditToolMain}>
-                                <Affix offsetTop={15} style={{ zIndex: 1 }}>
-                                    <PageTool
-                                        onToolItemClick={this.onToolItemClick}
+                <Row type="flex" justify="space-between">
+                    <Col span={4}>
+                        <Affix offsetTop={0}>
+                            <PageTool
+                                onToolItemClick={this.onToolItemClick}
+                            />
+                            <PageTool
+                                onToolItemClick={this.onToolItemClick}
+                            />
+                        </Affix>
+                    </Col>
+                    <Col span={12}>
+                        <PageView
+                            options={options}
+                            body={body}
+                            backgroundColor={background_color}
+                            onViewItemClick={this.onViewItemClick}
+                            onHeaderClick={this.phoneHeaderClick}
+                            setPage={this.setPage}
+                        >
+                            <Button
+                                type='primary'
+                                onClick={() => {
+                                    this.props.dispatch({
+                                        type: "page/edit",
+                                        payload: {
+                                            id,
+                                            name,
+                                            description,
+                                            background_color,
+                                            body,
+                                            module: "mobile"
+                                        },
+                                        callback: () => {
+                                            message.success("已保存");
+                                        }
+                                    });
+                                }}
+                            >
+                                保存
+                            </Button>
+                        </PageView>
+                    </Col>
+                    <Col span={8}>
+                        <Affix offsetTop={0}>
+                            {
+                                baseInfoVisible === false
+                                    ?
+                                    <PageControl
+                                        options={options}
+                                        body={body}
+                                        setPage={this.setPage}
+                                        getValues={this.getControlValues}
+                                        goodsListRefreshGoods={this.goodsListRefreshGoods}
                                     />
-                                </Affix>
-                            </View>
-                            <View className={styles.shopPageEditViewMain}>
-                                <PageView
-                                    options={options}
-                                    body={body}
-                                    backgroundColor={background_color}
-                                    onViewItemClick={this.onViewItemClick}
-                                    onHeaderClick={this.phoneHeaderClick}
-                                    setPage={this.setPage}
-                                />
-                            </View>
-                            <View className={styles.shopPageEditControllerMain}>
-                                <Affix offsetTop={15} style={{ zIndex: 1 }}>
-                                    {
-                                        baseInfoVisible === false
-                                            ?
-                                            <PageControl
-                                                options={options}
-                                                body={body}
-                                                setPage={this.setPage}
-                                                getValues={this.getControlValues}
-                                                goodsListRefreshGoods={this.goodsListRefreshGoods}
-                                            />
-                                            :
-                                            <BaseInfo
-                                                name={name}
-                                                backgroundColor={background_color}
-                                                description={description}
-                                                getValues={(value) => {
-                                                    this.setState({
-                                                        name: value.name,
-                                                        background_color: value.backgroundColor,
-                                                        description: value.description
-                                                    });
-                                                }}
-                                            />
-                                    }
-                                </Affix>
-                            </View>
-                        </View>
-                        <Row className={styles.shopPageEditFooter}>
-                            <Col span={10} />
-                            <Col span={2}>
-                                <Button
-                                    type='primary'
-                                    onClick={() => {
-                                        this.props.dispatch({
-                                            type: "page/edit",
-                                            payload: {
-                                                id,
-                                                name,
-                                                description,
-                                                background_color,
-                                                body,
-                                                module: "mobile"
-                                            },
-                                            callback: () => {
-                                                message.success("已保存");
-                                            }
-                                        });
-                                    }}
-                                >
-                                    保存
-                                </Button>
-                            </Col>
-                            <Col span={2}>
-                                <Button
-                                    onClick={() => {
-                                        history.goBack();
-                                    }}
-                                >
-                                    返回
-                                </Button>
-                            </Col>
-                        </Row>
-                    </Card>
-                </PageHeaderWrapper>
+                                    :
+                                    <BaseInfo
+                                        name={name}
+                                        backgroundColor={background_color}
+                                        description={description}
+                                        getValues={(value) => {
+                                            this.setState({
+                                                name: value.name,
+                                                background_color: value.backgroundColor,
+                                                description: value.description
+                                            });
+                                        }}
+                                    />
+                            }
+                        </Affix>
+                    </Col>
+                </Row>
             </Spin>
         );
     }

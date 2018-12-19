@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Modal, message } from "antd";
+import { Modal, message ,Icon} from "antd";
 import { SortableContainer, SortableElement, arrayMove } from "react-sortable-hoc";
 import Goods from "./goods";
 import GoodsList from "./goodsList";
@@ -203,7 +203,7 @@ export default class PageView extends Component {
 
     render() {
         const { hoverShow } = this.state;
-        const { body, options, onHeaderClick, backgroundColor } = this.props;
+        const { body, options, onHeaderClick, backgroundColor,children } = this.props;
 
         const items = body.length > 0 ? body.map((item, index) => (
             <div
@@ -252,13 +252,11 @@ export default class PageView extends Component {
             <div className={styles.dragPhoneWarp}>
                 <div
                     className={styles.dragPhoneHeader}
-                    onClick={onHeaderClick}
                 >
-                    <span>设置页面信息</span>
-                    <img
-                        src={require("@/assets/images/shop/page-setting.png")}
-                        alt='diyPhone'
-                    />
+                    <div onClick={onHeaderClick}>
+                        <Icon type="edit" /><a href="javascript:void(0)" style={{marginLeft:15}}>编辑页面基本信息</a>
+                    </div>
+                    {children}
                 </div>
                 <div
                     className={styles.dragPhoneContain}

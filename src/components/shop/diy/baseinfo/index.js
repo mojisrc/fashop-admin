@@ -19,7 +19,7 @@ export default class Index extends Component {
     render() {
         const { name, description, backgroundColor, getValues } = this.props;
         return (
-            <Card>
+            <Card bordered={false}>
                 <Form>
                     <FormItem
                         {...formItemLayout}

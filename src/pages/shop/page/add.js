@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { View } from "@/components/flexView";
 import { connect } from "dva";
 import { Row, Col, Button, Affix, message, Spin,Card } from "antd";
-import PageHeaderWrapper from '@/components/pageHeaderWrapper';
 import PageTool from "@/components/shop/diy/tool/index";
 import PageView from "@/components/shop/diy/view/index";
 import PageControl from "@/components/shop/diy/controller/index";

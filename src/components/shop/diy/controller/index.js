@@ -76,7 +76,7 @@ export default class PageControl extends Component {
         }
         return (
                 <ScrollView style={{height:'80vh'}} block={true}>
-                    <Card>{item}</Card>
+                    <Card bordered={false}>{item}</Card>
                 </ScrollView>
         )
     }
