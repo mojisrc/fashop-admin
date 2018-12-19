@@ -1,16 +1,10 @@
-.shopPageEditMain{
-    display: flex;
-    justify-content: flex-start;
-    flex-direction: row;
-    min-width: 1605px;
-}
 .shopPageEditToolMain{
     width: 200px;
     margin-right: 15px;
 }
 .shopPageEditViewMain{
-    margin-right: 15px;
     width: 375px;
+    margin: 0 auto;
 }
 .shopPageEditControllerMain{
     width: 500px;

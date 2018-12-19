@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Row, Col, Button } from 'antd';
+import { Col, Button, Card } from "antd";
 import styles from "./index.css";
 import { View } from "@/components/flexView";
 import { defaultData } from "./defaultData";
@@ -12,35 +12,35 @@ import { defaultData } from "./defaultData";
 
 export default class PageTool extends Component {
     render() {
-        const { onToolItemClick } = this.props
+        const { onToolItemClick } = this.props;
+        const gridStyle = {
+            width: '33.3%',
+            textAlign: 'center',
+            padding:0,
+            border:0,
+            boxShadow:'none'
+        };
         return (
-            <View className={styles.dragModuleWarp}>
-                <Row>
-                    <Col span={24}>
-                        <p className={styles.dragModuleTitle}>基础模块</p>
-                    </Col>
-                </Row>
-                <Row className={styles.itemRow}>
-                    {
-                        defaultData.length > 0 ? defaultData.map((item, index) => {
-                            return <Col span={8} key={index} className={styles.buttonCol}>
-                                <Button
-                                    className={styles.moduleItem}
-                                    onClick={() => {
-                                        onToolItemClick({...item}, index)
-                                    }}
-                                >
-                                    <View className={styles.iconView}>
-                                        <img src={item.icon} alt='' />
-                                    </View>
-                                    <p>{item.title}</p>
-                                </Button>
-                            </Col>
-                        }) : ''
-                    }
-                </Row>
-            </View>
-        )
+            <Card title={"基础模块"} type={'inner'} bordered={false}>
+                {
+                    defaultData.length > 0 ? defaultData.map((item, index) => {
+                        return <Card.Grid style={gridStyle} key={index}>
+                            <Button
+                                className={styles.moduleItem}
+                                onClick={() => {
+                                    onToolItemClick({ ...item }, index);
+                                }}
+                            >
+                                <View className={styles.iconView}>
+                                    <img src={item.icon} alt='' />
+                                </View>
+                                <p>{item.title}</p>
+                            </Button>
+                        </Card.Grid>
+                    }) : ""
+                }
+            </Card>
+        );
     }
 
 }

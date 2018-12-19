@@ -10,7 +10,7 @@ const { TextArea } = Input;
 
 // export type LinkActionType = 'portal' | 'goods' | 'page' | 'url' | 'goods_category'
 // type Props = {
-//     getValues: Function,
+//     onChange: Function,
 //     type: LinkActionType,
 //     value
 // }
@@ -23,6 +23,7 @@ const { TextArea } = Input;
 //     selectGoodsCategoryVisible:boolean,
 //     inputUrlVisible: boolean,
 // }
+// todo onChange() :xxx 约束
 export const linkInfo = {
     portal: {
         type: "portal",
@@ -51,7 +52,7 @@ export const linkInfo = {
     }
 };
 
-export default class Index extends Component {
+export default class ActionLink extends Component {
     state = {
         urlValue: {
             url: ""
@@ -65,8 +66,9 @@ export default class Index extends Component {
         const props = { ...this.props };
         switch (linkAction) {
             case "portal":
-                props.getValues({
-                    ...props, ...{ type: linkAction }
+                props.onChange({
+                    action: "portal",
+                    param: {}
                 });
                 break;
             case "goods":
@@ -96,7 +98,7 @@ export default class Index extends Component {
 
     render() {
         const props = { ...this.props };
-        const { type, getValues } = props;
+        const { type, onChange } = props;
         const { selectGoodsVisible, selectPageVisible, selectGoodsCategoryVisible, inputUrlVisible, urlValue } = this.state;
         return (
             <View>
@@ -139,12 +141,10 @@ export default class Index extends Component {
                         this.setState({
                             selectGoodsVisible: false
                         }, () => {
-                            getValues({
-                                ...props, ...{
-                                    type: "goods",
-                                    value: {
-                                        id: state.checkedData[0].id
-                                    }
+                            onChange({
+                                action: "goods",
+                                param: {
+                                    id: state.checkedData[0].id
                                 }
                             });
                         });
@@ -161,12 +161,10 @@ export default class Index extends Component {
                         this.setState({
                             selectPageVisible: false
                         }, () => {
-                            getValues({
-                                ...props, ...{
-                                    type: "page",
-                                    value: {
-                                        id: state.value.id
-                                    }
+                            onChange({
+                                action: "page",
+                                param: {
+                                    id: state.value.id
                                 }
                             });
                         });
@@ -183,12 +181,10 @@ export default class Index extends Component {
                         this.setState({
                             selectGoodsCategoryVisible: false
                         }, () => {
-                            getValues({
-                                ...props, ...{
-                                    type: "goods_category",
-                                    value: {
-                                        id: state.value.id
-                                    }
+                            onChange({
+                                action: "goods_category",
+                                param: {
+                                    id: state.value.id
                                 }
                             });
                         });
@@ -202,15 +198,13 @@ export default class Index extends Component {
                             inputUrlVisible: false
                         });
                     }}
-                    onOk={(e) => {
+                    onOk={() => {
                         this.setState({
                             inputUrlVisible: false
                         }, () => {
-                            getValues({
-                                ...props, ...{
-                                    type: "url",
-                                    value: urlValue
-                                }
+                            onChange({
+                                link: "url",
+                                param: urlValue
                             });
                         });
                     }}

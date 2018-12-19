@@ -437,7 +437,7 @@ export default class GoodsSpec extends Component {
         this.setState({ loading: true });
         const e = await GoodsApi.spec.add({
             name: this.AddSpecValueInput.input.value
-        }
+        })
         if (e.code === 0) {
             message.success("添加成功");
             this.setState({ loading: false, customSpecSortShow: false });

@@ -35,8 +35,9 @@ const Search = Input.Search;
 }))
 export default class SelectGoods extends Component {
     static defaultProps = {
-        goodList: { total_number: 0, list: [] },
-        goodsListLoading: true
+        goodsList: { total_number: 0, list: [] },
+        goodsListLoading: true,
+        multiSelect:false
     };
 
     constructor(props) {
@@ -52,7 +53,11 @@ export default class SelectGoods extends Component {
     }
 
     componentDidMount() {
-        this.initList();
+
+        const { goodsList, goodsListLoading } = this.props;
+        if (goodsList.list.length === 0 && goodsListLoading === false) {
+            this.initList();
+        }
     }
 
     initList() {

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Input, Form, Card } from "antd";
-import ColorPicker from "@/components/public/ColorPicker";
+import ColorPicker from "@/components/public/colorPicker";
 import { formItemLayout } from "@/components/shop/diy/formLayout";
 
 const { TextArea } = Input;
@@ -19,7 +19,7 @@ export default class Index extends Component {
     render() {
         const { name, description, backgroundColor, getValues } = this.props;
         return (
-            <Card>
+            <Card bordered={false}>
                 <Form>
                     <FormItem
                         {...formItemLayout}

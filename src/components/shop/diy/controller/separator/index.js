@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Radio, Form } from "antd";
-import ColorPicker from "@/components/public/ColorPicker";
+import ColorPicker from "@/components/public/colorPicker";
 import { formItemLayout } from "@/components/shop/diy/formLayout";
 const FormItem = Form.Item;
 const RadioGroup = Radio.Group;

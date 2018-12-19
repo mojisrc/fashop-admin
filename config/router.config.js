@@ -30,6 +30,7 @@ export default [
                     { path: "/shop/page", name: "制作页面", component: "/shop/page/list" },
                     { path: "/shop/page/add", component: "/shop/page/add" },
                     { path: "/shop/page/edit", component: "/shop/page/edit" },
+                    { path: "/shop/page/demo", component: "/shop/page/demo" },
                     { path: "/shop/category", name: "分类页面", component: "/shop/category" }
                 ]
             },

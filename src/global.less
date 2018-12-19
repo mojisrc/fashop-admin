@@ -31,3 +31,16 @@ ul,
 ol {
   list-style: none;
 }
+//解决scrollbars冲突
+.wrapper{
+  font-size: inherit!important;
+  font-family: inherit!important;
+}
+.pageDiyViewScrollWrapper{
+  margin-right: 0!important;
+}
+.pageDiyViewScrollWrapper .content{
+}
+.pageDiyViewScrollWrapper + .track{
+  right: -8px!important;
+}

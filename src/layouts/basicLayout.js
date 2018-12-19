@@ -146,6 +146,7 @@ class BasicLayout extends React.PureComponent {
     };
 
     renderSettingDrawer = () => {
+        return null;
         // Do not render SettingDrawer in production
         // unless it is deployed in preview.pro.ant.design as demo
         if (process.env.NODE_ENV === "production" && APP_TYPE !== "site") {
@@ -166,6 +167,7 @@ class BasicLayout extends React.PureComponent {
             route: { routes },
             fixedHeader
         } = this.props;
+
 
         const isTop = PropsLayout === "topmenu";
         const routerConfig = this.getRouterAuthority(pathname, routes);
@@ -188,19 +190,19 @@ class BasicLayout extends React.PureComponent {
                         minHeight: "100vh"
                     }}
                 >
-                    <Header
-                        menuData={menuData}
-                        handleMenuCollapse={this.handleMenuCollapse}
-                        logo={logo}
-                        isMobile={isMobile}
-                        {...this.props}
-                    />
+                    {/*<Header*/}
+                    {/*menuData={menuData}*/}
+                    {/*handleMenuCollapse={this.handleMenuCollapse}*/}
+                    {/*logo={logo}*/}
+                    {/*isMobile={isMobile}*/}
+                    {/*{...this.props}*/}
+                    {/*/>*/}
                     <Content className={styles.content} style={contentStyle}>
                         <Authorized authority={routerConfig} noMatch={<Exception403 />}>
                             {children}
                         </Authorized>
                     </Content>
-                    <Footer />
+                    {pathname === "/shop/page/add" || pathname === "/shop/page/edit" ? null : <Footer />}
                 </Layout>
             </Layout>
         );
@@ -221,7 +223,7 @@ class BasicLayout extends React.PureComponent {
     }
 }
 
-export default connect(({ global, setting, menu,member}) => ({
+export default connect(({ global, setting, menu, member }) => ({
     collapsed: global.collapsed,
     layout: setting.layout,
     menuData: menu.menuData,

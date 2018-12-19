@@ -1,31 +1,9 @@
-.dragModuleWarp{
-    border: 1px solid #e8e8e8;
-    border-radius: 4px;
-    background-color: #ffffff;
-}
-.dragModuleTitle{
-    background-color: #fafafa;
-    font-size: 14px;
-    color: rgba(0, 0, 0, 0.847058823529412);
-    line-height: 40px;
-    border-bottom: 1px solid #e8e8e8;
-    margin: 0;
-    padding-left: 15px;
-}
-.itemRow{
-    padding: 10px;
-}
-.buttonCol{
-    display: flex;
-    justify-content: center;
-}
 .moduleItem{
     padding: 0;
-    width: 80%;
-    margin-bottom: 10px;
     height: 70px;
-    border-style:none;
     box-shadow: none;
+    border: none;
+    margin-top: 1px;
 }
 .moduleItem>p{
     margin: 0;

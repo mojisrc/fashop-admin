@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { View } from "react-web-dom";
 import { Form } from "antd";
-import ColorPicker from "@/components/public/ColorPicker";
+import ColorPicker from "@/components/public/colorPicker";
 import { formItemLayout } from "@/components/shop/diy/formLayout";
 
 const FormItem = Form.Item;

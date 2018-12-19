@@ -1,21 +1,20 @@
 import React, { Component } from "react";
-import { View } from "@/components/flexView";
 import { connect } from "dva";
-import { Row, Col, Button, Affix, message, Spin, Card } from "antd";
-import PageHeaderWrapper from "@/components/pageHeaderWrapper";
+import { Row, Col, Button, message, Spin } from "antd";
 import PageTool from "@/components/shop/diy/tool/index";
 import PageView from "@/components/shop/diy/view/index";
 import PageControl from "@/components/shop/diy/controller/index";
 import BaseInfo from "@/components/shop/diy/baseinfo/index";
-import styles from "@/styles/shop/shopPageEdit.css";
 import GoodsApi from "@/services/goods";
-import PageApi from "@/services/page";
 import { query } from "@/utils/fa";
 import { getPageQuery } from "@/utils/utils";
+import styles from "./edit.css";
+import Scrollbar from "react-scrollbars-custom";
 
 @connect(({ goods, page, loading }) => ({
     goodList: goods.list.result,
     goodsListLoading: loading.effects["goods/list"],
+    pageEditLoading: loading.effects["page/edit"],
     pageInfo: page.info.result,
     pageInfoLoading: loading.effects["page/info"]
 }))
@@ -25,7 +24,8 @@ export default class Edit extends Component {
         goodList: { total_number: 0, list: [] },
         goodsListLoading: true,
         pageInfo: { info: {} },
-        pageInfoLoading: true
+        pageInfoLoading: true,
+        pageEditLoading: false
     };
     state = {
         id: 0,
@@ -43,17 +43,22 @@ export default class Edit extends Component {
     async componentDidMount() {
         const { dispatch } = this.props;
         const { id } = getPageQuery();
-        const e = await PageApi.info({ id });
-        if (e.code === 0) {
-            const { info } = e.result;
-            this.setState({
-                id: info.id,
-                name: info.name,
-                description: info.description,
-                background_color: info.background_color,
-                body: info.body
-            });
-        }
+        dispatch({
+            type: "page/info",
+            payload: { id },
+            callback: (response) => {
+                if (response.code === 0) {
+                    const { info } = response.result;
+                    this.setState({
+                        id: info.id,
+                        name: info.name,
+                        description: info.description,
+                        background_color: info.background_color,
+                        body: info.body
+                    });
+                }
+            }
+        });
         dispatch({
             type: "goods/list",
             payload: {
@@ -158,93 +163,85 @@ export default class Edit extends Component {
     };
 
     render() {
-        const { edit, history, goodsListLoading } = this.props;
+        const { pageEditLoading, pageInfoLoading } = this.props;
         let { id, options, body, baseInfoVisible, name, description, background_color } = this.state;
         return (
-            <Spin size="large" className="globalSpin" spinning={goodsListLoading}>
-                <PageHeaderWrapper hiddenBreadcrumb={true}>
-                    <Card bordered={false}>
-                        <View className={styles.shopPageEditMain}>
-                            <View className={styles.shopPageEditToolMain}>
-                                <Affix offsetTop={15} style={{ zIndex: 1 }}>
-                                    <PageTool
-                                        onToolItemClick={this.onToolItemClick}
-                                    />
-                                </Affix>
-                            </View>
-                            <View className={styles.shopPageEditViewMain}>
-                                <PageView
-                                    options={options}
-                                    body={body}
-                                    backgroundColor={background_color}
-                                    onViewItemClick={this.onViewItemClick}
-                                    onHeaderClick={this.phoneHeaderClick}
-                                    setPage={this.setPage}
-                                />
-                            </View>
-                            <View className={styles.shopPageEditControllerMain}>
-                                <Affix offsetTop={15} style={{ zIndex: 1 }}>
-                                    {
-                                        baseInfoVisible === false
-                                            ?
-                                            <PageControl
-                                                options={options}
-                                                body={body}
-                                                setPage={this.setPage}
-                                                getValues={this.getControlValues}
-                                                goodsListRefreshGoods={this.goodsListRefreshGoods}
-                                            />
-                                            :
-                                            <BaseInfo
-                                                name={name}
-                                                backgroundColor={background_color}
-                                                description={description}
-                                                getValues={(value) => {
-                                                    this.setState({
-                                                        name: value.name,
-                                                        background_color: value.backgroundColor,
-                                                        description: value.description
-                                                    });
-                                                }}
-                                            />
-                                    }
-                                </Affix>
-                            </View>
-                        </View>
-                        <Row className={styles.shopPageEditFooter}>
-                            <Col span={10} />
-                            <Col span={2}>
-                                <Button
-                                    type='primary'
-                                    onClick={() => {
-                                        let params = {
+            <Spin size="large" className="globalSpin" spinning={pageInfoLoading}>
+                <Row type="flex" justify="space-between" style={{ minHeight: "100vh", overflow: "hidden" }}>
+                    <Col span={4} className={styles.container}>
+                        <Scrollbar style={{ width: "100%", height: "100%", minHeight: 300 }}>
+                            <PageTool
+                                onToolItemClick={this.onToolItemClick}
+                            />
+                        </Scrollbar>
+                    </Col>
+                    <Col span={12}>
+                        <PageView
+                            options={options}
+                            body={body}
+                            backgroundColor={background_color}
+                            onViewItemClick={this.onViewItemClick}
+                            onHeaderClick={this.phoneHeaderClick}
+                            setPage={this.setPage}
+                        >
+                            <Button
+                                loading={pageEditLoading}
+                                disabled={pageInfoLoading}
+                                type='primary'
+                                onClick={() => {
+                                    this.props.dispatch({
+                                        type: "page/edit",
+                                        payload: {
                                             id,
                                             name,
                                             description,
                                             background_color,
                                             body,
                                             module: "mobile"
-                                        };
-                                        edit({
-                                            params
-                                        });
-                                    }}
-                                >
-                                    保存
-                                </Button>
-                            </Col>
-                            <Col span={2}>
-                                <Button
-                                    onClick={() => {
-                                        history.goBack();
-                                    }}
-                                >
-                                    返回
-                                </Button>
-                            </Col>
-                        </Row>
-                    </Card>
-                </PageHeaderWrapper>
+                                        },
+                                        callback: (response) => {
+                                            if (response.code === 0) {
+                                                message.success("已保存");
+                                            } else {
+                                                message.error(response.msg);
+                                            }
+                                        }
+                                    });
+                                }}
+                            >
+                                保存
+                            </Button>
+                        </PageView>
+                    </Col>
+                    <Col span={8} className={styles.container}>
+                        <Scrollbar style={{ width: "100%", height: "100%", minHeight: 300 }}>
+                            {
+                                baseInfoVisible === false
+                                    ?
+                                    <PageControl
+                                        options={options}
+                                        body={body}
+                                        setPage={this.setPage}
+                                        getValues={this.getControlValues}
+                                        goodsListRefreshGoods={this.goodsListRefreshGoods}
+                                    />
+                                    :
+                                    <BaseInfo
+                                        name={name}
+                                        backgroundColor={background_color}
+                                        description={description}
+                                        getValues={(value) => {
+                                            this.setState({
+                                                name: value.name,
+                                                background_color: value.backgroundColor,
+                                                description: value.description
+                                            });
+                                        }}
+                                    />
+                            }
+                        </Scrollbar>
+                    </Col>
+                </Row>
             </Spin>
         );
     }
