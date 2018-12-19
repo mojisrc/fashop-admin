@@ -11,3 +11,47 @@
 .right{
     flex: 0.6
 }
+.title{
+    height: 44px;
+    /* background: #1c1c20; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    color: #333;
+    font-weight: 500;
+    margin: 0
+}
+.card {
+    color: white;
+    height: 180px;
+    background: linear-gradient(0deg, #FF635C, #E7443D);
+    /* background: linear-gradient(0deg, rgb(254, 98, 99), rgb(254, 49, 78)); */
+    /* 相对定位，方便让before和after伪元素绝对定位偏移 */
+    position: relative;
+    /* 把超出div的部分隐藏起来 */
+    overflow: hidden;
+}
+
+.card:before, .card:after {
+    content: ' ';
+    width: 0;
+    height: 100%;
+    /* 绝对定位进行偏移 */
+    position: absolute;
+    top: 10px;
+}
+
+.card:before {
+    /* 圆点型的border */
+    border-right: 10px dotted white;
+    /* 偏移一个半径，让圆点的一半覆盖div */
+    left: -5px;
+}
+
+.card:after {
+    /* 圆点型的border */
+    border-left: 10px dotted white;
+    /* 偏移一个半径，让圆点的一半覆盖div */
+    right: -5px;
+}
