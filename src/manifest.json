@@ -3,7 +3,7 @@
   "short_name": "FaShop 商城系统 - Power By FaShop ( www.fashop.cn )",
   "display": "standalone",
   "start_url": "./?utm_source=homescreen",
-  "theme_color": "#002140",
+  "theme_color": "#e61d19",
   "background_color": "#000000",
   "icons": [
     {
