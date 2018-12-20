@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "dva";
 import PageHeaderWrapper from '@/components/pageHeaderWrapper';
-import { View } from "@/components/flexView";
 import { list } from "@/models/order";
 import OrderListHeader from "@/components/order/list/header"
 import OrderListTable from "@/components/order/list/table"

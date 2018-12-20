@@ -60,6 +60,7 @@ const order_typeArray = [
     }
 ];
 const categoryTreeData = (list) => {
+    // console.log(list)
     return list.map((e) => {
         return {
             title: e.name,
@@ -122,7 +123,9 @@ export default class GoodsListHeader extends Component {
         const { form, goodsCategory, loading } = this.props;
         const { getFieldDecorator } = form;
         const { sale_state, title, category_ids, order_type } = this.state.queryParams;
-        const treeData = categoryTreeData(Arr.toTree(goodsCategory.list));
+        let tree = Arr.toTree(goodsCategory.list)
+        const treeData = categoryTreeData(tree);
+        // console.log(treeData)
         // TreeSelect 只接受string
         let _category_ids = category_ids && category_ids.length ? [...category_ids] : [];
         return (

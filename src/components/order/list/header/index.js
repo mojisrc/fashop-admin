@@ -1,7 +1,5 @@
 import React, { Component } from "react";
-import { Row, Col, Button, Input, Select, DatePicker } from "antd";
-import styles from "./index.css";
-import { View } from "@/components/flexView";
+import { Button, Input, Select, DatePicker, Form} from "antd";
 import { getQueryPath } from "@/utils/index";
 import moment from "moment";
 import Query from "@/utils/query";
@@ -10,6 +8,36 @@ import update from "immutability-helper";
 const InputGroup = Input.Group;
 const Option = Select.Option;
 const { RangePicker } = DatePicker;
+const FormItem = Form.Item;
+const state_type_list = [
+    {
+        name: "待发货",
+        state_type: "state_pay"
+    }, {
+        name: "待付款",
+        state_type: "state_new"
+    }, {
+        name: "已发货",
+        state_type: "state_send"
+    }
+    , {
+        name: "已完成",
+        state_type: "state_success"
+    }, {
+        name: "已关闭",
+        state_type: "state_cancel"
+    }
+];
+const order_kind_list = [
+    {
+        name: "普通订单",
+        order_kind: "ordinary"
+    }, {
+        name: "拼团",
+        order_kind: "group"
+    }
+];
+@Form.create()
 export default class OrderManagementHeader extends Component {
     state = {
         queryParams: {
@@ -22,9 +50,10 @@ export default class OrderManagementHeader extends Component {
     };
 
     componentDidMount() {
-        this.initQueryParams()
+        this.initQueryParams();
     }
-    initQueryParams(){
+
+    initQueryParams() {
         const params = Query.getQuery();
         this.setState({
             queryParams: {
@@ -37,89 +66,61 @@ export default class OrderManagementHeader extends Component {
         });
     }
 
+
     render() {
+        const { getFieldDecorator } = this.props.form;
         const { queryParams } = this.state;
         const { keywords_type, keywords, create_time, state_type, order_kind } = queryParams;
         let create_time_moment = [];
         if (create_time.length > 0) {
             create_time_moment = [moment(create_time[0]), moment(create_time[1])];
         }
-        const state_type_list = [
-            {
-                name: "全部订单",
-                state_type: "all"
-            }, {
-                name: "待发货",
-                state_type: "state_pay"
-            }, {
-                name: "待付款",
-                state_type: "state_new"
-            }, {
-                name: "已发货",
-                state_type: "state_send"
-            }
-            , {
-                name: "已完成",
-                state_type: "state_success"
-            }, {
-                name: "已关闭",
-                state_type: "state_cancel"
-            }
-        ];
-        const order_kind_list = [
-            {
-                name: "全部",
-                order_kind: "all"
-            }, {
-                name: "普通订单",
-                order_kind: "ordinary"
-            }, {
-                name: "拼团",
-                order_kind: "group"
-            }
-        ];
         return (
-            <Row style={{
-                paddingBottom: "24px",
-                marginBottom: "24px",
-                borderBottom: "1px dashed #ededed"
-            }}
-            >
-                <Col span={5}>
-                    <InputGroup compact>
-                        <Select
-                            style={{ minWidth: "115px" }}
-                            placeholder="搜索条件"
-                            value={keywords_type}
-                            onChange={(keywords_type) => {
-                                this.setState(update(this.state, {
-                                    queryParams: { keywords_type: { $set: keywords_type } }
-                                }));
-                            }}
-                        >
-                            <Option value="goods_name">商品名称</Option>
-                            <Option value="order_no">订单号</Option>
-                            <Option value="receiver_name">收货人姓名</Option>
-                            <Option value="receiver_phone">收货人电话</Option>
-                            <Option value="courier_number">快递单号</Option>
-                        </Select>
-                        <Input
-                            placeholder={`请输入${keywords_type ? this.returnKeywordsType(keywords_type) : ""}`}
-                            onChange={(e) => {
-                                this.setState(update(this.state, {
-                                    queryParams: { keywords: { $set: e.target.value } }
-                                }));
-                            }}
-                            style={{ width: "56%" }}
-                            value={keywords}
-                        />
-                    </InputGroup>
-                </Col>
-                <Col span={6} className={styles.div1}>
-                    <View className={styles.view1}>
-                        <p className={styles.p1}>下单时间</p>
+            <Form layout="inline" className="ant-advanced-search-form">
+                <FormItem>
+                    {getFieldDecorator(`field-`, {
+                        rules: [{
+                            message: "Input something!"
+                        }]
+                    })(
+                        <InputGroup compact>
+                            <Select
+                                style={{ minWidth: "115px" }}
+                                placeholder="搜索条件"
+                                value={keywords_type}
+                                onChange={(keywords_type) => {
+                                    this.setState(update(this.state, {
+                                        queryParams: { keywords_type: { $set: keywords_type } }
+                                    }));
+                                }}
+                            >
+                                <Option value="goods_name">商品名称</Option>
+                                <Option value="order_no">订单号</Option>
+                                <Option value="receiver_name">收货人姓名</Option>
+                                <Option value="receiver_phone">收货人电话</Option>
+                                <Option value="courier_number">快递单号</Option>
+                            </Select>
+                            <Input
+                                placeholder={`请输入${keywords_type ? this.returnKeywordsType(keywords_type) : ""}`}
+                                onChange={(e) => {
+                                    this.setState(update(this.state, {
+                                        queryParams: { keywords: { $set: e.target.value } }
+                                    }));
+                                }}
+                                style={{ width: "56%" }}
+                                value={keywords}
+                            />
+                        </InputGroup>
+                    )}
+                </FormItem>
+
+                <FormItem label={`下单时间`}>
+                    {getFieldDecorator(`create_time`, {
+                        rules: [{
+                        }]
+                    })(
                         <RangePicker
-                            style={{ flex: 1 }}
+                            allowClear={true}
                             onChange={(dates, create_time) => {
                                 this.setState(update(this.state, {
                                     queryParams: { create_time: { $set: create_time } }
@@ -127,15 +128,21 @@ export default class OrderManagementHeader extends Component {
                             }}
                             value={create_time_moment}
                         />
-                    </View>
-                </Col>
-                <Col span={3} className={styles.div1}>
-                    <View className={styles.view1}>
-                        <p className={styles.p1}>订单类型</p>
+                    )}
+                </FormItem>
+
+                <FormItem label={`订单类型`}>
+                    {getFieldDecorator(`field-`, {
+                        // initialValue: "all",
+                        rules: [{
+                            message: "Input something!"
+                        }]
+                    })(
                         <Select
-                            placeholder="请选择"
-                            style={{ flex: 1 }}
+                            placeholder="全部类型"
+                            allowClear={true}
                             value={order_kind}
+                            style={{ width: 100 }}
                             onChange={(order_kind) => {
                                 this.setState(update(this.state, {
                                     queryParams: { order_kind: { $set: order_kind } }
@@ -153,14 +160,19 @@ export default class OrderManagementHeader extends Component {
                                 )
                             }
                         </Select>
-                    </View>
-                </Col>
-                <Col span={3} className={styles.div1}>
-                    <View className={styles.view1}>
-                        <p className={styles.p1}>订单状态</p>
+                    )}
+                </FormItem>
+
+                <FormItem label={`订单状态`}>
+                    {getFieldDecorator(`state_type`, {
+                        rules: [{
+                            message: "Input something!"
+                        }]
+                    })(
                         <Select
-                            placeholder="请选择"
-                            style={{ flex: 1 }}
+                            placeholder="全部状态"
+                            allowClear={true}
+                            style={{ width: 100 }}
                             value={state_type}
                             onChange={(state_type) => {
                                 this.setState(update(this.state, {
@@ -179,45 +191,38 @@ export default class OrderManagementHeader extends Component {
                                 )
                             }
                         </Select>
-                    </View>
-                </Col>
+                    )}
+                </FormItem>
+                <FormItem>
+                    <Button
+                        type="primary"
+                        onClick={() => {
+                            const path = getQueryPath("/order/list", {
+                                page: 1,
+                                rows: 10,
+                                keywords_type,
+                                keywords,
+                                create_time,
+                                state_type,
+                                order_kind
+                            });
+                            router.push(path);
 
-                <Col span={4} className={styles.div1}>
-                    <View
-                        style={{
-                            flexDirection: "row"
+                        }}
+                        style={{ marginRight: 14 }}
+                    >
+                        筛选
+                    </Button>
+                    <Button
+                        onClick={() => {
+                            const path = getQueryPath("/order/list");
+                            router.push(path);
                         }}
                     >
-                        <Button
-                            type="primary"
-                            onClick={() => {
-                                const path = getQueryPath("/order/list", {
-                                    page: 1,
-                                    rows: 10,
-                                    keywords_type,
-                                    keywords,
-                                    create_time,
-                                    state_type,
-                                    order_kind
-                                });
-                                router.push(path);
-
-                            }}
-                            style={{ marginRight: 14 }}
-                        >
-                            筛选
-                        </Button>
-                        <Button
-                            onClick={() => {
-                                const path = getQueryPath("/order/list");
-                                router.push(path);
-                            }}
-                        >
-                            清空筛选
-                        </Button>
-                    </View>
-                </Col>
-            </Row>
+                        清空筛选
+                    </Button>
+                </FormItem>
+            </Form>
         );
     }
 

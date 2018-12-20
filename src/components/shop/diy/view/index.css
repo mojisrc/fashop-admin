@@ -26,7 +26,6 @@
     min-height: 560px;
     background-color: #f6f6f6;
     border-top: 0;
-    height: 100%;
 }
 .phoneItem{
     display: flex;
@@ -42,7 +41,7 @@
 .operation{
     position: absolute;
     background-color: rgba(0,0,0,0);
-    bottom: 3px;
+    top: 3px;
     right: 0;
     flex-direction: row;
     z-index: 1;
