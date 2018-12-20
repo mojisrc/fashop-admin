@@ -13,6 +13,7 @@ import TopMenu from "./topMenu";
 import Title from "./title";
 import TextNav from "./textNav";
 import AuxiliaryBlank from "./auxiliaryBlank";
+import GoodsGroup from "./goodsGroup";
 import styles from "./index.css";
 import Scrollbar from "react-scrollbars-custom";
 
@@ -143,6 +144,9 @@ export default class PageView extends Component {
                 break;
             case "text_nav":
                 title = "文本导航";
+                break;
+            case "goods_group":
+                title = "拼团";
                 break;
         }
         Modal.confirm({
@@ -307,6 +311,8 @@ export default class PageView extends Component {
                 return <Title options={options} data={data} />;
             case "text_nav":
                 return <TextNav options={options} data={data} />;
+            case "goods_group":
+                return <GoodsGroup options={options} data={data} />;
             default:
 
         }

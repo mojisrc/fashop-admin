@@ -6,6 +6,7 @@ import {
     Rules,
     // Wechat,
 } from "@/components/marketing/coupon/add"
+import { getPageQuery } from "@/utils/utils";
 
 const FormItem = Form.Item;
 
@@ -43,10 +44,12 @@ export default class CouponAdd extends Component{
                 },
             },
         };
+        const { type } = getPageQuery();
         return <PageHeaderWrapper hiddenBreadcrumb={true}>
             <Card>
                 <Form onSubmit={this.handleSubmit}>
                     <Basic
+                        type={type}
                         form={form}
                         formItemLayout={formItemLayout}
                     />

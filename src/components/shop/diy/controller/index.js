@@ -13,6 +13,7 @@ import Video from "./video";
 import TopMenu from "./topMenu";
 import Title from "./title";
 import TextNav from "./textNav";
+import GoodsGroup from "./goodsGroup";
 
 // type Props = {
 //     options: optionsType,
@@ -69,6 +70,8 @@ export default class PageControl extends Component {
                     break
                 case 'text_nav':
                     item = <TextNav options={itemData.options} data={itemData.data} getValues={this.props.getValues} />
+                case 'goods_group':
+                    item = <GoodsGroup options={itemData.options} data={itemData.data} getValues={this.props.getValues} />;
                     break
                 default:
 
