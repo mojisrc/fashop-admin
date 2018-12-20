@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Table, Button, Switch, Modal, Divider } from "antd";
+import { Table, Button, Switch, Modal, Divider, Popconfirm, Icon } from "antd";
 import styles from "./index.css";
 import { View } from "@/components/flexView";
 import { connect } from "dva";
@@ -99,43 +99,27 @@ export default class FreebieListTable extends Component {
                         }}
                     >编辑</a>
                     <Divider type="vertical" />
-                    <a
-                        onClick={async () => {
-                            Modal.confirm({
-                                title: "停止发券",
-                                content: "停止发券后，买家之前领取的优惠券，在可用时间内还能继续使用，但无法再编辑优惠券内容。确定停止发券？",
-                                okText: "确认",
-                                okType: "danger",
-                                cancelText: "取消",
-                                onOk: async () => {
-                                    // const response = await GoodsApi.del({ ids: [record.id] });
-                                    // if (response.code === 0) {
-                                    //     this.initList();
-                                    // }
-                                }
-                            });
-
-                        }}
-                    >使失效</a>
+                    <Popconfirm
+                        title="确定让这组赠品活动失效？" 
+                        onConfirm={()=>console.log('confirm')} 
+                        onCancel={()=>console.log('cancel')}
+                    >
+                        <a>使失效</a>
+                    </Popconfirm>
                     <Divider type="vertical" />
-                    <a
-                        onClick={async () => {
-                            Modal.confirm({
-                                title: "停止发券",
-                                content: "停止发券后，买家之前领取的优惠券，在可用时间内还能继续使用，但无法再编辑优惠券内容。确定停止发券？",
-                                okText: "确认",
-                                okType: "danger",
-                                cancelText: "取消",
-                                onOk: async () => {
-                                    // const response = await GoodsApi.del({ ids: [record.id] });
-                                    // if (response.code === 0) {
-                                    //     this.initList();
-                                    // }
-                                }
-                            });
-
-                        }}
-                    >删除</a>
+                    <Popconfirm
+                        title="确定删除？"
+                        icon={
+                            <Icon
+                                type="question-circle-o"
+                                style={{ color: 'red' }}
+                            />
+                        }
+                        onConfirm={() => console.log('confirm')}
+                        onCancel={() => console.log('cancel')}
+                    >
+                        <a>删除</a>
+                    </Popconfirm>
                 </View>
             }
         ];

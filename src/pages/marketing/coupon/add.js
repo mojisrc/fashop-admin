@@ -4,7 +4,7 @@ import { Card, Form, Button, Input } from "antd";
 import {
     Basic,
     Rules,
-    Wechat,
+    // Wechat,
 } from "@/components/marketing/coupon/add"
 
 const FormItem = Form.Item;
@@ -54,10 +54,10 @@ export default class CouponAdd extends Component{
                         form={form}
                         formItemLayout={formItemLayout}
                     />
-                    <Wechat
+                    {/* <Wechat
                         form={form}
                         formItemLayout={formItemLayout}
-                    />
+                    /> */}
                     <FormItem {...tailFormItemLayout}>
                         <Button type="primary" htmlType="submit">保 存</Button>
                     </FormItem>

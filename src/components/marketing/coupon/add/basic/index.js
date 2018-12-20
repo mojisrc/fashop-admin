@@ -22,7 +22,10 @@ class Basic extends Component {
         return (
             <View className={styles.warp}>
                 <View className={styles.left}>
+                    <p className={styles.title}>Fashop 优惠券</p>
+                    <View className={styles.card}>
 
+                    </View>
                 </View>
                 <View className={styles.right}>
                     <h3>基本信息</h3>
@@ -36,6 +39,7 @@ class Basic extends Component {
                         })(
                             <Input
                                 placeholder="如：迎新年优惠券，最多10个字"
+                                style={{width: 230}}
                             />
                         )}
                     </FormItem>
@@ -159,7 +163,7 @@ class Basic extends Component {
                             <Checkbox>优惠券允许分享给好友领取</Checkbox>
                         )}
                     </FormItem>
-                    <FormItem
+                    {/* <FormItem
                         {...formItemLayout}
                         label='同步打标签'
                         extra="编辑后仅对后续领取的客户生效，之前对已领取的客户无法生效"
@@ -169,7 +173,7 @@ class Basic extends Component {
                         })(
                             <Checkbox>给领券客户打标签</Checkbox>
                         )}
-                    </FormItem>
+                    </FormItem> */}
                 </View>
             </View>
         );

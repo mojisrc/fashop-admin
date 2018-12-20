@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "dva";
 import { View } from "@/components/flexView";
-import { Form, Input, Radio, Select, Checkbox, Icon } from "antd";
+import { Form, Input, Radio, Select, Checkbox, Icon, Popover } from "antd";
 import styles from "./index.css";
 import router from "umi/router";
 
@@ -96,7 +96,22 @@ class Rules extends Component {
                     <FormItem
                         {...formItemLayout}
                         label='使用说明'
-                        extra={(<a>查看示例</a>)}
+                        extra={(
+                            <Popover
+                                trigger="click"
+                                placement="bottomLeft"
+                                content={(
+                                    <div>
+                                        <p>庆国庆优惠券</p>
+                                        <p>使用时间：2017-10-27 12:00:00 - 2017-10-29 14:49:06</p>
+                                        <p>优惠内容：部分商品，满88元8.8折优惠券</p>
+                                        <p>其他限制：仅原价购买商品时可用券</p>
+                                    </div>
+                                )}
+                            >
+                                <a>查看示例</a>
+                            </Popover>
+                        )}
                     >
                         {getFieldDecorator("title", {
                             rules: [{ required: true, message: "请输入使用说明!" }],
