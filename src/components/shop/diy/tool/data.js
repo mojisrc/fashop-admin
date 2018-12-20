@@ -232,3 +232,18 @@ export const defaultData = [
         ]
     }
 ]
+
+export const marketingData = [
+    {
+        type: 'goods_group',
+        icon: require('@/assets/images/shop/group.png'),
+        title: '拼团',
+        data: [],
+        options: {
+            source_type: 'auto', // 自动 auto 、 选择 choose
+            goods_sort: 1, // 销量多到少 1、价格高到低 2、价格低到高 3
+            goods_display_num: 3, // 最多12件，最少1件
+            layout_type: 1 //大图 1、小图 2、一大两小 3、列表 4、轮播 5
+        }
+    }
+]

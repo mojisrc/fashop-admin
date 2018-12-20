@@ -27,31 +27,61 @@
     height: 180px;
     background: linear-gradient(0deg, #FF635C, #E7443D);
     /* background: linear-gradient(0deg, rgb(254, 98, 99), rgb(254, 49, 78)); */
-    /* 相对定位，方便让before和after伪元素绝对定位偏移 */
     position: relative;
-    /* 把超出div的部分隐藏起来 */
     overflow: hidden;
 }
-
-.card:before, .card:after {
-    content: ' ';
-    width: 0;
-    height: 100%;
-    /* 绝对定位进行偏移 */
-    position: absolute;
-    top: 10px;
-}
-
-.card:before {
-    /* 圆点型的border */
-    border-right: 10px dotted white;
-    /* 偏移一个半径，让圆点的一半覆盖div */
-    left: -5px;
-}
-
 .card:after {
-    /* 圆点型的border */
-    border-left: 10px dotted white;
-    /* 偏移一个半径，让圆点的一半覆盖div */
-    right: -5px;
+    content: ' ';
+    width: 100%;
+    height: 6px;
+    position: absolute;
+    left: 4px;
+    bottom: -4px;
+    border-bottom: 8px dotted white;
+}
+.cardTop{
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 10px;
+    height: 60px;
+}
+.cardTitle{
+    font-size: 18px;
+    line-height: 60px;
+    max-width: 290px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    font-weight: 400;
+    color: #fff;
+}
+.cardBody{
+    align-items: center;
+    justify-content: center;
+}
+.content, .desc, .time{
+    text-align: center;
+    margin: 0;
+}
+.content{
+    font-size: 30px;
+    max-width: 80%;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    height: 40px;
+    line-height: 40px;
+    overflow: hidden;
+}
+.desc{
+    line-height: 1.5;
+    max-width: calc(100% - 20px);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    padding: 10px 0px;
+    overflow: hidden;
+}
+.time{
+    color: rgba(255, 255, 255, 0.5);
+    padding: 0px 10px 10px;
 }

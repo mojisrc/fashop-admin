@@ -1,0 +1,58 @@
+/*goodsCtrl*/
+.goodsCtrlWarp {
+    border: 1px solid #e8e8e8;
+    border-radius: 4px;
+    padding: 16px;
+}
+
+.goodsCtrlImgItemWarp {
+    height: 76px;
+    border-radius: 4px;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    display: flex;
+    text-align: center;
+}
+
+.goodsCtrlImgWarp {
+    margin-bottom: 10px;
+}
+
+.goodsCtrlImgWarp img {
+    width: 76px;
+}
+
+.goodsCtrlConfirmDelete {
+    flex-direction: row;
+    align-items: center;
+}
+
+.goodsCtrlConfirmDelete img {
+    width: 60px;
+    height: 60px;
+    margin-right: 10px;
+}
+
+.goodsCtrlConfirmDelete p {
+    margin: 0;
+    margin-right: 10px;
+}
+
+.goodsCtrlConfirmDelete span {
+
+}
+
+.goodsCtrlAddWarp {
+    background-color: #fff;
+    border: 1px dashed #ddd;
+}
+
+.goodsCtrlImgDelectWarp {
+    width: 80%;
+    position: absolute;
+    top: 0;
+    background-color: rgba(0, 0, 0, .1);
+    transition: .2s;
+}
+

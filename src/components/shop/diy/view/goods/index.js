@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import styles from "./index.css";
 import Image from "@/components/image/index";
+import { View } from "@/components/flexView";
 //
 // type Props = {
 //     data: GoodsDataType,
