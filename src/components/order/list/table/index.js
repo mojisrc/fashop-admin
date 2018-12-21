@@ -62,7 +62,7 @@ class OrderListTable extends Component {
 
     render() {
         const { orderList, orderListLoading } = this.props;
-        let { expandedRowKeys, get } = this.state;
+        let { expandedRowKeys } = this.state;
         let { list } = orderList;
         if (Array.isArray(list)) {
             list.map((item) => {

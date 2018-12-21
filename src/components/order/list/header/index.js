@@ -1,42 +1,15 @@
 import React, { Component } from "react";
-import { Button, Input, Select, DatePicker, Form} from "antd";
+import {  Select, Form } from "antd";
 import { getQueryPath } from "@/utils/index";
 import moment from "moment";
 import Query from "@/utils/query";
 import update from "immutability-helper";
+import { initialValue } from "@/utils/form";
+import router from "umi/router";
+import FormSearch from "@/components/public/formSearch";
 
-const InputGroup = Input.Group;
 const Option = Select.Option;
-const { RangePicker } = DatePicker;
-const FormItem = Form.Item;
-const state_type_list = [
-    {
-        name: "待发货",
-        state_type: "state_pay"
-    }, {
-        name: "待付款",
-        state_type: "state_new"
-    }, {
-        name: "已发货",
-        state_type: "state_send"
-    }
-    , {
-        name: "已完成",
-        state_type: "state_success"
-    }, {
-        name: "已关闭",
-        state_type: "state_cancel"
-    }
-];
-const order_kind_list = [
-    {
-        name: "普通订单",
-        order_kind: "ordinary"
-    }, {
-        name: "拼团",
-        order_kind: "group"
-    }
-];
+
 @Form.create()
 export default class OrderManagementHeader extends Component {
     state = {
@@ -44,8 +17,8 @@ export default class OrderManagementHeader extends Component {
             keywords_type: "goods_name",
             keywords: null,
             create_time: [],
-            state_type: "all",
-            order_kind: "all"
+            state_type: null,
+            order_kind: null
         }
     };
 
@@ -60,14 +33,16 @@ export default class OrderManagementHeader extends Component {
                 keywords_type: params["keywords_type"] !== undefined ? params["keywords_type"] : "goods_name",
                 keywords: params["keywords"] !== undefined ? params["keywords"] : null,
                 create_time: params["create_time"] !== undefined ? params["create_time"] : [],
-                state_type: params["state_type"] !== undefined ? params["state_type"] : "all",
-                order_kind: params["order_kind"] !== undefined ? params["order_kind"] : "all"
+                state_type: params["state_type"] !== undefined ? params["state_type"] : null,
+                order_kind: params["order_kind"] !== undefined ? params["order_kind"] : null
             }
         });
     }
+    submit = ()=>{
 
-
+    }
     render() {
+        // 待完成 TODO
         const { getFieldDecorator } = this.props.form;
         const { queryParams } = this.state;
         const { keywords_type, keywords, create_time, state_type, order_kind } = queryParams;
@@ -76,170 +51,147 @@ export default class OrderManagementHeader extends Component {
             create_time_moment = [moment(create_time[0]), moment(create_time[1])];
         }
         return (
-            <Form layout="inline" className="ant-advanced-search-form">
-                <FormItem>
-                    {getFieldDecorator(`field-`, {
-                        rules: [{
-                            message: "Input something!"
-                        }]
-                    })(
-                        <InputGroup compact>
-                            <Select
-                                style={{ minWidth: "115px" }}
-                                placeholder="搜索条件"
-                                value={keywords_type}
-                                onChange={(keywords_type) => {
-                                    this.setState(update(this.state, {
-                                        queryParams: { keywords_type: { $set: keywords_type } }
-                                    }));
-                                }}
-                            >
-                                <Option value="goods_name">商品名称</Option>
-                                <Option value="order_no">订单号</Option>
-                                <Option value="receiver_name">收货人姓名</Option>
-                                <Option value="receiver_phone">收货人电话</Option>
-                                <Option value="courier_number">快递单号</Option>
-                            </Select>
-                            <Input
-                                placeholder={`请输入${keywords_type ? this.returnKeywordsType(keywords_type) : ""}`}
-                                onChange={(e) => {
-                                    this.setState(update(this.state, {
-                                        queryParams: { keywords: { $set: e.target.value } }
-                                    }));
-                                }}
-                                style={{ width: "56%" }}
-                                value={keywords}
-                            />
-                        </InputGroup>
-                    )}
-                </FormItem>
-
-                <FormItem label={`下单时间`}>
-                    {getFieldDecorator(`create_time`, {
-                        rules: [{
-                        }]
-                    })(
-                        <RangePicker
-                            allowClear={true}
-                            onChange={(dates, create_time) => {
-                                this.setState(update(this.state, {
-                                    queryParams: { create_time: { $set: create_time } }
-                                }));
-                            }}
-                            value={create_time_moment}
-                        />
-                    )}
-                </FormItem>
-
-                <FormItem label={`订单类型`}>
-                    {getFieldDecorator(`field-`, {
-                        // initialValue: "all",
-                        rules: [{
-                            message: "Input something!"
-                        }]
-                    })(
-                        <Select
-                            placeholder="全部类型"
-                            allowClear={true}
-                            value={order_kind}
-                            style={{ width: 100 }}
-                            onChange={(order_kind) => {
-                                this.setState(update(this.state, {
-                                    queryParams: { order_kind: { $set: order_kind } }
-                                }));
-                            }}
-                        >
-                            {
-                                order_kind_list.map((item, index) =>
-                                    <Option
-                                        value={item.order_kind}
-                                        key={index}
-                                    >
-                                        {item.name}
-                                    </Option>
-                                )
-                            }
-                        </Select>
-                    )}
-                </FormItem>
-
-                <FormItem label={`订单状态`}>
-                    {getFieldDecorator(`state_type`, {
-                        rules: [{
-                            message: "Input something!"
-                        }]
-                    })(
-                        <Select
-                            placeholder="全部状态"
-                            allowClear={true}
-                            style={{ width: 100 }}
-                            value={state_type}
-                            onChange={(state_type) => {
-                                this.setState(update(this.state, {
-                                    queryParams: { state_type: { $set: state_type } }
-                                }));
-                            }}
-                        >
-                            {
-                                state_type_list.map((item, index) =>
-                                    <Option
-                                        value={item.state_type}
-                                        key={index}
-                                    >
-                                        {item.name}
-                                    </Option>
-                                )
-                            }
-                        </Select>
-                    )}
-                </FormItem>
-                <FormItem>
-                    <Button
-                        type="primary"
-                        onClick={() => {
-                            const path = getQueryPath("/order/list", {
-                                page: 1,
-                                rows: 10,
-                                keywords_type,
-                                keywords,
-                                create_time,
-                                state_type,
-                                order_kind
-                            });
-                            router.push(path);
-
-                        }}
-                        style={{ marginRight: 14 }}
-                    >
-                        筛选
-                    </Button>
-                    <Button
-                        onClick={() => {
-                            const path = getQueryPath("/order/list");
-                            router.push(path);
-                        }}
-                    >
-                        清空筛选
-                    </Button>
-                </FormItem>
-            </Form>
+           <FormSearch
+               onSubmit={(values)=>{
+                   console.log(values)
+               }}
+               items={[
+               {
+                   type: "select_input",
+                   options: {
+                       label: null,
+                       select: {
+                           field: 'keywords_type',
+                           style: { minWidth: 115 },
+                           placeholder: null,
+                           onChange: (value) => {
+                           },
+                           initialValue: null,
+                           data: keywords_type_list
+                       },
+                       input: {
+                           field: 'keywords',
+                           placeholder: '请输入关键词',
+                           onChange: (value) => {
+                           },
+                           initialValue: null
+                       }
+                   }
+               },
+               {
+                   type: "range_picker",
+                   options: {
+                       label: "下单时间",
+                       rangePicker: {
+                           field: 'create_time',
+                           style: null,
+                           placeholder: null,
+                           onChange: (value) => {
+                           },
+                           allowClear: true,
+                           initialValue: null
+                       }
+                   }
+               },
+               {
+                   type: "select",
+                   options: {
+                       label: "订单类型",
+                       select: {
+                           field: 'order_kind',
+                           style: {width:100},
+                           placeholder: '全部类型',
+                           onChange: (value) => {
+                           },
+                           allowClear: true,
+                           initialValue: null,
+                           data: order_kind_list
+                       }
+                   }
+               },
+               {
+                   type: "select",
+                   options: {
+                       label: "订单状态",
+                       select: {
+                           field: 'state_type',
+                           style: {width:100},
+                           placeholder: '全部状态',
+                           onChange: (value) => {
+                           },
+                           allowClear: true,
+                           initialValue: null,
+                           data: state_type_list
+                       }
+                   }
+               },
+               {
+                   type: "submit",
+                   options: {
+                       button:{}
+                   }
+               },
+               {
+                   type: "reset",
+                   options: {
+                       button: {
+                           onChange: (value) => {
+                           }
+                       }
+                   }
+               }
+           ]} />
         );
     }
-
-    returnKeywordsType(serachValue) {
-        switch (serachValue) {
-            case "goods_name":
-                return "商品名称";
-            case "order_no":
-                return "订单号";
-            case "receiver_name":
-                return "收货人姓名";
-            case "receiver_phone":
-                return "收货人电话";
-            case "courier_number":
-                return "快递单号";
-            default:
-                return "";
-        }
-    }
 }
+const state_type_list = [
+    {
+        name: "待发货",
+        value: "state_pay"
+    }, {
+        name: "待付款",
+        value: "state_new"
+    }, {
+        name: "已发货",
+        value: "state_send"
+    }
+    , {
+        name: "已完成",
+        value: "state_success"
+    }, {
+        name: "已关闭",
+        value: "state_cancel"
+    }
+];
+const order_kind_list = [
+    {
+        name: "普通订单",
+        value: "ordinary"
+    }, {
+        name: "拼团",
+        value: "group"
+    }
+];
+
+const keywords_type_list = [
+    {
+        name: "商品名称",
+        value: "goods_name"
+    },
+    {
+        name: "订单号",
+        value: "order_no"
+    },
+    {
+        name: "收货人姓名",
+        value: "receiver_name"
+    },
+    {
+        name: "收货人电话",
+        value: "receiver_phone"
+    },
+    {
+        name: "快递单号",
+        value: "courier_number"
+    }
+]
