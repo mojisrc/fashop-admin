@@ -6,7 +6,9 @@ export default {
 
     state: {
         currentUser: {},
-        list: {},
+        list: {
+            result: { list: [] ,total_number:0 }
+        },
         info: {},
         address: {},
         statistics: {}

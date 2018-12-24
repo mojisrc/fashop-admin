@@ -3,7 +3,9 @@ import freight from "@/services/freight";
 export default {
     namespace: "freight",
     state: {
-        list: {},
+        list: {
+            result: { list: [] ,total_number:0 }
+        },
         info: {},
         add: {},
         edit: {},

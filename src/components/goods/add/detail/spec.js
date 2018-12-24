@@ -10,76 +10,76 @@ import GoodsApi from "@/services/goods";
 const confirm = Modal.confirm;
 const Option = Select.Option;
 @connect(({ goodsSpec, loading }) => ({
-    specList: goodsSpec.list.result,
+    specList: goodsSpec.list.result.list,
     specListLoading: loading.effects["goodsSpec/list"]
 }))
 export default class GoodsSpec extends Component {
-    state = {
-        loaded: false,
-        customSpecSortShow: false,
-        loading: false,
-        addSpecComVisible: false,
-        specRowRightCloseBtnHoverIndex: -1,
-        specValueIds: [],
-        tagChecked: false,
-        specs: [],
-        lastSpecValuesPopoverClick: { index: 0, visible: false }
-    };
     static defaultProps = {
+        specList: [],
+        specListLoading: false,
         onChange: (e) => {
         }
     };
-
-    componentWillReceiveProps(nextProps) {
-        if (this.state.loaded === false && nextProps.skus !== this.props.skus) {
-            this.setState({
-                loaded: true
-            }, () => {
-                // 通过skus重组specs，必须存在spec 否则第一条无法被添加
-                if (nextProps.skus.length > 0 && nextProps.skus[0].spec.length > 0 && nextProps.skus[0].spec[0]["id"] > 0) {
-                    const specs = [];
-                    nextProps.skus.map((e) => {
-                        e.spec.map((skuSpec) => {
-                            const findInSpecsIndex = specs.findIndex((spec) => spec.id === skuSpec.id);
-                            // 预置spec
-                            if (findInSpecsIndex === -1) {
-                                // 如果state里没有 添加外部传入的specs
-                                specs.push({
-                                    id: skuSpec.id,
-                                    name: skuSpec.name,
-                                    values: []
-                                });
-                            }
-                            // 设置value
-                            const specIndex = specs.findIndex((spec) => spec.id === skuSpec.id);
-                            const specValueIndex = specs[specIndex].values.findIndex((value) => value.id === skuSpec.value_id);
-                            if (specValueIndex === -1) {
-                                specs[specIndex].values.push({
-                                    id: skuSpec.value_id,
-                                    name: skuSpec.value_name
-                                });
-                            }
-                        });
+    // todo 继续简化
+    constructor(props) {
+        super(props);
+        let specs = [];
+        const { skus } = props;
+        if (skus.length > 1) {
+            // 通过skus重组specs，必须存在spec 否则第一条无法被添加
+            if (skus.length > 0 && skus[0].spec.length > 0 && skus[0].spec[0]["id"] > 0) {
+                skus.map((e) => {
+                    e.spec.map((skuSpec) => {
+                        const findInSpecsIndex = specs.findIndex((spec) => spec.id === skuSpec.id);
+                        // 预置spec
+                        if (findInSpecsIndex === -1) {
+                            // 如果state里没有 添加外部传入的specs
+                            specs.push({
+                                id: skuSpec.id,
+                                name: skuSpec.name,
+                                values: []
+                            });
+                        }
+                        // 设置value
+                        const specIndex = specs.findIndex((spec) => spec.id === skuSpec.id);
+                        const specValueIndex = specs[specIndex].values.findIndex((value) => value.id === skuSpec.value_id);
+                        if (specValueIndex === -1) {
+                            specs[specIndex].values.push({
+                                id: skuSpec.value_id,
+                                name: skuSpec.value_name
+                            });
+                        }
                     });
-                    this.setState({ specs });
-                }
-            });
+                });
+            }
         }
+        this.state = {
+            customSpecSortShow: false,
+            loading: false,
+            addSpecComVisible: false,
+            specRowRightCloseBtnHoverIndex: -1,
+            specValueIds: [],
+            tagChecked: false,
+            specs,
+            lastSpecValuesPopoverClick: { index: 0, visible: false }
+        };
     }
 
     initGoodsSpecList() {
+        const { dispatch } = this.props;
         dispatch({
             type: "goodsSpec/list"
         });
     }
 
     render() {
-        const { skus, specList, reset, onChange, onMultiSpecChange } = this.props;
+        const { skus, specList, onChange, onMultiSpecChange } = this.props;
         const { specRowRightCloseBtnHoverIndex, specs, lastSpecValuesPopoverClick } = this.state;
         // 过滤掉空的sku 存在空的是为了照顾不存在规格的数据结构
         let _skus = skus.filter((sku) => {
             return sku.spec.length > 0 && sku.spec[0]["id"] !== "undefined" && sku.spec[0].id > 0;
         });
+        console.log(specs);
         return (
             specs.length === 0 ?
                 <Button
@@ -96,7 +96,7 @@ export default class GoodsSpec extends Component {
                             ]
                         });
                     }}
-                    style={{ width: "150px" }}
+                    style={{ width: 150 }}
                 >
                     <Icon type="plus" /> 添加型号分类
                 </Button>
@@ -127,7 +127,7 @@ export default class GoodsSpec extends Component {
                                                 }
                                             }}
                                         >
-                                            {specList.map((item) => (
+                                            {Array.isArray(specList) && specList.length > 0 && specList.map((item) => (
                                                 <Option key={item.id} disabled={!!specs.find((spec) => {
                                                     return item.id === spec.id;
                                                 })}>{item.name}</Option>))}
@@ -154,7 +154,7 @@ export default class GoodsSpec extends Component {
                                                                         onMultiSpecChange({ multi: false });
                                                                     }
                                                                     if (data.length === 0) {
-                                                                        reset();
+                                                                        this.initGoodsSpecList();
                                                                     }
                                                                 });
                                                             }
@@ -256,10 +256,12 @@ export default class GoodsSpec extends Component {
             message.warning("商品型号不能重复");
         }
     }
+
     // : { input: { value: null } }
     AddSpecInput;
     // : { input: { value: null } }
     AddSpecValueInput;
+
     // : { id: number }
     renderSpecValuePopoverContent(activeItem, index) {
         const { specList, onChange } = this.props;
@@ -330,7 +332,7 @@ export default class GoodsSpec extends Component {
                         addSpecComVisible ?
                             <View className={styles.valuesPopoverMid} style={{ padding: "0" }}>
                                 <Input
-                                    style={{ width: "50%" }}
+                                    size={"small"}
                                     placeholder='输入型号'
                                     ref={(e) => {
                                         if (e) {
@@ -438,7 +440,7 @@ export default class GoodsSpec extends Component {
         this.setState({ loading: true });
         const e = await GoodsApi.spec.add({
             name: this.AddSpecValueInput.input.value
-        })
+        });
         if (e.code === 0) {
             message.success("添加成功");
             this.setState({ loading: false, customSpecSortShow: false });

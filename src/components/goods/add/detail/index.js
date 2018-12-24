@@ -1,6 +1,4 @@
-import React, { Component } from "react";
-import { View } from "@/components/flexView";
-import styles from "./index.css";
+import React, { Component, Fragment } from "react";
 import { Form, Input, InputNumber } from "antd";
 import GoodsSpec from "./spec";
 
@@ -18,141 +16,48 @@ const FormItem = Form.Item;
 //     }>
 // }>
 
-export default class Detail extends Component {
-    static defaultProps = {
-        onChange: () => {
+export default class Skus extends Component {
+    defaultValue = [
+        {
+            spec: [
+                {
+                    id: 0,
+                    value_id: 0,
+                    name: null,
+                    value_name: null,
+                    value_img: null
+                }
+            ],
+            price: null,
+            stock: null,
+            code: null,
+            weight: 0
         }
-    };
-
-    render() {
-        const { getFieldDecorator, formItemLayout, specList, setSkus, skus, multiSpec, onMultiSpecChange } = this.props;
-        return (
-            <View className={`${styles.goodsItem}  specialExplainWarp`}>
-                <h3>型号价格</h3>
-                <FormItem
-                    {...formItemLayout}
-                >
-                    {getFieldDecorator("skus", {
-                        rules: [{
-                            validator: this.validator,
-                            required: true
-                        }],
-                        initialValue: skus.length > 0 ? skus : [
-                            {
-                                spec: [
-                                    {
-                                        id: 0,
-                                        name: null,
-                                        value_id: 0,
-                                        value_name: null,
-                                        value_img: null
-                                    }
-                                ],
-                                price: null,
-                                stock: null,
-                                code: null,
-                                weight: null
-                            }
-                        ]
-                    })(
-                        <GoodsSpecForm
-                            skus={skus}
-                            specList={specList}
-                            formItemLayout={formItemLayout}
-                            setSkus={setSkus}
-                            multiSpec={multiSpec}
-                            onMultiSpecChange={(e) => {
-                                onMultiSpecChange(e);
-                            }}
-                        />
-                    )}
-                </FormItem>
-            </View>
-        );
+    ]
+    constructor(props) {
+        super(props);
+        const value = props.value || this.defaultValue;
+        this.state = {
+            value,
+            showSku: false
+        };
     }
 
-    validator = (rule, skus, callback) => {
-        // 单产品验证
-        if (Array.isArray(skus) && skus.length === 1 && skus[0]["spec"] !== "undefined" && skus[0].spec.length === 1 && skus[0].spec[0].id === 0) {
-            if (!skus[0].price) {
-                callback("请输入商品价格");
-            } else if (!skus[0].stock) {
-                callback("请输入商品库存");
-            } else {
-                callback();
+    setSkus = (value) => {
+        this.setState({ value }, () => {
+            const { onChange } = this.props;
+            if (onChange) {
+                onChange(value);
             }
-        } else {
-            // 多产品验证
-            if (Array.isArray(skus)) {
-                const index = skus.findIndex((e) => {
-                    return !e.price || !e.stock;
-                });
-                if (index === -1) {
-                    callback();
-                } else {
-                    callback("请完善商品型号价格信息");
-                }
-            } else {
-                callback("请完善商品型号价格信息");
-            }
-
-        }
-    };
-}
-// type GoodsSpecFormProps = {
-//     skus: SkusType,
-//     onChange: ? Function,
-//     formItemLayout: {},
-//     specList: Array<{
-//         id: number,
-//         name: string,
-//         values: Array<{
-//             id: number,
-//             name: string,
-//         }>
-//     }>,
-//     setSkus: Function,
-//     multiSpec: boolean,
-//     onChange:Function,
-//     onMultiSpecChange: Function
-// }
-// type GoodsSpecFormState = {}
-
-class GoodsSpecForm extends Component {
-    static defaultProps = {
-        skus: [
-            {
-                spec: [
-                    {
-                        id: 0,
-                        value_id: 0,
-                        name: null,
-                        value_name: null,
-                        value_img: null
-                    }
-                ],
-                price: null,
-                stock: null,
-                code: null,
-                weight: 0
-            }
-        ],
-        onChange: (e) => {
-        }
-    };
-    state = {
-        showSku: false
-    };
-    setSkus = (skus) => {
-        this.props.setSkus(skus);
-        this.props.onChange(skus);
+        });
     };
 
     render() {
-        const { formItemLayout, specList, skus, multiSpec, onMultiSpecChange } = this.props;
+        const { formItemLayout } = this.props;
+        const skus = this.state.value;
         return (
-            <div>
-                {multiSpec !== true ? <div>
+            <Fragment>
+                {skus.length === 1 ? <div>
                     <FormItem
                         {...formItemLayout}
                         label='商品价格'
@@ -212,23 +117,22 @@ class GoodsSpecForm extends Component {
                 </div> : null}
                 <FormItem
                     {...formItemLayout}
-                    label='商品型号'
                 >
                     <GoodsSpec
                         skus={skus}
-                        specList={specList}
                         onChange={(skus) => {
                             this.setSkus(skus);
                         }}
                         reset={() => {
-                            this.setSkus([]);
+                            this.setSkus(this.defaultValue);
                         }}
                         onMultiSpecChange={(e) => {
-                            onMultiSpecChange(e);
+                            console.log('onMultiSpecChange',e)
                         }}
                     />
                 </FormItem>
-            </div>
+            </Fragment>
         );
     }
+
 }

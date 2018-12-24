@@ -3,7 +3,9 @@ import page from "@/services/page";
 export default {
     namespace: "page",
     state: {
-        list: {},
+        list: {
+            result: { list: [] ,total_number:0 }
+        },
         info: {},
         setPortal: {},
         add: {},

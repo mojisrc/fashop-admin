@@ -3,7 +3,9 @@ import area from "@/services/area";
 export default {
     namespace: "article",
     state: {
-        list: [],
+        list: {
+            result: { list: [] }
+        },
         info: []
     },
     effects: {

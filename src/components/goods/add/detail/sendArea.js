@@ -1,12 +1,8 @@
-import React,{ Component } from "react";
-import { View } from "@/components/flexView";
-import styles from './sendArea.css'
+import React,{ Component,Fragment } from "react";
 class GoodsSendArea extends Component {
     render() {
         return (
-            <View className={styles.sendArea}>
-
-            </View>
+            <Fragment />
         )
     }
 }

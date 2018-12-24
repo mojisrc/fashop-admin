@@ -1,7 +1,5 @@
-import React, { Component } from "react";
-import { View } from "@/components/flexView";
+import React, { Component, Fragment } from "react";
 import { Select, Radio, InputNumber, Form, Button, DatePicker } from "antd";
-import Wstyles from "./index.css";
 import { Link } from "react-router-dom";
 import moment from "moment";
 
@@ -13,8 +11,7 @@ class Freight extends Component {
     render() {
         const { getFieldDecorator, formItemLayout, shippingTemplateList, shippingCostSelect, refreshShippingTemplateList, freight_fee, sale_time } = this.props;
         return (
-            <View className={Wstyles.goodsItem}>
-                <h3>运费其他</h3>
+            <Fragment>
                 <FormItem
                     {...formItemLayout}
                     label='运费'
@@ -50,7 +47,7 @@ class Freight extends Component {
                         <GoodsSaleTime />
                     )}
                 </FormItem>
-            </View>
+            </Fragment>
         );
     }
 

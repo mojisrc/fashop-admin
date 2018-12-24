@@ -1,17 +1,17 @@
 import React, { Component } from "react";
 import { connect } from "dva";
-import { Form, Button, Modal, message, Card,Spin } from "antd";
+import { Form, Button, Modal, message, Card, Spin } from "antd";
 import PageHeaderWrapper from "@/components/pageHeaderWrapper";
 import Basic from "@/components/goods/add/basic";
-import Detail from "@/components/goods/add/detail";
+import Skus from "@/components/goods/add/detail";
 import Editor from "@/components/goods/add/editor";
 import Freight from "@/components/goods/add/detail/freight";
 import PhotoGallery from "@/components/public/photoGallery";
 import moment from "moment";
-import Arr from "@/utils/array";
+import styles from "./edit.css";
 
 const FormItem = Form.Item;
-
+@Form.create()
 @connect(({ goods, goodsCategory, goodsSpec, freight, loading }) => ({
     goodsInfo: goods.info.result,
     goodsCategory: goodsCategory.list.result,
@@ -24,7 +24,6 @@ const FormItem = Form.Item;
     freightListLoading: loading.effects["freightList/list"]
 }))
 
-@Form.create()
 export default class Add extends Component {
     static defaultProps = {
         goodsInfo: { info: {} },
@@ -62,9 +61,8 @@ export default class Add extends Component {
                 code: null,
                 weight: null
             }
-        ],
-        // 是否为多规格
-        multiSpec: false
+        ]
+
     };
 
     componentDidMount() {
@@ -79,27 +77,25 @@ export default class Add extends Component {
                         info,
                         skus: info.sku_list,
                         multiSpec: info.sku_list[0].spec[0].id > 0
-                    }, () => {
-                        dispatch({
-                            type: "goodsCategory/list"
-                        });
-                        dispatch({
-                            type: "goodsSpec/list"
-                        });
-                        dispatch({
-                            type: "freight/list",
-                            payload: {
-                                page: 1,
-                                rows: 1000
-                            }
-                        });
                     });
                 }
             }
         });
+        dispatch({
+            type: "goodsCategory/list"
+        });
+        this.refreshSpecList();
+        this.refreshFreightList();
     }
 
-    refreshfreightList = (callback) => {
+    refreshSpecList = () => {
+        const { dispatch } = this.props;
+        dispatch({
+            type: "goodsSpec/list"
+        });
+    };
+    refreshFreightList = (callback = () => {
+    }) => {
         const { dispatch } = this.props;
         dispatch({
             type: "freight/list",
@@ -154,15 +150,26 @@ export default class Add extends Component {
                 } else {
                     params.sale_time = sale_time.value.unix();
                 }
+                const id = this.state.info.id;
                 dispatch({
                     type: "goods/edit",
-                    payload: { ...params, id: this.state.info.id },
+                    payload: { ...params, id },
                     callback: (e) => {
                         if (e.code === 0) {
                             message.success("修改成功");
                             dispatch({
                                 type: "goods/info",
-                                payload: { id }
+                                payload: { id },
+                                callback: (response) => {
+                                    if (response.code === 0) {
+                                        const { info } = response.result;
+                                        this.setState({
+                                            info,
+                                            skus: info.sku_list,
+                                            multiSpec: info.sku_list[0].spec[0].id > 0
+                                        });
+                                    }
+                                }
                             });
                         } else {
                             message.warn(e.msg);
@@ -173,12 +180,11 @@ export default class Add extends Component {
         });
     };
 
+    // todo 重构涉及的组件，在当前页面直接输出
     render() {
         const { photoGalleryVisible, previewVisible, previewImage, shippingCostSelect, info, skus, multiSpec } = this.state;
         const { body, freight_fee, sale_time } = info;
-        const { goodsCategory, specList, freightList, form, goodsInfoLoading } = this.props;
-        let tree = Arr.toTree(goodsCategory.list)
-        const categoryTree = categoryTreeData(tree);
+        const { goodsCategory, freightList, form, goodsInfoLoading } = this.props;
         const { getFieldDecorator, getFieldValue } = form;
         const formItemLayout = {
             labelCol: {
@@ -210,49 +216,57 @@ export default class Add extends Component {
                 <Card bordered={false}>
                     <Spin size="large" spinning={goodsInfoLoading}>
                         <Form onSubmit={this.handleSubmit} style={{ width: 1000 }}>
-                            <Basic
-                                location={this.props.location}
-                                form={this.props.form}
-                                history={this.props.history}
-                                formItemLayout={formItemLayout}
-                                openPhotoGallery={this.openPhotoGallery}
-                                categoryTree={categoryTree}
-                                openPreviewModal={this.openPreviewModal}
-                                images={info.images}
-                                title={info.title}
-                                categoryIds={info.category_ids}
-                            />
-                            <Detail
-                                getFieldDecorator={getFieldDecorator}
-                                formItemLayout={formItemLayout}
-                                specList={specList.list}
-                                skus={skus}
-                                setSkus={(skus) => {
-                                    this.setState({ skus });
-                                }}
-                                multiSpec={multiSpec}
-                                onMultiSpecChange={(e) => {
-                                    this.setState({
-                                        multiSpec: !!e.multi
-                                    });
-                                }}
-                            />
-                            <Freight
-                                getFieldDecorator={getFieldDecorator}
-                                formItemLayout={formItemLayout}
-                                freightList={freightList.list}
-                                shippingCostSelect={shippingCostSelect}
-                                refreshfreightList={this.refreshfreightList}
-                                freight_fee={freight_fee}
-                                sale_time={sale_time}
-                            />
-                            <Editor
-                                getFieldDecorator={getFieldDecorator}
-                                formItemLayout={formItemLayout}
-                                getFieldValue={getFieldValue}
-                                openPhotoGallery={this.openPhotoGallery}
-                                body={body}
-                            />
+                            <div className={styles.item}>
+                                <h3>基本信息</h3>
+                                <Basic
+                                    location={this.props.location}
+                                    history={this.props.history}
+                                    formItemLayout={formItemLayout}
+                                    openPhotoGallery={this.openPhotoGallery}
+                                    categoryList={goodsCategory.list}
+                                    openPreviewModal={this.openPreviewModal}
+                                    images={info.images}
+                                    title={info.title}
+                                    form={form}
+                                    categoryIds={info.category_ids}
+                                />
+                            </div>
+                            <div className={styles.item}>
+                                <h3>型号价格</h3>
+                                <FormItem {...formItemLayout} label='商品型号'>
+                                    {getFieldDecorator("skus", {
+                                        rules: [{
+                                            validator: this.validator,
+                                            required: true
+                                        }],
+                                        initialValue: skus.length > 0 ? skus : null
+                                    })(<Skus />)}
+                                </FormItem>
+                            </div>
+                            <div className={styles.item}>
+                                <h3>运费其他</h3>
+                                <Freight
+                                    getFieldDecorator={getFieldDecorator}
+                                    formItemLayout={formItemLayout}
+                                    freightList={freightList.list}
+                                    shippingCostSelect={shippingCostSelect}
+                                    refreshfreightList={this.refreshfreightList}
+                                    freight_fee={freight_fee}
+                                    sale_time={sale_time}
+                                />
+                                <h3>商品详情</h3>
+                            </div>
+                            <FormItem {...formItemLayout} label='商品详情'>
+                                {getFieldDecorator("body", {
+                                    rules: [{ required: true, message: "请添加商品详情" }],
+                                    initialValue: body
+                                })(<Editor
+                                    openPhotoGallery={this.openPhotoGallery}
+                                    title={getFieldValue("title")}
+                                    images={getFieldValue("images")}
+                                />)}
+                            </FormItem>
+
                             <FormItem {...tailFormItemLayout}>
                                 <Button
                                     type="primary"
@@ -281,15 +295,32 @@ export default class Add extends Component {
             </PageHeaderWrapper>
         );
     }
+
+    skuValidator = (rule, skus, callback) => {
+        // 单产品验证
+        if (Array.isArray(skus) && skus.length === 1 && skus[0]["spec"] !== "undefined" && skus[0].spec.length === 1 && skus[0].spec[0].id === 0) {
+            if (!skus[0].price) {
+                callback("请输入商品价格");
+            } else if (!skus[0].stock) {
+                callback("请输入商品库存");
+            } else {
+                callback();
+            }
+        } else {
+            // 多产品验证
+            if (Array.isArray(skus)) {
+                const index = skus.findIndex((e) => {
+                    return !e.price || !e.stock;
+                });
+                if (index === -1) {
+                    callback();
+                } else {
+                    callback("请完善商品型号价格信息");
+                }
+            } else {
+                callback("请完善商品型号价格信息");
+            }
+
+        }
+    };
 }
-const categoryTreeData = (list) => {
-    // console.log(list)
-    return list.map((e) => {
-        return {
-            title: e.name,
-            value: `${e.id}`,
-            key: `${e.id}`,
-            children: categoryTreeData(e.children || [])
-        };
-    });
-};

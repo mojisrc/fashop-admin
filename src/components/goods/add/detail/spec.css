@@ -43,8 +43,12 @@
 .valuesPopoverMid{
     padding: 10px 0;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: flex-start;
     align-items: center;
+}
+.valuesPopoverMid input{width: 150px}
+.valuesPopoverMid input,.valuesPopoverMid button{
+    margin-right: 10px;
 }
 .valuesPopoverBot{
     flex-direction: row;

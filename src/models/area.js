@@ -3,7 +3,9 @@ import area from "@/services/area";
 export default {
     namespace: "area",
     state: {
-        list: {},
+        list: {
+            result: { list: [] }
+        },
         tree: {},
         cascader: []
     },

@@ -4,7 +4,9 @@ const refund = order.refund;
 export default {
     namespace: "refund",
     state: {
-        list: {},
+        list: {
+            result: { list: [] ,total_number:0 }
+        },
         info: {},
         handle: {},
         receive: {}

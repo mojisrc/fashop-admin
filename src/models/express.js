@@ -3,7 +3,9 @@ import express from "@/services/express";
 export default {
     namespace: "express",
     state: {
-        list: {},
+        list: {
+            result: { list: [] ,total_number:0 }
+        },
         info: {},
         add: {},
         edit: {},

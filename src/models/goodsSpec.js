@@ -4,7 +4,9 @@ const spec = goods.spec;
 export default {
     namespace: "goodsSpec",
     state: {
-        list: {},
+        list: {
+            result: { list: [] }
+        },
         add: {},
         edit: {},
         del: {}
