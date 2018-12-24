@@ -10,7 +10,7 @@ import GoodsApi from "@/services/goods";
 const confirm = Modal.confirm;
 const Option = Select.Option;
 @connect(({ goodsSpec, loading }) => ({
-    specList: goodsSpec.result.list,
+    specList: goodsSpec.list.result,
     specListLoading: loading.effects["goodsSpec/list"]
 }))
 export default class GoodsSpec extends Component {
@@ -256,11 +256,12 @@ export default class GoodsSpec extends Component {
             message.warning("商品型号不能重复");
         }
     }
-
-    AddSpecInput: { input: { value: null } };
-    AddSpecValueInput: { input: { value: null } };
-
-    renderSpecValuePopoverContent(activeItem: { id: number }, index) {
+    // : { input: { value: null } }
+    AddSpecInput;
+    // : { input: { value: null } }
+    AddSpecValueInput;
+    // : { id: number }
+    renderSpecValuePopoverContent(activeItem, index) {
         const { specList, onChange } = this.props;
         const { specValueIds, specs, addSpecComVisible } = this.state;
         const useModelData = specList.find((value) => {

@@ -10,7 +10,6 @@
 }
 
 .top {
-    margin: 0 0 10px 0;
     flex-direction: row;
     justify-content: space-between;
 }
@@ -68,6 +67,7 @@
 
 .evaluateContent {
     flex-direction: row;
+    margin-bottom: 15px;
 }
 
 .evaluateImg {
@@ -101,7 +101,7 @@
 
 .goodsListItem {
     flex-direction: row;
-    margin-bottom: 24px;
+    margin: 15px 0;
 }
 
 .goodsListItem img {
@@ -143,12 +143,16 @@
     color: rgba(0, 0, 0, 0.447058823529412);
     margin-left: 10px;
 }
+.contentItemTop i{
+    font-style: normal;
+}
 
 .contentItemBot {
     color: rgba(0, 0, 0, 0.647058823529412);
 }
 
 .pageView {
+    display: flex;
     flex-direction: row;
     justify-content: flex-end;
 }

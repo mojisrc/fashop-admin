@@ -170,8 +170,8 @@ class GoodsAddSpec extends Component {
             />
         )
     }
-
-    allEdit({ number, dataIndex, dataSource }: { number: Object, dataIndex: string, dataSource: SkusType }) {
+    // : { number: Object, dataIndex: string, dataSource: SkusType }
+    allEdit({ number, dataIndex, dataSource }) {
         const { onChange } = this.props
         const _dataSource = dataSource.map((item) => {
             return {

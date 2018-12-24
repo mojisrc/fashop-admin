@@ -65,13 +65,13 @@ export default class Add extends Component {
         dispatch(list({ params: { page: 1, rows: 1000 } }))
     }
 
-    refreshfreightList = (callback: Function) => {
+    refreshfreightList = (callback) => {
         const {
             dispatch
         } = this.props
         dispatch(list(callback))
     }
-    openPhotoGallery = ({ photoGalleryOnOk }: { photoGalleryOnOk: Function }) => {
+    openPhotoGallery = ({ photoGalleryOnOk }) => {
         this.setState({
             photoGalleryVisible: true,
             photoGalleryOnOk,
@@ -91,7 +91,8 @@ export default class Add extends Component {
             previewVisible: false
         })
     }
-    openPreviewModal = ({ previewImage }: { previewImage: string }) => {
+    // : { previewImage: string }
+    openPreviewModal = ({ previewImage }) => {
         this.setState({
             previewVisible: true,
             previewImage,

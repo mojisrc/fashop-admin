@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { setGoodsDetailData } from "@/actions/goods/detail";
 import { View } from "@/components/flexView";
 import { Form, Button, Row, Col, Modal, message } from "antd";
 import styles from "./index.css";

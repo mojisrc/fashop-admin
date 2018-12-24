@@ -1,7 +1,7 @@
 import React,{ Component } from "react";
 import { View } from "@/components/flexView";
 import styles from './goods.css'
-import Image from '@/image'
+import Image from '@/components/image'
 
 export default class Goods extends Component{
     render() {

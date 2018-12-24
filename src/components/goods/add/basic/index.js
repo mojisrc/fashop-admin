@@ -16,11 +16,12 @@ export default class Basic extends Component {
         const { getFieldDecorator, setFieldsValue } = form;
         // TreeSelect 只接受string
         let _categoryIds = [];
-        if (Array.isArray(categoryIds) && categoryIds.length > 0) {
+        if (Array.isArray(categoryTree) && categoryIds.length > 0) {
             _categoryIds = categoryIds.map((item) => {
                 return item + "";
             });
         }
+        console.log(_categoryIds)
         return (
             <View className={styles.goodsItem}>
                 <h3>基本信息</h3>
@@ -55,7 +56,7 @@ export default class Basic extends Component {
                     label='商品名称'
                 >
                     {getFieldDecorator("title", {
-                        rules: [{ required: true, message: "请输入商品名称!" }],
+                        rules: [{ required: true, message: "请输入商品名称" }],
                         initialValue: title
                     })(
                         <Input
@@ -69,7 +70,7 @@ export default class Basic extends Component {
                 >
                     {getFieldDecorator("category_ids", {
                         initialValue: _categoryIds,
-                        rules: [{ required: true, message: "请选择商品分类!" }]
+                        rules: [{ required: true, message: "请选择商品分类" }]
                     })(
                         <TreeSelect
                             showSearch
@@ -83,19 +84,7 @@ export default class Basic extends Component {
                                     category_ids: value
                                 });
                             }}
-                        >
-                            {
-                                categoryTree.map((item) =>
-                                    <TreeNode value={`${item.id}`} title={item.name} key={item.id}>
-                                        {
-                                            item.children && item.children.map((sub) =>
-                                                <TreeNode value={`${sub.id}`} title={sub.name} key={sub.id} />
-                                            )
-                                        }
-                                    </TreeNode>
-                                )
-                            }
-                        </TreeSelect>
+                        />
                     )}
                     <a
                         onClick={() => {

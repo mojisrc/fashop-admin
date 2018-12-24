@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "dva";
-import { Form, Button, Input,Card } from "antd";
+import { Form, Button, Input, Card } from "antd";
 import SendAddress from "@/components/order/send/sendAddress";
 import DeliveryWay from "@/components/order/send/deliveryWay";
-import PageHeaderWrapper from '@/components/pageHeaderWrapper';
+import PageHeaderWrapper from "@/components/pageHeaderWrapper";
 import { message } from "antd/lib/index";
 import OrderApi from "@/services/order";
 import ExpressApi from "@/services/express";
@@ -68,7 +68,16 @@ export default class Send extends Component {
                         tracking_no: values.tracking_no
                     });
                 }
-                dispatch(setSend({ params }));
+                dispatch({
+                    type: "order/setSend",
+                    payload: params,
+                    callback: () => {
+                        dispatch({
+                            type: "order/info",
+                            payload: { id }
+                        });
+                    }
+                });
             }
         });
     };
@@ -118,70 +127,70 @@ export default class Send extends Component {
         }
         return (
             <PageHeaderWrapper hiddenBreadcrumb={true}>
-            <Card bordered={false}>
-                <Form onSubmit={this.handleSubmit}>
-                    <SendAddress
-                        form={this.props.form}
-                        shipperList={shipperList}
-                        deliver_name={deliver_name}
-                        deliver_phone={deliver_phone}
-                        deliver_address={deliver_address}
-                        onShipperChange={({ deliver_name, deliver_phone, deliver_address }) => {
-                            this.setState({
-                                deliver_name,
-                                deliver_phone,
-                                deliver_address
-                            });
-                        }}
-                    />
-                    <DeliveryWay
-                        form={this.props.form}
-                        express_id={express_id}
-                        expressList={expressList}
-                        need_express={need_express}
-                        tracking_no={tracking_no}
-                        onExpressChange={({ express_id, tracking_no, need_express }) => {
-                            this.setState({
-                                express_id,
-                                tracking_no,
-                                need_express
-                            });
-                        }}
-                    />
-                    <FormItem
-                        label="输入备注"
-                        colon={false}
-                    >
-                        {getFieldDecorator("remark", {
-                            initialValue: remark
-                        })(
-                            <TextArea
-                                placeholder="请输入备注"
-                                type='textarea'
-                                autosize={{ minRows: 2, maxRows: 6 }}
-                            />
-                        )}
-                    </FormItem>
-                    <FormItem>
-                        <Button
-                            type="primary"
-                            htmlType="submit"
-                            style={{
-                                marginRight: 10
+                <Card bordered={false}>
+                    <Form onSubmit={this.handleSubmit}>
+                        <SendAddress
+                            form={this.props.form}
+                            shipperList={shipperList}
+                            deliver_name={deliver_name}
+                            deliver_phone={deliver_phone}
+                            deliver_address={deliver_address}
+                            onShipperChange={({ deliver_name, deliver_phone, deliver_address }) => {
+                                this.setState({
+                                    deliver_name,
+                                    deliver_phone,
+                                    deliver_address
+                                });
                             }}
-                        >
-                            确定
-                        </Button>
-                        <Button
-                            onClick={() => {
-                                router.goBack();
+                        />
+                        <DeliveryWay
+                            form={this.props.form}
+                            express_id={express_id}
+                            expressList={expressList}
+                            need_express={need_express}
+                            tracking_no={tracking_no}
+                            onExpressChange={({ express_id, tracking_no, need_express }) => {
+                                this.setState({
+                                    express_id,
+                                    tracking_no,
+                                    need_express
+                                });
                             }}
+                        />
+                        <FormItem
+                            label="输入备注"
+                            colon={false}
                         >
-                            返回
-                        </Button>
-                    </FormItem>
-                </Form>
-            </Card>
+                            {getFieldDecorator("remark", {
+                                initialValue: remark
+                            })(
+                                <TextArea
+                                    placeholder="请输入备注"
+                                    type='textarea'
+                                    autosize={{ minRows: 2, maxRows: 6 }}
+                                />
+                            )}
+                        </FormItem>
+                        <FormItem>
+                            <Button
+                                type="primary"
+                                htmlType="submit"
+                                style={{
+                                    marginRight: 10
+                                }}
+                            >
+                                确定
+                            </Button>
+                            <Button
+                                onClick={() => {
+                                    router.goBack();
+                                }}
+                            >
+                                返回
+                            </Button>
+                        </FormItem>
+                    </Form>
+                </Card>
             </PageHeaderWrapper>
         );
     }
