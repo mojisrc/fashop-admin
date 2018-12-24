@@ -24,50 +24,7 @@ export default class Add extends Component {
         name: "",
         description: "",
         background_color: "#FFFFFF",
-        body: [
-            // {
-            //     type: 'goods_group',
-            //     icon: require('@/assets/images/shop/group.png'),
-            //     title: '拼团',
-            //     data: [
-            //         {
-            //             id: 1,
-            //             img: "",
-            //             title: "商品标题",
-            //             price: 200,
-            //             market_price: 300,
-            //             desc: "描述"
-            //         }, {
-            //             id: 1,
-            //             img: "",
-            //             title: "商品标题",
-            //             price: 200,
-            //             market_price: 300,
-            //             desc: "描述"
-            //         }, {
-            //             id: 1,
-            //             img: "",
-            //             title: "商品标题",
-            //             price: 200,
-            //             market_price: 300,
-            //             desc: "描述"
-            //         }, {
-            //             id: 1,
-            //             img: "",
-            //             title: "商品标题",
-            //             price: 200,
-            //             market_price: 300,
-            //             desc: "描述"
-            //         }
-            //     ],
-            //     options: {
-            //         source_type: 'auto', // 自动 auto 、 选择 choose
-            //         goods_sort: 1, // 销量多到少 1、价格高到低 2、价格低到高 3
-            //         goods_display_num: 3, // 最多12件，最少1件
-            //         layout_type: 5 //大图 1、小图 2、一大两小 3、列表 4、轮播 5
-            //     }
-            // }
-        ],
+        body: [],
         options: {
             type: "",
             index: 0

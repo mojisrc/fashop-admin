@@ -1,7 +1,8 @@
 /*goodsPhone*/
-p{
+.groupViewWarp p{
     margin: 0;
 }
+
 .goodsPhoneWarp {
     display: flex;
     align-items: initial;
@@ -104,4 +105,24 @@ p{
     margin-right: 10px;
     color: #ccc;
     text-decoration: line-through;
+}
+
+/* carousel */
+.carouselItem{ 
+    display: flex!important;
+    flex-direction: row;
+    width: 100%;
+    height: 186px;
+}
+.carouselImgWarp{
+    position: relative;
+}
+.carouselGroup {
+    position: absolute;
+    background: #929292;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    color: #fff;
+    text-align: center;
 }
