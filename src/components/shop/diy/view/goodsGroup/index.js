@@ -9,35 +9,35 @@ import { Button, Carousel } from "antd";
 //     options: GoodsOptionsType
 // }
 // type State = {}
-export default class Index extends Component  {
+export default class Index extends Component {
     render() {
         const { data, options } = this.props
         const { layout_type } = options
         return (
-            <div className={styles.goodsPhoneWarp}>
+            <div className={`${styles.goodsPhoneWarp} ${styles.groupViewWarp}`}>
                 {
-                    layout_type===5 ? this.carousel(data) :
-                    data.map((item, index) => {
-                        if (layout_type === 1) {
-                            return this.big(item, index)
-                        } else if (layout_type === 2) {
-                            return this.small(item, index)
-                        // } else if (layout_type === 3) {
-                        //     return this.oneBigTwoSmall(item, index)
-                        } else if (layout_type === 4) {
-                            return this.list(item, index)
-                        }
-                    })
+                    layout_type === 5 ? this.carousel(data) :
+                        data.map((item, index) => {
+                            if (layout_type === 1) {
+                                return this.big(item, index)
+                            } else if (layout_type === 2) {
+                                return this.small(item, index)
+                                // } else if (layout_type === 3) {
+                                //     return this.oneBigTwoSmall(item, index)
+                            } else if (layout_type === 4) {
+                                return this.list(item, index)
+                            }
+                        })
                 }
             </div>
         )
     }
-// : {
-//     img: string,
-//     title: string,
-//     market_price: number,
-//     price: number,
-// }
+    // : {
+    //     img: string,
+    //     title: string,
+    //     market_price: number,
+    //     price: number,
+    // }
     small(item, index) {
         const imgWidth = (375 - 18 - 2) / 2 + 'px'
         return (
@@ -71,12 +71,12 @@ export default class Index extends Component  {
             </View>
         )
     }
-// : {
-//     img: string,
-//     title: string,
-//     market_price: number,
-//     price: number,
-// }
+    // : {
+    //     img: string,
+    //     title: string,
+    //     market_price: number,
+    //     price: number,
+    // }
     big(item, index) {
         return (
             <View
@@ -91,15 +91,15 @@ export default class Index extends Component  {
                 <View className={styles.smallBot}>
                     <p className={styles.smallTitle}>{item.title}</p>
                     <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', }}>
-                        <View style={{flexDirection: 'row', alignItems: 'center',}}>
-                            <p className={styles.smallPrice} style={{fontSize: 14}}>
+                        <View style={{ flexDirection: 'row', alignItems: 'center', }}>
+                            <p className={styles.smallPrice} style={{ fontSize: 14 }}>
                                 2人团 ￥
                             </p>
                             <p className={styles.smallPrice}>
                                 {item.price}
                             </p>
                         </View>
-                        <p className={styles.smallPrice} style={{fontSize: 14, color: '#999'}}>
+                        <p className={styles.smallPrice} style={{ fontSize: 14, color: '#999' }}>
                             已拼888件
                         </p>
                     </View>
@@ -107,12 +107,12 @@ export default class Index extends Component  {
             </View>
         )
     }
-// : {
-//     img: string,
-//     title: string,
-//     market_price: number,
-//     price: number,
-// }
+    // : {
+    //     img: string,
+    //     title: string,
+    //     market_price: number,
+    //     price: number,
+    // }
     oneBigTwoSmall(item, index) {
         const imgWidth = (375 - 18 - 2) / 2 + 'px'
         return (
@@ -192,55 +192,57 @@ export default class Index extends Component  {
             result.push(data.slice(i, i + 3));
         }
         // console.log(result);
-        return (
-            <Carousel afterChange={()=>{}} dots={true}>
-                <div><h3>1</h3></div>
-                <div><h3>2</h3></div>
-                <div><h3>3</h3></div>
-                <div><h3>4</h3></div>
-            </Carousel>
-        )
         // return (
-        //     <Carousel>
-        //         {
-        //             result.map((item,i)=>{
-        //                 if (i < 3) {
-        //                     return (
-        //                         <View key={i} style={{height: 376}}>
-        //                             {
-        //                                 item.map((childItem, j) => {
-        //                                     return (
-        //                                         <View key={j}>
-        //                                             <View className={styles.listImgWarp}>
-        //                                                 <Image
-        //                                                     src={childItem.img}
-        //                                                 />
-        //                                             </View>
-        //                                             <View className={styles.listRight}>
-        //                                                 <p className={styles.listTitle}>{childItem.title}</p>
-        //                                                 <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', }}>
-        //                                                     <View>
-        //                                                         <p className={styles.smallPrice} style={{ fontSize: 14, color: '#999' }}>
-        //                                                             2人团 已拼888件
-        //                                                         </p>
-        //                                                         <p className={styles.listPrice}>
-        //                                                             ￥{childItem.price}
-        //                                                             <span className={styles.marketPrice}>￥{childItem.market_price}</span>
-        //                                                         </p>
-        //                                                     </View>
-        //                                                     <Button type="primary">去开团</Button>
-        //                                                 </View>
-        //                                             </View>
-        //                                         </View>
-        //                                     )
-        //                                 })
-        //                             }
-        //                         </View>
-        //                     )
-        //                 }
-        //             })
-        //         }
-        //     </Carousel>
+        //     <View style={{width: '100%'}}>
+        //         <Carousel afterChange={()=>{}} dots={true} >
+        //             <div style={{backgroundColor: '#364d79', width: '100%'}}><h3>1</h3></div>
+        //             <div style={{backgroundColor: '#364d79', width: '100%'}}><h3>2</h3></div>
+        //             <div style={{backgroundColor: '#364d79', width: '100%'}}><h3>3</h3></div>
+        //             <div style={{backgroundColor: '#364d79', width: '100%'}}><h3>4</h3></div>
+        //         </Carousel>
+        //     </View>
         // )
+        return (
+            <View style={{ width: '100%' }}>
+                <Carousel
+                    dotsClass={`slick-dots carousel-dot`}
+                >
+                    {
+                        result.map((item, i) => {
+                            if (i < 3) {
+                                return (
+                                    <View key={i} className={styles.carouselItem}>
+                                        {
+                                            item.map((childItem, j) => {
+                                                return (
+                                                    <View key={j} style={{ flex: 1, alignItems: 'center', maxWidth: '33.33%' }}>
+                                                        <View style={{width: '94%',}}>
+                                                            <View className={`${styles.smallImgWarp} ${styles.carouselImgWarp}`}>
+                                                                <Image
+                                                                    src={childItem.img}
+                                                                />
+                                                                <p className={styles.carouselGroup}>
+                                                                    2人团
+                                                                </p>
+                                                            </View>
+                                                            <View style={{alignItems: 'center',}}>
+                                                                <p className={styles.listPrice} style={{marginTop: 4}}>
+                                                                    ￥<strong>{childItem.price}</strong>
+                                                                </p>
+                                                                <p className={styles.listTitle}>{childItem.title}</p>
+                                                            </View>
+                                                        </View>
+                                                    </View>
+                                                )
+                                            })
+                                        }
+                                    </View>
+                                )
+                            }
+                        })
+                    }
+                </Carousel>
+            </View>
+        )
     }
 }
