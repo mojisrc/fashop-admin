@@ -65,21 +65,16 @@ export default class FreebieListTable extends Component {
         const { goodsListLoading, goodsList, goodsCategory } = this.props;
         const columns = [
             {
-                title: "活动名称",
+                title: "赠品名称",
                 dataIndex: "title",
             }, {
-                title: "有效时间",
-                dataIndex: "create_time",
-                render: e => moment(e * 1000).format("YYYY-MM-DD hh:mm"),
-                width: 230
-            }, {
-                title: "活动状态",
+                title: "已发放",
                 dataIndex: "status",
             }, {
-                title: "已赠送",
+                title: "已兑换",
                 dataIndex: "go",
             }, {
-                title: "已领取",
+                title: "剩余",
                 dataIndex: "get",
             }, {
                 title: "操作",
@@ -105,20 +100,6 @@ export default class FreebieListTable extends Component {
                         onCancel={()=>console.log('cancel')}
                     >
                         <a>使失效</a>
-                    </Popconfirm>
-                    <Divider type="vertical" />
-                    <Popconfirm
-                        title="确定删除？"
-                        icon={
-                            <Icon
-                                type="question-circle-o"
-                                style={{ color: 'red' }}
-                            />
-                        }
-                        onConfirm={() => console.log('confirm')}
-                        onCancel={() => console.log('cancel')}
-                    >
-                        <a>删除</a>
                     </Popconfirm>
                 </View>
             }
