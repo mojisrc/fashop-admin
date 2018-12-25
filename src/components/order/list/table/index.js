@@ -25,7 +25,14 @@ class OrderListTable extends Component {
         orderId: 0,
         visible: false,
         expandedRowKeys: [],
-        get: { page : 1 , rows :10 }
+        get: { page : 1 , rows :10 },
+        queryParams: {
+            keywords_type: "goods_name",
+            keywords: null,
+            create_time: [],
+            state_type: null,
+            order_kind: null
+        }
     };
 
     componentDidMount() {
@@ -62,7 +69,7 @@ class OrderListTable extends Component {
 
     render() {
         const { orderList, orderListLoading } = this.props;
-        let { expandedRowKeys, get } = this.state;
+        let { expandedRowKeys } = this.state;
         let { list } = orderList;
         if (Array.isArray(list)) {
             list.map((item) => {

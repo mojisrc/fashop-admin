@@ -3,7 +3,9 @@ import image from "@/services/image";
 export default {
     namespace: "image",
     state: {
-        list: {},
+        list: {
+            result: { list: [] ,total_number:0 }
+        },
         add: {}
     },
     effects: {

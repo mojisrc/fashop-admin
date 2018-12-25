@@ -12,8 +12,6 @@ import router from "umi/router";
 @connect(({ goods, goodsCategory, loading }) => ({
     goodsList: goods.list.result,
     goodsListLoading: loading.effects["goods/list"],
-    goodsCategory: goodsCategory.result,
-    goodsCategoryLoading: loading.effects["goodsCategory/list"]
 }))
 export default class GoodsListTable extends Component {
     static defaultProps = {
@@ -33,12 +31,10 @@ export default class GoodsListTable extends Component {
     };
 
     componentDidMount() {
-        console.log('componentDidMount')
         this.initList();
     }
 
     initList() {
-        console.log('initList')
         const { dispatch, goodsCategory } = this.props;
         const get = Query.make([
             { key: "sale_state", rule: ["eq", "all"] },

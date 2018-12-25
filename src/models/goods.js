@@ -3,8 +3,12 @@ import goods from "@/services/goods";
 export default {
     namespace: "goods",
     state: {
-        list: {},
-        info: {},
+        list: {
+            result: { list: [], total_number: 0 }
+        },
+        info: { result: { info: {} } },
+        add: {},
+        edit: {},
         onSale: {},
         offSale: {},
         batchDownshelf: {},
@@ -14,7 +18,6 @@ export default {
     effects: {
         * list({ payload, callback }, { call, put }) {
             const response = yield call(goods.list, payload);
-            console.log(response)
             yield put({
                 type: "_list",
                 payload: response
@@ -25,6 +28,22 @@ export default {
             const response = yield call(goods.info, payload);
             yield put({
                 type: "_info",
+                payload: response
+            });
+            if (callback) callback(response);
+        },
+        * add({ payload, callback }, { call, put }) {
+            const response = yield call(goods.add, payload);
+            yield put({
+                type: "_add",
+                payload: response
+            });
+            if (callback) callback(response);
+        },
+        * edit({ payload, callback }, { call, put }) {
+            const response = yield call(goods.edit, payload);
+            yield put({
+                type: "_edit",
                 payload: response
             });
             if (callback) callback(response);
@@ -74,6 +93,18 @@ export default {
             return {
                 ...state,
                 info: action.payload
+            };
+        },
+        _add(state, action) {
+            return {
+                ...state,
+                add: action.payload
+            };
+        },
+        _edit(state, action) {
+            return {
+                ...state,
+                edit: action.payload
             };
         },
         _onSale(state, action) {

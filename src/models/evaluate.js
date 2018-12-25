@@ -4,7 +4,9 @@ const evaluate = goods.evaluate;
 export default {
     namespace: "goodsEvaluate",
     state: {
-        list: {},
+        list: {
+            result: { list: [] ,total_number:0 }
+        },
         reply: {},
         display: {}
     },

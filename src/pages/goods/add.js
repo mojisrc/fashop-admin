@@ -3,9 +3,9 @@ import { connect } from 'dva';
 import { Form, Button, Modal, message,Card } from "antd";
 import PageHeaderWrapper from '@/components/pageHeaderWrapper';
 import Basic from '@/components/goods/add/basic'
-import Detail from '@/components/goods/add/detail'
+import Detail from '@/components/goods/add/sku/index'
 import Editor from '@/components/goods/add/editor'
-import Freight from '@/components/goods/add/detail/freight'
+import FreightOther from '@/components/goods/add/freightOther'
 import PhotoGallery from '@/components/public/photoGallery'
 import moment from "moment";
 import GoodsApi from "@/services/goods";
@@ -65,13 +65,13 @@ export default class Add extends Component {
         dispatch(list({ params: { page: 1, rows: 1000 } }))
     }
 
-    refreshfreightList = (callback: Function) => {
+    refreshFreightList = (callback) => {
         const {
             dispatch
         } = this.props
         dispatch(list(callback))
     }
-    openPhotoGallery = ({ photoGalleryOnOk }: { photoGalleryOnOk: Function }) => {
+    openPhotoGallery = ({ photoGalleryOnOk }) => {
         this.setState({
             photoGalleryVisible: true,
             photoGalleryOnOk,
@@ -91,7 +91,8 @@ export default class Add extends Component {
             previewVisible: false
         })
     }
-    openPreviewModal = ({ previewImage }: { previewImage: string }) => {
+    // : { previewImage: string }
+    openPreviewModal = ({ previewImage }) => {
         this.setState({
             previewVisible: true,
             previewImage,
@@ -181,12 +182,12 @@ export default class Add extends Component {
                             })
                         }}
                     />
-                    <Freight
+                    <FreightOther
                         getFieldDecorator={getFieldDecorator}
                         formItemLayout={formItemLayout}
                         freightList={freightList}
                         shippingCostSelect={shippingCostSelect}
-                        refreshfreightList={this.refreshfreightList}
+                        refreshFreightList={this.refreshFreightList}
                         freight_fee={0}
                     />
                     <Editor

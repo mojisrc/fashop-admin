@@ -3,7 +3,6 @@ import { View } from "@/components/flexView";
 import { Modal, Tabs, Button, Row, Col, Checkbox, Pagination, Spin } from "antd";
 import styles from "./index.css";
 import { connect } from "dva";
-import { initList } from "@/models/photoGallery";
 import UploadImage from "@/components/uploadImage";
 import Image from "@/components/image";
 import Query from "@/utils/query";
@@ -99,7 +98,7 @@ export default class PhotoGallery extends Component {
 
     returnImgList() {
         const { checkedValues } = this.state;
-        const { imageList } = this.props;
+        const { imageList,imageListLoading } = this.props;
         const { list } = imageList;
         return (
             <View className={styles.imgList}>
@@ -113,7 +112,7 @@ export default class PhotoGallery extends Component {
                         <Button type="primary">上传图片</Button>
                     </UploadImage>
                 </View>
-                <Spin spinning={loading}>
+                <Spin spinning={imageListLoading}>
                     <CheckboxGroup
                         value={checkedValues}
                         onChange={checkedValues => {

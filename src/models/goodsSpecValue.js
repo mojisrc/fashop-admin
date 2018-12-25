@@ -4,7 +4,9 @@ const specValue = goods.specValue;
 export default {
     namespace: "specValue",
     state: {
-        list: {},
+        list: {
+            result: { list: [] ,total_number:0 }
+        },
         add: {},
         del: {}
     },

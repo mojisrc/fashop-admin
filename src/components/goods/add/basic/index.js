@@ -1,19 +1,19 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import { connect } from "dva";
-import { View } from "@/components/flexView";
 import { Form, Input, TreeSelect } from "antd";
-import styles from "./index.css";
 import { UploadGroupImage } from "@/components/uploadImage";
 import router from "umi/router";
+import Arr from "@/utils/array";
+import Antd from "@/utils/antd";
 
 const FormItem = Form.Item;
-const TreeNode = TreeSelect.TreeNode;
-
 @connect()
 export default class Basic extends Component {
     render() {
-        const { form, formItemLayout, openPhotoGallery, categoryTree, openPreviewModal, title, images, categoryIds } = this.props;
+        const { formItemLayout, openPhotoGallery, categoryList, openPreviewModal, title, images, categoryIds, form } = this.props;
         const { getFieldDecorator, setFieldsValue } = form;
+        let tree = Arr.toTree(categoryList);
+        const categoryTree = Antd.treeData(tree);
         // TreeSelect 只接受string
         let _categoryIds = [];
         if (Array.isArray(categoryIds) && categoryIds.length > 0) {
@@ -22,8 +22,7 @@ export default class Basic extends Component {
             });
         }
         return (
-            <View className={styles.goodsItem}>
-                <h3>基本信息</h3>
+            <Fragment>
                 <FormItem
                     {...formItemLayout}
                     label='商品图'
@@ -38,7 +37,7 @@ export default class Basic extends Component {
                                 values = values ? values : [];
                                 openPhotoGallery({
                                     photoGalleryOnOk: (e) => {
-                                        onChange([...e, ...values]);
+                                        onChange([...values, ...e]);
                                     }
                                 });
                             }}
@@ -55,7 +54,7 @@ export default class Basic extends Component {
                     label='商品名称'
                 >
                     {getFieldDecorator("title", {
-                        rules: [{ required: true, message: "请输入商品名称!" }],
+                        rules: [{ required: true, message: "请输入商品名称" }],
                         initialValue: title
                     })(
                         <Input
@@ -69,9 +68,10 @@ export default class Basic extends Component {
                 >
                     {getFieldDecorator("category_ids", {
                         initialValue: _categoryIds,
-                        rules: [{ required: true, message: "请选择商品分类!" }]
+                        rules: [{ required: true, message: "请选择商品分类" }]
                     })(
                         <TreeSelect
+                            treeData={categoryTree}
                             showSearch
                             dropdownStyle={{ maxHeight: 400, overflow: "auto" }}
                             placeholder="请选择商品分类"
@@ -83,19 +83,7 @@ export default class Basic extends Component {
                                     category_ids: value
                                 });
                             }}
-                        >
-                            {
-                                categoryTree.map((item) =>
-                                    <TreeNode value={`${item.id}`} title={item.name} key={item.id}>
-                                        {
-                                            item.children && item.children.map((sub) =>
-                                                <TreeNode value={`${sub.id}`} title={sub.name} key={sub.id} />
-                                            )
-                                        }
-                                    </TreeNode>
-                                )
-                            }
-                        </TreeSelect>
+                        />
                     )}
                     <a
                         onClick={() => {
@@ -105,7 +93,7 @@ export default class Basic extends Component {
                         新增分类
                     </a>
                 </FormItem>
-            </View>
+            </Fragment>
         );
     }
 }

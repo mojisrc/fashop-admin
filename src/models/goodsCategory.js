@@ -4,7 +4,9 @@ const category = goods.category;
 export default {
     namespace: "goodsCategory",
     state: {
-        list: {},
+        list: {
+            result: { list: [] }
+        },
         info: {},
         add: {},
         edit: {},

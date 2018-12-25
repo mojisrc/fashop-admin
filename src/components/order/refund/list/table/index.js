@@ -166,13 +166,6 @@ export default class RefundTable extends Component {
         ];
         return (
             <View>
-                {/*<View className={styles.batchView}>*/}
-                {/*<Button*/}
-                {/*type='primary'*/}
-                {/*>*/}
-                {/*批量导出*/}
-                {/*</Button>*/}
-                {/*</View>*/}
                 <Table
                     loading={refundListLoading}
                     dataSource={refundList.list}

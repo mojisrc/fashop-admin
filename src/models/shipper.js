@@ -3,7 +3,9 @@ import shipper from "@/services/shipper";
 export default {
     namespace: "shipper",
     state: {
-        list: {},
+        list: {
+            result: { list: [] ,total_number:0 }
+        },
         info: {},
         add: {},
         edit: {},

@@ -18,7 +18,7 @@ export default class OrderDetailGoodsInfo extends Component {
                 title: "商品描述",
                 dataIndex: "goods_img",
                 key: "goods_img",
-                render: (text, record) => <View className={styles.goodsDesc}>
+                render: (text, record,index) => <View className={styles.goodsDesc} key={`goods_img${index}`}>
                     <img src={record.goods_img} alt='' />
                     <span>{record.goods_title}</span>
                 </View>
@@ -27,10 +27,9 @@ export default class OrderDetailGoodsInfo extends Component {
                 dataIndex: "goods_spec",
                 key: "goods_spec",
                 render: (goods_spec) => {
-                    console.log(goods_spec);
                     if (Array.isArray(goods_spec) && goods_spec.length > 0) {
                         return goods_spec.map(function(item, index) {
-                            return item.value_id > 0 && <Tag key={index}>{item.value_name}</Tag>;
+                            return item.value_id > 0 && <Tag key={`goods_spec_${item.value_id}_${index}`}>{item.value_name}</Tag>;
                         });
                     } else {
                         return "";
@@ -63,7 +62,7 @@ export default class OrderDetailGoodsInfo extends Component {
                 <Table
                     columns={columns}
                     dataSource={data}
-                    rowKey={record => record.goods_id}
+                    rowKey={record => `${record.goods_id}_goods`}
                     pagination={false}
                     // footer={() =>
                     //     <p className={styles.tableFooter}>

@@ -3,7 +3,9 @@ import order from "@/services/order";
 export default {
     namespace: "order",
     state: {
-        list: {},
+        list: {
+            result: { list: [] ,total_number:0 }
+        },
         info: {},
         setSend: {},
         setOrderExpires: {}

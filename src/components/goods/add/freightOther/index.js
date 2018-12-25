@@ -1,7 +1,5 @@
-import React, { Component } from "react";
-import { View } from "@/components/flexView";
+import React, { Component, Fragment } from "react";
 import { Select, Radio, InputNumber, Form, Button, DatePicker } from "antd";
-import Wstyles from "./index.css";
 import { Link } from "react-router-dom";
 import moment from "moment";
 
@@ -9,12 +7,11 @@ const Option = Select.Option;
 const RadioGroup = Radio.Group;
 const FormItem = Form.Item;
 
-class Freight extends Component {
+class FreightOther extends Component {
     render() {
         const { getFieldDecorator, formItemLayout, shippingTemplateList, shippingCostSelect, refreshShippingTemplateList, freight_fee, sale_time } = this.props;
         return (
-            <View className={Wstyles.goodsItem}>
-                <h3>运费其他</h3>
+            <Fragment>
                 <FormItem
                     {...formItemLayout}
                     label='运费'
@@ -50,7 +47,7 @@ class Freight extends Component {
                         <GoodsSaleTime />
                     )}
                 </FormItem>
-            </View>
+            </Fragment>
         );
     }
 
@@ -318,4 +315,4 @@ class GoodsFreight extends Component {
     }
 }
 
-export default Freight;
+export default FreightOther;

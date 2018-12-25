@@ -8,7 +8,9 @@ import { getPageQuery } from '@/utils/utils';
 export default {
     namespace: "member",
     state: {
-        list: {},
+        list: {
+            result: { list: [] ,total_number:0 }
+        },
         token: {},
         selfEdit: {},
         add: {},

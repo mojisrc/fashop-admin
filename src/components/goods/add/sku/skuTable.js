@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { Form, InputNumber, Table, Input } from "antd";
-import { View } from "@/components/flexView";
-import styles from "./spec.css";
+import { View } from "@/components/flexView/index";
+import styles from "./index.css";
 
 const FormItem = Form.Item;
 
-class GoodsAddSpec extends Component {
+class SkuTable extends Component {
     state = {
         skus: [],
     }
@@ -170,8 +170,8 @@ class GoodsAddSpec extends Component {
             />
         )
     }
-
-    allEdit({ number, dataIndex, dataSource }: { number: Object, dataIndex: string, dataSource: SkusType }) {
+    // : { number: Object, dataIndex: string, dataSource: SkusType }
+    allEdit({ number, dataIndex, dataSource }) {
         const { onChange } = this.props
         const _dataSource = dataSource.map((item) => {
             return {
@@ -182,4 +182,4 @@ class GoodsAddSpec extends Component {
         onChange(_dataSource)
     }
 }
-export default GoodsAddSpec
+export default SkuTable

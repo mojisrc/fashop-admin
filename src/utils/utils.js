@@ -176,6 +176,17 @@ export function formatWan(val) {
   }
   return result;
 }
+const categoryTreeData = (list) => {
+    // console.log(list)
+    return list.map((e) => {
+        return {
+            title: e.name,
+            value: `${e.id}`,
+            key: `${e.id}`,
+            children: categoryTreeData(e.children || [])
+        };
+    });
+};
 
 // 给官方演示站点用，用于关闭真实开发环境不需要使用的特性
 // export function isAntdPro() {
