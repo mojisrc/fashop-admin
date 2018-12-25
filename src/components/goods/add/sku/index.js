@@ -85,7 +85,7 @@ export default class Sku extends Component {
         }
 
         this.state = {
-            id:props.id,
+            id: props.id,
             value: skus,
             customSpecSortShow: false,
             loading: false,
@@ -116,7 +116,7 @@ export default class Sku extends Component {
     }
 
     render() {
-        const {  specList, onChange } = this.props;
+        const { specList, onChange } = this.props;
         const { specRowRightCloseBtnHoverIndex, specs, lastSpecValuesPopoverClick, multiSkus } = this.state;
         const skus = this.state.value;
 
@@ -198,14 +198,11 @@ export default class Sku extends Component {
                                                                         const data = this.mergeSkus(_specs);
                                                                         this.setState({
                                                                             specs: _specs,
-                                                                            multiSkus: data[0]["spec"][0]["id"] !== 0
+                                                                            multiSkus: data[0]["spec"][0]["id"] !== 0,
+                                                                            value: data
                                                                         }, () => {
-                                                                            console.log(data)
-                                                                            onChange(data);
-                                                                            let fieldsValue = {}
-                                                                            fieldsValue[this.state.id] = data
-                                                                            this.props.form.setFieldsValue(fieldsValue)
-
+                                                                            fieldsValue[this.state.id] = data;
+                                                                            this.props.form.setFieldsValue(fieldsValue);
                                                                             if (data.length === 0) {
                                                                                 this.initGoodsSpecList();
                                                                             }
