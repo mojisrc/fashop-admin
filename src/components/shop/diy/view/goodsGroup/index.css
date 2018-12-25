@@ -23,13 +23,8 @@
 }
 
 .listImgWarp {
-    width: 30%;
     padding-bottom: 10px;
     border-bottom: 1px solid #eaeaea;
-}
-
-.listImgWarp img {
-    width: 100%;
 }
 
 .listRight {
@@ -67,16 +62,10 @@
 }
 
 /* small */
-.smallWarp {
-}
 
 .smallImgWarp {
     width: 100%;
     overflow: hidden;
-}
-
-.smallImgWarp img {
-    width: 100%;
 }
 
 .smallBot {
@@ -85,7 +74,7 @@
     padding: 0 10px;
 }
 
-.smallTitle {
+.groupViewWarp .smallTitle {
     margin: 10px 0;
     overflow: hidden;
     display: -webkit-box;

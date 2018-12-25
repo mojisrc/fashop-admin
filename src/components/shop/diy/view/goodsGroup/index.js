@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import styles from "./index.css";
-import Image from "@/components/image/index";
+import Image from "@/components/defaultImage/index";
 import { View } from "@/components/flexView";
 import { Button, Carousel } from "antd";
 //
@@ -22,8 +22,8 @@ export default class Index extends Component {
                                 return this.big(item, index)
                             } else if (layout_type === 2) {
                                 return this.small(item, index)
-                                // } else if (layout_type === 3) {
-                                //     return this.oneBigTwoSmall(item, index)
+                                } else if (layout_type === 3) {
+                                    return this.oneBigTwoSmall(item, index)
                             } else if (layout_type === 4) {
                                 return this.list(item, index)
                             }
@@ -50,6 +50,7 @@ export default class Index extends Component {
                     <Image
                         src={item.img}
                         style={{ width: imgWidth, height: imgWidth }}
+                        type="samll_img"
                     />
                 </View>
                 <View className={styles.smallBot}>
@@ -86,6 +87,8 @@ export default class Index extends Component {
                 <View className={styles.smallImgWarp}>
                     <Image
                         src={item.img}
+                        type="big_img"
+                        style={{height: 375}}
                     />
                 </View>
                 <View className={styles.smallBot}>
@@ -121,22 +124,23 @@ export default class Index extends Component {
                 style={{
                     width: `${
                         (index + 1) % 3 === 0 || (index + 1) % 3 === 2 ? imgWidth : '100%'
-                        }`,
+                    }`,
                     marginRight: `${
                         (index + 1) % 3 === 2 ? '6px' : '0'
-                        }`
+                    }`
                 }}
             >
                 <View className={styles.smallImgWarp}>
                     <Image
                         src={item.img}
+                        type={index!==0 ? "samll_img" : "big_img"}
                         style={{
                             width: `${
                                 (index + 1) % 3 === 0 || (index + 1) % 3 === 2 ? imgWidth : '100%'
-                                }`,
+                            }`,
                             height: `${
-                                (index + 1) % 3 === 0 || (index + 1) % 3 === 2 ? imgWidth : 'auto'
-                                }`,
+                                (index + 1) % 3 === 0 || (index + 1) % 3 === 2 ? imgWidth : '375px'
+                            }`,
                         }}
                     />
                 </View>
@@ -165,6 +169,8 @@ export default class Index extends Component {
                 <View className={styles.listImgWarp}>
                     <Image
                         src={item.img}
+                        type="list_img"
+                        style={{width: 75, height: 75}}
                     />
                 </View>
                 <View className={styles.listRight}>
@@ -220,6 +226,8 @@ export default class Index extends Component {
                                                             <View className={`${styles.smallImgWarp} ${styles.carouselImgWarp}`}>
                                                                 <Image
                                                                     src={childItem.img}
+                                                                    type="carousel_img"
+                                                                    style={{height: 106}}
                                                                 />
                                                                 <p className={styles.carouselGroup}>
                                                                     2人团
