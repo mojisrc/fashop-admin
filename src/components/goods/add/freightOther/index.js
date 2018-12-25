@@ -315,4 +315,4 @@ class GoodsFreight extends Component {
     }
 }
 
-export default Index;
+export default FreightOther;

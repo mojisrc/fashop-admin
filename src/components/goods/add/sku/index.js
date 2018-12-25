@@ -24,7 +24,7 @@ const formItemLayout = {
     specList: goodsSpec.list.result.list,
     specListLoading: loading.effects["goodsSpec/list"]
 }))
-export default class Skus extends Component {
+export default class Sku extends Component {
     static defaultProps = {
         specList: [],
         specListLoading: false,

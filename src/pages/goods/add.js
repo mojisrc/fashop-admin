@@ -5,7 +5,7 @@ import PageHeaderWrapper from '@/components/pageHeaderWrapper';
 import Basic from '@/components/goods/add/basic'
 import Detail from '@/components/goods/add/sku/index'
 import Editor from '@/components/goods/add/editor'
-import Index from '@/components/goods/add/freightOther/freight'
+import FreightOther from '@/components/goods/add/freightOther'
 import PhotoGallery from '@/components/public/photoGallery'
 import moment from "moment";
 import GoodsApi from "@/services/goods";
@@ -182,7 +182,7 @@ export default class Add extends Component {
                             })
                         }}
                     />
-                    <Index
+                    <FreightOther
                         getFieldDecorator={getFieldDecorator}
                         formItemLayout={formItemLayout}
                         freightList={freightList}
