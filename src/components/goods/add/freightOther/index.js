@@ -7,7 +7,7 @@ const Option = Select.Option;
 const RadioGroup = Radio.Group;
 const FormItem = Form.Item;
 
-class Freight extends Component {
+class FreightOther extends Component {
     render() {
         const { getFieldDecorator, formItemLayout, shippingTemplateList, shippingCostSelect, refreshShippingTemplateList, freight_fee, sale_time } = this.props;
         return (
@@ -315,4 +315,4 @@ class GoodsFreight extends Component {
     }
 }
 
-export default Freight;
+export default Index;

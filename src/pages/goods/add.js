@@ -3,9 +3,9 @@ import { connect } from 'dva';
 import { Form, Button, Modal, message,Card } from "antd";
 import PageHeaderWrapper from '@/components/pageHeaderWrapper';
 import Basic from '@/components/goods/add/basic'
-import Detail from '@/components/goods/add/detail'
+import Detail from '@/components/goods/add/sku/index'
 import Editor from '@/components/goods/add/editor'
-import Freight from '@/components/goods/add/detail/freight'
+import Index from '@/components/goods/add/freightOther/freight'
 import PhotoGallery from '@/components/public/photoGallery'
 import moment from "moment";
 import GoodsApi from "@/services/goods";
@@ -65,7 +65,7 @@ export default class Add extends Component {
         dispatch(list({ params: { page: 1, rows: 1000 } }))
     }
 
-    refreshfreightList = (callback) => {
+    refreshFreightList = (callback) => {
         const {
             dispatch
         } = this.props
@@ -182,12 +182,12 @@ export default class Add extends Component {
                             })
                         }}
                     />
-                    <Freight
+                    <Index
                         getFieldDecorator={getFieldDecorator}
                         formItemLayout={formItemLayout}
                         freightList={freightList}
                         shippingCostSelect={shippingCostSelect}
-                        refreshfreightList={this.refreshfreightList}
+                        refreshFreightList={this.refreshFreightList}
                         freight_fee={0}
                     />
                     <Editor

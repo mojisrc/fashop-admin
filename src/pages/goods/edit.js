@@ -3,9 +3,9 @@ import { connect } from "dva";
 import { Form, Button, Modal, message, Card, Spin } from "antd";
 import PageHeaderWrapper from "@/components/pageHeaderWrapper";
 import Basic from "@/components/goods/add/basic";
-import Skus from "@/components/goods/add/detail";
+import Sku from "@/components/goods/add/sku";
 import Editor from "@/components/goods/add/editor";
-import Freight from "@/components/goods/add/detail/freight";
+import FreightOther from "@/components/goods/add/freightOther";
 import PhotoGallery from "@/components/public/photoGallery";
 import moment from "moment";
 import styles from "./edit.css";
@@ -182,7 +182,7 @@ export default class Add extends Component {
 
     // todo 重构涉及的组件，在当前页面直接输出
     render() {
-        const { photoGalleryVisible, previewVisible, previewImage, shippingCostSelect, info, skus, multiSpec } = this.state;
+        const { photoGalleryVisible, previewVisible, previewImage, shippingCostSelect, info, skus } = this.state;
         const { body, freight_fee, sale_time } = info;
         const { goodsCategory, freightList, form, goodsInfoLoading } = this.props;
         const { getFieldDecorator, getFieldValue } = form;
@@ -233,24 +233,24 @@ export default class Add extends Component {
                             </div>
                             <div className={styles.item}>
                                 <h3>型号价格</h3>
-                                <FormItem {...formItemLayout} label='商品型号'>
+                                <FormItem {...formItemLayout}>
                                     {getFieldDecorator("skus", {
                                         rules: [{
-                                            validator: this.validator,
+                                            validator: Sku.validator,
                                             required: true
                                         }],
                                         initialValue: skus.length > 0 ? skus : null
-                                    })(<Skus />)}
+                                    })(<Sku form={form} />)}
                                 </FormItem>
                             </div>
                             <div className={styles.item}>
                                 <h3>运费其他</h3>
-                                <Freight
+                                <FreightOther
                                     getFieldDecorator={getFieldDecorator}
                                     formItemLayout={formItemLayout}
                                     freightList={freightList.list}
                                     shippingCostSelect={shippingCostSelect}
-                                    refreshfreightList={this.refreshfreightList}
+                                    refreshFreightList={this.refreshFreightList}
                                     freight_fee={freight_fee}
                                     sale_time={sale_time}
                                 />
@@ -266,7 +266,6 @@ export default class Add extends Component {
                                     images={getFieldValue("images")}
                                 />)}
                             </FormItem>
-
                             <FormItem {...tailFormItemLayout}>
                                 <Button
                                     type="primary"
@@ -277,9 +276,6 @@ export default class Add extends Component {
                                 >
                                     保存修改
                                 </Button>
-                                {/*<Button htmlType="submit">*/}
-                                {/*放入仓库*/}
-                                {/*</Button>*/}
                             </FormItem>
                         </Form>
                         <PhotoGallery
@@ -296,31 +292,5 @@ export default class Add extends Component {
         );
     }
 
-    skuValidator = (rule, skus, callback) => {
-        // 单产品验证
-        if (Array.isArray(skus) && skus.length === 1 && skus[0]["spec"] !== "undefined" && skus[0].spec.length === 1 && skus[0].spec[0].id === 0) {
-            if (!skus[0].price) {
-                callback("请输入商品价格");
-            } else if (!skus[0].stock) {
-                callback("请输入商品库存");
-            } else {
-                callback();
-            }
-        } else {
-            // 多产品验证
-            if (Array.isArray(skus)) {
-                const index = skus.findIndex((e) => {
-                    return !e.price || !e.stock;
-                });
-                if (index === -1) {
-                    callback();
-                } else {
-                    callback("请完善商品型号价格信息");
-                }
-            } else {
-                callback("请完善商品型号价格信息");
-            }
 
-        }
-    };
 }

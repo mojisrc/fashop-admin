@@ -37,7 +37,7 @@ export default class Basic extends Component {
                                 values = values ? values : [];
                                 openPhotoGallery({
                                     photoGalleryOnOk: (e) => {
-                                        onChange([...e, ...values]);
+                                        onChange([...values, ...e]);
                                     }
                                 });
                             }}
