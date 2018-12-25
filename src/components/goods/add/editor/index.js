@@ -57,11 +57,11 @@ export default class Editor extends Component {
                     <Row gutter={24}>
                         <Col span={10} style={{ marginTop: 20 }}>
                             <View className={styles.bodyContentWarp}>
-                                <img
-                                    className={styles.phoneTop}
-                                    src={require("@/assets/images/shop/diyPhone.png")}
-                                    alt='diyPhone'
-                                />
+                                {/*<img*/}
+                                    {/*className={styles.phoneTop}*/}
+                                    {/*src={require("@/assets/images/shop/diyPhone.png")}*/}
+                                    {/*alt='diyPhone'*/}
+                                {/*/>*/}
                                 <View className={styles.bodyContent}>
                                     <View className={styles.bodyContentScroll}>
                                         {
