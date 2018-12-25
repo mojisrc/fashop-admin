@@ -1,31 +1,25 @@
 import React, { Component } from "react";
-import { connect } from 'dva';
-import { Form, Button, Modal, message,Card } from "antd";
-import PageHeaderWrapper from '@/components/pageHeaderWrapper';
-import Basic from '@/components/goods/add/basic'
-import Detail from '@/components/goods/add/sku/index'
-import Editor from '@/components/goods/add/editor'
-import FreightOther from '@/components/goods/add/freightOther'
-import PhotoGallery from '@/components/public/photoGallery'
+import { connect } from "dva";
+import { Form, Button, Modal, message, Card, Spin } from "antd";
+import PageHeaderWrapper from "@/components/pageHeaderWrapper";
+import Sku from "@/components/goods/add/sku";
+import Editor from "@/components/goods/add/editor";
+import PhotoGallery from "@/components/public/photoGallery";
 import moment from "moment";
-import GoodsApi from "@/services/goods";
-const FormItem = Form.Item;
-@connect(({
-              view: {
-                  goods: {
-                      categoryTree,
-                      specList
-                  },
-                  freight: {
-                      list: freightList
-                  },
-              }
-          }) => ({
-    categoryTree,
-    specList,
-    freightList,
-}))
+import styles from "./edit.css";
+
 @Form.create()
+@connect(({ goods, goodsCategory, goodsSpec, freight, loading }) => ({
+    goodsCategory: goodsCategory.list.result,
+    specList: goodsSpec.list.result,
+    freightList: freight.list.result,
+    goodsListLoading: loading.effects["goods/list"],
+    goodsInfoLoading: loading.effects["goods/info"],
+    goodsCategoryLoading: loading.effects["goodsCategory/list"],
+    specListLoading: loading.effects["goodsSpec/list"],
+    freightListLoading: loading.effects["freightList/list"]
+}))
+
 export default class Add extends Component {
     state = {
         photoGalleryVisible: false,
@@ -158,15 +152,7 @@ export default class Add extends Component {
             <PageHeaderWrapper hiddenBreadcrumb={true}>
             <Card bordered={false}>
                 <Form onSubmit={this.handleSubmit} style={{ width: 1000 }}>
-                    <Basic
-                        location={this.props.location}
-                        form={this.props.form}
-                        history={this.props.history}
-                        formItemLayout={formItemLayout}
-                        openPhotoGallery={this.openPhotoGallery}
-                        categoryTree={categoryTree}
-                        openPreviewModal={this.openPreviewModal}
-                    />
+
                     <Detail
                         getFieldDecorator={getFieldDecorator}
                         formItemLayout={formItemLayout}

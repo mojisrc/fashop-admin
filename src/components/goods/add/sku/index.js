@@ -201,6 +201,7 @@ export default class Sku extends Component {
                                                                             multiSkus: data[0]["spec"][0]["id"] !== 0,
                                                                             value: data
                                                                         }, () => {
+                                                                            let fieldsValue = {}
                                                                             fieldsValue[this.state.id] = data;
                                                                             this.props.form.setFieldsValue(fieldsValue);
                                                                             if (data.length === 0) {
