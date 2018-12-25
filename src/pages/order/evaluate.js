@@ -196,10 +196,10 @@ export default class Evaluate extends Component {
                                             {
                                                 item.content ?
                                                     <View className={styles.evaluateContent}>
-                                                        <p>
+                                                        <span>
                                                             <strong>评价内容：</strong>
                                                             {item.content}
-                                                        </p>
+                                                        </span>
                                                     </View> : null
                                             }
                                             {

@@ -113,20 +113,20 @@ class List extends Component {
                 title: "操作",
                 key: "operation",
                 render: (record) => <View className={styles.operation}>
-                    <a
-                        onClick={() => {
-                            const container = document.createElement("div");
-                            ReactDOM.render(<EditAddress
-                                orderId={record.id}
-                                visible={true}
-                                onCancel={() => {
-                                    ReactDOM.unmountComponentAtNode(container);
-                                }}
-                            />, container);
-                        }}
-                    >
-                        修改地址
-                    </a>
+                    {/*<a*/}
+                        {/*onClick={() => {*/}
+                            {/*const container = document.createElement("div");*/}
+                            {/*ReactDOM.render(<EditAddress*/}
+                                {/*orderId={record.id}*/}
+                                {/*visible={true}*/}
+                                {/*onCancel={() => {*/}
+                                    {/*ReactDOM.unmountComponentAtNode(container);*/}
+                                {/*}}*/}
+                            {/*/>, container);*/}
+                        {/*}}*/}
+                    {/*>*/}
+                        {/*修改地址*/}
+                    {/*</a>*/}
                     <a
                         onClick={() => {
                             const container = document.createElement("div");
