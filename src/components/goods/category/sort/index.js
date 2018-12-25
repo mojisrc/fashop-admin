@@ -1,13 +1,8 @@
-import React, { Component,Fragment } from "react";
+import React, { Component, Fragment } from "react";
 import { Button, Modal, Tree, message } from "antd";
-import {View} from "@/components/public/dom";
-import { connect } from "dva";
 
 const TreeNode = Tree.TreeNode;
-@connect(({ goodsCategory, loading }) => ({
-    goodsCategorySort: goodsCategory.sort,
-    goodsCategorySortLoading: loading.effects["goodsCategory/sort"]
-}))
+
 export default class CategorySort extends Component {
     state = {
         visible: false,
@@ -54,7 +49,7 @@ export default class CategorySort extends Component {
                                 <TreeNode title={data.name} key={data.id} data={data} index={i}>
                                     {
                                         data.children && data.children.map((item, j) => (
-                                            <TreeNode title={item.name} key={item.id} data={item} index={j} />
+                                            <TreeNode title={`${item.name}`} key={item.id} data={item} index={j} />
                                         ))
                                     }
                                 </TreeNode>
@@ -117,9 +112,11 @@ export default class CategorySort extends Component {
             } else {
                 const oneLevelIndex = dataSource.findIndex((e) => e.id === startData.pid);
                 const newArray = [...dataSource];
-                newArray[oneLevelIndex].children.splice(startIndex, 1);
-                const endIndex = newArray[oneLevelIndex].children.findIndex((e) => e.id === endData.id);
-                newArray[oneLevelIndex].children.splice(endIndex, 0, startData);
+                if (typeof newArray[oneLevelIndex] !== "undefined" && typeof newArray[oneLevelIndex]["children"] !== "undefined") {
+                    newArray[oneLevelIndex].children.splice(startIndex, 1);
+                    const endIndex = newArray[oneLevelIndex].children.findIndex((e) => e.id === endData.id);
+                    newArray[oneLevelIndex].children.splice(endIndex, 0, startData);
+                }
                 this.setState({
                     dataSource: newArray
                 });

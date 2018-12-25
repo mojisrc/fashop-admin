@@ -10,6 +10,7 @@ import styles from "@/components/goods/list/table/index.css";
 import { View } from "@/components/flexView";
 import moment from "moment";
 import router from "umi/router";
+import Antd from "@/utils/antd";
 @connect(({ goods, goodsCategory, loading }) => ({
     goodsList: goods.list.result,
     goodsListLoading: loading.effects["goods/list"],
@@ -61,8 +62,8 @@ export default class GoodsList extends Component {
     render() {
         const { goodsList, goodsListLoading, goodsCategory } = this.props;
         const { title, category_ids, sort_type, sale_state } = this.search.getParam();
-        let tree = Arr.toTree(goodsCategory.list);
-        const treeData = categoryTreeData(tree);
+        const tree = Arr.toTree(goodsCategory.list);
+        const treeData = Antd.treeData(tree);
         // TreeSelect 只接受string
         let _category_ids = category_ids && category_ids.length ? [...category_ids] : [];
         const columns = [
@@ -279,15 +280,3 @@ export default class GoodsList extends Component {
         );
     }
 }
-const categoryTreeData = (list) => {
-    // console.log(list)
-    return list.map((e) => {
-        return {
-            title: e.name,
-            value: `${e.id}`,
-            key: `${e.id}`,
-            children: categoryTreeData(e.children || [])
-        };
-    });
-};
-

@@ -20,7 +20,6 @@ import { UploadGroupImage } from "@/components/uploadImage";
 import Arr from "@/utils/array";
 import Antd from "@/utils/antd";
 import router from "umi/router";
-import moment from "moment";
 import GoodsFreight from "@/components/goods/add/freight";
 
 const FormItem = Form.Item;
