@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import { connect } from "dva";
 import {
     Form,
@@ -41,7 +41,6 @@ class GoodsEdit extends Component {
         goodsInfo: { info: {} },
         goodsCategory: { list: [] },
         specList: { list: [] },
-        freightList: { list: [] },
         goodsListLoading: true,
         goodsInfoLoading: true,
         goodsCategoryLoading: true,
@@ -53,9 +52,9 @@ class GoodsEdit extends Component {
         },
         previewVisible: false,
         previewImage: "",
-        shippingCostSelect: "freight",
-        freightList: [],
-        info: {},
+        info: {
+            body: [], freight_fee: 0, freight_id: 0, sale_time: null, title: "", images: [], category_ids: []
+        },
         skus: [
             {
                 spec: [
@@ -73,9 +72,7 @@ class GoodsEdit extends Component {
                 weight: null
             }
         ]
-
-    };
-
+    }
     componentDidMount() {
         const { dispatch, location: { query: { id } } } = this.props;
         dispatch({
@@ -87,7 +84,10 @@ class GoodsEdit extends Component {
                     this.setState({
                         info,
                         skus: info.sku_list,
-                        multiSpec: info.sku_list[0].spec[0].id > 0
+                        photoGalleryVisible: false,
+                        photoGalleryOnOk: (e) => {},
+                        previewVisible: false,
+                        previewImage: "",
                     });
                 }
             }
@@ -98,40 +98,6 @@ class GoodsEdit extends Component {
         this.refreshSpecList();
     }
 
-    refreshSpecList = () => {
-        const { dispatch } = this.props;
-        dispatch({
-            type: "goodsSpec/list"
-        });
-    };
-
-    openPhotoGallery = ({ photoGalleryOnOk }) => {
-        this.setState({
-            photoGalleryVisible: true,
-            photoGalleryOnOk
-        });
-    };
-    onCancelPhotoGallery = () => {
-        this.setState({
-            photoGalleryVisible: false
-        });
-    };
-    onOkPhotoGallery = (e) => {
-        this.state.photoGalleryOnOk(e);
-        this.onCancelPhotoGallery();
-    };
-    previewCancel = () => {
-        this.setState({
-            previewVisible: false
-        });
-    };
-    // : { previewImage: string }
-    openPreviewModal = ({ previewImage }) => {
-        this.setState({
-            previewVisible: true,
-            previewImage
-        });
-    };
     handleSubmit = (e) => {
         e.preventDefault();
         this.props.form.validateFieldsAndScroll(async (err, values) => {
@@ -165,7 +131,6 @@ class GoodsEdit extends Component {
                                         this.setState({
                                             info,
                                             skus: info.sku_list,
-                                            multiSpec: info.sku_list[0].spec[0].id > 0
                                         });
                                     }
                                 }
@@ -311,11 +276,6 @@ class GoodsEdit extends Component {
                                             format="YYYY-MM-DD HH:mm:ss"
                                             placeholder="选择时间"
                                             style={{ marginRight: 15 }}
-                                            onOk={(e) => {
-                                                if (e) {
-                                                    setFieldsValue(e);
-                                                }
-                                            }}
                                         />
                                     )}
                                 </FormItem>
@@ -356,6 +316,41 @@ class GoodsEdit extends Component {
             </PageHeaderWrapper>
         );
     }
+    refreshSpecList = () => {
+        const { dispatch } = this.props;
+        dispatch({
+            type: "goodsSpec/list"
+        });
+    };
+
+    openPhotoGallery = ({ photoGalleryOnOk }) => {
+        this.setState({
+            photoGalleryVisible: true,
+            photoGalleryOnOk
+        });
+    };
+    onCancelPhotoGallery = () => {
+        this.setState({
+            photoGalleryVisible: false
+        });
+    };
+    onOkPhotoGallery = (e) => {
+        this.state.photoGalleryOnOk(e);
+        this.onCancelPhotoGallery();
+    };
+    previewCancel = () => {
+        this.setState({
+            previewVisible: false
+        });
+    };
+    // : { previewImage: string }
+    openPreviewModal = ({ previewImage }) => {
+        this.setState({
+            previewVisible: true,
+            previewImage
+        });
+    };
+
 }
 
 const formItemLayout = {

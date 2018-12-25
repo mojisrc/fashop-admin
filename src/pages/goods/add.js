@@ -1,34 +1,56 @@
 import React, { Component } from "react";
 import { connect } from "dva";
-import { Form, Button, Modal, message, Card, Spin } from "antd";
+import {
+    Form,
+    Button,
+    Modal,
+    message,
+    Card,
+    Spin,
+    Input,
+    TreeSelect,
+    DatePicker
+} from "antd";
 import PageHeaderWrapper from "@/components/pageHeaderWrapper";
 import Sku from "@/components/goods/add/sku";
 import Editor from "@/components/goods/add/editor";
 import PhotoGallery from "@/components/public/photoGallery";
-import moment from "moment";
 import styles from "./edit.css";
+import { UploadGroupImage } from "@/components/uploadImage";
+import Arr from "@/utils/array";
+import Antd from "@/utils/antd";
+import router from "umi/router";
+import moment from "moment";
+import GoodsFreight from "@/components/goods/add/freight";
+
+const FormItem = Form.Item;
 
 @Form.create()
-@connect(({ goods, goodsCategory, goodsSpec, freight, loading }) => ({
+@connect(({ goods, goodsCategory, goodsSpec, loading }) => ({
     goodsCategory: goodsCategory.list.result,
     specList: goodsSpec.list.result,
-    freightList: freight.list.result,
     goodsListLoading: loading.effects["goods/list"],
-    goodsInfoLoading: loading.effects["goods/info"],
     goodsCategoryLoading: loading.effects["goodsCategory/list"],
-    specListLoading: loading.effects["goodsSpec/list"],
-    freightListLoading: loading.effects["freightList/list"]
+    specListLoading: loading.effects["goodsSpec/list"]
 }))
 
-export default class Add extends Component {
+class GoodsEdit extends Component {
+    static defaultProps = {
+        goodsCategory: { list: [] },
+        specList: { list: [] },
+        goodsListLoading: true,
+        goodsCategoryLoading: true,
+        specListLoading: true
+    };
     state = {
         photoGalleryVisible: false,
         photoGalleryOnOk: (e) => {
         },
         previewVisible: false,
-        previewImage: '',
-        shippingCostSelect: 'freight',
-        freightList: [],
+        previewImage: "",
+        info: {
+            body: [], freight_fee: 0, freight_id: 0, sale_time: null, title: "", images: [], category_ids: []
+        },
         skus: [
             {
                 spec: [
@@ -45,168 +67,271 @@ export default class Add extends Component {
                 code: null,
                 weight: null
             }
-        ],
-        // 是否为多规格
-        multiSpec: false
+        ]
     }
-
     componentDidMount() {
-        const {
-            dispatch,
-        } = this.props
-        dispatch(list())
-        dispatch(specList())
-        dispatch(list({ params: { page: 1, rows: 1000 } }))
+        const { dispatch } = this.props;
+        dispatch({
+            type: "goodsCategory/list"
+        });
+        this.refreshSpecList();
     }
 
-    refreshFreightList = (callback) => {
-        const {
-            dispatch
-        } = this.props
-        dispatch(list(callback))
-    }
-    openPhotoGallery = ({ photoGalleryOnOk }) => {
-        this.setState({
-            photoGalleryVisible: true,
-            photoGalleryOnOk,
-        })
-    }
-    onCancelPhotoGallery = () => {
-        this.setState({
-            photoGalleryVisible: false
-        })
-    }
-    onOkPhotoGallery = (e) => {
-        this.state.photoGalleryOnOk(e)
-        this.onCancelPhotoGallery()
-    }
-    previewCancel = () => {
-        this.setState({
-            previewVisible: false
-        })
-    }
-    // : { previewImage: string }
-    openPreviewModal = ({ previewImage }) => {
-        this.setState({
-            previewVisible: true,
-            previewImage,
-        })
-    }
     handleSubmit = (e) => {
         e.preventDefault();
         this.props.form.validateFieldsAndScroll(async (err, values) => {
             if (!err) {
-                const { title, images, category_ids, body, skus, sale_time, freight_fee, freightData, freight_id, } = values
-                const params = { title, images, category_ids, body, skus, freight_fee, freight_id, sale_time }
-                if (freightData.key === 'freight') {
-                    params.freight_fee = freightData.value
-                } else if (freightData.key === 'freight_id') {
-                    params.freight_id = freightData.value
-                }
-                if (sale_time.key === 0) {
-                    params.sale_time = moment().unix()
-                } else {
-                    params.sale_time = sale_time.value.unix()
-                }
-                const e = await Fetch.fetch({
-                    api: GoodsApi.add,
-                    params
-                })
-                if (e.code === 0) {
-                    message.success('添加成功')
-                    router.goBack()
-                } else {
-                    message.warn(e.msg)
-                }
+                const { dispatch } = this.props;
+                const { title, images, category_ids, body, skus, sale_time, freight } = values;
+                const params = {
+                    title,
+                    images,
+                    category_ids,
+                    body,
+                    skus,
+                    freight_fee: freight.freight_fee,
+                    freight_id: freight.freight_id,
+                    sale_time
+                };
+                params.sale_time = sale_time.unix();
+                dispatch({
+                    type: "goods/add",
+                    payload: params,
+                    callback: (e) => {
+                        if (e.code === 0) {
+                            message.success("添加成功");
+                            router.goBack();
+                        } else {
+                            message.warn(e.msg);
+                        }
+                    }
+                });
             }
-        })
-    }
+        });
+    };
+
 
     render() {
-        const { photoGalleryVisible, previewVisible, previewImage, shippingCostSelect, skus, multiSpec } = this.state
-        const { categoryTree, specList, freightList, form, } = this.props
-        const { getFieldDecorator, getFieldValue, } = form
-        const formItemLayout = {
-            labelCol: {
-                xs: { span: 24 },
-                sm: { span: 4 },
-            },
-            wrapperCol: {
-                xs: { span: 24 },
-                sm: { span: 20 },
-            },
-        };
-        const tailFormItemLayout = {
-            wrapperCol: {
-                xs: {
-                    span: 24,
-                    offset: 0,
-                },
-                sm: {
-                    span: 16,
-                    offset: 4,
-                },
-            },
-        };
+        const { photoGalleryVisible, previewVisible, previewImage, info, skus } = this.state;
+        const { body, freight_fee, freight_id, sale_time, title, images, category_ids } = info;
+        const { goodsCategory, form, goodsCategoryLoading } = this.props;
+        const { getFieldDecorator, getFieldValue, setFieldsValue } = form;
+
+        let tree = Arr.toTree(goodsCategory.list);
+        const categoryTree = Antd.treeData(tree);
+
         return (
             <PageHeaderWrapper hiddenBreadcrumb={true}>
-            <Card bordered={false}>
-                <Form onSubmit={this.handleSubmit} style={{ width: 1000 }}>
-
-                    <Detail
-                        getFieldDecorator={getFieldDecorator}
-                        formItemLayout={formItemLayout}
-                        specList={specList}
-                        skus={skus}
-                        setSkus={(skus) => {
-                            this.setState({ skus })
-                        }}
-                        multiSpec={multiSpec}
-                        onMultiSpecChange={(e) => {
-                            this.setState({
-                                multiSpec: !!e.multi
-                            })
-                        }}
-                    />
-                    <FreightOther
-                        getFieldDecorator={getFieldDecorator}
-                        formItemLayout={formItemLayout}
-                        freightList={freightList}
-                        shippingCostSelect={shippingCostSelect}
-                        refreshFreightList={this.refreshFreightList}
-                        freight_fee={0}
-                    />
-                    <Editor
-                        getFieldDecorator={getFieldDecorator}
-                        formItemLayout={formItemLayout}
-                        getFieldValue={getFieldValue}
-                        openPhotoGallery={this.openPhotoGallery}
-                    />
-                    <FormItem {...tailFormItemLayout}>
-                        <Button
-                            type="primary"
-                            htmlType="submit"
-                            style={{
-                                marginRight: 10
-                            }}
-                        >
-                            上架出售
-                        </Button>
-                        {/*<Button htmlType="submit">*/}
-                        {/*放入仓库*/}
-                        {/*</Button>*/}
-                    </FormItem>
-                </Form>
-                <PhotoGallery
-                    visible={photoGalleryVisible}
-                    onCancel={this.onCancelPhotoGallery}
-                    onOk={this.onOkPhotoGallery}
-                />
-                <Modal visible={previewVisible} footer={null} onCancel={this.previewCancel}>
-                    <img alt="example" style={{ width: '100%' }} src={previewImage} />
-                </Modal>
-            </Card>
+                <Card bordered={false}>
+                    <Spin size="large" spinning={goodsCategoryLoading}>
+                        <Form onSubmit={this.handleSubmit} style={{ width: 1000 }}>
+                            <div className={styles.item}>
+                                <h3>基本信息</h3>
+                                <FormItem
+                                    {...formItemLayout}
+                                    label='商品图'
+                                >
+                                    {getFieldDecorator("images", {
+                                        rules: [{ required: true, message: "请选择商品图" }],
+                                        valuePropName: "url",
+                                        initialValue: images
+                                    })(
+                                        <UploadGroupImage
+                                            onClick={(onChange, values) => {
+                                                values = values ? values : [];
+                                                this.openPhotoGallery({
+                                                    photoGalleryOnOk: (e) => {
+                                                        onChange([...values, ...e]);
+                                                    }
+                                                });
+                                            }}
+                                            preview={(previewImage) => {
+                                                this.openPreviewModal({
+                                                    previewImage
+                                                });
+                                            }}
+                                        />
+                                    )}
+                                </FormItem>
+                                <FormItem
+                                    {...formItemLayout}
+                                    label='商品名称'
+                                >
+                                    {getFieldDecorator("title", {
+                                        rules: [{ required: true, message: "请输入商品名称" }],
+                                        initialValue: title
+                                    })(
+                                        <Input
+                                            placeholder="请输入商品名称"
+                                        />
+                                    )}
+                                </FormItem>
+                                <FormItem
+                                    {...formItemLayout}
+                                    label='商品分类'
+                                >
+                                    {getFieldDecorator("category_ids", {
+                                        rules: [{ required: true, message: "请选择商品分类" }]
+                                    })(
+                                        <TreeSelect
+                                            treeData={categoryTree}
+                                            showSearch
+                                            dropdownStyle={{ maxHeight: 400, overflow: "auto" }}
+                                            placeholder="请选择商品分类"
+                                            allowClear
+                                            multiple
+                                            treeDefaultExpandAll
+                                            onChange={(value) => {
+                                                setFieldsValue({
+                                                    category_ids: value
+                                                });
+                                            }}
+                                        />
+                                    )}
+                                    <a
+                                        onClick={() => {
+                                            router.push("/goods/category/add");
+                                        }}
+                                    >
+                                        新增分类
+                                    </a>
+                                </FormItem>
+                            </div>
+                            <div className={styles.item}>
+                                <h3>型号价格</h3>
+                                <FormItem {...formItemLayout}>
+                                    {getFieldDecorator("skus", {
+                                        rules: [{
+                                            validator: Sku.validator,
+                                            required: true
+                                        }],
+                                        initialValue: skus.length > 0 ? skus : null
+                                    })(<Sku form={form} />)}
+                                </FormItem>
+                            </div>
+                            <div className={styles.item}>
+                                <h3>运费其他</h3>
+                                <FormItem {...formItemLayout} label={"运费"}>
+                                    {getFieldDecorator("freight", {
+                                        rules: [{
+                                            required: true
+                                        }],
+                                        initialValue: {
+                                            freight_id,
+                                            freight_fee
+                                        }
+                                    })(<GoodsFreight />)}
+                                </FormItem>
+                                <FormItem {...formItemLayout} label={"开售时间"}>
+                                    {getFieldDecorator("sale_time", {
+                                        rules: [{
+                                            required: true
+                                        }],
+                                    })(
+                                        <DatePicker
+                                            showTime
+                                            format="YYYY-MM-DD HH:mm:ss"
+                                            placeholder="选择时间"
+                                            style={{ marginRight: 15 }}
+                                        />
+                                    )}
+                                </FormItem>
+                                <h3>商品详情</h3>
+                            </div>
+                            <FormItem {...formItemLayout} label='商品详情'>
+                                {getFieldDecorator("body", {
+                                    rules: [{ required: true, message: "请添加商品详情" }],
+                                    initialValue: body
+                                })(<Editor
+                                    openPhotoGallery={this.openPhotoGallery}
+                                    title={getFieldValue("title")}
+                                    images={getFieldValue("images")}
+                                />)}
+                            </FormItem>
+                            <FormItem {...tailFormItemLayout}>
+                                <Button
+                                    type="primary"
+                                    htmlType="submit"
+                                    style={{
+                                        marginRight: 10
+                                    }}
+                                >
+                                    保存添加
+                                </Button>
+                            </FormItem>
+                        </Form>
+                        <PhotoGallery
+                            visible={photoGalleryVisible}
+                            onCancel={this.onCancelPhotoGallery}
+                            onOk={this.onOkPhotoGallery}
+                        />
+                        <Modal visible={previewVisible} footer={null} onCancel={this.previewCancel}>
+                            <img alt="example" style={{ width: "100%" }} src={previewImage} />
+                        </Modal>
+                    </Spin>
+                </Card>
             </PageHeaderWrapper>
-        )
+        );
     }
+
+    refreshSpecList = () => {
+        const { dispatch } = this.props;
+        dispatch({
+            type: "goodsSpec/list"
+        });
+    };
+
+    openPhotoGallery = ({ photoGalleryOnOk }) => {
+        this.setState({
+            photoGalleryVisible: true,
+            photoGalleryOnOk
+        });
+    };
+    onCancelPhotoGallery = () => {
+        this.setState({
+            photoGalleryVisible: false
+        });
+    };
+    onOkPhotoGallery = (e) => {
+        this.state.photoGalleryOnOk(e);
+        this.onCancelPhotoGallery();
+    };
+    previewCancel = () => {
+        this.setState({
+            previewVisible: false
+        });
+    };
+    // : { previewImage: string }
+    openPreviewModal = ({ previewImage }) => {
+        this.setState({
+            previewVisible: true,
+            previewImage
+        });
+    };
+
 }
+
+const formItemLayout = {
+    labelCol: {
+        xs: { span: 24 },
+        sm: { span: 4 }
+    },
+    wrapperCol: {
+        xs: { span: 24 },
+        sm: { span: 20 }
+    }
+};
+const tailFormItemLayout = {
+    wrapperCol: {
+        xs: {
+            span: 24,
+            offset: 0
+        },
+        sm: {
+            span: 16,
+            offset: 4
+        }
+    }
+};
+
+export default GoodsEdit;

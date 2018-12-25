@@ -119,11 +119,6 @@ export default class Sku extends Component {
         const { specList, onChange } = this.props;
         const { specRowRightCloseBtnHoverIndex, specs, lastSpecValuesPopoverClick, multiSkus } = this.state;
         const skus = this.state.value;
-
-        // 过滤掉空的sku 存在空的是为了照顾不存在规格的数据结构
-        let _skus = skus.filter((sku) => {
-            return sku.spec.length > 0 && sku.spec[0]["id"] !== "undefined" && sku.spec[0].id > 0;
-        });
         return (
             <Fragment>
                 {multiSkus === false && this.renderSingleSku()}
@@ -195,13 +190,13 @@ export default class Sku extends Component {
                                                                     onOk: () => {
                                                                         let _specs = [...specs];
                                                                         _specs.splice(index, 1);
-                                                                        const data = this.mergeSkus(_specs);
+                                                                        const data = _specs.length === 0 ? this.defaultValue : this.mergeSkus(_specs);
                                                                         this.setState({
                                                                             specs: _specs,
                                                                             multiSkus: data[0]["spec"][0]["id"] !== 0,
                                                                             value: data
                                                                         }, () => {
-                                                                            let fieldsValue = {}
+                                                                            let fieldsValue = {};
                                                                             fieldsValue[this.state.id] = data;
                                                                             this.props.form.setFieldsValue(fieldsValue);
                                                                             if (data.length === 0) {
@@ -232,7 +227,11 @@ export default class Sku extends Component {
                                                                 _specs[index].values = _specs[index].values.filter((filterItem) => {
                                                                     return filterItem.id !== value.id;
                                                                 });
-                                                                onChange(this.mergeSkus(_specs));
+                                                                const skuValue = this.mergeSkus(_specs);
+                                                                onChange(this.mergeSkus(skuValue));
+                                                                this.setState({
+                                                                    value: skuValue
+                                                                });
                                                             }}
                                                         >
                                                             {value.name}
@@ -266,7 +265,13 @@ export default class Sku extends Component {
                                 multiSkus === true ? <View
                                     className={styles.buttonWarp}>{this.addSpecItemButtom()}</View> : this.addSpecItemButtom()
                             }
-                            {multiSkus === true && <SkuTable skus={_skus} specs={specs} onChange={onChange} />}
+                            {multiSkus === true && <SkuTable skus={skus} specs={specs} onChange={(e) => {
+                                this.setState({
+                                    value: e
+                                }, () => {
+                                    onChange(e);
+                                });
+                            }} />}
                             {this.customSpecModal()}
                         </View>}
                 </FormItem>
@@ -363,7 +368,7 @@ export default class Sku extends Component {
                     values: []
                 };
                 const data = this.mergeSkus(_specs);
-                this.setState({ specs: _specs });
+                this.setState({ specs: _specs, value: data });
                 onChange(data);
             }
         } else {
@@ -506,7 +511,7 @@ export default class Sku extends Component {
                             }
                             _specs[index].values = [...specVaues, ..._specs[index].values];
                             const data = this.mergeSkus(_specs);
-                            this.setState({ specValueIds: [] }, () => {
+                            this.setState({ specValueIds: [], value: data }, () => {
                                 onChange(data);
                             });
                         }}
@@ -619,15 +624,7 @@ export default class Sku extends Component {
                     price: null,
                     stock: null,
                     code: null,
-                    spec: [
-                        {
-                            id: 0,
-                            value_id: 0,
-                            name: null,
-                            value_name: null,
-                            value_img: null
-                        }
-                    ],
+                    spec: arr1,
                     weight: null
                 });
             } else {
