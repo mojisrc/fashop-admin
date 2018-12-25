@@ -38,7 +38,7 @@ function disabledRangeTime(_, type) {
 class Basic extends Component {
     render() {
         const { form, title, formItemLayout, type } = this.props;
-        const { getFieldDecorator, setFieldsValue, getFieldValue, getFieldsValue } = form;
+        const { getFieldDecorator, setFieldsValue, getFieldValue } = form;
         getFieldDecorator("over", {
             rules: [{ required: true, message: "请输入金额数!" }],
         });
@@ -53,56 +53,11 @@ class Basic extends Component {
             height: '38px',
             lineHeight: '38px',
         };
-        const cardData = getFieldsValue()
-        // console.log("cardData", cardData);
-        console.log(type === 'random');
-        
         return (
             <View className={styles.warp}>
-                <View className={styles.left}>
-                    <p className={styles.title}>Fashop 优惠券</p>
-                    <View className={styles.card}>
-                        <View className={styles.cardTop}>
-                            {
-                                cardData.title ? 
-                                <p className={styles.cardTitle}>{cardData.title}</p> : <p className={styles.cardTitle}/>
-                            }
-                            {
-                                cardData.share ? 
-                                <Button type="ghost" style={{color: '#fff'}}>分享</Button> : null
-                            }
-                        </View>
-                        <View className={styles.cardBody}>
-                            {
-                                cardData.content||(cardData.content1&&cardData.content2) ? 
-                                <p className={styles.content}>
-                                    {
-                                        type==='reward' ? `减免${cardData.content}元优惠券` : 
-                                        type==='discount' ? `${cardData.content}折优惠券` : 
-                                        type==='random' ? `随机优惠${cardData.content1}至${cardData.content2}` : ''
-                                    }
-                                </p> : <p className={styles.content}/>
-                            }
-                            {
-                                cardData.limit==="a" ? <p className={styles.desc}>无限制</p> : 
-                                cardData.limit==="b" ? (
-                                    cardData.over ? 
-                                    <p className={styles.desc}>满{cardData.over}元</p> :
-                                    <p className={styles.desc}>订单满 xx 元（不含运费)</p>
-                                ) : <p className={styles.desc}/>
-                            }
-                            {
-                                cardData.time === 1 && cardData.range ?
-                                <p className={styles.time}>有效日期：{cardData.range}</p> : 
-                                cardData.time === 2 && cardData.days ?
-                                <p className={styles.time}>有效日期：领券当日起{cardData.days}天内可用</p> : 
-                                cardData.time === 3 && cardData.days ?
-                                <p className={styles.time}>有效日期：领券次日起{cardData.days}天内可用</p> : 
-                                <p className={styles.time}/>
-                            }
-                        </View>
-                    </View>
-                </View>
+                {
+                    this.left()
+                }
                 <View className={styles.right}>
                     <h3>基本信息</h3>
                     <FormItem
@@ -138,12 +93,15 @@ class Basic extends Component {
                     <FormItem
                         {...formItemLayout}
                         label="适用商品"
-                        // extra={'你选择了分销商品（实物），优惠后可能造成利润受损'}
-                        // extra={'请选择适用商品'}
+                        validateStatus={
+                            getFieldValue('goods') === "a" ? "error" : ""
+                        }
+                        help={getFieldValue('goods') === "a" ? "你选择了分销商品（实物），优惠后可能造成利润受损" : ""}
                     >
                         {getFieldDecorator('goods', {
                             rules: [{ required: true }],
-                            initialValue: title
+                            // initialValue: title
+                            initialValue: "a"
                         })(
                             <RadioGroup>
                                 <Radio style={radioStyle} value="a">全部商品可用</Radio>
@@ -163,12 +121,26 @@ class Basic extends Component {
                     <FormItem
                         {...formItemLayout}
                         label="使用门槛"
-                        validateStatus={getFieldValue('limit')==="b"&&!getFieldValue("over") ? "error" : ""}
-                        help={getFieldValue('limit')==="b"&&!getFieldValue("over") ? "请输入金额数!" : ""}
+                        validateStatus={
+                            (
+                                (getFieldValue('limit')==="b"&&!getFieldValue("over"))||
+                                (type==='reward'&&getFieldValue('content')>getFieldValue("over"))
+                            ) ? "error" : ""
+                        }
+                        help={
+                            getFieldValue('limit')==="b"&&!getFieldValue("over") ? "请输入金额数!" : 
+                            (
+                                type==='reward'&&getFieldValue('content')>getFieldValue("over") ? "使用门槛不能低于优惠券面额" : 
+                                // type==='discount' ? `${cardData.content}折优惠券` : 
+                                // type==='random' ? `随机优惠${cardData.content1}至${cardData.content2}` : 
+                                ""
+                            )
+                        }
                     >
                         {getFieldDecorator('limit', {
                             rules: [{ required: true }],
-                            initialValue: title
+                            // initialValue: title
+                            initialValue: "a"
                         })(
                             <RadioGroup>
                                 <Radio style={radioStyle} value="a">无使用门槛</Radio>
@@ -238,7 +210,8 @@ class Basic extends Component {
                     >
                         {getFieldDecorator('time', {
                             rules: [{ required: true }],
-                            initialValue: title
+                            // initialValue: title
+                            initialValue: 1
                         })(
                             <RadioGroup>
                                 <FormItem
@@ -293,6 +266,7 @@ class Basic extends Component {
                     >
                         {getFieldDecorator('share', {
                             valuePropName: 'checked',
+                            initialValue: true
                         })(
                             <Checkbox>优惠券允许分享给好友领取</Checkbox>
                         )}
@@ -311,6 +285,96 @@ class Basic extends Component {
                 </View>
             </View>
         );
+    }
+    left(){
+        const { form, type } = this.props;
+        const { getFieldsValue } = form;
+        const cardData = getFieldsValue()
+        // console.log("cardData", cardData);
+        // console.log(type === 'random');
+        return(
+            <View className={styles.left}>
+                <p className={styles.title}>Fashop 优惠券</p>
+                <View className={styles.card}>
+                    <View className={styles.cardTop}>
+                        {
+                            cardData.title ? 
+                            <p className={styles.cardTitle}>{cardData.title}</p> : <p className={styles.cardTitle}/>
+                        }
+                        {
+                            cardData.share ? 
+                            <Button type="ghost" style={{color: '#fff'}}>分享</Button> : null
+                        }
+                    </View>
+                    <View className={styles.cardBody}>
+                        {
+                            cardData.content||(cardData.content1&&cardData.content2) ? 
+                            <p className={styles.content}>
+                                {
+                                    type==='reward' ? `减免${cardData.content}元优惠券` : 
+                                    type==='discount' ? `${cardData.content}折优惠券` : 
+                                    type==='random' ? `随机优惠${cardData.content1}至${cardData.content2}` : ''
+                                }
+                            </p> : <p className={styles.content}/>
+                        }
+                        {
+                            cardData.limit==="a" ? <p className={styles.desc}>无限制</p> : 
+                            cardData.limit==="b" ? (
+                                cardData.over ? 
+                                <p className={styles.desc}>满{cardData.over}元</p> :
+                                <p className={styles.desc}>订单满 xx 元（不含运费)</p>
+                            ) : <p className={styles.desc}/>
+                        }
+                        {
+                            cardData.time === 1 && cardData.range ?
+                            <p className={styles.time}>有效日期：{cardData.range}</p> : 
+                            cardData.time === 2 && cardData.days ?
+                            <p className={styles.time}>有效日期：领券当日起{cardData.days}天内可用</p> : 
+                            cardData.time === 3 && cardData.days ?
+                            <p className={styles.time}>有效日期：领券次日起{cardData.days}天内可用</p> : 
+                            <p className={styles.time}/>
+                        }
+                    </View>
+                </View>
+                <p className={styles.descTitle}>使用说明</p>
+                <View className={styles.descView}>
+                    {
+                        cardData.title ?
+                        <p className={styles.descInfo}>{cardData.title}</p> : null
+                    }
+                    {
+                        cardData.time === 1 && cardData.range ?
+                        <p className={styles.descInfo}>使用时间：{cardData.range}</p> : 
+                        cardData.time === 2 && cardData.days ?
+                        <p className={styles.descInfo}>使用时间：领券当日起{cardData.days}天内可用</p> : 
+                        cardData.time === 3 && cardData.days ?
+                        <p className={styles.descInfo}>使用时间：领券次日起{cardData.days}天内可用</p> : 
+                        <p className={styles.descInfo}/>
+                    }
+                    <p className={styles.descInfo}>
+                        优惠内容：
+                        {
+                            cardData.goods==="a" ? "全部商品可用" : "部分商品可用"
+                        }，
+                        {
+                            cardData.limit==="a" ? "无限制" : 
+                            cardData.limit==="b"&&cardData.over ? `满${cardData.over}元` : null
+                        }
+                        {
+                            cardData.content||(cardData.content1&&cardData.content2) ? (
+                                type==='reward' ? `减免${cardData.content}元优惠券` : 
+                                type==='discount' ? `${cardData.content}折优惠券` : 
+                                type==='random' ? `随机优惠${cardData.content1}至${cardData.content2}` : ''
+                            ) : null
+                        }
+                    </p>
+                    {
+                        cardData.otherLimit ?
+                        <p className={styles.descInfo}>其他限制：仅原价购买商品时可用券</p> : null
+                    }
+                </View>
+            </View>
+        )
     }
 }
 export default Basic

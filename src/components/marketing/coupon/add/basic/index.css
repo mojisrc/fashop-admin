@@ -19,7 +19,6 @@
     justify-content: center;
     font-size: 16px;
     color: #333;
-    font-weight: 500;
     margin: 0
 }
 .card {
@@ -84,4 +83,23 @@
 .time{
     color: rgba(255, 255, 255, 0.5);
     padding: 0px 10px 10px;
+}
+.descTitle{
+    color: rgb(51, 51, 51);
+    line-height: 40px;
+    padding-left: 10px;
+    margin: 0;
+}
+.descView{
+    padding: 10px;
+    border-top: 1px solid rgb(229, 229, 229);
+    border-bottom: 1px solid rgb(229, 229, 229);
+}
+.descView p{
+    margin: 0;
+}
+.descInfo{
+    font-size: 14px;
+    color: rgb(51, 51, 51);
+    line-height: 1.5;
 }

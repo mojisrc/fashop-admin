@@ -33,7 +33,8 @@ class Rules extends Component {
                     >
                         {getFieldDecorator('limit', {
                             rules: [{ required: true }],
-                            initialValue: title
+                            // initialValue: title
+                            initialValue: "a"
                         })(
                             <RadioGroup>
                                 <Radio style={radioStyle} value="a">不限制，所有人可领</Radio>
@@ -51,7 +52,8 @@ class Rules extends Component {
                     >
                         {getFieldDecorator('radio', {
                             rules: [{ required: true }],
-                            initialValue: title
+                            // initialValue: title
+                            initialValue: "a"
                         })(
                             <RadioGroup>
                                 <Radio style={radioStyle} value="a">无使用门槛</Radio>
@@ -84,7 +86,7 @@ class Rules extends Component {
                         {...formItemLayout}
                         label='其他限制'
                     >
-                        {getFieldDecorator('agreement', {
+                        {getFieldDecorator('otherLimit', {
                             valuePropName: 'checked',
                         })(
                             <Checkbox>
