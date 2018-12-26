@@ -13,7 +13,7 @@ const Option = Select.Option;
 //
 // type Props = {
 //     options: {
-//         layout_type: number,
+//         layout_style: number,
 //     },
 //     data: Array<{
 //         id: number,
@@ -48,7 +48,7 @@ export default class Index extends Component {
     render() {
         // const { delectShow, addGoodsVisible, currentId } = this.state;
         const { options, data, getValues } = this.props;
-        const { layout_type, source_type, goods_sort } = options||{};
+        const { layout_style, source_type, goods_sort } = options||{};
         return (
             <Form>
                 <FormItem
@@ -220,10 +220,10 @@ export default class Index extends Component {
                     label="展现形式"
                 >
                     <RadioGroup
-                        value={layout_type}
+                        value={layout_style}
                         onChange={(e) => {
                             getValues({
-                                options: { ...options, ...{ layout_type: e.target.value } },
+                                options: { ...options, ...{ layout_style: e.target.value } },
                                 data
                             });
                         }}

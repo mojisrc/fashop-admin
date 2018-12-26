@@ -238,31 +238,30 @@ export const marketingData = [
         type: 'goods_group',
         icon: require('@/assets/images/shop/group.png'),
         title: '拼团',
-        // data: [],
         data: [
             {
-                id: 1,
+                id: null,
                 img: "",
                 title: "商品标题",
                 price: 200,
                 market_price: 300,
                 desc: "描述"
             }, {
-                id: 2,
+                id: null,
                 img: "",
                 title: "商品标题",
                 price: 200,
                 market_price: 300,
                 desc: "描述"
             }, {
-                id: 3,
+                id: null,
                 img: "",
                 title: "商品标题",
                 price: 200,
                 market_price: 300,
                 desc: "描述"
             }, {
-                id: 4,
+                id: null,
                 img: "",
                 title: "商品标题",
                 price: 200,
@@ -274,7 +273,7 @@ export const marketingData = [
             source_type: 'auto', // 自动 auto 、 选择 choose
             goods_sort: 1, // 销量多到少 1、价格高到低 2、价格低到高 3
             goods_display_num: 3, // 最多12件，最少1件
-            layout_type: 5 //大图 1、小图 2、一大两小 3、列表 4、轮播 5
+            layout_style: 5 //大图 1、小图 2、一大两小 3、列表 4、轮播 5
         }
     }
 ]

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import {  Button, Input, Select,  Form } from "antd";
+import { Button, Input, Select, Form } from "antd";
 import { View } from "@/components/flexView";
 import { getQueryPath } from "@/utils"
 import moment from "moment";
@@ -37,48 +37,38 @@ export default class ListHeader extends Component {
     render() {
         const { queryParams } = this.state
         const { keywords_type, keywords, create_time, state_type, order_kind } = queryParams
-        let create_time_moment = []
         if (create_time.length > 0) {
             create_time_moment = [moment(create_time[0]), moment(create_time[1])]
         }
-        const state_type_list = [
-            {
-                name: '全部订单',
-                state_type: 'all'
-            }, {
-                name: '待发货',
-                state_type: 'state_pay'
-            }, {
-                name: '待付款',
-                state_type: 'state_new'
-            }, {
-                name: '已发货',
-                state_type: 'state_send'
-            }
-            , {
-                name: '已完成',
-                state_type: 'state_success'
-            }, {
-                name: '已关闭',
-                state_type: 'state_cancel'
-            }
-        ]
-        const order_kind_list = [
+        const status_list = [
             {
                 name: '全部',
-                order_kind: 'all'
+                status: 'all'
             }, {
-                name: '普通订单',
-                order_kind: 'ordinary'
+                name: '未开始',
+                status: '1'
             }, {
-                name: '拼团',
-                order_kind: 'group'
+                name: '已开始生效中',
+                status: '2'
+            }, {
+                name: '已开始未生效',
+                status: '3'
+            }, {
+                name: '已过期生效中',
+                status: '4'
+            }, {
+                name: '已过期未生效',
+                status: '5'
             }
         ]
         return (
             <Form
                 layout="inline"
-                className="ant-advanced-search-form"
+                style={{
+                    paddingBottom: "24px",
+                    marginBottom: "24px",
+                    borderBottom: "1px dashed #ededed"
+                }}
             >
                 <FormItem label={`名称`}>
                     <Input
@@ -91,10 +81,10 @@ export default class ListHeader extends Component {
                         value={keywords}
                     />
                 </FormItem>
-                <FormItem label={`订单状态`}>
+                <FormItem label={`活动状态`}>
                     <Select
                         placeholder="请选择"
-                        style={{ width: 100 }}
+                        style={{ width: 130 }}
                         value={order_kind}
                         onChange={(order_kind) => {
                             this.setState(update(this.state, {
@@ -103,9 +93,9 @@ export default class ListHeader extends Component {
                         }}
                     >
                         {
-                            order_kind_list.map((item, index) =>
+                            status_list.map((item, index) =>
                                 <Option
-                                    value={item.order_kind}
+                                    value={item.status}
                                     key={index}
                                 >
                                     {item.name}

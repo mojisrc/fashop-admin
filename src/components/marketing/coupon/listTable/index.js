@@ -1,67 +1,63 @@
 import React, { Component } from "react";
-import { Table, Button, Switch, Modal, Divider } from "antd";
+import { Table, Divider, Popconfirm, Button } from "antd";
 import styles from "./index.css";
 import { View } from "@/components/flexView";
 import { connect } from "dva";
-import Image from "@/components/image";
-import moment from "moment";
 import Query from "@/utils/query";
+import moment from "moment/moment";
+import Image from "@/components/image/index";
 import router from "umi/router";
 
-@connect(({ goods, goodsCategory, loading }) => ({
-    goodsList: goods.list.result,
-    goodsListLoading: loading.effects["goods/list"],
-    goodsCategory: goodsCategory.result,
-    goodsCategoryLoading: loading.effects["goodsCategory/list"]
+@connect(({ coupon, loading }) => ({
+    couponList: coupon.list.result,
+    couponListLoading: loading.effects["coupon/list"]
 }))
-export default class CouponListTable extends Component {
+export default class ListTable extends Component {
     static defaultProps = {
-        goodsList: {
-            total_number: 0,
-            list: []
-        },
-        goodsListLoading: true,
-        goodsCategory: {
-            list: []
-        },
-        goodsCategoryLoading: true
+        couponListLoading: true,
+        couponList: {
+            list: [],
+            total_number: 0
+        }
     };
     state = {
-        rowSelectionIds: [],
+        selectedRowKeys: [],
+        customerVisible: false,
+        currentUser: {},
         get: { page: 1, rows: 10 }
+    };
+    onSelectChange = (selectedRowKeys) => {
+        this.setState({ selectedRowKeys });
     };
 
     componentDidMount() {
-        console.log('componentDidMount')
         this.initList();
     }
 
     initList() {
-        console.log('initList')
-        const { dispatch, goodsCategory } = this.props;
-        const get = Query.make([
-            { key: "sale_state", rule: ["eq", "all"] },
-            { key: "order_type", rule: ["eq", "all"] }
-        ]);
+        const { dispatch } = this.props;
+        const get = Query.make();
         dispatch({
-            type: "goods/list",
-            payload: get,
-            callback:(res)=>{
-                console.log(res)
+            type: "coupon/list",
+            payload: {
+                page: get.page,
+                rows: get.rows
+            },
+            callback: () => {
+                this.setState({
+                    get
+                });
             }
-        });
-        if (!goodsCategory.list.length) {
-            dispatch({
-                type: "goodsCategory/list"
-            });
-        }
-        this.setState({
-            get
         });
     }
 
     render() {
-        const { goodsListLoading, goodsList, goodsCategory } = this.props;
+        // const { selectedRowKeys } = this.state;
+        // const rowSelection = {
+        //     selectedRowKeys,
+        //     onChange: this.onSelectChange
+        // };
+        const { couponList, couponListLoading } = this.props;
         const columns = [
             {
                 title: "优惠券名称",
@@ -98,7 +94,7 @@ export default class CouponListTable extends Component {
                 width: 200,
                 render: (record) => <View className={styles.operation}>
                     <a
-                        onClick={()=>{
+                        onClick={() => {
                             router.push({
                                 pathname: `/marketing/coupon/edit`,
                                 search: `?id=${record.id}`,
@@ -133,15 +129,15 @@ export default class CouponListTable extends Component {
         const addList = [
             {
                 title: "满减券",
-                desc: <p className={styles.addDesc}>例：满100元减20元<br/>便于合理控制活动成本</p>,
+                desc: <p className={styles.addDesc}>例：满100元减20元<br />便于合理控制活动成本</p>,
                 type: "reward"
             }, {
                 title: "折扣券",
-                desc: <p className={styles.addDesc}>例：满100元打9折<br/>提高店铺销量和客单价</p>,
+                desc: <p className={styles.addDesc}>例：满100元打9折<br />提高店铺销量和客单价</p>,
                 type: "discount"
             }, {
                 title: "随机金额券",
-                desc: <p className={styles.addDesc}>获得金额随机的优惠券<br/>增加活动趣味性</p>,
+                desc: <p className={styles.addDesc}>获得金额随机的优惠券<br />增加活动趣味性</p>,
                 type: "random"
             }
         ]
@@ -149,7 +145,7 @@ export default class CouponListTable extends Component {
             <View>
                 <View className={styles.addList}>
                     {
-                        addList.map((item,index)=>(
+                        addList.map((item, index) => (
                             <View className={styles.addItem} key={index}>
                                 <p className={styles.addTitle}>{item.title}</p>
                                 {item.desc}
@@ -169,9 +165,10 @@ export default class CouponListTable extends Component {
                     }
                 </View>
                 <Table
-                    loading={goodsListLoading}
                     defaultExpandAllRows
-                    dataSource={[{}]}
+                    loading={couponListLoading}
+                    size="middle"
+                    dataSource={couponList.list ? couponList.list : []}
                     columns={columns}
                     rowKey={record => record.id}
                     pagination={{
@@ -179,12 +176,13 @@ export default class CouponListTable extends Component {
                         showQuickJumper: false,
                         current: this.state.get.page,
                         pageSize: this.state.get.rows,
-                        total: goodsList.total_number
+                        total: couponList.total_number
                     }}
                     onChange={({ current, pageSize }) => {
                         router.push(Query.page(current, pageSize));
                         this.initList();
                     }}
+                    // rowSelection={rowSelection}
                 />
             </View>
         );

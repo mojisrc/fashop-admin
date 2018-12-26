@@ -9,29 +9,9 @@ import moment from "moment";
 const FormItem = Form.Item;
 const RadioGroup = Radio.Group;
 const { RangePicker } = DatePicker;
-function range(start, end) {
-    const result = [];
-    for (let i = start; i < end; i++) {
-        result.push(i);
-    }
-    return result;
-}
 function disabledDate(current) {
-    return current < moment().endOf('day');
-}
-function disabledRangeTime(_, type) {
-    if (type === 'start') {
-        return {
-            disabledHours: () => range(0, 60).splice(4, 20),
-            disabledMinutes: () => range(30, 60),
-            disabledSeconds: () => [55, 56],
-        };
-    }
-    return {
-        disabledHours: () => range(0, 60).splice(20, 4),
-        disabledMinutes: () => range(0, 31),
-        disabledSeconds: () => [55, 56],
-    };
+    // Can not select days before today
+    return current && current < moment().startOf('day');
 }
 
 @connect()
@@ -223,7 +203,6 @@ class Basic extends Component {
                                             showTime 
                                             format="YYYY-MM-DD HH:mm:ss" 
                                             disabledDate={disabledDate}
-                                            disabledTime={disabledRangeTime}
                                             disabled={getFieldValue('time') !== 1}
                                             onChange={(e) => setFieldsValue({ range: `${moment(e[0]).format("YYYY-MM-DD HH:mm:ss")} - ${moment(e[1]).format("YYYY-MM-DD HH:mm:ss")}` })}
                                         />
