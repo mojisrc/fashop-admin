@@ -79,8 +79,8 @@ export default {
     proxy: {
       '/admin/': {
         // target: 'https://demo.fashop.cn',
-        // target: 'http://127.0.0.1:9510',
-        target: 'http://192.168.1.115:9510',
+        target: 'http://127.0.0.1:9510',
+        // target: 'http://192.168.1.115:9510',
         changeOrigin: true,
         // pathRewrite: { '^/admin': '' },
       },
