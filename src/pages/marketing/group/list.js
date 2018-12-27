@@ -1,241 +1,187 @@
 import React, { Component } from "react";
 import { connect } from "dva";
-import { Button, Divider, Form, Input, Select, Table,Card } from "antd";
-import update from "immutability-helper";
-import { getQueryPath } from "@/utils";
-import Query from "@/utils/query";
-import { View } from "@/components/flexView";
-import OrderModel from "@/models1/order";
-import moment from "moment";
 import PageHeaderWrapper from "@/components/pageHeaderWrapper";
-const FormItem = Form.Item;
-const Option = Select.Option;
-const orderModel = new OrderModel();
-const order_kind_list = [
-    {
-        name: "全部",
-        order_kind: "all"
-    }, {
-        name: "普通订单",
-        order_kind: "ordinary"
-    }, {
-        name: "拼团",
-        order_kind: "group"
-    }
-];
-@connect()
-export default class List extends Component {
-    static defaultProps = {};
-    state = {
-        orderId: 0,
-        expandedRowKeys: [],
-        list: [],
-        totalNumber: 0,
-        page: 1,
-        rows: 10,
-        queryParams: {
-            keywords_type: "goods_name",
-            keywords: null,
-            create_time: [],
-            state_type: "all",
-            order_kind: "all"
-        }
+import { Card, Table, Divider, Button } from "antd";
+import PageList from "@/components/pageList";
+import styles from "@/components/marketing/group/listTable/index.css";
+import { View } from "@/components/flexView";
+import router from "umi/router";
+import moment from "moment";
 
+@connect(({ group, loading }) => ({
+    groupList: group.list.result,
+    groupListLoading: loading.effects["group/list"]
+}))
+export default class GroupList extends Component {
+    static defaultProps = {
+        groupListLoading: true,
+        groupList: {
+            list: [],
+            total_number: 0
+        }
+    };
+    search = new PageList({
+        router: "/marketing/group/list",
+        rows: 10,
+        param: {
+            keywords: null,
+            state: null,
+        },
+        refresh: (e) => {
+            this.initList(e);
+        }
+    });
+
+    initList = () => {
+        const { dispatch } = this.props;
+        dispatch({
+            type: "group/list",
+            payload: this.search.filter()
+        });
     };
 
-    async componentDidMount() {
-        const params = Query.make([
-            { key: "state", rule: ["eq", "all"] },
-            { key: "keywords_type", rule: ["rely", "keywords"] }
-        ]);
-        if (params["create_time"] !== undefined) {
-            params["create_time"] = [moment(params["create_time"][0]).unix(), moment(params["create_time"][1]).unix()];
-        }
-        const result = await orderModel.list(params);
-        this.setState({
-            list: result.list,
-            totalNumber: result.total_number,
-            page: params.page,
-            rows: params.rows,
-            queryParams: {
-                keywords_type: params["keywords_type"] !== undefined ? params["keywords_type"] : "goods_name",
-                keywords: params["keywords"] !== undefined ? params["keywords"] : null,
-                create_time: params["create_time"] !== undefined ? params["create_time"] : [],
-                state_type: params["state_type"] !== undefined ? params["state_type"] : "all",
-                order_kind: params["order_kind"] !== undefined ? params["order_kind"] : "all"
-            }
-        });
+    componentDidMount() {
+        this.initList();
     }
 
     render() {
-        let { list } = this.state;
-        const { queryParams } = this.state;
-        const { keywords_type, keywords, create_time, state_type, order_kind } = queryParams;
-        let create_time_moment = [];
-        if (create_time.length > 0) {
-            create_time_moment = [moment(create_time[0]), moment(create_time[1])];
-        }
+        const { groupList, groupListLoading } = this.props;
+        const {
+            keywords,
+            state,
+        } = this.search.getParam();
         const columns = [
             {
                 title: "活动标题",
-                dataIndex: "sn",
-                key: "sn"
+                dataIndex: "title",
+                key: "title"
             }, {
-                title: "拼团限时",
-                dataIndex: "create_time",
-                key: "create_time",
-                render: (text) => {
-                    return moment(text, "X").format("YYYY-MM-DD HH:mm:ss");
-                }
+                title: "拼团时限",
+                dataIndex: "time_over",
+                key: "time_over",
+                render: (text, record) => `${record.time_over_day}天${record.time_over_hour}时${record.time_over_minute}分`
             }, {
                 title: "活动时间",
-                dataIndex: "state",
-                key: "state",
-                render: (text) => <span>{this.returnOrderState(text)}</span>
-            },
-            {
+                dataIndex: "start_time",
+                key: "start_time",
+                render: (text, record) => `${moment(record.start_time, "X").format("YYYY-MM-DD HH:mm:ss")} 至 ${moment(record.end_time, "X").format("YYYY-MM-DD HH:mm:ss")}`
+            }, {
                 title: "参团人数",
-                dataIndex: "freight_fee",
-                key: "freight_fee",
-                render: (value) => {
-                    return `¥${value}`;
-                }
+                dataIndex: "limit_buy_num",
+                key: "limit_buy_num"
             }, {
                 title: "活动状态",
-                dataIndex: "amount",
-                key: "amount",
-                render: (value) => {
-                    return `¥${value}`;
-                }
+                dataIndex: "state_desc",
+                key: "state_desc",
             }, {
                 title: "操作",
                 key: "operation",
-                render: (record) => <div>
+                className: styles.column,
+                width: 300,
+                render: (record) => <View className={styles.operation}>
                     <a
                         onClick={() => {
-                            router.push(`/order/list/detail?id=${record.id}`);
+                            // router.push({
+                            //     pathname: `/marketing/freebie/edit`,
+                            //     search: `?id=${record.id}`,
+                            //     state: {
+                            //         record
+                            //     }
+                            // });
                         }}
-                    >
-                        详情
-                    </a>
+                    >编辑</a>
                     <Divider type="vertical" />
-                    <a
-                        onClick={() => {
-                            router.push(`/order/list/send?id=${record.id}`);
-                        }}
+                    <Popconfirm
+                        title="确定让这组赠品活动失效？"
+                        onConfirm={() => console.log('confirm')}
+                        onCancel={() => console.log('cancel')}
                     >
-                        发货
-                    </a>
-                </div>
+                        <a>使失效</a>
+                    </Popconfirm>
+                </View>
             }
         ];
         return (
             <PageHeaderWrapper hiddenBreadcrumb={true}>
-            <Card bordered={false}>
-                <View>
-                    <Form
-                        layout="inline"
-                        className="ant-advanced-search-form"
-                    >
-                        <FormItem label={`名称`}>
-                            <Input
-                                placeholder={`请输入活动名称`}
-                                onChange={(e) => {
-                                    this.setState(update(this.state, {
-                                        queryParams: { keywords: { $set: e.target.value } }
-                                    }));
-                                }}
-                                value={keywords}
-                            />
-                        </FormItem>
-                        <FormItem label={`订单状态`}>
-                            <Select
-                                placeholder="请选择"
-                                style={{ width: 100 }}
-                                value={order_kind}
-                                onChange={(order_kind) => {
-                                    this.setState(update(this.state, {
-                                        queryParams: { order_kind: { $set: order_kind } }
-                                    }));
-                                }}
-                            >
-                                {
-                                    order_kind_list.map((item, index) =>
-                                        <Option
-                                            value={item.order_kind}
-                                            key={index}
-                                        >
-                                            {item.name}
-                                        </Option>
-                                    )
+                <Card bordered={false}>
+                    <PageList.Search
+                        loading={groupListLoading}
+                        onSubmit={this.search.submit}
+                        defaultValue={this.search.defaultParam}
+                        onReset={this.search.reset}
+                        items={[
+                            {
+                                label: "活动名称",
+                                input: {
+                                    field: "keywords",
+                                    placeholder: "请输入活动名称",
+                                    initialValue: keywords
                                 }
-                            </Select>
-                        </FormItem>
-                        <FormItem>
-                            <Button
-                                type="primary"
-                                onClick={() => {
-                                    const path = getQueryPath("/order/list", {
-                                        page: 1,
-                                        rows: 10,
-                                        keywords_type,
-                                        keywords,
-                                        create_time,
-                                        state_type,
-                                        order_kind
-                                    });
-                                    router.push(path);
-                                }}
-                                style={{ marginRight: 14 }}
-                            >
-                                筛选
-                            </Button>
-                            <Button
-                                onClick={() => {
-                                    const path = getQueryPath("/order/list");
-                                    router.push(path);
-                                }}
-                            >
-                                清空筛选
-                            </Button>
-                        </FormItem>
-                    </Form>
-                    {Array.isArray(list) && list.length > 0 ? <Table
-                        loading={false}
-                        dataSource={list}
+                            }, {
+                                label: "活动状态",
+                                select: {
+                                    field: "state",
+                                    style: { width: 130 },
+                                    placeholder: "全部",
+                                    data: [
+                                        { name: "未开始", value: "0" },
+                                        { name: "已开始生效中", value: "10" },
+                                        { name: "已开始未生效", value: "20" },
+                                        { name: "已过期生效中", value: "30" },
+                                        { name: "已过期未生效", value: "40" },
+                                    ],
+                                    initialValue: state
+                                }
+                            },
+                        ]} 
+                    />
+                    <View className={styles.batchView}>
+                        <Button
+                            type='primary'
+                            onClick={() => {
+                                router.push("/marketing/group/add");
+                            }}
+                        >
+                            创建活动
+                        </Button>
+                    </View>
+                    <Table
+                        loading={groupListLoading}
+                        dataSource={groupList.list}
                         columns={columns}
+                        rowKey={record => record.id}
                         pagination={{
                             showSizeChanger: false,
                             showQuickJumper: false,
-                            pageSize: this.state.rows,
-                            total: this.state.totalNumber,
-                            current: this.state.page
+                            current: this.search.page,
+                            pageSize: this.search.rows,
+                            total: groupList.total_number
                         }}
-                        onChange={({ current, pageSize }) => {
-                            router.push(Query.page(current, pageSize));
+                        onChange={({ current }) => {
+                            this.search.setPage(current).push();
                         }}
-                        rowKey={record => record.id}
-                    /> : ""}
-                </View>
-            </Card>
+                    />
+                </Card>
             </PageHeaderWrapper>
         );
     }
 
-    returnOrderState(state) {
-        switch (state) {
-            case 0:
-                return "已取消";
-            case 10:
-                return <span style={{ color: "#ccc" }}>未支付</span>;
-            case 20:
-                return <span style={{ color: "#EC9729" }}>待发货</span>;
-            case 30:
-                return <span style={{ color: "#6AEB52" }}>已发货</span>;
-            case 40:
-                return "已完成";
-            default:
-                return "";
-        }
-    }
+    // returnGroupState(state) {
+    //     switch (state) {
+    //         case 0:
+    //             return <span style={{ color: "red" }}>未处理</span>;
+    //         case 10:
+    //             return "已拒绝退款";
+    //         case 20:
+    //             return "已同意退款";
+    //         case 30:
+    //             return "已完成";
+    //         case 50:
+    //             return "用户主动撤销";
+    //         case 51:
+    //             return "用户主动收货";
+    //         default:
+    //             return "-";
+    //     }
+    // }
 }

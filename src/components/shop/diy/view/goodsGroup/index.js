@@ -12,19 +12,19 @@ import { Button, Carousel } from "antd";
 export default class Index extends Component {
     render() {
         const { data, options } = this.props
-        const { layout_type } = options
+        const { layout_style } = options
         return (
             <div className={`${styles.goodsPhoneWarp} ${styles.groupViewWarp}`}>
                 {
-                    layout_type === 5 ? this.carousel(data) :
+                    layout_style === 5 ? this.carousel(data) :
                         data.map((item, index) => {
-                            if (layout_type === 1) {
+                            if (layout_style === 1) {
                                 return this.big(item, index)
-                            } else if (layout_type === 2) {
+                            } else if (layout_style === 2) {
                                 return this.small(item, index)
-                                } else if (layout_type === 3) {
+                                } else if (layout_style === 3) {
                                     return this.oneBigTwoSmall(item, index)
-                            } else if (layout_type === 4) {
+                            } else if (layout_style === 4) {
                                 return this.list(item, index)
                             }
                         })
@@ -197,17 +197,6 @@ export default class Index extends Component {
         for (var i = 0, len = data.length; i < len; i += 3) {
             result.push(data.slice(i, i + 3));
         }
-        // console.log(result);
-        // return (
-        //     <View style={{width: '100%'}}>
-        //         <Carousel afterChange={()=>{}} dots={true} >
-        //             <div style={{backgroundColor: '#364d79', width: '100%'}}><h3>1</h3></div>
-        //             <div style={{backgroundColor: '#364d79', width: '100%'}}><h3>2</h3></div>
-        //             <div style={{backgroundColor: '#364d79', width: '100%'}}><h3>3</h3></div>
-        //             <div style={{backgroundColor: '#364d79', width: '100%'}}><h3>4</h3></div>
-        //         </Carousel>
-        //     </View>
-        // )
         return (
             <View style={{ width: '100%' }}>
                 <Carousel
