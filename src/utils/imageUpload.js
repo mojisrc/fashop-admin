@@ -6,7 +6,7 @@ export default ({ file, onSuccess, is_save }) => {
     const reader = new FileReader();
     reader.onload = async (a) => {
         const dataURL = a.target.result;
-        const e = image.add({
+        const e = await image.add({
             image: dataURL,
             is_save
         });

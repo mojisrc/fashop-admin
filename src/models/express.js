@@ -10,7 +10,7 @@ export default {
         add: {},
         edit: {},
         del: {},
-        setIsCommonlyUse: {}
+        setCommonlyUse: {}
     },
     effects: {
         * list({ payload, callback }, { call, put }) {
@@ -52,10 +52,10 @@ export default {
                 payload: response
             });
         },
-        * setIsCommonlyUse({ payload, callback }, { call, put }) {
-            const response = yield call(express.setIsCommonlyUse, payload);
+        * setCommonlyUse({ payload, callback }, { call, put }) {
+            const response = yield call(express.setCommonlyUse, payload);
             yield put({
-                type: "_setIsCommonlyUse",
+                type: "_setCommonlyUse",
                 payload: response
             });
             if (callback) callback(response);
@@ -92,10 +92,10 @@ export default {
                 del: action.payload
             };
         },
-        _setIsCommonlyUse(state, action) {
+        _setCommonlyUse(state, action) {
             return {
                 ...state,
-                setIsCommonlyUse: action.payload
+                setCommonlyUse: action.payload
             };
         }
     }
