@@ -75,6 +75,7 @@ export default class Index extends Component  {
                 <View className={styles.smallImgWarp}>
                     <Image
                         src={item.img}
+                        style={{width: '100%'}}
                     />
                 </View>
                 <View className={styles.smallBot}>

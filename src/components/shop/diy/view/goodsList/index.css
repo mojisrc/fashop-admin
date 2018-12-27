@@ -86,8 +86,11 @@
 }
 .bigImgWarp{
     width: 100%;
-    height: 375px;
     overflow: hidden;
+}
+.bigImgWarp img{
+    width: 100%;
+    overflow-y: hidden;
 }
 /* small */
 .smallWarp{

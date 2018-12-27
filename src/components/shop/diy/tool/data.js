@@ -239,35 +239,35 @@ export const marketingData = [
         icon: require('@/assets/images/shop/group.png'),
         title: '拼团',
         data: [
-            {
-                id: null,
-                img: "",
-                title: "商品标题",
-                price: 200,
-                market_price: 300,
-                desc: "描述"
-            }, {
-                id: null,
-                img: "",
-                title: "商品标题",
-                price: 200,
-                market_price: 300,
-                desc: "描述"
-            }, {
-                id: null,
-                img: "",
-                title: "商品标题",
-                price: 200,
-                market_price: 300,
-                desc: "描述"
-            }, {
-                id: null,
-                img: "",
-                title: "商品标题",
-                price: 200,
-                market_price: 300,
-                desc: "描述"
-            }
+            // {
+            //     id: null,
+            //     img: "https://demo.fashop.cn/Upload/20181220/udgHbwqnDR37jcI.png",
+            //     title: "商品标题",
+            //     price: 200,
+            //     market_price: 300,
+            //     desc: "描述"
+            // }, {
+            //     id: null,
+            //     img: "https://demo.fashop.cn/Upload/20180606/qBR8CjZG4cfKtnV.jpeg",
+            //     title: "商品标题",
+            //     price: 200,
+            //     market_price: 300,
+            //     desc: "描述"
+            // }, {
+            //     id: null,
+            //     img: "https://demo.fashop.cn/Upload/20180606/r79yVhWMfXCnNbc.jpeg",
+            //     title: "商品标题",
+            //     price: 200,
+            //     market_price: 300,
+            //     desc: "描述"
+            // }, {
+            //     id: null,
+            //     img: "https://demo.fashop.cn/Upload/20181220/udgHbwqnDR37jcI.png",
+            //     title: "商品标题",
+            //     price: 200,
+            //     market_price: 300,
+            //     desc: "描述"
+            // }
         ],
         options: {
             source_type: 'auto', // 自动 auto 、 选择 choose

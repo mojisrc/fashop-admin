@@ -6,6 +6,7 @@ import PageView from "@/components/shop/diy/view/index";
 import PageControl from "@/components/shop/diy/controller/index";
 import BaseInfo from "@/components/shop/diy/baseinfo/index";
 import GoodsApi from "@/services/goods";
+import GroupApi from "@/services/group";
 import { query } from "@/utils/fa";
 import styles from "./edit.css";
 import Scrollbar from "react-scrollbars-custom";
@@ -73,6 +74,32 @@ export default class Add extends Component {
             order_type
         });
 
+        if (goodsListResult.code === 0) {
+            return goodsListResult.result.list;
+        } else {
+            message.warning(goodsListResult.msg);
+            return [];
+        }
+    };
+    goodsGroupRefreshGoods = async (values) => {
+        let order_type = 8;
+        switch (values.options.goods_sort) {
+            case 1:
+                order_type = 8;
+                break;
+            case 2:
+                order_type = 3;
+                break;
+            case 3:
+                order_type = 9;
+                break;
+        }
+
+        const goodsListResult = await GroupApi.pageGoods({
+            page: 1,
+            rows: values.options.goods_display_num,
+            order_type
+        });
         if (goodsListResult.code === 0) {
             return goodsListResult.result.list;
         } else {
@@ -198,6 +225,7 @@ export default class Add extends Component {
                                         setPage={this.setPage}
                                         getValues={this.getControlValues}
                                         goodsListRefreshGoods={this.goodsListRefreshGoods}
+                                        goodsGroupRefreshGoods={this.goodsGroupRefreshGoods}
                                     />
                                     :
                                     <BaseInfo

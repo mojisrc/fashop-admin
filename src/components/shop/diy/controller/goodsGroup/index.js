@@ -46,7 +46,7 @@ export default class Index extends Component {
     };
 
     render() {
-        // const { delectShow, addGoodsVisible, currentId } = this.state;
+        const { delectShow, addGoodsVisible, currentId } = this.state;
         const { options, data, getValues } = this.props;
         const { layout_style, source_type, goods_sort } = options||{};
         return (
@@ -57,10 +57,10 @@ export default class Index extends Component {
                 >
                     <RadioGroup
                         value={source_type}
-                        onChange={(e) => {
+                        onChange={async(e) => {
                             getValues({
                                 options: { ...options, ...{ source_type: e.target.value } },
-                                data
+                                // data: []
                             });
                         }}
                     >
@@ -75,7 +75,21 @@ export default class Index extends Component {
                         label="显示数量"
                         extra="最多12件，最少1件"
                     >
-                        <InputNumber max={12} min={1}/>
+                        <InputNumber 
+                            max={12} 
+                            min={1}
+                            onChange={async (e) => {
+                                const values = {
+                                    options: { ...options, ...{ goods_display_num: e } },
+                                    data
+                                };
+                                await this.props.refreshGoods(values)
+                                getValues({
+                                    options: values.options,
+                                    data: await this.props.refreshGoods(values)
+                                });
+                            }}
+                        />
                         <span> 件</span>
                     </FormItem> : null
                 }
@@ -95,8 +109,7 @@ export default class Index extends Component {
                                 };
                                 getValues({
                                     options: values.options,
-                                    data
-                                    // data: await this.props.refreshGoods(values)
+                                    data: await this.props.refreshGoods(values)
                                 });
 
                             }}
@@ -112,7 +125,7 @@ export default class Index extends Component {
                     <FormItem
                         {...formItemLayout}
                     >
-                        {/* {
+                        {
                             data.map((listItem, index) => (
                                 <Col
                                     key={index}
@@ -173,19 +186,19 @@ export default class Index extends Component {
                                     }
                                 </Col>
                             ))
-                        } */}
+                        }
                         <View
                             className={`${styles.goodsCtrlImgItemWarp} ${styles.goodsCtrlAddWarp}`}
                             onClick={() => {
-                                // this.setState({
-                                //     addGoodsVisible: true
-                                // });
+                                this.setState({
+                                    addGoodsVisible: true
+                                });
                             }}
                         >
                             <Icon type="plus" />
                             <span>添加</span>
                         </View>
-                        {/* <SeleceGoods
+                        <SeleceGoods
                             visible={addGoodsVisible}
                             close={() => {
                                 this.setState({ addGoodsVisible: false });
@@ -212,7 +225,7 @@ export default class Index extends Component {
                                     });
                                 });
                             }}
-                        /> */}
+                        />
                     </FormItem> : null
                 }
                 <FormItem
