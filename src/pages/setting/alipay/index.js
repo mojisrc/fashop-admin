@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "dva";
 import { Card } from "antd";
 import PageHeaderWrapper from "@/components/pageHeaderWrapper";
-import { Alert, Switch, Form, Input, Button, message, Upload, Icon, Spin } from "antd";
+import { Switch, Form, Input, Button, message, Spin } from "antd";
 
 const FormItem = Form.Item;
 
@@ -17,33 +17,19 @@ class Payment extends Component {
         paymentInfo: {
             info: {
                 config: {
-                    app_secret: "",
                     app_id: "",
-                    mini_app_id: "",
-                    mini_app_secret: "",
-                    mch_id: "",
-                    key: "",
-                    status: 0,
-                    apiclient_cert: "",
-                    apiclient_key: "",
-                    apiclientCert: [],
-                    apiclientKey: []
+                    ali_public_key: "",
+                    private_key: "",
+                    callback_domain: ""
                 }
             }
         }
     };
     state = {
-        app_secret: "",
         app_id: "",
-        mini_app_id: "",
-        mini_app_secret: "",
-        mch_id: "",
-        key: "",
-        status: 0,
-        apiclient_cert: "",
-        apiclient_key: "",
-        apiclientCert: [],
-        apiclientKey: []
+        ali_public_key: "",
+        private_key: "",
+        callback_domain: ""
     };
 
     componentDidMount() {
@@ -51,7 +37,7 @@ class Payment extends Component {
         dispatch({
             type: "payment/info",
             payload: {
-                type: "wechat"
+                type: "alipay"
             },
             callback: (response) => {
                 if (response.code === 0) {
@@ -60,34 +46,10 @@ class Payment extends Component {
                     if (config) {
                         this.setState({
                             app_id: config.app_id,
-                            app_secret: config.app_secret,
-                            mini_app_id: config.mini_app_id,
-                            mini_app_secret: config.mini_app_secret,
-                            mch_id: config.mch_id,
-                            key: config.key,
-                            status,
-                            apiclient_cert: config.apiclient_cert,
-                            apiclient_key: config.apiclient_key,
-                            apiclientCert: config.apiclient_cert
-                                ? [
-                                    {
-                                        uid: "-1",
-                                        name: "证书",
-                                        status: "done",
-                                        path: config.apiclient_cert
-                                    }
-                                ]
-                                : [],
-                            apiclientKey: config.apiclient_key
-                                ? [
-                                    {
-                                        uid: "-1",
-                                        name: "证书",
-                                        status: "done",
-                                        path: config.apiclient_key
-                                    }
-                                ]
-                                : []
+                            ali_public_key: config.ali_public_key,
+                            private_key: config.private_key,
+                            callback_domain: config.callback_domain,
+                            status
                         });
                     }
                 } else {
@@ -101,27 +63,17 @@ class Payment extends Component {
         e.preventDefault();
         this.props.form.validateFieldsAndScroll((err, values) => {
             if (!err) {
-                const { apiclientCert, apiclientKey } = this.state;
-                const { app_id, app_secret, status, mini_app_id, mch_id, key } = values;
+                const { app_id, ali_public_key, private_key, callback_domain } = values;
                 const { dispatch } = this.props;
                 dispatch({
                     type: "payment/edit",
                     payload: {
-                        type: "wechat",
+                        type: "alipay",
                         config: {
                             app_id,
-                            app_secret,
-                            mini_app_id,
-                            mch_id,
-                            key,
-                            apiclient_cert:
-                                typeof apiclientCert[0]["path"] !== "undefined"
-                                    ? apiclientCert[0].path
-                                    : "",
-                            apiclient_key:
-                                typeof apiclientKey[0]["path"] !== "undefined"
-                                    ? apiclientKey[0].path
-                                    : ""
+                            ali_public_key,
+                            private_key,
+                            callback_domain
                         },
                         status: status ? 1 : 0
                     },
@@ -138,30 +90,13 @@ class Payment extends Component {
     };
 
     render() {
-        const { app_id, app_secret, status, mini_app_id, mini_app_secret, mch_id, key, apiclientCert, apiclientKey } = this.state;
+        const { app_id, ali_public_key, private_key, callback_domain } = this.state;
         const { form, paymentEditLoading, paymentInfoLoading } = this.props;
-        const name = "cert";
-        const action = "admin/upload/addCert";
         const { getFieldDecorator } = form;
-        const token = JSON.parse(localStorage.getItem("token"));
-        const headers = { "Access-Token": token.accessToken };
         return (
             <PageHeaderWrapper hiddenBreadcrumb={true}>
                 <Card bordered={false}>
                     <Spin size="large" spinning={paymentInfoLoading}>
-                        <Alert
-                            message="微信支付设置"
-                            description={
-                                <p>
-                                    还没开通微信支付？申请链接：{" "}
-                                    <a href={`https://mp.weixin.qq.com/`} target="_blank">
-                                        开通微信支付接口
-                                    </a>
-                                </p>
-                            }
-                            type="info"
-                            showIcon
-                        />
                         <Form
                             onSubmit={this.handleSubmit}
                             style={{
@@ -171,107 +106,47 @@ class Payment extends Component {
                         >
                             <FormItem
                                 {...formItemLayout}
-                                label="微信商户ID"
-                                // extra="微信支付商户号，审核通过后，会发送到申请时的邮箱"
+                                label="支付宝AppId"
                             >
-                                {getFieldDecorator("mch_id", {
-                                    rules: [
-                                        {
-                                            required: true,
-                                            message: "请输入"
-                                        }
-                                    ],
-                                    initialValue: mch_id
-                                })(<Input placeholder="请输入" />)}
-                            </FormItem>
-                            <FormItem {...formItemLayout} label="微信商户API密钥">
-                                {getFieldDecorator("key", {
-                                    rules: [
-                                        {
-                                            required: true,
-                                            message: "请输入"
-                                        }
-                                    ],
-                                    initialValue: key
-                                })(<Input placeholder="请输入" />)}
-                            </FormItem>
-                            <FormItem {...formItemLayout} label="小程序App Id">
-                                {getFieldDecorator("mini_app_id", {
-                                    initialValue: mini_app_id
-                                })(<Input placeholder="请输入" />)}
-                            </FormItem>
-                            <FormItem {...formItemLayout} label="小程序App Secret">
-                                {getFieldDecorator("mini_app_secret", {
-                                    initialValue: mini_app_secret
-                                })(<Input placeholder="请输入" />)}
-                            </FormItem>
-                            <FormItem {...formItemLayout} label="公众号App Id">
                                 {getFieldDecorator("app_id", {
+                                    rules: [
+                                        {
+                                            required: true,
+                                            message: "请输入"
+                                        }
+                                    ],
                                     initialValue: app_id
                                 })(<Input placeholder="请输入" />)}
                             </FormItem>
-                            <FormItem {...formItemLayout} label="公众号App Secret">
-                                {getFieldDecorator("app_secret", {
-                                    initialValue: app_secret
+                            <FormItem {...formItemLayout} label="支付宝公钥">
+                                {getFieldDecorator("ali_public_key", {
+                                    rules: [
+                                        {
+                                            required: true,
+                                            message: "请输入"
+                                        }
+                                    ],
+                                    initialValue: ali_public_key
                                 })(<Input placeholder="请输入" />)}
                             </FormItem>
-                            <FormItem
-                                {...formItemLayout}
-                                label="CERT证书"
-                                extra="下载证书 cert.zip 中的 apiclient_cert.pem 文件，微信退款原路退回时所需"
-                            >
-                                {getFieldDecorator("apiclient_cert", {})(
-                                    <Upload
-                                        name={name}
-                                        action={action}
-                                        headers={headers}
-                                        onChange={e => {
-                                            this.onApiclientCertChange(e);
-                                        }}
-                                        fileList={apiclientCert}
-                                    >
-                                        <Button>
-                                            <Icon type="upload" /> 上传证书
-                                        </Button>
-                                        {Array.isArray(apiclientCert) && apiclientCert.length > 0 ? (
-                                            <span style={{ marginLeft: 10, color: "green" }}>
-                                                    已上传
-                                                </span>
-                                        ) : (
-                                            <span style={{ marginLeft: 10 }}>未上传</span>
-                                        )}
-                                    </Upload>
-                                )}
+                            <FormItem {...formItemLayout} label="支付宝私钥">
+                                {getFieldDecorator("private_key", {
+                                    initialValue: private_key
+                                })(<Input placeholder="请输入" />)}
                             </FormItem>
-                            <FormItem
-                                {...formItemLayout}
-                                label="KEY密钥文件"
-                                extra="下载证书 cert.zip 中的 apiclient_key.pem 文件，微信退款原路退回时所需"
+                            <FormItem {...formItemLayout} label="回调域名" extra="使用场景：支付宝支付异步通知、退款原路返回"
                             >
-                                {getFieldDecorator("apiclient_key", {})(
-                                    <Upload
-                                        name={name}
-                                        action={action}
-                                        headers={headers}
-                                        onChange={e => {
-                                            this.onApiclientKeyChange(e);
-                                        }}
-                                        fileList={apiclientKey}
-                                    >
-                                        <Button>
-                                            <Icon type="upload" /> 上传证书
-                                        </Button>
-                                        {Array.isArray(apiclientKey) && apiclientKey.length > 0 ? (
-                                            <span style={{ marginLeft: 10, color: "green" }}>
-                                                    已上传
-                                                </span>
-                                        ) : (
-                                            <span style={{ marginLeft: 10 }}>未上传</span>
-                                        )}
-                                    </Upload>
-                                )}
+                                {getFieldDecorator("callback_domain", {
+                                    rules: [
+                                        {
+                                            required: true,
+                                            message: "请输入回调域名"
+                                        }
+                                    ],
+                                    initialValue: callback_domain
+                                })(<Input placeholder="请输入回调域名，如：https://www.fashop.cn" />)}
                             </FormItem>
-                            <FormItem {...formItemLayout} label="是否启用">
+                            <FormItem {...formItemLayout} label="支付开关">
                                 {getFieldDecorator("status", {
                                     valuePropName: "checked",
                                     initialValue: status === 1
