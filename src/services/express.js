@@ -4,7 +4,7 @@ export default {
     async list(data = {}) {
         return fa.request({
             url: `/admin/express/list`,
-            method: "POST",
+            method: "GET",
             data
         });
     },

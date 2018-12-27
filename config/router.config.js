@@ -80,8 +80,14 @@ export default [
                         routes: [
                             { path: "/setting/deliver", redirect: "/setting/deliver/shipper" },
                             { path: "/setting/deliver/shipper", component: "/setting/shipper/list" },
+                            { path: "/setting/deliver/shipper/add", component: "/setting/shipper/add" },
+                            { path: "/setting/deliver/shipper/edit", component: "/setting/shipper/edit" },
                             { path: "/setting/deliver/express", component: "/setting/express/list" },
-                            { path: "/setting/deliver/freight", component: "/setting/freight/list" }
+                            { path: "/setting/deliver/express/add", component: "/setting/express/add" },
+                            { path: "/setting/deliver/express/edit", component: "/setting/express/edit" },
+                            { path: "/setting/deliver/freight", component: "/setting/freight/list" },
+                            { path: "/setting/deliver/freight/add", component: "/setting/freight/add" },
+                            { path: "/setting/deliver/freight/edit", component: "/setting/freight/edit" }
                         ]
 
                     },

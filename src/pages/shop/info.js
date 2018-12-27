@@ -6,13 +6,14 @@ import UploadImage from "@/components/uploadImage";
 
 const { TextArea } = Input;
 const FormItem = Form.Item;
+
 @Form.create()
 @connect(({ shop, loading }) => ({
     shopInfo: shop.info.result,
     shopInfoLoading: loading.effects["shop/info"],
     setBaseInfoLoading: loading.effects["shop/setBaseInfo"]
 }))
-export default class Info extends Component {
+class ShopInfo extends Component {
     static defaultProps = {
         shopInfo: {
             info: {}
@@ -53,28 +54,7 @@ export default class Info extends Component {
     render() {
         const { form, shopInfo, setBaseInfoLoading, shopInfoLoading } = this.props;
         const { getFieldDecorator } = form;
-        const formItemLayout = {
-            labelCol: {
-                xs: { span: 24 },
-                sm: { span: 6 }
-            },
-            wrapperCol: {
-                xs: { span: 24 },
-                sm: { span: 18 }
-            }
-        };
-        const tailFormItemLayout = {
-            wrapperCol: {
-                xs: {
-                    span: 24,
-                    offset: 0
-                },
-                sm: {
-                    span: 16,
-                    offset: 6
-                }
-            }
-        };
+
         return (
             <PageHeaderWrapper hiddenBreadcrumb={true}>
                 <Card bordered={false}>
@@ -151,3 +131,27 @@ export default class Info extends Component {
         );
     }
 }
+
+const formItemLayout = {
+    labelCol: {
+        xs: { span: 24 },
+        sm: { span: 6 }
+    },
+    wrapperCol: {
+        xs: { span: 24 },
+        sm: { span: 18 }
+    }
+};
+const tailFormItemLayout = {
+    wrapperCol: {
+        xs: {
+            span: 24,
+            offset: 0
+        },
+        sm: {
+            span: 16,
+            offset: 6
+        }
+    }
+};
+export default ShopInfo;

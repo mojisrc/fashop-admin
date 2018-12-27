@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Table, Button, InputNumber } from "antd";
-import styles from './index.css'
+import styles from "./index.css";
 //
 // type IdsType = Array<string>
 //
@@ -58,13 +58,13 @@ export default class FreightAddTable extends Component {
 
     componentWillReceiveProps(nextProps) {
         if (this.props.dataSource !== nextProps.dataSource) {
-            const { onChange } = this.props
-            if (typeof onChange === 'function') {
+            const { onChange } = this.props;
+            if (typeof onChange === "function") {
                 onChange(nextProps.dataSource.map((e) => {
                     return {
                         ...e,
                         area_ids: e.ids
-                    }
+                    };
                 }));
             }
         }
@@ -80,48 +80,48 @@ export default class FreightAddTable extends Component {
             getChildIds,
             changeTableDataSource,
             payType
-        } = this.props
-        const firstAmountPrecision = payType === 1 ? 0 : 1
-        const unit = payType === 1 ? '件 (个)' : '重 (KG)'
+        } = this.props;
+        const firstAmountPrecision = payType === 1 ? 0 : 1;
+        const unit = payType === 1 ? "件 (个)" : "重 (KG)";
         const columns = [
             {
                 title: "可配送区域",
                 dataIndex: "ids",
                 className: `${styles.deliverableArea}`,
                 render: (e) => {
-                    const newArray = this.getTreeNodesData(areaList, e)
+                    const newArray = this.getTreeNodesData(areaList, e);
                     return <span>
                         {
                             newArray.map((a, i) => {
                                 if (!a.child) {
-                                    return <span style={{ color: '#000' }}
-                                                 key={a.id}>{i === 0 ? null : '、'}{a.name}</span>
+                                    return <span style={{ color: "#000" }}
+                                                 key={a.id}>{i === 0 ? null : "、"}{a.name}</span>;
                                 } else {
                                     return (
-                                        <span style={{ color: '#000' }} key={a.id}>
-                                            {i === 0 ? null : '、'}{a.name}[
+                                        <span style={{ color: "#000" }} key={a.id}>
+                                            {i === 0 ? null : "、"}{a.name}[
                                             {a.child.map((b, j) => {
                                                 if (!b.child) {
-                                                    return <span style={{ color: '#555' }}
-                                                                 key={b.id}>{j === 0 ? null : '、'}{b.name}</span>
+                                                    return <span style={{ color: "#555" }}
+                                                                 key={b.id}>{j === 0 ? null : "、"}{b.name}</span>;
                                                 } else {
                                                     return (
-                                                        <span style={{ color: '#555' }} key={b.id}>
-                                                             {j === 0 ? null : '、'}
+                                                        <span style={{ color: "#555" }} key={b.id}>
+                                                             {j === 0 ? null : "、"}
                                                             {b.name}
-                                                            ({b.child.map((c, z) => (<span style={{ color: '#999' }}
-                                                                                           key={c.id}>{z === 0 ? null : '、'}{c.name}</span>))})
+                                                            ({b.child.map((c, z) => (<span style={{ color: "#999" }}
+                                                                                           key={c.id}>{z === 0 ? null : "、"}{c.name}</span>))})
                                                         </span>
-                                                    )
+                                                    );
                                                 }
                                             })}
                                             ]
                                         </span>
-                                    )
+                                    );
                                 }
                             })
                         }
-                    </span>
+                    </span>;
                 }
             },
             {
@@ -132,36 +132,36 @@ export default class FreightAddTable extends Component {
                         <a
                             style={{ marginRight: 10 }}
                             onClick={() => {
-                                let newArray = []
+                                let newArray = [];
                                 record.ids.map((e) => {
                                     areaList.map((item) => {
                                         if (e === `${item.id}`) {
-                                            let childIds = getChildIds(item)
-                                            return newArray = [...newArray, e, ...childIds]
+                                            let childIds = getChildIds(item);
+                                            return newArray = [...newArray, e, ...childIds];
                                         } else {
                                             item._child.map((itemB) => {
                                                 if (e === `${itemB.id}`) {
-                                                    let childIds = getChildIds(itemB)
-                                                    return newArray = [...newArray, e, ...childIds]
+                                                    let childIds = getChildIds(itemB);
+                                                    return newArray = [...newArray, e, ...childIds];
                                                 } else {
                                                     itemB._child.map((itemC) => {
                                                         if (e === `${itemC.id}`) {
-                                                            return newArray = [...newArray, e]
+                                                            return newArray = [...newArray, e];
                                                         }
-                                                    })
+                                                    });
                                                 }
-                                            })
+                                            });
                                         }
-                                    })
-                                })
-                                editAreaList(newArray, index)
+                                    });
+                                });
+                                editAreaList(newArray, index);
                             }}
                         >
                             编辑
                         </a>
                         <a
                             onClick={() => {
-                                delAreaList(index)
+                                delAreaList(index);
                             }}
                         >删除</a>
                     </span>
@@ -175,7 +175,7 @@ export default class FreightAddTable extends Component {
                         value={e}
                         precision={firstAmountPrecision}
                         onChange={(e) => {
-                            changeTableDataSource(index, 'first_amount', e)
+                            changeTableDataSource(index, "first_amount", e);
                         }}
                         min={0}
                     />
@@ -189,7 +189,7 @@ export default class FreightAddTable extends Component {
                         value={e}
                         precision={2}
                         onChange={(e) => {
-                            changeTableDataSource(index, 'first_fee', e)
+                            changeTableDataSource(index, "first_fee", e);
                         }}
                         min={0}
                     />
@@ -203,7 +203,7 @@ export default class FreightAddTable extends Component {
                         value={e}
                         precision={firstAmountPrecision}
                         onChange={(e) => {
-                            changeTableDataSource(index, 'additional_amount', e)
+                            changeTableDataSource(index, "additional_amount", e);
                         }}
                         min={0}
                     />
@@ -217,13 +217,13 @@ export default class FreightAddTable extends Component {
                         value={e}
                         precision={2}
                         onChange={(e) => {
-                            changeTableDataSource(index, 'additional_fee', e)
+                            changeTableDataSource(index, "additional_fee", e);
                         }}
                         min={0}
                     />
                 )
-            },
-        ]
+            }
+        ];
 
         return (
             <Table
@@ -231,7 +231,7 @@ export default class FreightAddTable extends Component {
                 columns={columns}
                 simple
                 rowKey={(record, index) => {
-                    return `${index}`
+                    return `${index}`;
                 }}
                 dataSource={dataSource}
                 pagination={false}
@@ -241,77 +241,77 @@ export default class FreightAddTable extends Component {
                             type="dashed"
                             icon='plus'
                             onClick={() => {
-                                changeAreaListModal(true)
+                                changeAreaListModal(true);
                             }}
                         >
                             添加可配送区域和运费
                         </Button>
-                    )
+                    );
                 }}
             />
         );
     }
 
-    getTreeNodesData = (data: AreaType, checkedKeys: IdsType) => {
+    getTreeNodesData = (data, checkedKeys) => {
         const {
             getChildIds,
-            getChildInCludes,
-        } = this.props
+            getChildInCludes
+        } = this.props;
 
-        let newArray = []
+        let newArray = [];
         data.map(item => {
             if (item._child.length) {
                 if (checkedKeys.includes(`${item.id}`)) {
                     newArray.push({
                         name: item.name,
                         id: item.id
-                    })
+                    });
                 } else {
-                    let childItem = getChildIds(item)
-                    let checkedItem = getChildInCludes(childItem, checkedKeys)
+                    let childItem = getChildIds(item);
+                    let checkedItem = getChildInCludes(childItem, checkedKeys);
                     if (checkedItem.length > 0) {
-                        let newArrayB = []
+                        let newArrayB = [];
                         item._child.map((itemB) => {
-                            let childItem = getChildIds(itemB)
-                            let checkedItem = getChildInCludes(childItem, checkedKeys)
+                            let childItem = getChildIds(itemB);
+                            let checkedItem = getChildInCludes(childItem, checkedKeys);
                             if (checkedKeys.includes(`${itemB.id}`)) {
                                 newArrayB.push({
                                     name: itemB.name,
                                     id: itemB.id
-                                })
+                                });
                             } else if (checkedItem.length > 0) {
-                                let newArrayC = []
+                                let newArrayC = [];
                                 itemB._child.map((itemC) => {
                                     if (checkedKeys.includes(`${itemC.id}`)) {
                                         newArrayC.push({
                                             name: itemC.name,
-                                            id: itemC.id,
-                                        })
+                                            id: itemC.id
+                                        });
                                     }
-                                })
+                                });
                                 newArrayB.push({
                                     name: itemB.name,
                                     id: itemB.id,
                                     child: newArrayC
-                                })
+                                });
                             }
-                        })
+                        });
                         newArray.push({
                             name: item.name,
                             id: item.id,
                             child: newArrayB
-                        })
+                        });
                     }
                 }
             } else {
                 if (checkedKeys.includes(`${item.id}`)) {
                     newArray.push({
                         name: item.name,
-                        id: item.id,
-                    })
+                        id: item.id
+                    });
                 }
             }
-        })
-        return newArray
-    }
+        });
+        return newArray;
+    };
 }
