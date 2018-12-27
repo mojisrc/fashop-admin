@@ -75,7 +75,7 @@ export default [
                     { path: "/setting", redirect: "/setting/deliver/shipper" },
                     {
                         path: "/setting/deliver",
-                        name: "配送设置",
+                        name: "物流配送",
                         component: "/setting/deliverLayout",
                         routes: [
                             { path: "/setting/deliver", redirect: "/setting/deliver/shipper" },
@@ -85,8 +85,9 @@ export default [
                         ]
 
                     },
-                    { path: "/setting/order", name: "订单设置", component: "/setting/order" },
-                    { path: "/setting/payment", name: "支付设置", component: "/setting/payment" }
+                    { path: "/setting/order", name: "订单", component: "/setting/order" },
+                    { path: "/setting/wechat", name: "微信", component: "/setting/wechat" },
+                    { path: "/setting/alipay", name: "支付宝", component: "/setting/alipay" }
                 ]
             },
             {
