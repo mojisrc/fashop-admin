@@ -21,7 +21,7 @@ class Search extends Component {
     };
 
     render() {
-        const { items, onSubmit, onReset } = this.props;
+        const { items, onSubmit, onReset, style } = this.props;
         let _items = [...items];
         if (typeof onSubmit === "function") {
             _items.push({
@@ -36,20 +36,25 @@ class Search extends Component {
             });
         }
         return (
-            <Form layout="inline" className="ant-advanced-search-form" onSubmit={(e) => {
-                e.preventDefault();
-                this.props.form.validateFieldsAndScroll((err, values) => {
-                    if (!err) {
-                        // 过滤时间统一为时间戳
-                        items.map((item) => {
-                            if (typeof item["timeRange"] !== "undefined") {
-                                values[item.timeRange.field] = this.timeRangeToStamp(values[item.timeRange.field]);
-                            }
-                        });
-                        onSubmit(values);
-                    }
-                });
-            }}>
+            <Form 
+                layout="inline" 
+                className="ant-advanced-search-form" 
+                style={style ? style : {}}
+                onSubmit={(e) => {
+                    e.preventDefault();
+                    this.props.form.validateFieldsAndScroll((err, values) => {
+                        if (!err) {
+                            // 过滤时间统一为时间戳
+                            items.map((item) => {
+                                if (typeof item["timeRange"] !== "undefined") {
+                                    values[item.timeRange.field] = this.timeRangeToStamp(values[item.timeRange.field]);
+                                }
+                            });
+                            onSubmit(values);
+                        }
+                    });
+                }}
+            >
                 {
                     _items.map((item, index) => {
                         if (typeof item["input"] !== "undefined") {

@@ -38,9 +38,11 @@ export default class PageControl extends Component {
                     break
                 case 'goods_list':
                     item = <GoodsList
-                        options={itemData.options} data={itemData.data}
+                        options={itemData.options} 
+                        data={itemData.data}
                         getValues={this.props.getValues}
-                        refreshGoods={this.props.goodsListRefreshGoods} />
+                        refreshGoods={this.props.goodsListRefreshGoods} 
+                    />
                     break
                 case 'goods_search':
                     item = <GoodsSearch options={itemData.options} data={{}} getValues={this.props.getValues} />
@@ -74,16 +76,21 @@ export default class PageControl extends Component {
                     item = <TextNav options={itemData.options} data={itemData.data} getValues={this.props.getValues} />
                     break
                 case 'goods_group':
-                    item = <GoodsGroup options={itemData.options} data={itemData.data} getValues={this.props.getValues} />;
+                    item = <GoodsGroup 
+                        options={itemData.options} 
+                        data={itemData.data} 
+                        getValues={this.props.getValues} 
+                        refreshGoods={this.props.goodsGroupRefreshGoods} 
+                    />;
                     break
                 default:
 
             }
         }
         return (
-                <ScrollView style={{height:'80vh'}} block={true}>
-                    <Card bordered={false}>{item}</Card>
-                </ScrollView>
+            <ScrollView style={{height:'80vh'}} block={true}>
+                <Card bordered={false}>{item}</Card>
+            </ScrollView>
         )
     }
 }

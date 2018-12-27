@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "dva";
 import PageHeaderWrapper from "@/components/pageHeaderWrapper";
-import { Card, Table, Divider, Button } from "antd";
+import { Card, Table, Divider, Button, Popconfirm } from "antd";
 import PageList from "@/components/pageList";
-import styles from "@/components/marketing/group/listTable/index.css";
+import styles from "@/components/marketing/group/index.css";
 import { View } from "@/components/flexView";
 import router from "umi/router";
 import moment from "moment";
@@ -81,13 +81,10 @@ export default class GroupList extends Component {
                 render: (record) => <View className={styles.operation}>
                     <a
                         onClick={() => {
-                            // router.push({
-                            //     pathname: `/marketing/freebie/edit`,
-                            //     search: `?id=${record.id}`,
-                            //     state: {
-                            //         record
-                            //     }
-                            // });
+                            router.push({
+                                pathname: `/marketing/group/edit`,
+                                search: `?id=${record.id}`,
+                            });
                         }}
                     >编辑</a>
                     <Divider type="vertical" />
@@ -165,23 +162,4 @@ export default class GroupList extends Component {
             </PageHeaderWrapper>
         );
     }
-
-    // returnGroupState(state) {
-    //     switch (state) {
-    //         case 0:
-    //             return <span style={{ color: "red" }}>未处理</span>;
-    //         case 10:
-    //             return "已拒绝退款";
-    //         case 20:
-    //             return "已同意退款";
-    //         case 30:
-    //             return "已完成";
-    //         case 50:
-    //             return "用户主动撤销";
-    //         case 51:
-    //             return "用户主动收货";
-    //         default:
-    //             return "-";
-    //     }
-    // }
 }

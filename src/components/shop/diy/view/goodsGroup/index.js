@@ -58,7 +58,7 @@ export default class Index extends Component {
                     <View>
                         <View style={{ flexDirection: 'row', alignItems: 'center', }}>
                             <p className={styles.smallPrice} style={{ fontSize: 14 }}>
-                                2人团 ￥
+                                {item.limit_buy_num}人团 ￥
                             </p>
                             <p className={styles.smallPrice}>
                                 {item.price}
@@ -88,7 +88,7 @@ export default class Index extends Component {
                     <Image
                         src={item.img}
                         type="big_img"
-                        style={{height: 375}}
+                        style={{ width: '100%' }}
                     />
                 </View>
                 <View className={styles.smallBot}>
@@ -96,7 +96,7 @@ export default class Index extends Component {
                     <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', }}>
                         <View style={{ flexDirection: 'row', alignItems: 'center', }}>
                             <p className={styles.smallPrice} style={{ fontSize: 14 }}>
-                                2人团 ￥
+                                {item.limit_buy_num}人团 ￥
                             </p>
                             <p className={styles.smallPrice}>
                                 {item.price}
@@ -178,7 +178,7 @@ export default class Index extends Component {
                     <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', }}>
                         <View>
                             <p className={styles.smallPrice} style={{ fontSize: 14, color: '#999' }}>
-                                2人团 已拼888件
+                                {item.limit_buy_num}人团 已拼888件
                             </p>
                             <p className={styles.listPrice}>
                                 ￥{item.price}
@@ -219,7 +219,7 @@ export default class Index extends Component {
                                                                     style={{height: 106}}
                                                                 />
                                                                 <p className={styles.carouselGroup}>
-                                                                    2人团
+                                                                    {childItem.limit_buy_num}人团
                                                                 </p>
                                                             </View>
                                                             <View style={{alignItems: 'center',}}>
