@@ -1,20 +1,187 @@
 import React, { Component } from "react";
-import PageHeaderWrapper from "@/components/pageHeaderWrapper";
-import GroupListHeader from "@/components/marketing/group/listHeader";
-import GroupListTable from "@/components/marketing/group/listTable";
 import { connect } from "dva";
-import { Card } from "antd";
+import PageHeaderWrapper from "@/components/pageHeaderWrapper";
+import { Card, Table, Divider, Button } from "antd";
+import PageList from "@/components/pageList";
+import styles from "@/components/marketing/group/listTable/index.css";
+import { View } from "@/components/flexView";
+import router from "umi/router";
+import moment from "moment";
 
-@connect()
-class Group extends Component {
-    render() {
-        return <PageHeaderWrapper hiddenBreadcrumb={true}>
-            <Card bordered={false}>
-                <GroupListHeader {...this.props} />
-                <GroupListTable {...this.props} />
-            </Card>
-        </PageHeaderWrapper>
+@connect(({ group, loading }) => ({
+    groupList: group.list.result,
+    groupListLoading: loading.effects["group/list"]
+}))
+export default class GroupList extends Component {
+    static defaultProps = {
+        groupListLoading: true,
+        groupList: {
+            list: [],
+            total_number: 0
+        }
+    };
+    search = new PageList({
+        router: "/marketing/group/list",
+        rows: 10,
+        param: {
+            keywords: null,
+            state: null,
+        },
+        refresh: (e) => {
+            this.initList(e);
+        }
+    });
+
+    initList = () => {
+        const { dispatch } = this.props;
+        dispatch({
+            type: "group/list",
+            payload: this.search.filter()
+        });
+    };
+
+    componentDidMount() {
+        this.initList();
     }
-}
-export default Group
 
+    render() {
+        const { groupList, groupListLoading } = this.props;
+        const {
+            keywords,
+            state,
+        } = this.search.getParam();
+        const columns = [
+            {
+                title: "活动标题",
+                dataIndex: "title",
+                key: "title"
+            }, {
+                title: "拼团时限",
+                dataIndex: "time_over",
+                key: "time_over",
+                render: (text, record) => `${record.time_over_day}天${record.time_over_hour}时${record.time_over_minute}分`
+            }, {
+                title: "活动时间",
+                dataIndex: "start_time",
+                key: "start_time",
+                render: (text, record) => `${moment(record.start_time, "X").format("YYYY-MM-DD HH:mm:ss")} 至 ${moment(record.end_time, "X").format("YYYY-MM-DD HH:mm:ss")}`
+            }, {
+                title: "参团人数",
+                dataIndex: "limit_buy_num",
+                key: "limit_buy_num"
+            }, {
+                title: "活动状态",
+                dataIndex: "state_desc",
+                key: "state_desc",
+            }, {
+                title: "操作",
+                key: "operation",
+                className: styles.column,
+                width: 300,
+                render: (record) => <View className={styles.operation}>
+                    <a
+                        onClick={() => {
+                            // router.push({
+                            //     pathname: `/marketing/freebie/edit`,
+                            //     search: `?id=${record.id}`,
+                            //     state: {
+                            //         record
+                            //     }
+                            // });
+                        }}
+                    >编辑</a>
+                    <Divider type="vertical" />
+                    <Popconfirm
+                        title="确定让这组赠品活动失效？"
+                        onConfirm={() => console.log('confirm')}
+                        onCancel={() => console.log('cancel')}
+                    >
+                        <a>使失效</a>
+                    </Popconfirm>
+                </View>
+            }
+        ];
+        return (
+            <PageHeaderWrapper hiddenBreadcrumb={true}>
+                <Card bordered={false}>
+                    <PageList.Search
+                        loading={groupListLoading}
+                        onSubmit={this.search.submit}
+                        defaultValue={this.search.defaultParam}
+                        onReset={this.search.reset}
+                        items={[
+                            {
+                                label: "活动名称",
+                                input: {
+                                    field: "keywords",
+                                    placeholder: "请输入活动名称",
+                                    initialValue: keywords
+                                }
+                            }, {
+                                label: "活动状态",
+                                select: {
+                                    field: "state",
+                                    style: { width: 130 },
+                                    placeholder: "全部",
+                                    data: [
+                                        { name: "未开始", value: "0" },
+                                        { name: "已开始生效中", value: "10" },
+                                        { name: "已开始未生效", value: "20" },
+                                        { name: "已过期生效中", value: "30" },
+                                        { name: "已过期未生效", value: "40" },
+                                    ],
+                                    initialValue: state
+                                }
+                            },
+                        ]} 
+                    />
+                    <View className={styles.batchView}>
+                        <Button
+                            type='primary'
+                            onClick={() => {
+                                router.push("/marketing/group/add");
+                            }}
+                        >
+                            创建活动
+                        </Button>
+                    </View>
+                    <Table
+                        loading={groupListLoading}
+                        dataSource={groupList.list}
+                        columns={columns}
+                        rowKey={record => record.id}
+                        pagination={{
+                            showSizeChanger: false,
+                            showQuickJumper: false,
+                            current: this.search.page,
+                            pageSize: this.search.rows,
+                            total: groupList.total_number
+                        }}
+                        onChange={({ current }) => {
+                            this.search.setPage(current).push();
+                        }}
+                    />
+                </Card>
+            </PageHeaderWrapper>
+        );
+    }
+
+    // returnGroupState(state) {
+    //     switch (state) {
+    //         case 0:
+    //             return <span style={{ color: "red" }}>未处理</span>;
+    //         case 10:
+    //             return "已拒绝退款";
+    //         case 20:
+    //             return "已同意退款";
+    //         case 30:
+    //             return "已完成";
+    //         case 50:
+    //             return "用户主动撤销";
+    //         case 51:
+    //             return "用户主动收货";
+    //         default:
+    //             return "-";
+    //     }
+    // }
+}
