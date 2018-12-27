@@ -10,7 +10,7 @@ import { connect } from "dva";
     expressList: express.list.result,
     expressListLoading: loading.effects["express/list"]
 }))
-export default class List extends Component {
+class ExpressList extends Component {
     static defaultProps = {
         expressListLoading: true,
         expressList: {
@@ -25,6 +25,7 @@ export default class List extends Component {
             keywords_type: "company_name",
             keywords: null
         },
+        rule: [{ key: "keywords_type", rule: ["rely", "keywords"] }],
         refresh: (e) => {
             this.initList(e);
         }
@@ -173,6 +174,7 @@ export default class List extends Component {
     }
 
 }
+
 const keywords_type_list = [
     {
         name: "公司名称",
@@ -180,3 +182,4 @@ const keywords_type_list = [
     }
 
 ];
+export default ExpressList;
