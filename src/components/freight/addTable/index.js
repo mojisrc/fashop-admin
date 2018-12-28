@@ -1,72 +1,29 @@
 import React, { Component } from "react";
 import { Table, Button, InputNumber } from "antd";
 import styles from "./index.css";
-//
-// type IdsType = Array<string>
-//
-// type AreaType = Array<{
-//     id: number,
-//     name: string,
-//     children: Array<{
-//         id: number,
-//         name: string,
-//         children: Array<any>
-//     }>
-// }>
-// type Props = {
-//     onChange?: Function,
-//     areaList: AreaType,
-//     dataSource: Array<{
-//         additional_amount: number,
-//         additional_fee: number,
-//         first_amount: number,
-//         first_fee: number,
-//         ids: Array<string>
-//     }>,
-//     payType: 1 | 2,
-//     changeAreaListModal: Function,
-//     changeTableDataSource: Function,
-//     delAreaList: Function,
-//     editAreaList: Function,
-//     getChildIds: Function,
-//     getChildInCludes: Function,
-// }
-// type State = {
-//     payType: number,
-//     visible: boolean,
-//     checkedAreaKeys: IdsType,
-//     expandedKeys,
-//     checkedKeys: IdsType,
-//     editAreaTableIndex: number | null,
-//     loading: boolean,
-//     autoExpandParent: boolean,
-//     autoExpandParent2: boolean,
-//     expandedKeys2: IdsType,
-//     checkedKeys2: IdsType,
-//     selectedKeys2: IdsType,
-//     selectedKeys: IdsType,
-//     tableDataSource: Array<{
-//         additional_amount: number,
-//         additional_fee: number,
-//         first_amount: number,
-//         first_fee: number,
-//         ids: Array<string>
-//     }>
-// }
 
 export default class FreightAddTable extends Component {
+    static defaultProps = {
+        changeAreaListModal: () => {},
+        dataSource:[],
+        areaListTree:[],
+        editAreaListTree: () => {},
+        delAreaListTree: () => {},
+        getAllChildrenIds: () => {},
+        changeDataSource: () => {},
+        payType:1,
+        onChange: () => {}
+    };
 
     componentWillReceiveProps(nextProps) {
         if (this.props.dataSource !== nextProps.dataSource) {
             const { onChange } = this.props;
-            if (typeof onChange === "function") {
-                onChange(nextProps.dataSource.map((e) => {
-                    return {
-                        ...e,
-                        area_ids: e.ids
-                    };
-                }));
-            }
+            onChange(nextProps.dataSource.map((e) => {
+                return {
+                    ...e,
+                    area_ids: e.ids
+                };
+            }));
         }
     }
 
@@ -74,11 +31,11 @@ export default class FreightAddTable extends Component {
         const {
             changeAreaListModal,
             dataSource,
-            areaList,
-            editAreaList,
-            delAreaList,
-            getChildIds,
-            changeTableDataSource,
+            areaListTree,
+            editAreaListTree,
+            delAreaListTree,
+            getAllChildrenIds,
+            changeDataSource,
             payType
         } = this.props;
         const firstAmountPrecision = payType === 1 ? 0 : 1;
@@ -89,7 +46,7 @@ export default class FreightAddTable extends Component {
                 dataIndex: "ids",
                 className: `${styles.deliverableArea}`,
                 render: (e) => {
-                    const newArray = this.getTreeNodesData(areaList, e);
+                    const newArray = this.getTreeNodesData(areaListTree, e);
                     return <span>
                         {
                             newArray.map((a, i) => {
@@ -134,14 +91,14 @@ export default class FreightAddTable extends Component {
                             onClick={() => {
                                 let newArray = [];
                                 record.ids.map((e) => {
-                                    areaList.map((item) => {
+                                    areaListTree.map((item) => {
                                         if (e === `${item.id}`) {
-                                            let childIds = getChildIds(item);
+                                            let childIds = getAllChildrenIds(item);
                                             return newArray = [...newArray, e, ...childIds];
                                         } else {
                                             item.children.map((itemB) => {
                                                 if (e === `${itemB.id}`) {
-                                                    let childIds = getChildIds(itemB);
+                                                    let childIds = getAllChildrenIds(itemB);
                                                     return newArray = [...newArray, e, ...childIds];
                                                 } else {
                                                     itemB.children.map((itemC) => {
@@ -154,14 +111,14 @@ export default class FreightAddTable extends Component {
                                         }
                                     });
                                 });
-                                editAreaList(newArray, index);
+                                editAreaListTree(newArray, index);
                             }}
                         >
                             编辑
                         </a>
                         <a
                             onClick={() => {
-                                delAreaList(index);
+                                delAreaListTree(index);
                             }}
                         >删除</a>
                     </span>
@@ -175,7 +132,7 @@ export default class FreightAddTable extends Component {
                         value={e}
                         precision={firstAmountPrecision}
                         onChange={(e) => {
-                            changeTableDataSource(index, "first_amount", e);
+                            changeDataSource(index, "first_amount", e);
                         }}
                         min={0}
                     />
@@ -189,7 +146,7 @@ export default class FreightAddTable extends Component {
                         value={e}
                         precision={2}
                         onChange={(e) => {
-                            changeTableDataSource(index, "first_fee", e);
+                            changeDataSource(index, "first_fee", e);
                         }}
                         min={0}
                     />
@@ -203,7 +160,7 @@ export default class FreightAddTable extends Component {
                         value={e}
                         precision={firstAmountPrecision}
                         onChange={(e) => {
-                            changeTableDataSource(index, "additional_amount", e);
+                            changeDataSource(index, "additional_amount", e);
                         }}
                         min={0}
                     />
@@ -217,7 +174,7 @@ export default class FreightAddTable extends Component {
                         value={e}
                         precision={2}
                         onChange={(e) => {
-                            changeTableDataSource(index, "additional_fee", e);
+                            changeDataSource(index, "additional_fee", e);
                         }}
                         min={0}
                     />
@@ -252,14 +209,10 @@ export default class FreightAddTable extends Component {
         );
     }
 
-    getTreeNodesData = (data, checkedKeys) => {
-        const {
-            getChildIds,
-            getChildInCludes
-        } = this.props;
-
+    getTreeNodesData = (areaListTree, checkedKeys) => {
+        const { getAllChildrenIds, getIncludeIds } = this.props;
         let newArray = [];
-        data.map(item => {
+        areaListTree.map(item => {
             if (item.children.length) {
                 if (checkedKeys.includes(`${item.id}`)) {
                     newArray.push({
@@ -267,13 +220,13 @@ export default class FreightAddTable extends Component {
                         id: item.id
                     });
                 } else {
-                    let childItem = getChildIds(item);
-                    let checkedItem = getChildInCludes(childItem, checkedKeys);
+                    let childItem = getAllChildrenIds(item);
+                    let checkedItem = getIncludeIds(childItem, checkedKeys);
                     if (checkedItem.length > 0) {
                         let newArrayB = [];
                         item.children.map((itemB) => {
-                            let childItem = getChildIds(itemB);
-                            let checkedItem = getChildInCludes(childItem, checkedKeys);
+                            let childItem = getAllChildrenIds(itemB);
+                            let checkedItem = getIncludeIds(childItem, checkedKeys);
                             if (checkedKeys.includes(`${itemB.id}`)) {
                                 newArrayB.push({
                                     name: itemB.name,

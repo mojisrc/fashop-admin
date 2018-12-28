@@ -24,6 +24,7 @@ class FreightAdd extends Component {
         freightAddLoading: false
     };
     state = {
+        areaListTree: [],
         payType: 1,
         visible: false,
         expandedKeys: [],
@@ -32,31 +33,36 @@ class FreightAdd extends Component {
         checkedKeys: [],
         selectedKeys: [],
 
-        expandedKeys2: [],
-        autoExpandParent2: true,
-        checkedKeys2: [],
-        selectedKeys2: [],
+        rightExpandedKeys: [],
+        rightAutoExpandParent: true,
+        rightCheckedKeys: [],
+        rightSelectedKeys: [],
 
         checkedAreaKeys: [],
 
-        dataSource: [],
+        correctIds: [],
 
         editAreaTableIndex: null
 
     };
-    // todo 为了方便给所有的子集补上chilren
+
     componentDidMount() {
         const { dispatch } = this.props;
         dispatch({
-            type: "area/list"
+            type: "area/list",
+            callback: (response) => {
+                this.setState({
+                    areaListTree: Arr.toTreeFillChildren(response.result.list)
+                });
+            }
         });
     }
 
     changeDataSource = (index, key, value) => {
-        const { dataSource } = this.state;
-        const _dataSource = [...dataSource];
-        _dataSource[index][key] = value;
-        this.setState({ dataSource: _dataSource });
+        const { correctIds } = this.state;
+        const _correctIds = [...correctIds];
+        _correctIds[index][key] = value;
+        this.setState({ correctIds: _correctIds });
     };
     changeAreaListModal = (e) => {
         this.setState({
@@ -64,38 +70,37 @@ class FreightAdd extends Component {
             checkedAreaKeys: []
         });
     };
-    editAreaList = (e, index) => {
+    editAreaListTree = (e, index) => {
         this.setState({
             visible: true,
             checkedAreaKeys: e,
             editAreaTableIndex: index
         });
     };
-    delAreaList = (index) => {
-        const { dataSource } = this.state;
-        const _dataSource = [...dataSource];
-        _dataSource.splice(index, 1);
-        this.setState({ dataSource: _dataSource });
+    delAreaListTree = (index) => {
+        const { correctIds } = this.state;
+        const _correctIds = [...correctIds];
+        _correctIds.splice(index, 1);
+        this.setState({ correctIds: _correctIds });
     };
     handleOk = (selectTreeNodesData) => {
-        const { dataSource, checkedAreaKeys, editAreaTableIndex } = this.state;
-        const { areaList } = this.props;
+        const { correctIds, checkedAreaKeys, editAreaTableIndex, areaListTree } = this.state;
         if (editAreaTableIndex !== null) {
-            const _dataSource = [...dataSource];
-            _dataSource[editAreaTableIndex].ids = this.getAreaCheckedIds(areaList, checkedAreaKeys);
+            const _correctIds = [...correctIds];
+            _correctIds[editAreaTableIndex].ids = this.correctCheckedAreaIds(areaListTree, checkedAreaKeys);
             this.setState({
-                dataSource: _dataSource,
+                correctIds: _correctIds,
                 checkedAreaKeys: [],
                 editAreaTableIndex: null
             });
         } else if (selectTreeNodesData.length > 0) {
             this.setState({
-                dataSource: [...dataSource, {
+                correctIds: [...correctIds, {
                     first_amount: 1,
                     first_fee: 0.00,
                     additional_amount: 1,
                     additional_fee: 0.00,
-                    ids: this.getAreaCheckedIds(areaList, checkedAreaKeys)
+                    ids: this.correctCheckedAreaIds(areaListTree, checkedAreaKeys)
                 }],
                 checkedAreaKeys: []
             });
@@ -103,36 +108,39 @@ class FreightAdd extends Component {
         this.changeAreaListModal(false);
     };
     /**
-     * 过滤，如果父级包含了所有子集，返回父级id
-     * @param {[]} areaTreeList
+     * 纠正选择的地区id集合，如果父级包含了所有子集，返回父级id
+     * @param {[]} areaListTree
      * @param {string[]} checkedKeys
      * @returns {string[]}
      */
-    getAreaCheckedIds = (areaTreeList, checkedKeys) => {
+    correctCheckedAreaIds = (areaListTree, checkedKeys) => {
         let ids = [];
-        areaTreeList.map(item => {
-            if (typeof item["children"] !== "undefined" && Array.isArray(item.children) && item.children.length) {
-                let childItem = this.getChildIds(item);
-                let checkedItem = this.getChildInCludes(childItem, checkedKeys);
-                if (checkedItem.length === childItem.length) {
-                    ids.push(item.id);
-                } else if (checkedItem.length) {
+        areaListTree.map(item => {
+            if (item.children.length) {
+                let allIds = this.getAllChildrenIds(item);
+                let checkedIds = this.getIncludeIds(allIds, checkedKeys);
+                // 省级
+                if (checkedIds.length === allIds.length) {
+                    ids.push(`${item.id}`);
+                } else if (checkedIds.length) {
+                    // 市级
                     return item.children.map((sub) => {
-                        if (typeof sub["children"] !== "undefined" && Array.isArray(sub.children) && sub.children.length) {
-                            let childItem = this.getChildIds(sub);
-                            let checkedItem = this.getChildInCludes(childItem, checkedKeys);
-                            if (checkedItem.length === childItem.length) {
-                                ids.push(sub.id);
+                        if (sub.children.length) {
+                            let allIds = this.getAllChildrenIds(sub);
+                            let checkedIds = this.getIncludeIds(allIds, checkedKeys);
+                            if (checkedIds.length === allIds.length) {
+                                ids.push(`${sub.id}`);
                             } else {
+                                // 区县级
                                 sub.children.map((area) => {
                                     if (checkedKeys.includes(`${area.id}`)) {
-                                        ids.push(area.id);
+                                        ids.push(`${area.id}`);
                                     }
                                 });
                             }
                         } else {
                             if (checkedKeys.includes(`${sub.id}`)) {
-                                ids.push(sub.id);
+                                ids.push(`${sub.id}`);
                             }
                         }
                     });
@@ -141,11 +149,12 @@ class FreightAdd extends Component {
                 }
             } else {
                 if (checkedKeys.includes(`${item.id}`)) {
-                    ids.push(item.id);
+                    ids.push(`${item.id}`);
                 }
             }
         });
-        return ids.map((e) => `${e}`);
+        console.log(ids);
+        return ids;
     };
     handleCancel = () => {
         this.changeAreaListModal(false);
@@ -172,11 +181,8 @@ class FreightAdd extends Component {
     };
 
     render() {
-        const { form, areaList, freightAddLoading } = this.props;
-        const { visible, checkedKeys, checkedAreaKeys, checkedKeys2, dataSource, payType } = this.state;
-        const { getFieldDecorator } = form;
-        const areaListTree = Arr.toTree(areaList);
-
+        const { form: { getFieldDecorator }, freightAddLoading } = this.props;
+        const { visible, checkedKeys, checkedAreaKeys, rightCheckedKeys, correctIds, payType, areaListTree } = this.state;
         const selectTreeNodesData = this.getSelectTreeNodesData(areaListTree, checkedAreaKeys);
         const filterOutAreaList = this.filterAreaList(areaListTree);
         return (
@@ -228,13 +234,13 @@ class FreightAdd extends Component {
                         })(
                             <FreightAddTable
                                 changeAreaListModal={this.changeAreaListModal}
-                                dataSource={dataSource}
-                                areaList={areaList}
-                                getChildIds={this.getChildIds}
-                                getChildInCludes={this.getChildInCludes}
-                                editAreaList={this.editAreaList}
+                                dataSource={correctIds}
+                                areaListTree={areaListTree}
+                                getAllChildrenIds={this.getAllChildrenIds}
+                                getIncludeIds={this.getIncludeIds}
+                                editAreaListTree={this.editAreaListTree}
                                 changeDataSource={this.changeDataSource}
-                                delAreaList={this.delAreaList}
+                                delAreaListTree={this.delAreaListTree}
                                 payType={payType}
                             />
                         )}
@@ -287,6 +293,7 @@ class FreightAdd extends Component {
                         <View className={styles.view4}>
                             <Button
                                 onClick={() => {
+                                    console.log(checkedKeys,checkedAreaKeys)
                                     this.setState({
                                         checkedAreaKeys: [...checkedAreaKeys, ...checkedKeys],
                                         checkedKeys: []
@@ -299,7 +306,7 @@ class FreightAdd extends Component {
                             <Button
                                 onClick={() => {
                                     const newArray = [...checkedAreaKeys];
-                                    checkedKeys2.map((e) => {
+                                    rightCheckedKeys.map((e) => {
                                         const index = newArray.findIndex((a) => a === e);
                                         if (index !== -1) {
                                             newArray.splice(index, 1);
@@ -309,10 +316,10 @@ class FreightAdd extends Component {
                                     });
                                     this.setState({
                                         checkedAreaKeys: newArray,
-                                        checkedKeys2: []
+                                        rightCheckedKeys: []
                                     });
                                 }}
-                                disabled={checkedKeys2.length === 0}
+                                disabled={rightCheckedKeys.length === 0}
                                 type="danger"
                                 style={{ marginTop: 15 }}
                             >
@@ -329,15 +336,15 @@ class FreightAdd extends Component {
                             >
                                 <Tree
                                     checkable
-                                    onExpand={this.onExpand2}
-                                    expandedKeys={this.state.expandedKeys2}
-                                    autoExpandParent={this.state.autoExpandParent2}
-                                    onCheck={this.onCheck2}
-                                    checkedKeys={checkedKeys2}
-                                    onSelect={this.onSelect2}
-                                    selectedKeys={this.state.selectedKeys2}
+                                    onExpand={this.onRightExpand}
+                                    expandedKeys={this.state.rightExpandedKeys}
+                                    autoExpandParent={this.state.rightAutoExpandParent}
+                                    onCheck={this.onRightClick}
+                                    checkedKeys={rightCheckedKeys}
+                                    onSelect={this.onRightSelect}
+                                    selectedKeys={this.state.rightSelectedKeys}
                                 >
-                                    {this.renderTreeNodes2(selectTreeNodesData)}
+                                    {this.renderRightTreeNodes(selectTreeNodesData)}
                                 </Tree>
                             </ScrollView>
                         </View>
@@ -359,13 +366,12 @@ class FreightAdd extends Component {
     onSelect = (selectedKeys) => {
         this.setState({ selectedKeys });
     };
-    // data: AreaType, checkedKeys
-    renderTreeNodes = (data, checkedKeys) => {
+    renderTreeNodes = (areaListTree, checkedKeys) => {
         const newArray = [];
-        data.map(item => {
+        areaListTree.map(item => {
             if (item.children && item.children.length) {
-                const childItem = this.getChildIds(item);
-                const checkedItem = this.getChildInCludes(childItem, checkedKeys);
+                const childItem = this.getAllChildrenIds(item);
+                const checkedItem = this.getIncludeIds(childItem, checkedKeys);
                 if (checkedItem.length !== childItem.length) {
                     newArray.push(
                         <TreeNode title={item.name} key={item.id} dataRef={item}>
@@ -381,25 +387,25 @@ class FreightAdd extends Component {
         });
         return newArray;
     };
-    onExpand2 = (expandedKeys2) => {
+    onRightExpand = (rightExpandedKeys) => {
         this.setState({
-            expandedKeys2,
-            autoExpandParent2: false
+            rightExpandedKeys,
+            rightAutoExpandParent: false
         });
     };
-    onCheck2 = (checkedKeys2) => {
+    onRightClick = (rightCheckedKeys) => {
 
-        this.setState({ checkedKeys2 });
+        this.setState({ rightCheckedKeys });
     };
-    onSelect2 = (selectedKeys2) => {
-        this.setState({ selectedKeys2 });
+    onRightSelect = (rightSelectedKeys) => {
+        this.setState({ rightSelectedKeys });
     };
-    renderTreeNodes2 = (data) => {
+    renderRightTreeNodes = (data) => {
         return data.map(item => {
-            if (item.children && item.children.length) {
+            if (item.children.length>0) {
                 return (
                     <TreeNode title={item.name} key={item.id} dataRef={item}>
-                        {this.renderTreeNodes2(item.children)}
+                        {this.renderRightTreeNodes(item.children)}
                     </TreeNode>
                 );
             } else {
@@ -407,48 +413,36 @@ class FreightAdd extends Component {
             }
         });
     };
-    // data: AreaType, checkedKeys: IdsType
-    getSelectTreeNodesData = (data, checkedKeys) => {
-        const newArray = data.filter((item) => {
-            return checkedKeys.includes(`${item.id}`) || this.isChildInCludes(this.getChildIds(item), checkedKeys);
+    getSelectTreeNodesData = (areasListTree, checkedKeys) => {
+        const newArray = areasListTree.filter((item) => {
+            return checkedKeys.includes(`${item.id}`) || this.isChildrenInclude(this.getAllChildrenIds(item), checkedKeys);
         });
         const newArray2 = newArray.map((e) => {
-            const _children = [];
-            if (typeof e["children"] !== "undefined" && Array.isArray(e.children)) {
-                typeof e["children"] !== "undefined" && Array.isArray(e.children) && e.children.filter((item) => {
-                    return checkedKeys.includes(`${item.id}`) || this.isChildInCludes(this.getChildIds(item), checkedKeys);
-                });
-            }
-            return { ...e, children: _children };
+            const a = e.children.filter((item) => {
+                return checkedKeys.includes(`${item.id}`) || this.isChildrenInclude(this.getAllChildrenIds(item), checkedKeys);
+            });
+            return { ...e, children: a };
         });
         return newArray2.map((e) => {
-            if (typeof e["children"] !== "undefined" && Array.isArray(e.children)) {
-                const a = e.children.map((c) => {
-                    const d = c.children.filter((item) => {
-                        return checkedKeys.includes(`${item.id}`);
-                    });
-                    return {
-                        ...c,
-                        children: d
-                    };
+            const a = e.children.map((c) => {
+                const d = c.children.filter((item) => {
+                    return checkedKeys.includes(`${item.id}`);
                 });
                 return {
-                    ...e,
-                    children: a
+                    ...c,
+                    children: d
                 };
-            } else {
-                return {
-                    ...e,
-                    children: []
-                };
-            }
+            });
+            return {
+                ...e,
+                children: a
+            };
         });
     };
-    // itemArray: IdsType, selectArray: IdsType
-    getChildInCludes = (itemArray, selectArray) => {
-        return itemArray.filter((e) => selectArray.includes(e));
+    getIncludeIds = (areaIds, selectAreaIds) => {
+        return areaIds.filter((e) => selectAreaIds.includes(e));
     };
-    isChildInCludes = (ary = [], keyArray = []) => {
+    isChildrenInclude = (ary = [], keyArray = []) => {
         const e = keyArray.findIndex((e) => {
             return ary.includes(e);
         });
@@ -458,28 +452,23 @@ class FreightAdd extends Component {
             return true;
         }
     };
-    getChildIds = (e = {
-        id: number,
-        name: string,
-        children: []
-    }) => {
-        const newArray = [];
-        const newFunc = (c) => {
+    getAllChildrenIds = (e = { id: number, name: string, children: [] }) => {
+        const ids = [];
+        const _recursive = (c) => {
             if (c.children && c.children.length) {
                 c.children.map((a) => {
-                    newArray.push(`${a.id}`);
-                    newFunc(a);
+                    ids.push(`${a.id}`);
+                    _recursive(a);
                 });
             }
         };
-        newFunc(e);
-        return newArray;
+        _recursive(e);
+        return ids;
     };
-    // AreaType
-    filterAreaList = (areaList = []) => {
-        const { dataSource } = this.state;
+    filterAreaList = (areaListTree = []) => {
+        const { correctIds } = this.state;
         const checkedKeys = [];
-        dataSource.map((e) => {
+        correctIds.map((e) => {
             e.ids.map((id) => {
                 checkedKeys.push(id);
             });
@@ -487,64 +476,50 @@ class FreightAdd extends Component {
         const getItemIds = (e) => {
             return e.map((item) => (`${item.id}`));
         };
-        const newArray = areaList.filter((item) => {
-            if (typeof item["children"] !== "undefined" && Array.isArray(item.children) && item.children.length) {
-                if (checkedKeys.includes(`${item.id}`)) {
-                    return false;
-                } else {
-                    return this.getChildInCludes(getItemIds(item.children), checkedKeys).length !== item.children.length;
-                }
+        const newArray = areaListTree.filter((item) => {
+            if (checkedKeys.includes(`${item.id}`)) {
+                return false;
             } else {
-                return !checkedKeys.includes(`${item.id}`);
-            }
-        });
-        const newArray2 = newArray.map((e) => {
-            if (typeof e["children"] !== "undefined") {
-                const a = e.children.filter((item) => {
-                    if (typeof item["children"] !== "undefined" && Array.isArray(item.children) && item.children.length) {
-                        if (checkedKeys.includes(`${item.id}`)) {
-                            return false;
-                        } else {
-                            return this.getChildInCludes(getItemIds(item.children), checkedKeys).length !== item.children.length;
-                        }
-                    } else {
-                        return !checkedKeys.includes(`${item.id}`);
-                    }
-                });
-                return { ...e, children: a };
-            } else {
-                return { ...e, children: [] };
+                return this.getIncludeIds(getItemIds(item.children), checkedKeys).length !== item.children.length;
             }
 
         });
-        return newArray2.map((e) => {
-            if (typeof e["children"] !== "undefined" && Array.isArray(e.children) && e.children.length) {
-                const a = e.children.map((c) => {
-                    if (typeof c["children"] !== "undefined" && Array.isArray(c.children) && c.children.length) {
-                        const d = c.children.filter((item) => {
-                            return !checkedKeys.includes(`${item.id}`);
-                        });
-                        return {
-                            ...c,
-                            children: d
-                        };
+        const newArray2 = newArray.map((e) => {
+            const a = e.children.filter((item) => {
+                if (typeof item["children"] !== "undefined" && Array.isArray(item.children) && item.children.length) {
+                    if (checkedKeys.includes(`${item.id}`)) {
+                        return false;
                     } else {
-                        return {
-                            ...c,
-                            children: []
-                        };
+                        return this.getIncludeIds(getItemIds(item.children), checkedKeys).length !== item.children.length;
                     }
-                });
-                return {
-                    ...e,
-                    children: a
-                };
-            } else {
-                return {
-                    ...e,
-                    children: []
-                };
-            }
+                } else {
+                    return !checkedKeys.includes(`${item.id}`);
+                }
+            });
+            return { ...e, children: a };
+        });
+        return newArray2.map((e) => {
+            const a = e.children.map((c) => {
+                if (typeof c["children"] !== "undefined" && Array.isArray(c.children) && c.children.length) {
+                    const d = c.children.filter((item) => {
+                        return !checkedKeys.includes(`${item.id}`);
+                    });
+                    return {
+                        ...c,
+                        children: d
+                    };
+                } else {
+                    return {
+                        ...c,
+                        children: []
+                    };
+                }
+            });
+            return {
+                ...e,
+                children: a
+            };
+
         });
     };
 }

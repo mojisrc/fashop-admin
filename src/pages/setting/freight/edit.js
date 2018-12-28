@@ -70,14 +70,14 @@ export default class Edit extends Component {
         });
     };
 // : IdsType
-    editAreaList = (e, index) => {
+    editAreaListTree = (e, index) => {
         this.setState({
             visible: true,
             checkedAreaKeys: e,
             editAreaTableIndex: index
         });
     };
-    delAreaList = (index) => {
+    delAreaListTree = (index) => {
         const { tableDataSource } = this.state;
         const newArray = [...tableDataSource];
         newArray.splice(index, 1);
@@ -270,9 +270,9 @@ export default class Edit extends Component {
                                     areaList={areaList}
                                     getChildIds={this.getChildIds}
                                     getChildInCludes={this.getChildInCludes}
-                                    editAreaList={this.editAreaList}
+                                    editAreaListTree={this.editAreaListTree}
                                     changeTableDataSource={this.changeTableDataSource}
-                                    delAreaList={this.delAreaList}
+                                    delAreaListTree={this.delAreaListTree}
                                     payType={payType}
                                 />
                             )}

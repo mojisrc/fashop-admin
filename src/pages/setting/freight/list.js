@@ -5,9 +5,9 @@ import { View } from "@/components/flexView";
 import { connect } from "dva";
 import moment from "moment/moment";
 import { Modal } from "antd";
-import Query from "@/utils/query";
 import router from "umi/router";
 import PageList from "@/components/pageList";
+import Arr from "@/utils/array";
 
 @connect(({ freight: { list }, area, loading }) => ({
     freightList: list.result,
@@ -45,9 +45,9 @@ class FreightList extends Component {
         dispatch({
             type: "area/list",
             callback: (response) => {
-                var areaListByKey = {};
-                response.result.list.forEach(function(item) {
-                    areaListByKey[item.id] = item;
+                let areaListByKey = {};
+                response.result.list.map(function(item) {
+                    areaListByKey[`${item.id}`] = item;
                 });
                 this.setState({
                     areaListByKey
@@ -112,14 +112,14 @@ class FreightList extends Component {
                                 okText: "确认",
                                 okType: "danger",
                                 cancelText: "取消",
-                                onOk() {
-                                    dispatch({
+                                onOk: () => {
+                                    this.props.dispatch({
                                         type: "freight/del",
                                         payload: {
                                             id: record.id
                                         },
                                         callback: () => {
-                                            this.initList();
+                                            this.search.push();
                                         }
                                     });
                                 }
@@ -135,12 +135,63 @@ class FreightList extends Component {
                 dataIndex: "area_ids",
                 key: "area_ids",
                 className: `${styles.areas}`,
-                render: (area_ids) => {
+                render: (area_ids)=> {
+                    let areasIds = []
+                    let areasGroup = []
                     if (area_ids && area_ids.length > 0) {
-                        const areaNames = area_ids.map((id) => {
-                            return (typeof areaListByKey[id] !== "undefined" && typeof areaListByKey[id]["name"] !== "undefined") ? areaListByKey[id].name : "x";
+                        area_ids.map((id) => {
+                            let current = areaListByKey[id];
+                            if(!Arr.inArray(areasIds,current.id)){
+                                areasIds.push(current.id)
+                                areasGroup.push(current)
+                            }
+                            if (current["pid"] !== 0) {
+                                let city = areaListByKey[current["pid"]]
+                                if(!Arr.inArray(areasIds,city.id)){
+                                    areasIds.push(city.id)
+                                    areasGroup.push(city)
+                                }
+                                if(city['pid']!==0){
+                                    let province = areaListByKey[city["pid"]]
+                                    if(!Arr.inArray(areasIds,province.id)){
+                                        areasIds.push(province.id)
+                                        areasGroup.push(province)
+                                    }
+                                }
+                            }
                         });
-                        return areaNames.join(",");
+                        let areasGroupTree = Arr.toTreeFillChildren(areasGroup)
+                        return <span>
+                        {
+                            Array.isArray(areasGroupTree) && areasGroupTree.length > 0 &&  areasGroupTree.map((a, i) => {
+                                if (!a.children) {
+                                    return <span style={{ color: "#000" }} key={a.id}>{i === 0 ? null : "、"}{a.name}</span>;
+                                } else {
+                                    return (
+                                        <span style={{ color: "#000" }} key={a.id}>
+                                            {i === 0 ? null : "、"}{a.name}[
+                                            {a.children.map((b, j) => {
+                                                if (!b.children) {
+                                                    return <span style={{ color: "#555" }}
+                                                                 key={b.id}>{j === 0 ? null : "、"}{b.name}</span>;
+                                                } else {
+                                                    return (
+                                                        <span style={{ color: "#555" }} key={b.id}>
+                                                             {j === 0 ? null : "、"}
+                                                            {b.name}
+                                                            ({b.children.map((c, z) => (<span style={{ color: "#999" }}
+                                                                                           key={c.id}>{z === 0 ? null : "、"}{c.name}</span>))})
+                                                        </span>
+                                                    );
+                                                }
+                                            })}
+                                            ]
+                                        </span>
+                                    );
+                                }
+                            })
+                        }
+                    </span>;
                     } else {
                         return "-";
                     }

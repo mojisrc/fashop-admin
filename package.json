@@ -67,6 +67,7 @@
     "react-sortable-hoc": "^0.8.4",
     "react-web-dom": "^1.1.3",
     "reactcss": "^1.2.3",
+    "smart-arraytotree": "^1.1.0",
     "ws-web-utils": "^2.0.5"
   },
   "devDependencies": {
