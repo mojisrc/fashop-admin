@@ -160,7 +160,7 @@ class FreightList extends Component {
                                 }
                             }
                         });
-                        let areasGroupTree = Arr.toTreeFillChildren(areasGroup)
+                        let areasGroupTree = Arr.toTree(areasGroup)
                         return <span>
                         {
                             Array.isArray(areasGroupTree) && areasGroupTree.length > 0 &&  areasGroupTree.map((a, i) => {

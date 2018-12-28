@@ -64,6 +64,7 @@ export default class GoodsList extends Component {
         const { title, category_ids, sort_type, sale_state } = this.search.getParam();
         const tree = Arr.toTree(goodsCategory.list);
         const treeData = Antd.treeData(tree);
+
         // TreeSelect 只接受string
         let _category_ids = category_ids && category_ids.length ? [...category_ids] : [];
         const columns = [
