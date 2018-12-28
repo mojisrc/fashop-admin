@@ -2,11 +2,9 @@ import React, { Component } from "react";
 import { Input, Button, Modal, Form, Tree, message, Card } from "antd";
 import { Link } from "react-router-dom";
 import styles from "@/styles/freight/freightAdd.css";
-import PageHeaderWrapper from "@/components/pageHeaderWrapper";
 import FreightAddTable from "@/components/freight/addTable/index";
 import { connect } from "dva";
 import { View, ScrollView } from "@/components/flexView";
-import FreightApi from "@/services/freight";
 
 const FormItem = Form.Item;
 const TreeNode = Tree.TreeNode;
@@ -43,7 +41,7 @@ export default class Edit extends Component {
     };
 
     async componentDidMount() {
-        const { areaList, dispatch, location } = this.props;
+        const { areaList, dispatch } = this.props;
         const { id } = query.getParams();
         const e = await info({ params: { id } });
         if (e.code === 0) {

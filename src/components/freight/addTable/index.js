@@ -7,10 +7,10 @@ import styles from "./index.css";
 // type AreaType = Array<{
 //     id: number,
 //     name: string,
-//     _child: Array<{
+//     children: Array<{
 //         id: number,
 //         name: string,
-//         _child: Array<any>
+//         children: Array<any>
 //     }>
 // }>
 // type Props = {
@@ -139,12 +139,12 @@ export default class FreightAddTable extends Component {
                                             let childIds = getChildIds(item);
                                             return newArray = [...newArray, e, ...childIds];
                                         } else {
-                                            item._child.map((itemB) => {
+                                            item.children.map((itemB) => {
                                                 if (e === `${itemB.id}`) {
                                                     let childIds = getChildIds(itemB);
                                                     return newArray = [...newArray, e, ...childIds];
                                                 } else {
-                                                    itemB._child.map((itemC) => {
+                                                    itemB.children.map((itemC) => {
                                                         if (e === `${itemC.id}`) {
                                                             return newArray = [...newArray, e];
                                                         }
@@ -260,7 +260,7 @@ export default class FreightAddTable extends Component {
 
         let newArray = [];
         data.map(item => {
-            if (item._child.length) {
+            if (item.children.length) {
                 if (checkedKeys.includes(`${item.id}`)) {
                     newArray.push({
                         name: item.name,
@@ -271,7 +271,7 @@ export default class FreightAddTable extends Component {
                     let checkedItem = getChildInCludes(childItem, checkedKeys);
                     if (checkedItem.length > 0) {
                         let newArrayB = [];
-                        item._child.map((itemB) => {
+                        item.children.map((itemB) => {
                             let childItem = getChildIds(itemB);
                             let checkedItem = getChildInCludes(childItem, checkedKeys);
                             if (checkedKeys.includes(`${itemB.id}`)) {
@@ -281,7 +281,7 @@ export default class FreightAddTable extends Component {
                                 });
                             } else if (checkedItem.length > 0) {
                                 let newArrayC = [];
-                                itemB._child.map((itemC) => {
+                                itemB.children.map((itemC) => {
                                     if (checkedKeys.includes(`${itemC.id}`)) {
                                         newArrayC.push({
                                             name: itemC.name,
