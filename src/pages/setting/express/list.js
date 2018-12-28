@@ -154,7 +154,7 @@ class ExpressList extends Component {
                     <Table
                         columns={columns}
                         dataSource={expressList.list}
-                        loading={expressListLoading}
+                        loading={expressListLoading}cascader
                         rowKey={record => record.id}
                         pagination={{
                             showSizeChanger: false,
