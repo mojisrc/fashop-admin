@@ -14,7 +14,7 @@ const FormItem = Form.Item;
     shipperInfoLoading: loading.effects["shipper/info"],
     shipperEditLoading: loading.effects["shipper/edit"]
 }))
-export default class Edit extends Component {
+class ShipperEdit extends Component {
     static defaultProps = {
         areaList: [],
         areaListLoading: true,
@@ -89,7 +89,6 @@ export default class Edit extends Component {
         const cascaderData = Antd.cascaderData(tree);
         const { info } = this.state;
         const { name, contact_number, province_id, city_id, area_id, address } = info;
-        console.log(info);
         const { getFieldDecorator } = this.props.form;
         return (
             <Card bordered={false}>
@@ -170,3 +169,5 @@ export default class Edit extends Component {
         );
     }
 }
+
+export default ShipperEdit;
