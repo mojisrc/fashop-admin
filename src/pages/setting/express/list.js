@@ -1,5 +1,4 @@
 import React, { Component, Fragment } from "react";
-import PageHeaderWrapper from "@/components/pageHeaderWrapper";
 import { Card, Button, Table, Tag, Divider, Modal } from "antd";
 import styles from "./index.css";
 import router from "umi/router";
@@ -117,59 +116,57 @@ class ExpressList extends Component {
             }
         ];
         return (
-            <PageHeaderWrapper hiddenBreadcrumb={true}>
-                <Card bordered={false}>
-                    <PageList.Search
-                        loading={expressListLoading}
-                        onSubmit={this.search.submit}
-                        defaultValue={this.search.defaultParam}
-                        onReset={this.search.reset}
-                        items={[
-                            {
-                                selectInput: [
-                                    {
-                                        field: "keywords_type",
-                                        style: { minWidth: 115 },
-                                        initialValue: keywords_type,
-                                        data: keywords_type_list
-                                    },
-                                    {
-                                        field: "keywords",
-                                        placeholder: "请输入关键词",
-                                        initialValue: keywords
-                                    }
-                                ]
-                            }
-                        ]} />
-                    <div className={styles.batchView}>
-                        <Button
-                            type='primary'
-                            onClick={() => {
-                                router.push("/setting/deliver/express/add");
-                            }}
-                        >
-                            新增物流公司
-                        </Button>
-                    </div>
-                    <Table
-                        columns={columns}
-                        dataSource={expressList.list}
-                        loading={expressListLoading}cascader
-                        rowKey={record => record.id}
-                        pagination={{
-                            showSizeChanger: false,
-                            showQuickJumper: false,
-                            current: this.search.page,
-                            pageSize: this.search.rows,
-                            total: expressList.total_number
+            <Card bordered={false}>
+                <PageList.Search
+                    loading={expressListLoading}
+                    onSubmit={this.search.submit}
+                    defaultValue={this.search.defaultParam}
+                    onReset={this.search.reset}
+                    items={[
+                        {
+                            selectInput: [
+                                {
+                                    field: "keywords_type",
+                                    style: { minWidth: 115 },
+                                    initialValue: keywords_type,
+                                    data: keywords_type_list
+                                },
+                                {
+                                    field: "keywords",
+                                    placeholder: "请输入关键词",
+                                    initialValue: keywords
+                                }
+                            ]
+                        }
+                    ]} />
+                <div className={styles.batchView}>
+                    <Button
+                        type='primary'
+                        onClick={() => {
+                            router.push("/setting/deliver/express/add");
                         }}
-                        onChange={({ current }) => {
-                            this.search.setPage(current).push();
-                        }}
+                    >
+                        新增物流公司
+                    </Button>
+                </div>
+                <Table
+                    columns={columns}
+                    dataSource={expressList.list}
+                    loading={expressListLoading} cascader
+                    rowKey={record => record.id}
+                    pagination={{
+                        showSizeChanger: false,
+                        showQuickJumper: false,
+                        current: this.search.page,
+                        pageSize: this.search.rows,
+                        total: expressList.total_number
+                    }}
+                    onChange={({ current }) => {
+                        this.search.setPage(current).push();
+                    }}
 
-                    />
-                </Card>
-            </PageHeaderWrapper>
+                />
+            </Card>
         );
     }
 
