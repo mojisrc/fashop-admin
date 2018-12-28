@@ -3,7 +3,7 @@ import { Input, Button, Modal, Form, Tree, message, Card } from "antd";
 import { Link } from "react-router-dom";
 import styles from "@/styles/freight/freightAdd.css";
 import PageHeaderWrapper from "@/components/pageHeaderWrapper";
-import FreightAddTable from "@/components/setting/freightAddTable/index";
+import FreightAddTable from "@/components/freight/addTable/index";
 import { connect } from "dva";
 import { View, ScrollView } from "@/components/flexView";
 import FreightApi from "@/services/freight";
