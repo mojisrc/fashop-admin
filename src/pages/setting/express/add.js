@@ -1,31 +1,47 @@
 import React, { Component } from "react";
-import { Input, Button, Form, Switch,Card } from 'antd';
-import PageHeaderWrapper from '@/components/pageHeaderWrapper';
-import { connect } from 'dva';
+import { Input, Button, Form, Switch, Card, message } from "antd";
+import { connect } from "dva";
+import router from "umi/router";
+
 const FormItem = Form.Item;
 @Form.create()
-@connect()
+@connect(({ area, loading }) => ({
+    expressAddLoading: loading.effects["express/add"]
+}))
 export default class Add extends Component {
-    state = {}
+    static defaultProps = {
+        expressAddLoading: false
+    };
 
     handleSubmit = (e) => {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
             if (!err) {
-                const { dispatch } = this.props
-                let params = {
+                const { dispatch } = this.props;
+                let payload = {
                     company_name: values.company_name,
-                    is_commonly_use: values.is_commonly_use ? 1 : 0,
-                }
-                dispatch(add({ params }))
+                    is_commonly_use: values.is_commonly_use ? 1 : 0
+                };
+                dispatch({
+                    type: "express/add",
+                    payload,
+                    callback: (response) => {
+                        if (response.code === 0) {
+                            message.success("添加成功");
+                            router.goBack();
+                        } else {
+                            message.error(response.msg);
+                        }
+                    }
+                });
             }
         });
-    }
+    };
 
     render() {
-        const { getFieldDecorator } = this.props.form
+        const { expressAddLoading } = this.props;
+        const { getFieldDecorator } = this.props.form;
         return (
-            <PageHeaderWrapper hiddenBreadcrumb={true}>
             <Card bordered={false}>
                 <Form onSubmit={this.handleSubmit} style={{ width: 1000 }}>
                     <FormItem
@@ -33,8 +49,8 @@ export default class Add extends Component {
                         wrapperCol={{ span: 4 }}
                         label='物流公司名称'
                     >
-                        {getFieldDecorator('company_name', {
-                            rules: [{ required: true, message: '请输入物流公司名称' }],
+                        {getFieldDecorator("company_name", {
+                            rules: [{ required: true, message: "请输入物流公司名称" }]
                         })(
                             <Input
                                 placeholder="请输入物流公司名称"
@@ -46,9 +62,9 @@ export default class Add extends Component {
                         wrapperCol={{ span: 6 }}
                         label='设为常用'
                     >
-                        {getFieldDecorator('is_commonly_use', {
+                        {getFieldDecorator("is_commonly_use", {
                             initialValue: false,
-                            rules: [{ required: true, message: '请选择是否常用' }],
+                            rules: [{ required: true, message: "请选择是否常用" }]
                         })(
                             <Switch checkedChildren="是" unCheckedChildren="否" />
                         )}
@@ -59,13 +75,13 @@ export default class Add extends Component {
                         <Button
                             type="primary"
                             htmlType="submit"
+                            loading={expressAddLoading}
                         >
                             添加
                         </Button>
                     </FormItem>
                 </Form>
             </Card>
-            </PageHeaderWrapper>
-        )
+        );
     }
 }

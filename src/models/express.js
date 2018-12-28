@@ -51,6 +51,7 @@ export default {
                 type: "_del",
                 payload: response
             });
+            if (callback) callback(response);
         },
         * setCommonlyUse({ payload, callback }, { call, put }) {
             const response = yield call(express.setCommonlyUse, payload);
