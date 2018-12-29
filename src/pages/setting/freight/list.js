@@ -100,7 +100,7 @@ class FreightList extends Component {
                 render: (record) => <View className={styles.operation}>
                     <a
                         onClick={() => {
-                            router.push(`/setting/freight/edit?id=${record.id}`);
+                            router.push(`/setting/deliver/freight/edit?id=${record.id}`);
                         }}
                     >
                         编辑

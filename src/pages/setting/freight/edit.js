@@ -1,23 +1,32 @@
 import React, { Component } from "react";
-import { Input, Button, Modal, Form, Tree, message, Card } from "antd";
-import { Link } from "react-router-dom";
+import { Input, Button, Modal, Form, Tree, message, Card, Spin } from "antd";
 import styles from "@/styles/freight/freightAdd.css";
 import FreightAddTable from "@/components/freight/addTable/index";
 import { connect } from "dva";
+import Arr from "@/utils/array";
 import { View, ScrollView } from "@/components/flexView";
+import router from "umi/router";
 
 const FormItem = Form.Item;
 const TreeNode = Tree.TreeNode;
-@connect(({ app: { setting: { areaList } } }) => ({ areaList }))
+
 @Form.create()
-export default class Edit extends Component {
+@connect(({ area, freight, loading }) => ({
+    areaList: area.list.result.list,
+    freightInfo: freight.info.result,
+    areaListLoading: loading.effects["area/list"],
+    freightAddLoading: loading.effects["freight/add"],
+    freightInfoLoading: loading.effects["freight/info"]
+}))
+class FreightAdd extends Component {
+    static defaultProps = {
+        areaList: [],
+        areaListLoading: true,
+        freightAddLoading: false
+    };
     state = {
-        info: {
-            id: 0,
-            name: "",
-            pay_type: 1,
-            areas: []
-        },
+        info:{},
+        areaListTree: [],
         payType: 1,
         visible: false,
         expandedKeys: [],
@@ -26,163 +35,66 @@ export default class Edit extends Component {
         checkedKeys: [],
         selectedKeys: [],
 
-        expandedKeys2: [],
-        autoExpandParent2: true,
-        checkedKeys2: [],
-        selectedKeys2: [],
+        rightExpandedKeys: [],
+        rightAutoExpandParent: true,
+        rightCheckedKeys: [],
+        rightSelectedKeys: [],
 
         checkedAreaKeys: [],
 
-        tableDataSource: [],
+        correctIds: [],
 
-        editAreaTableIndex: null,
+        editAreaTableIndex: null
 
-        loading: false
     };
 
-    async componentDidMount() {
-        const { areaList, dispatch } = this.props;
-        const { id } = query.getParams();
-        const e = await info({ params: { id } });
-        if (e.code === 0) {
-            const { info } = e.result;
-            this.setState({
-                info,
-                tableDataSource: info.areas,
-                payType: info.pay_type
-            });
-        }
-        if (!areaList.length) {
-            dispatch(areaList());
-        }
-    }
-
-    changeTableDataSource = (index, key, value) => {
-        const { tableDataSource } = this.state;
-        const _tableDataSource = [...tableDataSource];
-        _tableDataSource[index][key] = value;
-        this.setState({ tableDataSource: _tableDataSource });
-    };
-    changeAreaListModal = (e) => {
-        this.setState({
-            visible: e,
-            checkedAreaKeys: []
-        });
-    };
-// : IdsType
-    editAreaListTree = (e, index) => {
-        this.setState({
-            visible: true,
-            checkedAreaKeys: e,
-            editAreaTableIndex: index
-        });
-    };
-    delAreaListTree = (index) => {
-        const { tableDataSource } = this.state;
-        const newArray = [...tableDataSource];
-        newArray.splice(index, 1);
-        this.setState({
-            tableDataSource: newArray
-        });
-    };
-// : AreaType
-    handleOk = (selectTreeNodesData) => {
-        const {
-            tableDataSource,
-            checkedAreaKeys,
-            editAreaTableIndex
-        } = this.state;
-        const {
-            areaList
-        } = this.props;
-        if (editAreaTableIndex !== null) {
-            const newArray = [...tableDataSource];
-            newArray[editAreaTableIndex].ids = this.getTreeNodesData(areaList, checkedAreaKeys);
-            this.setState({
-                tableDataSource: newArray,
-                checkedAreaKeys: [],
-                editAreaTableIndex: null
-            });
-        } else if (selectTreeNodesData.length > 0) {
-            this.setState({
-                tableDataSource: [...tableDataSource, {
-                    first_amount: 1,
-                    first_fee: 0.00,
-                    additional_amount: 1,
-                    additional_fee: 0.00,
-                    ids: this.getTreeNodesData(areaList, checkedAreaKeys)
-                }],
-                checkedAreaKeys: []
-            });
-        }
-        this.changeAreaListModal(false);
-    };
-// : AreaType   : IdsType
-    getTreeNodesData = (data, checkedKeys) => {
-        let newArray = [];
-        data.map(item => {
-            if (item._child.length) {
-                let childItem = this.getChildIds(item);
-                let checkedItem = this.getChildInCludes(childItem, checkedKeys);
-                if (checkedItem.length === childItem.length) {
-                    newArray.push(item.id);
-                } else if (checkedItem.length) {
-                    return item._child.map((itemB) => {
-                        if (itemB._child.length) {
-                            let childItem = this.getChildIds(itemB);
-                            let checkedItem = this.getChildInCludes(childItem, checkedKeys);
-                            if (checkedItem.length === childItem.length) {
-                                newArray.push(itemB.id);
-                            } else {
-                                itemB._child.map((itemC) => {
-                                    if (checkedKeys.includes(`${itemC.id}`)) {
-                                        newArray.push(itemC.id);
-                                    }
-                                });
-                            }
-                        } else {
-                            if (checkedKeys.includes(`${itemB.id}`)) {
-                                newArray.push(itemB.id);
-                            }
-                        }
+    componentDidMount() {
+        const { location: { query: { id } }, dispatch } = this.props;
+        dispatch({
+            type: "freight/info",
+            payload: { id },
+            callback: (e) => {
+                if (e.code === 0) {
+                    const { info } = e.result;
+                    this.setState({
+                        info,
+                        correctIds: info.areas,
+                        payType: info.pay_type
                     });
                 } else {
-                    return null;
+                    message.error(e.msg);
+                    router.goBack;
                 }
-            } else {
-                if (checkedKeys.includes(`${item.id}`)) {
-                    newArray.push(item.id);
-                }
+                dispatch({
+                    type: "area/list",
+                    callback: (response) => {
+                        this.setState({
+                            areaListTree: Arr.toTreeFillChildren(response.result.list)
+                        });
+                    }
+                });
+
             }
         });
-        return newArray.map((e) => `${e}`);
-    };
-    handleCancel = () => {
-        this.changeAreaListModal(false);
-    };
+    }
+
+
     handleSubmit = (e) => {
         e.preventDefault();
-        const {
-            validateFieldsAndScroll,
-            resetFields
-        } = this.props.form;
-        const { info } = this.state;
+        const { validateFieldsAndScroll } = this.props.form;
         validateFieldsAndScroll((err, values) => {
             if (!err) {
-                this.setState({
-                    loading: true
-                }, async () => {
-                    const e = await Fetch.fetch({
-                        api: FreightApi.edit,
-                        params: { ...values, ...{ id: info.id } }
-                    });
-                    if (e.code === 0) {
-                        resetFields();
-                        message.success("保存成功");
-                        router.push("/setting/deliver/freight");
-                    } else {
-                        this.setState({ loading: false });
-                        message.warn(e.msg);
+                const { location: { query: { id } }, dispatch } = this.props;
+                dispatch({
+                    type: "freight/edit",
+                    payload: Object.assign(values, { id }),
+                    callback: (e) => {
+                        if (e.code === 0) {
+                            message.success("保存成功");
+                            router.goBack();
+                        } else {
+                            message.warn(e.msg);
+                        }
                     }
                 });
             }
@@ -190,48 +102,13 @@ export default class Edit extends Component {
     };
 
     render() {
-        const {
-            form,
-            areaList
-        } = this.props;
-        const {
-            visible,
-            checkedKeys,
-            checkedAreaKeys,
-            checkedKeys2,
-            tableDataSource,
-            loading,
-            payType,
-            info
-        } = this.state;
-        const { getFieldDecorator } = form;
-        const formItemLayout = {
-            labelCol: {
-                xs: { span: 24 },
-                sm: { span: 2 }
-            },
-            wrapperCol: {
-                xs: { span: 24 },
-                sm: { span: 22 }
-            }
-        };
-        const tailFormItemLayout = {
-            wrapperCol: {
-                xs: {
-                    span: 24,
-                    offset: 0
-                },
-                sm: {
-                    span: 16,
-                    offset: 2
-                }
-            }
-        };
-        const selectTreeNodesData = this.getSelectTreeNodesData(areaList, checkedAreaKeys);
-        const filterOutAreaList = this.filterAreaList(areaList);
+        const { form: { getFieldDecorator }, freightAddLoading, freightInfoLoading } = this.props;
+        const { visible, checkedKeys, checkedAreaKeys, rightCheckedKeys, correctIds, payType, areaListTree, info } = this.state;
+        const selectTreeNodesData = this.getSelectTreeNodesData(areaListTree, checkedAreaKeys);
+        const filterOutAreaList = this.filterAreaList(areaListTree);
         return (
-            <PageHeaderWrapper hiddenBreadcrumb={true}>
-                <Card bordered={false}>
+            <Card bordered={false}>
+                <Spin size="large" spinning={freightInfoLoading}>
                     <Form onSubmit={this.handleSubmit}>
                         <FormItem
                             {...formItemLayout}
@@ -251,7 +128,7 @@ export default class Edit extends Component {
                             {...formItemLayout}
                             label='计费方式'
                         >
-                            <View>{info.pay_type === 1 ? "按件数" : "按重量"}</View>
+                            <span>{info.pay_type === 1 ? "按件数" : "按重量"}</span>
                         </FormItem>
                         <FormItem
                             {...formItemLayout}
@@ -266,12 +143,12 @@ export default class Edit extends Component {
                             })(
                                 <FreightAddTable
                                     changeAreaListModal={this.changeAreaListModal}
-                                    dataSource={tableDataSource}
-                                    areaList={areaList}
-                                    getChildIds={this.getChildIds}
-                                    getChildInCludes={this.getChildInCludes}
+                                    dataSource={correctIds}
+                                    areaListTree={areaListTree}
+                                    getAllChildrenIds={this.getAllChildrenIds}
+                                    getIncludeIds={this.getIncludeIds}
                                     editAreaListTree={this.editAreaListTree}
-                                    changeTableDataSource={this.changeTableDataSource}
+                                    changeDataSource={this.changeDataSource}
                                     delAreaListTree={this.delAreaListTree}
                                     payType={payType}
                                 />
@@ -284,13 +161,10 @@ export default class Edit extends Component {
                                 type="primary"
                                 htmlType="submit"
                                 style={{ marginRight: 20 }}
-                                loading={loading}
+                                loading={freightAddLoading}
                             >
                                 保存
                             </Button>
-                            <Link to={`/setting/deliver/freight`}>
-                                <Button>返回</Button>
-                            </Link>
                         </FormItem>
                     </Form>
                     <Modal
@@ -340,7 +214,7 @@ export default class Edit extends Component {
                                 <Button
                                     onClick={() => {
                                         const newArray = [...checkedAreaKeys];
-                                        checkedKeys2.map((e) => {
+                                        rightCheckedKeys.map((e) => {
                                             const index = newArray.findIndex((a) => a === e);
                                             if (index !== -1) {
                                                 newArray.splice(index, 1);
@@ -350,10 +224,10 @@ export default class Edit extends Component {
                                         });
                                         this.setState({
                                             checkedAreaKeys: newArray,
-                                            checkedKeys2: []
+                                            rightCheckedKeys: []
                                         });
                                     }}
-                                    disabled={checkedKeys2.length === 0}
+                                    disabled={rightCheckedKeys.length === 0}
                                     type="danger"
                                     style={{ marginTop: 15 }}
                                 >
@@ -370,50 +244,147 @@ export default class Edit extends Component {
                                 >
                                     <Tree
                                         checkable
-                                        onExpand={this.onExpand2}
-                                        expandedKeys={this.state.expandedKeys2}
-                                        autoExpandParent={this.state.autoExpandParent2}
-                                        onCheck={this.onCheck2}
-                                        checkedKeys={checkedKeys2}
-                                        onSelect={this.onSelect2}
-                                        selectedKeys={this.state.selectedKeys2}
+                                        onExpand={this.onRightExpand}
+                                        expandedKeys={this.state.rightExpandedKeys}
+                                        autoExpandParent={this.state.rightAutoExpandParent}
+                                        onCheck={this.onRightClick}
+                                        checkedKeys={rightCheckedKeys}
+                                        onSelect={this.onRightSelect}
+                                        selectedKeys={this.state.rightSelectedKeys}
                                     >
-                                        {this.renderTreeNodes2(selectTreeNodesData)}
+                                        {this.renderRightTreeNodes(selectTreeNodesData)}
                                     </Tree>
                                 </ScrollView>
                             </View>
                         </View>
                     </Modal>
-                </Card>
-            </PageHeaderWrapper>
+                </Spin>
+            </Card>
         );
     }
 
+    changeDataSource = (index, key, value) => {
+        const { correctIds } = this.state;
+        const _correctIds = [...correctIds];
+        _correctIds[index][key] = value;
+        this.setState({ correctIds: _correctIds });
+    };
+    changeAreaListModal = (e) => {
+        this.setState({
+            visible: e,
+            checkedAreaKeys: []
+        });
+    };
+    editAreaListTree = (e, index) => {
+        this.setState({
+            visible: true,
+            checkedAreaKeys: e,
+            editAreaTableIndex: index
+        });
+    };
+    delAreaListTree = (index) => {
+        const { correctIds } = this.state;
+        const _correctIds = [...correctIds];
+        _correctIds.splice(index, 1);
+        this.setState({ correctIds: _correctIds });
+    };
+    handleOk = (selectTreeNodesData) => {
+        const { correctIds, checkedAreaKeys, editAreaTableIndex, areaListTree } = this.state;
+        if (editAreaTableIndex !== null) {
+            const _correctIds = [...correctIds];
+            _correctIds[editAreaTableIndex].ids = this.correctCheckedAreaIds(areaListTree, checkedAreaKeys);
+            this.setState({
+                correctIds: _correctIds,
+                checkedAreaKeys: [],
+                editAreaTableIndex: null
+            });
+        } else if (selectTreeNodesData.length > 0) {
+            this.setState({
+                correctIds: [...correctIds, {
+                    first_amount: 1,
+                    first_fee: 0.00,
+                    additional_amount: 1,
+                    additional_fee: 0.00,
+                    ids: this.correctCheckedAreaIds(areaListTree, checkedAreaKeys)
+                }],
+                checkedAreaKeys: []
+            });
+        }
+        this.changeAreaListModal(false);
+    };
+    /**
+     * 纠正选择的地区id集合，如果父级包含了所有子集，返回父级id
+     * @param {[]} areaListTree
+     * @param {string[]} checkedKeys
+     * @returns {string[]}
+     */
+    correctCheckedAreaIds = (areaListTree, checkedKeys) => {
+        let ids = [];
+        areaListTree.map(item => {
+            if (item.children.length) {
+                let allIds = this.getAllChildrenIds(item);
+                let checkedIds = this.getIncludeIds(allIds, checkedKeys);
+                // 省级
+                if (checkedIds.length === allIds.length) {
+                    ids.push(`${item.id}`);
+                } else if (checkedIds.length) {
+                    // 市级
+                    return item.children.map((sub) => {
+                        if (sub.children.length) {
+                            let allIds = this.getAllChildrenIds(sub);
+                            let checkedIds = this.getIncludeIds(allIds, checkedKeys);
+                            if (checkedIds.length === allIds.length) {
+                                ids.push(`${sub.id}`);
+                            } else {
+                                // 区县级
+                                sub.children.map((area) => {
+                                    if (checkedKeys.includes(`${area.id}`)) {
+                                        ids.push(`${area.id}`);
+                                    }
+                                });
+                            }
+                        } else {
+                            if (checkedKeys.includes(`${sub.id}`)) {
+                                ids.push(`${sub.id}`);
+                            }
+                        }
+                    });
+                } else {
+                    return null;
+                }
+            } else {
+                if (checkedKeys.includes(`${item.id}`)) {
+                    ids.push(`${item.id}`);
+                }
+            }
+        });
+        return ids;
+    };
+    handleCancel = () => {
+        this.changeAreaListModal(false);
+    };
     onExpand = (expandedKeys) => {
         this.setState({
             expandedKeys,
             autoExpandParent: false
         });
     };
-// : IdsType
     onCheck = (checkedKeys) => {
         this.setState({ checkedKeys });
     };
-// : IdsType
     onSelect = (selectedKeys) => {
         this.setState({ selectedKeys });
     };
-// : AreaType : IdsType
-    renderTreeNodes = (data, checkedKeys) => {
+    renderTreeNodes = (areaListTree, checkedKeys) => {
         const newArray = [];
-        data.map(item => {
-            if (item._child && item._child.length) {
-                const childItem = this.getChildIds(item);
-                const checkedItem = this.getChildInCludes(childItem, checkedKeys);
+        areaListTree.map(item => {
+            if (item.children && item.children.length) {
+                const childItem = this.getAllChildrenIds(item);
+                const checkedItem = this.getIncludeIds(childItem, checkedKeys);
                 if (checkedItem.length !== childItem.length) {
                     newArray.push(
                         <TreeNode title={item.name} key={item.id} dataRef={item}>
-                            {this.renderTreeNodes(item._child, checkedKeys)}
+                            {this.renderTreeNodes(item.children, checkedKeys)}
                         </TreeNode>
                     );
                 }
@@ -425,26 +396,25 @@ export default class Edit extends Component {
         });
         return newArray;
     };
-// : IdsType
-    onExpand2 = (expandedKeys2) => {
+    onRightExpand = (rightExpandedKeys) => {
         this.setState({
-            expandedKeys2,
-            autoExpandParent2: false
+            rightExpandedKeys,
+            rightAutoExpandParent: false
         });
     };
-    onCheck2 = (checkedKeys2) => {
+    onRightClick = (rightCheckedKeys) => {
 
-        this.setState({ checkedKeys2 });
+        this.setState({ rightCheckedKeys });
     };
-    onSelect2 = (selectedKeys2) => {
-        this.setState({ selectedKeys2 });
+    onRightSelect = (rightSelectedKeys) => {
+        this.setState({ rightSelectedKeys });
     };
-    renderTreeNodes2 = (areas) => {
-        return areas.map(item => {
-            if (item._child && item._child.length) {
+    renderRightTreeNodes = (data) => {
+        return data.map(item => {
+            if (item.children.length > 0) {
                 return (
                     <TreeNode title={item.name} key={item.id} dataRef={item}>
-                        {this.renderTreeNodes2(item._child)}
+                        {this.renderRightTreeNodes(item.children)}
                     </TreeNode>
                 );
             } else {
@@ -452,37 +422,36 @@ export default class Edit extends Component {
             }
         });
     };
-    getSelectTreeNodesData = (areas, checkedKeys) => {
-        const newArray = areas.filter((item) => {
-            return checkedKeys.includes(`${item.id}`) || this.isChildInCludes(this.getChildIds(item), checkedKeys);
+    getSelectTreeNodesData = (areasListTree, checkedKeys) => {
+        const newArray = areasListTree.filter((item) => {
+            return checkedKeys.includes(`${item.id}`) || this.isChildrenInclude(this.getAllChildrenIds(item), checkedKeys);
         });
         const newArray2 = newArray.map((e) => {
-            const a = e._child.filter((item) => {
-                return checkedKeys.includes(`${item.id}`) || this.isChildInCludes(this.getChildIds(item), checkedKeys);
+            const a = e.children.filter((item) => {
+                return checkedKeys.includes(`${item.id}`) || this.isChildrenInclude(this.getAllChildrenIds(item), checkedKeys);
             });
-            return { ...e, _child: a };
+            return { ...e, children: a };
         });
         return newArray2.map((e) => {
-            const a = e._child.map((c) => {
-                const d = c._child.filter((item) => {
+            const a = e.children.map((c) => {
+                const d = c.children.filter((item) => {
                     return checkedKeys.includes(`${item.id}`);
                 });
                 return {
                     ...c,
-                    _child: d
+                    children: d
                 };
             });
             return {
                 ...e,
-                _child: a
+                children: a
             };
         });
     };
-// : IdsType
-    getChildInCludes = (itemArray, selectArray) => {
-        return itemArray.filter((e) => selectArray.includes(e));
+    getIncludeIds = (areaIds, selectAreaIds) => {
+        return areaIds.filter((e) => selectAreaIds.includes(e));
     };
-    isChildInCludes = (ary = [], keyArray = []) => {
+    isChildrenInclude = (ary = [], keyArray = []) => {
         const e = keyArray.findIndex((e) => {
             return ary.includes(e);
         });
@@ -492,29 +461,23 @@ export default class Edit extends Component {
             return true;
         }
     };
-    getChildIds = (e = {
-        id: number,
-        name: string,
-        _child: []
-    }) => {
-        const newArray = [];
-        const newFunc = (c) => {
-            if (c._child && c._child.length) {
-                c._child.map((a) => {
-                    newArray.push(`${a.id}`);
-                    newFunc(a);
+    getAllChildrenIds = (e = { id: number, name: string, children: [] }) => {
+        const ids = [];
+        const _recursive = (c) => {
+            if (c.children && c.children.length) {
+                c.children.map((a) => {
+                    ids.push(`${a.id}`);
+                    _recursive(a);
                 });
             }
         };
-        newFunc(e);
-        return newArray;
+        _recursive(e);
+        return ids;
     };
-    filterAreaList = (areaList= []) => {
-        const {
-            tableDataSource
-        } = this.state;
+    filterAreaList = (areaListTree = []) => {
+        const { correctIds } = this.state;
         const checkedKeys = [];
-        tableDataSource.map((e) => {
+        correctIds.map((e) => {
             e.ids.map((id) => {
                 checkedKeys.push(id);
             });
@@ -522,45 +485,74 @@ export default class Edit extends Component {
         const getItemIds = (e) => {
             return e.map((item) => (`${item.id}`));
         };
-        const newArray = areaList.filter((item) => {
-            if (item._child.length) {
-                if (checkedKeys.includes(`${item.id}`)) {
-                    return false;
-                } else {
-                    return this.getChildInCludes(getItemIds(item._child), checkedKeys).length !== item._child.length;
-                }
+        const newArray = areaListTree.filter((item) => {
+            if (checkedKeys.includes(`${item.id}`)) {
+                return false;
             } else {
-                return !checkedKeys.includes(`${item.id}`);
+                return this.getIncludeIds(getItemIds(item.children), checkedKeys).length !== item.children.length;
             }
+
         });
         const newArray2 = newArray.map((e) => {
-            const a = e._child.filter((item) => {
-                if (item._child.length) {
+            const a = e.children.filter((item) => {
+                if (typeof item["children"] !== "undefined" && Array.isArray(item.children) && item.children.length) {
                     if (checkedKeys.includes(`${item.id}`)) {
                         return false;
                     } else {
-                        return this.getChildInCludes(getItemIds(item._child), checkedKeys).length !== item._child.length;
+                        return this.getIncludeIds(getItemIds(item.children), checkedKeys).length !== item.children.length;
                     }
                 } else {
                     return !checkedKeys.includes(`${item.id}`);
                 }
             });
-            return { ...e, _child: a };
+            return { ...e, children: a };
         });
         return newArray2.map((e) => {
-            const a = e._child.map((c) => {
-                const d = c._child.filter((item) => {
-                    return !checkedKeys.includes(`${item.id}`);
-                });
-                return {
-                    ...c,
-                    _child: d
-                };
+            const a = e.children.map((c) => {
+                if (typeof c["children"] !== "undefined" && Array.isArray(c.children) && c.children.length) {
+                    const d = c.children.filter((item) => {
+                        return !checkedKeys.includes(`${item.id}`);
+                    });
+                    return {
+                        ...c,
+                        children: d
+                    };
+                } else {
+                    return {
+                        ...c,
+                        children: []
+                    };
+                }
             });
             return {
                 ...e,
-                _child: a
+                children: a
             };
+
         });
     };
 }
+
+const formItemLayout = {
+    labelCol: {
+        xs: { span: 24 },
+        sm: { span: 2 }
+    },
+    wrapperCol: {
+        xs: { span: 24 },
+        sm: { span: 22 }
+    }
+};
+const tailFormItemLayout = {
+    wrapperCol: {
+        xs: {
+            span: 24,
+            offset: 0
+        },
+        sm: {
+            span: 16,
+            offset: 2
+        }
+    }
+};
+export default FreightAdd;

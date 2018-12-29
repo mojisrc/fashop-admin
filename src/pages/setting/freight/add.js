@@ -153,7 +153,6 @@ class FreightAdd extends Component {
                 }
             }
         });
-        console.log(ids);
         return ids;
     };
     handleCancel = () => {
@@ -293,7 +292,6 @@ class FreightAdd extends Component {
                         <View className={styles.view4}>
                             <Button
                                 onClick={() => {
-                                    console.log(checkedKeys,checkedAreaKeys)
                                     this.setState({
                                         checkedAreaKeys: [...checkedAreaKeys, ...checkedKeys],
                                         checkedKeys: []

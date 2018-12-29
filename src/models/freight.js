@@ -4,9 +4,9 @@ export default {
     namespace: "freight",
     state: {
         list: {
-            result: { list: [] ,total_number:0 }
+            result: { list: [], total_number: 0 }
         },
-        info: {},
+        info: { result: { info: {} } },
         add: {},
         edit: {},
         del: {}
