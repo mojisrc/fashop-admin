@@ -1,5 +1,6 @@
 import { message } from "antd";
 import defaultSettings from "../defaultSettings";
+import setting from "@/services/setting";
 
 let lessNodesAppended;
 const updateTheme = primaryColor => {
@@ -69,8 +70,62 @@ const updateColorWeak = colorWeak => {
 
 export default {
     namespace: "setting",
-    state: defaultSettings,
+    state: Object.assign(defaultSettings, {
+        info: {
+            result: {
+                info: {}
+            },
+            info: { result: { info: {} } },
+            add: {},
+            edit: {}
+        }
+    }),
+    effects: {
+        * info({ payload, callback }, { call, put }) {
+            const response = yield call(setting.info, payload);
+            yield put({
+                type: "_info",
+                payload: response
+            });
+            if (callback) callback(response);
+        },
+        * add({ payload, callback }, { call, put }) {
+            const response = yield call(setting.add, payload);
+            yield put({
+                type: "_add",
+                payload: response
+            });
+            if (callback) callback(response);
+        },
+        * edit({ payload, callback }, { call, put }) {
+            const response = yield call(setting.edit, payload);
+            yield put({
+                type: "_edit",
+                payload: response
+            });
+            if (callback) callback(response);
+        }
+
+    },
     reducers: {
+        _info(state, action) {
+            return {
+                ...state,
+                info: action.payload
+            };
+        },
+        _add(state, action) {
+            return {
+                ...state,
+                add: action.payload
+            };
+        },
+        _edit(state, action) {
+            return {
+                ...state,
+                edit: action.payload
+            };
+        },
         getSetting(state) {
             const setting = {};
             const urlParams = new URL(window.location.href);
