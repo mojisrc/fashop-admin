@@ -1,5 +1,7 @@
 export default {
-    "GET /admin/setting/info": info
+    "GET /admin/setting/info": info,
+    "POST /admin/setting/add": { code: 0 },
+    "POST /admin/setting/edit": { code: 0 }
 };
 
 function info(req, res) {
