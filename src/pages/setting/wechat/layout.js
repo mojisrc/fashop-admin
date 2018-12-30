@@ -3,18 +3,15 @@ import router from 'umi/router';
 import { connect } from 'dva';
 import PageHeaderWrapper from '@/components/pageHeaderWrapper';
 @connect()
-class DeliverLayout extends Component {
+class WechatLayout extends Component {
     handleTabChange = key => {
         const { match } = this.props;
         switch (key) {
-            case 'shipper':
-                router.push(`${match.url}/shipper`);
+            case 'base':
+                router.push(`${match.url}/base`);
                 break;
-            case 'express':
-                router.push(`${match.url}/express`);
-                break;
-            case 'freight':
-                router.push(`${match.url}/freight`);
+            case 'miniTemplate':
+                router.push(`${match.url}/miniTemplate`);
                 break;
             default:
                 break;
@@ -24,16 +21,12 @@ class DeliverLayout extends Component {
     render() {
         const tabList = [
             {
-                key: 'shipper',
-                tab: '商家地址库',
+                key: 'base',
+                tab: '基础设置',
             },
             {
-                key: 'express',
-                tab: '物流管理',
-            },
-            {
-                key: 'freight',
-                tab: '运费模板',
+                key: 'miniTemplate',
+                tab: '小程序模板消息',
             }
         ];
 
@@ -52,4 +45,4 @@ class DeliverLayout extends Component {
     }
 }
 
-export default DeliverLayout;
+export default WechatLayout;

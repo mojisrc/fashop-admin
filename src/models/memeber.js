@@ -73,16 +73,19 @@ export default {
         },
         * logout({ payload, callback }, { call, put }) {
             reloadAuthorized();
-            yield put(
-                routerRedux.push({
-                    pathname: "/login",
-                    search: stringify({
-                        redirect: window.location.href
-                    })
-                })
-            );
             localStorage.setItem("token", null);
-            if (callback) callback(response);
+            if (callback){
+                callback(response)
+            }else{
+                yield put(
+                    routerRedux.push({
+                        pathname: "/login",
+                        search: stringify({
+                            redirect: window.location.href
+                        })
+                    })
+                );
+            }
         },
         * self({ payload, callback }, { call, put }) {
             const response = yield call(member.self, payload);

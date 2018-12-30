@@ -69,6 +69,13 @@ export default [
                 ]
             },
             {
+                path: "/member",
+                routes: [
+                    { path: "/member", redirect: "/member/self" },
+                    { path: "/member/self", component: "/member/self" }
+                ]
+            },
+            {
                 path: "/setting",
                 name: "设置",
                 routes: [
@@ -92,7 +99,14 @@ export default [
 
                     },
                     { path: "/setting/order", name: "订单配置", component: "/setting/order" },
-                    { path: "/setting/wechat", name: "微信配置", component: "/setting/wechat" },
+                    {
+                        path: "/setting/wechat", name: "微信配置", component: "/setting/wechat/layout",
+                        routes: [
+                            { path: "/setting/wechat", redirect: "/setting/wechat/base" },
+                            { path: "/setting/wechat/base", component: "/setting/wechat/base" },
+                            { path: "/setting/wechat/miniTemplate", component: "/setting/wechat/miniTemplate" }
+                        ]
+                    },
                     { path: "/setting/alipay", name: "支付宝配置", component: "/setting/alipay" },
                     { path: "/setting/sms", name: "短信配置", component: "/setting/sms" }
                 ]

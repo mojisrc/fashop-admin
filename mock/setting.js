@@ -6,7 +6,7 @@ export default {
 
 function info(req, res) {
     const params = req.query;
-    switch (params.type) {
+    switch (params.key) {
         case "alidayu":
             alidayu(req, res);
             break;
@@ -38,15 +38,17 @@ function alidayu(req, res) {
                     template_list: {
                         "register": {
                             "template_id": "SMS_xxxxx",
-                            "template_name": "注册验证码",
+                            "template_name": "注册",
                             "template_variable": "code",
-                            "template_status": 1
+                            "template_status": 1,
+                            "template_content": "您的验证码：${code}，如非本人操作，请忽略本短信！"
                         },
                         "find_password": {
                             "template_id": "SMS_xxxxx",
-                            "template_name": "找回密码验证码",
+                            "template_name": "找回密码",
                             "template_variable": "code",
-                            "template_status": 1
+                            "template_status": 1,
+                            "template_content": "您的验证码：${code}，如非本人操作，请忽略本短信！"
                         }
                     }
                 }
@@ -70,22 +72,26 @@ function wechatMiniTemplate(req, res) {
                         "order_pay_success": {
                             "template_id": "Y1blRZEdiqSXSDOfiKT9rG4oEmlpfeq_rjcpuuo",
                             "template_name": "订单支付成功",
-                            "template_status": 1
+                            "template_status": 1,
+                            "template_content": "1.订单号 2.订单总额 3.订单商品名称 4.下单时间 5.商品数量"
                         },
                         "order_pay_fail": {
                             "template_id": "Y1blRZEdiqSXSDOfiKT9rG4oEmlpfeq_rjcpuuo",
                             "template_name": "订单支付失败",
-                            "template_status": 1
+                            "template_status": 1,
+                            "template_content": "1.订单号 2.订单总额 3.订单商品名称 4.下单时间 5.商品数量"
                         },
                         "order_cancel": {
                             "template_id": "Y1blRZEdiqSXSDOfiKT9rG4oEmlpfeq_rjcpuuo",
                             "template_name": "订单取消",
-                            "template_status": 1
+                            "template_status": 1,
+                            "template_content": "1.订单号 2.订单总额 3.订单商品名称 4.下单时间 5.商品数量"
                         },
                         "order_refund_apply": {
                             "template_id": "Y1blRZEdiqSXSDOfiKT9rG4oEmlpfeq_rjcpuuo",
                             "template_name": "订单退款申请",
-                            "template_status": 1
+                            "template_status": 1,
+                            "template_content": "1.订单号 2.订单总额 3.订单商品名称 4.下单时间 5.商品数量"
                         }
                     }
                 }

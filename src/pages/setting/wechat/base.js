@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "dva";
 import { Card } from "antd";
-import PageHeaderWrapper from "@/components/pageHeaderWrapper";
 import { Alert, Switch, Form, Input, Button, message, Upload, Icon, Spin } from "antd";
 
 const FormItem = Form.Item;
@@ -149,18 +148,17 @@ class Payment extends Component {
         const token = JSON.parse(localStorage.getItem("token"));
         const headers = { "Access-Token": token.accessToken };
         return (
-            <PageHeaderWrapper hiddenBreadcrumb={true}>
                 <Card bordered={false}>
                     <Spin size="large" spinning={paymentInfoLoading}>
                         <Alert
                             message="注意：App手机登录、微信登录用户打通"
                             description={
-                                <p>
+                                <span>
                                     如果您使用了App并且使用了手机登录和微信登录方式，请去配置微信开放平台绑定它们之间的关系，
                                     <a href={`https://www.fashop.cn/help/login-ways`} target="_blank">
                                         详情请见
                                     </a>
-                                </p>
+                                </span>
                             }
                             type="info"
                             showIcon
@@ -168,8 +166,7 @@ class Payment extends Component {
                         <Form
                             onSubmit={this.handleSubmit}
                             style={{
-                                width: "88%",
-                                marginTop: 48
+                                marginTop: 24
                             }}
                         >
                             <FormItem
@@ -300,7 +297,6 @@ class Payment extends Component {
                         </Form>
                     </Spin>
                 </Card>
-            </PageHeaderWrapper>
         );
     }
 

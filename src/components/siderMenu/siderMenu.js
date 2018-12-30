@@ -7,6 +7,7 @@ import PageLoading from "../pageLoading";
 import { getDefaultCollapsedSubMenus } from "./siderMenuUtils";
 
 const BaseMenu = React.lazy(() => import("./baseMenu"));
+const LeftFooter = React.lazy(() => import("./leftFooter"));
 const { Sider } = Layout;
 
 export default class SiderMenu extends PureComponent {
@@ -83,6 +84,7 @@ export default class SiderMenu extends PureComponent {
                         style={{ padding: "16px 0", width: "100%" }}
                         {...defaultProps}
                     />
+                    <LeftFooter />
                 </Suspense>
             </Sider>
         );

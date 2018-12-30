@@ -1,7 +1,6 @@
 import React, { Component, Fragment } from "react";
 import { connect } from "dva";
-import PageHeaderWrapper from "@/components/pageHeaderWrapper";
-import { Switch, Form, Input, Button, message, Spin, Card, Table } from "antd";
+import { Switch, Form, Input, Button, message, Spin, Card, Table, Alert } from "antd";
 
 const FormItem = Form.Item;
 
@@ -10,7 +9,7 @@ const FormItem = Form.Item;
     settingInfoLoading: loading.effects["setting/info"],
     settingEditLoading: loading.effects["setting/edit"]
 }))
-class Sms extends Component {
+class MiniTemplate extends Component {
     static defaultProps = {
         settingInfoLoading: true,
         settingInfo: { info: {} }
@@ -48,7 +47,7 @@ class Sms extends Component {
         dispatch({
             type: "setting/info",
             payload: {
-                key: "alidayu"
+                key: "wechat_mini_template"
             },
             callback: (response) => {
                 if (response.code === 0) {
@@ -70,16 +69,13 @@ class Sms extends Component {
         this.props.form.validateFieldsAndScroll((err, values) => {
             if (!err) {
                 console.log(values);
-                const { access_key_id, access_key_secret, signature, template_list, status } = values;
+                const { template_list, status } = values;
                 const { dispatch } = this.props;
                 dispatch({
                     type: "setting/edit",
                     payload: {
-                        key: "alipay",
+                        key: "wechat_mini_template",
                         config: {
-                            access_key_id,
-                            access_key_secret,
-                            signature,
                             template_list
                         },
                         status: status ? 1 : 0
@@ -133,7 +129,7 @@ class Sms extends Component {
                             {getFieldDecorator(`template_list.${key}.template_id`, {
                                 rules: [
                                     {
-                                        message: "请输入，如：SMS_xxxxx"
+                                        message: "请输入，如：Y1blRZEdiq........."
                                     }
                                 ],
                                 initialValue: template_list[key].template_id
@@ -142,64 +138,52 @@ class Sms extends Component {
                     </Fragment>,
                     content: template_list[key].template_content
                 });
-            })
+            });
             return arr;
         })(info.config.template_list);
         return (
-            <PageHeaderWrapper hiddenBreadcrumb={true}>
-                <Card title={<div>
-                    阿里云短信
-                    <a href={`https://www.fashop.cn/help/sms`} target="_blank"
-                       style={{ fontSize: 14, marginLeft: 15, fontWeight: 400 }}>
-                        如何申请？
-                    </a>
-                </div>} bordered={false}>
-                    <Spin size="large" spinning={settingInfoLoading}>
-                        <Form
-                            onSubmit={this.handleSubmit}
-                            style={{}}
-                        >
-                            <FormItem
-                                {...formItemLayout}
-                                label="Access KeyID"
-                            >
-                                {getFieldDecorator("access_key_id", {
-                                    initialValue: info.access_key_id??""
-                                })(<Input placeholder="请输入" style={{ width: "auto", minWidth: 300 }} />)}
-                            </FormItem>
-                            <FormItem {...formItemLayout} label="Access KeySecret">
-                                {getFieldDecorator("access_key_secret", {
-                                    initialValue: info.access_key_secret??""
-                                })(<Input placeholder="请输入" style={{ width: "auto", minWidth: 300 }} />)}
-                            </FormItem>
-                            <FormItem {...formItemLayout} label="短信签名">
-                                {getFieldDecorator("private_key", {
-                                    initialValue: info.signature??""
-                                })(<Input placeholder="请输入，如FaShop" style={{ width: "auto", minWidth: 100 }} />)}
-                            </FormItem>
-                            <FormItem {...formItemLayout} label="使用场景" className="ant-form-item-table-style">
-                                {getFieldDecorator("private_key", {
-                                    initialValue: info.signature??""
-                                })(<Table bordered={true} columns={columns} dataSource={data} pagination={false} />)}
-                                <a href={`https://www.fashop.cn/help/sms#如何获得模板ID`} target="_blank">
-                                    如何获取模板ID？
-                                </a>
-                            </FormItem>
-                            <FormItem {...formItemLayout} label="是否开启" extra={"关闭后，短信提醒功能将不可使用"}>
-                                {getFieldDecorator("status", {
-                                    valuePropName: "checked",
-                                    initialValue: info.status === 1
-                                })(<Switch />)}
-                            </FormItem>
-                            <FormItem {...tailFormItemLayout}>
-                                <Button type="primary" htmlType="submit" loading={settingEditLoading}>
-                                    保存
-                                </Button>
-                            </FormItem>
-                        </Form>
-                    </Spin>
-                </Card>
-            </PageHeaderWrapper>
+            <Card bordered={false}>
+                <Spin size="large" spinning={settingInfoLoading}>
+                    <Alert
+                        description={
+                            <span style={{ fontWidth: 400 }}>
+                                    模板消息仅用于微信小程序向用户发送服务通知，因微信限制，每笔支付订单可允许向用户在7天内推送最多3条模板消息。
+                                    <a href={`https://www.fashop.cn/help/wechat-mini-template`} target="_blank">
+                                        详情请见
+                                    </a>
+                                </span>
+                        }
+                        type="info"
+                        showIcon
+                    />
+                    <Form
+                        onSubmit={this.handleSubmit}
+                        style={{
+                            marginTop: 24
+                        }}
+                    >
+                        <FormItem {...formItemLayout} label="使用场景" className="ant-form-item-table-style">
+                            {getFieldDecorator("private_key", {
+                                initialValue: info.signature ?? ""
+                            })(<Table bordered={true} columns={columns} dataSource={data} pagination={false} />)}
+                            <a href={`https://www.fashop.cn/help/sms#如何获得模板ID`} target="_blank">
+                                如何获取模板ID？
+                            </a>
+                        </FormItem>
+                        <FormItem {...formItemLayout} label="是否开启" extra={"关闭后，短信提醒功能将不可使用"}>
+                            {getFieldDecorator("status", {
+                                valuePropName: "checked",
+                                initialValue: info.status === 1
+                            })(<Switch />)}
+                        </FormItem>
+                        <FormItem {...tailFormItemLayout}>
+                            <Button type="primary" htmlType="submit" loading={settingEditLoading}>
+                                保存
+                            </Button>
+                        </FormItem>
+                    </Form>
+                </Spin>
+            </Card>
         );
     }
 }
@@ -207,11 +191,11 @@ class Sms extends Component {
 const formItemLayout = {
     labelCol: {
         xs: { span: 24 },
-        sm: { span: 3 }
+        sm: { span: 2 }
     },
     wrapperCol: {
         xs: { span: 24 },
-        sm: { span: 16 }
+        sm: { span: 22 }
     }
 };
 const tailFormItemLayout = {
@@ -222,8 +206,8 @@ const tailFormItemLayout = {
         },
         sm: {
             span: 10,
-            offset: 3
+            offset: 2
         }
     }
 };
-export default Sms;
+export default MiniTemplate;
