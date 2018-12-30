@@ -5,41 +5,8 @@ import { View } from "@/components/flexView";
 import { connect } from "dva";
 import moment from "moment/moment";
 import Image from "@/components/image/index";
-import { getOrderList } from "@/actions/order";
-import Query from "@/utils/query";
-// type Props = {
-//     user_id: number,
-//     history: historyType,
-//     dispatch: dispatchType,
-//     orderListLoading: boolean,
-//     getOrderList: Function,
-//     orderList: {
-//         page: number,
-//         rows: number,
-//         total_number: number,
-//         list: Array<{
-//             extend_order_extend: {
-//                 reciver_name: string,
-//                 reciver_info: {
-//                     address: string,
-//                     name: string,
-//                     phone: string,
-//                     rows?: number
-//                 },
-//                 remark: string,
-//             },
-//             extend_order_goods: Array<{
-//                 reciver_info: {
-//                     address: string,
-//                     name: string,
-//                     phone: string,
-//                     rows?: number
-//                 },
-//                 rows: number
-//             }>
-//         }>,
-//     },
-// }
+import PageList from "@/components/pageList";
+import router from "umi/router";
 @connect(({ order, loading }) => ({
     orderList: order.list.result,
     orderListLoading: loading.effects["order/list"]
@@ -47,7 +14,8 @@ import Query from "@/utils/query";
 export default class OrderManagementTable extends Component {
     static defaultProps = {
         orderListLoading: false,
-        orderList: {}
+        orderList: {},
+        user_id: 0
     };
     state = {
         page: 1,
@@ -59,37 +27,35 @@ export default class OrderManagementTable extends Component {
         this.initList();
     }
 
-    initList() {
-        const { dispatch, user_id } = this.props;
-        const get = Query.make([
-            { key: "state", rule: ["eq", "all"] },
-            { key: "keywords_type", rule: ["rely", "keywords"] }
-        ]);
-        if (get["create_time"] !== undefined) {
-            get["create_time"] = [moment(get["create_time"][0]).unix(), moment(get["create_time"][1]).unix()];
+    search = new PageList({
+        refresh: (e) => {
+            this.initList(e);
         }
-        params["user_ids"] = [user_id];
+    });
 
+    initList = () => {
+        const { dispatch, user_id } = this.props;
         dispatch({
             type: "order/list",
             payload: {
-                page: get.page,
-                rows: get.rows
+                page: this.search.page,
+                rows: this.search.rows,
+                user_ids: [user_id]
             },
             callback: (response) => {
                 const { result: { list } } = response;
                 this.setState({
-                    get,
                     expandedRowKeys: Array.isArray(list) ? list.map((item) => item.id) : []
                 });
             }
         });
-    }
+    };
 
     render() {
         const { orderList, orderListLoading } = this.props;
+        let { expandedRowKeys } = this.state;
         let { list } = orderList;
-        if (list) {
+        if (Array.isArray(list)) {
             list.map((item) => {
                 item.extend_order_goods.map((goods) => {
                     goods["reciver_info"] = item.extend_order_extend.reciver_info;
@@ -99,6 +65,7 @@ export default class OrderManagementTable extends Component {
                 return item;
             });
         }
+
         const columns = [
             {
                 title: "订单号",
@@ -113,8 +80,8 @@ export default class OrderManagementTable extends Component {
                 }
             }, {
                 title: "订单状态",
-                dataIndex: "state_type",
-                key: "state_type",
+                dataIndex: "state",
+                key: "state",
                 render: (text) => <span>{this.returnOrderState(text)}</span>
             },
             {
@@ -217,57 +184,58 @@ export default class OrderManagementTable extends Component {
                 }
             }
         ];
-        return (
-            <View>
-                {orderList.list ? <Table
-                    loading={orderListLoading}
-                    dataSource={orderList.list ? orderList.list : []}
-                    columns={columns}
-                    expandedRowRender={record => (
-                        <Table
 
-                            dataSource={record.extend_order_goods ? record.extend_order_goods : []}
-                            columns={expandedRowColumns}
-                            pagination={false}
-                            rowKey={record => `${record.id}_child`}
-                        />
-                    )}
-                    defaultExpandAllRows={false}
-                    pagination={{
-                        showSizeChanger: false,
-                        showQuickJumper: false,
-                        pageSize: this.state.rows,
-                        total: orderList.total_number,
-                        current: this.state.page
-                    }}
-                    onChange={({ current, pageSize }) => {
-                        // this.setState({
-                        //     page:current,
-                        //     rows:pageSize
-                        // })
-                        // this.initList()
-                        router.push(Query.page(current, pageSize));
-                    }}
-                    rowKey={record => record.id}
-                /> : ""}
+        return (
+            orderListLoading === false && orderList.list.length > 0 ? <Table
+                loading={orderListLoading}
+                dataSource={orderList.list ? orderList.list : []}
+                columns={columns}
+                expandedRowRender={record => (
+                    <Table
+                        dataSource={record.extend_order_goods}
+                        columns={expandedRowColumns}
+                        pagination={false}
+                        defaultExpandAllRows={true}
+                        rowKey={record => `${record.id}_child`}
+                    />
+                )}
+                onExpand={(expanded, record) => {
+                    expanded ? expandedRowKeys.push(record.id) : expandedRowKeys = expandedRowKeys.filter(v => v !== record.id);
+                    this.setState({ expandedRowKeys });
+                }}
+                expandedRowKeys={expandedRowKeys}
+                pagination={{
+                    showSizeChanger: false,
+                    showQuickJumper: false,
+                    current: this.search.page,
+                    pageSize: this.search.rows,
+                    total: orderList.total_number
+                }}
+                onChange={({ current }) => {
+                    this.search.setPage(current).refresh();
+                }}
+                rowKey={record => record.id}
+            /> : <View className={styles.addressEmpty}>
+                <img
+                    src={require("@/assets/images/fetchStatus/emptySearch.png")}
+                />
+                <p>该用户还没有下过订单</p>
             </View>
         );
     }
 
-    returnOrderState(text: string) {
-        switch (text) {
-            case "state_new":
-                return "待支付";
-            case "state_pay":
-                return "待发货";
-            case "state_send":
-                return "待收货";
-            case "state_success":
-                return "已完成";
-            case "state_noeval":
-                return "待评价";
-            case "state_cancel":
+    returnOrderState(state) {
+        switch (state) {
+            case 0:
                 return "已取消";
+            case 10:
+                return <span style={{ color: "#ccc" }}>未支付</span>;
+            case 20:
+                return <span style={{ color: "#EC9729" }}>待发货</span>;
+            case 30:
+                return <span style={{ color: "#6AEB52" }}>已发货</span>;
+            case 40:
+                return "已完成";
             default:
                 return "";
         }

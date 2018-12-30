@@ -1,5 +1,4 @@
 export default [
-    // user
     {
         path: "/login",
         component: "../layouts/userLayout",
@@ -7,14 +6,12 @@ export default [
             { path: "/login", component: "/member/login" }
         ]
     },
-    // app
     {
         path: "/",
         component: "../layouts/basicLayout",
         Routes: ["src/pages/authorized"],
         authority: ["admin", "user"],
         routes: [
-            // dashboard
             { path: "/", redirect: "/dashboard/analysis" },
             {
                 path: "/dashboard/analysis",
@@ -65,7 +62,8 @@ export default [
                 name: "客户",
                 routes: [
                     { path: "/user", redirect: "/user/list" },
-                    { path: "/user/list", name: "客户管理", component: "/user/list" }
+                    { path: "/user/list", name: "客户管理", component: "/user/list" },
+                    { path: "/user/detail", component: "/user/detail" }
                 ]
             },
             {

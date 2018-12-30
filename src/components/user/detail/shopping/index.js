@@ -1,30 +1,21 @@
 import React, { Component } from "react";
 import { connect } from "dva";
 import { View } from "@/components/flexView";
-import styles from './index.css'
-import Loadable from 'react-loadable';
-import { Spin } from "antd";
+import styles from "./index.css";
 
-const OrderListTable = Loadable({
-    loader: () => import('../orderListTable/index'),
-    loading: () => {
-        return <Spin size="large" className="global-spin" />;
-    },
-})
-// type Props = {
-//     user_id: number,
-//     refund_times: number,
-//     refund_total: number,
-//     buy_times: number,
-//     cost_average: number,
-//     cost_total: number,
-// }
-//
-// type States = {}
 @connect()
 export default class ShoppingInfo extends Component {
+    static defaultProps = {
+        user_id: 0,
+        refund_times: 0,
+        refund_total: 0,
+        buy_times: 0,
+        cost_average: 0,
+        cost_total: 0
+    };
+
     render() {
-        const { user_id, refund_times, refund_total, buy_times, cost_average, cost_total,history } = this.props
+        const { refund_times, refund_total, buy_times, cost_average, cost_total } = this.props;
         return (
             <View>
                 <View className={styles.dataDisplay}>
@@ -49,8 +40,7 @@ export default class ShoppingInfo extends Component {
                         <p>{cost_total ? cost_total : 0}</p>
                     </View>
                 </View>
-                <OrderListTable user_id={user_id} history={history} />
             </View>
-        )
+        );
     }
 }

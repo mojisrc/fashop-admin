@@ -7,11 +7,21 @@ export default {
     state: {
         currentUser: {},
         list: {
-            result: { list: [] ,total_number:0 }
+            result: { list: [], total_number: 0 }
         },
-        info: {},
+        info: { result: { info: {} } },
         address: {},
-        statistics: {}
+        statistics: {
+            result: {
+                info: {
+                    refund_times: 0,
+                    refund_total: 0,
+                    buy_times: 0,
+                    cost_average: 0,
+                    cost_total: 0
+                }
+            }
+        }
     },
 
     effects: {

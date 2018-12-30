@@ -47,3 +47,16 @@
     width: 150px;
 }
 .reciverAddress{}
+
+.addressEmpty{
+    text-align: center;
+}
+.addressEmpty >img{
+    width: 100px;
+    height: 100px;
+    margin: 30px auto 10px auto;
+}
+
+.addressEmpty >p{
+    color: #999999;
+}
