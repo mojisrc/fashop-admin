@@ -12,9 +12,6 @@ const plugins = [
             dva: {
                 hmr: true
             },
-            targets: {
-                ie: 11
-            },
             locale: {
                 enable: true, // default false
                 default: "zh-CN", // default zh-CN
@@ -67,23 +64,23 @@ export default {
     // Theme for antd
     // https://ant.design/docs/react/customize-theme-cn
     theme: {
-        'primary-color': defaultSettings.primaryColor,
-        'layout-header-background':'#000',
-        'menu-bg':'#000',
-        'menu-dark-bg':'#000',
-        'menu-dark-submenu-bg':'#151515'
+        "primary-color": defaultSettings.primaryColor,
+        "layout-header-background": "#000",
+        "menu-bg": "#000",
+        "menu-dark-bg": "#000",
+        "menu-dark-submenu-bg": "#151515"
     },
     externals: {
         "@antv/data-set": "DataSet"
     },
     proxy: {
-      '/admin/': {
-        // target: 'https://demo.fashop.cn',
-        target: 'http://127.0.0.1:9510',
-        // target: 'http://192.168.1.115:9510',
-        changeOrigin: true,
-        // pathRewrite: { '^/admin': '' },
-      },
+        "/admin/": {
+            // target: 'https://demo.fashop.cn',
+            target: "http://127.0.0.1:9510",
+            // target: 'http://192.168.1.115:9510',
+            changeOrigin: true
+            // pathRewrite: { '^/admin': '' },
+        }
     },
     ignoreMomentLocale: true,
     lessLoaderOptions: {
