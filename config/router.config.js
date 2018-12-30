@@ -63,7 +63,7 @@ export default [
                 routes: [
                     { path: "/user", redirect: "/user/list" },
                     { path: "/user/list", name: "客户管理", component: "/user/list" },
-                    { path: "/user/detail", component: "/user/detail" }
+                    { path: "/user/list/detail", component: "/user/detail" }
                 ]
             },
             {

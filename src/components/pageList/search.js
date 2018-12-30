@@ -36,9 +36,9 @@ class Search extends Component {
             });
         }
         return (
-            <Form 
-                layout="inline" 
-                className="ant-advanced-search-form" 
+            <Form
+                layout="inline"
+                className="ant-advanced-search-form"
                 style={style ? style : {}}
                 onSubmit={(e) => {
                     e.preventDefault();
@@ -292,6 +292,8 @@ class Search extends Component {
             return <FormItem key={index}>
                 <Button
                     onClick={() => {
+                        console.log(defaultValue)
+                        // Object.keys(defaultValue)
                         resetFields(Object.keys(defaultValue));
                         reset.onClick(defaultValue);
                     }}
