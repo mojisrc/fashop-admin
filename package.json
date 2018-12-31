@@ -4,6 +4,7 @@
   "description": "微信小程序商城后台，微信小程序微店后台",
   "private": true,
   "scripts": {
+    "bootstrap": "yarn || npm i",
     "presite": "node ./scripts/generateMock.js && cd functions && npm install",
     "start": "cross-env APP_TYPE=site umi dev",
     "start:no-mock": "cross-env MOCK=none umi dev",
