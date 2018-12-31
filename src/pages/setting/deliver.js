@@ -33,7 +33,6 @@ export default class Deliver extends Component<Props, State> {
         const {  dispatch } = this.props
         const { match, routerData, location } = this.props;
 
-        console.log(this.props)
         const routes = getRoutes(match.path, routerData);
         const TabsStyle = {
             tab: {

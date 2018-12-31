@@ -25,5 +25,17 @@ export const UserApi = {
         method: 'GET',
         showLoading: false,
         needLogin: true,
+    },
+    edit:{
+        url: `${ROOT_URL}user/edit`,
+        method: 'POST',
+        showLoading: false,
+        needLogin: true,
+    },
+    retailInfo:{
+        url: `${ROOT_URL}user/retailInfo`,
+        method: 'GET',
+        showLoading: false,
+        needLogin: true,
     }
 }

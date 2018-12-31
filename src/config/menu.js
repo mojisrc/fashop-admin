@@ -14,16 +14,18 @@ const menuData = [
         path: 'userInfo',
         name: '个人资料',
         hideInMenu: true,
-    }, {
+    },
+    {
         path: 'shop',
-        name: '店铺',
+        name: '门店管理',
         children: [
             {
                 path: 'decorate',
-                name: '店铺装修'
+                name: '店铺装修',
+                hideInMenu: true,
             }, {
                 path: 'setting',
-                name: '店铺设置',
+                name: '首页设置'
             }, {
                 path: 'pageEdit',
                 name: '编辑模板',
@@ -32,9 +34,13 @@ const menuData = [
                 path: 'pageAdd',
                 name: '新增模板',
                 hideInMenu: true,
+            }, {
+                path: 'shopList',
+                name: '分销商管理'
             }
         ]
-    }, {
+    },
+    {
         path: 'order',
         name: '订单',
         children: [
@@ -44,9 +50,11 @@ const menuData = [
             }, {
                 path: 'evaluate',
                 name: '评价管理',
+                hideInMenu: true,
             }, {
                 path: 'refund',
                 name: '退款售后',
+                hideInMenu: true,
             }
         ]
     }, {
@@ -71,7 +79,7 @@ const menuData = [
             }
         ]
     },
-    // , {
+    // {
     //     path: 'article',
     //     name: '图文',
     //     children: [
@@ -98,26 +106,26 @@ const menuData = [
     //         }
     //     ]
     // },
-    {
-        path: 'setting',
-        name: '设置',
-        children: [
-            {
-                path: 'deliver',
-                name: '配送设置',
-            },{
-                path: 'orderSetting',
-                name: '订单设置',
-            }, {
-                path: 'paymentSetting',
-                name: '支付设置',
-            }
-            // , {
-            //     path: 'smsSetting',
-            //     name: '短信提醒',
-            // }
-        ]
-    },
+    // {
+    //     path: 'setting',
+    //     name: '设置',
+    //     children: [
+    //         {
+    //             path: 'deliver',
+    //             name: '配送设置',
+    //         },{
+    //             path: 'orderSetting',
+    //             name: '订单设置',
+    //         }, {
+    //             path: 'paymentSetting',
+    //             name: '支付设置',
+    //         }
+    //         // , {
+    //         //     path: 'smsSetting',
+    //         //     name: '短信提醒',
+    //         // }
+    //     ]
+    // },
     // {
     //       path: 'config',
     //       name: '配置',

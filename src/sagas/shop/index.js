@@ -30,6 +30,16 @@ function* editShopInfo({ params }) {
     }
 }
 
+function* editIndexInfo({ params }) {
+    const e = yield call(Fetch.fetch, { api: ShopApi.setIndexInfo, params })
+    if (e.code === 0) {
+        message.success('修改成功！')
+        yield call(getShopInfo)
+    } else {
+        message.warning(e.msg)
+    }
+}
+
 function* editGoodsCategoryStyle({ params }) {
     const e = yield call(Fetch.fetch, { api: ShopApi.setGoodsCategoryStyle, params })
     if (e.code === 0) {
@@ -63,6 +73,7 @@ function* editPortalTemplate({ params }) {
 export default function* rootSaga() {
     yield takeEvery(types.shop.GET_SHOP_INFO, getShopInfo)
     yield takeEvery(types.shop.EDIT_SHOP_INFO, editShopInfo)
+    yield takeEvery(types.shop.EDIT_INDEX_INFO, editIndexInfo)
     yield takeEvery(types.shop.EDIT_GOODS_CATEGORY_STYLE, editGoodsCategoryStyle)
     yield takeEvery(types.shop.EDIT_SHOP_COLOR_SCHEME, editShopColorScheme)
     yield takeEvery(types.shop.EDIT_PORTAL_TEMPLATE, editPortalTemplate)

@@ -26,6 +26,15 @@ export const editShopInfo = ({params})=>{
     }
 }
 
+export const editIndexInfo = ({params})=>{
+    return dispatch => {
+        dispatch({
+            type : types.shop.EDIT_INDEX_INFO,
+            params
+        })
+    }
+}
+
 export const editGoodsCategoryStyle = ({params})=>{
     return dispatch => {
         dispatch({
