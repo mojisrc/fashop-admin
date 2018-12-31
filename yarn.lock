@@ -3203,7 +3203,7 @@ commondir@^1.0.1:
   version "1.0.1"
   resolved "https://registry.npmjs.org/commondir/-/commondir-1.0.1.tgz#ddd800da0c66127393cca5950ea968a3aaf1253b"
 
-"commoner@github:martinandert/commoner#react-inline":
+commoner@martinandert/commoner#react-inline:
   version "0.10.1"
   resolved "https://codeload.github.com/martinandert/commoner/tar.gz/01f8a2ee85f7a7f5a61b8b97673c586b73669f23"
   dependencies:
@@ -4500,7 +4500,7 @@ enzyme-adapter-utils@^1.9.0:
     prop-types "^15.6.2"
     semver "^5.6.0"
 
-enzyme@^3.4.1, enzyme@^3.7.0:
+enzyme@^3.4.1:
   version "3.8.0"
   resolved "https://registry.npmjs.org/enzyme/-/enzyme-3.8.0.tgz#646d2d5d0798cb98fdec39afcee8a53237b47ad5"
   dependencies:
@@ -7997,6 +7997,10 @@ lodash.flatten@^4.4.0:
 lodash.flattendeep@^4.4.0:
   version "4.4.0"
   resolved "https://registry.npmjs.org/lodash.flattendeep/-/lodash.flattendeep-4.4.0.tgz#fb030917f86a3134e5bc9bec0d69e0013ddfedb2"
+
+lodash.groupby@^4.6.0:
+  version "4.6.0"
+  resolved "https://registry.yarnpkg.com/lodash.groupby/-/lodash.groupby-4.6.0.tgz#0b08a1dcf68397c397855c3239783832df7403d1"
 
 lodash.isarguments@^3.0.0:
   version "3.1.0"
@@ -12091,6 +12095,12 @@ slice-ansi@2.0.0:
     ansi-styles "^3.2.0"
     astral-regex "^1.0.0"
     is-fullwidth-code-point "^2.0.0"
+
+smart-arraytotree@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/smart-arraytotree/-/smart-arraytotree-1.1.0.tgz#f19997a3e3102b57e8aa3cf72d7630677efaf368"
+  dependencies:
+    lodash.groupby "^4.6.0"
 
 smart-buffer@^1.0.13:
   version "1.1.15"

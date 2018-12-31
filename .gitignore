@@ -2,10 +2,12 @@
 # misc
 .DS_Store
 npm-debug.log*
+
 # umi
 .umi
 .umi-production
 .vscode/settings.json
+
 # dependencies
 /node_modules
 # testing
@@ -17,6 +19,7 @@ npm-debug.log*
 .env.development.local
 .env.test.local
 .env.production.local
+yarn-error.log
 
 yarn-debug.log*
 *.iws
