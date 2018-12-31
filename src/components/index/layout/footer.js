@@ -15,13 +15,6 @@ export default class LayoutFooter extends Component<{}, {}> {
             <Footer>
                 <Row>
                     <Col span={8}>
-                        <img
-                            src={'/logo-black.png'}
-                            alt=""
-                            style={{
-                                width: 68
-                            }}
-                        />
                     </Col>
                     <Col span={8}>
                         <p
@@ -31,7 +24,7 @@ export default class LayoutFooter extends Component<{}, {}> {
                                 color:'#999'
                             }}
                         >
-                            Powered by FaShop ( www.fashop.cn )
+                            Powered by CM ( www.iotiotiot.cn )
                         </p>
                     </Col>
                     <Col span={8} />

@@ -22,7 +22,7 @@ import styles from './index.css'
                    <Col span={4}>服务器操作系统</Col>
                    <Col span={8}>LinuxiZ2ze36ko76auog28w4oskZ3.10.0-514.10.2.el7.x86_64</Col>
                    <Col span={4}>服务器域名／IP</Col>
-                   <Col span={8}>fashop.chitj.com:80 [47.93.124.60]</Col>
+                   <Col span={8}>iotiotiot.chitj.com:80 [47.93.124.60]</Col>
                </Row>
                <Row className={styles.systemInfoRow}>
                    <Col span={4}>服务器环境</Col>

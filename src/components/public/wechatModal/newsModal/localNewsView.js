@@ -106,7 +106,7 @@ export default class LocalNewsView extends Component<Props,State> {
                                                 <p>{item.media[0].title}</p>
                                                 <View className={styles.imgView}>
                                                     <Image
-                                                        src={`https://demo.fashop.cn/admin/mix/wechatImage?url=${item.media[0].cover_pic}`}
+                                                        src={`https://demo.iotiotiot.cn/admin/mix/wechatImage?url=${item.media[0].cover_pic}`}
                                                         style={{
                                                             width: '100%'
                                                         }}

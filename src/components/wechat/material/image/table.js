@@ -63,7 +63,7 @@ export default class ImageTable extends React.Component<Props,State> {
                                     </p>
                                     <View className={styles.imgView} id={`${index}`}>
                                         <Image
-                                            src={`https://demo.fashop.cn/admin/mix/wechatImage?url=${imageitem.url}`}
+                                            src={`https://demo.iotiotiot.cn/admin/mix/wechatImage?url=${imageitem.url}`}
                                             style={{
                                                 width:'100%'
                                             }}

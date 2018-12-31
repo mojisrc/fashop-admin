@@ -101,7 +101,13 @@ export default class Basic extends Component<Props, State> {
                                     <TreeNode value={`${item.id}`} title={item.name} key={item.id}>
                                         {
                                             item.children && item.children.map((sub) =>
-                                                <TreeNode value={`${sub.id}`} title={sub.name} key={sub.id} />
+                                                <TreeNode value={`${sub.id}`} title={sub.name} key={sub.id} >
+                                                    {
+                                                        sub.children && sub.children.map((thr) =>
+                                                            <TreeNode value={`${thr.id}`} title={thr.name} key={thr.id} />
+                                                        )
+                                                    }
+                                                </TreeNode>
                                             )
                                         }
                                     </TreeNode>

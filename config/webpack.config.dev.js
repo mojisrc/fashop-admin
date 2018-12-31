@@ -258,7 +258,9 @@ module.exports = {
     //   is resolved relative to this directory
     target: "web", // enum  // the environment in which the bundle should run
     // changes chunk loading behavior and available modules
-    externals: [],  // Don't follow/bundle these modules, but request them at runtime from the environment
+    externals: {
+        'BMap' : 'BMap'
+    },  // Don't follow/bundle these modules, but request them at runtime from the environment
     serve: { //object
         port: 1337,
         content: './dist',
@@ -273,7 +275,7 @@ module.exports = {
         compress: true, // enable gzip compression
         historyApiFallback: true, // true for index.html upon 404, object for multiple paths
         hot: true, // hot module replacement. Depends on HotModuleReplacementPlugin
-        https: false, // true for self-signed, object for cert authority
+        https: true, // true for self-signed, object for cert authority
         noInfo: true, // only errors & warns on hot reload
     },
     plugins: [

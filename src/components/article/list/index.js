@@ -1,6 +1,6 @@
 //@flow
 import React, { Component } from 'react'
-import { Popconfirm, Row, Col, Spin, Pagination, Button,Table, Modal } from 'antd';
+import { Popconfirm, Row, Col, Spin, Pagination, Button,Table, Modal,message } from 'antd';
 import { View } from 'react-web-dom'
 import styles from './index.css'
 import moment from 'moment'
@@ -8,8 +8,10 @@ import Image from "../../image";
 import Fetch from "../../../utils/fetch";
 import { GoodsApi } from "../../../config/api/article";
 import Query from "../../../utils/query";
+import {historyType} from "../../../utils/flow";
 
 type Props = {
+    history: historyType,
     localNewsMaterialList: {
         list: Array<{
             create_time: string,
@@ -40,7 +42,8 @@ export default class TableList extends Component<Props, State> {
     }
 
     render() {
-        const { articleList } = this.props
+
+        const { articleList,history } = this.props
         let { page, rows, total_number, list, } = articleList
         const { delIds } = this.state
 

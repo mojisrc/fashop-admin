@@ -1,6 +1,7 @@
 export const GET_SHOP_INFO = 'GET_SHOP_INFO'; // 获取店铺信息
 export const SAVE_SHOP_INFO = 'SAVE_SHOP_INFO'; // 保存店铺信息
 export const EDIT_SHOP_INFO = 'EDIT_SHOP_INFO'; // 修改店铺信息
+export const EDIT_INDEX_INFO = 'EDIT_INDEX_INFO'; //修改首页信息
 export const EDIT_GOODS_CATEGORY_STYLE = 'EDIT_GOODS_CATEGORY_STYLE'; // 修改店铺分类页风格
 export const EDIT_SHOP_COLOR_SCHEME = 'EDIT_SHOP_COLOR_SCHEME'; // 修改店铺配色方案
 export const EDIT_PORTAL_TEMPLATE = 'EDIT_PORTAL_TEMPLATE'; // 修改店铺首页模板

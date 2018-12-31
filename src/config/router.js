@@ -89,6 +89,21 @@ export const getRouterData = () => {
         '/shop/setting': {
             component: dynamicWrapper(() => import('../pages/shop/setting')),
         },
+        '/shop/shopList': {
+            component: dynamicWrapper(() => import('../pages/shop/shopList')),
+        },
+        '/shop/shopList/main': {
+            component: dynamicWrapper(() => import('../pages/shop/main')),
+        },
+        '/shop/shopList/second': {
+            component: dynamicWrapper(() => import('../pages/shop/second')),
+        },
+        '/shop/shopList/third': {
+            component: dynamicWrapper(() => import('../pages/shop/third')),
+        },
+        '/shop/shopList/applylist': {
+            component: dynamicWrapper(() => import('../pages/shop/applylist')),
+        },
         '/setting/orderSetting': {
             component: dynamicWrapper(() => import('../pages/setting/orderSetting')),
         },
@@ -185,9 +200,9 @@ export const getRouterData = () => {
         '/setting/deliver/freightEdit': {
             component: dynamicWrapper(() => import('../pages/setting/freightEdit')),
         },
-        // '/article/list': {
-        //     component: dynamicWrapper(() => import('../pages/article/list')),
-        // },
+        '/article/list': {
+            component: dynamicWrapper(() => import('../pages/article/list')),
+        },
         // '/article/list/add': {
         //     component: dynamicWrapper(() => import('../pages/article/add')),
         // },

@@ -347,7 +347,7 @@ export default class EditReply extends Component<Props,State> {
                                             <View>
                                                 <Image
                                                     style={{width: 98,marginBottom:24}}
-                                                    src={`https://demo.fashop.cn/admin/mix/wechatImage?url=${replyItem.extra.url}`}
+                                                    src={`https://demo.iotiotiot.cn/admin/mix/wechatImage?url=${replyItem.extra.url}`}
                                                 />
                                             </View> :
                                             replyItem.type==='news' ?

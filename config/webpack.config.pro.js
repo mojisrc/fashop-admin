@@ -89,6 +89,9 @@ module.exports = {
     //     'echarts':'echarts',
     //     "antd":"antd"
     // },
+    externals: {
+        'BMap' : 'BMap'
+    },
     output: {
         // The build folder.
         path: paths.appBuild,

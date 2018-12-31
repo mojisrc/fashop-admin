@@ -19,6 +19,12 @@ export const ShopApi = {
         showLoading: false,
         needLogin: true,
     },
+    setIndexInfo:{
+        url: `${ROOT_URL}shop/setIndexInfo`,
+        method: 'POST',
+        showLoading: false,
+        needLogin: true,
+    },
     setGoodsCategoryStyle:{
         url: `${ROOT_URL}shop/setGoodsCategoryStyle`,
         method: 'POST',

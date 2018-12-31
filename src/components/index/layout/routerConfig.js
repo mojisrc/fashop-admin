@@ -35,6 +35,9 @@ export const routerConfig = {
                     path: 'pageAdd',
                     title: '新增模板',
                     hideInMenu: true,
+                }, {
+                    path: 'shopList',
+                    name: '分销商管理'
                 }
             ]
         },{

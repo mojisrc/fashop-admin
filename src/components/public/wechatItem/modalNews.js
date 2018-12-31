@@ -22,7 +22,7 @@ export default class ModalNews extends Component<Props,State> {
                     <p>{extra[0].title}</p>
                     <View className={styles.imgView}>
                         <Image
-                            src={`https://demo.fashop.cn/admin/mix/wechatImage?url=${extra[0].thumb_url}`}
+                            src={`https://demo.iotiotiot.cn/admin/mix/wechatImage?url=${extra[0].thumb_url}`}
                             style={{
                                 width: '100%'
                             }}

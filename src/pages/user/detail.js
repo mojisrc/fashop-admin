@@ -7,6 +7,7 @@ import Page from '../../components/public/page'
 import styles from '../../styles/customer/customerDetail.css'
 import ShoppingInfo from "../../components/user/shoppingInfo";
 import ReceiveInfo from "../../components/user/receiveInfo";
+import Retailer from "../../components/user/retailer";
 import Image from "../../components/image";
 import moment from "moment/moment";
 import { getUserInfo, getUserStatistics } from "../../actions/user";
@@ -105,6 +106,14 @@ export default class Detail extends Component<Props, States> {
                 name: '收货信息',
                 render: () => <Page>
                     <ReceiveInfo
+                        user_id={id}
+                    />
+                </Page>
+            }, {
+                key: `3`,
+                name: '分销商设置',
+                render: () => <Page>
+                    <Retailer
                         user_id={id}
                     />
                 </Page>

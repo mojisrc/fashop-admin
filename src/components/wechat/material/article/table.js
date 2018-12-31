@@ -165,7 +165,7 @@ export default class ArticleTable extends Component<Props,State> {
                 <View className={styles.manyArticleTop}>
                     <View>
                         <Image
-                            src={`https://demo.fashop.cn/admin/mix/wechatImage?url=${listItem[0].thumb_url}`}
+                            src={`https://demo.iotiotiot.cn/admin/mix/wechatImage?url=${listItem[0].thumb_url}`}
                             style={{
                                 width: '100%'
                             }}
@@ -203,7 +203,7 @@ export default class ArticleTable extends Component<Props,State> {
                             <p>{childListItem.title}</p>
                             <View>
                                 <Image
-                                    src={`https://demo.fashop.cn/admin/mix/wechatImage?url=${childListItem.thumb_url}`}
+                                    src={`https://demo.iotiotiot.cn/admin/mix/wechatImage?url=${childListItem.thumb_url}`}
                                     style={{
                                         width: '100%'
                                     }}
@@ -245,7 +245,7 @@ export default class ArticleTable extends Component<Props,State> {
                 <p>{listItem[0].title}</p>
                 <View className={styles.singleArticleImgView}>
                     <Image
-                        src={`https://demo.fashop.cn/admin/mix/wechatImage?url=${listItem[0].thumb_url}`}
+                        src={`https://demo.iotiotiot.cn/admin/mix/wechatImage?url=${listItem[0].thumb_url}`}
                         style={{
                             width: '100%'
                         }}

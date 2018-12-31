@@ -1,27 +1,25 @@
 //@flow
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Tabs } from 'antd';
 import { View } from "react-web-dom";
 import styles from '../../styles/shop/shopSetting.css'
 import { setDiyData } from '../../actions/shop/decorate'
-
 import ShopBasicInfo from './basicInfo'
+import {dispatchType, formType} from "../../utils/flow";
 
-const TabPane = Tabs.TabPane;
+type Props = {
+    form: formType,
+    dispatch: dispatchType,
+    history: { goBack: Function, push: Function },
+}
 
 class Setting extends Component<{},
     {}> {
     render() {
-        const tabsList = [
-            {
-                id: 1,
-                tab: '基本信息',
-                pageRender: () => <ShopBasicInfo {...this.props} />
-            }
-        ]
+
         return (
             <View className={`${styles.shopSettingWarp} shopSetting`}>
+<<<<<<< HEAD
                 <Tabs defaultActiveKey='1'>
                     {
                         tabsList.map(({ tab, id, pageRender }) =>
@@ -33,6 +31,9 @@ class Setting extends Component<{},
                         )
                     }
                 </Tabs>
+=======
+                <ShopBasicInfo {...this.props} />
+>>>>>>> local
             </View>
         )
     }
