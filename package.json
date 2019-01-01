@@ -1,9 +1,10 @@
 {
-  "name": "ant-design-pro",
-  "version": "2.1.1",
-  "description": "An out-of-box UI solution for enterprise applications",
+  "name": "fashop-admin",
+  "version": "2.0.0",
+  "description": "微信小程序商城后台，微信小程序微店后台",
   "private": true,
   "scripts": {
+    "bootstrap": "yarn || npm i",
     "presite": "node ./scripts/generateMock.js && cd functions && npm install",
     "start": "cross-env APP_TYPE=site umi dev",
     "start:no-mock": "cross-env MOCK=none umi dev",
