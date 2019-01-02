@@ -5,7 +5,6 @@ import styles from "./index.css";
 import { connect } from "dva";
 import UploadImage from "@/components/uploadImage";
 import Image from "@/components/image";
-import Query from "@/utils/query";
 
 const TabPane = Tabs.TabPane;
 const CheckboxGroup = Checkbox.Group;

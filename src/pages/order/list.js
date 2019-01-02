@@ -2,10 +2,8 @@ import React, { Component } from "react";
 import { connect } from "dva";
 import PageHeaderWrapper from "@/components/pageHeaderWrapper";
 import { Card } from "antd";
-import EditAddress from "@/components/order/list/editAddress/index";
-import EditPrice from "@/components/order/list/editPrice/index";
+import OrderEditPrice from "@/components/order/editPrice/index";
 import { Table } from "antd";
-import * as ReactDOM from "react-dom";
 import { View } from "@/components/flexView";
 import moment from "moment/moment";
 import Image from "@/components/image/index";
@@ -18,6 +16,7 @@ import PageList from "@/components/pageList";
     orderListLoading: loading.effects["order/list"]
 }))
 class List extends Component {
+
     static defaultProps = {
         orderListLoading: false,
         orderList: {}
@@ -113,30 +112,11 @@ class List extends Component {
                 title: "操作",
                 key: "operation",
                 render: (record) => <View className={styles.operation}>
-                    {/*<a*/}
-                        {/*onClick={() => {*/}
-                            {/*const container = document.createElement("div");*/}
-                            {/*ReactDOM.render(<EditAddress*/}
-                                {/*orderId={record.id}*/}
-                                {/*visible={true}*/}
-                                {/*onCancel={() => {*/}
-                                    {/*ReactDOM.unmountComponentAtNode(container);*/}
-                                {/*}}*/}
-                            {/*/>, container);*/}
-                        {/*}}*/}
-                    {/*>*/}
-                        {/*修改地址*/}
-                    {/*</a>*/}
                     <a
                         onClick={() => {
-                            const container = document.createElement("div");
-                            ReactDOM.render(<EditPrice
-                                orderId={record.id}
-                                visible={true}
-                                onCancel={() => {
-                                    ReactDOM.unmountComponentAtNode(container);
-                                }}
-                            />, container);
+                            this.editPrice.getWrappedInstance().show({
+                                orderId: record.id
+                            });
                         }}
                     >
                         改价
@@ -234,6 +214,7 @@ class List extends Component {
 
         return (
             <PageHeaderWrapper hiddenBreadcrumb={true}>
+                <OrderEditPrice ref={(e) => this.editPrice = e} />
                 <Card bordered={false}>
                     <PageList.Search
                         loading={orderListLoading}

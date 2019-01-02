@@ -29,6 +29,13 @@ export default {
             data
         });
     },
+    async changePrice(data = {}) {
+        return fa.request({
+            url: `/admin/order/changePrice`,
+            method: "POST",
+            data
+        });
+    },
     refund: {
         async list(data = {}) {
             return fa.request({
