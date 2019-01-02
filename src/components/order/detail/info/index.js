@@ -47,7 +47,7 @@ export default class OrderDetailInfo extends Component {
                     amount={amount ? amount : 0}
                     freight_fee={freight_fee ? freight_fee : 0}
                 />
-                {state === 20 ? <OperateInfo history={history} info={info} /> : null}
+                <OperateInfo history={history} info={info} />
             </Card>
         );
 

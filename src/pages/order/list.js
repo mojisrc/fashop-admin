@@ -112,7 +112,7 @@ class List extends Component {
                 title: "操作",
                 key: "operation",
                 render: (record) => <View className={styles.operation}>
-                    <a
+                    {record.state === 10 ? <a
                         onClick={() => {
                             this.editPrice.getWrappedInstance().show({
                                 orderId: record.id
@@ -120,7 +120,7 @@ class List extends Component {
                         }}
                     >
                         改价
-                    </a>
+                    </a> : null}
                     <a
                         onClick={() => {
                             router.push(`/order/list/detail?id=${record.id}`);
