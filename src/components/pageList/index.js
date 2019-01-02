@@ -60,11 +60,16 @@ class PageList {
     };
 
     constructor(options) {
+        const params = parse(window.location.href.split("?")[1]);
         if (typeof options["page"] !== "undefined") {
             this.page = options["page"];
+        } else if (typeof params["page"] !== "undefined") {
+            this.page = parseInt(params["page"]);
         }
         if (typeof options["rows"] !== "undefined") {
             this.rows = options["rows"];
+        } else if (typeof params["rows"] !== "undefined") {
+            this.rows = parseInt(params["rows"]);
         }
         if (typeof options["router"] !== "undefined") {
             this.router = options["router"];
@@ -84,7 +89,7 @@ class PageList {
         if (typeof options["reset"] !== "undefined") {
             this.reset = options["reset"];
         }
-        const params = parse(window.location.href.split("?")[1]);
+
         Object.keys(params).forEach((key) => {
             this.param[key] = params[key];
         });
