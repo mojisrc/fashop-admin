@@ -39,17 +39,6 @@ const plugins = [
     ]
 ];
 
-// 针对 preview.pro.ant.design 的 GA 统计代码
-// 业务上不需要这个
-if (process.env.APP_TYPE === "site") {
-    plugins.push([
-        "umi-plugin-ga",
-        {
-            code: "UA-72788897-6"
-        }
-    ]);
-}
-
 export default {
     // add for transfer to umi
     plugins,
@@ -57,7 +46,13 @@ export default {
         ie: 11
     },
     define: {
-        APP_TYPE: process.env.APP_TYPE || ""
+        APP_TYPE: process.env.APP_TYPE || "",
+        "process.env.production": {
+            api: {
+                // url: "http://127.0.0.1:9510"
+                url: "https://demo.fashop.cn"
+            }
+        }
     },
     // 路由配置
     routes: pageRoutes,
@@ -73,13 +68,17 @@ export default {
     externals: {
         "@antv/data-set": "DataSet"
     },
+    /**
+     * 部署（build）模式下无效，仅供开发环境下
+     */
     proxy: {
-        "/admin/": {
-            // target: 'https://demo.fashop.cn',
-            target: "http://127.0.0.1:9510",
+        "/admin": {
+            target: "https://demo.fashop.cn",
+            // target: "http://127.0.0.1:9510",
             // target: 'http://192.168.1.115:9510',
-            changeOrigin: true
-            // pathRewrite: { '^/admin': '' },
+            changeOrigin: true,
+            pathRewrite: { "^/admin": "/admin" },
+            secure: false
         }
     },
     ignoreMomentLocale: true,
