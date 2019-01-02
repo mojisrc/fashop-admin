@@ -50,6 +50,7 @@ class PageList {
         router.push(path);
         this.refresh();
     };
+    
     filter = () => {
         const query = new Query();
         return query.setParams({
