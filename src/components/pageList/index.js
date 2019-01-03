@@ -30,6 +30,7 @@ class PageList {
         this.push();
     };
     reset = () => {
+        console.log("reset", this.defaultParam);
         this.param = this.defaultParam;
         this.setPage(1);
         this.push();
@@ -47,10 +48,11 @@ class PageList {
         if (count(search) > 0) {
             path = `${path}?${search}`;
         }
+        console.log("push", search);
         router.push(path);
         this.refresh();
     };
-    
+
     filter = () => {
         const query = new Query();
         return query.setParams({
@@ -76,7 +78,8 @@ class PageList {
             this.router = options["router"];
         }
         if (typeof options["param"] !== "undefined") {
-            this.param = this.defaultParam = options["param"];
+            this.param = options["param"];
+            this.defaultParam = options["param"];
         }
         if (typeof options["rule"] !== "undefined") {
             this.rule = options["rule"];
@@ -90,10 +93,15 @@ class PageList {
         if (typeof options["reset"] !== "undefined") {
             this.reset = options["reset"];
         }
-
-        Object.keys(params).forEach((key) => {
-            this.param[key] = params[key];
-        });
+        if (count(params) > 0) {
+            let _params = {};
+            Object.keys(params).forEach((key) => {
+                if (typeof params[key] !== "undefined") {
+                    _params[key] = params[key];
+                }
+            });
+            this.param = Object.assign({},options["param"], _params);
+        }
     }
 }
 
