@@ -23,7 +23,7 @@ export default class DeliverInfo extends Component {
                             info: deliver_address,
                         }, {
                             title: '物流单号',
-                            info: tracking_no ? tracking_no : '无',
+                            info: tracking_no ? <span>{tracking_no}<a href={`https://www.kuaidi100.com/chaxun?com=[]&nu=${tracking_no}`} target="_blank" style={{marginLeft:10}}>查看物流</a></span> : '无',
                         }
                         , {
                             title: '发货时间',

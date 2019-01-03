@@ -316,11 +316,14 @@ class List extends Component {
             case 0:
                 return "已取消";
             case 10:
-                return <span style={{ color: "#ccc" }}>未支付</span>;
+                return "未支付";
+                // return <span style={{ color: "#ccc" }}>未支付</span>;
             case 20:
-                return <span style={{ color: "#EC9729" }}>待发货</span>;
+                return "待发货";
+                // return <span style={{ color: "#EC9729" }}>待发货</span>;
             case 30:
-                return <span style={{ color: "#6AEB52" }}>已发货</span>;
+                return "已发货";
+                // return <span style={{ color: "#6AEB52" }}>已发货</span>;
             case 40:
                 return "已完成";
             default:
