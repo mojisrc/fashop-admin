@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import OrderDetailView from "@/components/order/detail";
 import { connect } from "dva";
-import { getPageQuery } from "@/utils/utils";
 import { Spin, Card } from "antd";
 import PageHeaderWrapper from '@/components/pageHeaderWrapper';
 @connect(({ order, loading }) => ({
@@ -40,8 +39,7 @@ export default class Detail extends Component {
     };
 
     componentDidMount() {
-        const { id } = getPageQuery();
-        const { dispatch } = this.props;
+        const { dispatch, location: { query: { id } } } = this.props;
         dispatch({
             type: "order/info",
             payload: {

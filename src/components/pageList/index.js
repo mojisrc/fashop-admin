@@ -17,8 +17,10 @@ class PageList {
     static Search = Search;
     page = 1;
     rows = 10;
-    // /order/list
-    router = "";
+    /**
+     * string | function
+     */
+    router;
     param = {};
     rule = [];
     refresh = () => {
@@ -30,7 +32,6 @@ class PageList {
         this.push();
     };
     reset = () => {
-        console.log("reset", this.defaultParam);
         this.param = this.defaultParam;
         this.setPage(1);
         this.push();
@@ -43,12 +44,16 @@ class PageList {
         return this.param;
     };
     push = () => {
-        let path = this.router;
+        let path;
+        if (typeof this.router === "function") {
+            path = this.router();
+        } else {
+            path = this.router;
+        }
         const search = stringify(this.filter());
         if (count(search) > 0) {
-            path = `${path}?${search}`;
+            path = `${path}${path.indexOf("?") === -1 ? "?" : "&"}${search}`;
         }
-        console.log("push", search);
         router.push(path);
         this.refresh();
     };
@@ -100,7 +105,7 @@ class PageList {
                     _params[key] = params[key];
                 }
             });
-            this.param = Object.assign({},options["param"], _params);
+            this.param = Object.assign({}, options["param"], _params);
         }
     }
 }

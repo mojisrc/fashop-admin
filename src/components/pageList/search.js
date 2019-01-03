@@ -29,9 +29,16 @@ class Search extends Component {
         onReset: () => {
 
         },
-        defaultValue: {}
+        defaultValue: {},
+        getInstance:()=>{}
     };
+    constructor(props){
+        super(props);
 
+        if(typeof props['getInstance'] !== "undefined"){
+            props.getInstance(this)
+        }
+    }
     render() {
         const { items, onSubmit, onReset, style } = this.props;
         let _items = [...items];
@@ -98,9 +105,7 @@ class Search extends Component {
         );
     }
     componentDidMount(){
-
         const { setFieldsValue } = this.props.form;
-
         let _values = {}
         Object.keys(this.values).forEach((key) => {
             if (typeof this.values[key] !== "undefined" && this.values[key] !== null) {
@@ -339,6 +344,11 @@ class Search extends Component {
             </FormItem>;
         }
     };
+    resetValues(){
+        const { defaultValue } = this.props;
+        const { resetFields } = this.props.form;
+        resetFields(Object.keys(defaultValue));
+    }
 }
 
 export default Search;
