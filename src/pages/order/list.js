@@ -184,6 +184,17 @@ class List extends Component {
                     return `¥${value}`;
                 }
             }, {
+                title: "售后",
+                dataIndex: "lock_state",
+                key: "lock_state",
+                render: (value,item) => {
+                    if(item.lock_state === 1 && item.refund_id > 0){
+                        return <a onClick={()=>{
+                            router.push(`/order/refund/edit?id=${item.refund_id}`)
+                        }}>退款中</a>
+                    }
+                }
+            }, {
                 title: "收货人",
                 dataIndex: "reciver_info.name",
                 key: "reciver",
