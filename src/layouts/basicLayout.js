@@ -204,14 +204,6 @@ class BasicLayout extends React.PureComponent {
                     </Content>
                     {pathname === "/shop/page/add" || pathname === "/shop/page/edit" ? null : <Footer />}
                 </Layout>
-
-                <audio controls="controls" style={{display:'none'}} id="audio">
-                    <source  src={require("@/assets/mp3/order-notice.mp3")} type="audio/mpeg" />
-                </audio>
-                {/*<a onClick={()=>{*/}
-                    {/*var a = window.document.getElementById('audio');*/}
-                    {/*a.play();*/}
-                {/*}}>播放</a>*/}
             </Layout>
         );
         return (
