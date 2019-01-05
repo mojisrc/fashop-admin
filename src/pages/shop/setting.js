@@ -19,21 +19,7 @@ class Setting extends Component<{},
 
         return (
             <View className={`${styles.shopSettingWarp} shopSetting`}>
-<<<<<<< HEAD
-                <Tabs defaultActiveKey='1'>
-                    {
-                        tabsList.map(({ tab, id, pageRender }) =>
-                            <TabPane tab={tab} key={id}>
-                                {
-                                    pageRender()
-                                }
-                            </TabPane>
-                        )
-                    }
-                </Tabs>
-=======
                 <ShopBasicInfo {...this.props} />
->>>>>>> local
             </View>
         )
     }
