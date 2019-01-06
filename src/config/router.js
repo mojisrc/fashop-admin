@@ -86,9 +86,6 @@ export const getRouterData = () => {
         '/shop/decorate/add': {
             component: dynamicWrapper(() => import('../pages/shop/pageAdd')),
         },
-        '/shop/setting': {
-            component: dynamicWrapper(() => import('../pages/shop/setting')),
-        },
         '/shop/shopList': {
             component: dynamicWrapper(() => import('../pages/shop/shopList')),
         },
@@ -103,6 +100,12 @@ export const getRouterData = () => {
         },
         '/shop/shopList/applylist': {
             component: dynamicWrapper(() => import('../pages/shop/applylist')),
+        },
+        '/ads/setting': {
+            component: dynamicWrapper(() => import('../pages/ads/setting')),
+        },
+        '/ads/storeSetting': {
+            component: dynamicWrapper(() => import('../pages/ads/storeSetting')),
         },
         '/setting/orderSetting': {
             component: dynamicWrapper(() => import('../pages/setting/orderSetting')),

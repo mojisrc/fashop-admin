@@ -24,9 +24,6 @@ const menuData = [
                 name: '店铺装修',
                 hideInMenu: true,
             }, {
-                path: 'setting',
-                name: '首页设置'
-            }, {
                 path: 'pageEdit',
                 name: '编辑模板',
                 hideInMenu: true,
@@ -37,6 +34,19 @@ const menuData = [
             }, {
                 path: 'shopList',
                 name: '分销商管理'
+            }
+        ]
+    },
+    {
+        path: 'ads',
+        name: '广告',
+        children: [
+            {
+                path: 'setting',
+                name: '首页广告'
+            }, {
+                path: 'storeSetting',
+                name: '门店广告'
             }
         ]
     },
