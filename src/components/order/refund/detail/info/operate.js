@@ -79,7 +79,6 @@ export default class OrderDetailOperateInfo extends Component {
                     </View></Fragment> : null}
                 {/*卖家处理状态 默认0处理中(未处理) 10拒绝(驳回) 20同意 30成功(已完成) 50取消(用户主动撤销) 51取消(用户主动收货)*/}
                 {handle_state === 0 ? <View className={styles.infoWarp}>
-                    <p className={styles.infoTitle}>可执行操作</p>
                     <View className={styles.btnWarp}>
                         <Button
                             type='primary'
@@ -122,7 +121,6 @@ export default class OrderDetailOperateInfo extends Component {
                     </View>
                 </View> : null}
                 {handle_state === 20 ? <View className={styles.infoWarp}>
-                    <p className={styles.infoTitle}>可执行操作</p>
                     <View className={styles.btnWarp}><Button
                         type='danger'
                         onClick={() => {

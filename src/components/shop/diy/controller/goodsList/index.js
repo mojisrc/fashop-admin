@@ -7,51 +7,15 @@ const RadioGroup = Radio.Group;
 const CheckboxGroup = Checkbox.Group;
 const FormItem = Form.Item;
 
-//
-// type Props = {
-//     componentName?: string,
-//     getValues: Function,
-//     refreshGoods: Function,
-//     options: {
-//         goods_sort: number,
-//         goods_display_num: number,
-//         goods_display_field: Array<string>,
-//         layout_style: number,
-//     },
-//     data: Array<{
-//         id: number,
-//         img: {
-//             url: string
-//         },
-//         title: string,
-//         price: number,
-//         market_price: number,
-//         desc: string
-//     }>
-// }
-
 export default class Index extends Component {
 
     static defalutProps = {
         componentName: "goodsList"
     };
 
-    formatGoodsList(goodsListData) {
-        return Array.isArray(goodsListData) && goodsListData.length > 0 ? goodsListData.list.map((goods) => {
-            return {
-                id: goods.id,
-                img: goods.img,
-                title: goods.title,
-                price: goods.price,
-                market_price: goods.market_price ? goods.market_price : "",
-                desc: goods.desc ? goods.desc : ""
-            };
-        }) : [];
-    }
-
     render() {
         const { options, data, getValues } = this.props;
-        const { layout_style, goods_display_field, goods_display_num, goods_sort } = options;
+        const { layout_style, goods_display_field, goods_display_num, goods_sort,goods_title_rows } = options;
         return (
             <Form>
                 <FormItem
@@ -132,11 +96,26 @@ export default class Index extends Component {
                             });
                         }}
                     >
-
                         <Checkbox value="title">商品名称</Checkbox>
                         <Checkbox value="price">商品销售价</Checkbox>
-                        {/*<Checkbox value="market_price">商品原价</Checkbox>*/}
                     </CheckboxGroup>
+                </FormItem>
+                <FormItem
+                    {...formItemLayout}
+                    label="标题行数"
+                >
+                    <RadioGroup
+                        value={goods_title_rows}
+                        onChange={async (e) => {
+                            getValues({
+                                options: { ...options, ...{ goods_title_rows: e.target.value } },
+                                data
+                            });
+                        }}
+                    >
+                        <Radio value={1}>一行</Radio>
+                        <Radio value={2}>两行</Radio>
+                    </RadioGroup>
                 </FormItem>
             </Form>
         );

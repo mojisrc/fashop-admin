@@ -94,7 +94,6 @@ export default [
                             { path: "/setting/deliver/freight/add", component: "/setting/freight/add" },
                             { path: "/setting/deliver/freight/edit", component: "/setting/freight/edit" }
                         ]
-
                     },
                     { path: "/setting/order", name: "订单配置", component: "/setting/order" },
                     {
@@ -114,8 +113,7 @@ export default [
                 name: "营销",
                 routes: [
                     { path: "/marketing", redirect: "/marketing/coupon/list" },
-                    { path: "/marketing/group", redirect: "/marketing/group/list" },
-                    { path: "/marketing/group/list", name: "拼团", component: "/marketing/group/list" },
+                    { path: "/marketing/group", name: "拼团", component: "/marketing/group/list" },
                     { path: "/marketing/group/add", component: "/marketing/group/add" },
                     { path: "/marketing/group/edit", component: "/marketing/group/edit" },
                     { path: "/marketing/coupon", redirect: "/marketing/coupon/list" },

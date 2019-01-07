@@ -29,7 +29,9 @@
     border-radius: 5px;
     position: relative;
 }
-
+.itemLeft>img {
+    width: 100%;
+}
 .uploadBtn p {
     margin: 0;
 }
