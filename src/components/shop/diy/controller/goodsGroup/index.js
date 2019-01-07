@@ -10,30 +10,6 @@ const FormItem = Form.Item;
 
 const RadioGroup = Radio.Group;
 const Option = Select.Option;
-//
-// type Props = {
-//     options: {
-//         layout_style: number,
-//     },
-//     data: Array<{
-//         id: number,
-//         img: {
-//             url: string
-//         },
-//         title: string,
-//         price: number,
-//         // market_price: number,
-//         // desc: string
-//     }>,
-//     getValues: Function,
-//     componentName?: string
-// }
-//
-// type State = {
-//     addGoodsVisible: boolean,
-//     delectShow: boolean,
-//     currentId: number,
-// }
 
 export default class Index extends Component {
     state = {
@@ -60,7 +36,7 @@ export default class Index extends Component {
                         onChange={async(e) => {
                             getValues({
                                 options: { ...options, ...{ source_type: e.target.value } },
-                                // data: []
+                                data: []
                             });
                         }}
                     >
