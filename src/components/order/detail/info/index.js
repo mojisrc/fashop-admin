@@ -11,7 +11,7 @@ export default class OrderDetailInfo extends Component {
     render() {
         const { orderInfo } = this.props;
         const { info } = orderInfo;
-        const { extend_order_extend, create_time, sn, trade_no, state, extend_order_goods, amount, freight_fee } = info;
+        const { id, extend_order_extend, create_time, sn, trade_no, state, extend_order_goods, amount, freight_fee } = info;
         const { reciver_name, reciver_info, message, deliver_name, deliver_phone, deliver_address, tracking_time, tracking_no, remark } = extend_order_extend;
         const { history } = this.props;
         return (
@@ -32,6 +32,7 @@ export default class OrderDetailInfo extends Component {
                     }}
                 />
                 {state >= 30 ? <DeliverInfo
+                    id={id}
                     deliver_name={deliver_name}
                     deliver_phone={deliver_phone}
                     deliver_address={deliver_address}

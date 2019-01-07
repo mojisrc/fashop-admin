@@ -17,6 +17,7 @@
     color: rgba(0, 0, 0, 0.847058823529412);
     line-height: 24px;
     margin-bottom: 15px;
+    display: inline-block;
 }
 .infoItem{
     color: rgba(0, 0, 0, 0.847058823529412);
