@@ -45,10 +45,10 @@ export default class OrderDetailOperateInfo extends Component {
                         <Form.Item extra={`退款累计金额不得超过订单总金额 ${maxRefundAmount}元`}>
                             <InputNumber
                                 style={{ width: 100 }}
-                                formatter={value => `${value} 元`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
-                                parser={value => value.replace(/\$\s?|(,*)/g, '')}
+                                addonAfter="元"
                                 value={refund_amount}
                                 max={maxRefundAmount}
+                                disabled={handle_state !== 0}
                                 min={0}
                                 precision={2}
                                 onChange={(value) => {
@@ -56,7 +56,7 @@ export default class OrderDetailOperateInfo extends Component {
                                         refund_amount: value
                                     });
                                 }}
-                            />
+                            /> 元
                         </Form.Item>
 
                     </View>

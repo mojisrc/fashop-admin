@@ -1,7 +1,7 @@
 export default {
-    "GET /admin/setting/info": info,
-    "POST /admin/setting/add": { code: 0 },
-    "POST /admin/setting/edit": { code: 0 }
+    // "GET /admin/setting/info": info,
+    // "POST /admin/setting/add": { code: 0 },
+    // "POST /admin/setting/edit": { code: 0 }
 };
 
 function info(req, res) {
@@ -28,7 +28,7 @@ function alidayu(req, res) {
         code: 0,
         result: {
             info: {
-                key: "alidayu_template",
+                key: "alidayu",
                 name: "阿里云短信",
                 status: 1,
                 config: {
