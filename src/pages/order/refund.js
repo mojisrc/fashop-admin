@@ -208,8 +208,10 @@ export default class Refund extends Component {
                                         { name: "买家已发货，等待收货", value: "3" },
                                         { name: "已收货，确认退款", value: "4" },
                                         { name: "退款成功", value: "5" },
-                                        { name: "退款关闭", value: "6" }
-                                    ],
+                                        { name: "退款关闭", value: "6" },
+                                        { name: "同意退款，仅退款", value: "7" },
+                                        { name: "拒绝(驳回)", value: "8" },
+                            ],
                                     initialValue: refund_state
                                 }
                             },
@@ -256,7 +258,6 @@ export default class Refund extends Component {
     }
 
     returnRefundState(state) {
-
         switch (state) {
             case 0:
                 return <span style={{ color: "red" }}>未处理</span>;
