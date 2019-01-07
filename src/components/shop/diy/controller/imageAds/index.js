@@ -39,6 +39,7 @@ export default class Index extends Component {
                 <FormItem
                     {...formItemLayout}
                     label="显示形式"
+                    help="建议图片最大宽度不超过640px"
                 >
                     <RadioGroup
                         value={layout_style}
@@ -52,12 +53,6 @@ export default class Index extends Component {
                         <Radio value={1}>折叠轮播</Radio>
                         <Radio value={2}>上下平铺</Radio>
                     </RadioGroup>
-                </FormItem>
-                <FormItem
-                    {...formItemLayout}
-                    label="设置图片"
-                    help="建议图片最大宽度不超过640px"
-                >
                 </FormItem>
                 <GroupCardMake
                     defaultValue={{

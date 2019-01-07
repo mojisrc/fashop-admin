@@ -41,7 +41,10 @@
     display: -webkit-box;
     text-overflow: ellipsis;
     -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
+    -webkit-line-clamp: 1;
+    height: 20px;
+    word-break: break-all;
+    word-wrap:break-word;
 }
 
 .listPrice {
@@ -81,12 +84,15 @@
 
 .smallTitle {
     margin: 10px 0;
-    overflow: hidden;
-    display: -webkit-box;
-    text-overflow: ellipsis;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
+    height: 20px;
+    -webkit-line-clamp: 1;
     font-size: 14px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-box-orient:vertical;
+    word-break: break-all;
+    word-wrap:break-word;
+    display:-webkit-box;
 }
 
 .smallPrice {
@@ -97,4 +103,16 @@
     margin-right: 10px;
     color: #ccc;
     text-decoration: line-through;
+}
+.lineClamp1{
+    -webkit-line-clamp: 1!important;
+    height: 20px!important;
+    -webkit-box-orient:vertical!important;
+
+}
+.lineClamp2{
+    -webkit-line-clamp: 2!important;
+    height: 40px!important;
+    -webkit-box-orient:vertical!important;
+
 }
