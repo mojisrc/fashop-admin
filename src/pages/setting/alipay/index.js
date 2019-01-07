@@ -102,7 +102,7 @@ class Payment extends Component {
                             onSubmit={this.handleSubmit}
                             style={{
                                 width: "88%",
-                                marginTop: 48
+                                marginTop: 24
                             }}
                         >
                             <FormItem
