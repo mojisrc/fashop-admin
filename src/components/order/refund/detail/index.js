@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { connect } from "dva";
-import { View } from "@/components/flexView";
 import BasicInfo from "./info/basic";
 import DetailInfo from "./info/detail";
 import GoodsInfo from "./info/goods";
@@ -79,9 +78,10 @@ export default class RefundDetail extends Component {
     static defaultProps = {
         refundInfoLoading: true,
         refundInfo: {
-            info: {},
+            info: {}
         }
     };
+
     componentDidMount() {
         const { dispatch, id } = this.props;
         dispatch({
@@ -91,11 +91,11 @@ export default class RefundDetail extends Component {
     }
 
     render() {
-        const { refundInfo:{info}, history,refundInfoLoading } = this.props;
+        const { refundInfo: { info }, history, refundInfoLoading } = this.props;
         const {
             id,
             refund_sn, refund_type, handle_state, handle_message, create_time,
-            refund_amount, user_reason, user_explain, user_images,order_amount,
+            refund_amount, user_reason, user_explain, user_images, order_amount,
             order_id,
             order_sn,
             goods_id, goods_title, goods_img, goods_spec, goods_pay_price, goods_num,
