@@ -16,7 +16,10 @@ function disabledDate(current) {
 @connect()
 class Basic extends Component {
     render() {
-        const { form, formItemLayout, groupInfo } = this.props;
+        const groupInfo = this.props.groupInfo || {};
+        console.log(groupInfo);
+        
+        const { form, formItemLayout } = this.props;
         const { getFieldDecorator, setFieldsValue, getFieldValue } = form;
         return (
             <View>
@@ -42,8 +45,8 @@ class Basic extends Component {
                     {getFieldDecorator("time", {
                         rules: [{ required: true, message: "请选择活动时间!" }],
                         initialValue: (groupInfo.start_time&&groupInfo.end_time) ? [
-                            new Date(groupInfo.start_time),
-                            new Date(groupInfo.end_time)
+                            moment(groupInfo.start_time,'X'),
+                            moment(groupInfo.end_time,'X')
                         ] : []
                     })(
                         <RangePicker

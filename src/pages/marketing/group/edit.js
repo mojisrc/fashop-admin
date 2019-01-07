@@ -101,12 +101,12 @@ export default class GroupEdit extends Component {
                         <Basic
                             form={form}
                             formItemLayout={formItemLayout}
-                            groupInfo={groupInfo}
+                            groupInfo={groupInfo.info}
                         />
                         <Goods
                             form={form}
                             formItemLayout={formItemLayout}
-                            groupInfo={groupInfo}
+                            groupInfo={groupInfo.info}
                         />
                         <FormItem {...tailFormItemLayout}>
                             <Button type="primary" htmlType="submit">保 存</Button>

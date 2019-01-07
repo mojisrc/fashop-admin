@@ -6,6 +6,7 @@ import styles from "./index.css";
 import router from "umi/router";
 import Query from "@/utils/query";
 import PageList from "@/components/pageList";
+import Image from "@/components/image";
 
 const FormItem = Form.Item;
 const TabPane = Tabs.TabPane;
@@ -14,7 +15,8 @@ const Option = Select.Option
 @connect()
 class Goods extends Component {
     render() {
-        const { form, groupInfo } = this.props;
+        const groupInfo = this.props.groupInfo || {};
+        const { form } = this.props;
         const { getFieldDecorator } = form;
         getFieldDecorator("group_goods", {
             // rules: [{ required: true, message: "请选择商品!" }],
@@ -23,10 +25,10 @@ class Goods extends Component {
         const tabList = [
             {
                 title: "选择商品",
-                render: ()=> <SelectableGoods />
+                render: ()=> <SelectableGoods group_id={groupInfo.id} />
             }, {
                 title: "已参与商品",
-                render: ()=> <SelectedGoods />
+                render: ()=> <SelectedGoods group_id={groupInfo.id} />
             }
         ]
         return (
@@ -84,10 +86,13 @@ class SelectableGoods extends Component{
         this.initList();
     }
     initList = () => {
-        const { dispatch } = this.props;
+        const { dispatch, group_id } = this.props;
         dispatch({
             type: "group/selectableGoods",
-            payload: this.search.filter()
+            payload: {
+                ...this.search.filter(),
+                group_id
+            }
         });
     };
 
@@ -104,10 +109,19 @@ class SelectableGoods extends Component{
             onChange: this.onSelectChange,
         };
         const hasSelected = selectedRowKeys.length > 0;
+        // console.log("selectableGoods", selectableGoods);
+        
         const columns = [
             {
                 title: "商品图",
                 dataIndex: "img",
+                render: (e) => (
+                    <Image
+                        type='goods'
+                        src={e}
+                        style={{ width: 50, height: 50 }}
+                    />
+                )
             }, {
                 title: "商品标题",
                 dataIndex: "title",
@@ -116,10 +130,11 @@ class SelectableGoods extends Component{
                 dataIndex: "price",
             }, {
                 title: "库存",
-                dataIndex: "storage"
+                dataIndex: "stock"
             }, {
                 title: "SKU数量",
-                dataIndex: "num"
+                dataIndex: "sku_list",
+                render: text=> <span>{text ? text.length : 0}</span>
             }, {
                 title: "操作",
                 key: "operation",
@@ -207,13 +222,14 @@ class SelectedGoods extends Component {
         this.initList();
     }
     initList = () => {
-        const { dispatch } = this.props;
+        const { dispatch, group_id } = this.props;
         const get = Query.make();
         dispatch({
             type: "group/selectedGoods",
             payload: {
                 page: get.page,
-                rows: get.rows
+                rows: get.rows,
+                group_id
             },
             callback: () => {
                 this.setState({
@@ -271,8 +287,7 @@ class SelectedGoods extends Component {
                     rowSelection={rowSelection}
                     columns={columns}
                     loading={selectedGoodsLoading}
-                    dataSource={[{}]}
-                    // dataSource={selectedGoods.list ? selectedGoods.list : []}
+                    dataSource={selectedGoods.list ? selectedGoods.list : []}
                     pagination={{
                         showSizeChanger: false,
                         showQuickJumper: false,

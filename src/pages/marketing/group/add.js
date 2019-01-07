@@ -14,6 +14,9 @@ const FormItem = Form.Item;
 @Form.create()
 @connect()
 export default class GroupAdd extends Component {
+    state={
+        step: 1
+    }
     handleSubmit = (e) => {
         e.preventDefault();
         this.props.form.validateFieldsAndScroll((err, values) => {
@@ -29,7 +32,7 @@ export default class GroupAdd extends Component {
                     limit_buy_num,
                     limit_group_num,
                     limit_goods_num,
-                    group_goods,
+                    // group_goods,
                 } = values;
                 const params = {
                     title,
@@ -41,15 +44,15 @@ export default class GroupAdd extends Component {
                     limit_buy_num,
                     limit_group_num,
                     limit_goods_num,
-                    group_goods,
+                    group_goods: [],
                 };
                 dispatch({
                     type: "group/add",
                     payload: params,
                     callback: (e) => {
                         if (e.code === 0) {
-                            message.success("添加成功");
-                            router.goBack();
+                            // message.success("添加成功");
+                            // router.goBack();
                         } else {
                             message.warn(e.msg);
                         }
@@ -89,13 +92,16 @@ export default class GroupAdd extends Component {
                         form={form}
                         formItemLayout={formItemLayout}
                     />
-                    <Goods
+                    <FormItem {...tailFormItemLayout}>
+                        <Button type="primary" htmlType="submit">选择商品</Button>
+                    </FormItem>
+                    {/* <Goods
                         form={form}
                         formItemLayout={formItemLayout}
-                    />
-                    <FormItem {...tailFormItemLayout}>
+                    /> */}
+                    {/* <FormItem {...tailFormItemLayout}>
                         <Button type="primary" htmlType="submit">保 存</Button>
-                    </FormItem>
+                    </FormItem> */}
                 </Form>
             </Card>
         </PageHeaderWrapper>
