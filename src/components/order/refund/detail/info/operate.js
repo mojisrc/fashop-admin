@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Button, Input, InputNumber,message } from "antd";
+import { Button, Input, InputNumber, message ,Form} from "antd";
 import styles from "../index.css";
 import { View } from "@/components/flexView";
 import { handle } from "@/models/refund";
@@ -19,7 +19,8 @@ export default class OrderDetailOperateInfo extends Component {
     componentWillReceiveProps(nextProps) {
         if (nextProps.id !== this.state.id) {
             this.setState({
-                handle_message: nextProps.handle_message
+                handle_message: nextProps.handle_message,
+                refund_amount: nextProps.refund_amount
             });
         }
     }
@@ -27,27 +28,37 @@ export default class OrderDetailOperateInfo extends Component {
     constructor(props) {
         super();
         this.state = {
-            handle_message: props.handle_message
+            handle_message: props.handle_message,
+            refund_amount: props.refund_amount
         };
     }
 
     render() {
-        const { id, refund_amount, handle_state, dispatch } = this.props;
-        const { handle_message } = this.state;
-        let maxRefundAmount = refund_amount ? parseFloat(refund_amount) : 0;
+        const { id, handle_state, dispatch, order_amount } = this.props;
+        const { handle_message, refund_amount } = this.state;
+        let maxRefundAmount = order_amount ? parseFloat(order_amount) : 0;
         return (
             <Fragment>
                 {id > 0 ? <Fragment><View className={styles.infoWarp}>
-                    <p className={styles.infoTitle}>退款金额</p>
+                    <p className={styles.infoTitle}>同意退款</p>
                     <View className={styles.btnWarp}>
-                        <InputNumber
-                            style={{ width: 100 }}
-                            defaultValue={refund_amount}
-                            max={maxRefundAmount}
-                            min={0}
-                            precision={2}
-                            disabled
-                        /> &nbsp;&nbsp;元
+                        <Form.Item extra={`退款累计金额不得超过订单总金额 ${maxRefundAmount}元`}>
+                            <InputNumber
+                                style={{ width: 100 }}
+                                formatter={value => `${value} 元`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                                parser={value => value.replace(/\$\s?|(,*)/g, '')}
+                                value={refund_amount}
+                                max={maxRefundAmount}
+                                min={0}
+                                precision={2}
+                                onChange={(value) => {
+                                    this.setState({
+                                        refund_amount: value
+                                    });
+                                }}
+                            />
+                        </Form.Item>
+
                     </View>
                 </View>
                     <View className={styles.infoWarp}>
@@ -75,7 +86,7 @@ export default class OrderDetailOperateInfo extends Component {
                             onClick={() => {
                                 dispatch({
                                     type: "refund/handle",
-                                    payload: { id, handle_state: 20, handle_message },
+                                    payload: { id, handle_state: 20, handle_message, refund_amount },
                                     callback: (response) => {
                                         if (response.code === 0) {
                                             message.success("操作成功");
@@ -83,7 +94,6 @@ export default class OrderDetailOperateInfo extends Component {
                                         } else {
                                             message.error(response.msg);
                                         }
-
                                     }
                                 });
                             }}

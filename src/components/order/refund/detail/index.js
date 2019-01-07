@@ -95,7 +95,7 @@ export default class RefundDetail extends Component {
         const {
             id,
             refund_sn, refund_type, handle_state, handle_message, create_time,
-            refund_amount, user_reason, user_explain, user_images,
+            refund_amount, user_reason, user_explain, user_images,order_amount,
             order_id,
             order_sn,
             goods_id, goods_title, goods_img, goods_spec, goods_pay_price, goods_num,
@@ -149,6 +149,7 @@ export default class RefundDetail extends Component {
 
             <OperateInfo
                 id={id}
+                order_amount={order_amount}
                 refund_amount={refund_amount}
                 handle_message={handle_message}
                 handle_state={handle_state}
