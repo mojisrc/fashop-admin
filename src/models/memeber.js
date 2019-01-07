@@ -1,15 +1,14 @@
 import member from "@/services/member";
 import { setAuthority } from "@/utils/authority";
 import { reloadAuthorized } from "@/utils/authorized";
-import { routerRedux } from "dva/router";
-import { stringify } from 'qs';
-import { getPageQuery } from '@/utils/utils';
+import { stringify } from "qs";
+import { getPageQuery } from "@/utils/utils";
 
 export default {
     namespace: "member",
     state: {
         list: {
-            result: { list: [] ,total_number:0 }
+            result: { list: [], total_number: 0 }
         },
         token: {},
         selfEdit: {},
@@ -71,22 +70,6 @@ export default {
             });
             if (callback) callback(response);
         },
-        * logout({ payload, callback }, { call, put }) {
-            reloadAuthorized();
-            localStorage.setItem("token", null);
-            if (callback){
-                callback(response)
-            }else{
-                yield put(
-                    routerRedux.push({
-                        pathname: "/login",
-                        search: stringify({
-                            redirect: window.location.href
-                        })
-                    })
-                );
-            }
-        },
         * self({ payload, callback }, { call, put }) {
             const response = yield call(member.self, payload);
             yield put({
@@ -120,23 +103,30 @@ export default {
                 const urlParams = new URL(window.location.href);
                 const params = getPageQuery();
                 let { redirect } = params;
-                if (redirect) {
+                if (redirect && redirect.indexOf("login") === -1) {
                     const redirectUrlParams = new URL(redirect);
                     if (redirectUrlParams.origin === urlParams.origin) {
                         redirect = redirect.substr(urlParams.origin.length);
                         if (redirect.match(/^\/.*#/)) {
-                            redirect = redirect.substr(redirect.indexOf('#') + 1);
+                            redirect = redirect.substr(redirect.indexOf("#") + 1);
                         }
-                    } else {
-                        window.location.href = redirect;
-                        return;
                     }
+                    // 为了清空所有redux
+                    window.location.href = redirect;
+                } else {
+                    // 为了清空所有redux
+                    window.location.href = "/";
                 }
-                yield put(routerRedux.replace(redirect || '/'));
             }
-            if (callback) callback(response);
+        },
+        * logout() {
+            reloadAuthorized();
+            localStorage.setItem("token", null);
+            // todo 如果定义了路由前缀判断
+            window.location.href = "/login?" + stringify({
+                redirect: window.location.href
+            });
         }
-
     },
     reducers: {
         _list(state, action) {
@@ -192,6 +182,16 @@ export default {
                 ...state,
                 login: action.payload
             };
+        }
+    },
+    subscriptions: {
+        setup({ dispatch, history }) {
+            const token = JSON.parse(localStorage.getItem("token"));
+            if (history.location.pathname.indexOf("login") > -1 && token !== null) {
+                dispatch({
+                    type: "member/logout"
+                });
+            }
         }
     }
 };

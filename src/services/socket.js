@@ -1,39 +1,57 @@
+let ws;
 
-let websocket = "";
-
-export function listen(action) {
-    if (websocket === "") {
+export function listen(callback) {
+    let connectStatus = false;
+    let host = process.env.NODE_ENV === "production" ? process.env.production.websocket.host : process.env.dev.websocket.host;
+    let init = function() {
+        if (window.WebSocket) {
+            ws = new WebSocket(host);
+        } else {
+            alert("您的浏览器不支持WebSocket.");
+        }
+    };
+    let keepHeartbeat = function() {
+        setInterval(() => {
+            if (connectStatus !== true) {
+                init();
+                console.log("正在尝试重链...");
+            } else {
+                ws.send("pong");
+            }
+        }, 3000);
+    };
+    if (!ws) {
         try {
-            websocket = new WebSocket({
-                host: "ws://127.0.0.1:9510"
-            });
-            websocket.init();
-            // websocket.keepHeartbeat()
-            websocket.socket.onopen = function(event) {
-                console.log(event.type);
-                websocket.socket.isConnection = true;
+            init();
+            keepHeartbeat();
+            ws.onopen = function() {
+                connectStatus = true;
+                const token = JSON.parse(localStorage.getItem("token"));
+                ws.send(JSON.stringify({
+                    sign: "login",
+                    action: "admin.member.login",
+                    param: {
+                        access_token: token.accessToken
+                    }
+                }));
             };
-            websocket.socket.onclose = function(event) {
-                console.log(event.type);
+            ws.onclose = function() {
+                connectStatus = false;
             };
-            websocket.socket.onmessage = function(event) {
-                var data = JSON.parse(event.data);
-                if (data.type !== "pong") {
-                    action({
-                        type: "message",
-                        state: "notice"
-                    });
+            ws.onmessage = function(event) {
+                const token = JSON.parse(localStorage.getItem("token"));
+                if(token){
+                    var data = JSON.parse(event.data);
+                    if (typeof data["action"] !== "undefined") {
+                        callback(data);
+                    }
                 }
-                if (data.type === "pong") {
-                    console.log("保持心跳");
-                }
             };
-            // websocket.socket.onerror = function(event) {
-            //     console.log(event);
-            // };
-
+            ws.onerror = function(event) {
+                console.log(event);
+            };
         } catch (err) {
-            console.log("websocket err", err);
+            console.log("ws err", err);
         }
     }
 }
