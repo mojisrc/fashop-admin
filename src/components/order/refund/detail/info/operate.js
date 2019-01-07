@@ -1,9 +1,10 @@
 import React, { Component } from "react";
-import { Button, Input, InputNumber } from "antd";
+import { Button, Input, InputNumber,message } from "antd";
 import styles from "../index.css";
 import { View } from "@/components/flexView";
 import { handle } from "@/models/refund";
 import { connect } from "dva";
+import router from "umi/router";
 
 const TextArea = Input.TextArea;
 const { Fragment } = React;
@@ -75,11 +76,14 @@ export default class OrderDetailOperateInfo extends Component {
                                 dispatch({
                                     type: "refund/handle",
                                     payload: { id, handle_state: 20, handle_message },
-                                    callback: () => {
-                                        dispatch({
-                                            type: "refund/info",
-                                            payload: { id }
-                                        });
+                                    callback: (response) => {
+                                        if (response.code === 0) {
+                                            message.success("操作成功");
+                                            router.goBack();
+                                        } else {
+                                            message.error(response.msg);
+                                        }
+
                                     }
                                 });
                             }}
@@ -92,11 +96,13 @@ export default class OrderDetailOperateInfo extends Component {
                                 dispatch({
                                     type: "refund/handle",
                                     payload: { id, handle_state: 10, handle_message },
-                                    callback: () => {
-                                        dispatch({
-                                            type: "refund/info",
-                                            payload: { id }
-                                        });
+                                    callback: (response) => {
+                                        if (response.code === 0) {
+                                            message.success("操作成功");
+                                            router.goBack();
+                                        } else {
+                                            message.error(response.msg);
+                                        }
                                     }
                                 });
                             }}

@@ -1,4 +1,6 @@
 import * as service from "@/services/socket";
+import {  notification } from 'antd';
+import router from "umi/router";
 // 全局铃声
 var audio;
 
@@ -26,9 +28,20 @@ export default {
                 return service.listen(data => {
                     switch (data.action) {
                         case "admin.order.pay":
+                            const openNotification = () => {
+                                notification.open({
+                                    message: '订单通知',
+                                    description: <span>您有一条新支付的订单 <a onClick={()=>{
+                                        notification.close(data.action)
+                                        router.push('/order/list?state_type=state_pay')
+                                    }}>查看</a></span>,
+                                    duration: 4.5,
+                                    key:data.action
+                                });
+                            };
+                            openNotification()
                             try {
                                 if (audio) {
-                                    console.log(audio)
                                     var isPlaying = audio.currentTime > 0 && !audio.paused && !audio.ended
                                         && audio.readyState > 2;
 
@@ -43,7 +56,6 @@ export default {
                                                 }
                                             };
                                             catchChromeException(audio.play());
-                                            audio.play()
                                         }
                                     }
                                 }

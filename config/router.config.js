@@ -38,8 +38,8 @@ export default [
                     { path: "/order", redirect: "/order/list" },
                     { path: "/order/list", name: "订单管理", component: "/order/list" },
                     { path: "/order/list/detail", component: "/order/detail" },
-                    { path: "/order/evaluate", name: "评价管理", component: "/order/evaluate" },
                     { path: "/order/refund", name: "退款售后", component: "/order/refund" },
+                    { path: "/order/evaluate", name: "评价管理", component: "/order/evaluate" },
                     { path: "/order/refund/edit", component: "/order/refundEdit" },
                     { path: "/order/list/send", component: "/order/send" }
                 ]
