@@ -31,7 +31,7 @@ export default {
                             const openNotification = () => {
                                 notification.open({
                                     message: '订单通知',
-                                    description: <span>您有一条新支付的订单 <a onClick={()=>{
+                                    description: <span>您有一条新的支付订单 <a onClick={()=>{
                                         notification.close(data.action)
                                         router.push('/order/list?state_type=state_pay')
                                     }}>查看</a></span>,
