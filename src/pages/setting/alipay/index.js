@@ -7,14 +7,14 @@ import { Switch, Form, Input, Button, message, Spin } from "antd";
 const FormItem = Form.Item;
 
 @Form.create()
-@connect(({ payment, loading }) => ({
-    paymentInfoLoading: loading.effects["payment/info"],
-    paymentEditLoading: loading.effects["payment/edit"]
+@connect(({ setting, loading }) => ({
+    settingInfoLoading: loading.effects["setting/info"],
+    settingEditLoading: loading.effects["setting/edit"]
 }))
 class Payment extends Component {
     static defaultProps = {
-        paymentInfoLoading: true,
-        paymentInfo: {
+        settingInfoLoading: true,
+        settingInfo: {
             info: {
                 config: {
                     app_id: "",
@@ -35,9 +35,9 @@ class Payment extends Component {
     componentDidMount() {
         const { dispatch } = this.props;
         dispatch({
-            type: "payment/info",
+            type: "setting/info",
             payload: {
-                type: "alipay"
+                key: "alipay"
             },
             callback: (response) => {
                 if (response.code === 0) {
@@ -63,12 +63,13 @@ class Payment extends Component {
         e.preventDefault();
         this.props.form.validateFieldsAndScroll((err, values) => {
             if (!err) {
-                const { app_id, public_key, private_key, callback_domain } = values;
+                const { app_id, public_key, private_key, callback_domain, status } = values;
+                console.log(values);
                 const { dispatch } = this.props;
                 dispatch({
-                    type: "payment/edit",
+                    type: "setting/edit",
                     payload: {
-                        type: "alipay",
+                        key: "alipay",
                         config: {
                             app_id,
                             public_key,
@@ -90,13 +91,13 @@ class Payment extends Component {
     };
 
     render() {
-        const { app_id, public_key, private_key, callback_domain } = this.state;
-        const { form, paymentEditLoading, paymentInfoLoading } = this.props;
+        const { app_id, public_key, private_key, callback_domain, status } = this.state;
+        const { form, settingEditLoading, settingInfoLoading } = this.props;
         const { getFieldDecorator } = form;
         return (
             <PageHeaderWrapper hiddenBreadcrumb={true}>
                 <Card bordered={false}>
-                    <Spin size="large" spinning={paymentInfoLoading}>
+                    <Spin size="large" spinning={settingInfoLoading}>
                         <Form
                             onSubmit={this.handleSubmit}
                             style={{
@@ -153,7 +154,7 @@ class Payment extends Component {
                                 })(<Switch />)}
                             </FormItem>
                             <FormItem {...tailFormItemLayout}>
-                                <Button type="primary" htmlType="submit" loading={paymentEditLoading}>
+                                <Button type="primary" htmlType="submit" loading={settingEditLoading}>
                                     保存
                                 </Button>
                             </FormItem>
