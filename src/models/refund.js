@@ -5,10 +5,11 @@ export default {
     namespace: "refund",
     state: {
         list: {
-            result: { list: [] ,total_number:0 }
+            result: { list: [], total_number: 0 }
         },
         info: {},
         handle: {},
+        refund: {},
         receive: {}
     },
     effects: {
@@ -32,6 +33,14 @@ export default {
             const response = yield call(refund.handle, payload);
             yield put({
                 type: "_handle",
+                payload: response
+            });
+            if (callback) callback(response);
+        },
+        * refund({ payload, callback }, { call, put }) {
+            const response = yield call(refund.refund, payload);
+            yield put({
+                type: "_refund",
                 payload: response
             });
             if (callback) callback(response);
@@ -62,6 +71,12 @@ export default {
             return {
                 ...state,
                 handle: action.payload
+            };
+        },
+        _refund(state, action) {
+            return {
+                ...state,
+                refund: action.payload
             };
         },
         _receive(state, action) {

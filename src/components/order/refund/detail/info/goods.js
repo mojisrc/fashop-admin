@@ -60,16 +60,11 @@ export default class OrderDetailGoodsInfo extends Component {
             <View className={styles.infoWarp}>
                 <p className={styles.infoTitle}>退款商品</p>
                 <Table
+                    bordered
                     columns={columns}
                     dataSource={data}
                     rowKey={record => `${record.goods_id}_goods`}
                     pagination={false}
-                    // footer={() =>
-                    //     <p className={styles.tableFooter}>
-                    //         共 {data.length} 件商品 &nbsp;
-                    //         合计：￥16.00（含运费：￥10.00）
-                    //     </p>
-                    // }
                 />
             </View>
         );

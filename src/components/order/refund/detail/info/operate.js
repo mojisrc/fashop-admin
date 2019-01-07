@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Button, Input, InputNumber, message ,Form} from "antd";
+import { Button, Input, InputNumber, message, Form, Modal } from "antd";
 import styles from "../index.css";
 import { View } from "@/components/flexView";
 import { handle } from "@/models/refund";
@@ -121,6 +121,38 @@ export default class OrderDetailOperateInfo extends Component {
                         </Button>
                     </View>
                 </View> : null}
+                {handle_state === 20 ? <View className={styles.infoWarp}>
+                    <p className={styles.infoTitle}>可执行操作</p>
+                    <View className={styles.btnWarp}><Button
+                        type='danger'
+                        onClick={() => {
+                            Modal.confirm({
+                                title: `您确定授权第三方支付平台退回吗?`,
+                                content: "一旦确定，钱将打到对方账号",
+                                okType: "danger",
+                                okText: "确定",
+                                cancelText: "取消",
+                                onOk: () => {
+                                    dispatch({
+                                        type: "refund/refund",
+                                        payload: { id },
+                                        callback: (response) => {
+                                            if (response.code === 0) {
+                                                message.success("操作成功");
+                                                router.goBack();
+                                            } else {
+                                                message.error(response.msg);
+                                            }
+                                        }
+                                    });
+                                }
+                            });
+
+                        }}
+                    >
+                        授权第三方支付平台退回 ¥{refund_amount} 元
+                    </Button></View></View> : null
+                }
             </Fragment>
         );
     }

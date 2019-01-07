@@ -1,7 +1,5 @@
 .infoWarp{
-    margin-top: 24px;
-    padding-bottom: 24px;
-    border-bottom: 1px solid #ededed;
+    margin-top: 15px;
 }
 .infoWarp:first-child{
     margin-top: 0;

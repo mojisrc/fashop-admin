@@ -58,6 +58,13 @@ export default {
                 data
             });
         },
+        async refund(data = {}) {
+            return fa.request({
+                url: `/admin/orderrefund/refund`,
+                method: "POST",
+                data
+            });
+        },
         async receive(data = {}) {
             return fa.request({
                 url: `/admin/orderrefund/receive`,
