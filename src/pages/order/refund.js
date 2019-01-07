@@ -266,15 +266,15 @@ export default class Refund extends Component {
             case 0:
                 return <span style={{ color: "red" }}>未处理</span>;
             case 10:
-                return "已拒绝退款";
+                return "已拒绝";
             case 20:
-                return "已同意退款";
+                return "已同意";
             case 30:
-                return "已完成退款";
+                return "已完成";
             case 50:
-                return "用户主动撤销";
+                return "用户已撤销";
             case 51:
-                return "用户主动收货";
+                return "用户已收货";
             default:
                 return "-";
         }
