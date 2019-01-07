@@ -270,7 +270,7 @@ export default class Refund extends Component {
             case 20:
                 return "已同意退款";
             case 30:
-                return "已完成";
+                return "已完成退款";
             case 50:
                 return "用户主动撤销";
             case 51:
