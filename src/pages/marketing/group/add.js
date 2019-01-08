@@ -44,7 +44,7 @@ export default class GroupAdd extends Component {
                     limit_buy_num,
                     limit_group_num,
                     limit_goods_num,
-                    group_goods: [],
+                    // group_goods: [],
                 };
                 dispatch({
                     type: "group/add",
@@ -92,16 +92,13 @@ export default class GroupAdd extends Component {
                         form={form}
                         formItemLayout={formItemLayout}
                     />
-                    <FormItem {...tailFormItemLayout}>
-                        <Button type="primary" htmlType="submit">选择商品</Button>
-                    </FormItem>
-                    {/* <Goods
+                    <Goods
                         form={form}
                         formItemLayout={formItemLayout}
-                    /> */}
-                    {/* <FormItem {...tailFormItemLayout}>
+                    />
+                    <FormItem {...tailFormItemLayout}>
                         <Button type="primary" htmlType="submit">保 存</Button>
-                    </FormItem> */}
+                    </FormItem>
                 </Form>
             </Card>
         </PageHeaderWrapper>

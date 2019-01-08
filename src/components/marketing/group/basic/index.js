@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "dva";
 import { View } from "@/components/flexView";
-import { Form, Input, InputNumber, Radio, DatePicker, Checkbox, Button, Row, Col, Switch } from "antd";
+import { Form, Input, InputNumber, Radio, DatePicker, Checkbox, Button, Row, Col, Switch, Icon, Modal, Table } from "antd";
 import router from "umi/router";
 import moment from "moment";
 
@@ -18,12 +18,11 @@ class Basic extends Component {
     render() {
         const groupInfo = this.props.groupInfo || {};
         console.log(groupInfo);
-        
         const { form, formItemLayout } = this.props;
         const { getFieldDecorator, setFieldsValue, getFieldValue } = form;
         return (
             <View>
-                <h3>基本信息</h3>
+                <h3>活动信息</h3>
                 <FormItem
                     {...formItemLayout}
                     label='活动标题'
@@ -178,7 +177,7 @@ class Basic extends Component {
                     {...formItemLayout}
                     label="优惠叠加"
                 >
-                    {getFieldDecorator('radio-group',{
+                    {getFieldDecorator('is_overlay',{
                         rules: [{ required: true, message: "请选择优惠叠加!" }],
                         initialValue: "a"
                     })(

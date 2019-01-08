@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "dva";
 import { View } from "@/components/flexView";
-import { Form, Input, Tabs, Button, Table, Divider, Select, Modal } from "antd";
+import { Form, Input, Tabs, Button, Table, Divider, Select, Modal, Icon } from "antd";
 import styles from "./index.css";
 import router from "umi/router";
 import Query from "@/utils/query";
@@ -16,55 +16,102 @@ const Option = Select.Option
 class Goods extends Component {
     render() {
         const groupInfo = this.props.groupInfo || {};
-        const { form } = this.props;
-        const { getFieldDecorator } = form;
-        getFieldDecorator("group_goods", {
-            // rules: [{ required: true, message: "请选择商品!" }],
-            initialValue: groupInfo.group_goods ? groupInfo.group_goods : []
-        });
-        const tabList = [
-            {
-                title: "选择商品",
-                render: ()=> <SelectableGoods group_id={groupInfo.id} />
-            }, {
-                title: "已参与商品",
-                render: ()=> <SelectedGoods group_id={groupInfo.id} />
-            }
-        ]
+        const { form, formItemLayout } = this.props;
+        const { getFieldDecorator, getFieldValue } = form;
         return (
             <View>
-                <h3>编辑商品</h3>
-                <Tabs 
-                    onChange={()=>{}} 
-                    type="card"
-                    tabBarStyle={{
-                        marginBottom: 0
-                    }}
-                    style={{
-                        marginLeft: 20
-                    }}
+                <h3>活动商品</h3>
+                <FormItem
+                    {...formItemLayout}
+                    label="选择商品"
                 >
-                    {
-                        tabList.map((item,index)=>(
-                            <TabPane tab={item.title} key={index}>
-                                {
-                                    item.render()
-                                }
-                            </TabPane>
-                        ))
-                    }
-                </Tabs>
+                    {getFieldDecorator('goods_info', {
+                        rules: [{ required: true, message: "请选择商品!" }],
+                        initialValue: groupInfo.goods_info ? groupInfo.goods_info : null
+                    })(
+                        <AddGoods />
+                    )}
+                </FormItem>
+                {
+                    getFieldValue('goods_info') ?
+                        <FormItem
+                            {...formItemLayout}
+                            label="优惠设置"
+                        >
+                            {getFieldDecorator('sepc_list', {
+                                rules: [{ required: true, message: "请输入拼团价格!" }],
+                                initialValue: groupInfo.sepc_list ? groupInfo.sepc_list : []
+                            })(
+                                <GoodsSkuList />
+                            )}
+                        </FormItem> 
+                        : null
+                }
             </View>
         );
     }
 }
 export default Goods
 
+class AddGoods extends Component {
+    state = {
+        visible: false
+    }
+    hideModal = () => {
+        this.setState({
+            visible: false
+        })
+    }
+    render() {
+        const { visible } = this.state
+        const { onChange, value } = this.props
+        return <View>
+            <View
+                className={styles.add}
+                onClick={() => {
+                    this.setState({
+                        visible: true
+                    })
+                }}
+            >
+                {
+                    value ? 
+                    <View className={styles.imgWarp}>
+                        <Image
+                            type='goods'
+                            src={value.img}
+                            style={{ width: 72, height: 72 }}
+                        />
+                        <View className={styles.zhezhao}>
+                            <span>替换</span>
+                        </View>
+                    </View> :
+                    <Icon type="plus" style={{ color: "#b9b9b9" }}/>
+                }
+            </View>
+            <Modal
+                title="选择商品"
+                visible={visible}
+                onCancel={this.hideModal}
+                width={960}
+                footer={null}
+            >
+                <SelectableGoods
+                    onOk={(goods_info) => {
+                        onChange(goods_info)
+                        this.hideModal()
+                    }}
+                />
+            </Modal>
+        </View>
+    }
+}
+
 @connect(({ group, loading }) => ({
     selectableGoods: group.selectableGoods.result,
     selectableGoodsLoading: loading.effects["group/selectableGoods"]
 }))
-class SelectableGoods extends Component{
+class SelectableGoods extends Component {
     static defaultProps = {
         selectableGoodsLoading: true,
         selectableGoods: {
@@ -72,9 +119,6 @@ class SelectableGoods extends Component{
             total_number: 0
         }
     };
-    state = {
-        selectedRowKeys: [], // Check here to configure the default column
-    }
     search = new PageList({
         router: "/marketing/group/add",
         rows: 10,
@@ -91,26 +135,13 @@ class SelectableGoods extends Component{
             type: "group/selectableGoods",
             payload: {
                 ...this.search.filter(),
-                group_id
+                group_id: 3
             }
         });
     };
-
-    onSelectChange = (selectedRowKeys) => {
-        console.log('selectedRowKeys changed: ', selectedRowKeys);
-        this.setState({ selectedRowKeys });
-    }
-    render(){
-        const { selectedRowKeys } = this.state;
-        const { selectableGoods, selectableGoodsLoading } = this.props;
+    render() {
+        const { selectableGoods, selectableGoodsLoading, onOk } = this.props;
         const { keywords, state } = this.search.getParam();
-        const rowSelection = {
-            selectedRowKeys,
-            onChange: this.onSelectChange,
-        };
-        const hasSelected = selectedRowKeys.length > 0;
-        // console.log("selectableGoods", selectableGoods);
-        
         const columns = [
             {
                 title: "商品图",
@@ -134,23 +165,25 @@ class SelectableGoods extends Component{
             }, {
                 title: "SKU数量",
                 dataIndex: "sku_list",
-                render: text=> <span>{text ? text.length : 0}</span>
+                render: text => <span>{text ? text.length : 0}</span>
             }, {
                 title: "操作",
                 key: "operation",
-                render: (record) => <Button>
-                    参与活动
-                </Button>
+                render: (record) => record.id ? <Button
+                    onClick={() => onOk(record)}
+                >
+                    选取
+                </Button> : <span>不可选</span>
             }
         ]
-        return(
+        return (
             <View className={styles.tableWarp}>
                 <PageList.Search
                     loading={selectableGoodsLoading}
                     onSubmit={this.search.submit}
                     defaultValue={this.search.defaultParam}
                     onReset={this.search.reset}
-                    style={{ margin: "20px" }}
+                    style={{ margin: "10px 20px" }}
                     items={[
                         {
                             label: "商品名称",
@@ -175,159 +208,11 @@ class SelectableGoods extends Component{
                         }
                     ]}
                 />
-                <Table 
-                    loading={selectableGoodsLoading}
-                    rowSelection={rowSelection} 
-                    columns={columns} 
-                    dataSource={selectableGoods.list} 
-                    footer={() => (
-                        <View style={{ flexDirection: 'row', alignItems: 'center', }}>
-                            <span>
-                                {hasSelected ? `已选择 ${selectedRowKeys.length} 条` : ''}
-                            </span>
-                            <Button
-                                type="primary"
-                                size="small"
-                                style={{ marginLeft: 8 }}
-                                disabled={!selectedRowKeys.length}
-                            >
-                                批量参加
-                            </Button>
-                        </View>
-                    )}
-                />
-            </View>
-        )
-    }
-}
-
-@connect(({ group, loading }) => ({
-    selectedGoods: group.selectedGoods.result,
-    selectedGoodsLoading: loading.effects["group/selectedGoods"]
-}))
-class SelectedGoods extends Component {
-    static defaultProps = {
-        selectedGoodsLoading: true,
-        selectedGoods: {
-            list: [],
-            total_number: 0
-        }
-    };
-    state = {
-        selectedRowKeys: [], // Check here to configure the default column
-        get: { page: 1, rows: 10 },
-        visible: false
-    }
-    componentDidMount() {
-        this.initList();
-    }
-    initList = () => {
-        const { dispatch, group_id } = this.props;
-        const get = Query.make();
-        dispatch({
-            type: "group/selectedGoods",
-            payload: {
-                page: get.page,
-                rows: get.rows,
-                group_id
-            },
-            callback: () => {
-                this.setState({
-                    get
-                });
-            }
-        });
-    };
-    onSelectChange = (selectedRowKeys) => {
-        console.log('selectedRowKeys changed: ', selectedRowKeys);
-        this.setState({ selectedRowKeys });
-    }
-    hideModal=()=>{
-        this.setState({
-            visible: false
-        })
-    }
-    render() {
-        const { selectedRowKeys, visible } = this.state;
-        const { selectedGoods, selectedGoodsLoading } = this.props;
-        const rowSelection = {
-            selectedRowKeys,
-            onChange: this.onSelectChange,
-        };
-        const hasSelected = selectedRowKeys.length > 0;
-        const columns = [
-            {
-                title: "商品图",
-                dataIndex: "img",
-            }, {
-                title: "商品标题",
-                dataIndex: "title",
-            }, {
-                title: "价格（元）",
-                dataIndex: "price",
-            }, {
-                title: "库存",
-                dataIndex: "storage"
-            }, {
-                title: "SKU数量",
-                dataIndex: "num"
-            }, {
-                title: "操作",
-                key: "operation",
-                render: (record) => <div>
-                    <a href="#" onClick={()=>this.setState({visible: true})}>设置拼团</a>
-                    <Divider type="vertical" />
-                    <a href="#">取消参加</a>
-                </div>
-            }
-        ]
-        return (
-            <View className={styles.tableWarp}>
                 <Table
-                    rowSelection={rowSelection}
+                    loading={selectableGoodsLoading}
                     columns={columns}
-                    loading={selectedGoodsLoading}
-                    dataSource={selectedGoods.list ? selectedGoods.list : []}
-                    pagination={{
-                        showSizeChanger: false,
-                        showQuickJumper: false,
-                        current: this.state.get.page,
-                        pageSize: this.state.get.rows,
-                        total: selectedGoods.total_number
-                    }}
-                    onChange={({ current, pageSize }) => {
-                        router.push(Query.page(current, pageSize));
-                        this.initList();
-                    }}
-                    footer={() => (
-                        <View style={{flexDirection: 'row',alignItems: 'center',}}>
-                            <span>
-                                {hasSelected ? `已选择 ${selectedRowKeys.length} 条` : ''}
-                            </span>
-                            <Button
-                                type="primary"
-                                size="small"
-                                style={{ marginLeft: 8 }}
-                                disabled={!selectedRowKeys.length}
-                            >
-                                全部取消参加
-                            </Button>
-                        </View>
-                    )}
+                    dataSource={selectableGoods.list}
                 />
-                <Modal
-                    title="设置拼团"
-                    visible={visible}
-                    onOk={()=>{
-
-                    }}
-                    onCancel={this.hideModal}
-                    width={960}
-                    okText="确认"
-                    cancelText="取消"
-                >
-                    <GoodsSkuList/>
-                </Modal>
             </View>
         )
     }
@@ -337,7 +222,7 @@ class SelectedGoods extends Component {
     goodsSkuList: group.goodsSkuList.result,
     goodsSkuListLoading: loading.effects["group/goodsSkuList"]
 }))
-class GoodsSkuList extends Component{
+class GoodsSkuList extends Component {
     static defaultProps = {
         goodsSkuListLoading: true,
         goodsSkuList: {
@@ -346,7 +231,6 @@ class GoodsSkuList extends Component{
         }
     };
     state = {
-        selectedRowKeys: [], // Check here to configure the default column
         get: { page: 1, rows: 10 },
         visible: false
     }
@@ -369,18 +253,9 @@ class GoodsSkuList extends Component{
             }
         });
     };
-    onSelectChange = (selectedRowKeys) => {
-        console.log('selectedRowKeys changed: ', selectedRowKeys);
-        this.setState({ selectedRowKeys });
-    }
-    render(){
-        const { selectedRowKeys, visible } = this.state;
+    render() {
+        const { visible } = this.state;
         const { goodsSkuList, goodsSkuListLoading } = this.props;
-        const rowSelection = {
-            selectedRowKeys,
-            onChange: this.onSelectChange,
-        };
-        const hasSelected = selectedRowKeys.length > 0;
         const columns = [
             {
                 title: "SKU",
@@ -393,21 +268,39 @@ class GoodsSkuList extends Component{
                 dataIndex: "storage"
             }, {
                 title: "拼团价",
-                dataIndex: "group_price"
+                dataIndex: "group_price",
+                render:()=> <View className={styles.rowCenter}>
+                    <Input 
+                        addonBefore="拼团价" 
+                        step={0.01} 
+                        style={{width: 130, marginRight: 10}}
+                        onChange={(e)=>console.log(e)}
+                    />
+                    <span>元</span>
+                </View>
             }, {
-                title: "团长优惠",
-                dataIndex: "captain_price"
+                title: "团长优惠（不填写为无优惠）",
+                dataIndex: "captain_price",
+                render:()=> <View className={styles.rowCenter}>
+                    <Input 
+                        addonBefore="团长价" 
+                        step={0.01} 
+                        style={{width: 130, marginRight: 10}}
+                        onChange={(e)=>console.log(e)}
+                    />
+                    <span>元</span>
+                </View>
             }, {
                 title: "状态",
-                dataIndex: "state"
+                dataIndex: "state",
             }
         ]
-        return(
+        return (
             <Table
-                rowSelection={rowSelection}
                 columns={columns}
                 loading={goodsSkuListLoading}
-                dataSource={goodsSkuList.list ? goodsSkuList.list : []}
+                dataSource={[{}]}
+                // dataSource={goodsSkuList.list ? goodsSkuList.list : []}
                 pagination={{
                     showSizeChanger: false,
                     showQuickJumper: false,
@@ -423,3 +316,4 @@ class GoodsSkuList extends Component{
         )
     }
 }
+

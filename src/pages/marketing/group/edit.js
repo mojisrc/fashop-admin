@@ -30,7 +30,7 @@ export default class GroupEdit extends Component {
         this.props.form.validateFieldsAndScroll((err, values) => {
             if (!err) {
                 // console.log('Received values of form: ', values);
-                const { dispatch, location: { query: { id } } } = this.props;
+                const { dispatch, groupInfo: { info: { id } } } = this.props;
                 const {
                     title,
                     time_over_day,
