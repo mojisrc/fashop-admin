@@ -3,12 +3,7 @@ import styles from "./index.css";
 import Image from "@/components/defaultImage/index";
 import { View } from "@/components/flexView";
 import { Button, Carousel } from "antd";
-//
-// type Props = {
-//     data: GoodsDataType,
-//     options: GoodsOptionsType
-// }
-// type State = {}
+
 export default class Index extends Component {
     render() {
         const { data, options } = this.props
@@ -32,13 +27,11 @@ export default class Index extends Component {
             </div>
         )
     }
-    // : {
-    //     img: string,
-    //     title: string,
-    //     market_price: number,
-    //     price: number,
-    // }
+
     small(item, index) {
+        const { options } = this.props;
+        const { goods_title_rows } = options;
+        const rows = `lineClamp${goods_title_rows}`;
         const imgWidth = (375 - 18 - 2) / 2 + 'px'
         return (
             <View
@@ -54,7 +47,7 @@ export default class Index extends Component {
                     />
                 </View>
                 <View className={styles.smallBot}>
-                    <p className={styles.smallTitle}>{item.title}</p>
+                    <p className={`${styles.smallTitle} ${styles[rows]}`}>{item.title}</p>
                     <View>
                         <View style={{ flexDirection: 'row', alignItems: 'center', }}>
                             <p className={styles.smallPrice} style={{ fontSize: 14 }}>
@@ -72,13 +65,11 @@ export default class Index extends Component {
             </View>
         )
     }
-    // : {
-    //     img: string,
-    //     title: string,
-    //     market_price: number,
-    //     price: number,
-    // }
+
     big(item, index) {
+        const { options } = this.props;
+        const { goods_title_rows } = options;
+        const rows = `lineClamp${goods_title_rows}`;
         return (
             <View
                 className={styles.bigWarp}
@@ -92,7 +83,7 @@ export default class Index extends Component {
                     />
                 </View>
                 <View className={styles.smallBot}>
-                    <p className={styles.smallTitle}>{item.title}</p>
+                    <p className={`${styles.smallTitle} ${styles[rows]}`}>{item.title}</p>
                     <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', }}>
                         <View style={{ flexDirection: 'row', alignItems: 'center', }}>
                             <p className={styles.smallPrice} style={{ fontSize: 14 }}>
@@ -110,13 +101,11 @@ export default class Index extends Component {
             </View>
         )
     }
-    // : {
-    //     img: string,
-    //     title: string,
-    //     market_price: number,
-    //     price: number,
-    // }
+
     oneBigTwoSmall(item, index) {
+        const { options } = this.props;
+        const { goods_title_rows } = options;
+        const rows = `lineClamp${goods_title_rows}`;
         const imgWidth = (375 - 18 - 2) / 2 + 'px'
         return (
             <View
@@ -145,7 +134,7 @@ export default class Index extends Component {
                     />
                 </View>
                 <View className={styles.smallBot}>
-                    <p className={styles.smallTitle}>{item.title}</p>
+                    <p className={`${styles.smallTitle} ${styles[rows]}`}>{item.title}</p>
                     <p className={styles.smallPrice}>
                         {/*<span>￥{item.market_price}</span>*/}
                         ￥{item.price}
@@ -154,13 +143,11 @@ export default class Index extends Component {
             </View>
         )
     }
-    // item: {
-    //     img: string,
-    //     title: string,
-    //     market_price: number,
-    //     price: number,
-    // }
+    
     list(item, index) {
+        const { options } = this.props;
+        const { goods_title_rows } = options;
+        const rows = `lineClamp${goods_title_rows}`;
         return (
             <View
                 className={styles.listWarp}
@@ -174,7 +161,7 @@ export default class Index extends Component {
                     />
                 </View>
                 <View className={styles.listRight}>
-                    <p className={styles.listTitle}>{item.title}</p>
+                    <p className={`${styles.listTitle} ${styles[rows]}`}>{item.title}</p>
                     <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', }}>
                         <View>
                             <p className={styles.smallPrice} style={{ fontSize: 14, color: '#999' }}>
