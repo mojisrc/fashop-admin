@@ -4,7 +4,7 @@
   </a>
 </p>
 
-<h1 align="center">Fa Shop Admin</h1>
+<h1 align="center">FaShop Admin</h1>
 
 <div align="center">
 微信小程序商城后台，微信小程序微店后台
