@@ -35,8 +35,20 @@
     cursor: pointer;
     position: relative;
 }
-.phoneItem:hover{
-    box-shadow: rgb(181, 181, 181) 0px 0px 20px 0px
+.phoneItem:hover:before,.phoneItemActive:before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    pointer-events: none;
+    z-index: 2;
+    display: block;
+    border: 1px dashed #38f;
 }
 .operation{
     position: absolute;

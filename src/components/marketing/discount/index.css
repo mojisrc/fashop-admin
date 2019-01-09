@@ -1,0 +1,15 @@
+.column{
+    text-align: center!important;
+}
+.operation{
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+.batchView{
+    margin-bottom: 24px;
+    flex-direction: row;
+}
+.batchView button{
+    margin-right: 24px;
+}

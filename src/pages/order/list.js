@@ -2,10 +2,8 @@ import React, { Component } from "react";
 import { connect } from "dva";
 import PageHeaderWrapper from "@/components/pageHeaderWrapper";
 import { Card } from "antd";
-import EditAddress from "@/components/order/list/editAddress/index";
-import EditPrice from "@/components/order/list/editPrice/index";
+import OrderEditPrice from "@/components/order/editPrice/index";
 import { Table } from "antd";
-import * as ReactDOM from "react-dom";
 import { View } from "@/components/flexView";
 import moment from "moment/moment";
 import Image from "@/components/image/index";
@@ -13,32 +11,47 @@ import router from "umi/router";
 import styles from "./list.css";
 import PageList from "@/components/pageList";
 
+
 @connect(({ order, loading }) => ({
     orderList: order.list.result,
     orderListLoading: loading.effects["order/list"]
 }))
 class List extends Component {
+
     static defaultProps = {
         orderListLoading: false,
         orderList: {}
     };
-    state = {
-        orderId: 0,
-        visible: false,
-        expandedRowKeys: []
-    };
+
+    constructor(props) {
+        super(props);
+        // 设置url里的订单状态（state_type）
+        const {  location: { query: { state_type } } } = props;
+        this.state = {
+            orderId: 0,
+            visible: false,
+            expandedRowKeys: [],
+            tabKey: state_type ?? 'all'
+        }
+    }
 
     componentDidMount() {
         this.initList();
     }
 
     search = new PageList({
-        router: "/order/list",
+        router: () => {
+            const { tabKey } = this.state;
+            if (tabKey !== "all") {
+                return `/order/list?state_type=${tabKey}`;
+            } else {
+                return `/order/list`;
+            }
+        },
         param: {
             keywords_type: "goods_name",
             keywords: null,
             create_time: [],
-            state_type: null,
             order_kind: null
         },
         rule: [{ key: "keywords_type", rule: ["rely", "keywords"] }],
@@ -47,11 +60,17 @@ class List extends Component {
         }
     });
 
+
     initList = () => {
         const { dispatch } = this.props;
+        const { tabKey } = this.state;
+        let payload = this.search.filter();
+        if (tabKey !== "all") {
+            payload["state_type"] = tabKey;
+        }
         dispatch({
             type: "order/list",
-            payload: this.search.filter(),
+            payload,
             callback: (response) => {
                 const { result: { list } } = response;
                 this.setState({
@@ -60,9 +79,22 @@ class List extends Component {
             }
         });
     };
+    onTabChange = (key) => {
+        this.setState({ tabKey: key }, () => {
+            if (key !== "all") {
+                router.push(`/order/list?state_type=${key}`);
+            } else {
+                router.push(`/order/list`);
+            }
+            // 重置搜索表单的值
+            this.searchForm.resetValues();
+            // 重置PageSearchList
+            this.search.reset();
+        });
+    };
 
     render() {
-        let { keywords_type, keywords, create_time, state_type, order_kind } = this.search.getParam();
+        let { keywords_type, keywords, create_time, order_kind } = this.search.getParam();
         const { orderList, orderListLoading } = this.props;
         let { expandedRowKeys } = this.state;
         let { list } = orderList;
@@ -113,34 +145,15 @@ class List extends Component {
                 title: "操作",
                 key: "operation",
                 render: (record) => <View className={styles.operation}>
-                    {/*<a*/}
-                        {/*onClick={() => {*/}
-                            {/*const container = document.createElement("div");*/}
-                            {/*ReactDOM.render(<EditAddress*/}
-                                {/*orderId={record.id}*/}
-                                {/*visible={true}*/}
-                                {/*onCancel={() => {*/}
-                                    {/*ReactDOM.unmountComponentAtNode(container);*/}
-                                {/*}}*/}
-                            {/*/>, container);*/}
-                        {/*}}*/}
-                    {/*>*/}
-                        {/*修改地址*/}
-                    {/*</a>*/}
-                    <a
+                    {record.state === 10 ? <a
                         onClick={() => {
-                            const container = document.createElement("div");
-                            ReactDOM.render(<EditPrice
-                                orderId={record.id}
-                                visible={true}
-                                onCancel={() => {
-                                    ReactDOM.unmountComponentAtNode(container);
-                                }}
-                            />, container);
+                            this.editPrice.getWrappedInstance().show({
+                                orderId: record.id
+                            });
                         }}
                     >
                         改价
-                    </a>
+                    </a> : null}
                     <a
                         onClick={() => {
                             router.push(`/order/list/detail?id=${record.id}`);
@@ -204,6 +217,17 @@ class List extends Component {
                     return `¥${value}`;
                 }
             }, {
+                title: "售后",
+                dataIndex: "lock_state",
+                key: "lock_state",
+                render: (value, item) => {
+                    if (item.lock_state === 1 && item.refund_id > 0) {
+                        return <a onClick={() => {
+                            router.push(`/order/refund/edit?id=${item.refund_id}`);
+                        }}>退款中</a>;
+                    }
+                }
+            }, {
                 title: "收货人",
                 dataIndex: "reciver_info.name",
                 key: "reciver",
@@ -231,11 +255,31 @@ class List extends Component {
                 }
             }
         ];
-
+        let tabList = state_type_list.map((item) => {
+            return {
+                key: item.value,
+                tab: item.name
+            };
+        });
+        tabList.unshift({
+            key: "all",
+            tab: "全部"
+        });
         return (
             <PageHeaderWrapper hiddenBreadcrumb={true}>
-                <Card bordered={false}>
+                <OrderEditPrice ref={(e) => this.editPrice = e} />
+
+                <Card bordered={false}
+                      tabList={tabList}
+                      activeTabKey={this.state.tabKey}
+                      onTabChange={(key) => {
+                          this.onTabChange(key);
+                      }}
+                >
+
                     <PageList.Search
+                        wrappedComponentRef={(form) => this.searchForm = form}
+                        ref={this.searchInstance}
                         loading={orderListLoading}
                         onSubmit={this.search.submit}
                         defaultValue={this.search.defaultParam}
@@ -272,17 +316,17 @@ class List extends Component {
                                     data: order_kind_list,
                                     initialValue: order_kind
                                 }
-                            },
-                            {
-                                label: "订单状态",
-                                select: {
-                                    field: "state_type",
-                                    style: { width: 100 },
-                                    placeholder: "全部状态",
-                                    data: state_type_list,
-                                    initialValue: state_type
-                                }
                             }
+                            // {
+                            //     label: "订单状态",
+                            //     select: {
+                            //         field: "state_type",
+                            //         style: { width: 100 },
+                            //         placeholder: "全部状态",
+                            //         data: state_type_list,
+                            //         initialValue: state_type
+                            //     }
+                            // }
                         ]} />
                     <Table
                         loading={orderListLoading}
@@ -324,11 +368,14 @@ class List extends Component {
             case 0:
                 return "已取消";
             case 10:
-                return <span style={{ color: "#ccc" }}>未支付</span>;
+                return "未支付";
+            // return <span style={{ color: "#ccc" }}>未支付</span>;
             case 20:
-                return <span style={{ color: "#EC9729" }}>待发货</span>;
+                return "待发货";
+            // return <span style={{ color: "#EC9729" }}>待发货</span>;
             case 30:
-                return <span style={{ color: "#6AEB52" }}>已发货</span>;
+                return "已发货";
+            // return <span style={{ color: "#6AEB52" }}>已发货</span>;
             case 40:
                 return "已完成";
             default:

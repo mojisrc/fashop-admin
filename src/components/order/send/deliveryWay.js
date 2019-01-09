@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { connect } from "dva";
 import { Form, Select, Radio, Card, Input } from "antd";
 import { View } from "@/components/flexView";
 import styles from "./index.css";
@@ -8,8 +7,7 @@ const FormItem = Form.Item;
 const Option = Select.Option;
 const RadioGroup = Radio.Group;
 
-@connect()
-export default class DeliveryWay extends Component {
+class DeliveryWay extends Component {
     static defaultProps = {
         expressList: [],
         express_id: 0,
@@ -37,16 +35,7 @@ export default class DeliveryWay extends Component {
     render() {
         const { getFieldDecorator } = this.props.form;
         const { expressList, tracking_no, express_id, onExpressChange, need_express } = this.props;
-        const formItemLayout = {
-            labelCol: {
-                xs: { span: 24 },
-                sm: { span: 2 }
-            },
-            wrapperCol: {
-                xs: { span: 24 },
-                sm: { span: 6 }
-            }
-        };
+
         return (
             <View className={styles.orderSendItemWarp}>
                 <p className={styles.title}>配送方式</p>
@@ -138,3 +127,15 @@ export default class DeliveryWay extends Component {
         );
     }
 }
+
+const formItemLayout = {
+    labelCol: {
+        xs: { span: 24 },
+        sm: { span: 2 }
+    },
+    wrapperCol: {
+        xs: { span: 24 },
+        sm: { span: 6 }
+    }
+};
+export default DeliveryWay;

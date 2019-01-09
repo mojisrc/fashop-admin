@@ -6,7 +6,19 @@ import moment from "moment/moment";
 const Option = Select.Option;
 const { RangePicker } = DatePicker;
 const FormItem = Form.Item;
+const count = (params) => {
+    let count = 0;
+    for (var property in params) {
+        if (Object.prototype.hasOwnProperty.call(params, property)) {
+            count++;
+        }
+    }
+    return count;
+};
 
+/**
+ * todo 需要简化
+ */
 @Form.create()
 class Search extends Component {
     static defaultProp = {
@@ -17,9 +29,16 @@ class Search extends Component {
         onReset: () => {
 
         },
-        defaultValue: {}
+        defaultValue: {},
+        getInstance:()=>{}
     };
+    constructor(props){
+        super(props);
 
+        if(typeof props['getInstance'] !== "undefined"){
+            props.getInstance(this)
+        }
+    }
     render() {
         const { items, onSubmit, onReset, style } = this.props;
         let _items = [...items];
@@ -85,7 +104,18 @@ class Search extends Component {
             </Form>
         );
     }
-
+    componentDidMount(){
+        const { setFieldsValue } = this.props.form;
+        let _values = {}
+        Object.keys(this.values).forEach((key) => {
+            if (typeof this.values[key] !== "undefined" && this.values[key] !== null) {
+                _values[key] = this.values[key];
+            }
+        });
+        if(count(_values) > 0 ){
+            setFieldsValue(_values)
+        }
+    }
     formatItem = (item) => {
         return item;
     };
@@ -98,9 +128,10 @@ class Search extends Component {
         }
         return times;
     }
-
+    values = {}
     renders = {
         input: (item, index) => {
+            const { defaultValue } = this.props;
             const { getFieldDecorator } = this.props.form;
             let { input, label } = item;
             input = Object.assign({
@@ -110,10 +141,11 @@ class Search extends Component {
                 },
                 initialValue: null
             }, input);
+            this.values[input.field] = input.initialValue
 
             return <FormItem label={label} key={index}>
                 {getFieldDecorator(input.field, {
-                    ...initialValue(input.initialValue)
+                    ...initialValue(defaultValue[input.field])
                 })(<Input
                     placeholder={input.placeholder}
                     onChange={(e) => {
@@ -123,6 +155,7 @@ class Search extends Component {
             </FormItem>;
         },
         select: (item, index) => {
+            const { defaultValue } = this.props;
             const { getFieldDecorator } = this.props.form;
             let { select, label } = item;
 
@@ -135,10 +168,11 @@ class Search extends Component {
                 allowClear: true,
                 initialValue: null
             }, select);
+            this.values[select.field] = select.initialValue
 
             return <FormItem label={label} key={index}>
                 {getFieldDecorator(select.field, {
-                    ...initialValue(select.initialValue)
+                    ...initialValue(defaultValue[select.field])
                 })(
                     <Select
                         placeholder={select.placeholder}
@@ -156,8 +190,10 @@ class Search extends Component {
             </FormItem>;
         },
         selectInput: (item, index) => {
+            const { defaultValue } = this.props;
             const { getFieldDecorator } = this.props.form;
             let { selectInput, label } = item;
+
             const select = Object.assign({
                 field: null,
                 style: { minWidth: 115 },
@@ -178,10 +214,12 @@ class Search extends Component {
                 },
                 initialValue: null
             }, selectInput[1]);
+            this.values[select.field] = select.initialValue
+            this.values[input.field] = input.initialValue
 
 
             const prefixSelector = getFieldDecorator(select.field, {
-                ...initialValue(select.initialValue)
+                ...initialValue(defaultValue[select.field])
             })(<Select
                 style={select.style}
                 placeholder={select.placeholder}
@@ -195,7 +233,7 @@ class Search extends Component {
             </Select>);
             return <FormItem label={label} key={index}>
                 {getFieldDecorator(input.field, {
-                    ...initialValue(input.initialValue)
+                    ...initialValue(defaultValue[input.field])
                 })(<Input
                     addonBefore={prefixSelector}
                     placeholder={input.placeholder}
@@ -206,6 +244,7 @@ class Search extends Component {
             </FormItem>;
         },
         timeRange: (item, index) => {
+            const { defaultValue } = this.props;
             const { getFieldDecorator } = this.props.form;
             let { timeRange, label } = item;
 
@@ -222,9 +261,11 @@ class Search extends Component {
             if (Array.isArray(timeRange.initialValue) && timeRange.initialValue.length === 2) {
                 timeRange.initialValue = [moment(parseInt(timeRange.initialValue[0] + "000")), moment(parseInt(timeRange.initialValue[1] + "000"))];
             }
+            this.values[timeRange.field] = timeRange.initialValue
+
             return <FormItem label={label} key={index}>
                 {getFieldDecorator(timeRange.field, {
-                    ...initialValue(timeRange.initialValue)
+                    ...initialValue(defaultValue[timeRange.field])
                 })(
                     <RangePicker
                         allowClear={true}
@@ -236,6 +277,7 @@ class Search extends Component {
             </FormItem>;
         },
         treeSelect: (item, index) => {
+            const { defaultValue } = this.props;
             const { getFieldDecorator } = this.props.form;
             let { treeSelect, label } = item;
 
@@ -252,10 +294,11 @@ class Search extends Component {
                 allowClear: true,
                 initialValue: null
             }, treeSelect);
+            this.values[treeSelect.field] = treeSelect.initialValue
 
             return <FormItem label={label} key={index}>
                 {getFieldDecorator(treeSelect.field, {
-                    ...initialValue(treeSelect.initialValue)
+                    ...initialValue(defaultValue[treeSelect.field])
                 })(
                     <TreeSelect
                         style={treeSelect.style}
@@ -292,8 +335,6 @@ class Search extends Component {
             return <FormItem key={index}>
                 <Button
                     onClick={() => {
-                        console.log(defaultValue)
-                        // Object.keys(defaultValue)
                         resetFields(Object.keys(defaultValue));
                         reset.onClick(defaultValue);
                     }}
@@ -303,6 +344,11 @@ class Search extends Component {
             </FormItem>;
         }
     };
+    resetValues(){
+        const { defaultValue } = this.props;
+        const { resetFields } = this.props.form;
+        resetFields(Object.keys(defaultValue));
+    }
 }
 
 export default Search;

@@ -4,11 +4,12 @@ export default {
     namespace: "order",
     state: {
         list: {
-            result: { list: [] ,total_number:0 }
+            result: { list: [], total_number: 0 }
         },
         info: {},
         setSend: {},
-        setOrderExpires: {}
+        setOrderExpires: {},
+        changePrice: {}
     },
     effects: {
         * list({ payload, callback }, { call, put }) {
@@ -42,6 +43,14 @@ export default {
                 payload: response
             });
             if (callback) callback(response);
+        },
+        * changePrice({ payload, callback }, { call, put }) {
+            const response = yield call(order.changePrice, payload);
+            yield put({
+                type: "_changePrice",
+                payload: response
+            });
+            if (callback) callback(response);
         }
     },
     reducers: {
@@ -67,6 +76,12 @@ export default {
             return {
                 ...state,
                 setOrderExpires: action.payload
+            };
+        },
+        _changePrice(state, action) {
+            return {
+                ...state,
+                changePrice: action.payload
             };
         }
     }

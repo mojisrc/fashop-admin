@@ -21,7 +21,7 @@ export default class Coupon extends Component {
         }
     };
     search = new PageList({
-        router: "/marketing/coupon/list",
+        router: "/marketing/coupon",
         rows: 10,
         param: {
             keywords: null,

@@ -29,30 +29,7 @@ const SortableList = SortableContainer(({ items, pressDelay }) => {
         </ul>
     );
 });
-//
-// type Props = {
-//     options: optionsType,
-//     body: PageBodyType,
-//     backgroundColor: string,
-//     onViewItemClick: Function,
-//     onHeaderClick: Function,
-//     setPage: Function,
-// }
-// type State = {
-//     hoverShow: number,
-//     items: any,
-//     actioning: boolean
-// }
-// type SortEndType = { oldIndex: number, newIndex: number }
-// type SortStartType = { node: any, index, collection: any }
-// type EventType = {
-//     target: {
-//         innerHTML: string,
-//         dataset: {
-//             index
-//         }
-//     }
-// }
+
 export default class PageView extends Component {
     state = {
         hoverShow: -2,
@@ -213,13 +190,7 @@ export default class PageView extends Component {
         const items = body.length > 0 ? body.map((item, index) => (
             <div
                 key={index}
-                className={styles.phoneItem}
-                style={
-                    options.index === index ?
-                        {
-                            boxShadow: "rgb(181, 181, 181) 0px 0px 20px 0px"
-                        } : {}
-                }
+                className={`${styles.phoneItem} ${options.index === index ? styles.phoneItemActive : ''}`}
                 onMouseEnter={() => {
                     if (index !== options.index) {
                         this.setState({ hoverShow: index });

@@ -14,11 +14,14 @@ const FormItem = Form.Item;
 @Form.create()
 @connect()
 export default class GroupAdd extends Component {
+    state={
+        step: 1
+    }
     handleSubmit = (e) => {
         e.preventDefault();
         this.props.form.validateFieldsAndScroll((err, values) => {
             if (!err) {
-                // console.log('Received values of form: ', values);
+                console.log('Received values of form: ', values);
                 const { dispatch } = this.props;
                 const {
                     title,
@@ -29,8 +32,15 @@ export default class GroupAdd extends Component {
                     limit_buy_num,
                     limit_group_num,
                     limit_goods_num,
-                    group_goods,
                 } = values;
+                const group_goods = values.group_goods.map((item,index)=>{
+                    return {
+                        goods_id: item.goods_id,
+                        goods_sku_id: item.id,
+                        group_price: item.group_price,
+                        captain_price: item.captain_price,
+                    }
+                })
                 const params = {
                     title,
                     time_over_day,

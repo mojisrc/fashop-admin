@@ -50,6 +50,13 @@ export default {
             data
         });
     },
+    async skuList(data = {}) {
+        return fa.request({
+            url: `/admin/goods/skuList`,
+            method: "GET",
+            data
+        });
+    },
     async batchUpshelf(data = {}) {
         return fa.request({
             url: `/admin/goods/batchUpshelf`,

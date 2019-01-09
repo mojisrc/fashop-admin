@@ -10,6 +10,9 @@ export default {
         add: {},
         edit: {},
         onSale: {},
+        skuList: {
+            result: { list: [], total_number: 0 }
+        },
         offSale: {},
         batchDownshelf: {},
         batchUpshelf: {}
@@ -64,6 +67,16 @@ export default {
             });
             if (callback) callback(response);
         },
+        * skuList({ payload, callback }, { call, put }) {
+            const response = yield call(goods.skuList, payload);
+            console.log("response", response);
+            
+            yield put({
+                type: "_skuList",
+                payload: response
+            });
+            if (callback) callback(response);
+        },
         * batchDownshelf({ payload, callback }, { call, put }) {
             const response = yield call(goods.batchDownshelf, payload);
             yield put({
@@ -111,6 +124,12 @@ export default {
             return {
                 ...state,
                 onSale: action.payload
+            };
+        },
+        _skuList(state, action) {
+            return {
+                ...state,
+                skuList: action.payload
             };
         },
         _offSale(state, action) {

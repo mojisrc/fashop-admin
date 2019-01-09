@@ -17,8 +17,10 @@ class PageList {
     static Search = Search;
     page = 1;
     rows = 10;
-    // /order/list
-    router = "";
+    /**
+     * string | function
+     */
+    router;
     param = {};
     rule = [];
     refresh = () => {
@@ -42,14 +44,20 @@ class PageList {
         return this.param;
     };
     push = () => {
-        let path = this.router;
+        let path;
+        if (typeof this.router === "function") {
+            path = this.router();
+        } else {
+            path = this.router;
+        }
         const search = stringify(this.filter());
         if (count(search) > 0) {
-            path = `${path}?${search}`;
+            path = `${path}${path.indexOf("?") === -1 ? "?" : "&"}${search}`;
         }
         router.push(path);
         this.refresh();
     };
+
     filter = () => {
         const query = new Query();
         return query.setParams({
@@ -60,17 +68,23 @@ class PageList {
     };
 
     constructor(options) {
+        const params = parse(window.location.href.split("?")[1]);
         if (typeof options["page"] !== "undefined") {
             this.page = options["page"];
+        } else if (typeof params["page"] !== "undefined") {
+            this.page = parseInt(params["page"]);
         }
         if (typeof options["rows"] !== "undefined") {
             this.rows = options["rows"];
+        } else if (typeof params["rows"] !== "undefined") {
+            this.rows = parseInt(params["rows"]);
         }
         if (typeof options["router"] !== "undefined") {
             this.router = options["router"];
         }
         if (typeof options["param"] !== "undefined") {
-            this.param = this.defaultParam = options["param"];
+            this.param = options["param"];
+            this.defaultParam = options["param"];
         }
         if (typeof options["rule"] !== "undefined") {
             this.rule = options["rule"];
@@ -84,10 +98,15 @@ class PageList {
         if (typeof options["reset"] !== "undefined") {
             this.reset = options["reset"];
         }
-        const params = parse(window.location.href.split("?")[1]);
-        Object.keys(params).forEach((key) => {
-            this.param[key] = params[key];
-        });
+        if (count(params) > 0) {
+            let _params = {};
+            Object.keys(params).forEach((key) => {
+                if (typeof params[key] !== "undefined") {
+                    _params[key] = params[key];
+                }
+            });
+            this.param = Object.assign({}, options["param"], _params);
+        }
     }
 }
 

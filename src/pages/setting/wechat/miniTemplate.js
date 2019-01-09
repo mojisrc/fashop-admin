@@ -16,26 +16,33 @@ class MiniTemplate extends Component {
     };
     state = {
         info: {
-            key: "alidayu_template",
+            key: "wechat_mini_template",
             status: 1,
             config: {
-                access_key_id: "xxxxxxxxxx",
-                access_key_secret: "xxxxxxxxxx",
-                signature: "FaShop",
                 template_list: {
-                    "register": {
-                        "template_id": "SMS_xxxxx",
-                        "template_name": "注册",
-                        "template_variable": "code",
+                    "order_pay_success": {
+                        "template_id": "Y1blRZEdiqSXSDOfiKT9rG4oEmlpfeq_rjcpuuo",
+                        "template_name": "订单支付成功",
                         "template_status": 1,
-                        "template_content": "您的验证码：${code}，如非本人操作，请忽略本短信！"
+                        "template_content": "1.订单号 2.订单总额 3.订单商品名称 4.下单时间 5.商品数量"
                     },
-                    "find_password": {
-                        "template_id": "SMS_xxxxx",
-                        "template_name": "找回密码",
-                        "template_variable": "code",
+                    "order_pay_fail": {
+                        "template_id": "Y1blRZEdiqSXSDOfiKT9rG4oEmlpfeq_rjcpuuo",
+                        "template_name": "订单支付失败",
                         "template_status": 1,
-                        "template_content": "您的验证码：${code}，如非本人操作，请忽略本短信！"
+                        "template_content": "1.订单号 2.订单总额 3.订单商品名称 4.下单时间 5.商品数量"
+                    },
+                    "order_cancel": {
+                        "template_id": "Y1blRZEdiqSXSDOfiKT9rG4oEmlpfeq_rjcpuuo",
+                        "template_name": "订单取消",
+                        "template_status": 1,
+                        "template_content": "1.订单号 2.订单总额 3.订单商品名称 4.下单时间 5.商品数量"
+                    },
+                    "order_refund_apply": {
+                        "template_id": "Y1blRZEdiqSXSDOfiKT9rG4oEmlpfeq_rjcpuuo",
+                        "template_name": "订单退款申请",
+                        "template_status": 1,
+                        "template_content": "1.订单号 2.订单总额 3.订单商品名称 4.下单时间 5.商品数量"
                     }
                 }
             }
@@ -68,7 +75,6 @@ class MiniTemplate extends Component {
         e.preventDefault();
         this.props.form.validateFieldsAndScroll((err, values) => {
             if (!err) {
-                console.log(values);
                 const { template_list, status } = values;
                 const { dispatch } = this.props;
                 dispatch({

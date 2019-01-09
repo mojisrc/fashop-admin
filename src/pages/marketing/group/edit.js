@@ -30,7 +30,7 @@ export default class GroupEdit extends Component {
         this.props.form.validateFieldsAndScroll((err, values) => {
             if (!err) {
                 // console.log('Received values of form: ', values);
-                const { dispatch, location: { query: { id } } } = this.props;
+                const { dispatch, groupInfo: { info: { id } } } = this.props;
                 const {
                     title,
                     time_over_day,
@@ -101,12 +101,12 @@ export default class GroupEdit extends Component {
                         <Basic
                             form={form}
                             formItemLayout={formItemLayout}
-                            groupInfo={groupInfo}
+                            groupInfo={groupInfo.info}
                         />
                         <Goods
                             form={form}
                             formItemLayout={formItemLayout}
-                            groupInfo={groupInfo}
+                            groupInfo={groupInfo.info}
                         />
                         <FormItem {...tailFormItemLayout}>
                             <Button type="primary" htmlType="submit">保 存</Button>

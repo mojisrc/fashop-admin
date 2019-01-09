@@ -9,7 +9,7 @@ import Image from "@/components/image/index";
 import { list } from "@/models/order";
 import Query from "@/utils/query";
 import EditAddress from "../editAddress/index";
-import EditPrice from "../editPrice/index";
+import EditPrice from "../../editPrice/index";
 import router from "umi/router";
 
 @connect(({ order, loading }) => ({

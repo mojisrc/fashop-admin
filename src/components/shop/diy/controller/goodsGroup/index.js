@@ -10,30 +10,6 @@ const FormItem = Form.Item;
 
 const RadioGroup = Radio.Group;
 const Option = Select.Option;
-//
-// type Props = {
-//     options: {
-//         layout_style: number,
-//     },
-//     data: Array<{
-//         id: number,
-//         img: {
-//             url: string
-//         },
-//         title: string,
-//         price: number,
-//         // market_price: number,
-//         // desc: string
-//     }>,
-//     getValues: Function,
-//     componentName?: string
-// }
-//
-// type State = {
-//     addGoodsVisible: boolean,
-//     delectShow: boolean,
-//     currentId: number,
-// }
 
 export default class Index extends Component {
     state = {
@@ -48,7 +24,7 @@ export default class Index extends Component {
     render() {
         const { delectShow, addGoodsVisible, currentId } = this.state;
         const { options, data, getValues } = this.props;
-        const { layout_style, source_type, goods_sort } = options||{};
+        const { layout_style, source_type, goods_sort,goods_title_rows } = options||{};
         return (
             <Form>
                 <FormItem
@@ -60,7 +36,7 @@ export default class Index extends Component {
                         onChange={async(e) => {
                             getValues({
                                 options: { ...options, ...{ source_type: e.target.value } },
-                                // data: []
+                                data: []
                             });
                         }}
                     >
@@ -69,14 +45,14 @@ export default class Index extends Component {
                     </RadioGroup>
                 </FormItem>
                 {
-                    source_type==="auto" ? 
+                    source_type==="auto" ?
                     <FormItem
                         {...formItemLayout}
                         label="显示数量"
                         extra="最多12件，最少1件"
                     >
-                        <InputNumber 
-                            max={12} 
+                        <InputNumber
+                            max={12}
                             min={1}
                             onChange={async (e) => {
                                 const values = {
@@ -94,7 +70,7 @@ export default class Index extends Component {
                     </FormItem> : null
                 }
                 {
-                    source_type==="auto" ? 
+                    source_type==="auto" ?
                     <FormItem
                         {...formItemLayout}
                         label="商品排序"
@@ -121,7 +97,7 @@ export default class Index extends Component {
                     </FormItem> : null
                 }
                 {
-                    source_type==="choose" ? 
+                    source_type==="choose" ?
                     <FormItem
                         {...formItemLayout}
                     >
@@ -245,6 +221,23 @@ export default class Index extends Component {
                         <Radio value={2}>小图</Radio>
                         <Radio value={4}>列表</Radio>
                         <Radio value={5}>轮播</Radio>
+                    </RadioGroup>
+                </FormItem>
+                <FormItem
+                    {...formItemLayout}
+                    label="标题行数"
+                >
+                    <RadioGroup
+                        value={goods_title_rows}
+                        onChange={async (e) => {
+                            getValues({
+                                options: { ...options, ...{ goods_title_rows: e.target.value } },
+                                data
+                            });
+                        }}
+                    >
+                        <Radio value={1}>一行</Radio>
+                        <Radio value={2}>两行</Radio>
                     </RadioGroup>
                 </FormItem>
             </Form>

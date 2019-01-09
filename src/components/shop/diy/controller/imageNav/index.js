@@ -6,13 +6,6 @@ import GroupCard from "@/components/shop/diy/controller/common/groupCard";
 const FormItem = Form.Item;
 const RadioGroup = Radio.Group;
 
-// type Props = {
-//     options: {
-//         rows: number,
-//         each_row_display: number,
-//     },
-// }
-
 export default class Index extends Component {
 
     static defalutProps = {

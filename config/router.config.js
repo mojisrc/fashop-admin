@@ -38,10 +38,10 @@ export default [
                     { path: "/order", redirect: "/order/list" },
                     { path: "/order/list", name: "订单管理", component: "/order/list" },
                     { path: "/order/list/detail", component: "/order/detail" },
-                    { path: "/order/evaluate", name: "评价管理", component: "/order/evaluate" },
                     { path: "/order/refund", name: "退款售后", component: "/order/refund" },
+                    { path: "/order/evaluate", name: "评价管理", component: "/order/evaluate" },
                     { path: "/order/refund/edit", component: "/order/refundEdit" },
-                    { path: "/order/send", component: "/order/send" }
+                    { path: "/order/list/send", component: "/order/send" }
                 ]
             },
             {
@@ -94,7 +94,6 @@ export default [
                             { path: "/setting/deliver/freight/add", component: "/setting/freight/add" },
                             { path: "/setting/deliver/freight/edit", component: "/setting/freight/edit" }
                         ]
-
                     },
                     { path: "/setting/order", name: "订单配置", component: "/setting/order" },
                     {
@@ -113,19 +112,19 @@ export default [
                 path: "/marketing",
                 name: "营销",
                 routes: [
-                    { path: "/marketing", redirect: "/marketing/coupon/list" },
-                    { path: "/marketing/group", redirect: "/marketing/group/list" },
-                    { path: "/marketing/group/list", name: "拼团", component: "/marketing/group/list" },
+                    { path: "/marketing", redirect: "/marketing/group" },
+                    { path: "/marketing/group", name: "拼团", component: "/marketing/group/list" },
                     { path: "/marketing/group/add", component: "/marketing/group/add" },
                     { path: "/marketing/group/edit", component: "/marketing/group/edit" },
-                    { path: "/marketing/coupon", redirect: "/marketing/coupon/list" },
-                    { path: "/marketing/coupon/list", name: "优惠券", component: "/marketing/coupon/list" },
+                    { path: "/marketing/coupon", name: "优惠券", component: "/marketing/coupon/list" },
                     { path: "/marketing/coupon/add", component: "/marketing/coupon/add" },
                     { path: "/marketing/coupon/edit", component: "/marketing/coupon/edit" },
-                    { path: "/marketing/freebie", redirect: "/marketing/freebie/list" },
-                    { path: "/marketing/freebie/list", name: "赠品", component: "/marketing/freebie/list" },
+                    { path: "/marketing/freebie", name: "赠品", component: "/marketing/freebie/list" },
                     { path: "/marketing/freebie/add", component: "/marketing/freebie/add" },
-                    { path: "/marketing/freebie/edit", component: "/marketing/freebie/edit" }
+                    { path: "/marketing/freebie/edit", component: "/marketing/freebie/edit" },
+                    { path: "/marketing/discount", name: "限时折扣", component: "/marketing/discount/list" },
+                    { path: "/marketing/discount/add", component: "/marketing/discount/add" },
+                    { path: "/marketing/discount/edit", component: "/marketing/discount/edit" }
                 ]
             }
         ]

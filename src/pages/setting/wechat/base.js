@@ -6,14 +6,14 @@ import { Alert, Switch, Form, Input, Button, message, Upload, Icon, Spin } from 
 const FormItem = Form.Item;
 
 @Form.create()
-@connect(({ payment, loading }) => ({
-    paymentInfoLoading: loading.effects["payment/info"],
-    paymentEditLoading: loading.effects["payment/edit"]
+@connect(({ setting, loading }) => ({
+    settingInfoLoading: loading.effects["setting/info"],
+    settingEditLoading: loading.effects["setting/edit"]
 }))
 class Payment extends Component {
     static defaultProps = {
-        paymentInfoLoading: true,
-        paymentInfo: {
+        settingInfoLoading: true,
+        settingInfo: {
             info: {
                 config: {
                     app_secret: "",
@@ -50,9 +50,9 @@ class Payment extends Component {
     componentDidMount() {
         const { dispatch } = this.props;
         dispatch({
-            type: "payment/info",
+            type: "setting/info",
             payload: {
-                type: "wechat"
+                key: "wechat"
             },
             callback: (response) => {
                 if (response.code === 0) {
@@ -107,9 +107,9 @@ class Payment extends Component {
                 const { app_id, app_secret, status, mini_app_id, mch_id, key } = values;
                 const { dispatch } = this.props;
                 dispatch({
-                    type: "payment/edit",
+                    type: "setting/edit",
                     payload: {
-                        type: "wechat",
+                        key: "wechat",
                         config: {
                             app_id,
                             app_secret,
@@ -141,7 +141,7 @@ class Payment extends Component {
 
     render() {
         const { app_id, app_secret, status, mini_app_id, mini_app_secret, mch_id, key, apiclientCert, apiclientKey, callback_domain } = this.state;
-        const { form, paymentEditLoading, paymentInfoLoading } = this.props;
+        const { form, settingEditLoading, settingInfoLoading } = this.props;
         const name = "cert";
         const action = "/admin/upload/addCert";
         const { getFieldDecorator } = form;
@@ -149,7 +149,7 @@ class Payment extends Component {
         const headers = { "Access-Token": token.accessToken };
         return (
                 <Card bordered={false}>
-                    <Spin size="large" spinning={paymentInfoLoading}>
+                    <Spin size="large" spinning={settingInfoLoading}>
                         <Alert
                             message="注意：App手机登录、微信登录用户打通"
                             description={
@@ -290,7 +290,7 @@ class Payment extends Component {
                                 })(<Switch />)}
                             </FormItem>
                             <FormItem {...tailFormItemLayout}>
-                                <Button type="primary" htmlType="submit" loading={paymentEditLoading}>
+                                <Button type="primary" htmlType="submit" loading={settingEditLoading}>
                                     保存
                                 </Button>
                             </FormItem>

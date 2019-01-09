@@ -45,7 +45,7 @@ export default class GroupList extends Component {
     }
 
     render() {
-        const { groupList, groupListLoading } = this.props;
+        const { groupList, groupListLoading, dispatch } = this.props;
         const {
             keywords,
             state,
@@ -78,24 +78,58 @@ export default class GroupList extends Component {
                 key: "operation",
                 className: styles.column,
                 width: 300,
-                render: (record) => <View className={styles.operation}>
-                    <a
-                        onClick={() => {
-                            router.push({
-                                pathname: `/marketing/group/edit`,
-                                search: `?id=${record.id}`,
-                            });
-                        }}
-                    >编辑</a>
-                    <Divider type="vertical" />
-                    <Popconfirm
-                        title="确定让这组赠品活动失效？"
-                        onConfirm={() => console.log('confirm')}
-                        onCancel={() => console.log('cancel')}
-                    >
-                        <a>使失效</a>
-                    </Popconfirm>
-                </View>
+                render: (record) => {
+                    const showDelete = record.state_desc === "未开始" || record.state_desc === "已过期未生效"
+                    const showInvalid = record.state_desc === "已开始生效中" || record.state_desc === "已过期生效中"
+                    const showEffective = record.state_desc === "已开始未生效"
+                    return <View className={styles.operation}>
+                        <a
+                            onClick={() => {
+                                router.push({
+                                    pathname: `/marketing/group/edit`,
+                                    search: `?id=${record.id}`,
+                                });
+                            }}
+                        >
+                            编辑
+                        </a>
+                        <Divider type="vertical" />
+                        {
+                            showDelete ? 
+                            <Popconfirm
+                                title="确定删除该拼团活动？"
+                                onConfirm={() => {
+                                    dispatch({
+                                        type: "group/del",
+                                        payload: {
+                                            id: record.id
+                                        }
+                                    });
+                                }}
+                                onCancel={() => console.log('cancel')}
+                            >
+                                <a>删除</a>
+                            </Popconfirm> :
+                            showInvalid ? 
+                            <Popconfirm
+                                title="确定让这个拼团活动失效？"
+                                onConfirm={() => console.log('confirm')}
+                                onCancel={() => console.log('cancel')}
+                            >
+                                <a>使失效</a>
+                            </Popconfirm> :
+                            showEffective ? 
+                            <Popconfirm
+                                title="确定让这个拼团活动生效？"
+                                onConfirm={() => console.log('confirm')}
+                                onCancel={() => console.log('cancel')}
+                            >
+                                <a>生效</a>
+                            </Popconfirm> :
+                            null
+                        }
+                    </View>
+                }
             }
         ];
         return (

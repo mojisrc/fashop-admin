@@ -17,7 +17,7 @@ class Sms extends Component {
     };
     state = {
         info: {
-            key: "alidayu_template",
+            key: "alidayu",
             status: 1,
             config: {
                 access_key_id: "xxxxxxxxxx",
@@ -75,7 +75,7 @@ class Sms extends Component {
                 dispatch({
                     type: "setting/edit",
                     payload: {
-                        key: "alipay",
+                        key: "alidayu",
                         config: {
                             access_key_id,
                             access_key_secret,
@@ -164,23 +164,21 @@ class Sms extends Component {
                                 label="Access KeyID"
                             >
                                 {getFieldDecorator("access_key_id", {
-                                    initialValue: info.access_key_id??""
+                                    initialValue: info.config.access_key_id??""
                                 })(<Input placeholder="请输入" style={{ width: "auto", minWidth: 300 }} />)}
                             </FormItem>
                             <FormItem {...formItemLayout} label="Access KeySecret">
                                 {getFieldDecorator("access_key_secret", {
-                                    initialValue: info.access_key_secret??""
+                                    initialValue: info.config.access_key_secret??""
                                 })(<Input placeholder="请输入" style={{ width: "auto", minWidth: 300 }} />)}
                             </FormItem>
                             <FormItem {...formItemLayout} label="短信签名">
-                                {getFieldDecorator("private_key", {
-                                    initialValue: info.signature??""
+                                {getFieldDecorator("signature", {
+                                    initialValue: info.config.signature??""
                                 })(<Input placeholder="请输入，如FaShop" style={{ width: "auto", minWidth: 100 }} />)}
                             </FormItem>
                             <FormItem {...formItemLayout} label="使用场景" className="ant-form-item-table-style">
-                                {getFieldDecorator("private_key", {
-                                    initialValue: info.signature??""
-                                })(<Table bordered={true} columns={columns} dataSource={data} pagination={false} />)}
+                                <Table bordered={true} columns={columns} dataSource={data} pagination={false} />
                                 <a href={`https://www.fashop.cn/help/sms#如何获得模板ID`} target="_blank">
                                     如何获取模板ID？
                                 </a>

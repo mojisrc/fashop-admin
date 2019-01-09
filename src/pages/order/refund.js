@@ -3,7 +3,6 @@ import { connect } from "dva";
 import PageHeaderWrapper from "@/components/pageHeaderWrapper";
 import { Card,Table } from "antd";
 import PageList from "@/components/pageList";
-import styles from "@/components/order/refund/list/table/index.css";
 import { View } from "@/components/flexView";
 import router from "umi/router";
 import moment from "moment";
@@ -108,10 +107,17 @@ export default class Refund extends Component {
                         {text}
                     </a>
             }, {
-                title: "订单金额（元）",
+                title: "退款金额",
+                dataIndex: "refund_amount",
+                key: "refund_amount",
+                align: 'center',
+                render:(text) => `${text}元`
+            }, {
+                title: "订单金额",
                 dataIndex: "order_amount",
                 key: "order_amount",
-                className: styles.column
+                align: 'center',
+                render:(text) => `${text}元`
             }, {
                 title: "收货人",
                 dataIndex: "reciver_name",
@@ -123,19 +129,17 @@ export default class Refund extends Component {
             }, {
                 title: "操作",
                 key: "operation",
-                className: styles.column,
-                render: (record) => <View className={styles.operation}>
-                    <a
-                        onClick={() => {
-                            router.push({
-                                pathname: `/order/refund/edit`,
-                                search: `?id=${record.id}`
-                            });
-                        }}
-                    >
-                        详情
-                    </a>
-                </View>
+                align: 'center',
+                render: (record) => <a
+                    onClick={() => {
+                        router.push({
+                            pathname: `/order/refund/edit`,
+                            search: `?id=${record.id}`
+                        });
+                    }}
+                >
+                    详情
+                </a>
             }
         ];
         return (
@@ -208,8 +212,10 @@ export default class Refund extends Component {
                                         { name: "买家已发货，等待收货", value: "3" },
                                         { name: "已收货，确认退款", value: "4" },
                                         { name: "退款成功", value: "5" },
-                                        { name: "退款关闭", value: "6" }
-                                    ],
+                                        { name: "退款关闭", value: "6" },
+                                        { name: "同意退款，仅退款", value: "7" },
+                                        { name: "拒绝(驳回)", value: "8" },
+                            ],
                                     initialValue: refund_state
                                 }
                             },
@@ -256,20 +262,19 @@ export default class Refund extends Component {
     }
 
     returnRefundState(state) {
-
         switch (state) {
             case 0:
                 return <span style={{ color: "red" }}>未处理</span>;
             case 10:
-                return "已拒绝退款";
+                return "已拒绝";
             case 20:
-                return "已同意退款";
+                return "已同意";
             case 30:
                 return "已完成";
             case 50:
-                return "用户主动撤销";
+                return "用户已撤销";
             case 51:
-                return "用户主动收货";
+                return "用户已收货";
             default:
                 return "-";
         }

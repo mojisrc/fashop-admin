@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Row, Col, Button, Input, Rate, Switch, Pagination, Spin ,Card} from "antd";
+import { Row, Col, Button, Input, Rate, Switch, Pagination, Spin, Card } from "antd";
 import styles from "./evaluate.css";
 import Image from "@/components/image/index";
 import { View } from "@/components/flexView";
@@ -9,6 +9,7 @@ import PhotoGallery from "@/components/photoGallery/index";
 import GoodsApi from "@/services/goods";
 import PageList from "@/components/pageList";
 import PageHeaderWrapper from "@/components/pageHeaderWrapper";
+import { ListEmpty } from "@/components/empty";
 
 const { TextArea } = Input;
 const { Fragment } = React;
@@ -17,7 +18,7 @@ const { Fragment } = React;
     evaluateList: goodsEvaluate.list.result,
     evaluateListLoading: loading.effects["goodsEvaluate/list"]
 }))
-export default class Evaluate extends Component {
+class Evaluate extends Component {
     static defaultProps = {
         evaluateListLoading: true,
         evaluateList: {
@@ -131,6 +132,9 @@ export default class Evaluate extends Component {
                         this.PhotoGallery = e;
                     }} />
                     <Spin tip="Loading..." spinning={evaluateListLoading}>
+                        {
+                            Array.isArray(list) && list.length === 0 ? <ListEmpty /> : null
+                        }
                         <View className={"EvaluateListTable"}>
                             {
                                 Array.isArray(list) && list.map((item, e) =>
@@ -372,3 +376,5 @@ export default class Evaluate extends Component {
         );
     }
 }
+
+export default Evaluate;

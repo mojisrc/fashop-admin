@@ -2,7 +2,6 @@ import fetch from "dva/fetch";
 import { notification } from "antd";
 import router from "umi/router";
 import hash from "hash.js";
-// import { isAntdPro } from "@/utils";
 
 const codeMessage = {
     200: "服务器成功返回请求的数据。",
@@ -65,9 +64,9 @@ const cachedSave = (response, hashcode) => {
  */
 export default function request(url, option) {
     const options = {
-        // expirys: isAntdPro(),
         ...option
     };
+    url = process.env.NODE_ENV === "production" ? process.env.production.api.url + url : url;
     /**
      * Produce fingerprints based on url and parameters
      * Maybe url has the same parameters
@@ -78,10 +77,7 @@ export default function request(url, option) {
         .update(fingerprint)
         .digest("hex");
 
-    const defaultOptions = {
-        credentials: "include"
-    };
-    const newOptions = { ...defaultOptions, ...options };
+    const newOptions = { ...options };
     if (
         newOptions.method === "POST" ||
         newOptions.method === "PUT" ||
@@ -103,21 +99,6 @@ export default function request(url, option) {
         }
     }
 
-    const expirys = options.expirys && 60;
-    // options.expirys !== false, return the cache,
-    if (options.expirys !== false) {
-        const cached = sessionStorage.getItem(hashcode);
-        const whenCached = sessionStorage.getItem(`${hashcode}:timestamp`);
-        if (cached !== null && whenCached !== null) {
-            const age = (Date.now() - whenCached) / 1000;
-            if (age < expirys) {
-                const response = new Response(new Blob([cached]));
-                return response.json();
-            }
-            sessionStorage.removeItem(hashcode);
-            sessionStorage.removeItem(`${hashcode}:timestamp`);
-        }
-    }
     return fetch(url, newOptions)
         .then(checkStatus)
         .then(response => cachedSave(response, hashcode))

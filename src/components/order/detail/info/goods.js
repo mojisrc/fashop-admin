@@ -43,6 +43,7 @@ export default class OrderDetailGoodsInfo extends Component {
             <View className={styles.infoWarp}>
                 <p className={styles.infoTitle}>商品信息</p>
                 <Table
+                    bordered
                     key='order_goods_table'
                     columns={columns}
                     dataSource={extend_order_goods}

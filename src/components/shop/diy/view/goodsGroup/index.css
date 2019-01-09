@@ -40,9 +40,12 @@
     display: -webkit-box;
     text-overflow: ellipsis;
     -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
+    -webkit-line-clamp: 1;
+    height: 20px;
     font-size: 16px;
     color: #333;
+    word-break: break-all;
+    word-wrap:break-word;
 }
 
 .listPrice {
@@ -80,9 +83,12 @@
     display: -webkit-box;
     text-overflow: ellipsis;
     -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
+    -webkit-line-clamp: 1;
+    height: 20px;
     font-size: 16px;
     color: #333;
+    word-break: break-all;
+    word-wrap:break-word;
 }
 
 .smallPrice {
@@ -97,7 +103,7 @@
 }
 
 /* carousel */
-.carouselItem{ 
+.carouselItem{
     display: flex!important;
     flex-direction: row;
     width: 100%;
@@ -114,4 +120,15 @@
     bottom: 0;
     color: #fff;
     text-align: center;
+}
+.lineClamp1{
+    -webkit-line-clamp: 1!important;
+    height: 20px!important;
+    -webkit-box-orient:vertical!important;
+
+}
+.lineClamp2{
+    -webkit-line-clamp: 2!important;
+    height: 40px!important;
+    -webkit-box-orient:vertical!important;
 }
