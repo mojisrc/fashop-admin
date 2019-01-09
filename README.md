@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://www.fashop.cn">
-    <img width="200" src="https://www.fashop.cn/logo.png">
+    <img width="100" src="https://www.fashop.cn/logo.png">
   </a>
 </p>
 
