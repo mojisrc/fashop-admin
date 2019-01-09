@@ -1,6 +1,12 @@
-# fashop-admin
+<h1 align="center">Fa Shop Admin</h1>
 
-微信小程序商城后台，微信小程序微店后台，接口基于FaShop
+<div align="center">
+微信小程序商城后台，微信小程序微店后台
+</div>
+
+![](https://img.shields.io/github/stars/mojisrc/fashop-admin.svg)
+![](https://img.shields.io/github/issues/mojisrc/fashop-admin.svg)
+![](https://img.shields.io/github/forks/mojisrc/fashop-admin.svg)
 
 ## 安装运行
 ```bash
@@ -92,15 +98,13 @@ Issue #1, #2
 Close #1
 ```
 
-
-
 ## 配置接口域名
 修改根目录下 config/config.js 文件
 ```
 proxy: {
-      '/admin/': {
-         target: 'https://demo.fashop.cn',
-         changeOrigin: true,
-      },
-    },
+  '/admin/': {
+     target: 'https://demo.fashop.cn',
+     changeOrigin: true,
+  },
+},
 ```
