@@ -12,13 +12,44 @@ const FormItem = Form.Item;
 const TabPane = Tabs.TabPane;
 const Option = Select.Option
 
-@connect()
+@connect(({ goods, loading }) => ({
+    skuList: goods.skuList.result,
+    skuListLoading: loading.effects["goods/skuList"]
+}))
 class Goods extends Component {
+    static defaultProps = {
+        skuListLoading: true,
+        skuList: {
+            list: [],
+            total_number: 0
+        }
+    };
+    componentDidMount() {
+        this.initList();
+    }
+    initList = () => {
+        const { dispatch, form } = this.props;
+        if (form.getFieldValue('goods_info')&&form.getFieldValue('goods_info').id){
+            dispatch({
+                type: "goods/skuList",
+                payload: {
+                    page: 1,
+                    rows: 100,
+                    goods_id: form.getFieldValue('goods_info').id
+                },
+                callback: (res) => {
+                    form.setFieldsValue({
+                        group_goods: res.result.list
+                    })
+                }
+            });
+        }
+    };
     render() {
         const groupInfo = this.props.groupInfo || {};
         console.log(groupInfo);
-        const { form, formItemLayout } = this.props;
-        const { getFieldDecorator, getFieldValue, setFieldsValue } = form;
+        const { form, formItemLayout, skuListLoading, skuList } = this.props;
+        const { getFieldDecorator, getFieldValue } = form;
         return (
             <View>
                 <h3>活动商品</h3>
@@ -30,7 +61,7 @@ class Goods extends Component {
                         rules: [{ required: true, message: "请选择商品!" }],
                         initialValue: groupInfo.goods_info ? groupInfo.goods_info : null
                     })(
-                        <AddGoods />
+                        <AddGoods initList={this.initList}/>
                     )}
                 </FormItem>
                 {
@@ -40,9 +71,12 @@ class Goods extends Component {
                             label="优惠设置"
                         >
                             {getFieldDecorator('group_goods', {
-                                initialValue: groupInfo.group_goods ? groupInfo.group_goods : []
+                                initialValue: skuList.list.length ? skuList.list : groupInfo.group_goods ? groupInfo.group_goods : []
                             })(
-                                <GoodsSkuList goods_id={getFieldValue('goods_info').id}/>
+                                <GoodsSkuList 
+                                    skuList={skuList.list}
+                                    skuListLoading={skuListLoading}
+                                />
                             )}
                         </FormItem> 
                         : null
@@ -64,7 +98,7 @@ class AddGoods extends Component {
     }
     render() {
         const { visible } = this.state
-        const { onChange, value } = this.props;
+        const { onChange, value, initList } = this.props;
         return <View>
             <View
                 className={styles.add}
@@ -100,6 +134,7 @@ class AddGoods extends Component {
                     onOk={(goods_info) => {
                         console.log("goods_info", goods_info);
                         onChange(goods_info)
+                        initList()
                         this.hideModal()
                     }}
                 />
@@ -267,35 +302,8 @@ class SelectableGoods extends Component {
     }
 }
 
-@connect(({ goods, loading }) => ({
-    skuList: goods.skuList.result,
-    skuListLoading: loading.effects["goods/skuList"]
-}))
+
 class GoodsSkuList extends Component {
-    static defaultProps = {
-        skuListLoading: true,
-        skuList: {
-            list: [],
-            total_number: 0
-        }
-    };
-    componentDidMount() {
-        this.initList();
-    }
-    initList = () => {
-        const { dispatch, goods_id } = this.props;
-        dispatch({
-            type: "goods/skuList",
-            payload: {
-                page: 1,
-                rows: 100,
-                goods_id
-            },
-            callback: () => {
-                
-            }
-        });
-    };
     render() {
         const { skuList, skuListLoading, value, onChange } = this.props;
         const columns = [
@@ -349,7 +357,7 @@ class GoodsSkuList extends Component {
             <Table
                 columns={columns}
                 loading={skuListLoading}
-                dataSource={skuList.list ? skuList.list : []}
+                dataSource={skuList}
                 pagination={null}
             />
         )
