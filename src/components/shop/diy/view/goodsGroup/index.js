@@ -143,7 +143,7 @@ export default class Index extends Component {
             </View>
         )
     }
-    
+
     list(item, index) {
         const { options } = this.props;
         const { goods_title_rows } = options;
