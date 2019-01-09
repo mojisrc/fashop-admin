@@ -1,3 +1,9 @@
+<p align="center">
+  <a href="https://www.fashop.cn">
+    <img width="200" src="https://www.fashop.cn/logo.png">
+  </a>
+</p>
+
 <h1 align="center">Fa Shop Admin</h1>
 
 <div align="center">
