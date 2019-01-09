@@ -17,7 +17,6 @@ function disabledDate(current) {
 class Basic extends Component {
     render() {
         const groupInfo = this.props.groupInfo || {};
-        console.log(groupInfo);
         const { form, formItemLayout } = this.props;
         const { getFieldDecorator, setFieldsValue, getFieldValue } = form;
         return (

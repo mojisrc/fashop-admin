@@ -16,8 +16,9 @@ const Option = Select.Option
 class Goods extends Component {
     render() {
         const groupInfo = this.props.groupInfo || {};
+        console.log(groupInfo);
         const { form, formItemLayout } = this.props;
-        const { getFieldDecorator, getFieldValue } = form;
+        const { getFieldDecorator, getFieldValue, setFieldsValue } = form;
         return (
             <View>
                 <h3>活动商品</h3>
@@ -38,11 +39,10 @@ class Goods extends Component {
                             {...formItemLayout}
                             label="优惠设置"
                         >
-                            {getFieldDecorator('sepc_list', {
-                                rules: [{ required: true, message: "请输入拼团价格!" }],
-                                initialValue: groupInfo.sepc_list ? groupInfo.sepc_list : []
+                            {getFieldDecorator('group_goods', {
+                                initialValue: groupInfo.group_goods ? groupInfo.group_goods : []
                             })(
-                                <GoodsSkuList />
+                                <GoodsSkuList goods_id={getFieldValue('goods_info').id}/>
                             )}
                         </FormItem> 
                         : null
@@ -64,7 +64,7 @@ class AddGoods extends Component {
     }
     render() {
         const { visible } = this.state
-        const { onChange, value } = this.props
+        const { onChange, value } = this.props;
         return <View>
             <View
                 className={styles.add}
@@ -98,6 +98,7 @@ class AddGoods extends Component {
             >
                 <SelectableGoods
                     onOk={(goods_info) => {
+                        console.log("goods_info", goods_info);
                         onChange(goods_info)
                         this.hideModal()
                     }}
@@ -107,18 +108,33 @@ class AddGoods extends Component {
     }
 }
 
-@connect(({ group, loading }) => ({
+@connect(({ goods, goodsCategory, group, loading }) => ({
+    goodsList: goods.list.result,
+    goodsListLoading: loading.effects["goods/list"],
+    goodsCategory: goodsCategory.list.result,
+    goodsCategoryLoading: loading.effects["goodsCategory/list"],
     selectableGoods: group.selectableGoods.result,
     selectableGoodsLoading: loading.effects["group/selectableGoods"]
 }))
 class SelectableGoods extends Component {
     static defaultProps = {
+        goodsList: {
+            list: [],
+            total_number: 0
+        },
+        goodsListLoading: true,
+        goodsCategory:{
+            list:[]
+        },
+        goodsCategoryLoading: true,
         selectableGoodsLoading: true,
         selectableGoods: {
             list: [],
-            total_number: 0
         }
     };
+    state = {
+        get: { page: 1, rows: 10 }
+    }
     search = new PageList({
         router: "/marketing/group/add",
         rows: 10,
@@ -129,18 +145,31 @@ class SelectableGoods extends Component {
     componentDidMount() {
         this.initList();
     }
-    initList = () => {
-        const { dispatch, group_id } = this.props;
+    initList() {
+        const { dispatch, goodsCategory } = this.props;
+        const get = Query.make([
+            { key: "sale_state", rule: ["eq", "all"] },
+            { key: "order_type", rule: ["eq", "all"] }
+        ]);
         dispatch({
-            type: "group/selectableGoods",
-            payload: {
-                ...this.search.filter(),
-                group_id: 3
+            type: "goods/list",
+            payload: get,
+            callback: (res) => {
+                // console.log(res)
             }
         });
-    };
+        dispatch({
+            type: "goodsCategory/list",
+        });
+        dispatch({
+            type: "group/selectableGoods",
+        });
+        this.setState({
+            get
+        });
+    }
     render() {
-        const { selectableGoods, selectableGoodsLoading, onOk } = this.props;
+        const { goodsListLoading, goodsList, goodsCategory, selectableGoods, onOk } = this.props;
         const { keywords, state } = this.search.getParam();
         const columns = [
             {
@@ -169,17 +198,24 @@ class SelectableGoods extends Component {
             }, {
                 title: "操作",
                 key: "operation",
-                render: (record) => record.id ? <Button
+                render: (record) => record.selectable ? <Button
                     onClick={() => onOk(record)}
                 >
                     选取
                 </Button> : <span>不可选</span>
             }
         ]
+        const selectableGoodsIds = selectableGoods.list.map(item=>item.id)
+        const currentList = goodsList.list.map(item=>{
+            if(selectableGoodsIds.indexOf(item.id)>-1){
+                item.selectable = true
+            }
+            return item
+        })
         return (
             <View className={styles.tableWarp}>
                 <PageList.Search
-                    loading={selectableGoodsLoading}
+                    loading={goodsListLoading}
                     onSubmit={this.search.submit}
                     defaultValue={this.search.defaultParam}
                     onReset={this.search.reset}
@@ -198,122 +234,124 @@ class SelectableGoods extends Component {
                                 field: "state",
                                 style: { width: 130 },
                                 placeholder: "全部",
-                                data: [
-                                    { name: "未开始", value: "0" },
-                                    { name: "进行中", value: "10" },
-                                    { name: "已结束", value: "20" },
-                                ],
+                                data: goodsCategory.list.map((item,index)=>{
+                                    return {
+                                        name: item.name,
+                                        value: item.id
+                                    }
+                                }),
                                 initialValue: state
                             }
                         }
                     ]}
                 />
                 <Table
-                    loading={selectableGoodsLoading}
+                    loading={goodsListLoading}
+                    dataSource={currentList}
                     columns={columns}
-                    dataSource={selectableGoods.list}
+                    rowKey={record => record.id}
+                    pagination={{
+                        showSizeChanger: false,
+                        showQuickJumper: false,
+                        current: this.state.get.page,
+                        pageSize: this.state.get.rows,
+                        total: goodsList.total_number
+                    }}
+                    onChange={({ current, pageSize }) => {
+                        router.push(Query.page(current, pageSize));
+                        this.initList();
+                    }}
                 />
             </View>
         )
     }
 }
 
-@connect(({ group, loading }) => ({
-    goodsSkuList: group.goodsSkuList.result,
-    goodsSkuListLoading: loading.effects["group/goodsSkuList"]
+@connect(({ goods, loading }) => ({
+    skuList: goods.skuList.result,
+    skuListLoading: loading.effects["goods/skuList"]
 }))
 class GoodsSkuList extends Component {
     static defaultProps = {
-        goodsSkuListLoading: true,
-        goodsSkuList: {
+        skuListLoading: true,
+        skuList: {
             list: [],
             total_number: 0
         }
     };
-    state = {
-        get: { page: 1, rows: 10 },
-        visible: false
-    }
     componentDidMount() {
         this.initList();
     }
     initList = () => {
-        const { dispatch } = this.props;
-        const get = Query.make();
+        const { dispatch, goods_id } = this.props;
         dispatch({
-            type: "group/goodsSkuList",
+            type: "goods/skuList",
             payload: {
-                page: get.page,
-                rows: get.rows
+                page: 1,
+                rows: 100,
+                goods_id
             },
             callback: () => {
-                this.setState({
-                    get
-                });
+                
             }
         });
     };
     render() {
-        const { visible } = this.state;
-        const { goodsSkuList, goodsSkuListLoading } = this.props;
+        const { skuList, skuListLoading, value, onChange } = this.props;
         const columns = [
             {
                 title: "SKU",
-                dataIndex: "sku",
+                dataIndex: "title",
             }, {
                 title: "价格（元）",
                 dataIndex: "price",
             }, {
                 title: "库存",
-                dataIndex: "storage"
+                dataIndex: "stock"
             }, {
                 title: "拼团价",
                 dataIndex: "group_price",
-                render:()=> <View className={styles.rowCenter}>
-                    <Input 
-                        addonBefore="拼团价" 
-                        step={0.01} 
-                        style={{width: 130, marginRight: 10}}
-                        onChange={(e)=>console.log(e)}
+                render: (tetx, record) => <FormItem
+                    validateStatus={(!record.group_price) || (record.group_price && (Number(record.group_price) > Number(record.price))) ? "error" : null}
+                    help={!record.group_price ? "请输入正确的拼团价" : (record.group_price && (Number(record.group_price) > Number(record.price))) ? "拼团价不能高于原价" : ""}
+                >
+                    <Input
+                        addonBefore="拼团价"
+                        type="number"
+                        step={0.01}
+                        style={{ width: 130, marginRight: 10 }}
+                        onChange={(e) => {
+                            record.group_price = e.target.value
+                            onChange(skuList.list)
+                        }}
                     />
                     <span>元</span>
-                </View>
+                </FormItem>
             }, {
                 title: "团长优惠（不填写为无优惠）",
                 dataIndex: "captain_price",
-                render:()=> <View className={styles.rowCenter}>
-                    <Input 
-                        addonBefore="团长价" 
-                        step={0.01} 
-                        style={{width: 130, marginRight: 10}}
-                        onChange={(e)=>console.log(e)}
+                render: () => <FormItem>
+                    <Input
+                        addonBefore="团长价"
+                        type="number"
+                        step={0.01}
+                        style={{ width: 130, marginRight: 10 }}
+                        onChange={(e) => {
+                            record.captain_price = e.target.value
+                            onChange(skuList.list)
+                        }}
                     />
                     <span>元</span>
-                </View>
-            }, {
-                title: "状态",
-                dataIndex: "state",
+                </FormItem>
             }
         ]
         return (
             <Table
                 columns={columns}
-                loading={goodsSkuListLoading}
-                dataSource={[{}]}
-                // dataSource={goodsSkuList.list ? goodsSkuList.list : []}
-                pagination={{
-                    showSizeChanger: false,
-                    showQuickJumper: false,
-                    current: this.state.get.page,
-                    pageSize: this.state.get.rows,
-                    total: goodsSkuList.total_number
-                }}
-                onChange={({ current, pageSize }) => {
-                    router.push(Query.page(current, pageSize));
-                    this.initList();
-                }}
+                loading={skuListLoading}
+                dataSource={skuList.list ? skuList.list : []}
+                pagination={null}
             />
         )
     }
 }
-
