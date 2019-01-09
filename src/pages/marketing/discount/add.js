@@ -5,7 +5,7 @@ import router from "umi/router";
 import {
     Basic,
     Goods,
-} from "@/components/marketing/group"
+} from "@/components/marketing/discount"
 import moment from "moment";
 import { connect } from "dva";
 
@@ -21,7 +21,7 @@ export default class GroupAdd extends Component {
         e.preventDefault();
         this.props.form.validateFieldsAndScroll((err, values) => {
             if (!err) {
-                console.log('Received values of form: ', values);
+                // console.log('Received values of form: ', values);
                 const { dispatch } = this.props;
                 const {
                     title,
@@ -32,15 +32,8 @@ export default class GroupAdd extends Component {
                     limit_buy_num,
                     limit_group_num,
                     limit_goods_num,
+                    // group_goods,
                 } = values;
-                const group_goods = values.group_goods.map((item,index)=>{
-                    return {
-                        goods_id: item.goods_id,
-                        goods_sku_id: item.id,
-                        group_price: item.group_price,
-                        captain_price: item.captain_price,
-                    }
-                })
                 const params = {
                     title,
                     time_over_day,
@@ -51,15 +44,15 @@ export default class GroupAdd extends Component {
                     limit_buy_num,
                     limit_group_num,
                     limit_goods_num,
-                    group_goods,
+                    group_goods: [],
                 };
                 dispatch({
                     type: "group/add",
                     payload: params,
                     callback: (e) => {
                         if (e.code === 0) {
-                            message.success("添加成功");
-                            router.goBack();
+                            // message.success("添加成功");
+                            // router.goBack();
                         } else {
                             message.warn(e.msg);
                         }
@@ -99,13 +92,16 @@ export default class GroupAdd extends Component {
                         form={form}
                         formItemLayout={formItemLayout}
                     />
-                    <Goods
+                    <FormItem {...tailFormItemLayout}>
+                        <Button type="primary" htmlType="submit">选择商品</Button>
+                    </FormItem>
+                    {/* <Goods
                         form={form}
                         formItemLayout={formItemLayout}
-                    />
-                    <FormItem {...tailFormItemLayout}>
+                    /> */}
+                    {/* <FormItem {...tailFormItemLayout}>
                         <Button type="primary" htmlType="submit">保 存</Button>
-                    </FormItem>
+                    </FormItem> */}
                 </Form>
             </Card>
         </PageHeaderWrapper>

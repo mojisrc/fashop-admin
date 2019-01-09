@@ -82,23 +82,23 @@ export default class Add extends Component {
         }
     };
     goodsGroupRefreshGoods = async (values) => {
-        let order_type = 8;
-        switch (values.options.goods_sort) {
-            case 1:
-                order_type = 8;
-                break;
-            case 2:
-                order_type = 3;
-                break;
-            case 3:
-                order_type = 9;
-                break;
-        }
+        // let order_type = 8;
+        // switch (values.options.goods_sort) {
+        //     case 1:
+        //         order_type = 8;
+        //         break;
+        //     case 2:
+        //         order_type = 3;
+        //         break;
+        //     case 3:
+        //         order_type = 9;
+        //         break;
+        // }
 
         const goodsListResult = await GroupApi.pageGoods({
             page: 1,
             rows: values.options.goods_display_num,
-            order_type
+            // order_type
         });
         if (goodsListResult.code === 0) {
             return goodsListResult.result.list;

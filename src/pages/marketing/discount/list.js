@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "dva";
 import PageHeaderWrapper from "@/components/pageHeaderWrapper";
-import { Card, Table, Divider, Button, Popconfirm, message } from "antd";
+import { Card, Table, Divider, Button, Popconfirm } from "antd";
 import PageList from "@/components/pageList";
-import styles from "@/components/marketing/group/index.css";
+import styles from "@/components/marketing/discount/index.css";
 import { View } from "@/components/flexView";
 import router from "umi/router";
 import moment from "moment";
@@ -45,7 +45,7 @@ export default class GroupList extends Component {
     }
 
     render() {
-        const { groupList, groupListLoading, dispatch } = this.props;
+        const { groupList, groupListLoading } = this.props;
         const {
             keywords,
             state,
@@ -56,19 +56,10 @@ export default class GroupList extends Component {
                 dataIndex: "title",
                 key: "title"
             }, {
-                title: "拼团时限",
-                dataIndex: "time_over",
-                key: "time_over",
-                render: (text, record) => `${record.time_over_day}天${record.time_over_hour}时${record.time_over_minute}分`
-            }, {
                 title: "活动时间",
                 dataIndex: "start_time",
                 key: "start_time",
                 render: (text, record) => `${moment(record.start_time, "X").format("YYYY-MM-DD HH:mm:ss")} 至 ${moment(record.end_time, "X").format("YYYY-MM-DD HH:mm:ss")}`
-            }, {
-                title: "参团人数",
-                dataIndex: "limit_buy_num",
-                key: "limit_buy_num"
             }, {
                 title: "活动状态",
                 dataIndex: "state_desc",
@@ -79,28 +70,25 @@ export default class GroupList extends Component {
                 className: styles.column,
                 width: 300,
                 render: (record) => {
-                    const showEdit = record.state_desc === "未开始" || record.state_desc === "已开始生效中"
-                    const showDelete = record.state_desc === "未开始" || record.state_desc === "已过期未生效"
-                    const showInvalid = record.state_desc === "已开始生效中" || record.state_desc === "已过期生效中"
-                    const showEffective = record.state_desc === "已开始未生效"
+                    const showDelete = record.state_desc === "未开始" || record.state_desc === "已结束"
+                    const showInvalid = record.state_desc === "进行中"
+                    const showEdit = record.state_desc !== "已结束"
                     return <View className={styles.operation}>
                         {
                             showEdit ? 
                             <a
                                 onClick={() => {
                                     router.push({
-                                        pathname: `/marketing/group/edit`,
+                                        pathname: `/marketing/discount/edit`,
                                         search: `?id=${record.id}`,
                                     });
                                 }}
                             >
                                 编辑
-                            </a> : <a
+                            </a> :
+                            <a
                                 onClick={() => {
-                                    router.push({
-                                        pathname: `/marketing/group/edit`,
-                                        search: `?id=${record.id}`,
-                                    });
+                                    
                                 }}
                             >
                                 查看
@@ -116,13 +104,6 @@ export default class GroupList extends Component {
                                         type: "group/del",
                                         payload: {
                                             id: record.id
-                                        },
-                                        callback: (e) => {
-                                            if(e.code===0){
-                                                this.initList()
-                                            }else {
-                                                message.error(e.msg);
-                                            }
                                         }
                                     });
                                 }}
@@ -133,46 +114,10 @@ export default class GroupList extends Component {
                             showInvalid ? 
                             <Popconfirm
                                 title="确定让这个拼团活动失效？"
-                                onConfirm={() => {
-                                    dispatch({
-                                        type: "group/showSet",
-                                        payload: {
-                                            id: record.id
-                                        },
-                                        callback: (e) => {
-                                            if(e.code===0){
-                                                this.initList()
-                                            }else {
-                                                message.error(e.msg);
-                                            }
-                                        }
-                                    });
-                                }}
+                                onConfirm={() => console.log('confirm')}
                                 onCancel={() => console.log('cancel')}
                             >
                                 <a>使失效</a>
-                            </Popconfirm> :
-                            showEffective ? 
-                            <Popconfirm
-                                title="确定让这个拼团活动生效？"
-                                onConfirm={() => {
-                                    dispatch({
-                                        type: "group/showSet",
-                                        payload: {
-                                            id: record.id
-                                        },
-                                        callback: (e) => {
-                                            if(e.code===0){
-                                                this.initList()
-                                            }else {
-                                                message.error(e.msg);
-                                            }
-                                        }
-                                    });
-                                }}
-                                onCancel={() => console.log('cancel')}
-                            >
-                                <a>生效</a>
                             </Popconfirm> :
                             null
                         }
@@ -204,10 +149,8 @@ export default class GroupList extends Component {
                                     placeholder: "全部",
                                     data: [
                                         { name: "未开始", value: "0" },
-                                        { name: "已开始生效中", value: "10" },
-                                        { name: "已开始未生效", value: "20" },
-                                        { name: "已过期生效中", value: "30" },
-                                        { name: "已过期未生效", value: "40" },
+                                        { name: "进行中", value: "10" },
+                                        { name: "已结束", value: "20" },
                                     ],
                                     initialValue: state
                                 }

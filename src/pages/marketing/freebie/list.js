@@ -21,7 +21,7 @@ export default class Freebie extends Component {
         }
     };
     search = new PageList({
-        router: "/marketing/coupon/list",
+        router: "/marketing/freebie",
         rows: 10,
         param: {
             keywords: null,

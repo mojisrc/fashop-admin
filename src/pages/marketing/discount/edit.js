@@ -1,28 +1,36 @@
 import React, { Component } from "react";
 import PageHeaderWrapper from "@/components/pageHeaderWrapper";
-import { Card, Form, Button, message } from "antd";
+import { Card, Form, Button, message, Spin } from "antd";
 import router from "umi/router";
 import {
     Basic,
     Goods,
-} from "@/components/marketing/group"
+} from "@/components/marketing/discount"
 import moment from "moment";
 import { connect } from "dva";
 
 const FormItem = Form.Item;
 
 @Form.create()
-@connect()
-export default class GroupAdd extends Component {
-    state={
-        step: 1
+@connect(({ group, loading }) => ({
+    groupInfo: group.info.result,
+    groupInfoLoading: loading.effects["group/info"],
+}))
+export default class GroupEdit extends Component {
+    componentDidMount() {
+        const { dispatch, location: { query: { id } } } = this.props;
+        dispatch({
+            type: "group/info",
+            payload: { id },
+            callback: (e) => {}
+        });
     }
     handleSubmit = (e) => {
         e.preventDefault();
         this.props.form.validateFieldsAndScroll((err, values) => {
             if (!err) {
-                console.log('Received values of form: ', values);
-                const { dispatch } = this.props;
+                // console.log('Received values of form: ', values);
+                const { dispatch, groupInfo: { info: { id } } } = this.props;
                 const {
                     title,
                     time_over_day,
@@ -32,16 +40,10 @@ export default class GroupAdd extends Component {
                     limit_buy_num,
                     limit_group_num,
                     limit_goods_num,
+                    group_goods,
                 } = values;
-                const group_goods = values.group_goods.map((item,index)=>{
-                    return {
-                        goods_id: item.goods_id,
-                        goods_sku_id: item.id,
-                        group_price: item.group_price,
-                        captain_price: item.captain_price,
-                    }
-                })
                 const params = {
+                    id,
                     title,
                     time_over_day,
                     time_over_hour,
@@ -69,7 +71,7 @@ export default class GroupAdd extends Component {
         });
     }
     render() {
-        const { form } = this.props;
+        const { form, groupInfo, groupInfoLoading } = this.props;
         const formItemLayout = {
             labelCol: {
                 xs: { span: 24 },
@@ -92,22 +94,26 @@ export default class GroupAdd extends Component {
                 },
             },
         };
-        return <PageHeaderWrapper hiddenBreadcrumb={true}>
-            <Card>
-                <Form onSubmit={this.handleSubmit}>
-                    <Basic
-                        form={form}
-                        formItemLayout={formItemLayout}
-                    />
-                    <Goods
-                        form={form}
-                        formItemLayout={formItemLayout}
-                    />
-                    <FormItem {...tailFormItemLayout}>
-                        <Button type="primary" htmlType="submit">保 存</Button>
-                    </FormItem>
-                </Form>
-            </Card>
-        </PageHeaderWrapper>
+        return <Spin tip="Loading" spinning={groupInfoLoading}>
+            <PageHeaderWrapper hiddenBreadcrumb={true}>
+                <Card>
+                    <Form onSubmit={this.handleSubmit}>
+                        <Basic
+                            form={form}
+                            formItemLayout={formItemLayout}
+                            groupInfo={groupInfo.info}
+                        />
+                        <Goods
+                            form={form}
+                            formItemLayout={formItemLayout}
+                            groupInfo={groupInfo.info}
+                        />
+                        <FormItem {...tailFormItemLayout}>
+                            <Button type="primary" htmlType="submit">保 存</Button>
+                        </FormItem>
+                    </Form>
+                </Card>
+            </PageHeaderWrapper>
+        </Spin>
     }
 }
