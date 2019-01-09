@@ -17,8 +17,10 @@ function disabledDate(current) {
 class Basic extends Component {
     render() {
         const groupInfo = this.props.groupInfo || {};
+        console.log(groupInfo);
         const { form, formItemLayout } = this.props;
         const { getFieldDecorator, setFieldsValue, getFieldValue } = form;
+        const disabled = groupInfo && moment().isAfter(moment(groupInfo.start_time, 'X'))
         return (
             <View>
                 <h3>活动信息</h3>
@@ -77,6 +79,7 @@ class Basic extends Component {
                                     max={89}
                                     min={0}
                                     precision={0}
+                                    disabled={disabled}
                                 />
                             )}
                             <span className="ant-form-text"> 天</span>
@@ -92,6 +95,7 @@ class Basic extends Component {
                                     max={24}
                                     min={0}
                                     precision={0}
+                                    disabled={disabled}
                                 />
                             )}
                             <span className="ant-form-text"> 时</span>
@@ -107,6 +111,7 @@ class Basic extends Component {
                                     max={60}
                                     min={0}
                                     precision={0}
+                                    disabled={disabled}
                                 />
                             )}
                             <span className="ant-form-text"> 分</span>
@@ -126,6 +131,7 @@ class Basic extends Component {
                             max={100}
                             min={2}
                             precision={0}
+                            disabled={disabled}
                         />
                     )}
                     <span className="ant-form-text"> 人</span>
@@ -153,6 +159,7 @@ class Basic extends Component {
                         <InputNumber
                             min={0}
                             precision={0}
+                            disabled={disabled}
                         />
                     )}
                     <span className="ant-form-text"> 件</span>
@@ -168,6 +175,7 @@ class Basic extends Component {
                         <InputNumber
                             min={0}
                             precision={0}
+                            disabled={disabled}
                         />
                     )}
                     <span className="ant-form-text"> 团</span>

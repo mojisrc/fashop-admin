@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "dva";
 import PageHeaderWrapper from "@/components/pageHeaderWrapper";
-import { Card, Table, Divider, Button, Popconfirm } from "antd";
+import { Card, Table, Divider, Button, Popconfirm, message } from "antd";
 import PageList from "@/components/pageList";
 import styles from "@/components/marketing/group/index.css";
 import { View } from "@/components/flexView";
@@ -79,20 +79,33 @@ export default class GroupList extends Component {
                 className: styles.column,
                 width: 300,
                 render: (record) => {
+                    const showEdit = record.state_desc === "未开始" || record.state_desc === "已开始生效中"
                     const showDelete = record.state_desc === "未开始" || record.state_desc === "已过期未生效"
                     const showInvalid = record.state_desc === "已开始生效中" || record.state_desc === "已过期生效中"
                     const showEffective = record.state_desc === "已开始未生效"
                     return <View className={styles.operation}>
-                        <a
-                            onClick={() => {
-                                router.push({
-                                    pathname: `/marketing/group/edit`,
-                                    search: `?id=${record.id}`,
-                                });
-                            }}
-                        >
-                            编辑
-                        </a>
+                        {
+                            showEdit ? 
+                            <a
+                                onClick={() => {
+                                    router.push({
+                                        pathname: `/marketing/group/edit`,
+                                        search: `?id=${record.id}`,
+                                    });
+                                }}
+                            >
+                                编辑
+                            </a> : <a
+                                onClick={() => {
+                                    router.push({
+                                        pathname: `/marketing/group/edit`,
+                                        search: `?id=${record.id}`,
+                                    });
+                                }}
+                            >
+                                查看
+                            </a>
+                        }
                         <Divider type="vertical" />
                         {
                             showDelete ? 
@@ -103,6 +116,13 @@ export default class GroupList extends Component {
                                         type: "group/del",
                                         payload: {
                                             id: record.id
+                                        },
+                                        callback: (e) => {
+                                            if(e.code===0){
+                                                this.initList()
+                                            }else {
+                                                message.error(e.msg);
+                                            }
                                         }
                                     });
                                 }}
@@ -113,7 +133,21 @@ export default class GroupList extends Component {
                             showInvalid ? 
                             <Popconfirm
                                 title="确定让这个拼团活动失效？"
-                                onConfirm={() => console.log('confirm')}
+                                onConfirm={() => {
+                                    dispatch({
+                                        type: "group/showSet",
+                                        payload: {
+                                            id: record.id
+                                        },
+                                        callback: (e) => {
+                                            if(e.code===0){
+                                                this.initList()
+                                            }else {
+                                                message.error(e.msg);
+                                            }
+                                        }
+                                    });
+                                }}
                                 onCancel={() => console.log('cancel')}
                             >
                                 <a>使失效</a>
@@ -121,7 +155,21 @@ export default class GroupList extends Component {
                             showEffective ? 
                             <Popconfirm
                                 title="确定让这个拼团活动生效？"
-                                onConfirm={() => console.log('confirm')}
+                                onConfirm={() => {
+                                    dispatch({
+                                        type: "group/showSet",
+                                        payload: {
+                                            id: record.id
+                                        },
+                                        callback: (e) => {
+                                            if(e.code===0){
+                                                this.initList()
+                                            }else {
+                                                message.error(e.msg);
+                                            }
+                                        }
+                                    });
+                                }}
                                 onCancel={() => console.log('cancel')}
                             >
                                 <a>生效</a>

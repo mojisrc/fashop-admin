@@ -40,8 +40,15 @@ export default class GroupEdit extends Component {
                     limit_buy_num,
                     limit_group_num,
                     limit_goods_num,
-                    group_goods,
                 } = values;
+                const group_goods = values.group_goods.map((item, index) => {
+                    return {
+                        goods_id: item.goods_id,
+                        goods_sku_id: item.id,
+                        group_price: item.group_price,
+                        captain_price: item.captain_price,
+                    }
+                })
                 const params = {
                     id,
                     title,
@@ -56,11 +63,11 @@ export default class GroupEdit extends Component {
                     group_goods,
                 };
                 dispatch({
-                    type: "group/add",
+                    type: "group/edit",
                     payload: params,
                     callback: (e) => {
                         if (e.code === 0) {
-                            message.success("添加成功");
+                            message.success("修改成功");
                             router.goBack();
                         } else {
                             message.warn(e.msg);

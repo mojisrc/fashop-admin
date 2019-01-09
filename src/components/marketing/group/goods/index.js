@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "dva";
 import { View } from "@/components/flexView";
-import { Form, Input, Tabs, Button, Table, Divider, Select, Modal, Icon } from "antd";
+import { Form, Input, Tabs, Button, Table, Divider, Select, Modal, Icon, InputNumber } from "antd";
 import styles from "./index.css";
 import router from "umi/router";
 import Query from "@/utils/query";
@@ -39,7 +39,11 @@ class Goods extends Component {
                 },
                 callback: (res) => {
                     form.setFieldsValue({
-                        group_goods: res.result.list
+                        group_goods: res.result.list.map((item => {
+                            item.group_price = null
+                            item.captain_price = null
+                            return item
+                        }))
                     })
                 }
             });
@@ -47,7 +51,7 @@ class Goods extends Component {
     };
     render() {
         const groupInfo = this.props.groupInfo || {};
-        console.log(groupInfo);
+        // console.log(groupInfo);
         const { form, formItemLayout, skuListLoading, skuList } = this.props;
         const { getFieldDecorator, getFieldValue } = form;
         return (
@@ -74,7 +78,11 @@ class Goods extends Component {
                                 initialValue: skuList.list.length ? skuList.list : groupInfo.group_goods ? groupInfo.group_goods : []
                             })(
                                 <GoodsSkuList 
-                                    skuList={skuList.list}
+                                    skuList={skuList.list.map((item=>{
+                                        item.group_price = item.group_price ? item.group_price : null
+                                        item.captain_price = item.captain_price ? item.captain_price : null
+                                        return item
+                                    }))}
                                     skuListLoading={skuListLoading}
                                 />
                             )}
@@ -132,7 +140,6 @@ class AddGoods extends Component {
             >
                 <SelectableGoods
                     onOk={(goods_info) => {
-                        console.log("goods_info", goods_info);
                         onChange(goods_info)
                         initList()
                         this.hideModal()
@@ -317,20 +324,23 @@ class GoodsSkuList extends Component {
                 title: "库存",
                 dataIndex: "stock"
             }, {
-                title: "拼团价",
+                title: "拼团价（填写原价为不参与拼团）",
                 dataIndex: "group_price",
-                render: (tetx, record) => <FormItem
+                render: (text, record) => <FormItem
                     validateStatus={(!record.group_price) || (record.group_price && (Number(record.group_price) > Number(record.price))) ? "error" : null}
                     help={!record.group_price ? "请输入正确的拼团价" : (record.group_price && (Number(record.group_price) > Number(record.price))) ? "拼团价不能高于原价" : ""}
                 >
-                    <Input
+                    <InputNumber
                         addonBefore="拼团价"
                         type="number"
                         step={0.01}
+                        min={0.01}
+                        max={record.price}
                         style={{ width: 130, marginRight: 10 }}
+                        value={text}
                         onChange={(e) => {
-                            record.group_price = e.target.value
-                            onChange(skuList.list)
+                            record.group_price = e
+                            onChange(skuList)
                         }}
                     />
                     <span>元</span>
@@ -338,15 +348,20 @@ class GoodsSkuList extends Component {
             }, {
                 title: "团长优惠（不填写为无优惠）",
                 dataIndex: "captain_price",
-                render: () => <FormItem>
-                    <Input
+                render: (text, record) => <FormItem
+                    validateStatus={(!record.captain_price) || (record.captain_price && record.group_price && (Number(record.captain_price) > Number(record.group_price))) ? "error" : null}
+                    help={!record.captain_price ? "请输入正确的团长价" : (record.captain_price && record.group_price && (Number(record.captain_price) > Number(record.group_price))) ? "团长价不能高于拼团价" : ""}
+                >
+                    <InputNumber
                         addonBefore="团长价"
                         type="number"
                         step={0.01}
+                        min={0}
                         style={{ width: 130, marginRight: 10 }}
+                        value={text}
                         onChange={(e) => {
-                            record.captain_price = e.target.value
-                            onChange(skuList.list)
+                            record.captain_price = e
+                            onChange(skuList)
                         }}
                     />
                     <span>元</span>
