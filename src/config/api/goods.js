@@ -43,6 +43,24 @@ export const GoodsApi = {
         showLoading: false,
         needLogin: true,
     },
+    hotSale:{
+        url: `${ROOT_URL}goods/hotSale`,
+        method: 'POST',
+        showLoading: false,
+        needLogin: true,
+    },
+    unHotSale:{
+        url: `${ROOT_URL}goods/unHotSale`,
+        method: 'POST',
+        showLoading: false,
+        needLogin: true,
+    },
+    hotSaleIndex:{
+        url: `${ROOT_URL}goods/hotSaleIndex`,
+        method: 'POST',
+        showLoading: false,
+        needLogin: true,
+    },
     spec:{
         list:{
             url: `${ROOT_URL}goodsspec/list`,

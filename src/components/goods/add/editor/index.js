@@ -213,12 +213,17 @@ class EditorContent extends Component<{},
                 message.error('text类型匹配异常')
             }
         }
-        if (images.length) {
+        const imgList = [];
+        for(let i = 0; i < images.fileList.length; i++){
+            let file = images.fileList[i];
+            imgList.push(file.url);
+        }
+        if (imgList.length) {
             const item = abledata.find((e) => {
                 return e.type === 'image'
             })
             if (item) {
-                images.map((e) => {
+                imgList.map((e) => {
                     newArray.push({
                         type: item.type,
                         value: item.getValue(e),

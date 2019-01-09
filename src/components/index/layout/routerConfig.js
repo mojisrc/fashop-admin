@@ -38,6 +38,9 @@ export const routerConfig = {
                 }, {
                     path: 'shopList',
                     name: '分销商管理'
+                }, {
+                    path: 'storeSetting',
+                    name: '总店设置'
                 }
             ]
         },{

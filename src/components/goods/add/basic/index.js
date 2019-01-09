@@ -2,9 +2,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { View } from "react-web-dom";
-import { Form, Input, TreeSelect } from "antd";
+import { Form, Input, TreeSelect, Upload, Icon, message } from "antd";
 import styles from './index.css'
-import { UploadGroupImage } from '../../../uploadImage'
+import { imageUpload } from "../../../../utils";
 
 const FormItem = Form.Item;
 const TreeNode = TreeSelect.TreeNode;
@@ -23,16 +23,60 @@ type Props = {
 type State = {}
 @connect()
 export default class Basic extends Component<Props, State> {
+    state = {
+        fileList: []
+    };
+    componentWillMount () {
+        let fileList = [];
+        if(this.props.images){
+            for(let i = 0; i < this.props.images.length; i++){
+                let img = {
+                    uid: i,
+                    status: 'done',
+                    url: this.props.images[i]
+                }
+                fileList.push(img);
+            }
+        }
+        this.setState({fileList});
+    };
+    triggerChange = (e: { origin: { path: string } }) => {
+        const fileList = this.state.fileList;
+        for(let i = 0; i < fileList.length; i++){
+            let tmp = fileList[i];
+            if(tmp.status == "uploading"){
+                fileList.splice(i,1);
+            }
+        }
+        let newImg = {
+            uid: fileList.length,
+            status: 'done',
+            url: e.origin.path,
+        }
+        fileList.push(newImg);
+        this.setState({fileList});
+    }
+    handleChange = ({ fileList }) => this.setState({ fileList })
     render() {
         const { form, formItemLayout, history, openPhotoGallery, categoryTree, openPreviewModal, title, images, categoryIds } = this.props
         const { getFieldDecorator, setFieldsValue } = form
+        const { fileList} = this.state
+        const uploadButton = (
+            <View className={styles.uploadBtn}>
+                <Icon type='plus' />
+                <p>Upload</p>
+            </View>
+        );
+        let is_save = 1;
         // TreeSelect 只接受string
         let _categoryIds = []
+
         if(Array.isArray(categoryIds) && categoryIds.length>0){
             _categoryIds = categoryIds.map((item) => {
                 return item + ''
             })
         }
+        console.log(fileList)
         return (
             <View className={styles.goodsItem}>
                 <h3>基本信息</h3>
@@ -45,21 +89,21 @@ export default class Basic extends Component<Props, State> {
                         valuePropName: 'url',
                         initialValue: images,
                     })(
-                        <UploadGroupImage
-                            onClick={(onChange, values) => {
-                                values = values ? values : []
-                                openPhotoGallery({
-                                    photoGalleryOnOk: (e) => {
-                                        onChange([...e, ...values])
-                                    }
+                        <Upload
+                            listType='picture-card'
+                            fileList={fileList}
+                            beforeUpload={beforeUpload}
+                            customRequest={({ file }) => {
+                                imageUpload({
+                                    file,
+                                    onSuccess: this.triggerChange,
+                                    is_save,
                                 })
                             }}
-                            preview={(previewImage) => {
-                                openPreviewModal({
-                                    previewImage,
-                                })
-                            }}
-                        />
+                            onChange={this.handleChange}
+                        >
+                            {fileList.length >= 5 ? null : uploadButton}
+                        </Upload>
                     )}
                 </FormItem>
                 <FormItem
@@ -126,4 +170,15 @@ export default class Basic extends Component<Props, State> {
             </View>
         )
     }
+}
+function beforeUpload(file) {
+    const isImage = file.type.includes('image') !== -1;
+    if (!isImage) {
+        message.error('你只能上传图片!');
+    }
+    const isLimit = file.size / 1024 / 1024 < 5;
+    if (!isLimit) {
+        message.error('图片不能超过5MB!');
+    }
+    return isImage && isLimit;
 }

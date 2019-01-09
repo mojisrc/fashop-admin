@@ -1,6 +1,6 @@
 //@flow
 import React, { Component } from "react";
-import { Table, Button, Switch, Modal, message } from "antd";
+import { Table, Button, Switch, Modal,InputNumber, message } from "antd";
 import styles from "./index.css";
 import { View } from "react-web-dom";
 import { connect } from "react-redux";
@@ -63,6 +63,7 @@ export default class GoodsListTable extends Component <Props, State> {
         const { dispatch, categoryList, } = this.props
         const params = Query.invokerForListParams([
             { key: 'sale_state', rule: ['eq', 'all'] },
+            { key: 'is_hot_sale', rule: ['eq', 'all'] },
             { key: 'order_type', rule: ['eq', 'all'] },
         ])
         dispatch(getGoodsList({ params }))
@@ -155,6 +156,47 @@ export default class GoodsListTable extends Component <Props, State> {
                             if (response.code === 0) {
                                 this.getGoodsList()
                             }
+                        }
+                    }}
+                />
+            }, {
+                title: "总店推荐",
+                dataIndex: "is_hot_sale",
+                render: (text, record) => <Switch
+                    defaultChecked={!!text}
+                    onChange={async (checked) => {
+                        if (checked) {
+                            const response = await Fetch.fetch({
+                                api: GoodsApi.hotSale,
+                                params: { ids: [record.id] }
+                            })
+                            if (response.code === 0) {
+                                this.getGoodsList()
+                            }
+                        } else {
+                            const response = await Fetch.fetch({
+                                api: GoodsApi.unHotSale,
+                                params: { ids: [record.id] }
+                            })
+                            if (response.code === 0) {
+                                this.getGoodsList()
+                            }
+                        }
+                    }}
+                />
+            }, {
+                title: "推荐排序",
+                dataIndex: "hot_sale_index",
+                render: (text, record) => <InputNumber
+                    defaultValue={text}
+                    style={{ width: 60,textAlign: "center" }}
+                    onChange={async (val) => {
+                        const response = await Fetch.fetch({
+                            api: GoodsApi.hotSaleIndex,
+                            params: { id: record.id,index:val }
+                        })
+                        if (response.code === 0) {
+                            this.getGoodsList()
                         }
                     }}
                 />

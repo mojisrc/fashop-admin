@@ -62,6 +62,18 @@ const order_typeArray = [
         title: '排序低到高',
     }
 ]
+const hot_saleArray = [
+    {
+        id: 'all',
+        title: '全部',
+    },{
+        id: '1',
+        title: "总店推荐"
+    }, {
+        id: '0',
+        title: "普通商品"
+    }
+]
 const categoryTreeData = (categoryList) => {
     return categoryList.map((e) => {
         return {
@@ -106,6 +118,7 @@ type Props = {
 export default class GoodsListHeader extends Component<Props, {
     queryParams: {
         sale_state: string,
+        is_hot_sale: string,
         title: string | null,
         category_ids: Array<number>,
         order_type: string
@@ -117,6 +130,7 @@ export default class GoodsListHeader extends Component<Props, {
     state = {
         queryParams: {
             sale_state: 'all',
+            is_hot_sale: 'all',
             title: null,
             category_ids: [],
             order_type: 'all'
@@ -129,6 +143,7 @@ export default class GoodsListHeader extends Component<Props, {
         this.setState({
             queryParams: {
                 sale_state: params['sale_state'] !== undefined ? params['sale_state'] : 'all',
+                is_hot_sale: params['is_hot_sale'] !== undefined ? params['is_hot_sale'] : 'all',
                 title: params['title'] !== undefined ? params['title'] : null,
                 category_ids: params['category_ids'] !== undefined ? params['category_ids'] : [],
                 order_type: params['order_type'] !== undefined ? params['order_type'] : 'all',
@@ -144,6 +159,7 @@ export default class GoodsListHeader extends Component<Props, {
                 page: 1,
                 rows: 10,
                 sale_state: values.sale_state,
+                is_hot_sale: values.is_hot_sale,
                 title: values.title,
                 category_ids: values.category_ids,
                 order_type: values.order_type,
@@ -160,7 +176,7 @@ export default class GoodsListHeader extends Component<Props, {
             loading,
         } = this.props
         const {getFieldDecorator} = form
-        const { sale_state, title, category_ids, order_type } = this.state.queryParams
+        const { sale_state, is_hot_sale, title, category_ids, order_type } = this.state.queryParams
         const treeData = categoryTreeData(categoryList)
         // TreeSelect 只接受string
         let _category_ids = category_ids && category_ids.length ? [...category_ids] : []
@@ -230,7 +246,31 @@ export default class GoodsListHeader extends Component<Props, {
                         </Select>
                     )}
                 </FormItem>
-                <FormItem>
+                <FormItem
+                    label="总店推荐"
+                >
+                    {getFieldDecorator("is_hot_sale", {
+                        initialValue: is_hot_sale,
+                    })(
+                        <Select
+                            placeholder="请选择"
+                            style={{ width: 200 }}
+                        >
+                            {
+                                hot_saleArray.map((e, i) => (
+                                    <Option value={e.id} key={i}>{e.title}</Option>
+                                ))
+                            }
+                        </Select>
+                    )}
+                </FormItem>
+                <FormItem
+                    style={{
+                        textAlign: 'center',
+                        margin: 'auto',
+                        width: '100%',
+                        marginTop: '10px'
+                    }}>
                     <Button
                         type="primary"
                         style={{ marginRight: 15 }}

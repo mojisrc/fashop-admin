@@ -180,6 +180,12 @@ export default class Add extends Component<Props, State> {
                 } else {
                     params.sale_time = sale_time.value.unix()
                 }
+                const imgList = [];
+                for(let i = 0; i < images.fileList.length; i++){
+                    let file = images.fileList[i];
+                    imgList.push(file.url);
+                }
+                params.images = imgList;
                 const e = await Fetch.fetch({
                     api: GoodsApi.edit,
                     params: { ...params, id: this.state.info.id }

@@ -13,7 +13,6 @@ export default ({ file, onSuccess, is_save }) => {
                 is_save,
             }
         })
-        console.log(e)
         if (e.code === 0) {
             onSuccess(e.result)
         } else {

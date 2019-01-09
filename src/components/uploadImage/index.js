@@ -26,6 +26,7 @@ export default class UploadImage extends Component<{ url?: string, onChange?: Fu
             children,
             is_save,
         } = this.props
+        console.log(children);
         return (
             <Upload
                 listType={children ? 'text' : 'picture-card'}
