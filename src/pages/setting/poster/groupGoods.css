@@ -1,8 +1,9 @@
 .view {
     width: 326px;
     height: 466px;
-    border: 1px dotted #3388ff;
+    border: 1px solid #f3f3f3;
     background-color: #ffffff;
+    box-shadow: 0 0 20px #e6e6e6;
 }
 
 .container{
