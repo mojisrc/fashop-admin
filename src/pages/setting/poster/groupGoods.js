@@ -1,22 +1,453 @@
-import React, { Component, Fragment } from "react";
-import { Card } from "antd";
-import { Alert, Switch, Form, Input, Button, message, Upload, Icon, Spin } from "antd";
-import Draggable, { DraggableCore } from "react-draggable";
+import { Form, Icon, Tabs, Slider, Input } from "antd";
 import styles from "./groupGoods.css";
-import Resizable from "re-resizable";
+import ColorPicker from "@/components/public/colorPicker";
+import UploadImage from "@/components/uploadImage";
+import { BaseController, formItemLayout, maxWidth, maxHeight } from "./baseController";
+import { connect } from "dva";
 
-@Form.create()
-class PosterGroupGoods extends Component {
-    static defaultProps = {
-        settingInfoLoading:false
+const TabPane = Tabs.TabPane;
+const FormItem = Form.Item;
+
+@connect(({ setting, loading }) => ({
+    settingInfoLoading: loading.effects["setting/info"],
+    settingEditLoading: loading.effects["setting/edit"]
+}))
+class PosterGroupGoods extends BaseController {
+    constructor(props) {
+        super(props);
+        this.setStyles(styles);
     }
-    state = {
-        index: null,
-        options: {
-            backgroundColor: "#ffffff",
-            backgroundImage: null,
-        },
-        body: [
+
+    key = "poster_group_goods";
+
+    getFormController() {
+        const { body } = this.state;
+        const types = {};
+        body.map((item) => {
+            types[item.type] = item;
+        });
+        return <Form>
+            <Tabs tabPosition={"top"}
+                  defaultActiveKey={`background`}
+                  activeKey={`${this.getIndexTabKey()}`}
+                  onChange={(activeKey) => {
+                      this.setState({ index: parseInt(this.getTypeBody(activeKey)._index) });
+                  }} style={{ minHeight: 500, width: 700 }}>
+                <TabPane tab="背景" key="background">
+                    <FormItem {...formItemLayout} label="背景色">
+                        <ColorPicker
+                            color={types["background"].options.backgroundColor}
+                            colorChange={(color) => {
+                                const { _index } = this.getTypeBody("background");
+                                let _body = [...body];
+                                _body[_index].options.backgroundColor = color.hex;
+                                this.setState({ body: _body });
+                            }}
+                        />
+                    </FormItem>
+                    <FormItem {...formItemLayout} label="背景图">
+                        <UploadImage
+                            onChange={(e) => {
+                                const { _index } = this.getTypeBody("background");
+                                let _body = [...body];
+                                _body[_index].options.backgroundImage = e;
+                                this.setState({ body: _body });
+                            }}
+                            is_save={0}
+                        >
+                            <div className={styles.uploadBtn}>
+                                {types["background"].options.backgroundImage.length ?
+                                    <img
+                                        src={types["background"].options.backgroundImage}
+                                        alt=''
+                                        style={{ backgroundColor: types["background"].options.backgroundColor }}
+                                    /> : <Icon type='plus' className={styles.uploadIcon} />}
+                            </div>
+                        </UploadImage>
+                    </FormItem>
+                </TabPane>
+                <TabPane tab="头像" key="avatar">
+                    <FormItem {...formItemLayout} label="尺寸">
+                        <Slider max={326} min={0} value={types["avatar"].options.size.width}
+                                style={{ width: 200 }}
+                                onChange={(value) => {
+                                    const { _index } = this.getTypeBody("avatar");
+                                    let _body = [...body];
+                                    _body[_index].options.size = {
+                                        width: value,
+                                        height: value
+                                    };
+                                    this.setState({ body: _body });
+                                }}
+                        />
+                    </FormItem>
+                    <FormItem {...formItemLayout} label="圆角">
+                        <Slider max={326} min={0} value={types["avatar"].options.borderRadius}
+                                style={{ width: 200 }}
+                                onChange={(value) => {
+                                    const { _index } = this.getTypeBody("avatar");
+                                    let _body = [...body];
+                                    _body[_index].options.borderRadius = value;
+                                    this.setState({ body: _body });
+                                }}
+                        />
+                    </FormItem>
+                </TabPane>
+                <TabPane tab="昵称" key="nickname">
+                    <FormItem {...formItemLayout} label="字号">
+                        <Slider max={72} min={10} value={types["nickname"].options.fontSize}
+                                style={{ width: 200 }}
+                                onChange={(value) => {
+                                    const { _index } = this.getTypeBody("nickname");
+                                    let _body = [...body];
+                                    _body[_index].options.fontSize = value;
+                                    this.setState({ body: _body });
+                                }}
+                        />
+                    </FormItem>
+                    <FormItem {...formItemLayout} label="颜色">
+                        <ColorPicker
+                            color={types["nickname"].options.fontColor}
+                            colorChange={(color) => {
+                                const { _index } = this.getTypeBody("nickname");
+                                let _body = [...body];
+                                _body[_index].options.fontColor = color.hex;
+                                this.setState({ body: _body });
+                            }}
+                        />
+                    </FormItem>
+                </TabPane>
+                <TabPane tab="口号" key="slogan">
+                    <FormItem {...formItemLayout} label="文本">
+                        <Input placeholder="Basic usage" value={types["slogan"].options.fontContent}
+                               style={{ width: 200 }}
+                               onChange={({ target: { value } }) => {
+                                   const { _index } = this.getTypeBody("slogan");
+                                   let _body = [...body];
+                                   _body[_index].options.fontContent = value;
+                                   this.setState({ body: _body });
+                               }}
+                        />
+                    </FormItem>
+                    <FormItem {...formItemLayout} label="尺寸">
+                        <Slider max={72} min={10} value={types["slogan"].options.fontSize}
+                                style={{ width: 200 }}
+                                onChange={(value) => {
+                                    const { _index } = this.getTypeBody("slogan");
+                                    let _body = [...body];
+                                    _body[_index].options.fontSize = value;
+                                    this.setState({ body: _body });
+                                }}
+                        />
+                    </FormItem>
+                    <FormItem {...formItemLayout} label="颜色">
+                        <ColorPicker
+                            color={types["slogan"].options.fontColor}
+                            colorChange={(color) => {
+                                const { _index } = this.getTypeBody("slogan");
+                                let _body = [...body];
+                                _body[_index].options.fontColor = color.hex;
+                                this.setState({ body: _body });
+                            }}
+                        />
+                    </FormItem>
+                </TabPane>
+                <TabPane tab="拼团数" key="group_number">
+                    <FormItem {...formItemLayout} label="字号">
+                        <Slider max={72} min={10} value={types["group_number"].options.fontSize}
+                                style={{ width: 200 }}
+                                onChange={(value) => {
+                                    const { _index } = this.getTypeBody("group_number");
+                                    let _body = [...body];
+                                    _body[_index].options.fontSize = value;
+                                    this.setState({ body: _body });
+                                }}
+                        />
+                    </FormItem>
+                    <FormItem {...formItemLayout} label="颜色">
+                        <ColorPicker
+                            color={types["group_number"].options.fontColor}
+                            colorChange={(color) => {
+                                const { _index } = this.getTypeBody("group_number");
+                                let _body = [...body];
+                                _body[_index].options.fontColor = color.hex;
+                                this.setState({ body: _body });
+                            }}
+                        />
+                    </FormItem>
+                    <FormItem {...formItemLayout} label="背景色">
+                        <ColorPicker
+                            color={types["group_number"].options.fontColor}
+                            colorChange={(color) => {
+                                const { _index } = this.getTypeBody("group_number");
+                                let _body = [...body];
+                                _body[_index].options.fontBackgroundColor = color.hex;
+                                this.setState({ body: _body });
+                            }}
+                        />
+                    </FormItem>
+                </TabPane>
+                <TabPane tab="图片" key="goods_img">
+                    <FormItem {...formItemLayout} label="尺寸">
+                        <Slider max={326} min={0} value={types["goods_img"].options.size.width}
+                                style={{ width: 200 }}
+                                onChange={(value) => {
+                                    const { _index } = this.getTypeBody("goods_img");
+                                    let _body = [...body];
+                                    _body[_index].options.size = {
+                                        width: value,
+                                        height: value
+                                    };
+                                    this.setState({ body: _body });
+                                }}
+                        />
+                    </FormItem>
+                </TabPane>
+                <TabPane tab="标题" key="goods_title">
+                    <FormItem {...formItemLayout} label="字号">
+                        <Slider max={72} min={10} value={types["goods_title"].options.fontSize}
+                                style={{ width: 200 }}
+                                onChange={(value) => {
+                                    const { _index } = this.getTypeBody("goods_title");
+                                    let _body = [...body];
+                                    _body[_index].options.fontSize = value;
+                                    this.setState({ body: _body });
+                                }}
+                        />
+                    </FormItem>
+                    <FormItem {...formItemLayout} label="颜色">
+                        <ColorPicker
+                            color={types["goods_title"].options.fontColor}
+                            colorChange={(color) => {
+                                const { _index } = this.getTypeBody("goods_title");
+                                let _body = [...body];
+                                _body[_index].options.fontColor = color.hex;
+                                this.setState({ body: _body });
+                            }}
+                        />
+                    </FormItem>
+                </TabPane>
+                <TabPane tab="价格" key="goods_group_price">
+                    <FormItem {...formItemLayout} label="字号">
+                        <Slider max={72} min={0} value={types["goods_group_price"].options.fontSize}
+                                style={{ width: 200 }}
+                                onChange={(value) => {
+                                    const { _index } = this.getTypeBody("goods_group_price");
+                                    let _body = [...body];
+                                    _body[_index].options.fontSize = value;
+                                    this.setState({ body: _body });
+                                }}
+                        />
+                    </FormItem>
+                    <FormItem {...formItemLayout} label="颜色">
+                        <ColorPicker
+                            color={types["goods_group_price"].options.fontColor}
+                            colorChange={(color) => {
+                                const { _index } = this.getTypeBody("goods_group_price");
+                                let _body = [...body];
+                                _body[_index].options.fontColor = color.hex;
+                                this.setState({ body: _body });
+                            }}
+                        />
+                    </FormItem>
+                </TabPane>
+                <TabPane tab="原价" key="goods_price">
+                    <FormItem {...formItemLayout} label="字号">
+                        <Slider max={72} min={0} value={types["goods_price"].options.fontSize}
+                                style={{ width: 200 }}
+                                onChange={(value) => {
+                                    const { _index } = this.getTypeBody("goods_price");
+                                    let _body = [...body];
+                                    _body[_index].options.fontSize = value;
+                                    this.setState({ body: _body });
+                                }}
+                        />
+                    </FormItem>
+                    <FormItem {...formItemLayout} label="颜色">
+                        <ColorPicker
+                            color={types["goods_price"].options.fontColor}
+                            colorChange={(color) => {
+                                const { _index } = this.getTypeBody("goods_price");
+                                let _body = [...body];
+                                _body[_index].options.fontColor = color.hex;
+                                this.setState({ body: _body });
+                            }}
+                        />
+                    </FormItem>
+                </TabPane>
+                <TabPane tab="二维码" key="mini_qr">
+                    <FormItem {...formItemLayout} label="尺寸">
+                        <Slider max={326} min={40} value={types["mini_qr"].options.size.height}
+                                style={{ width: 200 }}
+                                onChange={(value) => {
+                                    const { _index } = this.getTypeBody("mini_qr");
+                                    let _body = [...body];
+                                    _body[_index].options.size = {
+                                        width: value,
+                                        height: value
+                                    };
+                                    this.setState({ body: _body });
+                                }}
+                        />
+                    </FormItem>
+                </TabPane>
+            </Tabs>
+        </Form>;
+    }
+
+    initFormatBody(data) {
+        return data.map((item) => {
+            switch (item.type) {
+                case "background":
+                    return {
+                        ...item, ...{
+                            children: <div style={{
+                                backgroundColor: item.options.backgroundColor,
+                                backgroundImage: `url("${item.options.backgroundImage}")`
+                            }}
+                            />,
+                            tabPane: {
+                                title: "背景"
+                            }
+                        }
+                    };
+                case "avatar":
+                    return {
+                        ...item, ...{
+                            resizableProps: {
+                                lockAspectRatio: "1/1"
+                            },
+                            children: <img
+                                style={{
+                                    borderRadius: item.options.borderRadius
+                                }}
+                                src={"https://tvax2.sinaimg.cn/crop.0.0.850.850.180/684ff39bly8fi57d6kk3oj20nm0nm75h.jpg"} />,
+                            tabPane: {
+                                title: "头像"
+                            }
+                        }
+                    };
+                case "nickname":
+                    return {
+                        ...item, ...{
+                            resizableProps: { lockAspectRatio: null },
+                            children: <div
+                                style={{ fontSize: item.options.fontSize, color: item.options.fontColor }}
+                            >用户昵称</div>,
+                            tabPane: {
+                                title: "昵称"
+                            }
+                        }
+                    };
+                case "slogan":
+                    return {
+                        ...item, ...{
+                            resizableProps: { lockAspectRatio: null },
+                            children: <div
+                                style={{ fontSize: item.options.fontSize, color: item.options.fontColor }}
+                            >{item.options.fontContent}</div>,
+                            tabPane: {
+                                title: "口号"
+                            }
+                        }
+                    };
+                case "group_number":
+                    return {
+                        ...item, ...{
+                            resizableProps: { lockAspectRatio: null },
+                            children: <div
+                                style={{
+                                    fontSize: item.options.fontSize,
+                                    color: item.options.fontColor,
+                                    backgroundColor: item.options.fontBackgroundColor
+                                }}
+                            >2人团</div>,
+                            tabPane: {
+                                title: "拼团数"
+                            }
+                        }
+                    };
+                case "goods_img":
+                    return {
+                        ...item, ...{
+                            resizableProps: {
+                                lockAspectRatio: "1/1"
+                            },
+                            children: <img
+                                src={"https://img14.360buyimg.com/n7/jfs/t1/21043/38/1380/506454/5c1209f7E3e839ba2/9c5ea9fe4add6cf6.jpg"} />,
+                            tabPane: {
+                                title: "图片"
+                            }
+                        }
+                    };
+                case "goods_title":
+                    return {
+                        ...item, ...{
+                            resizableProps: { lockAspectRatio: null },
+                            children: <div
+                                style={{ fontSize: item.options.fontSize, color: item.options.fontColor }}
+                            >新款风衣文艺范韩版修身款翻领纯棉七分袖百搭短款新款风</div>,
+                            tabPane: {
+                                title: "标题"
+                            }
+                        }
+                    };
+                case "goods_group_price":
+                    return {
+                        ...item, ...{
+                            resizableProps: { lockAspectRatio: null },
+                            children: <div
+                                style={{ fontSize: item.options.fontSize, color: item.options.fontColor }}
+                            >¥50.00</div>,
+                            tabPane: {
+                                title: "价格"
+                            }
+                        }
+                    };
+                case "goods_price":
+                    return {
+                        ...item, ...{
+                            resizableProps: { lockAspectRatio: null },
+                            children: <div
+                                style={{ fontSize: item.options.fontSize, color: item.options.fontColor }}
+                            >¥99.00</div>,
+                            tabPane: {
+                                title: "原价"
+                            }
+                        }
+                    };
+                case "mini_qr":
+                    return {
+                        ...item, ...{
+                            resizableProps: { lockAspectRatio: "1/1" },
+                            children: <img
+                                src={"https://tvax2.sinaimg.cn/crop.0.0.850.850.180/684ff39bly8fi57d6kk3oj20nm0nm75h.jpg"} />,
+                            tabPane: {
+                                title: "二维码"
+                            }
+                        }
+                    };
+            }
+        });
+    };
+
+    getDefaultBody() {
+        return [
+            {
+                type: "background",
+                options: {
+                    size: {
+                        width: maxWidth,
+                        height: maxHeight
+                    },
+                    position: {
+                        x: 0,
+                        y: 0
+                    },
+                    backgroundColor: "#ffffff",
+                    backgroundImage: ""
+                }
+            },
             {
                 type: "goods_img",
                 options: {
@@ -26,7 +457,7 @@ class PosterGroupGoods extends Component {
                     },
                     position: {
                         x: 20,
-                        y: 20+30+20
+                        y: 20 + 30 + 20
                     }
                 }
 
@@ -42,7 +473,7 @@ class PosterGroupGoods extends Component {
                         x: 20,
                         y: 20
                     },
-                    borderRadius:60
+                    borderRadius: 60
                 }
 
             },
@@ -55,13 +486,14 @@ class PosterGroupGoods extends Component {
                     },
                     position: {
                         x: 20 + 30 + 10,
-                        y: 20+3
+                        y: 20 + 3
                     },
-                    fontSize:14,
-                    fontColor:'#1890FF'
+                    fontSize: 14,
+                    fontColor: "#1890FF"
                 }
 
             },
+
             {
                 type: "slogan",
                 options: {
@@ -71,11 +503,11 @@ class PosterGroupGoods extends Component {
                     },
                     position: {
                         x: 20 + 30 + 10 + 56 + 10,
-                        y: 20+3
+                        y: 20 + 3
                     },
-                    fontContent:'正在拼团 赶快加入',
-                    fontSize:14,
-                    fontColor:'#999999'
+                    fontContent: "正在拼团 赶快加入",
+                    fontSize: 14,
+                    fontColor: "#999999"
                 }
 
             },
@@ -87,12 +519,12 @@ class PosterGroupGoods extends Component {
                         height: 20
                     },
                     position: {
-                        x: 20+5,
-                        y: 20+30+20+5
+                        x: 20 + 5,
+                        y: 20 + 30 + 20 + 5
                     },
-                    fontSize:12,
-                    fontColor:'#ffffff',
-                    fontBackgroundColor:'#FF5127'
+                    fontSize: 12,
+                    fontColor: "#ffffff",
+                    fontBackgroundColor: "#FF5127"
                 }
 
             },
@@ -136,7 +568,7 @@ class PosterGroupGoods extends Component {
                     fontColor: "#999999",
                     fontSize: 14,
                     position: {
-                        x: 20+5+80,
+                        x: 20 + 5 + 80,
                         y: 464 - 20 - 20
                     }
                 }
@@ -155,168 +587,9 @@ class PosterGroupGoods extends Component {
                 }
 
             }
-        ]
-    };
-    initFormatBody = (data) => {
-        return data.map((item) => {
-            switch (item.type) {
-                case "avatar":
-                    return {
-                        ...item, ...{
-                            resizableProps: {
-                                lockAspectRatio: "1/1"
-                            },
-                            children: <img
-                                style={{
-                                    borderRadius:item.options.borderRadius
-                                }}
-                                src={"https://tvax2.sinaimg.cn/crop.0.0.850.850.180/684ff39bly8fi57d6kk3oj20nm0nm75h.jpg"} />
-                        }
-                    };
-                case "nickname":
-                    return {
-                        ...item, ...{
-                            resizableProps: { lockAspectRatio: null },
-                            children: <div
-                                style={{ fontSize: item.options.fontSize, color: item.options.fontColor }}
-                            >用户昵称</div>
-                        }
-                    };
-                case "slogan":
-                    return {
-                        ...item, ...{
-                            resizableProps: { lockAspectRatio: null },
-                            children: <div
-                                style={{ fontSize: item.options.fontSize, color: item.options.fontColor }}
-                            >{item.options.fontContent}</div>
-                        }
-                    };
-                case "group_number":
-                    return {
-                        ...item, ...{
-                            resizableProps: { lockAspectRatio: null },
-                            children: <div
-                                style={{ fontSize: item.options.fontSize, color: item.options.fontColor,backgroundColor:item.options.fontBackgroundColor }}
-                            >2人团</div>
-                        }
-                    };
-                case "goods_img":
-                    return {
-                        ...item, ...{
-                            resizableProps: {
-                                lockAspectRatio: "1/1"
-                            },
-                            children: <img
-                                src={"https://img14.360buyimg.com/n7/jfs/t1/21043/38/1380/506454/5c1209f7E3e839ba2/9c5ea9fe4add6cf6.jpg"} />
-                        }
-                    };
-                case "goods_title":
-                    return {
-                        ...item, ...{
-                            resizableProps: { lockAspectRatio: null },
-                            children: <div
-                                style={{ fontSize: item.options.fontSize, color: item.options.fontColor }}
-                            >新款风衣文艺范韩版修身款翻领纯棉七分袖百搭短款新款风衣文艺范韩版修</div>
-                        }
-                    };
-                case "goods_group_price":
-                    return {
-                        ...item, ...{
-                            resizableProps: { lockAspectRatio: null },
-                            children: <div
-                                style={{ fontSize: item.options.fontSize, color: item.options.fontColor }}
-                            >¥50.00</div>
-                        }
-                    };
-                case "goods_price":
-                    return {
-                        ...item, ...{
-                            resizableProps: { lockAspectRatio: null },
-                            children: <div
-                                style={{ fontSize: item.options.fontSize, color: item.options.fontColor }}
-                            >¥99.00</div>
-                        }
-                    };
-                case "mini_qr":
-                    return {
-                        ...item, ...{
-                            resizableProps: { lockAspectRatio: "1/1" },
-                            children: <img
-                                src={"https://tvax2.sinaimg.cn/crop.0.0.850.850.180/684ff39bly8fi57d6kk3oj20nm0nm75h.jpg"} />
-                        }
-                    };
-            }
-        });
-    };
-
-    onReposition = (x, y, index) => {
-        let _body = [...this.state.body];
-        _body[index].options.position = {
-            x,
-            y
-        };
-        this.setState({
-            body: _body
-        });
-    };
-    onResize = (d, index) => {
-        let _body = [...this.state.body];
-        let lastSize = _body[index].options.size;
-        _body[index].options.size = {
-            width: lastSize.width + d.width,
-            height: lastSize.height + d.height
-        };
-        this.setState({
-            body: _body
-        });
-    };
-
-    render() {
-        const {settingInfoLoading} = this.props
-        const { index, body } = this.state;
-        return (
-            <Card bordered={false}>
-                <Spin size="large" spinning={settingInfoLoading}>
-                <div className={styles.view}>
-                    <div className={styles.container}>
-                        {
-                            this.initFormatBody(body).map((item, i) => {
-                                return <Draggable
-                                    key={`k${i}`}
-                                    bounds="parent"
-                                    axis="both"
-                                    handle='.handle'
-                                    defaultPosition={item.options.position}
-                                    grid={[1, 1]}
-                                    onStop={(e, data) => {
-                                        this.setState({
-                                            index: i
-                                        }, () => {
-                                            this.onReposition(data.lastX, data.lastY, i);
-                                        });
-                                    }}>
-                                    <Resizable
-                                        className={`${styles.item}  ${index === i ? styles.active : ""} `}
-                                        size={item.options.size}
-                                        lockAspectRatio={item.resizableProps.lockAspectRatio}
-                                        onResizeStop={(e, direction, ref, d) => {
-                                            this.onResize(d, i);
-                                        }}
-                                        data-index={i}
-                                    >
-                                        <div className={`${styles[item.type]} handle`}>
-                                            {item.children}
-                                        </div>
-                                    </Resizable>
-                                </Draggable>;
-                            })
-                        }
-                    </div>
-                </div>
-                </Spin>
-            </Card>
-        );
+        ];
     }
 }
+
 
 export default PosterGroupGoods;

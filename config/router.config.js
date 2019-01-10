@@ -109,7 +109,7 @@ export default [
                     {
                         path: "/setting/poster", name: "海报配置", component: "/setting/poster/layout",
                         routes: [
-                            { path: "/setting/poster", redirect: "/setting/poster/goods" },
+                            { path: "/setting/poster", redirect: "/setting/poster/groupGoods" },
                             { path: "/setting/poster/goods", component: "/setting/poster/goods" },
                             { path: "/setting/poster/groupGoods", component: "/setting/poster/groupGoods" },
                         ]
