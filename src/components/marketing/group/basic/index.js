@@ -64,6 +64,7 @@ class Basic extends Component {
                                 style={{ width: 216 }}
                                 disabledDate={this.disabledStartDate}
                                 disabled={disabled}
+                                placeholder="请选择活动开始时间"
                             />
                         )}
                     </FormItem>
@@ -80,71 +81,60 @@ class Basic extends Component {
                                 format="YYYY-MM-DD HH:mm:ss"
                                 style={{ width: 216 }}
                                 disabledDate={this.disabledEndDate}
+                                placeholder="请选择活动结束时间"
                             />
                         )}
                     </FormItem>
                 </FormItem>
-                <Row>
-                    <Col span={6}>
-                        <FormItem
-                            labelCol={{
-                                xs: { span: 24 },
-                                sm: { span: 12 }
-                            }}
-                            wrapperCol={{
-                                xs: { span: 24 },
-                                sm: { span: 12 }
-                            }}
-                            label="拼团时限"
-                            extra="建议不要超过24小时"
-                        >
-                            {getFieldDecorator("time_over_day", {
-                                initialValue: groupInfo.time_over_day ? groupInfo.time_over_day : 0,
-                                rules: [{ required: true, message: "请输入天数" }]
-                            })(
-                                <InputNumber
-                                    max={89}
-                                    min={0}
-                                    precision={0}
-                                    disabled={disabled}
-                                />
-                            )}
-                            <span className="ant-form-text"> 天</span>
-                        </FormItem>
-                    </Col>
-                    <Col span={3}>
-                        <FormItem>
-                            {getFieldDecorator("time_over_hour", {
-                                initialValue: groupInfo.time_over_hour ? groupInfo.time_over_hour : 0,
-                                rules: [{ required: true, message: "请输入小时" }]
-                            })(
-                                <InputNumber
-                                    max={24}
-                                    min={0}
-                                    precision={0}
-                                    disabled={disabled}
-                                />
-                            )}
-                            <span className="ant-form-text"> 时</span>
-                        </FormItem>
-                    </Col>
-                    <Col span={3}>
-                        <FormItem>
-                            {getFieldDecorator("time_over_minute", {
-                                initialValue: groupInfo.time_over_minute ? groupInfo.time_over_minute : 0,
-                                rules: [{ required: true, message: "请输入分钟" }]
-                            })(
-                                <InputNumber
-                                    max={60}
-                                    min={0}
-                                    precision={0}
-                                    disabled={disabled}
-                                />
-                            )}
-                            <span className="ant-form-text"> 分</span>
-                        </FormItem>
-                    </Col>
-                </Row>
+                <FormItem
+                    label='拼团时限'
+                    {...formItemLayout}
+                    required={true}
+                    extra="建议不要超过24小时"
+                >
+                    <FormItem style={{ display: 'inline-block', marginBottom: 0 }}>
+                        {getFieldDecorator("time_over_day", {
+                            initialValue: groupInfo.time_over_day ? groupInfo.time_over_day : 0,
+                            rules: [{ required: true, message: "请输入天数" }]
+                        })(
+                            <InputNumber
+                                max={89}
+                                min={0}
+                                precision={0}
+                                disabled={disabled}
+                            />
+                        )}
+                    </FormItem>
+                    <span style={{ display: 'inline-block', width: 30, textAlign: 'center' }}>天</span>
+                    <FormItem style={{ display: 'inline-block', marginBottom: 0 }}>
+                        {getFieldDecorator("time_over_hour", {
+                            initialValue: groupInfo.time_over_hour ? groupInfo.time_over_hour : 0,
+                            rules: [{ required: true, message: "请输入小时" }]
+                        })(
+                            <InputNumber
+                                max={24}
+                                min={0}
+                                precision={0}
+                                disabled={disabled}
+                            />
+                        )}
+                    </FormItem>
+                    <span style={{ display: 'inline-block', width: 30, textAlign: 'center' }}>时</span>
+                    <FormItem style={{ display: 'inline-block', marginBottom: 0 }}>
+                        {getFieldDecorator("time_over_minute", {
+                            initialValue: groupInfo.time_over_minute ? groupInfo.time_over_minute : 0,
+                            rules: [{ required: true, message: "请输入分钟" }]
+                        })(
+                            <InputNumber
+                                max={60}
+                                min={0}
+                                precision={0}
+                                disabled={disabled}
+                            />
+                        )}
+                    </FormItem>
+                    <span style={{ display: 'inline-block', width: 30, textAlign: 'center' }}>分</span>
+                </FormItem>
                 <FormItem
                     {...formItemLayout}
                     label='参团人数'
