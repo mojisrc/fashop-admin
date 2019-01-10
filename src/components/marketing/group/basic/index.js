@@ -7,14 +7,24 @@ import moment from "moment";
 
 const FormItem = Form.Item;
 const RadioGroup = Radio.Group;
-const { RangePicker } = DatePicker;
-function disabledDate(current) {
-    // Can not select days before today
-    return current && current < moment().startOf('day');
-}
 
 @connect()
 class Basic extends Component {
+    disabledStartDate = (startValue) => {
+        const endValue = this.props.form.getFieldValue('end_time')
+        if (!startValue || !endValue) {
+            return startValue && startValue < moment().startOf('day')
+        }
+        return startValue.valueOf() > endValue.valueOf();
+    }
+
+    disabledEndDate = (endValue) => {
+        const startValue = this.props.form.getFieldValue('start_time')
+        if (!endValue || !startValue) {
+            return endValue && endValue < moment().startOf('day')
+        }
+        return endValue.valueOf() <= startValue.valueOf();
+    }
     render() {
         const groupInfo = this.props.groupInfo || {};
         const { form, formItemLayout } = this.props;
@@ -38,23 +48,41 @@ class Basic extends Component {
                     )}
                 </FormItem>
                 <FormItem
-                    {...formItemLayout}
                     label='活动时间'
+                    {...formItemLayout}
+                    style={{ marginBottom: 0 }}
+                    required={true}
                 >
-                    {getFieldDecorator("time", {
-                        rules: [{ required: true, message: "请选择活动时间!" }],
-                        initialValue: (groupInfo.start_time&&groupInfo.end_time) ? [
-                            moment(groupInfo.start_time,'X'),
-                            moment(groupInfo.end_time,'X')
-                        ] : []
-                    })(
-                        <RangePicker
-                            showTime
-                            format="YYYY-MM-DD HH:mm:ss"
-                            disabledDate={disabledDate}
-                        />
-                    )}
-                    {/* start_time end_time */}
+                    <FormItem style={{ display: 'inline-block' }}>
+                        {getFieldDecorator("start_time", {
+                            rules: [{ required: true, message: "请选择活动开始时间!" }],
+                            initialValue: groupInfo.start_time ? moment(groupInfo.start_time,'X') : null
+                        })(
+                            <DatePicker 
+                                showTime
+                                format="YYYY-MM-DD HH:mm:ss"
+                                style={{ width: 216 }}
+                                disabledDate={this.disabledStartDate}
+                                disabled={disabled}
+                            />
+                        )}
+                    </FormItem>
+                    <span style={{ display: 'inline-block', width: 40, textAlign: 'center' }}>
+                        -
+                    </span>
+                    <FormItem style={{ display: 'inline-block' }}>
+                        {getFieldDecorator("end_time", {
+                            rules: [{ required: true, message: "请选择活动结束时间!" }],
+                            initialValue: groupInfo.end_time ? moment(groupInfo.end_time, 'X') : null
+                        })(
+                            <DatePicker
+                                showTime
+                                format="YYYY-MM-DD HH:mm:ss"
+                                style={{ width: 216 }}
+                                disabledDate={this.disabledEndDate}
+                            />
+                        )}
+                    </FormItem>
                 </FormItem>
                 <Row>
                     <Col span={6}>
