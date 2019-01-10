@@ -73,6 +73,7 @@
     "ws-web-utils": "^2.0.5"
   },
   "devDependencies": {
+    "@commitlint/cli": "^7.2.1",
     "@types/react": "^16.7.7",
     "@types/react-dom": "^16.0.10",
     "antd-pro-merge-less": "^1.0.0",
@@ -110,6 +111,11 @@
   },
   "optionalDependencies": {
     "puppeteer": "^1.10.0"
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
   },
   "engines": {
     "node": ">=8.0.0"
