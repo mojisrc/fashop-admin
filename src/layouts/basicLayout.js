@@ -18,7 +18,7 @@ import Exception403 from "../pages/exception/403";
 import PageLoading from "@/components/pageLoading";
 import SiderMenu from "@/components/siderMenu";
 
-import styles from "./BasicLayout.less";
+import styles from "./basicLayout.less";
 
 // lazy load SettingDrawer
 const SettingDrawer = React.lazy(() => import("@/components/settingDrawer"));
