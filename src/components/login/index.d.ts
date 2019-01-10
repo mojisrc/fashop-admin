@@ -1,7 +1,7 @@
 import Button from 'antd/lib/button';
 import * as React from 'react';
-import LoginItem from './loginItem';
-import LoginTab from './loginTab';
+import LoginItem from './LoginItem';
+import LoginTab from './LoginTab';
 
 export interface ILoginProps {
   defaultActiveKey?: string;

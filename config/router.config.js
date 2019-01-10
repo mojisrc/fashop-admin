@@ -101,19 +101,11 @@ export default [
                         routes: [
                             { path: "/setting/wechat", redirect: "/setting/wechat/base" },
                             { path: "/setting/wechat/base", component: "/setting/wechat/base" },
-                            { path: "/setting/wechat/miniTemplate", component: "/setting/wechat/miniTemplate" },
+                            { path: "/setting/wechat/miniTemplate", component: "/setting/wechat/miniTemplate" }
                         ]
                     },
                     { path: "/setting/alipay", name: "支付宝配置", component: "/setting/alipay" },
-                    { path: "/setting/sms", name: "短信配置", component: "/setting/sms" },
-                    { path: "/setting/poster", name: "海报配置", component: "/setting/poster/layout",
-                        routes: [
-                            { path: "/setting/poster", redirect: "/setting/poster/groupGoods" },
-                            { path: "/setting/poster/goods",component: "/setting/poster/goods" },
-                            { path: "/setting/poster/groupGoods",component: "/setting/poster/groupGoods" },
-                        ]
-                    }
-
+                    { path: "/setting/sms", name: "短信配置", component: "/setting/sms" }
                 ]
             },
             {

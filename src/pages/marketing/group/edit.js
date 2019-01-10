@@ -12,9 +12,13 @@ import { connect } from "dva";
 const FormItem = Form.Item;
 
 @Form.create()
-@connect(({ group, loading }) => ({
+@connect(({ group, goods, loading }) => ({
     groupInfo: group.info.result,
     groupInfoLoading: loading.effects["group/info"],
+    groupGoodsSkuList: group.goodsSkuList.result,
+    groupGoodsSkuListLoading: loading.effects["group/goodsSkuList"],
+    skuList: goods.skuList.result,
+    skuListLoading: loading.effects["goods/skuList"]
 }))
 export default class GroupEdit extends Component {
     componentDidMount() {
@@ -22,6 +26,11 @@ export default class GroupEdit extends Component {
         dispatch({
             type: "group/info",
             payload: { id },
+            callback: (e) => {}
+        });
+        dispatch({
+            type: "group/goodsSkuList",
+            payload: { group_id: id },
             callback: (e) => {}
         });
     }
@@ -77,8 +86,30 @@ export default class GroupEdit extends Component {
             }
         });
     }
+    getGoodsSku = () => {
+        const { dispatch, form } = this.props;
+        if (form.getFieldValue('goods_info') && form.getFieldValue('goods_info').id) {
+            dispatch({
+                type: "goods/skuList",
+                payload: {
+                    page: 1,
+                    rows: 100,
+                    goods_id: form.getFieldValue('goods_info').id
+                },
+                callback: (res) => {
+                    form.setFieldsValue({
+                        group_goods: res.result.list.map((item => {
+                            item.group_price = null
+                            item.captain_price = null
+                            return item
+                        }))
+                    })
+                }
+            });
+        }
+    };
     render() {
-        const { form, groupInfo, groupInfoLoading } = this.props;
+        const { form, groupInfo, groupInfoLoading, groupGoodsSkuList } = this.props;
         const formItemLayout = {
             labelCol: {
                 xs: { span: 24 },
@@ -113,7 +144,15 @@ export default class GroupEdit extends Component {
                         <Goods
                             form={form}
                             formItemLayout={formItemLayout}
-                            groupInfo={groupInfo.info}
+                            groupInfo={{
+                                ...groupInfo.info,
+                                goods_info: groupGoodsSkuList.list&&groupGoodsSkuList.list[0] ?{
+                                    id: groupGoodsSkuList.list[0].goods_id,
+                                    img: groupGoodsSkuList.list[0].img
+                                } : null,
+                                group_goods: groupGoodsSkuList.list ? groupGoodsSkuList.list : []
+                            }}
+                            getGoodsSku={this.getGoodsSku}
                         />
                         <FormItem {...tailFormItemLayout}>
                             <Button type="primary" htmlType="submit">保 存</Button>

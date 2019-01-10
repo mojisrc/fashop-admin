@@ -18,7 +18,7 @@ import Exception403 from "../pages/exception/403";
 import PageLoading from "@/components/pageLoading";
 import SiderMenu from "@/components/siderMenu";
 
-import styles from "./basicLayout.less";
+import styles from "./BasicLayout.less";
 
 // lazy load SettingDrawer
 const SettingDrawer = React.lazy(() => import("@/components/settingDrawer"));
@@ -167,6 +167,7 @@ class BasicLayout extends React.PureComponent {
             route: { routes },
             fixedHeader
         } = this.props;
+
 
         const isTop = PropsLayout === "topmenu";
         const routerConfig = this.getRouterAuthority(pathname, routes);

@@ -12,7 +12,10 @@ import { connect } from "dva";
 const FormItem = Form.Item;
 
 @Form.create()
-@connect()
+@connect(({ goods, loading }) => ({
+    skuList: goods.skuList.result,
+    skuListLoading: loading.effects["goods/skuList"]
+}))
 export default class GroupAdd extends Component {
     state={
         step: 1
@@ -68,6 +71,28 @@ export default class GroupAdd extends Component {
             }
         });
     }
+    getGoodsSku = () => {
+        const { dispatch, form } = this.props;
+        if (form.getFieldValue('goods_info') && form.getFieldValue('goods_info').id) {
+            dispatch({
+                type: "goods/skuList",
+                payload: {
+                    page: 1,
+                    rows: 100,
+                    goods_id: form.getFieldValue('goods_info').id
+                },
+                callback: (res) => {
+                    form.setFieldsValue({
+                        group_goods: res.result.list.map((item => {
+                            item.group_price = null
+                            item.captain_price = null
+                            return item
+                        }))
+                    })
+                }
+            });
+        }
+    };
     render() {
         const { form } = this.props;
         const formItemLayout = {
@@ -102,6 +127,7 @@ export default class GroupAdd extends Component {
                     <Goods
                         form={form}
                         formItemLayout={formItemLayout}
+                        getGoodsSku={this.getGoodsSku}
                     />
                     <FormItem {...tailFormItemLayout}>
                         <Button type="primary" htmlType="submit">保 存</Button>

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Form, Tabs } from 'antd';
 import classNames from 'classnames';
-import LoginItem from './loginItem';
+import LoginItem from './LoginItem';
 import LoginTab from './loginTab';
 import LoginSubmit from './loginSubmit';
 import styles from './index.less';

@@ -54,10 +54,10 @@ export default {
         },
         "process.env.production": {
             websocket:{
-                host:'wss://v2-api.fashop.cn'
+                host:'wss://demo.fashop.cn'
             },
             api: {
-                url: "https://v2-api.fashop.cn"
+                url: "https://demo.fashop.cn"
             }
         },
 
