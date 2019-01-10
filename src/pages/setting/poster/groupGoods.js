@@ -7,6 +7,9 @@ import Resizable from "re-resizable";
 
 @Form.create()
 class PosterGroupGoods extends Component {
+    static defaultProps = {
+        settingInfoLoading:false
+    }
     state = {
         index: null,
         options: {
@@ -269,9 +272,11 @@ class PosterGroupGoods extends Component {
     };
 
     render() {
+        const {settingInfoLoading} = this.props
         const { index, body } = this.state;
         return (
-            <Fragment>
+            <Card bordered={false}>
+                <Spin size="large" spinning={settingInfoLoading}>
                 <div className={styles.view}>
                     <div className={styles.container}>
                         {
@@ -308,7 +313,8 @@ class PosterGroupGoods extends Component {
                         }
                     </div>
                 </div>
-            </Fragment>
+                </Spin>
+            </Card>
         );
     }
 }
