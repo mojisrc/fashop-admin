@@ -13,7 +13,7 @@ const FormItem = Form.Item;
 
 @Form.create()
 @connect()
-export default class GroupAdd extends Component {
+export default class DiscountAdd extends Component {
     state={
         step: 1
     }
@@ -25,29 +25,20 @@ export default class GroupAdd extends Component {
                 const { dispatch } = this.props;
                 const {
                     title,
-                    time_over_day,
-                    time_over_hour,
-                    time_over_minute,
-                    time,
-                    limit_buy_num,
-                    limit_group_num,
+                    start_time,
+                    end_time,
                     limit_goods_num,
-                    // group_goods,
+                    // discount_goods,
                 } = values;
                 const params = {
                     title,
-                    time_over_day,
-                    time_over_hour,
-                    time_over_minute,
-                    start_time: moment(time[0]).format('YYYY-MM-DD HH:mm:ss'),
-                    end_time: moment(time[1]).format('YYYY-MM-DD HH:mm:ss'),
-                    limit_buy_num,
-                    limit_group_num,
+                    start_time: moment(start_time).format('YYYY-MM-DD HH:mm:ss'),
+                    end_time: moment(end_time).format('YYYY-MM-DD HH:mm:ss'),
                     limit_goods_num,
-                    group_goods: [],
+                    discount_goods: [],
                 };
                 dispatch({
-                    type: "group/add",
+                    type: "discount/add",
                     payload: params,
                     callback: (e) => {
                         if (e.code === 0) {

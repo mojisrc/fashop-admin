@@ -8,20 +8,20 @@ import { View } from "@/components/flexView";
 import router from "umi/router";
 import moment from "moment";
 
-@connect(({ group, loading }) => ({
-    groupList: group.list.result,
-    groupListLoading: loading.effects["group/list"]
+@connect(({ discount, loading }) => ({
+    discountList: discount.list.result,
+    discountListLoading: loading.effects["discount/list"]
 }))
-export default class GroupList extends Component {
+export default class DiscountList extends Component {
     static defaultProps = {
-        groupListLoading: true,
-        groupList: {
+        discountListLoading: true,
+        discountList: {
             list: [],
             total_number: 0
         }
     };
     search = new PageList({
-        router: "/marketing/group/list",
+        router: "/marketing/discount/list",
         rows: 10,
         param: {
             keywords: null,
@@ -35,7 +35,7 @@ export default class GroupList extends Component {
     initList = () => {
         const { dispatch } = this.props;
         dispatch({
-            type: "group/list",
+            type: "discount/list",
             payload: this.search.filter()
         });
     };
@@ -45,7 +45,7 @@ export default class GroupList extends Component {
     }
 
     render() {
-        const { groupList, groupListLoading } = this.props;
+        const { discountList, discountListLoading } = this.props;
         const {
             keywords,
             state,
@@ -101,7 +101,7 @@ export default class GroupList extends Component {
                                 title="确定删除该拼团活动？"
                                 onConfirm={() => {
                                     dispatch({
-                                        type: "group/del",
+                                        type: "discount/del",
                                         payload: {
                                             id: record.id
                                         }
@@ -129,7 +129,7 @@ export default class GroupList extends Component {
             <PageHeaderWrapper hiddenBreadcrumb={true}>
                 <Card bordered={false}>
                     <PageList.Search
-                        loading={groupListLoading}
+                        loading={discountListLoading}
                         onSubmit={this.search.submit}
                         defaultValue={this.search.defaultParam}
                         onReset={this.search.reset}
@@ -161,15 +161,15 @@ export default class GroupList extends Component {
                         <Button
                             type='primary'
                             onClick={() => {
-                                router.push("/marketing/group/add");
+                                router.push("/marketing/discount/add");
                             }}
                         >
                             创建活动
                         </Button>
                     </View>
                     <Table
-                        loading={groupListLoading}
-                        dataSource={groupList.list}
+                        loading={discountListLoading}
+                        dataSource={discountList.list}
                         columns={columns}
                         rowKey={record => record.id}
                         pagination={{
@@ -177,7 +177,7 @@ export default class GroupList extends Component {
                             showQuickJumper: false,
                             current: this.search.page,
                             pageSize: this.search.rows,
-                            total: groupList.total_number
+                            total: discountList.total_number
                         }}
                         onChange={({ current }) => {
                             this.search.setPage(current).push();

@@ -12,15 +12,15 @@ import { connect } from "dva";
 const FormItem = Form.Item;
 
 @Form.create()
-@connect(({ group, loading }) => ({
-    groupInfo: group.info.result,
-    groupInfoLoading: loading.effects["group/info"],
+@connect(({ discount, loading }) => ({
+    discountInfo: discount.info.result,
+    discountInfoLoading: loading.effects["discount/info"],
 }))
-export default class GroupEdit extends Component {
+export default class DiscountEdit extends Component {
     componentDidMount() {
         const { dispatch, location: { query: { id } } } = this.props;
         dispatch({
-            type: "group/info",
+            type: "discount/info",
             payload: { id },
             callback: (e) => {}
         });
@@ -30,33 +30,24 @@ export default class GroupEdit extends Component {
         this.props.form.validateFieldsAndScroll((err, values) => {
             if (!err) {
                 // console.log('Received values of form: ', values);
-                const { dispatch, groupInfo: { info: { id } } } = this.props;
+                const { dispatch, discountInfo: { info: { id } } } = this.props;
                 const {
                     title,
-                    time_over_day,
-                    time_over_hour,
-                    time_over_minute,
-                    time,
-                    limit_buy_num,
-                    limit_group_num,
+                    start_time,
+                    end_time,
                     limit_goods_num,
-                    group_goods,
+                    // discount_goods,
                 } = values;
                 const params = {
                     id,
                     title,
-                    time_over_day,
-                    time_over_hour,
-                    time_over_minute,
-                    start_time: moment(time[0]).format('YYYY-MM-DD HH:mm:ss'),
-                    end_time: moment(time[1]).format('YYYY-MM-DD HH:mm:ss'),
-                    limit_buy_num,
-                    limit_group_num,
+                    start_time: moment(start_time).format('YYYY-MM-DD HH:mm:ss'),
+                    end_time: moment(end_time).format('YYYY-MM-DD HH:mm:ss'),
                     limit_goods_num,
-                    group_goods,
+                    discount_goods: [],
                 };
                 dispatch({
-                    type: "group/add",
+                    type: "discount/add",
                     payload: params,
                     callback: (e) => {
                         if (e.code === 0) {
@@ -71,7 +62,7 @@ export default class GroupEdit extends Component {
         });
     }
     render() {
-        const { form, groupInfo, groupInfoLoading } = this.props;
+        const { form, discountInfo, discountInfoLoading } = this.props;
         const formItemLayout = {
             labelCol: {
                 xs: { span: 24 },
@@ -94,19 +85,19 @@ export default class GroupEdit extends Component {
                 },
             },
         };
-        return <Spin tip="Loading" spinning={groupInfoLoading}>
+        return <Spin tip="Loading" spinning={discountInfoLoading}>
             <PageHeaderWrapper hiddenBreadcrumb={true}>
                 <Card>
                     <Form onSubmit={this.handleSubmit}>
                         <Basic
                             form={form}
                             formItemLayout={formItemLayout}
-                            groupInfo={groupInfo.info}
+                            discountInfo={discountInfo.info}
                         />
                         <Goods
                             form={form}
                             formItemLayout={formItemLayout}
-                            groupInfo={groupInfo.info}
+                            discountInfo={discountInfo.info}
                         />
                         <FormItem {...tailFormItemLayout}>
                             <Button type="primary" htmlType="submit">保 存</Button>
