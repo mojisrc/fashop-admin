@@ -75,6 +75,7 @@
     "ws-web-utils": "^2.0.5"
   },
   "devDependencies": {
+    "@commitlint/cli": "^7.2.1",
     "@types/react": "^16.7.7",
     "@types/react-dom": "^16.0.10",
     "antd-pro-merge-less": "^1.0.0",
@@ -93,7 +94,7 @@
     "eslint-plugin-markdown": "^1.0.0-beta.6",
     "eslint-plugin-react": "^7.11.1",
     "gh-pages": "^2.0.1",
-    "husky": "^1.2.0",
+    "husky": "^1.3.1",
     "jest-puppeteer": "^3.5.1",
     "lint-staged": "^8.1.0",
     "merge-umi-mock-data": "^0.0.3",
@@ -112,6 +113,11 @@
   },
   "optionalDependencies": {
     "puppeteer": "^1.10.0"
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
   },
   "engines": {
     "node": ">=8.0.0"

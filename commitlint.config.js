@@ -1,7 +1,7 @@
 module.exports = {
   rules: {
     // Header
-    'header-max-length': [2, 'always', 72],
+    'header-max-length': [2, 'always', 200],
     // <type>枚举
     'type-enum': [2, 'always', [
       'feat',
@@ -35,13 +35,8 @@ module.exports = {
     // 'start-case' 所有首字母大写 start-case
     'subject-case': [2, 'never',
       [
-        'lower-case',
-        'upper-case',
-        'camel-case',
-        'upper-case',
-        'pascal-case',
-        'sentence-case',
-        'start-case'
+        'snake-case',
+        'kebab-case'
       ]
     ],
     // <body> 以空行开头
