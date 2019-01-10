@@ -1,0 +1,83 @@
+.view {
+    width: 326px;
+    height: 466px;
+    border: 1px dotted #3388ff;
+    background-color: #ffffff;
+}
+.container{
+    width: 324px;
+    height: 464px;
+    position: relative;
+}
+.item{
+    cursor: pointer;
+    position: absolute!important;
+    overflow: hidden;
+}
+.active{}
+.active:after{
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    pointer-events: none;
+    z-index: 2;
+    display: block;
+    border: 1px dashed #38f;
+}
+.goods_img{
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+.goods_img img{
+    width: 100%;
+    height: 100%;
+}
+.goods_img:after{
+    display: block;
+    width: 100%;
+    height: 100%;
+    content: " ";
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.goods_title{
+    font-size: 14px;
+    color: #333333;
+    font-family: 'PingFangSC-Regular', 'PingFang SC';
+    font-weight: 400;
+}
+.goods_price{
+    display: inline-block;
+    font-family: 'PingFangSC-Medium', 'PingFang SC Medium', 'PingFang SC';
+    font-weight: 500;
+    line-height: 1;
+}
+.mini_qr{
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+.mini_qr:after{
+    display: block;
+    width: 100%;
+    height: 100%;
+    content: " ";
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.mini_qr>img{
+    width: 100%;
+    height: 100%;
+}
+

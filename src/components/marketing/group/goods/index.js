@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "dva";
 import { View } from "@/components/flexView";
-import { Form, Input, Tabs, Button, Table, Divider, Select, Modal, Icon } from "antd";
+import { Form, Input, Tabs, Button, Table, Divider, Select, Modal, Icon, InputNumber } from "antd";
 import styles from "./index.css";
 import router from "umi/router";
 import Query from "@/utils/query";
@@ -12,43 +12,10 @@ const FormItem = Form.Item;
 const TabPane = Tabs.TabPane;
 const Option = Select.Option
 
-@connect(({ goods, loading }) => ({
-    skuList: goods.skuList.result,
-    skuListLoading: loading.effects["goods/skuList"]
-}))
 class Goods extends Component {
-    static defaultProps = {
-        skuListLoading: true,
-        skuList: {
-            list: [],
-            total_number: 0
-        }
-    };
-    componentDidMount() {
-        this.initList();
-    }
-    initList = () => {
-        const { dispatch, form } = this.props;
-        if (form.getFieldValue('goods_info')&&form.getFieldValue('goods_info').id){
-            dispatch({
-                type: "goods/skuList",
-                payload: {
-                    page: 1,
-                    rows: 100,
-                    goods_id: form.getFieldValue('goods_info').id
-                },
-                callback: (res) => {
-                    form.setFieldsValue({
-                        group_goods: res.result.list
-                    })
-                }
-            });
-        }
-    };
     render() {
         const groupInfo = this.props.groupInfo || {};
-        console.log(groupInfo);
-        const { form, formItemLayout, skuListLoading, skuList } = this.props;
+        const { form, formItemLayout, getGoodsSku } = this.props;
         const { getFieldDecorator, getFieldValue } = form;
         return (
             <View>
@@ -61,7 +28,7 @@ class Goods extends Component {
                         rules: [{ required: true, message: "请选择商品!" }],
                         initialValue: groupInfo.goods_info ? groupInfo.goods_info : null
                     })(
-                        <AddGoods initList={this.initList}/>
+                        <AddGoods getGoodsSku={getGoodsSku}/>
                     )}
                 </FormItem>
                 {
@@ -71,12 +38,9 @@ class Goods extends Component {
                             label="优惠设置"
                         >
                             {getFieldDecorator('group_goods', {
-                                initialValue: skuList.list.length ? skuList.list : groupInfo.group_goods ? groupInfo.group_goods : []
+                                initialValue: groupInfo.group_goods ? groupInfo.group_goods : []
                             })(
-                                <GoodsSkuList 
-                                    skuList={skuList.list}
-                                    skuListLoading={skuListLoading}
-                                />
+                                <GoodsSkuList />
                             )}
                         </FormItem> 
                         : null
@@ -98,7 +62,7 @@ class AddGoods extends Component {
     }
     render() {
         const { visible } = this.state
-        const { onChange, value, initList } = this.props;
+        const { onChange, value, getGoodsSku } = this.props;
         return <View>
             <View
                 className={styles.add}
@@ -132,9 +96,8 @@ class AddGoods extends Component {
             >
                 <SelectableGoods
                     onOk={(goods_info) => {
-                        console.log("goods_info", goods_info);
                         onChange(goods_info)
-                        initList()
+                        getGoodsSku()
                         this.hideModal()
                     }}
                 />
@@ -305,7 +268,7 @@ class SelectableGoods extends Component {
 
 class GoodsSkuList extends Component {
     render() {
-        const { skuList, skuListLoading, value, onChange } = this.props;
+        const { value, onChange } = this.props;
         const columns = [
             {
                 title: "SKU",
@@ -317,20 +280,23 @@ class GoodsSkuList extends Component {
                 title: "库存",
                 dataIndex: "stock"
             }, {
-                title: "拼团价",
+                title: "拼团价（填写原价为不参与拼团）",
                 dataIndex: "group_price",
-                render: (tetx, record) => <FormItem
+                render: (text, record) => <FormItem
                     validateStatus={(!record.group_price) || (record.group_price && (Number(record.group_price) > Number(record.price))) ? "error" : null}
                     help={!record.group_price ? "请输入正确的拼团价" : (record.group_price && (Number(record.group_price) > Number(record.price))) ? "拼团价不能高于原价" : ""}
                 >
-                    <Input
+                    <InputNumber
                         addonBefore="拼团价"
                         type="number"
                         step={0.01}
+                        min={0.01}
+                        max={Number(record.price)}
                         style={{ width: 130, marginRight: 10 }}
+                        value={text}
                         onChange={(e) => {
-                            record.group_price = e.target.value
-                            onChange(skuList.list)
+                            record.group_price = e
+                            onChange(value)
                         }}
                     />
                     <span>元</span>
@@ -338,15 +304,20 @@ class GoodsSkuList extends Component {
             }, {
                 title: "团长优惠（不填写为无优惠）",
                 dataIndex: "captain_price",
-                render: () => <FormItem>
-                    <Input
+                render: (text, record) => <FormItem
+                    validateStatus={(!record.captain_price) || (record.captain_price && record.group_price && (Number(record.captain_price) > Number(record.group_price))) ? "error" : null}
+                    help={!record.captain_price ? "请输入正确的团长价" : (record.captain_price && record.group_price && (Number(record.captain_price) > Number(record.group_price))) ? "团长价不能高于拼团价" : ""}
+                >
+                    <InputNumber
                         addonBefore="团长价"
                         type="number"
                         step={0.01}
+                        min={0}
                         style={{ width: 130, marginRight: 10 }}
+                        value={text}
                         onChange={(e) => {
-                            record.captain_price = e.target.value
-                            onChange(skuList.list)
+                            record.captain_price = e
+                            onChange(value)
                         }}
                     />
                     <span>元</span>
@@ -356,8 +327,8 @@ class GoodsSkuList extends Component {
         return (
             <Table
                 columns={columns}
-                loading={skuListLoading}
-                dataSource={skuList}
+                loading={!value.length}
+                dataSource={value}
                 pagination={null}
             />
         )
