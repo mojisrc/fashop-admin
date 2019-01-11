@@ -147,7 +147,10 @@ class Payment extends Component {
         const { app_id, app_secret, status, mini_app_id, mini_app_secret, mch_id, key, apiclientCert, apiclientKey, callback_domain } = this.state;
         const { form, settingEditLoading, settingInfoLoading } = this.props;
         const name = "cert";
-        const action = "/admin/upload/addCert";
+        // TODO 封装起来，这儿我认为是umi.js的一个bug，自动索引出来的域名是http的
+        let action = "/admin/upload/addCert";
+        action = process.env.NODE_ENV === "production" ? process.env.production.api.url + action : action;
+
         const { getFieldDecorator } = form;
         const token = JSON.parse(localStorage.getItem("token"));
         const headers = { "Access-Token": token.accessToken };
