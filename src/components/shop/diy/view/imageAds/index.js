@@ -22,9 +22,9 @@ import Image from "@/components/image/index";
 
 export default class Index extends Component {
     render() {
-        const { data, options } = this.props
-        const { layout_style } = options
-        let _ads = data
+        const { data, options } = this.props;
+        const { layout_style } = options;
+        let _ads = data;
         return (
             <div className={styles.imageAdsPhoneWarp}>
                 {
@@ -34,17 +34,17 @@ export default class Index extends Component {
                                 _ads.map((item, index) => {
                                     return <div key={index} className={styles.carouselItem}>
                                         <Image src={item.img.url} />
-                                    </div>
+                                    </div>;
                                 })
                             }
                         </Carousel> :
                         _ads.map((item, index) => {
-                            return <div key={index} className={styles.carouselItem}>
-                                <Image src={item.img.url} />
-                            </div>
+                            return <div key={index}>
+                                <Image src={item.img.url} style={{ width: "100%" }} />
+                            </div>;
                         })
                 }
             </div>
-        )
+        );
     }
 }
