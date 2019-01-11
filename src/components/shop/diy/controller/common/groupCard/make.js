@@ -51,8 +51,8 @@ export default class GroupCardMake extends PureComponent {
                                 backgroundColor={typeof defaultValue["background_color"] !== "undefined" ? listItem.background_color : null}
                                 fontColor={typeof defaultValue["font_color"] !== "undefined" ? listItem.font_color : null}
                                 onChange={(response) => {
-                                    let _data = dataSource;
-                                    _data[index][subIndex] = response;
+                                    let _data = [...dataSource];
+                                    _data[index] = response
                                     onChange(_data);
                                 }}
                             />
@@ -61,7 +61,8 @@ export default class GroupCardMake extends PureComponent {
             }
             {addShow ? <Add
                 onClick={() => {
-                    let _data = [...dataSource, defaultValue];
+                    let _data = [...dataSource];
+                    _data.push(defaultValue)
                     onChange(_data);
                 }}
             /> : null}

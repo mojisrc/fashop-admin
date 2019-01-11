@@ -29,8 +29,6 @@ export default class PageControl extends Component {
         const { body, options } = this.props
         const itemData = body[options.index]
         let item = ''
-        console.log(itemData);
-        
         if (itemData) {
             switch (options.type) {
                 case 'goods':
@@ -38,10 +36,10 @@ export default class PageControl extends Component {
                     break
                 case 'goods_list':
                     item = <GoodsList
-                        options={itemData.options} 
+                        options={itemData.options}
                         data={itemData.data}
                         getValues={this.props.getValues}
-                        refreshGoods={this.props.goodsListRefreshGoods} 
+                        refreshGoods={this.props.goodsListRefreshGoods}
                     />
                     break
                 case 'goods_search':
@@ -76,11 +74,11 @@ export default class PageControl extends Component {
                     item = <TextNav options={itemData.options} data={itemData.data} getValues={this.props.getValues} />
                     break
                 case 'goods_group':
-                    item = <GoodsGroup 
-                        options={itemData.options} 
-                        data={itemData.data} 
-                        getValues={this.props.getValues} 
-                        refreshGoods={this.props.goodsGroupRefreshGoods} 
+                    item = <GoodsGroup
+                        options={itemData.options}
+                        data={itemData.data}
+                        getValues={this.props.getValues}
+                        refreshGoods={this.props.goodsGroupRefreshGoods}
                     />;
                     break
                 default:

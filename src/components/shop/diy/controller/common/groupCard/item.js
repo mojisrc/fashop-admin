@@ -5,8 +5,9 @@ import { formItemLayout } from "@/components/shop/diy/formLayout";
 import ActionLink from "@/components/shop/diy/controller/common/actionLink";
 import ColorPicker from "@/components/public/colorPicker";
 import styles from "./index.css";
-import { Form,Input,Icon} from "antd";
-const FormItem = Form.Item
+import { Form, Input, Icon } from "antd";
+
+const FormItem = Form.Item;
 // 返回组内一条的数据格式
 const _response = {
     title: "",
@@ -92,7 +93,7 @@ export default class GroupCardItem extends PureComponent {
                             <img
                                 src={img.url}
                                 alt=''
-                                style={{ width: "80px" ,backgroundColor}}
+                                style={{ width: "80px", backgroundColor }}
                             /> :
                             <div className={styles.uploadBtn}>
                                 <Icon type='plus' />
@@ -101,7 +102,7 @@ export default class GroupCardItem extends PureComponent {
                     }
                 </UploadImage>
             </div> : null}
-            <div style={{flex:1}}>
+            <div style={{ flex: 1 }}>
                 {title ? <FormItem
                     {...formItemLayout}
                     label="标题"
@@ -172,8 +173,8 @@ export default class GroupCardItem extends PureComponent {
 
     setResponse(field, value) {
         const { onChange } = this.props;
-        let response = this.state.response;
+        let { response } = this.state;
         response[field] = value;
-        onChange(response);
+        onChange({ ...response });
     }
 }
