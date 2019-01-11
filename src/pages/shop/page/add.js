@@ -76,7 +76,7 @@ export default class Add extends Component {
 
         if (goodsListResult.code === 0) {
             return goodsListResult.result.list;
-        } else {
+        }else {
             message.warning(goodsListResult.msg);
             return [];
         }
@@ -94,7 +94,6 @@ export default class Add extends Component {
         //         order_type = 9;
         //         break;
         // }
-
         const goodsListResult = await GroupApi.pageGoods({
             page: 1,
             rows: values.options.goods_display_num,

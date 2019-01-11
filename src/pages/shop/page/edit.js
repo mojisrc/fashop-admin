@@ -118,7 +118,6 @@ export default class Edit extends Component {
         //         order_type = 9;
         //         break;
         // }
-
         const goodsListResult = await GroupApi.pageGoods({
             page: 1,
             rows: values.options.goods_display_num,

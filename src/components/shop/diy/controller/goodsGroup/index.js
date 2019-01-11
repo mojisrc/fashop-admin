@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Col, Icon, Modal, message, Radio, Form, Select, InputNumber } from "antd";
 import styles from "./index.css";
-import SeleceGoods from "@/components/public/selectGoods/index";
+import SeleceGoods from "@/components/public/selectGroupGoods/index";
 import { View } from "@/components/flexView";
 import Image from "@/components/image/index";
 import { formItemLayout } from "@/components/shop/diy/formLayout";
@@ -24,7 +24,7 @@ export default class Index extends Component {
     render() {
         const { delectShow, addGoodsVisible, currentId } = this.state;
         const { options, data, getValues } = this.props;
-        const { layout_style, source_type, goods_sort,goods_title_rows } = options||{};
+        const { layout_style, source_type, goods_sort, goods_title_rows, goods_display_num } = options || {};
         return (
             <Form>
                 <FormItem
@@ -54,6 +54,7 @@ export default class Index extends Component {
                         <InputNumber
                             max={12}
                             min={1}
+                            value={goods_display_num}
                             onChange={async (e) => {
                                 const values = {
                                     options: { ...options, ...{ goods_display_num: e } },
@@ -183,14 +184,7 @@ export default class Index extends Component {
                             onOk={(goodsList) => {
                                 const _data = data;
                                 goodsList.map((item) =>
-                                    _data.push({
-                                        id: item.id,
-                                        img: item.img,
-                                        title: item.title,
-                                        price: item.price
-                                        // market_price: item.price,
-                                        // desc: item.desc ? item.desc : ''
-                                    })
+                                    _data.push(item)
                                 );
                                 this.setState({
                                     addGoodsVisible: false

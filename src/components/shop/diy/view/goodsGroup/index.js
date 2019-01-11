@@ -7,7 +7,7 @@ import { Button, Carousel } from "antd";
 export default class Index extends Component {
     render() {
         const { data, options } = this.props
-        const { layout_style } = options
+        const { layout_style } = options        
         return (
             <div className={`${styles.goodsPhoneWarp} ${styles.groupViewWarp}`}>
                 {
@@ -17,8 +17,8 @@ export default class Index extends Component {
                                 return this.big(item, index)
                             } else if (layout_style === 2) {
                                 return this.small(item, index)
-                                } else if (layout_style === 3) {
-                                    return this.oneBigTwoSmall(item, index)
+                            } else if (layout_style === 3) {
+                                return this.oneBigTwoSmall(item, index)
                             } else if (layout_style === 4) {
                                 return this.list(item, index)
                             }
@@ -54,11 +54,11 @@ export default class Index extends Component {
                                 {item.limit_buy_num}人团 ￥
                             </p>
                             <p className={styles.smallPrice}>
-                                {item.price}
+                                {item.group_price}
                             </p>
                         </View>
                         <p className={styles.smallPrice} style={{ fontSize: 14, color: '#999' }}>
-                            已拼888件
+                            已拼{item.group_sale_num}件
                         </p>
                     </View>
                 </View>
@@ -90,11 +90,11 @@ export default class Index extends Component {
                                 {item.limit_buy_num}人团 ￥
                             </p>
                             <p className={styles.smallPrice}>
-                                {item.price}
+                                {item.group_price}
                             </p>
                         </View>
                         <p className={styles.smallPrice} style={{ fontSize: 14, color: '#999' }}>
-                            已拼888件
+                            已拼{item.group_sale_num}件
                         </p>
                     </View>
                 </View>
@@ -137,7 +137,7 @@ export default class Index extends Component {
                     <p className={`${styles.smallTitle} ${styles[rows]}`}>{item.title}</p>
                     <p className={styles.smallPrice}>
                         {/*<span>￥{item.market_price}</span>*/}
-                        ￥{item.price}
+                        ￥{item.group_price}
                     </p>
                 </View>
             </View>
@@ -165,11 +165,11 @@ export default class Index extends Component {
                     <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', }}>
                         <View>
                             <p className={styles.smallPrice} style={{ fontSize: 14, color: '#999' }}>
-                                {item.limit_buy_num}人团 已拼888件
+                                {item.limit_buy_num}人团 已拼{item.group_sale_num}件
                             </p>
                             <p className={styles.listPrice}>
-                                ￥{item.price}
-                                <span className={styles.marketPrice}>￥{item.market_price}</span>
+                                ￥{item.group_price}
+                                <span className={styles.marketPrice}>￥{item.price}</span>
                             </p>
                         </View>
                         <Button type="primary">去开团</Button>
@@ -211,7 +211,7 @@ export default class Index extends Component {
                                                             </View>
                                                             <View style={{alignItems: 'center',}}>
                                                                 <p className={styles.listPrice} style={{marginTop: 4}}>
-                                                                    ￥<strong>{childItem.price}</strong>
+                                                                    ￥<strong>{childItem.group_price}</strong>
                                                                 </p>
                                                                 <p className={styles.listTitle}>{childItem.title}</p>
                                                             </View>
