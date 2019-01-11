@@ -172,14 +172,18 @@ class SelectableGoods extends Component {
         });
     }
     render() {
-        const { goodsListLoading, goodsList, goodsCategory, selectableGoods, onOk } = this.props;
+        const { goodsList, goodsListLoading, goodsCategory, selectableGoods, selectableGoodsLoading, onOk } = this.props;
         const { title, category_ids } = this.search.getParam();
 
         const tree = Arr.toTree(goodsCategory.list);
         const treeData = Antd.treeData(tree);
         // TreeSelect 只接受string
         let _category_ids = category_ids && category_ids.length ? [...category_ids] : [];
-
+        // 解决 selectable 请求中的时候列表渲染 bug
+        // 还存在 列表分页, 用路由控制分页，goBack时的 bug
+        if (selectableGoodsLoading){
+            return null
+        }
         const selectableGoodsIds = selectableGoods.list.map(item => item.id)
         const currentList = goodsList.list.map(item => {
             if (selectableGoodsIds.indexOf(item.id) === -1) {
@@ -224,7 +228,7 @@ class SelectableGoods extends Component {
         return (
             <View>
                 <PageList.Search
-                    loading={goodsListLoading}
+                    loading={goodsListLoading || selectableGoodsLoading}
                     onSubmit={this.search.submit}
                     defaultValue={this.search.defaultParam}
                     onReset={this.search.reset}
@@ -255,8 +259,8 @@ class SelectableGoods extends Component {
                     ]}
                 />
                 <Table
-                    loading={goodsListLoading}
-                    dataSource={currentList}
+                    loading={goodsListLoading || selectableGoodsLoading}
+                    dataSource={selectableGoodsLoading ? [] : currentList}
                     columns={columns}
                     rowKey={record => record.id}
                     pagination={{
