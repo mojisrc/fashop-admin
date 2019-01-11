@@ -104,7 +104,7 @@ class Payment extends Component {
         this.props.form.validateFieldsAndScroll((err, values) => {
             if (!err) {
                 const { apiclientCert, apiclientKey } = this.state;
-                const { app_id, app_secret, status, mini_app_id, mch_id, key } = values;
+                const { app_id, app_secret, status, mini_app_id,mini_app_secret, mch_id, key ,callback_domain} = values;
                 const { dispatch } = this.props;
                 dispatch({
                     type: "setting/edit",
@@ -114,6 +114,7 @@ class Payment extends Component {
                             app_id,
                             app_secret,
                             mini_app_id,
+                            mini_app_secret,
                             mch_id,
                             key,
                             apiclient_cert:
@@ -123,7 +124,8 @@ class Payment extends Component {
                             apiclient_key:
                                 typeof apiclientKey[0]["path"] !== "undefined"
                                     ? apiclientKey[0].path
-                                    : ""
+                                    : "",
+                            callback_domain
                         },
                         status: status ? 1 : 0
                     },

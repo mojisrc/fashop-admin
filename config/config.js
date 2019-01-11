@@ -47,19 +47,19 @@ export default {
     define: {
         APP_TYPE: process.env.APP_TYPE || "",
         "process.env.dev": {
-            websocket:{
-                host:'ws://127.0.0.1:9510'
-            },
+            websocket: {
+                host: "ws://127.0.0.1:9510"
+            }
             // 开发环境下的api走proxy
         },
         "process.env.production": {
-            websocket:{
-                host:'wss://demo.fashop.cn'
+            websocket: {
+                host: "wss://v2-api.fashop.cn"
             },
             api: {
-                url: "https://demo.fashop.cn"
+                url: "https://v2-api.fashop.cn"
             }
-        },
+        }
 
     },
     // 路由配置
