@@ -15,7 +15,7 @@ class Basic extends Component {
         if (!startValue || !endValue) {
             return startValue && startValue < moment().startOf('day')
         }
-        return startValue.valueOf() > endValue.valueOf();
+        return !moment(startValue).isBetween(moment().startOf('day'), moment(endValue).endOf('day'))
     }
 
     disabledEndDate = (endValue) => {
