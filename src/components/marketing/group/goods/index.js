@@ -299,6 +299,7 @@ class GoodsSkuList extends Component {
                 render: (text, record) => <FormItem
                     validateStatus={(!record.group_price) || (record.group_price && (Number(record.group_price) > Number(record.price))) ? "error" : null}
                     help={!record.group_price ? "请输入正确的拼团价" : (record.group_price && (Number(record.group_price) > Number(record.price))) ? "拼团价不能高于原价" : ""}
+                    style={{marginBottom: 0}}
                 >
                     <InputNumber
                         addonBefore="拼团价"
@@ -322,6 +323,7 @@ class GoodsSkuList extends Component {
                 render: (text, record) => <FormItem
                     validateStatus={(!record.captain_price) || (record.captain_price && record.group_price && (Number(record.captain_price) > Number(record.group_price))) ? "error" : null}
                     help={!record.captain_price ? "请输入正确的团长价" : (record.captain_price && record.group_price && (Number(record.captain_price) > Number(record.group_price))) ? "团长价不能高于拼团价" : ""}
+                    style={{marginBottom: 0}}
                 >
                     <InputNumber
                         addonBefore="团长价"

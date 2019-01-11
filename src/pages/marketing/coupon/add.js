@@ -7,6 +7,8 @@ import {
     // Wechat,
 } from "@/components/marketing/coupon/add"
 import { getPageQuery } from "@/utils/utils";
+import { View } from "@/components/flexView";
+import styles from "@/components/marketing/coupon/add/rules/index.css";
 
 const FormItem = Form.Item;
 
@@ -61,9 +63,14 @@ export default class CouponAdd extends Component{
                         form={form}
                         formItemLayout={formItemLayout}
                     /> */}
-                    <FormItem {...tailFormItemLayout}>
-                        <Button type="primary" htmlType="submit">保 存</Button>
-                    </FormItem>
+                    <View className={styles.warp}>
+                        <View className={styles.left}/>
+                        <View className={styles.right}>
+                            <FormItem {...tailFormItemLayout}>
+                                <Button type="primary" htmlType="submit">保 存</Button>
+                            </FormItem>
+                        </View>
+                    </View>
                 </Form>
             </Card>
         </PageHeaderWrapper>
