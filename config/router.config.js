@@ -124,6 +124,7 @@ export default [
                     { path: "/marketing/group", name: "拼团", component: "/marketing/group/list" },
                     { path: "/marketing/group/add", component: "/marketing/group/add" },
                     { path: "/marketing/group/edit", component: "/marketing/group/edit" },
+                    { path: "/marketing/group/detail", component: "/marketing/group/detail" },
                     { path: "/marketing/coupon", name: "优惠券", component: "/marketing/coupon/list" },
                     { path: "/marketing/coupon/add", component: "/marketing/coupon/add" },
                     { path: "/marketing/coupon/edit", component: "/marketing/coupon/edit" },
