@@ -7,6 +7,9 @@ import router from "umi/router";
 import Query from "@/utils/query";
 import PageList from "@/components/pageList";
 import Image from "@/components/image";
+import moment from "moment";
+import Arr from "@/utils/array";
+import Antd from "@/utils/antd";
 
 const FormItem = Form.Item;
 const TabPane = Tabs.TabPane;
@@ -17,6 +20,12 @@ class Goods extends Component {
         const groupInfo = this.props.groupInfo || {};
         const { form, formItemLayout, getGoodsSku } = this.props;
         const { getFieldDecorator, getFieldValue } = form;
+        const is_invalid = groupInfo && groupInfo.is_show===0 // 已失效
+        const is_over = groupInfo && moment().isAfter(moment(groupInfo.end_time, 'X')) // 已结束
+        const is_ing = groupInfo && moment().isBetween(moment(groupInfo.start_time, 'X'), moment(groupInfo.end_time, 'X')) // 进行中
+        const disabled = is_ing || is_invalid || is_over;
+        // 已失效、已结束的活动 不能重新选择商品 不能编辑拼团价 团长价（查看）
+        // 进行中 的活动 不能重新选择商品 不能编辑拼团价 团长价（编辑）
         return (
             <View>
                 <h3>活动商品</h3>
@@ -28,7 +37,7 @@ class Goods extends Component {
                         rules: [{ required: true, message: "请选择商品!" }],
                         initialValue: groupInfo.goods_info ? groupInfo.goods_info : null
                     })(
-                        <AddGoods getGoodsSku={getGoodsSku}/>
+                        <AddGoods getGoodsSku={getGoodsSku} disabled={disabled}/>
                     )}
                 </FormItem>
                 {
@@ -40,7 +49,7 @@ class Goods extends Component {
                             {getFieldDecorator('group_goods', {
                                 initialValue: groupInfo.group_goods ? groupInfo.group_goods : []
                             })(
-                                <GoodsSkuList />
+                                <GoodsSkuList disabled={disabled} />
                             )}
                         </FormItem> 
                         : null
@@ -62,14 +71,16 @@ class AddGoods extends Component {
     }
     render() {
         const { visible } = this.state
-        const { onChange, value, getGoodsSku } = this.props;
+        const { onChange, value, getGoodsSku, disabled } = this.props;
         return <View>
             <View
                 className={styles.add}
                 onClick={() => {
-                    this.setState({
-                        visible: true
-                    })
+                    if (!disabled){
+                        this.setState({
+                            visible: true
+                        })
+                    }
                 }}
             >
                 {
@@ -80,9 +91,12 @@ class AddGoods extends Component {
                             src={value.img}
                             style={{ width: 72, height: 72 }}
                         />
-                        <View className={styles.zhezhao}>
-                            <span>替换</span>
-                        </View>
+                        {
+                            disabled ? null :
+                            <View className={styles.zhezhao}>
+                                <span>替换</span>
+                            </View>
+                        }
                     </View> :
                     <Icon type="plus" style={{ color: "#b9b9b9" }}/>
                 }
@@ -130,31 +144,25 @@ class SelectableGoods extends Component {
             list: [],
         }
     };
-    state = {
-        get: { page: 1, rows: 10 }
-    }
     search = new PageList({
         router: "/marketing/group/add",
         rows: 10,
+        param: {
+            title: null,
+            category_ids: [],
+        },
         refresh: (e) => {
             this.initList(e);
         }
-    });
+    })
     componentDidMount() {
         this.initList();
     }
     initList() {
-        const { dispatch, goodsCategory } = this.props;
-        const get = Query.make([
-            { key: "sale_state", rule: ["eq", "all"] },
-            { key: "order_type", rule: ["eq", "all"] }
-        ]);
+        const { dispatch } = this.props;
         dispatch({
             type: "goods/list",
-            payload: get,
-            callback: (res) => {
-                // console.log(res)
-            }
+            payload: this.search.filter()
         });
         dispatch({
             type: "goodsCategory/list",
@@ -162,13 +170,23 @@ class SelectableGoods extends Component {
         dispatch({
             type: "group/selectableGoods",
         });
-        this.setState({
-            get
-        });
     }
     render() {
         const { goodsListLoading, goodsList, goodsCategory, selectableGoods, onOk } = this.props;
-        const { keywords, state } = this.search.getParam();
+        const { title, category_ids } = this.search.getParam();
+
+        const tree = Arr.toTree(goodsCategory.list);
+        const treeData = Antd.treeData(tree);
+        // TreeSelect 只接受string
+        let _category_ids = category_ids && category_ids.length ? [...category_ids] : [];
+
+        const selectableGoodsIds = selectableGoods.list.map(item => item.id)
+        const currentList = goodsList.list.map(item => {
+            if (selectableGoodsIds.indexOf(item.id) === -1) {
+                item.selectable = true
+            }
+            return item
+        })
         const columns = [
             {
                 title: "商品图",
@@ -203,15 +221,8 @@ class SelectableGoods extends Component {
                 </Button> : <span>不可选</span>
             }
         ]
-        const selectableGoodsIds = selectableGoods.list.map(item=>item.id)
-        const currentList = goodsList.list.map(item=>{
-            if(selectableGoodsIds.indexOf(item.id)>-1){
-                item.selectable = true
-            }
-            return item
-        })
         return (
-            <View className={styles.tableWarp}>
+            <View>
                 <PageList.Search
                     loading={goodsListLoading}
                     onSubmit={this.search.submit}
@@ -222,25 +233,25 @@ class SelectableGoods extends Component {
                         {
                             label: "商品名称",
                             input: {
-                                field: "keywords",
-                                placeholder: "请输入商品名称",
-                                initialValue: keywords
+                                field: "title",
+                                placeholder: "请输入关键词",
+                                initialValue: title
                             }
-                        }, {
+                        },
+                        {
                             label: "商品分类",
-                            select: {
-                                field: "state",
-                                style: { width: 130 },
-                                placeholder: "全部",
-                                data: goodsCategory.list.map((item,index)=>{
-                                    return {
-                                        name: item.name,
-                                        value: item.id
-                                    }
-                                }),
-                                initialValue: state
+                            treeSelect: {
+                                field: "category_ids",
+                                style: { width: 300 },
+                                dropdownStyle: { maxHeight: 400, overflow: "auto" },
+                                treeDefaultExpandAll: true,
+                                allowClear: true,
+                                multiple: true,
+                                placeholder: "请选择",
+                                treeData: treeData,
+                                initialValue: _category_ids
                             }
-                        }
+                        },
                     ]}
                 />
                 <Table
@@ -251,13 +262,12 @@ class SelectableGoods extends Component {
                     pagination={{
                         showSizeChanger: false,
                         showQuickJumper: false,
-                        current: this.state.get.page,
-                        pageSize: this.state.get.rows,
+                        current: this.search.page,
+                        pageSize: this.search.rows,
                         total: goodsList.total_number
                     }}
-                    onChange={({ current, pageSize }) => {
-                        router.push(Query.page(current, pageSize));
-                        this.initList();
+                    onChange={({ current }) => {
+                        this.search.setPage(current).push()
                     }}
                 />
             </View>
@@ -268,7 +278,7 @@ class SelectableGoods extends Component {
 
 class GoodsSkuList extends Component {
     render() {
-        const { value, onChange } = this.props;
+        const { value, onChange, disabled } = this.props;
         const columns = [
             {
                 title: "SKU",
@@ -294,6 +304,7 @@ class GoodsSkuList extends Component {
                         max={Number(record.price)}
                         style={{ width: 130, marginRight: 10 }}
                         value={text}
+                        disabled={disabled}
                         onChange={(e) => {
                             record.group_price = e
                             onChange(value)
@@ -315,6 +326,7 @@ class GoodsSkuList extends Component {
                         min={0}
                         style={{ width: 130, marginRight: 10 }}
                         value={text}
+                        disabled={disabled}
                         onChange={(e) => {
                             record.captain_price = e
                             onChange(value)

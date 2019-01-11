@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "dva";
 import { View } from "@/components/flexView";
-import { Form, Input, InputNumber, Radio, DatePicker, Checkbox, Button, Row, Col, Switch, Icon, Modal, Table } from "antd";
+import { Form, Input, InputNumber, Radio, DatePicker } from "antd";
 import router from "umi/router";
 import moment from "moment";
 
@@ -15,7 +15,7 @@ class Basic extends Component {
         if (!startValue || !endValue) {
             return startValue && startValue < moment().startOf('day')
         }
-        return startValue.valueOf() > endValue.valueOf();
+        return !moment(startValue).isBetween(moment().startOf('day'), moment(endValue).endOf('day'))
     }
 
     disabledEndDate = (endValue) => {
@@ -29,7 +29,12 @@ class Basic extends Component {
         const groupInfo = this.props.groupInfo || {};
         const { form, formItemLayout } = this.props;
         const { getFieldDecorator, setFieldsValue, getFieldValue } = form;
-        const disabled = groupInfo && moment().isAfter(moment(groupInfo.start_time, 'X'))
+        const is_invalid = groupInfo && groupInfo.is_show===0 // 已失效
+        const is_over = groupInfo && moment().isAfter(moment(groupInfo.end_time, 'X')) // 已结束
+        const is_ing = groupInfo && moment().isBetween(moment(groupInfo.start_time, 'X'), moment(groupInfo.end_time, 'X')) // 进行中
+        const disabled = is_ing || is_invalid || is_over;
+        // 已失效、已结束的活动 不能编辑（查看）
+        // 进行中 的活动 只能编辑活动标题、活动结束时间（编辑）
         return (
             <View>
                 <h3>活动信息</h3>
@@ -44,6 +49,7 @@ class Basic extends Component {
                         <Input
                             placeholder="请输入活动标题"
                             style={{width: 350}}
+                            disabled={is_invalid || is_over}
                         />
                     )}
                 </FormItem>
@@ -81,6 +87,7 @@ class Basic extends Component {
                                 format="YYYY-MM-DD HH:mm:ss"
                                 style={{ width: 216 }}
                                 disabledDate={this.disabledEndDate}
+                                disabled={is_invalid || is_over}
                                 placeholder="请选择活动结束时间"
                             />
                         )}
