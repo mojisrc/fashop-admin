@@ -5,10 +5,10 @@ import {
     Basic,
     Rules,
     // Wechat,
-} from "@/components/marketing/coupon/add"
+} from "@/components/marketing/coupon"
 import { getPageQuery } from "@/utils/utils";
 import { View } from "@/components/flexView";
-import styles from "@/components/marketing/coupon/add/rules/index.css";
+import styles from "@/components/marketing/coupon/rules/index.css";
 
 const FormItem = Form.Item;
 
