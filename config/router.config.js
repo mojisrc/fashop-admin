@@ -41,7 +41,7 @@ export default [
                     { path: "/order/refund", name: "退款售后", component: "/order/refund" },
                     { path: "/order/evaluate", name: "评价管理", component: "/order/evaluate" },
                     { path: "/order/refund/edit", component: "/order/refundEdit" },
-                    { path: "/order/list/send", component: "/order/send" }
+                    { path: "/order/list/send", component: "/order/send" },
                 ]
             },
             {
