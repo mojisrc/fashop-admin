@@ -5,7 +5,7 @@
   "private": true,
   "scripts": {
     "bootstrap": "yarn || npm i",
-    "presite": "node ./scripts/generateMock.js && cd functions && npm install",
+    "presite": "cd functions && npm install",
     "start": "cross-env APP_TYPE=site umi dev",
     "start:no-mock": "cross-env MOCK=none umi dev",
     "build": "umi build",
