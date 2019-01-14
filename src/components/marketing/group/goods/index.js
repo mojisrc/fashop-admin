@@ -144,25 +144,26 @@ class SelectableGoods extends Component {
             list: [],
         }
     };
-    search = new PageList({
-        router: "/marketing/group/add",
+    state = {
+        page: 1,
         rows: 10,
-        param: {
-            title: null,
-            category_ids: [],
-        },
-        refresh: (e) => {
-            this.initList(e);
-        }
-    })
+        title: null,
+        category_ids: [],
+    }
     componentDidMount() {
         this.initList();
     }
     initList() {
         const { dispatch } = this.props;
+        const { page, rows, title, category_ids } = this.state;
         dispatch({
             type: "goods/list",
-            payload: this.search.filter()
+            payload: {
+                page,
+                rows,
+                title,
+                category_ids,
+            }
         });
         dispatch({
             type: "goodsCategory/list",
@@ -173,14 +174,12 @@ class SelectableGoods extends Component {
     }
     render() {
         const { goodsList, goodsListLoading, goodsCategory, selectableGoods, selectableGoodsLoading, onOk } = this.props;
-        const { title, category_ids } = this.search.getParam();
-
+        const { page, rows, title, category_ids } = this.state;
         const tree = Arr.toTree(goodsCategory.list);
         const treeData = Antd.treeData(tree);
         // TreeSelect 只接受string
         let _category_ids = category_ids && category_ids.length ? [...category_ids] : [];
         // 解决 selectable 请求中的时候列表渲染 bug
-        // 还存在 列表分页, 用路由控制分页，goBack时的 bug
         if (selectableGoodsLoading){
             return null
         }
@@ -229,9 +228,24 @@ class SelectableGoods extends Component {
             <View>
                 <PageList.Search
                     loading={goodsListLoading || selectableGoodsLoading}
-                    onSubmit={this.search.submit}
-                    defaultValue={this.search.defaultParam}
-                    onReset={this.search.reset}
+                    defaultValue={{
+                        page: 1,
+                        rows: 10,
+                        title: null,
+                        category_ids: [],
+                    }}
+                    onSubmit={(values)=>{
+                        this.setState(values, 
+                        () => {
+                            this.initList();
+                        })
+                    }}
+                    onReset={(values)=>{
+                        this.setState(values, 
+                        () => {
+                            this.initList();
+                        })
+                    }}
                     style={{ margin: "10px 20px" }}
                     items={[
                         {
@@ -266,12 +280,17 @@ class SelectableGoods extends Component {
                     pagination={{
                         showSizeChanger: false,
                         showQuickJumper: false,
-                        current: this.search.page,
-                        pageSize: this.search.rows,
+                        current: page,
+                        pageSize: rows,
                         total: goodsList.total_number
                     }}
-                    onChange={({ current }) => {
-                        this.search.setPage(current).push()
+                    onChange={({ current, pageSize }) => {
+                        this.setState({
+                            page: current,
+                            rows: pageSize
+                        }, () => {
+                            this.initList();
+                        })
                     }}
                 />
             </View>
