@@ -5,7 +5,8 @@ export const defaultData = [
         title: '商品',
         data: [],
         options: {
-            layout_direction: 1 //小图 1、大图 2、一大两小 3、列表 4
+            layout_direction: 1, // 小图 1、大图 2、一大两小 3、列表 4
+            goods_title_rows: 1, // 标题行数 1 一行、2 两行
         }
     }, {
         type: 'goods_list',
@@ -16,6 +17,7 @@ export const defaultData = [
             goods_display_num: 6,
             goods_display_field: ['title', 'price', 'market_price'],
             layout_style: 1,
+            goods_title_rows: 1, // 标题行数 1 一行、2 两行
         },
         data: []
     }, {
@@ -45,7 +47,7 @@ export const defaultData = [
         icon: require('@/assets/images/shop/image_ads.png'),
         title: '图片广告',
         options: {
-            layout_style: 1,//折叠轮播1、上下平铺2
+            layout_style: 1,// 折叠轮播1、上下平铺2
         },
         data: [
             {
@@ -273,7 +275,8 @@ export const marketingData = [
             source_type: 'auto', // 自动 auto 、 选择 choose
             goods_sort: 1, // 销量多到少 1、价格高到低 2、价格低到高 3
             goods_display_num: 3, // 最多12件，最少1件
-            layout_style: 5 //大图 1、小图 2、一大两小 3、列表 4、轮播 5
+            layout_style: 5, // 大图 1、小图 2、一大两小 3、列表 4、轮播 5
+            goods_title_rows: 1, // 标题行数 1 一行、2 两行
         }
     }
 ]
