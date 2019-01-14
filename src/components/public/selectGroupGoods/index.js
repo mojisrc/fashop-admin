@@ -53,11 +53,7 @@ export default class SelectGoods extends Component {
     }
 
     componentDidMount() {
-
-        const { goodsList, goodsListLoading } = this.props;
-        if (goodsList.list.length === 0 && goodsListLoading === false) {
-            this.initList();
-        }
+        this.initList();
     }
 
     initList() {
@@ -71,7 +67,6 @@ export default class SelectGoods extends Component {
         });
     }
 
-
     render() {
         const { visible, close, onOk, multiSelect, goodsList, goodsListLoading, dispatch } = this.props;
         if (goodsList) {
@@ -79,7 +74,7 @@ export default class SelectGoods extends Component {
             const { page, rows, checkedData } = this.state;
             return (
                 <Modal
-                    title="添加商品"
+                    title="添加拼团商品"
                     cancelText='取消'
                     okText='确定'
                     visible={visible}
@@ -101,17 +96,22 @@ export default class SelectGoods extends Component {
                 >
                     <Spin spinning={goodsListLoading}>
                         <View className={styles.goodsList}>
-                            <View className={styles.goodsListTop}>
+                            {/* <View className={styles.goodsListTop}>
                                 <Search
                                     placeholder="请输入商品名称"
                                     onSearch={(value) => {
-                                        if (dispatch) {
-                                            dispatch(list({ params: { page, rows, title: value } }));
-                                        }
+                                        dispatch({
+                                            type: "goods/list",
+                                            payload: {
+                                                page,
+                                                rows,
+                                                title: value
+                                            }
+                                        })
                                     }}
                                     style={{ width: 200 }}
                                 />
-                            </View>
+                            </View> */}
                             <ScrollView className={styles.scrollView}>
                                 {
                                     list.map((item, i) => {
@@ -154,7 +154,13 @@ export default class SelectGoods extends Component {
                                                         />
                                                         <View className={styles.itemText}>
                                                             <p>{item.title}</p>
-                                                            <span>￥{item.price}</span>
+                                                            <p className={styles.smallPrice} style={{ fontSize: 14, color: '#999' }}>
+                                                                {item.limit_buy_num}人团 已拼{item.group_sale_num}件
+                                                            </p>
+                                                            <p className={styles.listPrice}>
+                                                                ￥{item.group_price}
+                                                                <span className={styles.marketPrice}>￥{item.price}</span>
+                                                            </p>
                                                         </View>
                                                     </View>
                                                 </View>
