@@ -36,6 +36,7 @@
     "antd": "^3.10.9",
     "bizcharts": "^3.4.0",
     "bizcharts-plugin-slider": "^2.1.1-beta.1",
+    "chalk": "^2.4.2",
     "classnames": "^2.2.6",
     "dva": "^2.4.0",
     "echarts": "^4.2.0-rc.2",
