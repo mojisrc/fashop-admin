@@ -74,7 +74,7 @@ export default class SelectGoods extends Component {
             const { page, rows, checkedData } = this.state;
             return (
                 <Modal
-                    title="添加商品"
+                    title="添加拼团商品"
                     cancelText='取消'
                     okText='确定'
                     visible={visible}
@@ -149,7 +149,13 @@ export default class SelectGoods extends Component {
                                                         />
                                                         <View className={styles.itemText}>
                                                             <p>{item.title}</p>
-                                                            <span>￥{item.price}</span>
+                                                            <p className={styles.smallPrice} style={{ fontSize: 14, color: '#999' }}>
+                                                                {item.limit_buy_num}人团 已拼{item.group_sale_num}件
+                                                            </p>
+                                                            <p className={styles.listPrice}>
+                                                                ￥{item.group_price}
+                                                                <span className={styles.marketPrice}>￥{item.price}</span>
+                                                            </p>
                                                         </View>
                                                     </View>
                                                 </View>
