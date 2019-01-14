@@ -18,8 +18,8 @@ class Payment extends Component {
             info: {
                 config: {
                     app_id: "",
-                    public_key: "",
-                    private_key: "",
+                    alipay_public_key: "",
+                    merchant_private_key: "",
                     callback_domain: ""
                 }
             }
@@ -27,8 +27,8 @@ class Payment extends Component {
     };
     state = {
         app_id: "",
-        public_key: "",
-        private_key: "",
+        alipay_public_key: "",
+        merchant_private_key: "",
         callback_domain: ""
     };
 
@@ -46,8 +46,8 @@ class Payment extends Component {
                     if (config) {
                         this.setState({
                             app_id: config.app_id,
-                            public_key: config.public_key,
-                            private_key: config.private_key,
+                            alipay_public_key: config.alipay_public_key,
+                            merchant_private_key: config.merchant_private_key,
                             callback_domain: config.callback_domain,
                             status
                         });
@@ -63,7 +63,7 @@ class Payment extends Component {
         e.preventDefault();
         this.props.form.validateFieldsAndScroll((err, values) => {
             if (!err) {
-                const { app_id, public_key, private_key, callback_domain, status } = values;
+                const { app_id, alipay_public_key, merchant_private_key, callback_domain, status } = values;
                 console.log(values);
                 const { dispatch } = this.props;
                 dispatch({
@@ -72,8 +72,8 @@ class Payment extends Component {
                         key: "alipay",
                         config: {
                             app_id,
-                            public_key,
-                            private_key,
+                            alipay_public_key,
+                            merchant_private_key,
                             callback_domain
                         },
                         status: status ? 1 : 0
@@ -91,7 +91,7 @@ class Payment extends Component {
     };
 
     render() {
-        const { app_id, public_key, private_key, callback_domain, status } = this.state;
+        const { app_id, alipay_public_key, merchant_private_key, callback_domain, status } = this.state;
         const { form, settingEditLoading, settingInfoLoading } = this.props;
         const { getFieldDecorator } = form;
         return (
@@ -120,19 +120,19 @@ class Payment extends Component {
                                 })(<Input placeholder="请输入" />)}
                             </FormItem>
                             <FormItem {...formItemLayout} label="支付宝公钥">
-                                {getFieldDecorator("public_key", {
+                                {getFieldDecorator("alipay_public_key", {
                                     rules: [
                                         {
                                             required: true,
                                             message: "请输入"
                                         }
                                     ],
-                                    initialValue: public_key
+                                    initialValue: alipay_public_key
                                 })(<Input placeholder="请输入" />)}
                             </FormItem>
                             <FormItem {...formItemLayout} label="支付宝私钥">
-                                {getFieldDecorator("private_key", {
-                                    initialValue: private_key
+                                {getFieldDecorator("merchant_private_key", {
+                                    initialValue: merchant_private_key
                                 })(<Input placeholder="请输入" />)}
                             </FormItem>
                             <FormItem {...formItemLayout} label="回调域名" extra="使用场景：支付宝支付异步通知、退款原路返回"
