@@ -130,8 +130,14 @@ class Payment extends Component {
                                     initialValue: alipay_public_key
                                 })(<Input placeholder="请输入" />)}
                             </FormItem>
-                            <FormItem {...formItemLayout} label="支付宝私钥">
+                            <FormItem {...formItemLayout} label="商户私钥">
                                 {getFieldDecorator("merchant_private_key", {
+                                    rules: [
+                                        {
+                                            required: true,
+                                            message: "请输入"
+                                        }
+                                    ],
                                     initialValue: merchant_private_key
                                 })(<Input placeholder="请输入" />)}
                             </FormItem>
