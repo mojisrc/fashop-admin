@@ -105,9 +105,14 @@ export default class SelectGoods extends Component {
                                 <Search
                                     placeholder="请输入商品名称"
                                     onSearch={(value) => {
-                                        if (dispatch) {
-                                            dispatch(list({ params: { page, rows, title: value } }));
-                                        }
+                                        dispatch({
+                                            type: "goods/list",
+                                            payload: {
+                                                page,
+                                                rows,
+                                                title: value
+                                            }
+                                        })
                                     }}
                                     style={{ width: 200 }}
                                 />

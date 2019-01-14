@@ -96,17 +96,22 @@ export default class SelectGoods extends Component {
                 >
                     <Spin spinning={goodsListLoading}>
                         <View className={styles.goodsList}>
-                            <View className={styles.goodsListTop}>
+                            {/* <View className={styles.goodsListTop}>
                                 <Search
                                     placeholder="请输入商品名称"
                                     onSearch={(value) => {
-                                        if (dispatch) {
-                                            dispatch(list({ params: { page, rows, title: value } }));
-                                        }
+                                        dispatch({
+                                            type: "goods/list",
+                                            payload: {
+                                                page,
+                                                rows,
+                                                title: value
+                                            }
+                                        })
                                     }}
                                     style={{ width: 200 }}
                                 />
-                            </View>
+                            </View> */}
                             <ScrollView className={styles.scrollView}>
                                 {
                                     list.map((item, i) => {
