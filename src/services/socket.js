@@ -40,11 +40,22 @@ export function listen(callback) {
             };
             ws.onmessage = function(event) {
                 const token = JSON.parse(localStorage.getItem("token"));
-                if(token){
-                    var data = JSON.parse(event.data);
-                    if (typeof data["action"] !== "undefined") {
-                        callback(data);
+                if (token) {
+                    if (typeof event.data == "string") {
+                        try {
+                            var data = JSON.parse(event.data);
+                            if (typeof data == "object" && data) {
+                                if (typeof data["action"] !== "undefined") {
+                                    callback(data);
+                                }
+                            } else {
+                                return false;
+                            }
+                        } catch (e) {
+                            return false;
+                        }
                     }
+
                 }
             };
             ws.onerror = function(event) {

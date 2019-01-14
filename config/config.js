@@ -25,6 +25,9 @@ const plugins = [
                     importWorkboxFrom: "local"
                 }
             },
+            routes: {
+                exclude: [/\.test\.(j|t)sx?$/],
+            },
             ...(!process.env.TEST && os.platform() === "darwin"
                 ? {
                     dll: {
@@ -48,7 +51,7 @@ export default {
         APP_TYPE: process.env.APP_TYPE || "",
         "process.env.dev": {
             websocket: {
-                host: "ws://127.0.0.1:9510"
+                host: "wss://v2-api.fashop.cn"
             }
             // 开发环境下的api走proxy
         },

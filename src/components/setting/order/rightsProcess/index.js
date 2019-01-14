@@ -18,7 +18,7 @@ export default class RightsProcess extends Component {
     };
 
     render() {
-        const { l form } = this.props;
+        const { form } = this.props;
         const { getFieldDecorator } = form;
 
         const formItemLayout = {
