@@ -41,10 +41,10 @@ export function listen(callback) {
             ws.onmessage = function(event) {
                 const token = JSON.parse(localStorage.getItem("token"));
                 if (token) {
-                    if (typeof event.data == "string") {
+                    if (typeof event.data === "string") {
                         try {
                             var data = JSON.parse(event.data);
-                            if (typeof data == "object" && data) {
+                            if (typeof data === "object" && data) {
                                 if (typeof data["action"] !== "undefined") {
                                     callback(data);
                                 }
