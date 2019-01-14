@@ -53,11 +53,7 @@ export default class SelectGoods extends Component {
     }
 
     componentDidMount() {
-
-        const { goodsList, goodsListLoading } = this.props;
-        if (goodsList.list.length === 0 && goodsListLoading === false) {
-            this.initList();
-        }
+        this.initList();
     }
 
     initList() {
@@ -70,7 +66,6 @@ export default class SelectGoods extends Component {
             }
         });
     }
-
 
     render() {
         const { visible, close, onOk, multiSelect, goodsList, goodsListLoading, dispatch } = this.props;
