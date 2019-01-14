@@ -25,6 +25,9 @@ const plugins = [
                     importWorkboxFrom: "local"
                 }
             },
+            routes: {
+                exclude: [/\.test\.(j|t)sx?$/],
+            },
             ...(!process.env.TEST && os.platform() === "darwin"
                 ? {
                     dll: {
