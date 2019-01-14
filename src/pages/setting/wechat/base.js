@@ -18,6 +18,7 @@ class Payment extends Component {
                 config: {
                     app_secret: "",
                     app_id: "",
+                    appid: "",
                     mini_app_id: "",
                     mini_app_secret: "",
                     mch_id: "",
@@ -38,6 +39,7 @@ class Payment extends Component {
         mini_app_id: "",
         mini_app_secret: "",
         mch_id: "",
+        appid: "",
         key: "",
         status: 0,
         apiclient_cert: "",
@@ -65,6 +67,7 @@ class Payment extends Component {
                             mini_app_id: config.mini_app_id,
                             mini_app_secret: config.mini_app_secret,
                             mch_id: config.mch_id,
+                            appid: config.appid,
                             key: config.key,
                             status,
                             callback_domain: config.callback_domain,
@@ -104,7 +107,7 @@ class Payment extends Component {
         this.props.form.validateFieldsAndScroll((err, values) => {
             if (!err) {
                 const { apiclientCert, apiclientKey } = this.state;
-                const { app_id, app_secret, status, mini_app_id, mini_app_secret, mch_id, key, callback_domain } = values;
+                const { app_id, app_secret, status, mini_app_id, mini_app_secret, mch_id, key, callback_domain, appid } = values;
                 const { dispatch } = this.props;
                 dispatch({
                     type: "setting/edit",
@@ -115,6 +118,7 @@ class Payment extends Component {
                             app_secret,
                             mini_app_id,
                             mini_app_secret,
+                            appid,
                             mch_id,
                             key,
                             apiclient_cert:
@@ -144,7 +148,7 @@ class Payment extends Component {
     };
 
     render() {
-        const { app_id, app_secret, status, mini_app_id, mini_app_secret, mch_id, key, apiclientCert, apiclientKey, callback_domain } = this.state;
+        const { app_id, app_secret, status, mini_app_id, appid, mini_app_secret, mch_id, key, apiclientCert, apiclientKey, callback_domain } = this.state;
         const { form, settingEditLoading, settingInfoLoading } = this.props;
         const name = "cert";
         // TODO 封装起来，这儿我认为是umi.js的一个bug，自动索引出来的域名是http的
@@ -220,6 +224,11 @@ class Payment extends Component {
                         <FormItem {...formItemLayout} label="公众号App Secret">
                             {getFieldDecorator("app_secret", {
                                 initialValue: app_secret
+                            })(<Input placeholder="请输入" />)}
+                        </FormItem>
+                        <FormItem {...formItemLayout} label="开放平台App Id" help={"用于App内微信支付、微信登陆"}>
+                            {getFieldDecorator("appid", {
+                                initialValue: appid
                             })(<Input placeholder="请输入" />)}
                         </FormItem>
                         <FormItem
