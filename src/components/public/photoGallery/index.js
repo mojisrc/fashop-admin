@@ -197,7 +197,7 @@ export default class PhotoGallery extends Component {
                                                 }
                                             >
                                                 {
-                                                    item.title ? <p>{item.title}</p> : null
+                                                    item.title ? <p className={styles.title}>{item.title}</p> : null
                                                 }
                                                 <div>
                                                     <Image
@@ -283,7 +283,7 @@ export default class PhotoGallery extends Component {
                                                 }
                                             >
                                                 {
-                                                    item.title ? <p>{item.title}</p> : null
+                                                    item.title ? <p className={styles.title}>{item.title}</p> : null
                                                 }
                                                 <div>
                                                     <Image
