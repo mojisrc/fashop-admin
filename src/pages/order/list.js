@@ -31,7 +31,7 @@ class List extends Component {
             orderId: 0,
             visible: false,
             expandedRowKeys: [],
-            tabKey: state_type ?? 'all'
+            tabKey: state_type ? state_type : 'all'
         }
     }
 
@@ -52,7 +52,8 @@ class List extends Component {
             keywords_type: "goods_name",
             keywords: null,
             create_time: [],
-            order_kind: null
+            order_type: null,
+            group_state_type: null,
         },
         rule: [{ key: "keywords_type", rule: ["rely", "keywords"] }],
         refresh: (e) => {
@@ -94,7 +95,7 @@ class List extends Component {
     };
 
     render() {
-        let { keywords_type, keywords, create_time, order_kind } = this.search.getParam();
+        let { keywords_type, keywords, create_time, order_type, group_state_type } = this.search.getParam();
         const { orderList, orderListLoading } = this.props;
         let { expandedRowKeys } = this.state;
         let { list } = orderList;
@@ -108,66 +109,105 @@ class List extends Component {
                 return item;
             });
         }
-
+        let tabList = state_type_list.map((item) => {
+            return {
+                key: item.value,
+                tab: item.name
+            };
+        });
+        tabList.unshift({
+            key: "all",
+            tab: "全部"
+        });
+        const group_search = Number(order_type) === 2 ? [{
+            label: "订单状态",
+            select: {
+                field: "group_state_type",
+                style: { width: 100 },
+                placeholder: "全部状态",
+                data: group_state_type_list,
+                initialValue: group_state_type
+            }
+        }] : []
         const columns = [
             {
                 title: "订单号",
                 dataIndex: "sn",
-                key: "sn"
+                key: "sn",
+                render:(text, record)=> Number(order_type)!==2 ? text : <div>
+                    <div>{text}</div>
+                    <div>
+                        <span className={styles.name}>团编号：</span>
+                        <a>{record.sn}</a>
+                    </div>
+                </div>
             }, {
                 title: "下单时间",
                 dataIndex: "create_time",
                 key: "create_time",
-                render: (text) => {
-                    return moment(text, "X").format("YYYY-MM-DD HH:mm:ss");
-                }
+                render: text => moment(text, "X").format("YYYY-MM-DD HH:mm:ss")
             }, {
                 title: "订单状态",
                 dataIndex: "state",
                 key: "state",
-                render: (text) => <span>{this.returnOrderState(text)}</span>
+                render: (text, record) => Number(order_type)!==2 ? text : <div>
+                    <div>{this.returnOrderState(text)}</div>
+                    <div>
+                        <span className={styles.name}>拼团状态：</span>
+                        <span className={styles.value}>拼团成功</span>
+                    </div>
+                </div>
             },
             {
                 title: "运费（元）",
                 dataIndex: "freight_fee",
                 key: "freight_fee",
-                render: (value) => {
-                    return `¥${value}`;
-                }
+                render: (value) => `¥${value}`
             }, {
                 title: "商品总额（元）",
                 dataIndex: "amount",
                 key: "amount",
-                render: (value) => {
-                    return `¥${value}`;
-                }
+                render: (value) => `¥${value}`
             }, {
                 title: "操作",
                 key: "operation",
                 render: (record) => <View className={styles.operation}>
-                    {record.state === 10 ? <a
-                        onClick={() => {
-                            this.editPrice.getWrappedInstance().show({
-                                orderId: record.id
-                            });
-                        }}
-                    >
-                        改价
-                    </a> : null}
+                    {
+                        record.state === 10 ? <a
+                            onClick={() => {
+                                this.editPrice.getWrappedInstance().show({
+                                    orderId: record.id
+                                });
+                            }}
+                        >
+                            改价
+                        </a> : null
+                    }
                     <a
                         onClick={() => {
-                            router.push(`/order/list/detail?id=${record.id}`);
+                            router.push(`/order/list/detail?id=${record.id}&group_id=${record.group_id}`);
                         }}
                     >
                         详情
                     </a>
-                    {record.state === 20 ? <a
-                        onClick={() => {
-                            router.push(`/order/list/send?id=${record.id}`);
-                        }}
-                    >
-                        发货
-                    </a> : ""}
+                    {
+                        Number(order_type)!==2 ? null : <a
+                            onClick={() => {
+                                
+                            }}
+                        >
+                            查看同团订单
+                        </a>
+                    }
+                    {
+                        record.state === 20 ? <a
+                            onClick={() => {
+                                router.push(`/order/list/send?id=${record.id}`);
+                            }}
+                        >
+                            发货
+                        </a> : ""
+                    }
 
                 </View>
             }
@@ -255,20 +295,9 @@ class List extends Component {
                 }
             }
         ];
-        let tabList = state_type_list.map((item) => {
-            return {
-                key: item.value,
-                tab: item.name
-            };
-        });
-        tabList.unshift({
-            key: "all",
-            tab: "全部"
-        });
         return (
             <PageHeaderWrapper hiddenBreadcrumb={true}>
                 <OrderEditPrice ref={(e) => this.editPrice = e} />
-
                 <Card bordered={false}
                       tabList={tabList}
                       activeTabKey={this.state.tabKey}
@@ -276,7 +305,6 @@ class List extends Component {
                           this.onTabChange(key);
                       }}
                 >
-
                     <PageList.Search
                         wrappedComponentRef={(form) => this.searchForm = form}
                         ref={this.searchInstance}
@@ -310,24 +338,15 @@ class List extends Component {
                             {
                                 label: "订单类型",
                                 select: {
-                                    field: "order_kind",
+                                    field: "order_type",
                                     style: { width: 100 },
                                     placeholder: "全部类型",
-                                    data: order_kind_list,
-                                    initialValue: order_kind
+                                    data: order_type_list,
+                                    initialValue: order_type
                                 }
-                            }
-                            // {
-                            //     label: "订单状态",
-                            //     select: {
-                            //         field: "state_type",
-                            //         style: { width: 100 },
-                            //         placeholder: "全部状态",
-                            //         data: state_type_list,
-                            //         initialValue: state_type
-                            //     }
-                            // }
-                        ]} />
+                            }, ...group_search
+                        ]} 
+                    />
                     <Table
                         loading={orderListLoading}
                         dataSource={orderList.list ? orderList.list : []}
@@ -369,13 +388,10 @@ class List extends Component {
                 return "已取消";
             case 10:
                 return "未支付";
-            // return <span style={{ color: "#ccc" }}>未支付</span>;
             case 20:
                 return "待发货";
-            // return <span style={{ color: "#EC9729" }}>待发货</span>;
             case 30:
                 return "已发货";
-            // return <span style={{ color: "#6AEB52" }}>已发货</span>;
             case 40:
                 return "已完成";
             default:
@@ -394,8 +410,7 @@ const state_type_list = [
     }, {
         name: "已发货",
         value: "state_send"
-    }
-    , {
+    }, {
         name: "已完成",
         value: "state_success"
     }, {
@@ -403,13 +418,29 @@ const state_type_list = [
         value: "state_cancel"
     }
 ];
-const order_kind_list = [
+const order_type_list = [
     {
         name: "普通订单",
-        value: "ordinary"
+        value: "1"
     }, {
-        name: "拼团",
-        value: "group"
+        name: "拼团订单",
+        value: "2"
+    }
+];
+
+const group_state_type_list = [
+    {
+        name: "待付款",
+        value: "group_state_new"
+    }, {
+        name: "待成团",
+        value: "group_state_pay"
+    }, {
+        name: "拼团成功",
+        value: "group_state_success"
+    }, {
+        name: "拼团失败",
+        value: "group_state_fail"
     }
 ];
 

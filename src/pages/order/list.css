@@ -28,7 +28,7 @@
 }
 .goodsGoodsImg{width: 90px}
 .goodsTitle{
-    width: 300px;
+    width: 150px;
 }
 
 .goodsPrice{
@@ -47,3 +47,9 @@
     width: 150px;
 }
 .reciverAddress{}
+.name{
+    color: rgba(0,0,0,.447);
+}
+.value{
+    color: #FF3333;
+}
