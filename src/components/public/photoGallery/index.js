@@ -191,14 +191,9 @@ export default class PhotoGallery extends Component {
                                             <View
                                                 className={styles.imgItem}
                                                 style={
-                                                    checkedImg.indexOf(
-                                                        item.id
-                                                    ) > -1
-                                                        ? {
-                                                            borderColor:
-                                                                "#188fff"
-                                                        }
-                                                        : {}
+                                                    checkedImg.indexOf(`${item.id}-${item.url}`) > -1 ? {
+                                                        borderColor: "#188fff"
+                                                    } : {}
                                                 }
                                             >
                                                 {
@@ -282,14 +277,9 @@ export default class PhotoGallery extends Component {
                                             <View
                                                 className={styles.imgItem}
                                                 style={
-                                                    checkedGoodsImg.indexOf(
-                                                        item.id
-                                                    ) > -1
-                                                        ? {
-                                                            borderColor:
-                                                                "#188fff"
-                                                        }
-                                                        : {}
+                                                    checkedGoodsImg.indexOf(`${item.id}-${item.img}`) > -1 ? {
+                                                        borderColor: "#188fff"
+                                                    } : {}
                                                 }
                                             >
                                                 {
