@@ -8,6 +8,13 @@ export default {
             data
         });
     },
+    async goodsImageList(data = {}) {
+        return fa.request({
+            url: `/admin/image/goodsImageList`,
+            method: "GET",
+            data
+        });
+    },
     async add(data = {}) {
         return fa.request({
             url: `/admin/image/add`,
