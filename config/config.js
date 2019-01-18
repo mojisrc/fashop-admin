@@ -26,7 +26,7 @@ const plugins = [
                 }
             },
             routes: {
-                exclude: [/\.test\.(j|t)sx?$/],
+                exclude: [/\.test\.(j|t)sx?$/]
             },
             ...(!process.env.TEST && os.platform() === "darwin"
                 ? {
@@ -41,6 +41,8 @@ const plugins = [
     ]
 ];
 
+const host = "http://127.0.0.1"
+
 export default {
     // add for transfer to umi
     plugins,
@@ -51,16 +53,16 @@ export default {
         APP_TYPE: process.env.APP_TYPE || "",
         "process.env.dev": {
             websocket: {
-                host: "wss://v2-api.fashop.cn"
+                host: host.replace("http", "ws")
             }
             // 开发环境下的api走proxy
         },
         "process.env.production": {
             websocket: {
-                host: "wss://v2-api.fashop.cn"
+                host: host.replace("http", "ws")
             },
             api: {
-                url: "https://v2-api.fashop.cn"
+                url: host
             }
         }
 
@@ -84,8 +86,7 @@ export default {
      */
     proxy: {
         "/admin": {
-            // target: "https://v2-api.fashop.cn",
-            target: "http://127.0.0.1:9510",
+            target: host,
             changeOrigin: true,
             pathRewrite: { "^/admin": "/admin" },
             secure: false

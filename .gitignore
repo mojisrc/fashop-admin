@@ -30,3 +30,5 @@ yarn-debug.log*
 /build/*
 /dist/*
 .temp/*
+config/config.prod.js
+config/config.js
