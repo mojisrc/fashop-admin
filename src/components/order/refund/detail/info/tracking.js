@@ -3,23 +3,9 @@ import styles from "../index.css";
 import { View } from "@/components/flexView";
 import InfoColumn from "@/components/public/info/infoColumn";
 import moment from "moment";
-import { Modal } from "antd";
+import { Modal, message } from "antd";
 import { receive } from "@/models/refund";
 import { connect } from "dva";
-//
-// type Props = {
-//
-//     id: number,
-//     tracking_no: string,
-//     tracking_phone: string,
-//     tracking_company: string,
-//     tracking_explain: string,
-//     tracking_time: number,
-//     tracking_images: Array<string>,
-//     receive: number,
-//     receive_time: number,
-// }
-// type State = {}
 
 @connect()
 export default class Tracking extends Component {
@@ -83,12 +69,17 @@ export default class Tracking extends Component {
                                         onOk: () => {
                                             dispatch({
                                                 type: "refund/receive",
-                                                payload: { id, handle_state: 10, handle_message },
-                                                callback: () => {
-                                                    dispatch({
-                                                        type: "refund/detail",
-                                                        payload: { id }
-                                                    });
+                                                payload: { id, handle_state: 10 },
+                                                callback: (response) => {
+                                                    console.log(response);
+                                                    if (response.code === 0) {
+                                                        dispatch({
+                                                            type: "refund/detail",
+                                                            payload: { id }
+                                                        });
+                                                    } else {
+                                                        message.error(response.msg);
+                                                    }
                                                 }
                                             });
                                         }
