@@ -150,11 +150,11 @@ class List extends Component {
                 title: "订单状态",
                 dataIndex: "state",
                 key: "state",
-                render: (text, record) => Number(order_type)!==2 ? text : <div>
+                render: (text, record) => Number(order_type)!==2 ? this.returnOrderState(text) : <div>
                     <div>{this.returnOrderState(text)}</div>
                     <div>
                         <span className={styles.name}>拼团状态：</span>
-                        <span className={styles.value}>拼团成功</span>
+                        <span className={styles.value}>{this.returnGroupOrderState(record.group_state_type)}</span>
                     </div>
                 </div>
             },
@@ -193,7 +193,13 @@ class List extends Component {
                     {
                         Number(order_type)!==2 ? null : <a
                             onClick={() => {
-                                
+                                // this.setState({ group_type: 1 }, () => {
+                                //     router.push(`/order/list?group_type=1`);
+                                //     // 重置搜索表单的值
+                                //     this.searchForm.resetValues();
+                                //     // 重置PageSearchList
+                                //     this.search.reset();
+                                // })
                             }}
                         >
                             查看同团订单
@@ -298,12 +304,13 @@ class List extends Component {
         return (
             <PageHeaderWrapper hiddenBreadcrumb={true}>
                 <OrderEditPrice ref={(e) => this.editPrice = e} />
-                <Card bordered={false}
-                      tabList={tabList}
-                      activeTabKey={this.state.tabKey}
-                      onTabChange={(key) => {
-                          this.onTabChange(key);
-                      }}
+                <Card 
+                    bordered={false}
+                    tabList={tabList}
+                    activeTabKey={this.state.tabKey}
+                    onTabChange={(key) => {
+                        this.onTabChange(key);
+                    }}
                 >
                     <PageList.Search
                         wrappedComponentRef={(form) => this.searchForm = form}
@@ -394,6 +401,20 @@ class List extends Component {
                 return "已发货";
             case 40:
                 return "已完成";
+            default:
+                return "";
+        }
+    }
+    returnGroupOrderState(type) {
+        switch (type) {
+            case "group_state_new":
+                return "待付款";
+            case "group_state_pay":
+                return "待开团";
+            case "group_state_success":
+                return "拼团成功";
+            case "group_state_fail":
+                return "拼团失败";
             default:
                 return "";
         }
