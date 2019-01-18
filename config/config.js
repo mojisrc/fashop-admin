@@ -41,8 +41,8 @@ const plugins = [
     ]
 ];
 
-// const host = "http://127.0.0.1:9510"
-const host = "https://v2-api.fashop.cn"
+const host = "http://127.0.0.1:9510"
+// const host = "https://v2-api.fashop.cn"
 
 export default {
     // add for transfer to umi

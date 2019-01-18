@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { View } from "@/components/flexView";
 import styles from "./index.css";
 import Result from '../../components/result'
+import { Button} from "antd";
+
 export default class InstallFinish extends Component {
     render() {
         return (
@@ -10,7 +12,13 @@ export default class InstallFinish extends Component {
                     <Result
                         type="success"
                         title="安装成功"
-                        description={<p>后台控制面板、小程序、App客户端的部署，请看官方文档</p>}
+                        description={<Button
+                            type='primary'
+                            onClick={() => {
+                                window.location.href = "/";
+                            }}
+                            size='large'
+                        >访问后台</Button>}
                         style={{ width: '100%' }}
                     />
                 </View>
