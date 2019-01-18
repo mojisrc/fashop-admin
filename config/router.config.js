@@ -1,5 +1,9 @@
 export default [
     {
+        path: "/install",
+        component: "/install"
+    },
+    {
         path: "/login",
         component: "../layouts/userLayout",
         routes: [

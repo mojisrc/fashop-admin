@@ -20,7 +20,6 @@ npm-debug.log*
 .env.test.local
 .env.production.local
 yarn-error.log
-
 yarn-debug.log*
 *.iws
 *.iml
