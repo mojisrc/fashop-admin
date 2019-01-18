@@ -15,6 +15,13 @@ export default {
             data
         });
     },
+    async groupInfo(data = {}) {
+        return fa.request({
+            url: `/admin/order/groupInfo`,
+            method: "GET",
+            data
+        });
+    },
     async setSend(data = {}) {
         return fa.request({
             url: `/admin/order/setSend`,

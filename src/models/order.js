@@ -7,6 +7,7 @@ export default {
             result: { list: [], total_number: 0 }
         },
         info: {},
+        groupInfo: {},
         setSend: {},
         setOrderExpires: {},
         changePrice: {}
@@ -24,6 +25,14 @@ export default {
             const response = yield call(order.info, payload);
             yield put({
                 type: "_info",
+                payload: response
+            });
+            if (callback) callback(response);
+        },
+        * groupInfo({ payload, callback }, { call, put }) {
+            const response = yield call(order.groupInfo, payload);
+            yield put({
+                type: "_groupInfo",
                 payload: response
             });
             if (callback) callback(response);
@@ -64,6 +73,12 @@ export default {
             return {
                 ...state,
                 info: action.payload
+            };
+        },
+        _groupInfo(state, action) {
+            return {
+                ...state,
+                groupInfo: action.payload
             };
         },
         _setSend(state, action) {
