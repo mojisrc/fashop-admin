@@ -30,4 +30,4 @@ yarn-debug.log*
 /dist/*
 .temp/*
 config/config.prod.js
-config/config.js
+.umirc.local.js

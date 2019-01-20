@@ -1,7 +1,7 @@
 import os from "os";
-import pageRoutes from "./router.config";
-import webpackPlugin from "./plugin.config";
-import defaultSettings from "../src/defaultSettings";
+import pageRoutes from "./config/router.config";
+import webpackPlugin from "./config/plugin.config";
+import defaultSettings from "./src/defaultSettings";
 
 const plugins = [
     [
@@ -42,7 +42,6 @@ const plugins = [
 ];
 
 const host = "http://127.0.0.1:9510"
-// const host = "https://v2-api.fashop.cn"
 
 export default {
     // add for transfer to umi
