@@ -1,7 +1,19 @@
 import os from "os";
+import fs from "fs";
 import pageRoutes from "./config/router.config";
 import webpackPlugin from "./config/plugin.config";
 import defaultSettings from "./src/defaultSettings";
+
+// 默认接口地址
+var host = "http://127.0.0.1:9510";
+
+// .umirc.js当做fashop的默认配置，.build.js是为了方便在本地编译生产环境下的配置
+if (fs.existsSync(".build.js")) {
+    const build = require("./.build.js");
+    if (build["host"] !== "undefined") {
+        host = build.host;
+    }
+}
 
 const plugins = [
     [
@@ -41,7 +53,6 @@ const plugins = [
     ]
 ];
 
-const host = "http://127.0.0.1:9510"
 
 export default {
     // add for transfer to umi

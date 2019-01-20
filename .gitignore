@@ -31,3 +31,4 @@ yarn-debug.log*
 .temp/*
 config/config.prod.js
 .umirc.local.js
+.build.js
