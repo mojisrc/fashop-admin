@@ -24,6 +24,13 @@ npm start
 npm install umi -g
 ```
 
+## 其他
+- .umirc.local.js 为本地开发配置
+- .build.js `npm run build`编译时不会走`.umirc.local.js`了，如果想在本地编译其他host，可在该文件内修改，不支持es6...
+> 如：module.exports = {  host: "https://v2-api.fashop.cn" };
+
+- .umirc.js 为fashop开发的默认配置，生产环境下也建议不要更改该文件
+
 ## commit-message规范
 
 > 参考: [my-commit-message](https://yanhaijing.com/git/2016/02/17/my-commit-message/)
@@ -104,13 +111,3 @@ Issue #1, #2
 Close #1
 ```
 
-## 配置接口域名
-修改根目录下 config/config.js 文件
-```
-proxy: {
-  '/admin/': {
-     target: 'https://demo.fashop.cn',
-     changeOrigin: true,
-  },
-},
-```
