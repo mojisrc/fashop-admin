@@ -1,4 +1,5 @@
-.moduleItem{
+.warp .moduleItem{
+    width: 100%;
     padding: 0;
     height: 70px;
     box-shadow: none;
