@@ -29,7 +29,11 @@ export default class Editor extends Component {
             images: []
         };
     }
-
+    componentWillReceiveProps(nextProps) {
+        this.setState({
+            value: nextProps.value || []
+        })
+    }
     render() {
         const { hoverShow, addModuleShow, addPosition, value } = this.state;
         const { openPhotoGallery } = this.props;

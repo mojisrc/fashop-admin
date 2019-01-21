@@ -44,6 +44,15 @@ class GoodsFreight extends Component {
         });
     };
 
+    componentWillReceiveProps(nextProps) {
+        const value = nextProps.value || { freight_id: 0, freight_fee: 0 };
+        this.setState({
+            freight_fee: value.freight_fee,
+            freight_id: value.freight_id,
+            freight_type: value.freight_id > 0 ? "freight_id" : "freight_fee"
+        })
+    }
+
     render() {
         const { freightList, freightListLoading, onChange } = this.props;
         const { freight_type, freight_id, freight_fee } = this.state;

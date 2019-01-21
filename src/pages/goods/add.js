@@ -21,6 +21,7 @@ import Arr from "@/utils/array";
 import Antd from "@/utils/antd";
 import router from "umi/router";
 import GoodsFreight from "@/components/goods/add/freight";
+import moment from "moment"
 
 const FormItem = Form.Item;
 
@@ -47,9 +48,6 @@ class GoodsEdit extends Component {
         },
         previewVisible: false,
         previewImage: "",
-        info: {
-            body: [], freight_fee: 0, freight_id: 0, sale_time: null, title: "", images: [], category_ids: []
-        },
         skus: [
             {
                 spec: [
@@ -66,7 +64,8 @@ class GoodsEdit extends Component {
                 code: null,
                 weight: null
             }
-        ]
+        ],
+        save: true,
     }
     componentDidMount() {
         const { dispatch } = this.props;
@@ -74,8 +73,23 @@ class GoodsEdit extends Component {
             type: "goodsCategory/list"
         });
         this.refreshSpecList();
+        let value = JSON.parse(localStorage.getItem("fashop-goods-add")) || {}
+        this.props.form.setFieldsValue(
+            value.sale_time ? {
+                ...value,
+                sale_time: moment(value.sale_time)
+            } : value
+        )
     }
 
+    componentWillUnmount(){
+        if(this.state.save){
+            let value = this.props.form.getFieldsValue()
+            localStorage.setItem("fashop-goods-add", JSON.stringify(value))
+        }else {
+            localStorage.removeItem("fashop-goods-add")
+        }
+    }
     handleSubmit = (e) => {
         e.preventDefault();
         this.props.form.validateFieldsAndScroll(async (err, values) => {
@@ -90,16 +104,19 @@ class GoodsEdit extends Component {
                     skus,
                     freight_fee: freight.freight_fee,
                     freight_id: freight.freight_id,
-                    sale_time
+                    sale_time: sale_time.unix()
                 };
-                params.sale_time = sale_time.unix();
                 dispatch({
                     type: "goods/add",
                     payload: params,
                     callback: (e) => {
                         if (e.code === 0) {
-                            message.success("添加成功");
-                            router.goBack();
+                            this.setState({
+                                save: false
+                            },()=>{
+                                message.success("添加成功");
+                                router.goBack();
+                            })
                         } else {
                             message.warn(e.msg);
                         }
@@ -111,14 +128,12 @@ class GoodsEdit extends Component {
 
 
     render() {
-        const { photoGalleryVisible, previewVisible, previewImage, info, skus } = this.state;
-        const { body, freight_fee, freight_id, sale_time, title, images, category_ids } = info;
+        const { photoGalleryVisible, previewVisible, previewImage } = this.state;
         const { goodsCategory, form, goodsCategoryLoading } = this.props;
         const { getFieldDecorator, getFieldValue, setFieldsValue } = form;
 
         let tree = Arr.toTree(goodsCategory.list);
         const categoryTree = Antd.treeData(tree);
-
         return (
             <PageHeaderWrapper hiddenBreadcrumb={true}>
                 <Card bordered={false}>
@@ -133,7 +148,6 @@ class GoodsEdit extends Component {
                                     {getFieldDecorator("images", {
                                         rules: [{ required: true, message: "请选择商品图" }],
                                         valuePropName: "url",
-                                        initialValue: images
                                     })(
                                         <UploadGroupImage
                                             onClick={(onChange, values) => {
@@ -158,7 +172,6 @@ class GoodsEdit extends Component {
                                 >
                                     {getFieldDecorator("title", {
                                         rules: [{ required: true, message: "请输入商品名称" }],
-                                        initialValue: title
                                     })(
                                         <Input
                                             placeholder="请输入商品名称"
@@ -204,7 +217,6 @@ class GoodsEdit extends Component {
                                             validator: Sku.validator,
                                             required: true
                                         }],
-                                        initialValue: skus.length > 0 ? skus : null
                                     })(<Sku form={form} />)}
                                 </FormItem>
                             </div>
@@ -215,10 +227,6 @@ class GoodsEdit extends Component {
                                         rules: [{
                                             required: true
                                         }],
-                                        initialValue: {
-                                            freight_id,
-                                            freight_fee
-                                        }
                                     })(<GoodsFreight />)}
                                 </FormItem>
                                 <FormItem {...formItemLayout} label={"开售时间"}>
@@ -240,7 +248,6 @@ class GoodsEdit extends Component {
                             <FormItem {...formItemLayout} label='商品详情'>
                                 {getFieldDecorator("body", {
                                     rules: [{ required: true, message: "请添加商品详情" }],
-                                    initialValue: body
                                 })(<Editor
                                     openPhotoGallery={this.openPhotoGallery}
                                     title={getFieldValue("title")}

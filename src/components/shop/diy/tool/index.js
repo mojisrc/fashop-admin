@@ -21,7 +21,7 @@ export default class PageTool extends Component {
             boxShadow:'none'
         };
         return (
-            <View>
+            <View className={styles.warp}>
                 <Card title={"基础模块"} type={'inner'} bordered={false}>
                     {
                         defaultData.length > 0 ? defaultData.map((item, index) => {
