@@ -104,7 +104,9 @@ class GoodsEdit extends Component {
             if (!err) {
                 const { dispatch } = this.props;
                 const { title, images, category_ids, body, skus, sale_time, freight } = values;
+                const id = this.state.info.id;
                 const params = {
+                    id,
                     title,
                     images,
                     category_ids,
@@ -112,13 +114,11 @@ class GoodsEdit extends Component {
                     skus,
                     freight_fee: freight.freight_fee,
                     freight_id: freight.freight_id,
-                    sale_time
+                    sale_time: sale_time.unix()
                 };
-                params.sale_time = sale_time.unix();
-                const id = this.state.info.id;
                 dispatch({
                     type: "goods/edit",
-                    payload: { ...params, id },
+                    payload: params,
                     callback: (e) => {
                         if (e.code === 0) {
                             message.success("修改成功");

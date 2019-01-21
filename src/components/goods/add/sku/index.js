@@ -95,7 +95,8 @@ export default class Sku extends Component {
             specValueIds: [],
             tagChecked: false,
             specs,
-            lastSpecValuesPopoverClick: { index: 0, visible: false }
+            lastSpecValuesPopoverClick: { index: 0, visible: false },
+            refresh: true
         };
     }
 
@@ -113,6 +114,50 @@ export default class Sku extends Component {
         dispatch({
             type: "goodsSpec/list"
         });
+    }
+
+    componentWillReceiveProps(nextProps) {
+        console.log("componentWillReceiveProps", nextProps);
+        if (this.state.refresh){
+            const skus = nextProps.value || this.defaultValue;
+            let specs = [];
+            let multiSkus = false;
+            if (skus.length > 1) {
+                // 通过skus重组specs，必须存在spec 否则第一条无法被添加
+                if (skus.length > 0 && skus[0].spec) {
+                    multiSkus = true;
+                    skus.map((e) => {
+                        e.spec.map((skuSpec) => {
+                            const findInSpecsIndex = specs.findIndex((spec) => spec.id === skuSpec.id);
+                            // 预置spec
+                            if (findInSpecsIndex === -1) {
+                                // 如果state里没有 添加外部传入的specs
+                                specs.push({
+                                    id: skuSpec.id,
+                                    name: skuSpec.name,
+                                    values: []
+                                });
+                            }
+                            // 设置value
+                            const specIndex = specs.findIndex((spec) => spec.id === skuSpec.id);
+                            const specValueIndex = specs[specIndex].values.findIndex((value) => value.id === skuSpec.value_id);
+                            if (specValueIndex === -1) {
+                                specs[specIndex].values.push({
+                                    id: skuSpec.value_id,
+                                    name: skuSpec.value_name
+                                });
+                            }
+                        });
+                    });
+                }
+            }
+            this.setState({
+                value: skus,
+                multiSkus,
+                specs,
+                refresh: false
+            })
+        }
     }
 
     render() {
