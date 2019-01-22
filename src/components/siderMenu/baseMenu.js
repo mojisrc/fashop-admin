@@ -4,7 +4,7 @@ import { Menu, Icon } from 'antd';
 import Link from 'umi/link';
 import { urlToList } from '../_utils/pathTools';
 import { getMenuMatches } from './siderMenuUtils';
-import { isUrl } from '@/utils/utils';
+import { isUrl } from '@/utils';
 import styles from './index.less';
 
 const { SubMenu } = Menu;
