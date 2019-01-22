@@ -2,7 +2,7 @@ import member from "@/services/member";
 import { setAuthority } from "@/utils/authority";
 import { reloadAuthorized } from "@/utils/authorized";
 import { stringify } from "qs";
-import { getPageQuery } from "@/utils/utils";
+import { getPageQuery } from "@/utils";
 
 export default {
     namespace: "member",

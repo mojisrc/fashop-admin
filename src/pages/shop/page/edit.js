@@ -8,7 +8,7 @@ import BaseInfo from "@/components/shop/diy/baseinfo/index";
 import GoodsApi from "@/services/goods";
 import GroupApi from "@/services/group";
 import { query } from "@/utils/fa";
-import { getPageQuery } from "@/utils/utils";
+import { getPageQuery } from "@/utils";
 import styles from "./edit.css";
 import Scrollbar from "react-scrollbars-custom";
 

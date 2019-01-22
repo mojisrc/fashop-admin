@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import PageHeaderWrapper from "@/components/pageHeaderWrapper";
-import { Card, Form, Button, Input } from "antd";
+import { Card, Form, Button } from "antd";
 import {
     Basic,
     Rules,
     // Wechat,
 } from "@/components/marketing/coupon"
-import { getPageQuery } from "@/utils/utils";
+import { getPageQuery } from "@/utils";
 import { View } from "@/components/flexView";
 import styles from "@/components/marketing/coupon/rules/index.css";
 
