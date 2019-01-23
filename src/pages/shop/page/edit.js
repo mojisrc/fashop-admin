@@ -13,20 +13,24 @@ import styles from "./edit.css";
 import Scrollbar from "react-scrollbars-custom";
 
 @connect(({ goods, page, loading }) => ({
-    goodList: goods.list.result,
+    goodsList: goods.list.result,
     goodsListLoading: loading.effects["goods/list"],
     pageEditLoading: loading.effects["page/edit"],
     pageInfo: page.info.result,
-    pageInfoLoading: loading.effects["page/info"]
+    pageInfoLoading: loading.effects["page/info"],
+    groupGoodsList: group.pageGoods.result,
+    groupGoodsListLoading: loading.effects["group/pageGoods"]
 }))
 
 export default class Edit extends Component {
     static defaultProps = {
-        goodList: { total_number: 0, list: [] },
+        goodsList: { total_number: 0, list: [] },
         goodsListLoading: true,
         pageInfo: { info: {} },
         pageInfoLoading: true,
-        pageEditLoading: false
+        pageEditLoading: false,
+        groupGoodsList: { total_number: 0, list: [] },
+        groupGoodsListLoading: true,
     };
     state = {
         id: 0,
@@ -59,7 +63,7 @@ export default class Edit extends Component {
                     });
                 }
             }
-        });
+        })
         dispatch({
             type: "goods/list",
             payload: {
@@ -67,17 +71,16 @@ export default class Edit extends Component {
                 rows: 6,
                 order_type: 8
             }
-        });
+        })
+        dispatch({
+            type: "group/pageGoods",
+            payload: {
+                page: 1,
+                rows: 3
+            }
+        })
     }
 
-// : {
-//     options: {
-//         goods_sort: number,
-//         goods_display_num: number,
-//         goods_display_field: Array<string>,
-//         layout_style: number,
-//     }
-// }
     goodsListRefreshGoods = async (values) => {
         let order_type = 8;
         switch (values.options.goods_sort) {
@@ -131,20 +134,23 @@ export default class Edit extends Component {
         }
     };
     onToolItemClick = (item) => {
-        const { goodsList } = this.props;
+        const { goodsList, groupGoodsList } = this.props;
         let { body } = this.state;
-        // delete _item.icon
         if (item.type === "goods_list") {
             let _goods = [];
-            Array.isArray(goodsList) && goodsList.list.map((sub, subindex) => (
+            goodsList.list.map((sub, subindex) => (
                 subindex < 6 && _goods.push({
-                    id: sub.id,
-                    img: sub.img,
-                    title: sub.title,
-                    price: sub.price,
+                    ...sub,
                     market_price: sub.market_price ? sub.market_price : "",
                     desc: sub.desc ? sub.desc : ""
                 })
+            ));
+            item.data = _goods;
+        }
+        if (item.type === "goods_group") {
+            let _goods = [];
+            groupGoodsList.list.map((sub) => (
+                subindex < 3 && _goods.push(sub)
             ));
             item.data = _goods;
         }
@@ -156,7 +162,6 @@ export default class Edit extends Component {
             },
             body: [...body, { ...item }]
         });
-        console.log(body);
     };
 
     onViewItemClick = () => {
@@ -170,7 +175,7 @@ export default class Edit extends Component {
             baseInfoVisible: true
         });
     };
-// : { options: optionsType, body: PageBodyType }
+
     setPage = (info) => {
         this.setState({
             options: info.options,
@@ -180,6 +185,7 @@ export default class Edit extends Component {
             this.phoneHeaderClick();
         }
     };
+    
     getControlValues = (value) => {
         let { options, body } = this.state;
         let { index } = options;

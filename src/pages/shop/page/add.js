@@ -11,15 +11,19 @@ import { query } from "@/utils/fa";
 import styles from "./edit.css";
 import Scrollbar from "react-scrollbars-custom";
 import router from 'umi/router';
-@connect(({ goods, page, loading }) => ({
-    goodList: goods.list.result,
+@connect(({ goods, page, group, loading }) => ({
+    goodsList: goods.list.result,
     goodsListLoading: loading.effects["goods/list"],
-    pageAddLoading: loading.effects["page/add"]
+    pageAddLoading: loading.effects["page/add"],
+    groupGoodsList: group.pageGoods.result,
+    groupGoodsListLoading: loading.effects["group/pageGoods"]
 }))
 export default class Add extends Component {
     static defaultProps = {
         goodList: { total_number: 0, list: [] },
-        goodsListLoading: true
+        goodsListLoading: true,
+        groupGoodsList: { total_number: 0, list: [] },
+        groupGoodsListLoading: true,
     };
     state = {
         name: "",
@@ -42,17 +46,15 @@ export default class Add extends Component {
                 rows: 6,
                 order_type: 8
             }
-        });
+        })
+        dispatch({
+            type: "group/pageGoods",
+            payload: {
+                page: 1,
+                rows: 3
+            }
+        })
     }
-
-// : {
-//     options: {
-//         goods_sort: number,
-//         goods_display_num: number,
-//         goods_display_field: Array<string>,
-//         layout_style: number,
-//     }
-// }
 
     goodsListRefreshGoods = async (values) => {
         let order_type = 8;
@@ -99,6 +101,7 @@ export default class Add extends Component {
             rows: values.options.goods_display_num,
             // order_type
         });
+        
         if (goodsListResult.code === 0) {
             return goodsListResult.result.list;
         } else {
@@ -107,20 +110,23 @@ export default class Add extends Component {
         }
     };
     onToolItemClick = (item) => {
-        const { goodsList } = this.props;
+        const { goodsList, groupGoodsList } = this.props;
         let { body } = this.state;
-        // delete _item.icon
         if (item.type === "goods_list") {
             let _goods = [];
-            Array.isArray(goodsList) && goodsList.list.map((sub, subindex) => (
+            goodsList.list.map((sub, subindex) => (
                 subindex < 6 && _goods.push({
-                    id: sub.id,
-                    img: sub.img,
-                    title: sub.title,
-                    price: sub.price,
+                    ...sub,
                     market_price: sub.market_price ? sub.market_price : "",
                     desc: sub.desc ? sub.desc : ""
                 })
+            ));
+            item.data = _goods;
+        }
+        if (item.type === "goods_group") {
+            let _goods = [];
+            groupGoodsList.list.map((sub) => (
+                subindex < 3 && _goods.push(sub)
             ));
             item.data = _goods;
         }
@@ -145,7 +151,7 @@ export default class Add extends Component {
             baseInfoVisible: true
         });
     };
-// : { options: optionsType, body: PageBodyType }
+
     setPage = (info) => {
         this.setState({
             options: info.options,
@@ -155,6 +161,7 @@ export default class Add extends Component {
             this.phoneHeaderClick();
         }
     };
+
     getControlValues = (value) => {
         let { options, body } = this.state;
         let { index } = options;
