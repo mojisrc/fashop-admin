@@ -1,85 +1,107 @@
 'use strict'
 
-import fa from "@/utils/fa";
+import fa from "./fa";
+// todo 增加state名字
+export default class Model {
+  namespace = ''
+  api = []
+  state = {}
+  effects = {}
+  reducers = {}
+  subscriptions = {}
+  props = {
+    state: {},
+    effects: {},
+    reducers: {}
+  }
 
-export default class Models {
-    /**
-     * 自动生成 models services
-     * @param model
-     * @param model.namespace
-     * @param model.services
-     * @returns {*|Promise<*>|PromiseLike<T | never>|Promise<T | never>}
-     */
-    static create({ namespace, services }) {
-        return {
-            namespace,
-            state: services,
-            effects: this.getEffects(services),
-            reducers: this.getReducers(services)
-        }
+  constructor({ namespace = '', api = [], state = {}, effects = {}, reducers = {},subscriptions = {} }) {
+    this.namespace = namespace
+    this.api = api
+    this.subscriptions = subscriptions
+    this.props = {
+      state,
+      effects,
+      reducers,
+      subscriptions
     }
-    static getEffects(services){
-        let result = {}
-        for (let i in services) {
-            const type = `_${i}`
-            let item = {
-                * [i]({ payload, callback }, { call, put }) {
-                    const request = (data = {}) => {
-                        return fa.request({
-                            url: `/admin/order/list`,
-                            method: "GET",
-                            data
-                        });
-                    }
-                    const response = yield call(request, payload);
-                    yield put({
-                        type,
-                        payload: response
-                    });
-                    if (callback) callback(response);
-                }
-            }
-            result = {
-                ...result,
-                ...item
-            }
-        }
-        console.log("getEffects-2", result);
-        return result
-        // return {
-        //     * list({ payload, callback }, { call, put }) {
-        //         const response = yield call(order.list, payload);
-        //         yield put({
-        //             type: "_list",
-        //             payload: response
-        //         });
-        //         if (callback) callback(response);
-        //     },
-        // }
+  }
+  static getInstance(options){
+    return new Model(options)
+  }
+  create() {
+    this.initState()
+    this.initEffects()
+    this.initReducers()
+    return {
+      namespace: this.namespace,
+      state: this.state,
+      effects: this.effects,
+      reducers: this.reducers,
+      subscriptions:this.subscriptions
     }
-    static getReducers(services){
-        let result = {}
-        for (let i in services) {
-            let name = `_${i}`
-            let item = {
-                [name](state, action) {
-                    return { ...state, [result[i]]: action.payload }
-                }
-            }
-            result = {
-                ...result,
-                ...item
-            }
+  }
+
+  initState() {
+    this.api.map((item) => {
+      const requestInfo = this.parseRequest(item.request)
+      let obj = {}
+      obj[requestInfo.action] = item.response
+      Object.assign(this.state, obj)
+    })
+    Object.assign(this.state, this.props.state)
+  }
+
+  initEffects() {
+    this.api.map((item) => {
+      const requestInfo = this.parseRequest(item.request)
+      let obj = {}
+      const action = requestInfo.action
+      obj[requestInfo.action] = function* ({ payload, callback }, { call, put }) {
+        const req = async (data = {}) => {
+          return fa.request({
+            url: `/${requestInfo.module}/${requestInfo.controller}/${requestInfo.action}`,
+            method: requestInfo.method,
+            data
+          });
         }
-        console.log("getReducers-2", result);
-        return result
-        // return {
-        //     _list(state, action) {
-        //         return {
-        //             ...state,
-        //             list: action.payload
-        //         };
-        //     }
-        // }
+        const response = yield call(req, payload);
+        yield put({
+          type: `_${action}`,
+          payload: response
+        });
+        if (callback) callback(response);
+      }
+      Object.assign(this.effects, obj)
+    })
+    Object.assign(this.effects, this.props.effects)
+  }
+
+  initReducers() {
+    let reducers = {}
+    this.api.map((item) => {
+      const requestInfo = this.parseRequest(item.request)
+      const action = requestInfo.action
+      reducers[`_${action}`] = function (state, actions) {
+        let obj = state
+        obj[action] = actions.payload
+        return obj
+      }
+    })
+    this.reducers = reducers
+    Object.assign(this.reducers, this.props.reducers)
+  }
+
+  // str 如 GET /admin/goods/list
+  parseRequest(str) {
+    const arr = str.split(" ");
+    const routerInfo = arr[1].split("/");
+    return {
+      method: arr[0],
+      module: routerInfo[1],
+      controller: routerInfo[2],
+      action: routerInfo[3],
     }
+  }
+
 }
