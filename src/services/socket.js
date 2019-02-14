@@ -1,6 +1,7 @@
 let ws;
 
 export function listen(callback) {
+    return false;
     let connectStatus = false;
     let host = process.env.NODE_ENV === "production" ? process.env.production.websocket.host : process.env.dev.websocket.host;
     let init = function() {
