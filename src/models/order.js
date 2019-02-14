@@ -1,28 +1,7 @@
 import order from "@/services/order";
 
-import Models from '../utils/models'
 
-let model =  {
-    namespace: "order",
-    services: {
-        list: {
-            result: { list: [], total_number: 0 }
-        },
-        info: {},
-        groupInfo: {},
-        setSend: {},
-        setOrderExpires: {},
-        changePrice: {}
-    }
-}
-
-const test = Models.create(model)
-
-console.log('test-create-model', test);
-
-export default test;
-
-const data =  {
+export default {
     namespace: "order",
     state: {
         list: {
@@ -123,7 +102,3 @@ const data =  {
         }
     }
 };
-
-console.log('data', data);
-
-// export default data

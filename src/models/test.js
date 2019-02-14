@@ -1,8 +1,8 @@
 import { stringify } from "qs";
 
-import Model from "@/utils/model";
+import Model from "@/utils/models";
 const options = {
-  namespace: "member",
+  namespace: "test",
   api: [
     {
       request: "GET /server/member/self",
@@ -23,6 +23,5 @@ const options = {
     }
   }
 };
-
 export default Model.getInstance(options).create();
 
