@@ -6,12 +6,17 @@ import defaultSettings from "./src/defaultSettings";
 
 // 默认接口地址
 var host = "http://127.0.0.1:9510";
+// 默认根目录
+var base = "";
 
 // .umirc.js当做fashop的默认配置，.build.js是为了方便在本地编译生产环境下的配置
 if (fs.existsSync(".build.js")) {
     const build = require("./.build.js");
     if (build["host"] !== "undefined") {
         host = build.host;
+    }
+    if (build["base"] !== "undefined") {
+        base = build.base;
     }
 }
 
@@ -41,20 +46,20 @@ const plugins = [
                 exclude: [/\.test\.(j|t)sx?$/]
             },
             ...(!process.env.TEST && os.platform() === "darwin"
-                ? {
-                    dll: {
-                        include: ["dva", "dva/router", "dva/saga", "dva/fetch"],
-                        exclude: ["@babel/runtime"]
-                    },
-                    hardSource: false
-                }
-                : {})
+              ? {
+                  dll: {
+                      include: ["dva", "dva/router", "dva/saga", "dva/fetch"],
+                      exclude: ["@babel/runtime"]
+                  },
+                  hardSource: false
+              }
+              : {})
         }
     ]
 ];
 
-
 export default {
+    base: base,
     // add for transfer to umi
     plugins,
     targets: {
@@ -75,8 +80,8 @@ export default {
             api: {
                 url: host
             }
-        }
-
+        },
+        "process.env.base": base
     },
     // 路由配置
     routes: pageRoutes,
@@ -118,9 +123,9 @@ export default {
         modules: true,
         getLocalIdent: (context, localIdentName, localName) => {
             if (
-                context.resourcePath.includes("node_modules") ||
-                context.resourcePath.includes("ant.design.pro.less") ||
-                context.resourcePath.includes("global.less")
+              context.resourcePath.includes("node_modules") ||
+              context.resourcePath.includes("ant.design.pro.less") ||
+              context.resourcePath.includes("global.less")
             ) {
                 return localName;
             }
@@ -128,9 +133,9 @@ export default {
             if (match && match[1]) {
                 const antdProPath = match[1].replace(".less", "");
                 const arr = antdProPath
-                    .split("/")
-                    .map(a => a.replace(/([A-Z])/g, "-$1"))
-                    .map(a => a.toLowerCase());
+                  .split("/")
+                  .map(a => a.replace(/([A-Z])/g, "-$1"))
+                  .map(a => a.toLowerCase());
                 return `antd-pro${arr.join("-")}-${localName}`.replace(/--/g, "-");
             }
             return localName;

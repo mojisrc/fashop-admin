@@ -115,7 +115,7 @@ export default {
                     window.location.href = redirect;
                 } else {
                     // 为了清空所有redux
-                    window.location.href = "/";
+                    window.location.href = process.env.base;
                 }
             }
         },
@@ -123,7 +123,7 @@ export default {
             reloadAuthorized();
             localStorage.setItem("token", null);
             // todo 如果定义了路由前缀判断
-            window.location.href = "/login?" + stringify({
+            window.location.href = process.env.base + "/login?" + stringify({
                 redirect: window.location.href
             });
         }
