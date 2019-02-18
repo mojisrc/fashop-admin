@@ -3,7 +3,6 @@ import { setAuthority } from "@/utils/authority";
 import { reloadAuthorized } from "@/utils/authorized";
 import { stringify } from "qs";
 import { getPageQuery } from "@/utils";
-
 export default {
     namespace: "member",
     state: {
@@ -105,12 +104,13 @@ export default {
                 let { redirect } = params;
                 if (redirect && redirect.indexOf("login") === -1) {
                     const redirectUrlParams = new URL(redirect);
-                    if (redirectUrlParams.origin === urlParams.origin) {
-                        redirect = redirect.substr(urlParams.origin.length);
-                        if (redirect.match(/^\/.*#/)) {
-                            redirect = redirect.substr(redirect.indexOf("#") + 1);
-                        }
-                    }
+                    // 临时注释 解决hash bug
+                    // if (redirectUrlParams.origin === urlParams.origin) {
+                    //     redirect = redirect.substr(urlParams.origin.length);
+                    //     if (redirect.match(/^\/.*#/)) {
+                    //         redirect = redirect.substr(redirect.indexOf("#") + 1);
+                    //     }
+                    // }
                     // 为了清空所有redux
                     window.location.href = redirect;
                 } else {
@@ -123,7 +123,7 @@ export default {
             reloadAuthorized();
             localStorage.setItem("token", null);
             // todo 如果定义了路由前缀判断
-            window.location.href = process.env.base + "/login?" + stringify({
+            window.location.href = process.env.base + "login?" + stringify({
                 redirect: window.location.href
             });
         }
@@ -187,11 +187,11 @@ export default {
     subscriptions: {
         setup({ dispatch, history }) {
             const token = JSON.parse(localStorage.getItem("token"));
-            if (history.location.pathname.indexOf("login") > -1 && token !== null) {
-                dispatch({
-                    type: "member/logout"
-                });
-            }
+            // if (history.location.pathname.indexOf("login") > -1 && token !== null) {
+            //     dispatch({
+            //         type: "member/logout"
+            //     });
+            // }
         }
     }
 };
