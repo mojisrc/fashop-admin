@@ -8,6 +8,8 @@ import defaultSettings from "./src/defaultSettings";
 var host = "http://127.0.0.1:9510";
 // 默认根目录
 var base = "";
+// 为了build后部署时不折腾nginx的try_files
+var history = "hash";
 
 // .umirc.js当做fashop的默认配置，.build.js是为了方便在本地编译生产环境下的配置
 if (fs.existsSync(".build.js")) {
@@ -17,6 +19,9 @@ if (fs.existsSync(".build.js")) {
     }
     if (build["base"] !== "undefined") {
         base = build.base;
+    }
+    if (build["history"] !== "undefined") {
+        history = build.history;
     }
 }
 
@@ -59,7 +64,9 @@ const plugins = [
 ];
 
 export default {
+    history: "hash",
     base: base,
+    publicPath: base,
     // add for transfer to umi
     plugins,
     targets: {
@@ -81,7 +88,7 @@ export default {
                 url: host
             }
         },
-        "process.env.base": base
+        "process.env.base": history === "hash" ? base + "#/" : base
     },
     // 路由配置
     routes: pageRoutes,
