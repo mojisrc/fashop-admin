@@ -12,7 +12,7 @@ import { getPageQuery } from "@/utils";
 import styles from "./edit.css";
 import Scrollbar from "react-scrollbars-custom";
 
-@connect(({ goods, page, loading }) => ({
+@connect(({ goods, page, group, loading }) => ({
     goodsList: goods.list.result,
     goodsListLoading: loading.effects["goods/list"],
     pageEditLoading: loading.effects["page/edit"],
