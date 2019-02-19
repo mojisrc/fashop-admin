@@ -42,6 +42,9 @@ export default {
                 type: "_setGoodsCategoryStyle",
                 payload: response
             });
+            yield put({
+                type: "info"
+            })
             if (callback) callback(response);
         },
         * setColorScheme({ payload, callback }, { call, put }) {
