@@ -1,7 +1,7 @@
 import arrayToTree from "smart-arraytotree";
 
 export default class Arr {
-    static inArray(arr, value) {
+    static inArray(value, arr) {
         for (var i = 0; i < arr.length; i++) {
             if (value === arr[i]) {
                 return true;
@@ -25,4 +25,31 @@ export default class Arr {
         return arrayToTree(list, { id: "id", pid: "pid", firstPid: 0, children: "children" }) ?? [];
     }
 
+    /**
+     * 去重
+     * @param {Array} arr
+     * @returns {Array}
+     */
+    static unique(arr) {
+        var hash = [];
+        for (var i = 0; i < arr.length; i++) {
+            if (hash.indexOf(arr[i]) === -1) {
+                hash.push(arr[i]);
+            }
+        }
+        return hash;
+    }
+
+    /**
+     *
+     * @param {Array} arr1
+     * @param  {Array} arr2
+     * @returns {Array}
+     */
+    static merge(arr1, arr2) {
+        for (var i = 0; i < arr2.length; i++) {
+            arr1.push(arr2[i]);
+        }
+        return arr1;
+    }
 }

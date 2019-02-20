@@ -141,19 +141,19 @@ class FreightList extends Component {
                     if (area_ids && area_ids.length > 0) {
                         area_ids.map((id) => {
                             let current = areaListByKey[id];
-                            if(!Arr.inArray(areasIds,current.id)){
+                            if(!Arr.inArray(current.id,areasIds)){
                                 areasIds.push(current.id)
                                 areasGroup.push(current)
                             }
                             if (current["pid"] !== 0) {
                                 let city = areaListByKey[current["pid"]]
-                                if(!Arr.inArray(areasIds,city.id)){
+                                if(!Arr.inArray(city.id,areasIds)){
                                     areasIds.push(city.id)
                                     areasGroup.push(city)
                                 }
                                 if(city['pid']!==0){
                                     let province = areaListByKey[city["pid"]]
-                                    if(!Arr.inArray(areasIds,province.id)){
+                                    if(!Arr.inArray(province.id,areasIds)){
                                         areasIds.push(province.id)
                                         areasGroup.push(province)
                                     }
