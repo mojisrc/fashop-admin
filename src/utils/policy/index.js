@@ -47,7 +47,7 @@ export class Policy {
                 let statement = statement_list[j];
                 if (statement.Effect === "Allow") {
                     this.allowActions = Arr.unique(Arr.merge(this.allowActions, statement.Action));
-                } else if (statement.Effect() === "Deny") {
+                } else if (statement.Effect === "Deny") {
                     this.denyActions = Arr.unique(Arr.merge(this.denyActions, statement.Action));
                 }
             }
