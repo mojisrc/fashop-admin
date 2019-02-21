@@ -1,19 +1,9 @@
-//@flow
 import React,{ Component } from 'react'
-import { View } from 'react-web-dom'
+import { View } from '@/components/flexView'
 import { Button, Input } from 'antd'
 import styles from './index.css'
 
-type Props = {
-    okFunc:Function,
-    closePopover:Function,
-    initValue:string
-}
-type State = {
-    value:string
-}
-
-export default class PublicPopoverContent extends Component<Props,State> {
+export default class PublicPopoverContent extends Component {
     static defaultValue = {
         initValue:''
     }

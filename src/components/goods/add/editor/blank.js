@@ -1,36 +1,30 @@
-//@flow
 import React, { Component } from "react";
-import { View } from "react-web-dom";
+import { View } from "@/components/flexView";
 import { Row, Col, Button, Modal, Input, message } from "antd";
-import styles from './blank.css'
-import { abledata } from './testData'
-import SelectGoods from '../../../public/selectGoods'
+import styles from "./blank.css";
+import { abledata } from "./testData";
+import SelectGoods from "@/components/public/selectGoods";
 
-export default class Blank extends Component<{
-    setGoodsDetailData: Function,
-    closeAddModule: Function,
-    data: Array<{}>,
-    openPhotoGallery: Function,
-    addPosition: number
-},
-    {
-        goodsAddVisible: boolean,
-        videoVisible: boolean,
-    }> {
+// setGoodsDetailData: Function,
+//     closeAddModule: Function,
+//     data: Array<{}>,
+//     openPhotoGallery: Function,
+//     addPosition: number
+class Blank extends Component {
     state = {
         goodsAddVisible: false,
-        videoVisible: false,
-    }
+        videoVisible: false
+    };
 
     render() {
-        const { videoVisible, goodsAddVisible } = this.state
+        const { videoVisible, goodsAddVisible } = this.state;
         const {
             setGoodsDetailData,
             data,
             closeAddModule,
             openPhotoGallery,
-            addPosition,
-        } = this.props
+            addPosition
+        } = this.props;
         return (
             <View className={styles.blankDetail}>
                 <Row>
@@ -46,50 +40,50 @@ export default class Blank extends Component<{
                                     className={styles.moduleItem}
                                     onClick={() => {
                                         switch (item.type) {
-                                            case 'goods':
+                                            case "goods":
                                                 this.setState({
                                                     goodsAddVisible: true
-                                                })
+                                                });
                                                 break;
-                                            case 'video':
+                                            case "video":
                                                 this.setState({
                                                     videoVisible: true
-                                                })
+                                                });
                                                 break;
-                                            case 'image':
+                                            case "image":
                                                 openPhotoGallery({
                                                     photoGalleryOnOk: (e) => {
                                                         const newArray = e.map((url) => ({
                                                             type: item.type,
-                                                            value: item.getValue(url),
-                                                        }))
-                                                        const oldArray = [...data]
+                                                            value: item.getValue(url)
+                                                        }));
+                                                        const oldArray = [...data];
                                                         newArray.map((item, i) => {
-                                                            oldArray.splice(addPosition + i, 0, item)
-                                                        })
-                                                        setGoodsDetailData(oldArray)
+                                                            oldArray.splice(addPosition + i, 0, item);
+                                                        });
+                                                        setGoodsDetailData(oldArray);
                                                     }
-                                                })
-                                                closeAddModule()
+                                                });
+                                                closeAddModule();
                                                 break;
-                                            case 'text':
+                                            case "text":
                                                 const newItem = {
                                                     type: item.type,
-                                                    value: item.getValue(),
-                                                }
-                                                const newArray = [...data]
-                                                newArray.splice(addPosition, 0, newItem)
-                                                setGoodsDetailData(newArray)
-                                                closeAddModule()
+                                                    value: item.getValue()
+                                                };
+                                                const newArray = [...data];
+                                                newArray.splice(addPosition, 0, newItem);
+                                                setGoodsDetailData(newArray);
+                                                closeAddModule();
                                                 break;
-                                            case 'separator':
+                                            case "separator":
                                                 const newDataItem = {
-                                                    type: item.type,
-                                                }
-                                                const newDataArray = [...data]
-                                                newDataArray.splice(addPosition, 0, newDataItem)
-                                                setGoodsDetailData(newDataArray)
-                                                closeAddModule()
+                                                    type: item.type
+                                                };
+                                                const newDataArray = [...data];
+                                                newDataArray.splice(addPosition, 0, newDataItem);
+                                                setGoodsDetailData(newDataArray);
+                                                closeAddModule();
                                                 break;
                                         }
                                     }}
@@ -99,7 +93,7 @@ export default class Blank extends Component<{
                                     </View>
                                     <p>{item.title}</p>
                                 </Button>
-                            </Col>
+                            </Col>;
                         })
                     }
                 </Row>
@@ -107,15 +101,15 @@ export default class Blank extends Component<{
                     multiSelect={false}
                     visible={goodsAddVisible}
                     close={() => {
-                        this.setState({ goodsAddVisible: false })
+                        this.setState({ goodsAddVisible: false });
                     }}
                     onOk={(e) => {
                         const typeItem = abledata.find((e) => {
-                            return e.type === 'goods'
-                        })
+                            return e.type === "goods";
+                        });
                         if (!typeItem) {
-                            message.error('类型匹配异常')
-                            return false
+                            message.error("类型匹配异常");
+                            return false;
                         }
                         const newArray = e.map((item) => ({
                             type: typeItem.type,
@@ -123,16 +117,16 @@ export default class Blank extends Component<{
                                 id: item.id,
                                 img: item.img,
                                 title: item.title,
-                                price: item.price,
-                            }),
-                        }))
-                        const oldArray = [...data]
+                                price: item.price
+                            })
+                        }));
+                        const oldArray = [...data];
                         newArray.map((item, i) => {
-                            oldArray.splice(addPosition + i, 0, item)
-                        })
-                        setGoodsDetailData(oldArray)
-                        this.setState({ goodsAddVisible: false })
-                        closeAddModule()
+                            oldArray.splice(addPosition + i, 0, item);
+                        });
+                        setGoodsDetailData(oldArray);
+                        this.setState({ goodsAddVisible: false });
+                        closeAddModule();
                     }}
                 />
                 <Modal
@@ -141,45 +135,46 @@ export default class Blank extends Component<{
                     okText='确定'
                     visible={videoVisible}
                     onOk={() => {
-                        const videoInputValue = this.videoInput.input.value
+                        const videoInputValue = this.videoInput.input.value;
                         if (!videoInputValue || !videoInputValue.length) {
-                            message.warn('请输入链接')
-                            return false
+                            message.warn("请输入链接");
+                            return false;
                         }
                         this.setState({
-                            videoVisible: false,
-                        })
+                            videoVisible: false
+                        });
                         const item = abledata.find((e) => {
-                            return e.type === 'video'
-                        })
+                            return e.type === "video";
+                        });
                         if (!item) {
-                            message.error('类型匹配异常')
-                            return false
+                            message.error("类型匹配异常");
+                            return false;
                         }
                         const newItem = {
                             type: item.type,
                             value: item.getValue({
-                                url: 'http://mvvideo10.meitudata.com/5aa889b8422991218.mp4?k=9088c7e9ca1d7f03f09bc43158733b6b&t=5aacb8f3',
-                                img: 'http://mvimg11.meitudata.com/5aa889745415e1642.jpg!thumb480',
-                            }),
-                        }
-                        const newArray = [...data]
-                        newArray.splice(addPosition, 0, newItem)
-                        setGoodsDetailData(newArray)
-                        closeAddModule()
+                                url: "http://mvvideo10.meitudata.com/5aa889b8422991218.mp4?k=9088c7e9ca1d7f03f09bc43158733b6b&t=5aacb8f3",
+                                img: "http://mvimg11.meitudata.com/5aa889745415e1642.jpg!thumb480"
+                            })
+                        };
+                        const newArray = [...data];
+                        newArray.splice(addPosition, 0, newItem);
+                        setGoodsDetailData(newArray);
+                        closeAddModule();
                     }}
                     onCancel={() => {
-                        this.setState({ videoVisible: false })
+                        this.setState({ videoVisible: false });
                     }}
                 >
                     <Input
                         ref={(e) => {
-                            this.videoInput = e
+                            this.videoInput = e;
                         }}
                         placeholder='请复制粘贴美拍或腾讯视频链接'
                     />
                 </Modal>
             </View>
-        )
+        );
     }
 }
+export default Blank

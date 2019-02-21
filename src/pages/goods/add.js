@@ -106,6 +106,7 @@ export default class Add extends Component<Props, State> {
                 weight: null
             }
         ],
+        save: true,
         // 是否为多规格
         multiSpec: false
     }
@@ -117,8 +118,22 @@ export default class Add extends Component<Props, State> {
         dispatch(getGoodsCategoryList())
         dispatch(getGoodsSpecList())
         dispatch(getFreightList({ params: { page: 1, rows: 1000 } }))
+        let value = JSON.parse(localStorage.getItem("fashop-goods-add")) || {}
+        this.props.form.setFieldsValue(
+            value.sale_time ? {
+                ...value,
+                sale_time: moment(value.sale_time)
+            } : value
+        )
     }
-
+    componentWillUnmount(){
+        if(this.state.save){
+            let value = this.props.form.getFieldsValue()
+            localStorage.setItem("fashop-goods-add", JSON.stringify(value))
+        }else {
+            localStorage.removeItem("fashop-goods-add")
+        }
+    }
     refreshfreightList = (callback: Function) => {
         const {
             dispatch
@@ -178,8 +193,12 @@ export default class Add extends Component<Props, State> {
                     params
                 })
                 if (e.code === 0) {
-                    message.success('添加成功')
-                    this.props.history.goBack()
+                    this.setState({
+                        save: false
+                    },()=>{
+                        message.success("添加成功");
+                        router.goBack();
+                    })
                 } else {
                     message.warn(e.msg)
                 }

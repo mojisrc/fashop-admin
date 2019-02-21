@@ -1,49 +1,52 @@
 import React, { Component, PropTypes } from "react";
-import Lightbox from 'react-images';
+import Lightbox from "react-images";
 
 export default class PhotoGallery extends Component {
     constructor(props) {
-        super(props)
+        super(props);
         this.state = {
             index: 0,
             photos: [],
-            open: false,
+            open: false
         };
     }
+
     closeLightbox() {
         this.setState({
             index: 0,
-            open: false,
+            open: false
         });
     }
+
     gotoPrevious() {
         this.setState({
-            index: this.state.index - 1,
+            index: this.state.index - 1
         });
     }
 
     gotoNext() {
         this.setState({
-            index: this.state.index + 1,
+            index: this.state.index + 1
         });
     }
 
     render() {
-        const { photos,index,open } = this.state
-        const { onClose } = this.props
+        const { photos, index, open } = this.state;
+        const { onClose } = this.props;
         return (
-            <Lightbox images={photos}
-                      onClose={() => {
-                          this.closeLightbox()
-                          if (onClose) {
-                              onClose()
-                          }
-                      }}
-                      onClickPrev={() => this.gotoPrevious()}
-                      onClickNext={() => this.gotoNext()}
-                      currentImage={index}
-                      isOpen={open}
+            <Lightbox
+                images={photos}
+                onClose={() => {
+                    this.closeLightbox();
+                    if (onClose) {
+                        onClose();
+                    }
+                }}
+                onClickPrev={() => this.gotoPrevious()}
+                onClickNext={() => this.gotoNext()}
+                currentImage={index}
+                isOpen={open}
             />
-        )
+        );
     }
 }

@@ -1,45 +1,45 @@
-//@flow
 import React, { Component } from "react";
-import { View } from "react-web-dom";
-import { Slider, Row, Col } from "antd";
+import { Slider, Form } from "antd";
+import { formItemLayout } from "@/components/shop/diy/formLayout";
+const FormItem = Form.Item
+// type Props = {
+//     componentName?:string,
+//     getValues: Function,
+//     options: {
+//         height: number
+//     },
+//     data: {}
+// }
+// type State = {}
 
-type Props = {
-    componentName?:string,
-    getValues: Function,
-    options: {
-        height: number
-    },
-    data: {}
-}
-type State = {}
-
-export default class Index extends Component<Props, State> {
+export default class Index extends Component {
     static defaultProps = {
-        componentName: 'auxiliaryBlank'
-    }
+        componentName: "auxiliaryBlank"
+    };
+
     render() {
-        const { options,data, getValues } = this.props
-        const { height } = options
+        const { options, data, getValues } = this.props;
+        const { height } = options;
         return (
-            <View className={`auxiliaryBlankCtrlWarp`}>
-                <Row gutter={16}>
-                    <Col span={4}>高度：</Col>
-                    <Col span={16}>
-                        <Slider
-                            value={height}
-                            onChange={(height) => {
-                                getValues({
-                                    options: {
-                                        height
-                                    },
-                                    data
-                                })
-                            }}
-                        />
-                    </Col>
-                    <Col span={4}>{height}</Col>
-                </Row>
-            </View>
-        )
+            <Form>
+                <FormItem
+                    {...formItemLayout}
+                    label="高度"
+                >
+                    <Slider
+                        value={height}
+                        onChange={(height) => {
+                            getValues({
+                                options: {
+                                    height
+                                },
+                                data
+                            });
+                        }}
+                    />
+                    <span>{height}</span>
+                </FormItem>
+            </Form>
+        );
     }
 }

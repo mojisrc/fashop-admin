@@ -1,21 +1,12 @@
-//@flow
 import React,{ Component } from "react";
-import { connect } from "react-redux";
-import { View } from "react-web-dom";
+import { connect } from "dva";
+import { View } from "@/components/flexView";
 import { Input } from "antd";
 import styles from './text.css'
 
 const { TextArea } = Input;
-
-class Text extends Component<
-    {
-        setGoodsDetailData:Function,
-        data:Array<{value:{content:string}}>,
-        index:number,
-        item:{},
-    },
-    {}
-> {
+@connect()
+export default class Text extends Component {
     render() {
         const { setGoodsDetailData, data, index, item } = this.props
         return (
@@ -34,11 +25,3 @@ class Text extends Component<
         )
     }
 }
-
-const mapStateToProps = ({view}) => {
-    return {
-
-    }
-}
-
-export default connect(mapStateToProps)(Text)

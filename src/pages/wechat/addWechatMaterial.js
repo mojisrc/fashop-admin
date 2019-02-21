@@ -1,53 +1,25 @@
-//@flow
+
 import React,{ Component } from 'react'
-import { bindActionCreators } from 'redux';
-import { connect } from "react-redux";
+
+import { connect } from 'dva';
 import * as actions from "../../actions/wechat/material";
-import { View } from "react-web-dom";
+import { View } from "@/components/flexView";
 import { Row, Col, Card, Form, Input, Button, Upload, Icon, message, Checkbox, Popover } from "antd";
-import RouterBreadcrumb from "../../components/wechat/public/routerBreadcrumb";
-import InputFile from "../../components/inputFile";
-import styles from "../../styles/wechat/addWechatMaterial.css";
+import RouterBreadcrumb from "@/components/wechat/public/routerBreadcrumb";
+import InputFile from "@/components/inputFile";
+import styles from "@/styles/wechat/addMaterial.css";
 import Editor from "react-umeditor";
-import {
-    handleSubmitType,
-    formType,
-    historyType,
-} from "../../utils/flow";
-import { Fetch } from '../../utils'
-import { env } from '../../config/root'
+import { Fetch } from '@/utils'
 
 const FormItem = Form.Item;
 const { TextArea } = Input;
-
-type Props = {
-    history:historyType,
-    pathSearch:{
-        num:string
-    },
-    addWechatMaterial:Function,
-}
-type State = {
-    media:Array<{
-        title: string,
-        thumb_media_id: string,
-        thumb_url: string,
-        show_cover_pic: number,
-        author: string,
-        digest: string,
-        content: string,
-        content_source_url: string
-    }>,
-    active:number
-}
-
 @connect(
     ({view:{material:{ wechatMaterialInfo }}}) => ({
         wechatMaterialInfo
     }),
-    dispatch => bindActionCreators(actions,dispatch),
+
 )
-export default class AddWechatMaterial extends Component<Props,State> {
+export default class AddMaterial extends Component {
     current:{
         title: string,
         thumb_media_id: string,
@@ -118,7 +90,7 @@ export default class AddWechatMaterial extends Component<Props,State> {
                         <View className={styles.leftTop}>
                             <img
                                 alt=''
-                                src={(require('../../images/wechat/diyPhone.png'))}
+                                src={(require('../../assets/images/wechat/diyPhone.png'))}
                             />
                         </View>
                         <View className={styles.leftContent}>
@@ -363,7 +335,7 @@ class CardContent extends Component<
         pathSearch:{
             num:string
         },
-        addWechatMaterial:Function,
+        addMaterial:Function,
         changeMedia:Function,
         changeActive:Function
     },{}>{
@@ -378,7 +350,7 @@ class CardContent extends Component<
         content_source_url: string
     }
     render(){
-        const { media, active, pathSearch, changeMedia, addWechatMaterial } = this.props
+        const { media, active, pathSearch, changeMedia, addMaterial } = this.props
         const formItemLayout = {
             labelCol: {
                 xs: { span: 24 },
@@ -558,7 +530,7 @@ class CardContent extends Component<
                             marginRight:20
                         }}
                         onClick={()=>{
-                            addWechatMaterial({
+                            addMaterial({
                                 params:{
                                     media
                                 }

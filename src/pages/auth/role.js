@@ -1,6 +1,5 @@
-//@flow
 import React, { Component } from "react";
-import { connect } from "react-redux";
+import { connect } from 'dva';
 import {
     Tabs,
     Layout,
@@ -12,41 +11,20 @@ import {
     Tooltip,
     message,
     Modal,
+    Card
 } from "antd";
-import { View } from "react-web-dom";
-import styles from "../../styles/auth/role.css";
-import RoleMembersTable from '../../components/auth/roleMembersTable'
-import RoleAuthTable from '../../components/auth/roleAuthTable'
-import GroupEditModal from '../../components/auth/groupEditModal'
+import { View } from "@/components/flexView";
+import styles from "@/styles/auth/role.css";
+import RoleMembersTable from '@/components/auth/roleMembersTable'
+import RoleAuthTable from '@/components/auth/roleAuthTable'
+import GroupEditModal from '@/components/auth/groupEditModal'
 import types from '../../constants'
-import {
-    addGroup,
-    groupDel,
-} from '../../actions/auth/role'
-import EditGroupMemberModal from '../../components/auth/editGroupMemberModal'
-import {AuthCom,authHoc} from '../../components/auth/authRules'
-import authSignConfig from '../../utils/authSignConfig'
-
-
+import EditGroupMemberModal from '@/components/auth/editGroupMemberModal'
+import {AuthCom,authHoc} from '@/components/auth/authRules'
+import authSignConfig from '@/utils/authSignConfig'
 const MenuItem = Menu.Item;
 const { Header, Content, Sider } = Layout;
 const TabPane = Tabs.TabPane;
-
-
-type Props = {
-    groupListLoading: boolean,
-    groupList: Array<{id:number,name:string}>,
-    dispatch: Function,
-    groupMemberList:{},
-}
-
-type State = {
-    onSelectKey: null|number,
-    editModalVisible: boolean,
-    onSelectIndex: null|number,
-    addGroupVisible: boolean,
-    editGroupMemberModalVisible: boolean,
-}
 
 @authHoc({
     rules: authSignConfig.auth.role
@@ -60,7 +38,7 @@ type State = {
     groupList,
     groupMemberList,
 }))
-export default class RoleOwner extends Component<Props,State> {
+export default class RoleOwner extends Component {
     state = {
         onSelectKey: null,
         editModalVisible: false,

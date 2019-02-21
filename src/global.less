@@ -1,0 +1,70 @@
+html,
+body,
+#root {
+  height: 100%;
+}
+
+.colorWeak {
+  filter: invert(80%);
+}
+
+.ant-layout {
+  min-height: 100vh;
+}
+
+canvas {
+  display: block;
+}
+
+body {
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.globalSpin {
+  width: 100%;
+  margin: 40px 0 !important;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+//解决scrollbars冲突
+.wrapper{
+  font-size: inherit!important;
+  font-family: inherit!important;
+}
+.pageDiyViewScrollWrapper{
+  margin-right: 0!important;
+}
+.pageDiyViewScrollWrapper .content{
+}
+.pageDiyViewScrollWrapper + .track{
+  right: -8px!important;
+}
+
+.ant-advanced-search-form{
+}
+
+// antd dot
+.ant-carousel .slick-dots.carousel-dot li button{
+    background: #CCCCCC;
+}
+.ant-carousel .slick-dots.carousel-dot li.slick-active button{
+    background: #ff585d;
+}
+
+// form
+.ant-form-item-table-style{
+  margin-bottom: 0!important;
+}
+.ant-form-item-hidden{
+  display: none!important;
+}
+
+// tabs
+.fa-card-tab.ant-tabs.ant-tabs-card .ant-tabs-card-bar .ant-tabs-tab{
+  border: 0;
+}

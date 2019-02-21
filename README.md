@@ -1,61 +1,113 @@
-# FaShop 微信小程序商城后台
-长期维护版本，欢迎大家踊跃提交贡献代码；
-## 参与开发
-更多项目请关注：[https://www.fashop.cn](https://www.fashop.cn)
-
-期待您的加入~ ,欢迎大家踊跃提交代码。
-
-开发问题欢迎一起交流 ： QQ交流群：632466687
-
-小程序项目地址：[https://github.com/mojisrc/wechat-mini-shop](https://github.com/mojisrc/wechat-mini-shop)
-## 使用
-```bash
-# 安装
-npm install
-# 运行
-npm start
-# 生产
-npm run build
-```
-## 接口地址
-- 如果您想自己搭建请去www.fashop.cn去了解安装教程
-- 您可以使用我们的测试接口地址 https://demo.fashop.cn，具体文档请求fashop官网查看
-- 更改接口地址文件 public/index.html 这是为了配合我们的fashop项目使用
-## 最新功能
-
-- 自定义后台拖拽界页面；
-- 默认3种商品分类页面；
-- 订单管理；
-- 退款退货管理；
-- 收藏列表；
-- 地址管理，1.用户添加，2.调用微信地址管理接口；
-- 购物车管理，支持切换规格；
-- 商品管理，支持多规格切换
-
-## 即将推出功能
-- 拼团
-- 分销
-- 原生APP
-- 自定义个人中心
-- 还有....如果您有什么需求，可以进群提出，说不定我们会优先处理， QQ交流群：632466687
-
-## 后台界面
-<p>
-<img src="https://ws4.sinaimg.cn/large/006tNbRwgy1fvews9zi8kj31kw0ttgtr.jpg" width="260px">
-<img src="https://ws3.sinaimg.cn/large/006tNbRwgy1fvewtsm9ypj31kw0tytw0.jpg" width="260px">
-<img src="https://ws2.sinaimg.cn/large/006tNbRwgy1fvewu4rq6tj31kw0tdwzv.jpg" width="260px">
-<img src="https://ws3.sinaimg.cn/large/006tNbRwgy1fvewufq30xj31kw0ts14y.jpg" width="260px">
-<img src="https://ws4.sinaimg.cn/large/006tNbRwgy1fvewurjn9sj31kw0u04ja.jpg" width="260px">
-<img src="https://ws4.sinaimg.cn/large/006tNbRwgy1fvewv4n551j31kw0tztox.jpg" width="260px">
-<img src="https://ws3.sinaimg.cn/large/006tNbRwgy1fveww6rgx6j31kw0tpjzo.jpg" width="260px">
-<img src="https://ws3.sinaimg.cn/large/006tNbRwgy1fvewwt3plmj31kw0tuqb2.jpg" width="260px">
-<img src="https://ws3.sinaimg.cn/large/006tNbRwgy1fvewx6cpo6j31kw0qggvw.jpg" width="260px">
-<img src="https://ws4.sinaimg.cn/large/006tNbRwgy1fvewxsjd77j31kw0tmwm8.jpg" width="260px">
-<img src="https://ws4.sinaimg.cn/large/006tNbRwgy1fvewy3vnyqj31kw0tqwmy.jpg" width="260px">
-<img src="https://ws3.sinaimg.cn/large/006tNbRwgy1fvewyeg8i5j31kw0tk12j.jpg" width="260px">
-<img src="https://ws3.sinaimg.cn/large/006tNbRwgy1fvewz0i0hzj31kw0tzwpw.jpg" width="260px">
-<img src="https://ws4.sinaimg.cn/large/006tNbRwgy1fvex0fii54j31kw0tuk18.jpg" width="260px">
-<img src="https://ws1.sinaimg.cn/large/006tNbRwgy1fvex06u7waj31kw0tln4x.jpg" width="260px">
-<img src="https://ws1.sinaimg.cn/large/006tNbRwgy1fvex0xgx3dj31kw0se44y.jpg" width="260px">
-<img src="https://ws4.sinaimg.cn/large/006tNbRwgy1fvex15ecmdj31kw0tbdmd.jpg" width="260px">
+<p align="center">
+  <a href="https://www.fashop.cn">
+    <img width="100" src="https://www.fashop.cn/logo.png">
+  </a>
 </p>
+
+<h1 align="center">FaShop Admin</h1>
+
+<div align="center">
+微信小程序商城后台，微信小程序微店后台
+</div>
+
+![](https://img.shields.io/github/stars/mojisrc/fashop-admin.svg)
+![](https://img.shields.io/github/issues/mojisrc/fashop-admin.svg)
+![](https://img.shields.io/github/forks/mojisrc/fashop-admin.svg)
+
+## 安装运行
+```bash
+npm install
+npm start
+```
+- 如果没安装umi 请先安装
+```bash
+npm install umi -g
+```
+
+## 其他
+- .umirc.local.js 为本地开发配置
+- .build.js `npm run build`编译时不会走`.umirc.local.js`了，如果想在本地编译其他host，可在该文件内修改，不支持es6...
+> 如：module.exports = {  host: "https://v2-api.fashop.cn" };
+
+- .umirc.js 为fashop开发的默认配置，生产环境下也建议不要更改该文件
+
+## commit-message规范
+
+> 参考: [my-commit-message](https://yanhaijing.com/git/2016/02/17/my-commit-message/)
+
+格式:
+
+Header必填，Body和Footer选填。
+
+```
+<Header>
+
+<Body>
+
+<Footer>
+```
+
+### Header
+
+Header部分只有一行，包括：type（必填）、scope（选填）和subject（必填）
+
+```
+<type>(<scope>): <subject>
+```
+
+**type**
+
+type用于说明 commit 的类别，可使用如下类别
+
+* feat 新功能
+* fix BUG修复
+* docs 文档
+* style 格式(不影响代码运行的变动)
+* refactor 重构
+* test 测试相关
+* chore 构建过程或辅助工具的变动
+* revert 还原代码
+
+**scope**
+
+scope用于説明 commit 影响范围
+
+**subject**
+
+subject是 commit 目的的简短描述
+
+### Body
+
+Body 部分是对本次 commit 的详细描述，可以分成多行。
+
+### Footer
+
+Footer 部分只用于两种情况：
+
+* 关联issue 
+* 关闭issue
+
+示例：
+
+```
+// 关联
+Issue #1, #2, #3
+// 关闭
+Close #1, #2, #3
+```
+
+### 完整示例
+
+```
+feat: 添加了XX功能
+
+添加了XXXXXXX
+
+- 添加功能1
+- 添加功能2
+- 添加功能3
+
+Issue #1, #2
+Close #1
+```
+

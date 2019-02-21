@@ -1,53 +1,50 @@
-//@flow
 import React, { Component } from "react";
 import { Carousel } from "antd";
 import styles from "./index.css";
-import { View } from "react-web-dom";
-import Image from "../../../../image/index";
-import type { LinkActionType } from "../../controller/common/actionLink"
+import Image from "@/components/image/index";
+//
+// type Props = {
+//     options: {
+//         layout_style: number
+//     },
+//     data: Array<{
+//         img: {
+//             url: string
+//         },
+//         title: string,
+//         link: {
+//             action: LinkActionType,
+//             param: {}
+//         }
+//     }>
+// }
+// type State = {}
 
-type Props = {
-    options: {
-        layout_style: number
-    },
-    data: Array<{
-        img: {
-            url: string
-        },
-        title: string,
-        link: {
-            action: LinkActionType,
-            param: {}
-        }
-    }>
-}
-type State = {}
-
-export default class Index extends Component<Props, State> {
+export default class Index extends Component {
     render() {
-        const { data, options } = this.props
-        const { layout_style } = options
-        let _ads = data
+        const { data, options } = this.props;
+        const { layout_style } = options;
+        let _ads = data;
         return (
-            <View className={styles.imageAdsPhoneWarp}>
+            <div className={styles.imageAdsPhoneWarp}>
                 {
                     layout_style === 1 ?
                         <Carousel autoplay={_ads.length > 1}>
                             {
                                 _ads.map((item, index) => {
-                                    return <View key={index} className={styles.carouselItem}>
+                                    return <div key={index} className={styles.carouselItem}>
                                         <Image src={item.img.url} />
-                                    </View>
+                                    </div>;
                                 })
                             }
                         </Carousel> :
                         _ads.map((item, index) => {
-                            return <View key={index} className={styles.carouselItem}>
-                                <Image src={item.img.url} />
-                            </View>
+                            return <div key={index}>
+                                <Image src={item.img.url} style={{ width: "100%" }} />
+                            </div>;
                         })
                 }
-            </View>
-        )
+            </div>
+        );
     }
 }

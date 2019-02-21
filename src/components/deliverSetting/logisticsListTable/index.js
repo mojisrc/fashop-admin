@@ -1,33 +1,31 @@
-//@flow
-
 import React, { Component } from "react";
 import {
     Table,
     Button,
 } from "antd";
 import styles from "./index.css";
-import { View } from "react-web-dom";
-import { connect } from "react-redux";
-import { dispatchType, historyType } from "../../../utils/flow";
-import { dispatchProps } from "../../../utils/defaultProps";
-import { getShipperList } from "../../../actions/deliver/shipper";
+import { View } from "@/components/flexView";
+import { connect } from "dva";
 
-type Props = {
-    history: historyType,
-    dispatch: dispatchType,
-    loading: boolean,
-    listData: {
-        page: number,
-        rows: number,
-        total_number: number,
-        list: Array<{}>,
-    },
-    categoryList: Array<{ id: number, name: string }>,
-}
 
-type State = {
-    rowSelectionIds: Array<string>,
-}
+import { getShipperList } from "@/actions/deliver/shipper";
+//
+// type Props = {
+//     history: historyType,
+//     dispatch: dispatchType,
+//     loading: boolean,
+//     listData: {
+//         page: number,
+//         rows: number,
+//         total_number: number,
+//         list: Array<{}>,
+//     },
+//     categoryList: Array<{ id: number, name: string }>,
+// }
+//
+// type State = {
+//     rowSelectionIds: Array<string>,
+// }
 
 @connect(({
               view: {
@@ -40,9 +38,9 @@ type State = {
     loading,
     listData,
 }))
-export default class ShipperListTable extends Component <Props, State> {
+export default class ShipperListTable extends Component  {
     static defaultProps = {
-        dispatch: dispatchProps,
+
         loading: false,
         listData: [],
     }
@@ -91,7 +89,7 @@ export default class ShipperListTable extends Component <Props, State> {
             render: (record) => <View className={styles.operation}>
                 <a
                     onClick={() => {
-                        // this.props.history.push({
+                        // router.push({
                         //     pathname:`/order/refundEdit`,
                         //     search:`?id=${record.id}`,
                         //     state:{
@@ -112,7 +110,7 @@ export default class ShipperListTable extends Component <Props, State> {
                     <Button
                         type='primary'
                         onClick={() => {
-                            history.push('/deliver/shipperAdd')
+                            router.push('/deliver/shipperAdd')
                         }}
                     >
                         新增地址

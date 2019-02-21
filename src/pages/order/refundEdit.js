@@ -1,32 +1,27 @@
-// @flow
 import React, { Component } from "react";
-import { View } from "react-web-dom";
-import Page from '../../components/public/page'
-import styles from '../../styles/order/refundEdit.css'
-import RefundDetail from "../../components/order/refundDetail";
-import { publicFunction } from "../../utils";
+import { View } from "@/components/flexView";
+import PageHeaderWrapper from "@/components/pageHeaderWrapper";
+import styles from "@/styles/order/refundEdit.css";
+import RefundDetail from "@/components/order/refund/detail";
+import { Card } from "antd";
 
-const { parseQuery } = publicFunction
-type Props = {
-    location: { state: { type: string, record: {} }, search: string },
-    history: { push: Function }
-}
-type State = {}
-export default class RefundEdit extends Component<Props, State> {
+export default class RefundEdit extends Component {
     render() {
-        const { location, history } = this.props
-        const { id } = parseQuery(location.search)
+        const { location : {query}, history } = this.props;
+        const { id } = query;
 
         return (
-            <View className={`${styles.refundEditWarp} refundEdit`}>
-                <Page>
-                    <RefundDetail
-                        id={id}
-                        history={history}
-                        location={location}
-                    />
-                </Page>
-            </View>
-        )
+            <PageHeaderWrapper hiddenBreadcrumb={true}>
+                <View className={`${styles.refundEditWarp} refundEdit`}>
+                    <Card bordered={false}>
+                        <RefundDetail
+                            id={id}
+                            history={history}
+                            location={location}
+                        />
+                    </Card>
+                </View>
+            </PageHeaderWrapper>
+        );
     }
 }

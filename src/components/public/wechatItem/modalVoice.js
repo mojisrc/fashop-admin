@@ -1,6 +1,6 @@
-//@flow
+
 import React,{ Component } from "react";
-import { View } from "react-web-dom";
+import { View } from "@/components/flexView";
 import styles from "./index.css";
 import moment from 'moment'
 
@@ -12,7 +12,7 @@ type State = {
     voiceing:boolean
 }
 
-export default class ModalVoice extends Component<Props,State>{
+export default class ModalVoice extends Component{
     state = {
         voiceing:false
     }
@@ -32,14 +32,14 @@ export default class ModalVoice extends Component<Props,State>{
                     {
                         voiceing ?
                         <img
-                            src={require('../../../images/wechat/voiceing.gif')}
+                            src={require('@/assets/images/wechat/voiceing.gif')}
                             style={{
                                 width:'100%',
                                 height:'100%',
                             }}
                         /> :
                         <img
-                            src={require('../../../images/wechat/voice.png')}
+                            src={require('@/assets/images/wechat/voice.png')}
                             style={{
                                 width:'100%',
                                 height:'100%',

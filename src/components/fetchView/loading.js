@@ -1,6 +1,6 @@
 import React,{ Component } from 'react';
-import {windowWidth} from '../../utils/style';
-import { View } from "react-web-dom";
+import {windowWidth} from '@/utils/style';
+import { View } from "@/components/flexView";
 import PropTypes from 'prop-types';
 
 export default class Loading extends Component{
@@ -42,7 +42,7 @@ export default class Loading extends Component{
                         )
                     }
                 >
-                    <use xlinkHref={require('../../images/loading.svg')}/>
+                    <use xlinkHref={require('../../assets/images/loading.svg')}/>
                 </svg>
 
             </View>

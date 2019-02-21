@@ -83,11 +83,11 @@
 }
 .qrcodeBg {
     height: 180px;
-    background: url(../../images/card.png) 35px -237px no-repeat;
+    background: url(../../assets/images/card.png) 35px -237px no-repeat;
 }
 .barcodeBg {
     height: 71px;
-    background: url(../../images/card.png) 0px -156px no-repeat;
+    background: url(../../assets/images/card.png) 0px -156px no-repeat;
 }
 .phoneItem{
     line-height: 40px;

@@ -1,17 +1,15 @@
-//@flow
 import React,{ Component } from 'react'
-import { bindActionCreators } from 'redux';
-import { connect } from "react-redux";
+import { connect } from "dva";
 import {
     getBroadcastUserSearch,
     getBroadcastSurplus,
     createWechatBroadcast,
-} from "../../../actions/wechat/message";
+} from "@/actions/wechat/message";
 import {
     getWechatUserTagList,
-} from "../../../actions/wechat/userTags";
+} from "@/actions/wechat/userTags";
 import { Modal, Button, Tag, Popover, DatePicker, Radio, message } from 'antd'
-import { View } from 'react-web-dom'
+import { View } from '@/components/flexView'
 import styles from './index.css'
 import { data } from './testData'
 import MsgTab from '../public/msgTab'
@@ -19,33 +17,32 @@ import SendTimingModal from './sendTimingModal'
 import moment from 'moment'
 
 const { RangePicker } = DatePicker;
-
-type Props = {
-    dispatch:Function,
-    broadcastRecordUserSearch:{
-        total_number:number
-    },
-    broadcastRecordSurplus:{
-        send_number:number,
-        can_send_state:number
-    },
-    wechatConfigInfo:{},
-    userTagList:Array<{}>
-}
-type State = {
-    timingSendVisible:boolean,
-    condition:{
-        sex:Array<number>,
-        province:Array<string>,
-        cost_average_price:Array<string>,
-        cost_times:Array<string>,
-        resent_cost_time:Array<string>,
-        resent_visit_time:Array<string>,
-        register_time:Array<string>,
-        user_tag:Array<number>,
-    },
-    provinceMore:boolean
-}
+//
+// type Props = {
+//     broadcastRecordUserSearch:{
+//         total_number:number
+//     },
+//     broadcastRecordSurplus:{
+//         send_number:number,
+//         can_send_state:number
+//     },
+//     wechatConfigInfo:{},
+//     userTagList:Array<{}>
+// }
+// type State = {
+//     timingSendVisible:boolean,
+//     condition:{
+//         sex:Array<number>,
+//         province:Array<string>,
+//         cost_average_price:Array<string>,
+//         cost_times:Array<string>,
+//         resent_cost_time:Array<string>,
+//         resent_visit_time:Array<string>,
+//         register_time:Array<string>,
+//         user_tag:Array<number>,
+//     },
+//     provinceMore:boolean
+// }
 
 @connect(
     ({view:{
@@ -56,9 +53,8 @@ type State = {
         broadcastRecordSurplus,
         userTagList
     }),
-    // dispatch => bindActionCreators(actions,dispatch),
 )
-export default class SendTable extends Component<Props,State> {
+export default class SendTable extends Component {
     state = {
         timingSendVisible: false,
         condition:{

@@ -1,26 +1,7 @@
-//@flow
 import React, { Component } from "react";
-import {
-    Row,
-    Col,
-    Button,
-    Input,
-    Select,
-    TreeSelect,
-    Form,
-} from "antd";
-import styles from "./index.css";
-import { View } from "react-web-dom";
-import { formType,handleSubmitType } from "../../../utils/flow";
-import { formdDfaultProps } from "../../../utils/defaultProps";
-import { connect } from "react-redux";
-import {
-    getGoodsList,
-} from "../../../actions/goods";
-import { dispatchProps } from "../../../utils/defaultProps";
-import { dispatchType } from "../../../utils/flow";
-
-
+import {Button, Input,Select, TreeSelect,Form, } from "antd";
+import { View } from "@/components/flexView";
+import { connect } from "dva";
 
 const Search = Input.Search;
 const Option = Select.Option;
@@ -122,7 +103,7 @@ export default class GoodsListHeader extends Component<Props>{
     static defaultProps = {
         form: formdDfaultProps,
     }
-    handleSubmit = (e: handleSubmitType) => {
+    handleSubmit = (e) => {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
             if (!err) {

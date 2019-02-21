@@ -1,33 +1,31 @@
-//@flow
 import React,{ Component } from 'react'
 import { Button, Icon, Popover, Modal } from 'antd'
-import { View } from 'react-web-dom'
+import { View } from '@/components/flexView'
 import styles from './leftCol.css'
 import DragAndDrop from '../dragAndDrop'
+//
+// type Props = {
+//     sort:boolean,
+//     sortEnd:Function,
+//     sortStart:Function,
+//     wechatMenuList:{
+//         menu:{
+//             button:Array<{
+//                 name:string,
+//                 type:string,
+//                 sub_button:Array<{
+//                     name:string,
+//                     type:string,
+//                 }>
+//             }>,
+//         }
+//     },
+//     currentMenu:Array<number>,
+//     setWechatMenuList:Function,
+//     setCurrentMenu:Function,
+// }
 
-type Props = {
-    sort:boolean,
-    sortEnd:Function,
-    sortStart:Function,
-    wechatMenuList:{
-        menu:{
-            button:Array<{
-                name:string,
-                type:string,
-                sub_button:Array<{
-                    name:string,
-                    type:string,
-                }>
-            }>,
-        }
-    },
-    currentMenu:Array<number>,
-    setWechatMenuList:Function,
-    setCurrentMenu:Function,
-}
-type State = {}
-
-export default class LeftCol extends Component<Props,State>{
+export default class LeftCol extends Component{
     render(){
         const { sort, sortEnd, sortStart, setWechatMenuList, setCurrentMenu, wechatMenuList } = this.props
         let allowSort = wechatMenuList.menu ? wechatMenuList.menu.button.filter((filterItem,index)=>{
@@ -38,7 +36,7 @@ export default class LeftCol extends Component<Props,State>{
                 <View className={styles.diyPhoneTop}>
                     <img
                         alt=''
-                        src={require('../../../images/wechat/diyPhone.png')}
+                        src={require('@/assets/images/wechat/diyPhone.png')}
                     />
                 </View>
                 <View className={styles.diyPhoneBody}/>
@@ -46,7 +44,7 @@ export default class LeftCol extends Component<Props,State>{
                     <View className={styles.botLeftView}>
                         <img
                             alt=''
-                            src={require('../../../images/wechat/mobile_foot.png')}
+                            src={require('@/assets/images/wechat/mobile_foot.png')}
                         />
                     </View>
                     {
@@ -81,7 +79,7 @@ export default class LeftCol extends Component<Props,State>{
                         <Button
                             disabled={
                                 wechatMenuList.menu&&wechatMenuList.menu.button.length>=2 ? false :
-                                allowSort.length ? false : true
+                                !allowSort.length
                             }
                             onClick={()=>{
                                 sortStart()

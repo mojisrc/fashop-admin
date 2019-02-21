@@ -1,21 +1,20 @@
-//@flow
 import React, { Component } from "react";
 import styles from "./index.css";
+//
+// type Props = {
+//     options: {
+//         title: string,
+//         align: string,
+//         background_color: string,
+//         font_color: string,
+//         leading_image: {
+//             url: string
+//         }
+//     }
+// }
+// type State = {}
 
-type Props = {
-    options: {
-        title: string,
-        align: string,
-        background_color: string,
-        font_color: string,
-        leading_image: {
-            url: string
-        }
-    }
-}
-type State = {}
-
-export default class Index extends Component<Props, State> {
+export default class Index extends Component {
     render() {
         const { options } = this.props
         const { title, align, background_color, font_color, leading_image } = options

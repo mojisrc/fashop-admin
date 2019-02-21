@@ -1,0 +1,36 @@
+.add{
+    width: 72px;
+    height: 72px;
+    border-radius: 3px;
+    overflow: hidden;
+    border-width: 1px;
+    border-style: dashed;
+    border-color: #d9d9d9;
+    align-items: center;
+    justify-content: center
+}
+.imgWarp{
+    position: relative;
+    width: 72px;
+    height: 72px;
+    border-radius: 3px;
+}
+.zhezhao{
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, .4);
+    align-items: center;
+    justify-content: center;
+}
+.zhezhao span{
+    font-size: 13px;
+    color: #ffffff;
+    cursor: pointer;
+}
+.rowCenter{
+    flex-direction: row;
+    align-items: center;
+}

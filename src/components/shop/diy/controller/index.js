@@ -1,7 +1,6 @@
-//@flow
 import React, { Component } from "react";
-import { View, ScrollView } from "react-web-dom";
-import styles from "./index.css";
+import { ScrollView } from "react-web-dom";
+import { Card} from "antd";
 import Goods from "./goods";
 import ImageNav from "./imageNav";
 import GoodsList from "./goodsList";
@@ -14,18 +13,18 @@ import Video from "./video";
 import TopMenu from "./topMenu";
 import Title from "./title";
 import TextNav from "./textNav";
-import type { optionsType, PageBodyType } from '../../../../interfaces/page'
+import GoodsGroup from "./goodsGroup";
 
-type Props = {
-    options: optionsType,
-    body: PageBodyType,
-    setPage: Function,
-    getValues: Function,
-    goodsListRefreshGoods: Function
-}
-type State = {}
+// type Props = {
+//     options: optionsType,
+//     body: PageBodyType,
+//     setPage: Function,
+//     getValues: Function,
+//     goodsListRefreshGoods: Function
+// }
+// type State = {}
 
-export default class PageControl extends Component<Props, State> {
+export default class PageControl extends Component {
     render() {
         const { body, options } = this.props
         const itemData = body[options.index]
@@ -37,9 +36,11 @@ export default class PageControl extends Component<Props, State> {
                     break
                 case 'goods_list':
                     item = <GoodsList
-                        options={itemData.options} data={itemData.data}
+                        options={itemData.options}
+                        data={itemData.data}
                         getValues={this.props.getValues}
-                        refreshGoods={this.props.goodsListRefreshGoods} />
+                        refreshGoods={this.props.goodsListRefreshGoods}
+                    />
                     break
                 case 'goods_search':
                     item = <GoodsSearch options={itemData.options} data={{}} getValues={this.props.getValues} />
@@ -72,14 +73,22 @@ export default class PageControl extends Component<Props, State> {
                 case 'text_nav':
                     item = <TextNav options={itemData.options} data={itemData.data} getValues={this.props.getValues} />
                     break
+                case 'goods_group':
+                    item = <GoodsGroup
+                        options={itemData.options}
+                        data={itemData.data}
+                        getValues={this.props.getValues}
+                        refreshGoods={this.props.goodsGroupRefreshGoods}
+                    />;
+                    break
                 default:
 
             }
         }
         return (
-                <ScrollView style={{height:'80vh'}} block={true} className={styles.dragCtrlWarp}>
-                    {item}
-                </ScrollView>
+            <ScrollView style={{height:'80vh'}} block={true}>
+                <Card bordered={false}>{item}</Card>
+            </ScrollView>
         )
     }
 }

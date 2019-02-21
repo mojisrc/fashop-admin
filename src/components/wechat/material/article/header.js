@@ -1,20 +1,17 @@
-//@flow
 import React,{ Component } from 'react'
 import { Button, Radio, Popover } from 'antd';
-import { View } from 'react-web-dom'
+import { View } from '@/components/flexView'
 import styles from '../index.css'
-import { Fetch } from '../../../../utils'
+//
+// type Props = {
+//     history:{
+//         push:Function
+//     },
+//     articleType:string,
+//     changeType:Function
+// }
 
-type Props = {
-    history:{
-        push:Function
-    },
-    articleType:string,
-    changeType:Function
-}
-type State = {}
-
-export default class ArticleHeader extends Component<Props,State> {
+export default class ArticleHeader extends Component {
     render() {
         const { articleType, changeType } = this.props
         return (
@@ -75,7 +72,7 @@ export default class ArticleHeader extends Component<Props,State> {
     }
     pushFunc({num}:{num:string}){
         const { articleType, history } = this.props
-        history.push({
+        router.push({
             search:`?menu=6&router=${articleType==='wechat' ? 'addWechatMaterial' : 'addServerMaterial'}&num=${num}`
         })
     }

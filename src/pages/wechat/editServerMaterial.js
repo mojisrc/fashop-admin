@@ -1,65 +1,29 @@
-//@flow
 import React,{ Component } from 'react'
-import { bindActionCreators } from 'redux';
-import { connect } from "react-redux";
+
+import { connect } from 'dva';
 import * as actions from "../../actions/wechat/material";
-import { View } from "react-web-dom";
+import { View } from "@/components/flexView";
 import { Row, Col, Card, Form, Input, Button, Upload, Icon, message, Checkbox, Popover, Select } from "antd";
-import RouterBreadcrumb from "../../components/wechat/public/routerBreadcrumb";
-import styles from "../../styles/wechat/addServerMaterial.css";
-import { imageUpload, Fetch } from "../../utils";
+import RouterBreadcrumb from "@/components/wechat/public/routerBreadcrumb";
+import styles from "@/styles/wechat/addServerMaterial.css";
+import { imageUpload, Fetch } from "@/utils";
 import {
     handleSubmitType,
     formType,
     historyType,
-} from "../../utils/flow";
+} from "@/utils/flow";
 
 const FormItem = Form.Item;
 const { TextArea } = Input;
 const Option = Select.Option;
 
-type Props = {
-    history:historyType,
-    form:formType,
-    pathSearch:{
-        id:string
-    },
-    localnewsMaterialInfo:{
-        info:{
-            media:Array<{
-                title: string,
-                digest: string,
-                cover_pic: string,
-                link:{
-                    action:string,
-                    param:{}
-                }
-            }>
-        }
-    },
-    getLocalnewsMaterialInfo:Function,
-    editLocalNewsMaterialList:Function,
-}
-type State = {
-    media:Array<{
-        title: string,
-        digest: string,
-        cover_pic: string,
-        link:{
-            action:string,
-            param:{}
-        }
-    }>,
-    active:number,
-}
-
 @connect(
     ({view:{material:{ localnewsMaterialInfo }}}) => ({
         localnewsMaterialInfo
     }),
-    dispatch => bindActionCreators(actions,dispatch),
+
 )
-export default class EditServerMaterial extends Component<Props,State> {
+export default class EditServerMaterial extends Component {
     state = {
         media: [],
         active:0
@@ -97,7 +61,7 @@ export default class EditServerMaterial extends Component<Props,State> {
                         <View className={styles.leftTop}>
                             <img
                                 alt=''
-                                src={(require('../../images/wechat/diyPhone.png'))}
+                                src={(require('../../assets/images/wechat/diyPhone.png'))}
                             />
                         </View>
                         <View className={styles.leftContent}>

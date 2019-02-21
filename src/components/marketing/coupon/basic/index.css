@@ -1,0 +1,105 @@
+.warp{
+    flex-direction: row;
+}
+.left{
+    flex: 0.4;
+    max-width: 320px;
+    height: 568px;
+    border: 1px solid #eaeaea;
+    margin: 0 24px 24px 0;
+}
+.right{
+    flex: 0.6
+}
+.title{
+    height: 44px;
+    /* background: #1c1c20; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    color: #333;
+    margin: 0
+}
+.card {
+    color: white;
+    height: 180px;
+    background: linear-gradient(0deg, #FF635C, #E7443D);
+    /* background: linear-gradient(0deg, rgb(254, 98, 99), rgb(254, 49, 78)); */
+    position: relative;
+    overflow: hidden;
+}
+.card:after {
+    content: ' ';
+    width: 100%;
+    height: 6px;
+    position: absolute;
+    left: 4px;
+    bottom: -4px;
+    border-bottom: 8px dotted white;
+}
+.cardTop{
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 10px;
+    height: 60px;
+}
+.cardTitle{
+    font-size: 18px;
+    line-height: 60px;
+    max-width: 290px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    font-weight: 400;
+    color: #fff;
+}
+.cardBody{
+    align-items: center;
+    justify-content: center;
+}
+.content, .desc, .time{
+    text-align: center;
+    margin: 0;
+}
+.content{
+    font-size: 30px;
+    max-width: 80%;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    height: 40px;
+    line-height: 40px;
+    overflow: hidden;
+}
+.desc{
+    line-height: 1.5;
+    max-width: calc(100% - 20px);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    padding: 10px 0px;
+    overflow: hidden;
+}
+.time{
+    color: rgba(255, 255, 255, 0.5);
+    padding: 0px 10px 10px;
+}
+.descTitle{
+    color: rgb(51, 51, 51);
+    line-height: 40px;
+    padding-left: 10px;
+    margin: 0;
+}
+.descView{
+    padding: 10px;
+    border-top: 1px solid rgb(229, 229, 229);
+    border-bottom: 1px solid rgb(229, 229, 229);
+}
+.descView p{
+    margin: 0;
+}
+.descInfo{
+    font-size: 14px;
+    color: rgb(51, 51, 51);
+    line-height: 1.5;
+}

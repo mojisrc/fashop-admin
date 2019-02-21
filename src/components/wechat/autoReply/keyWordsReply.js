@@ -1,33 +1,29 @@
-//@flow
 import React from 'react'
-import { bindActionCreators } from 'redux';
-import { connect } from "react-redux";
-import * as actions from "../../../actions/wechat/autoReply";
+
+import { connect } from "dva";
+import * as actions from "@/actions/wechat/autoReply";
 import { Table, Popconfirm } from 'antd';
-import { View } from 'react-web-dom'
+import { View } from '@/components/flexView'
 import KeyWordsReplyHeader from './KeyWordsReplyHeader'
 import styles from './index.css'
-import { data } from './testData'
-
-type Props = {
-    getKeyWordsReplyList:Function,
-    delAutoReplyKeywords:Function,
-    keyWordsReplyListLoading:boolean,
-    keyWordsReplyList:{
-        list:Array<{}>,
-        total_number:number
-    }
-}
-type State = {}
+// type Props = {
+//     getKeyWordsReplyList:Function,
+//     delAutoReplyKeywords:Function,
+//     keyWordsReplyListLoading:boolean,
+//     keyWordsReplyList:{
+//         list:Array<{}>,
+//         total_number:number
+//     }
+// }
 
 @connect(
     ({view:{wechatAutoReply:{ keyWordsReplyList, keyWordsReplyListLoading }}}) => ({
         keyWordsReplyList,
         keyWordsReplyListLoading,
     }),
-    dispatch => bindActionCreators(actions,dispatch),
+
 )
-export default class KeyWordsReply extends React.Component<Props,State> {
+export default class KeyWordsReply extends React.Component {
     componentDidMount(){
         this.props.getKeyWordsReplyList({params:{}})
     }
@@ -74,7 +70,7 @@ export default class KeyWordsReply extends React.Component<Props,State> {
                     <a
                         style={{marginRight:12}}
                         onClick={()=>{
-                            history.push({
+                            router.push({
                                 search:`?menu=2&router=editReply&editReplyId=${record.id}`
                             })
                         }}

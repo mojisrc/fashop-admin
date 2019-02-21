@@ -1,0 +1,17 @@
+.installFinishWarp{
+    flex:1;
+    align-items: center;
+    justify-content: space-evenly;
+}
+.installFinishWarp img{
+    width: 300px;
+}
+.btnView{
+
+}
+.btnView button{
+    padding: 0 30px;
+}
+.btnView button:first-child{
+    margin-bottom: 15px;
+}

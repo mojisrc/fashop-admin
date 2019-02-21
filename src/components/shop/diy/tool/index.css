@@ -1,34 +1,10 @@
-.dragModuleWarp{
-    border: 1px solid #e8e8e8;
-    border-radius: 4px;
-    background-color: #ffffff;
-}
-.dragModuleTitle{
-    background-color: #fafafa;
-    font-family: 'PingFangSC-Semibold', 'PingFang SC Semibold', 'PingFang SC', serif;
-    font-weight: 600;
-    font-style: normal;
-    font-size: 14px;
-    color: rgba(0, 0, 0, 0.847058823529412);
-    line-height: 53px;
-    text-align: center;
-    border-bottom: 1px solid #e8e8e8;
-    margin: 0;
-}
-.itemRow{
-    padding: 10px;
-}
-.buttonCol{
-    display: flex;
-    justify-content: center;
-}
-.moduleItem{
+.warp .moduleItem{
+    width: 100%;
     padding: 0;
-    width: 80%;
-    margin-bottom: 10px;
-    height: 80px;
-    background-color: #fafafa;
-    border-color: rgba(0,0,0,0);
+    height: 70px;
+    box-shadow: none;
+    border: none;
+    margin-top: 1px;
 }
 .moduleItem>p{
     margin: 0;
@@ -39,9 +15,12 @@
 }
 .iconView{
     width: 40px;
-    height: 40px;
-    border-radius: 4px;
+    height: 20px;
     justify-content: center;
     align-items: center;
     margin: 0 auto;
+}
+.iconView>img{
+    width: 20px;
+    height: 20px;
 }

@@ -1,0 +1,113 @@
+.viewMax{
+    display: flex;
+    background-color: #fff;
+}
+.fetchLoading{
+    flex: 1;
+}
+.view{
+    display: flex;
+    align-items: initial;
+    justify-content: flex-start;
+    flex-direction: column;
+}
+.ScrollView{
+    align-items: initial;
+    justify-content: flex-start;
+    flex-direction: column;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+}
+.flex{
+    display: flex;
+}
+.block{
+    display: block;
+}
+.NavigationBar{
+    background-color: #fff!important;
+    border-bottom: 1px solid #eaeaea;
+}
+.SearchBar{
+    flex:1;
+}
+.Text{
+    margin: 0 0;
+}
+
+
+.plateTitle{
+    background-color: #fff;
+    margin-bottom: 0.3em;
+}
+.titleText{
+    margin: 0;
+    text-align: center;
+}
+.plateCard{
+    background-color: #fff;
+    padding: 0.5em;
+    height: 280px;
+    border-bottom: 1px solid #eaeaea;
+}
+.plateCard:last-child{
+    border-bottom: 0;
+}
+.plateImg{
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+    max-height: 100%;
+}
+.homebtnlistWarp{
+    display: -webkit-flex;
+    display: -ms-flex;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-bottom: 1.1rem;
+}
+.homebtnlist{
+    width: 45%;
+    padding: 2.2%;
+    background-color: #fff;
+    margin-bottom: 0.3em;
+}
+.recommendCard{
+    height: 3.8rem;
+    display: -webkit-flex;
+    display: -ms-flex;
+    display: flex;
+    justify-content: center;
+}
+.recommendCard img{
+    width: auto;
+    height: 100%;
+    max-width: 100%;
+    max-height: 100%;
+}
+.recommendText{
+    margin: 0;
+    font-size: 0.8em;
+    width: 100%;
+    line-height: 1.4em;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    text-align: initial;
+}
+.recommendBottom{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+.allEvaluateStar{
+    display: -webkit-flex;
+    display: -ms-flex;
+    display: flex;
+    align-items: center;
+}
+.ShopCheckIcon{
+    margin-right: 0.2rem;
+}

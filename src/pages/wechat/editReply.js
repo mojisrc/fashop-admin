@@ -1,28 +1,28 @@
-//@flow
+
 import React,{ Component } from 'react'
-import { bindActionCreators } from 'redux';
-import { connect } from "react-redux";
+
+import { connect } from 'dva';
 import * as actions from "../../actions/wechat/autoReply";
-import { View } from "react-web-dom";
+import { View } from "@/components/flexView";
 import { Form, Input, Icon, Button, Select, Radio, Card, Popover, Popconfirm } from "antd";
-import "../../styles/wechat/addReply.less";
-import { Fetch } from "../../utils";
-import { formType, historyType, handleSubmitType } from '../../utils/flow'
+import "@/styles/wechat/addReply.less";
 
-import RouterBreadcrumb from "../../components/wechat/public/routerBreadcrumb";
+import { formType, historyType, handleSubmitType } from '@/utils/flow'
 
-import ModalNews from "../../components/public/wechatItem/modalNews";
-import ModalLocalNews from "../../components/public/wechatItem/modalLocalNews";
-import ModalVoice from "../../components/public/wechatItem/modalVoice";
-import ModalVideo from "../../components/public/wechatItem/modalVideo";
+import RouterBreadcrumb from "@/components/wechat/public/routerBreadcrumb";
 
-import NewsModal from "../../components/public/wechatModal/newsModal";
-import ImageModal from "../../components/public/wechatModal/imageModal";
-import VoiceModal from "../../components/public/wechatModal/voiceModal";
-import VideoModal from "../../components/public/wechatModal/videoModal";
-import TextModal from "../../components/public/wechatModal/textModal";
+import ModalNews from "@/components/public/wechatItem/modalNews";
+import ModalLocalNews from "@/components/public/wechatItem/modalLocalNews";
+import ModalVoice from "@/components/public/wechatItem/modalVoice";
+import ModalVideo from "@/components/public/wechatItem/modalVideo";
 
-import Image from "../../components/image";
+import NewsModal from "@/components/public/wechatModal/newsModal";
+import ImageModal from "@/components/public/wechatModal/imageModal";
+import VoiceModal from "@/components/public/wechatModal/voiceModal";
+import VideoModal from "@/components/public/wechatModal/videoModal";
+import TextModal from "@/components/public/wechatModal/textModal";
+
+import Image from "@/components/image";
 
 const FormItem = Form.Item;
 const InputGroup = Input.Group;
@@ -30,101 +30,14 @@ const Option = Select.Option;
 const RadioGroup = Radio.Group;
 
 let uuid = 1;
-
-type Props = {
-    history:historyType,
-    form:formType,
-    getAutoReplyKeywordsInfo:Function,
-    editAutoReplyKeywords:Function,
-    getWechatMaterialList:Function,
-    getLocalNewsMaterialList:Function,
-    pathSearch:{
-        editReplyId:string
-    },
-    autoReplyKeywordsInfo:{
-        info:{
-            id:number,
-            keys:Array<string>,
-            keywords:Array<{
-                key:string,
-                match_mode:string
-            }>,
-            reply_mode:string,
-            rule_name:string,
-            reply_content:Array<{
-                type:string,
-                media_id:string,
-                local_news_id:string,
-                content:string,
-            }>
-        }
-    },
-    imageMaterialList:{
-        item:Array<{
-            name:string,
-            url:string,
-            media_id:string,
-        }>
-    },
-    materialListLoading:boolean,
-    newsMaterialList:{
-        item:Array<{
-            content:{
-                news_item:Array<{
-                    digest:string,
-                    thumb_url:string,
-                    title:string,
-                }>,
-                update_time:string,
-            },
-            media_id:string
-        }>
-    },
-    localNewsMaterialList:{
-        item:Array<{
-            content:{
-                news_item:Array<{
-                    digest:string,
-                    thumb_url:string,
-                    title:string,
-                }>,
-                update_time:string,
-            },
-            media_id:string
-        }>
-    },
-    voiceMaterialList:{
-        item:Array<{
-            // name:string,
-            // update_time:string,
-            // media_id:string,
-        }>,
-        item_count:number,
-        total_count:number,
-    },
-    videoMaterialList:{
-        item:Array<{}>
-    },
-}
-type State = {
-    newsVisible:boolean,
-    localNewsVisible:boolean,
-    imageVisible:boolean,
-    textVisible:boolean,
-    voiceVisible:boolean,
-    videoVisible:boolean,
-    textInit:string,
-    reply_content_index:number,
-}
-
 @Form.create()
 @connect(
     ({view:{wechatAutoReply:{ autoReplyKeywordsInfo }}}) => ({
         autoReplyKeywordsInfo
     }),
-    dispatch => bindActionCreators(actions,dispatch),
+
 )
-export default class EditReply extends Component<Props,State> {
+export default class EditReply extends Component {
     state = {
         newsVisible:false,
         localNewsVisible:false,
@@ -172,7 +85,7 @@ export default class EditReply extends Component<Props,State> {
         });
     }
 
-    handleSubmit = (e:handleSubmitType) => {
+    handleSubmit = (e) => {
         e.preventDefault();
         const { form, editAutoReplyKeywords, autoReplyKeywordsInfo } = this.props
         form.validateFields((err, values) => {
@@ -372,7 +285,7 @@ export default class EditReply extends Component<Props,State> {
                                             replyItem.type==='voice' ?
                                             <View className={`voiceContent contentItem`}>
                                                 <img
-                                                    src={require('../../images/wechat/voice.png')}
+                                                    src={require('../../assets/images/wechat/voice.png')}
                                                     style={{
                                                         width:70,
                                                         height:70,

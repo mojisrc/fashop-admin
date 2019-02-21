@@ -1,21 +1,14 @@
-//@flow
 import React, { Component } from "react";
 import styles from "./index.css";
-import { View } from "react-web-dom";
-import Image from "../../../../image/index";
-import type { GoodsOptionsType, GoodsDataType } from "../../../../../interfaces/page"
+import Image from "@/components/image/index";
+import { View } from "@/components/flexView";
 
-type Props = {
-    data: GoodsDataType,
-    options: GoodsOptionsType
-}
-type State = {}
-export default class Index extends Component <Props, State> {
+export default class GoodsIndex extends Component  {
     render() {
         const { data, options } = this.props
         const { layout_direction } = options
         return (
-            <View className={styles.goodsPhoneWarp}>
+            <div className={styles.goodsPhoneWarp}>
                 {
                     data.map((item, index) => {
                         if (layout_direction === 1) {
@@ -29,16 +22,14 @@ export default class Index extends Component <Props, State> {
                         }
                     })
                 }
-            </View>
+            </div>
         )
     }
 
-    small(item: {
-        img: string,
-        title: string,
-        market_price: number,
-        price: number,
-    }, index: number) {
+    small(item, index) {
+        const { options } = this.props;
+        const { goods_title_rows } = options;
+        const rows = `lineClamp${goods_title_rows}`;
         const imgWidth = (375 - 18 - 2) / 2 + 'px'
         return (
             <View
@@ -53,7 +44,7 @@ export default class Index extends Component <Props, State> {
                     />
                 </View>
                 <View className={styles.smallBot}>
-                    <p className={styles.smallTitle}>{item.title}</p>
+                    <p className={`${styles.smallTitle} ${styles[rows]}`}>{item.title}</p>
                     <p className={styles.smallPrice}>
                         {/*<span>￥{item.market_price}</span>*/}
                         ￥{item.price}
@@ -63,12 +54,10 @@ export default class Index extends Component <Props, State> {
         )
     }
 
-    big(item: {
-        img: string,
-        title: string,
-        market_price: number,
-        price: number,
-    }, index: number) {
+    big(item, index) {
+        const { options } = this.props;
+        const { goods_title_rows } = options;
+        const rows = `lineClamp${goods_title_rows}`;
         return (
             <View
                 className={styles.bigWarp}
@@ -77,10 +66,11 @@ export default class Index extends Component <Props, State> {
                 <View className={styles.smallImgWarp}>
                     <Image
                         src={item.img}
+                        style={{width: '100%'}}
                     />
                 </View>
                 <View className={styles.smallBot}>
-                    <p className={styles.smallTitle}>{item.title}</p>
+                    <p className={`${styles.smallTitle} ${styles[rows]}`}>{item.title}</p>
                     <p className={styles.smallPrice}>
                         {/*<span>￥{item.market_price}</span>*/}
                         ￥{item.price}
@@ -90,12 +80,10 @@ export default class Index extends Component <Props, State> {
         )
     }
 
-    oneBigTwoSmall(item: {
-        img: string,
-        title: string,
-        market_price: number,
-        price: number,
-    }, index: number) {
+    oneBigTwoSmall(item, index) {
+        const { options } = this.props;
+        const { goods_title_rows } = options;
+        const rows = `lineClamp${goods_title_rows}`;
         const imgWidth = (375 - 18 - 2) / 2 + 'px'
         return (
             <View
@@ -123,7 +111,7 @@ export default class Index extends Component <Props, State> {
                     />
                 </View>
                 <View className={styles.smallBot}>
-                    <p className={styles.smallTitle}>{item.title}</p>
+                    <p className={`${styles.smallTitle} ${styles[rows]}`}>{item.title}</p>
                     <p className={styles.smallPrice}>
                         {/*<span>￥{item.market_price}</span>*/}
                         ￥{item.price}
@@ -133,12 +121,10 @@ export default class Index extends Component <Props, State> {
         )
     }
 
-    list(item: {
-        img: string,
-        title: string,
-        market_price: number,
-        price: number,
-    }, index: number) {
+    list(item, index) {
+        const { options } = this.props;
+        const { goods_title_rows } = options;
+        const rows = `lineClamp${goods_title_rows}`;
         return (
             <View
                 className={styles.listWarp}
@@ -150,7 +136,7 @@ export default class Index extends Component <Props, State> {
                     />
                 </View>
                 <View className={styles.listRight}>
-                    <p className={styles.listTitle}>{item.title}</p>
+                    <p className={`${styles.listTitle} ${styles[rows]}`}>{item.title}</p>
                     <p className={styles.listPrice}>
                         {/*<span>￥{item.market_price}</span>*/}
                         ￥{item.price}

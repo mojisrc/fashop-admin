@@ -1,0 +1,29 @@
+.paramConfigWarp{
+    height: 100%;
+}
+.paramConfigWarp h3{
+    font-family: 'PingFangSC-Semibold', 'PingFang SC Semibold', 'PingFang SC';
+    font-weight: 650;
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+.paramConfigFooter{
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.paramConfigFooter>a{
+    font-size: 13px;
+    margin-bottom: 25px;
+    color: #999999;
+}
+.paramConfigFooterBtnArea{
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+.modalView{
+    width: 320px;
+    margin: 60px auto 20px auto;
+    padding-top: 20px;
+}

@@ -1,0 +1,101 @@
+@import '~antd/dist/antd.css';
+body{
+    margin: 0;
+}
+#agreementView::-webkit-scrollbar-thumb{
+    border-radius: 4px;
+    background-color: #DE1D22;
+}
+body .ant-spin-dot,
+.environmentTest .ant-spin-dot{
+    height: auto;
+}
+body .ant-spin-nested-loading > div > .ant-spin .ant-spin-dot,
+.environmentTest .ant-spin-nested-loading > div > .ant-spin .ant-spin-dot{
+    top: 60%;
+}
+
+.App {
+    text-align: center;
+}
+
+.App-logo {
+    animation: App-logo-spin infinite 20s linear;
+    height: 80px;
+}
+
+.App-header {
+    background-color: #222;
+    height: 150px;
+    padding: 20px;
+    color: white;
+}
+
+.App-title {
+    font-size: 1.5em;
+}
+
+.App-intro {
+    font-size: large;
+}
+
+@keyframes App-logo-spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+
+.indexWarp{
+    padding: 30px;
+    min-height: 100vh;
+    box-sizing: border-box;
+    background-image:linear-gradient(135deg, #1b1f23 50vw, #282c2f 50vh)
+}
+
+.topView{
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+.topView img{
+    width: 100px;
+}
+.topView a{
+    color: #fff;
+}
+
+.contentView{
+    padding: 30px 0;
+    flex: 1;
+}
+.titleView{
+    flex-direction: row;
+    width: 50%;
+    margin: 0 auto;
+    justify-content: space-between;
+}
+.titleView p{
+    color: #333;
+    font-size: 16px;
+}
+.currentView{
+    flex: 1;
+    width: 70%;
+    margin: -5px auto 30px auto;
+    background-color: #fff;
+    border-radius: 4px;
+    position: relative;
+    padding: 30px;
+    min-height: 410px;
+}
+
+.footerView{
+    align-items: center;
+}
+.footerView a,
+.footerView p{
+    margin: 0;
+    line-height: 28px;
+    color: #666;
+    font-size: 14px;
+}

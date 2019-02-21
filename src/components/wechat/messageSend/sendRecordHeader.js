@@ -1,16 +1,11 @@
-//@flow
 import React,{ Component } from 'react'
 import { Select, Row, Col, Button } from 'antd'
-import { View } from 'react-web-dom'
+import { View } from '@/components/flexView'
 import styles from './index.css'
 import { sendRecordData} from './testData'
-
 const Option = Select.Option
 
-type Props = {}
-type State = {}
-
-export default class SendRecordHeader extends Component<Props,State> {
+export default class SendRecordHeader extends Component {
     render() {
         return (
             <Row

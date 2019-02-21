@@ -1,0 +1,14 @@
+version: '1'
+services:
+  fashop-damin:
+    # 未上传到docker hub 需要手动编译
+    image: fashop/fashop-admin:latest
+    ports:
+      - "5000:5000"
+      - "8000:8000"
+      - "3000:3000"
+    volumes:
+      - ./:/fashop-admin-code
+    restart: always
+    networks:
+      - default

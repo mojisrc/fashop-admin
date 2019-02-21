@@ -1,9 +1,9 @@
-//@flow
+
 import React, { Component } from "react";
-import { bindActionCreators } from 'redux';
-import { connect } from "react-redux";
-import * as actions from "../../../../actions/wechat/material";
-import { View } from "react-web-dom";
+
+import { connect } from 'dva';
+import * as actions from "@/actions/wechat/material";
+import { View } from "@/components/flexView";
 import { Modal, Button, Input, Row, Col, Card, Checkbox, Pagination, Radio, Spin } from "antd";
 import styles from "./index.css";
 import ModalNews from "../../wechatItem/modalNews";
@@ -12,11 +12,11 @@ const RadioGroup = Radio.Group
 const CheckboxGroup = Checkbox.Group;
 
 type Props = {
-    getWechatMaterialList:Function,
+    wechatMaterialList:Function,
     changeState:Function,
     newsCurrentPage:number,
     newsPageSize:number,
-    materialListLoading:boolean,
+    wechatMaterialListLoading:boolean,
     newsMaterialList:{
         item:Array<{
             content:{
@@ -38,22 +38,22 @@ type State = {
 
 @connect(
     ({view:{material:{
-        newsMaterialList, newsCurrentPage, newsPageSize, materialListLoading ,
+        newsMaterialList, newsCurrentPage, newsPageSize, wechatMaterialListLoading ,
     }}}) => ({
         newsMaterialList,
         newsCurrentPage,
         newsPageSize,
-        materialListLoading,
+        wechatMaterialListLoading,
     }),
-    dispatch => bindActionCreators(actions,dispatch),
+
 )
-export default class NewsView extends Component<Props,State> {
+export default class NewsView extends Component {
     state = {
         checkedValues:'',
     }
     componentDidMount(){
-        const { getWechatMaterialList } = this.props
-        getWechatMaterialList({
+        const { wechatMaterialList } = this.props
+        wechatMaterialList({
             params:{
                 type:'news',
                 offset:'0',
@@ -66,14 +66,14 @@ export default class NewsView extends Component<Props,State> {
         const {
             changeState,
             newsMaterialList,
-            getWechatMaterialList,
+            wechatMaterialList,
             newsCurrentPage,
             newsPageSize,
-            materialListLoading
+            wechatMaterialListLoading
         } = this.props
         const { item, total_count } = newsMaterialList
         return(
-            <Spin tip="Loading..." spinning={materialListLoading}>
+            <Spin tip="Loading..." spinning={wechatMaterialListLoading}>
                 <RadioGroup
                     value={checkedValues}
                     onChange={(e)=>{
@@ -129,7 +129,7 @@ export default class NewsView extends Component<Props,State> {
                         hideOnSinglePage
                         pageSizeOptions={['5','10','15','20']}
                         onChange={(page, pageSize)=>{
-                            getWechatMaterialList({
+                            wechatMaterialList({
                                 params:{
                                     type:'news',
                                     offset:page===1 ? '0' : (page-1)*pageSize-1,
@@ -138,7 +138,7 @@ export default class NewsView extends Component<Props,State> {
                             })
                         }}
                         onShowSizeChange={(current, size)=>{
-                            getWechatMaterialList({
+                            wechatMaterialList({
                                 params:{
                                     type:'news',
                                     offset:'0',

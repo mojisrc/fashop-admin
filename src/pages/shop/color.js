@@ -1,84 +1,59 @@
-//@flow
 import React,{ Component } from "react";
-import { View } from "react-web-dom";
-import { Row, Col, Button } from 'antd';
-import Page from '../../components/public/page'
-import styles from '../../styles/shop/shopColor.css'
-
-type Props = {
-    getShopInfo:Function,
-    editShopColorScheme:Function,
-    shopInfo:{
-        info:{
-            logo:string,
-            name:string,
-            contact_number:string,
-            description:string,
-            portal_template_id:number,
-            goods_category_style:number,
-            color_scheme:number,
-        }
-    },
-}
-type State = {
-    colorList:Array<{
-        color:Array<string>,
-        example:Array<string>,
-    }>,
-    currentColor:number
-}
-
-export default class Color extends Component<Props,State> {
+import { View } from "@/components/flexView";
+import { Row, Col, Button,Card } from 'antd';
+import PageHeaderWrapper from '@/components/pageHeaderWrapper';
+import styles from '@/styles/shop/shopColor.css'
+export default class Color extends Component {
     state = {
         colorList : [
             {
                 color:['#ff595d','#f39802','#fff'],
                 example:[
-                    require('../../images/shop/color1-1.jpg'),
-                    require('../../images/shop/color1-2.jpg'),
-                    require('../../images/shop/color1-3.jpg'),
+                    require('../../assets/images/shop/color1-1.jpg'),
+                    require('../../assets/images/shop/color1-2.jpg'),
+                    require('../../assets/images/shop/color1-3.jpg'),
                 ],
             }, {
                 color:['#ff547a','#ffe6e8','#fff'],
                 example:[
-                    require('../../images/shop/color2-1.jpg'),
-                    require('../../images/shop/color2-2.jpg'),
-                    require('../../images/shop/color2-3.jpg'),
+                    require('../../assets/images/shop/color2-1.jpg'),
+                    require('../../assets/images/shop/color2-2.jpg'),
+                    require('../../assets/images/shop/color2-3.jpg'),
                 ],
             }, {
                 color:['#ff4444','#545454','#fff'],
                 example:[
-                    require('../../images/shop/color3-1.jpg'),
-                    require('../../images/shop/color3-2.jpg'),
-                    require('../../images/shop/color3-3.jpg'),
+                    require('../../assets/images/shop/color3-1.jpg'),
+                    require('../../assets/images/shop/color3-2.jpg'),
+                    require('../../assets/images/shop/color3-3.jpg'),
                 ],
             }, {
                 color:['#fcc602','#1d2630','#fff'],
                 example:[
-                    require('../../images/shop/color4-1.jpg'),
-                    require('../../images/shop/color4-2.jpg'),
-                    require('../../images/shop/color4-3.jpg'),
+                    require('../../assets/images/shop/color4-1.jpg'),
+                    require('../../assets/images/shop/color4-2.jpg'),
+                    require('../../assets/images/shop/color4-3.jpg'),
                 ],
             }, {
                 color:['#64c4a9','#ddf1eb','#fff'],
                 example:[
-                    require('../../images/shop/color5-1.jpg'),
-                    require('../../images/shop/color5-2.jpg'),
-                    require('../../images/shop/color5-3.jpg'),
+                    require('../../assets/images/shop/color5-1.jpg'),
+                    require('../../assets/images/shop/color5-2.jpg'),
+                    require('../../assets/images/shop/color5-3.jpg'),
                 ],
             }, {
                 color:['#c3a869','#f3eee3','#fff'],
                 example:[
-                    require('../../images/shop/color6-1.jpg'),
-                    require('../../images/shop/color6-2.jpg'),
-                    require('../../images/shop/color6-3.jpg'),
+                    require('../../assets/images/shop/color6-1.jpg'),
+                    require('../../assets/images/shop/color6-2.jpg'),
+                    require('../../assets/images/shop/color6-3.jpg'),
                 ],
             }, {
                 color:['#00bc07','#373737','#fff'],
                 example:[
-                    require('../../images/shop/color7-1.jpg'),
-                    require('../../images/shop/color7-2.jpg'),
-                    require('../../images/shop/color7-3.jpg'),
+                    require('../../assets/images/shop/color7-1.jpg'),
+                    require('../../assets/images/shop/color7-2.jpg'),
+                    require('../../assets/images/shop/color7-3.jpg'),
                 ],
             }
         ],
@@ -92,7 +67,7 @@ export default class Color extends Component<Props,State> {
             return index===newCurrentColor
         })[0]
         return (
-            <Page>
+            <Card bordered={false}>
                 <h3>配色方案</h3>
                 <Row type="flex" justify="start">
                     {
@@ -150,7 +125,7 @@ export default class Color extends Component<Props,State> {
                         保存
                     </Button>
                 </View>
-            </Page>
+            </Card>
         )
     }
 }

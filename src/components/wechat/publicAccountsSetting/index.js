@@ -1,17 +1,10 @@
-//@flow
 import React,{ Component } from 'react'
 import { Tabs } from 'antd'
-import { View } from 'react-web-dom'
-import styles from './index.css'
-
+import { View } from '@/components/flexView'
 import BasicsSetting from './basicsSetting'
-
 const TabPane = Tabs.TabPane
 
-type Props = {}
-type State = {}
-
-export default class PublicAccountsSetting extends Component<Props,State> {
+export default class PublicAccountsSetting extends Component {
     render() {
         const tabList = [
             {

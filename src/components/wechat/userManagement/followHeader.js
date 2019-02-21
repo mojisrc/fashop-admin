@@ -1,12 +1,11 @@
-import React from 'react'
+import React from "react";
 import {
     Row,
     Col,
     Input
-} from 'antd'
-import styles from './index.css'
+} from "antd";
 
-const Search = Input.Search
+const Search = Input.Search;
 
 export default class FollowHeader extends React.Component {
     render() {
@@ -14,10 +13,10 @@ export default class FollowHeader extends React.Component {
             <Row
                 gutter={24}
                 style={{
-                    paddingTop: '10px',
-                    paddingBottom: '24px',
-                    marginBottom: '24px',
-                    borderBottom: '1px dashed #ededed'
+                    paddingTop: "10px",
+                    paddingBottom: "24px",
+                    marginBottom: "24px",
+                    borderBottom: "1px dashed #ededed"
                 }}
             >
                 <Col span={5}>
@@ -27,6 +26,6 @@ export default class FollowHeader extends React.Component {
                     />
                 </Col>
             </Row>
-        )
+        );
     }
 }

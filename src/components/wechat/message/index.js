@@ -1,18 +1,12 @@
-//@flow
 import React,{ Component } from 'react'
 import { Tabs } from 'antd'
-import { View } from 'react-web-dom'
-import styles from './index.css'
+import { View } from '@/components/flexView'
 
 import MessageManagementHeader from './header'
 import MessageManagementTable from './table'
 
 const TabPane = Tabs.TabPane
-
-type Props = {}
-type State = {}
-
-export default class MessageManagement extends Component<Props,State> {
+export default class MessageManagement extends Component {
     render() {
         const tabList = [
             {

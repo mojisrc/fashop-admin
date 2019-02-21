@@ -1,12 +1,12 @@
-//@flow
+
 import React, { Component } from "react";
-import { connect } from "react-redux";
+import { connect } from "dva";
 import {
     Button,
     Modal,
     Radio,
 } from "antd";
-import { View } from "react-web-dom";
+import { View } from "@/components/flexView";
 import styles from "./index.css";
 
 const RadioGroup = Radio.Group;

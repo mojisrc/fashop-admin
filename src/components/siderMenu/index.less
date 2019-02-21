@@ -1,12 +1,14 @@
 @import '~antd/lib/style/themes/default.less';
-@ease-in-out-circ: cubic-bezier(0.78, 0.14, 0.15, 0.86);
+
+@nav-header-height: @layout-header-height;
+
 .logo {
-  height: 64px;
+  height: @nav-header-height;
   position: relative;
-  line-height: 64px;
+  line-height: @nav-header-height;
   //padding-left: (@menu-collapsed-width - 32px) / 2;
   transition: all 0.3s;
-  background: #000;
+  background: @layout-header-background;
   overflow: hidden;
   text-align: center;
   img {
@@ -20,7 +22,7 @@
     vertical-align: middle;
     font-size: 20px;
     margin: 0 0 0 12px;
-    font-family: 'Myriad Pro', 'Helvetica Neue', Arial, Helvetica, sans-serif;
+    font-family: Avenir, 'Helvetica Neue', Arial, Helvetica, sans-serif;
     font-weight: 600;
   }
 }
@@ -30,13 +32,28 @@
   box-shadow: 2px 0 6px rgba(0, 21, 41, 0.35);
   position: relative;
   z-index: 10;
-  &.ligth {
+  &.fixSiderbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    :global(.ant-menu-root) {
+      overflow-y: auto;
+      //60px为左侧底部退出区域
+      height: ~'calc(100vh - @{nav-header-height} - 60px)';
+    }
+  }
+  &.light {
+    box-shadow: 2px 0 8px 0 rgba(29, 35, 41, 0.05);
     background-color: white;
     .logo {
       background: white;
+      box-shadow: 1px 1px 0 0 @border-color-split;
       h1 {
-        color: #000;
+        color: @primary-color;
       }
+    }
+    :global(.ant-menu-light) {
+      border-right-color: transparent;
     }
   }
 }
@@ -47,8 +64,12 @@
 }
 
 :global {
+  .top-nav-menu li.ant-menu-item {
+    height: @nav-header-height;
+    line-height: @nav-header-height;
+  }
   .drawer .drawer-content {
-    background: #001529;
+    background: #000000;
   }
   .ant-menu-inline-collapsed {
     & > .ant-menu-item .sider-menu-item-img + span,
@@ -68,5 +89,10 @@
   .ant-menu-submenu-title .sider-menu-item-img + span {
     transition: opacity 0.3s @ease-in-out, width 0.3s @ease-in-out;
     opacity: 1;
+  }
+}
+.ant-drawer-left {
+  .ant-drawer-body {
+    padding: 0;
   }
 }

@@ -1,19 +1,15 @@
-//@flow
 import React,{ Component } from "react";
-import { View } from "react-web-dom";
+import { View } from "@/components/flexView";
 import styles from './video.css'
-
-export default class Video extends Component<
-    {
-        item: {
-            value: {
-                url: string,
-                img: string,
-            }
-        },
-    },
-    {}
-> {
+// {
+//     item: {
+//         value: {
+//             url: string,
+//                 img: string,
+//         }
+//     },
+// }
+export default class Video extends Component{
     render() {
         const { item } = this.props
         return (

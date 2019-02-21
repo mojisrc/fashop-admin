@@ -1,0 +1,12 @@
+.item{
+    border-bottom: 1px solid #ededed;
+    margin-bottom: 10px;
+}
+.item>h3{
+    font-family: 'PingFangSC-Semibold', 'PingFang SC Semibold', 'PingFang SC';
+    font-weight: 600;
+    font-style: normal;
+    font-size: 16px;
+    color: rgba(0, 0, 0, 0.847058823529412);
+    line-height: 44px;
+}

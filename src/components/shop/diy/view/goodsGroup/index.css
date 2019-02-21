@@ -1,0 +1,134 @@
+/*goodsPhone*/
+.groupViewWarp p{
+    margin: 0;
+}
+
+.goodsPhoneWarp {
+    display: flex;
+    align-items: initial;
+    justify-content: flex-start;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: 0 6px;
+    box-sizing: border-box;
+}
+
+/* list */
+.listWarp {
+    width: 100%;
+    flex-direction: row;
+    background-color: #fff;
+    padding: 10px;
+    padding-bottom: 0;
+}
+
+.listImgWarp {
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eaeaea;
+}
+
+.listRight {
+    flex: 1;
+    padding-left: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eaeaea;
+    justify-content: space-around;
+}
+
+.listTitle {
+    overflow: hidden;
+    display: -webkit-box;
+    text-overflow: ellipsis;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    height: 20px;
+    font-size: 16px;
+    color: #333;
+    word-break: break-all;
+    word-wrap:break-word;
+}
+
+.listPrice {
+    color: #ff585d;
+}
+
+.marketPrice {
+    font-size: 12px;
+    margin-left: 10px;
+    color: #ccc;
+    text-decoration: line-through;
+}
+
+/* big */
+.bigWarp {
+    width: 100%;
+}
+
+/* small */
+
+.smallImgWarp {
+    width: 100%;
+    overflow: hidden;
+}
+
+.smallBot {
+    background-color: #fff;
+    margin-bottom: 8px;
+    padding: 0 10px;
+}
+
+.groupViewWarp .smallTitle {
+    margin: 10px 0;
+    overflow: hidden;
+    display: -webkit-box;
+    text-overflow: ellipsis;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    height: 20px;
+    font-size: 16px;
+    color: #333;
+    word-break: break-all;
+    word-wrap:break-word;
+}
+
+.smallPrice {
+    color: #ff585d;
+    font-size: 16px
+}
+
+.smallPrice span {
+    margin-right: 10px;
+    color: #ccc;
+    text-decoration: line-through;
+}
+
+/* carousel */
+.carouselItem{
+    display: flex!important;
+    flex-direction: row;
+    width: 100%;
+    height: 186px;
+}
+.carouselImgWarp{
+    position: relative;
+}
+.carouselGroup {
+    position: absolute;
+    background: #929292;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    color: #fff;
+    text-align: center;
+}
+.lineClamp1{
+    -webkit-line-clamp: 1!important;
+    height: 20px!important;
+    -webkit-box-orient:vertical!important;
+
+}
+.lineClamp2{
+    -webkit-line-clamp: 2!important;
+    height: 40px!important;
+    -webkit-box-orient:vertical!important;
+}

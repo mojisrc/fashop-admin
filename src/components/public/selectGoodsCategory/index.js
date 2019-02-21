@@ -1,84 +1,67 @@
-//@flow
 import React, { Component } from "react";
-import { View } from "react-web-dom";
+import { View } from "@/components/flexView";
 import { Modal, Tree } from "antd";
-import { connect } from "react-redux";
-import { getGoodsCategoryList } from "../../../actions/goods/category";
+import { connect } from "dva";
+import Arr from "@/utils/array";
 
 const TreeNode = Tree.TreeNode;
 
-type CategoryRowType = {
-    id: number,
-    name: string,
-    icon: string,
-    pid: number,
-    children: Array<any>
-}
-type CategoryType = {
-    id: number,
-    name: string,
-    icon: string,
-    pid: number,
-}
-type Props = {
-    visible: boolean,
-    close: Function,
-    getState: Function,
-    dispatch?: Function,
-    categoryTree?: Array<CategoryRowType>,
-    value?: CategoryRowType | null,
-    categoryList?: Array<CategoryType>,
-}
-type State = {
-    expandedKeys: Array<any>,
-    autoExpandParent: boolean,
-    value: CategoryType | null
-}
-@connect(
-    ({ view: { goods: { categoryTree, categoryList } } }) => ({
-        categoryTree, categoryList
-    })
-)
-export default class SelectGoodsCategory extends Component<Props, State> {
-    constructor(props: Props) {
+@connect(({ goodsCategory, loading }) => ({
+    goodsCategory: goodsCategory.list.result,
+    goodsCategoryLoading: loading.effects["goodsCategory/list"]
+}))
+export default class SelectGoodsCategory extends Component {
+    static defaultProps = {
+        visible: false,
+        goodsCategory: { list: [] },
+        goodsCategoryLoading: true
+    };
+
+    constructor(props) {
         super(props);
         this.state = {
             expandedKeys: [],
             autoExpandParent: true,
-            value: props.value ? props.value : null
-        }
+            value: props.value ? props.value : null,
+            categoryTree: []
+        };
     }
 
-    onExpand = (expandedKeys: Array<any>) => {
+    onExpand = (expandedKeys) => {
         this.setState({
             expandedKeys,
-            autoExpandParent: false,
+            autoExpandParent: false
         });
-    }
-
+    };
 
     componentDidMount() {
-        const { dispatch } = this.props
-        if (dispatch) {
-            dispatch(getGoodsCategoryList())
+        const { dispatch, goodsCategory,goodsCategoryLoading } = this.props;
+        if (goodsCategory.list.length === 0 && !goodsCategoryLoading) {
+            dispatch({
+                type: "goodsCategory/list",
+                callback: (response) => {
+                    this.setState({ categoryTree: Arr.toTree(response.result.list) });
+                }
+            });
         }
     }
 
-    onSelect = (selectedKeys: any, e: { selected: boolean, selectedNodes: Array<any>, node: any, event: any }) => {
-        const key = selectedKeys[0]
-        const { categoryList } = this.props
+    onSelect = (selectedKeys) => {
+        const key = selectedKeys[0];
+        const { categoryList } = this.props;
         if (Array.isArray(categoryList)) {
             const category = categoryList.find((value) => {
-                return Number(key) === Number(value.id)
-            })
+                return Number(key) === Number(value.id);
+            });
             this.setState({
                 value: category ? category : null
-            })
+            });
         }
-    }
+    };
 
     render() {
-        const { visible, categoryTree } = this.props
+        const { visible } = this.props;
+        const { categoryTree } = this.state;
         if (categoryTree) {
             const { expandedKeys, autoExpandParent } = this.state;
             const loop = categoryTree => categoryTree.map((item) => {
@@ -97,15 +80,15 @@ export default class SelectGoodsCategory extends Component<Props, State> {
                     title="选择商品分类页面"
                     visible={visible}
                     onCancel={() => {
-                        this.props.close()
+                        this.props.close();
                     }}
                     style={{ top: 20 }}
                     width={756}
-                    okType={'primary'}
-                    okText={'确定'}
-                    cancelText={'取消'}
+                    okType={"primary"}
+                    okText={"确定"}
+                    cancelText={"取消"}
                     onOk={() => {
-                        this.props.getState(this.state)
+                        this.props.getState(this.state);
                     }}
                     okButtonProps={{ disabled: this.state.value === null }}
                 >
@@ -120,9 +103,9 @@ export default class SelectGoodsCategory extends Component<Props, State> {
                         </Tree>
                     </View>
                 </Modal>
-            )
+            );
         } else {
-            return null
+            return null;
         }
     }
 }

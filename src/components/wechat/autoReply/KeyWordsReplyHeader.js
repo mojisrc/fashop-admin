@@ -1,20 +1,17 @@
-//@flow
 import React,{ Component } from 'react'
 import { Input, Button } from 'antd';
-import { View } from 'react-web-dom'
+import { View } from '@/components/flexView'
 import styles from './index.css'
-
 const Search = Input.Search;
+//
+// type Props = {
+//     history:{
+//         push:Function
+//     },
+//     getKeyWordsReplyList:Function
+// }
 
-type Props = {
-    history:{
-        push:Function
-    },
-    getKeyWordsReplyList:Function
-}
-type State = {}
-
-export default class KeyWordsReplyHeader extends Component<Props,State> {
+export default class KeyWordsReplyHeader extends Component {
     render() {
         const { history, getKeyWordsReplyList } = this.props
         return (
@@ -29,7 +26,7 @@ export default class KeyWordsReplyHeader extends Component<Props,State> {
                 <Button
                     type="primary"
                     onClick={()=>{
-                        history.push({
+                        router.push({
                             search:`?menu=2&router=addReply`
                         })
                     }}

@@ -1,5 +1,8 @@
 /*goodsPhone*/
 .goodsPhoneWarp {
+    display: flex;
+    align-items: initial;
+    justify-content: flex-start;
     flex-direction: row;
     flex-wrap: wrap;
     padding: 0 6px;
@@ -38,7 +41,10 @@
     display: -webkit-box;
     text-overflow: ellipsis;
     -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
+    -webkit-line-clamp: 1;
+    height: 20px;
+    word-break: break-all;
+    word-wrap:break-word;
 }
 
 .listPrice {
@@ -63,6 +69,7 @@
 
 .smallImgWarp {
     width: 100%;
+    overflow: hidden;
 }
 
 .smallImgWarp img {
@@ -77,11 +84,15 @@
 
 .smallTitle {
     margin: 10px 0;
+    height: 20px;
+    -webkit-line-clamp: 1;
+    font-size: 14px;
     overflow: hidden;
-    display: -webkit-box;
     text-overflow: ellipsis;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
+    -webkit-box-orient:vertical;
+    word-break: break-all;
+    word-wrap:break-word;
+    display:-webkit-box;
 }
 
 .smallPrice {
@@ -92,4 +103,15 @@
     margin-right: 10px;
     color: #ccc;
     text-decoration: line-through;
+}
+.lineClamp1{
+    -webkit-line-clamp: 1!important;
+    height: 20px!important;
+    -webkit-box-orient:vertical!important;
+
+}
+.lineClamp2{
+    -webkit-line-clamp: 2!important;
+    height: 40px!important;
+    -webkit-box-orient:vertical!important;
 }

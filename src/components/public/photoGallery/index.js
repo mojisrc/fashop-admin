@@ -1,73 +1,97 @@
-//@flow
 import React, { Component } from "react";
-import { View } from "react-web-dom";
-import {
-    Modal,
-    Tabs,
-    Button,
-    Row,
-    Col,
-    Checkbox,
-    Pagination,
-    Spin
-} from "antd";
+import { View } from "@/components/flexView";
+import { Modal, Tabs, Button, Row, Col, Checkbox, Pagination, Spin, Input, DatePicker } from "antd";
 import styles from "./index.css";
-import { connect } from "react-redux";
-import { getPhotoGalleryList } from "../../../actions/app/photoGallery";
-import UploadImage from "../../../components/uploadImage";
-import Image from "../../image";
+import { connect } from "dva";
+import UploadImage from "@/components/uploadImage";
+import Image from "@/components/image";
+import moment from "moment"
 
 const TabPane = Tabs.TabPane;
 const CheckboxGroup = Checkbox.Group;
+const Search = Input.Search;
+const { RangePicker } = DatePicker;
+function disabledDate(current) {
+    // Can not select days after today
+    return current && current > moment().endOf('day');
+}
 
-type Props = {
-    visible: boolean,
-    onCancel: Function,
-    onOk: Function,
-    imageList: {}
-};
-
-type State = {
-    url: string,
-    checkedValues: Array<string>
-};
-
-@connect(({ app: { app: { imageList } } }) => ({
-    imageList
+@connect(({ image, loading }) => ({
+    imageList: image.list.result,
+    imageListLoading: loading.effects["image/list"],
+    goodsImageList: image.goodsImageList.result,
+    goodsImageListLoading: loading.effects["image/goodsImageList"],
 }))
-export default class PhotoGallery extends Component<Props, State> {
+export default class PhotoGallery extends Component {
     static defaultProps = {
         imageList: {
-            page: 1,
-            rows: 20,
             total_number: 0,
-            list: [],
-            loading: true
+            list: []
+        },
+        goodsImageList: {
+            total_number: 0,
+            list: []
         }
     };
     state = {
-        url: "",
-        checkedValues: []
+        page: 1,
+        rows: 18,
+        goodsPage: 1,
+        goodsRows: 18,
+        checkedImg: [],
+        checkedGoodsImg: [],
+        keywords: null,
+        create_time: []
     };
     componentDidMount() {
-        this.getPhotoGalleryList()
+        this.initImgList();
+        this.initGoodsImgList();
     }
-    getPhotoGalleryList = ()=>{
-        const { dispatch, imageList } = this.props;
-        const { rows } = imageList;
-        dispatch(getPhotoGalleryList({ params: { page: 1, rows } }))
+    initImgList() {
+        const { dispatch } = this.props;
+        const { page, rows, create_time } = this.state
+        dispatch({
+            type: "image/list",
+            payload: {
+                page,
+                rows,
+                create_time
+            }
+        });
     }
-    clearCheckedValues = ()=>{
+    initGoodsImgList() {
+        const { dispatch } = this.props;
+        const { goodsPage, goodsRows, keywords } = this.state;
+        dispatch({
+            type: "image/goodsImageList",
+            payload: {
+                page: goodsPage,
+                rows: goodsRows, 
+                keywords
+            }
+        });
+    }
+    clearCheckedValues = () => {
         this.setState({
-            checkedValues: []
+            checkedImg: [],
+            checkedGoodsImg: [],
         })
     }
     render() {
         const {
             visible,
             onCancel,
-            onOk,
+            onOk
         } = this.props;
+        const tabList = [
+            {
+                tab: "图片库",
+                render: this.imgList
+            }, {
+                tab: "商品图",
+                render: this.goodsImgList
+            }
+        ]
         return (
             <Modal
                 title="我的图库"
@@ -81,47 +105,79 @@ export default class PhotoGallery extends Component<Props, State> {
                 width={800}
                 onCancel={() => {
                     onCancel();
-                    this.clearCheckedValues()
+                    this.clearCheckedValues();
                 }}
                 onOk={() => {
-                    onOk(this.state.checkedValues);
-                    this.clearCheckedValues()
+                    const result = [
+                        ...this.state.checkedImg,
+                        ...this.state.checkedGoodsImg,
+                    ].map(item=>{
+                        let index = item.indexOf("-")
+                        return item.substr(index+1)
+                    })
+                    onOk(result);
+                    this.clearCheckedValues();
                 }}
             >
-                <Tabs>
-                    <TabPane tab={"图片库"} key={"图片库"}>
-                        {this.returnImgList()}
-                    </TabPane>
+                <Tabs
+                    tabBarStyle={{
+                        paddingLeft: 24
+                    }}
+                >
+                    {
+                        tabList.map((item,index)=>(
+                            <TabPane tab={item.tab} key={index}>
+                                {
+                                    item.render()
+                                }
+                            </TabPane>
+                        ))
+                    }
                 </Tabs>
             </Modal>
         );
     }
-    returnImgList() {
-        const { checkedValues } = this.state;
-        const { imageList, dispatch } = this.props;
-        const { page, rows, total_number, list, loading } = imageList;
+
+    imgList = () => {
+        const { checkedImg } = this.state;
+        const { imageList, imageListLoading } = this.props;
+        const { list } = imageList;
         return (
             <View className={styles.imgList}>
                 <View className={styles.imgListTop}>
                     <UploadImage
-                        onChange={(e)=>{
-                            this.getPhotoGalleryList()
+                        onChange={(e) => {
+                            this.initImgList();
                         }}
                         is_save={1}
                     >
                         <Button type="primary">上传图片</Button>
                     </UploadImage>
+                    <RangePicker 
+                        style={{width: 318}}
+                        disabledDate={disabledDate}
+                        onChange={(date)=>{
+                            this.setState({
+                                create_time: date.length ? [
+                                    moment(date[0]).format('X'),
+                                    moment(date[1]).format('X')
+                                ] : []
+                            },()=>{
+                                this.initImgList()
+                            })
+                        }} 
+                    />
                 </View>
-                <Spin spinning={loading}>
+                <Spin spinning={imageListLoading}>
                     <CheckboxGroup
-                        value={checkedValues}
-                        onChange={checkedValues => {
-                            this.setState({ checkedValues });
+                        value={checkedImg}
+                        onChange={checkedImg => {
+                            this.setState({ checkedImg });
                         }}
                         style={{ display: "block" }}
                     >
                         <View className={styles.imgContent}>
-                            <Row gutter={30} type={'flex'}>
+                            <Row gutter={30} type={"flex"}>
                                 {list.map((item, index) => (
                                     <Col
                                         span={4}
@@ -129,28 +185,25 @@ export default class PhotoGallery extends Component<Props, State> {
                                         style={{ marginTop: 15 }}
                                     >
                                         <Checkbox
-                                            value={item.url}
+                                            value={`${item.id}-${item.url}`}
                                             className={styles.checkbox}
                                         >
                                             <View
                                                 className={styles.imgItem}
                                                 style={
-                                                    checkedValues.indexOf(
-                                                        item.id
-                                                    ) > -1
-                                                        ? {
-                                                              borderColor:
-                                                                  "#188fff"
-                                                          }
-                                                        : {}
+                                                    checkedImg.indexOf(`${item.id}-${item.url}`) > -1 ? {
+                                                        borderColor: "#188fff"
+                                                    } : {}
                                                 }
                                             >
-                                                <p>{item.title}</p>
+                                                {
+                                                    item.title ? <p className={styles.title}>{item.title}</p> : null
+                                                }
                                                 <div>
-                                                <Image
-                                                    src={item.url}
-                                                    style={{minHeight:101.33}}
-                                                />
+                                                    <Image
+                                                        src={item.url}
+                                                        style={{ minHeight: 101.33 }}
+                                                    />
                                                 </div>
                                             </View>
                                         </Checkbox>
@@ -165,13 +218,104 @@ export default class PhotoGallery extends Component<Props, State> {
                         size="small"
                         showSizeChanger={false}
                         showQuickJumper={false}
-                        current={page}
-                        pageSize={rows}
-                        total={total_number}
+                        current={this.state.page}
+                        pageSize={this.state.rows}
+                        total={imageList.total_number}
                         onChange={(page, rows) => {
-                            dispatch(getPhotoGalleryList({ params: { page,rows}}))
+                            this.setState({
+                                page,
+                                rows
+                            }, () => {
+                                this.initImgList();
+                            });
                         }}
-                        pageSizeOptions={['18']}
+                        pageSizeOptions={[`${this.state.rows}`]}
+                    />
+                </View>
+            </View>
+        );
+    }
+
+    goodsImgList = () => {
+        const { checkedGoodsImg } = this.state;
+        const { goodsImageList, goodsImageListLoading } = this.props;
+        const { list } = goodsImageList;
+        return (
+            <View className={styles.imgList}>
+                <View className={styles.imgListTop}>
+                    <View/>
+                    <Search
+                        placeholder="请输入关键词"
+                        onSearch={value => {
+                            this.setState({ keywords: value },()=>{
+                                this.initGoodsImgList()
+                            })
+                        }}
+                        style={{ width: 200 }}
+                    />
+                </View>
+                <Spin spinning={goodsImageListLoading}>
+                    <CheckboxGroup
+                        value={checkedGoodsImg}
+                        onChange={checkedGoodsImg => {
+                            this.setState({ checkedGoodsImg });
+                        }}
+                        style={{ display: "block" }}
+                    >
+                        <View className={styles.imgContent}>
+                            <Row gutter={30} type={"flex"}>
+                                {list.map((item, index) => (
+                                    <Col
+                                        span={4}
+                                        key={index}
+                                        style={{ marginTop: 15 }}
+                                    >
+                                        <Checkbox
+                                            value={`${item.id}-${item.img}`}
+                                            className={styles.checkbox}
+                                        >
+                                            <View
+                                                className={styles.imgItem}
+                                                style={
+                                                    checkedGoodsImg.indexOf(`${item.id}-${item.img}`) > -1 ? {
+                                                        borderColor: "#188fff"
+                                                    } : {}
+                                                }
+                                            >
+                                                {
+                                                    item.title ? <p className={styles.title}>{item.title}</p> : null
+                                                }
+                                                <div>
+                                                    <Image
+                                                        src={item.img}
+                                                        style={{ minHeight: 101.33 }}
+                                                    />
+                                                </div>
+                                            </View>
+                                        </Checkbox>
+                                    </Col>
+                                ))}
+                            </Row>
+                        </View>
+                    </CheckboxGroup>
+                </Spin>
+                <View className={styles.paginationView}>
+                    <Pagination
+                        size="small"
+                        showSizeChanger={false}
+                        showQuickJumper={false}
+                        current={this.state.goodsPage}
+                        pageSize={this.state.goodsRows}
+                        total={goodsImageList.total_number}
+                        onChange={(page, rows) => {
+                            this.setState({
+                                goodsPage: page,
+                                goodsRows: rows
+                            }, () => {
+                                this.initImgList();
+                            });
+                        }}
+                        pageSizeOptions={[`${this.state.goodsRows}`]}
                     />
                 </View>
             </View>

@@ -1,0 +1,39 @@
+.agreementViewWarp{
+    flex: 1;
+}
+.agreementViewWarp h3{
+    font-family: 'PingFangSC-Semibold', 'PingFang SC Semibold', 'PingFang SC';
+    font-weight: 650;
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+.agreementView{
+    height: 300px;
+    max-height: 300px;
+    overflow-y: scroll;
+    background-color: #f8f8f8;
+    padding: 15px;
+}
+.agreementView h3{
+    margin-bottom: 0;
+}
+.agreementView h4{
+    margin-top: 16px;
+}
+.agreementView p{
+    margin-left: 20px;
+}
+.agreementView .topP{
+    margin: 0;
+}
+.agreementView::-webkit-scrollbar-thumb{
+    border-radius: 4px;
+    background-color: #DE1D22;
+}
+.agreementFooter{
+    flex: 1;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+}

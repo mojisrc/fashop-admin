@@ -1,39 +1,37 @@
-//@flow
 import React,{ Component } from 'react'
-import { bindActionCreators } from 'redux';
-import { connect } from "react-redux";
-import * as actions from "../../../../actions/wechat/material";
+
+import { connect } from "dva";
+import * as actions from "@/actions/wechat/material";
 import { Popconfirm, Row, Col, Spin, Pagination } from 'antd';
-import { View } from 'react-web-dom'
+import { View } from '@/components/flexView'
 import styles from './index.css'
 import EmptyView from '../emptyView'
-import Image from '../../../image'
+import Image from '@/image'
 import moment from 'moment'
-
-type Props = {
-    localNewsMaterialList:{
-        list:Array<{
-            create_time:string,
-            media:Array<{
-                title:string,
-                cover_pic:string,
-                link:{
-                    action:string,
-                    param:{
-                        id:number
-                    }
-                }
-            }>
-        }>,
-        total_number:number
-    },
-    getLocalNewsMaterialList:Function,
-    delLocalNewsMaterialList:Function,
-    localNewsCurrentPage:number,
-    localNewsPageSize:number,
-    localNewsMaterialListLoading:boolean,
-}
-type State = {}
+//
+// type Props = {
+//     localNewsMaterialList:{
+//         list:Array<{
+//             create_time:string,
+//             media:Array<{
+//                 title:string,
+//                 cover_pic:string,
+//                 link:{
+//                     action:string,
+//                     param:{
+//                         id:number
+//                     }
+//                 }
+//             }>
+//         }>,
+//         total_number:number
+//     },
+//     getLocalNewsMaterialList:Function,
+//     delLocalNewsMaterialList:Function,
+//     localNewsCurrentPage:number,
+//     localNewsPageSize:number,
+//     localNewsMaterialListLoading:boolean,
+// }
 
 @connect(
     ({view:{material:{ localNewsMaterialList, localNewsCurrentPage, localNewsPageSize, localNewsMaterialListLoading }}}) => ({
@@ -42,9 +40,9 @@ type State = {}
         localNewsPageSize,
         localNewsMaterialListLoading,
     }),
-    dispatch => bindActionCreators(actions,dispatch),
+
 )
-export default class LocalArticleTable extends Component<Props,State> {
+export default class LocalArticleTable extends Component {
     componentDidMount(){
         this.props.getLocalNewsMaterialList({
             params:{
@@ -101,7 +99,7 @@ export default class LocalArticleTable extends Component<Props,State> {
                                             <View className={styles.operation}>
                                                 <a
                                                     onClick={() => {
-                                                        history.push({
+                                                        router.push({
                                                             search:`?menu=6&router=editServerMaterial&id=${itemItem.id}`
                                                         })
                                                     }}

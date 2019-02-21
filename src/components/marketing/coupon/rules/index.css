@@ -1,0 +1,11 @@
+.warp{
+    flex-direction: row;
+}
+.left{
+    flex: 0.4;
+    max-width: 320px;
+    margin: 0 24px 24px 0;
+}
+.right{
+    flex: 0.6
+}

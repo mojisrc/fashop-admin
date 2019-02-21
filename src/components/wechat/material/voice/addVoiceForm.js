@@ -1,20 +1,11 @@
-//@flow
 import React, { Component } from 'react'
-import { bindActionCreators } from 'redux';
-import { connect } from "react-redux";
-import * as actions from "../../../../actions/wechat/material";
+import { connect } from "dva";
+import * as actions from "@/actions/wechat/material";
 import { Button, Upload, message } from 'antd';
-import { View } from 'react-web-dom'
-import { Fetch } from '../../../../utils'
-import { env } from '../../../../config/root'
-
-
-type Props = {
-    hideModal: Function
-}
-type State = {
-    fileList: Array<{}>
-}
+import { View } from '@/components/flexView'
+// type Props = {
+//     hideModal: Function
+// }
 
 @connect(
     ({ view: { material: { voiceMaterialList, voiceCurrentPage, voicePageSize, materialListLoading } } }) => ({
@@ -26,7 +17,10 @@ type State = {
     dispatch => bindActionCreators(actions, dispatch),
 )
 // todo fetch
-export default class AddVoiceForm extends Component<Props, State> {
+export default class AddVoiceForm extends Component {
+    state = {
+        fileList : []
+    }
     render() {
         const { hideModal, getWechatMaterialList } = this.props
         return (

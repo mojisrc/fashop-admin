@@ -1,108 +1,33 @@
-//@flow
 import React,{ Component } from 'react'
-import { bindActionCreators } from 'redux';
-import { connect } from "react-redux";
-import * as actions from "../../actions/wechat/autoReply";
-import { View } from "react-web-dom";
+import { connect } from 'dva';
+import { View } from "@/components/flexView";
 import { Form, Input, Icon, Button, Select, Radio, Card, Popover } from "antd";
-import "../../styles/wechat/addReply.less";
-import { formType, historyType, handleSubmitType } from '../../utils/flow'
+import "@/styles/wechat/addReply.less";
+import RouterBreadcrumb from "@/components/wechat/public/routerBreadcrumb";
+import ModalNews from "@/components/public/wechatItem/modalNews";
+import ModalLocalNews from "@/components/public/wechatItem/modalLocalNews";
+import NewsModal from "@/components/public/wechatModal/newsModal";
+import ImageModal from "@/components/public/wechatModal/imageModal";
+import VoiceModal from "@/components/public/wechatModal/voiceModal";
+import VideoModal from "@/components/public/wechatModal/videoModal";
+import TextModal from "@/components/public/wechatModal/textModal";
 
-import RouterBreadcrumb from "../../components/wechat/public/routerBreadcrumb";
-
-import ModalNews from "../../components/public/wechatItem/modalNews";
-import ModalLocalNews from "../../components/public/wechatItem/modalLocalNews";
-// import ModalVoice from "../../components/public/wechatItem/modalVoice";
-// import ModalVideo from "../../components/public/wechatItem/modalVideo";
-
-import NewsModal from "../../components/public/wechatModal/newsModal";
-import ImageModal from "../../components/public/wechatModal/imageModal";
-import VoiceModal from "../../components/public/wechatModal/voiceModal";
-import VideoModal from "../../components/public/wechatModal/videoModal";
-import TextModal from "../../components/public/wechatModal/textModal";
-
-import Image from "../../components/image";
+import Image from "@/components/image";
 
 const FormItem = Form.Item;
-const InputGroup = Input.Group;
 const Option = Select.Option;
 const RadioGroup = Radio.Group;
 
 let uuid = 0;
-
-type Props = {
-    history:historyType,
-    form:formType,
-    addAutoReplyKeywords:Function,
-    getWechatMaterialList:Function,
-    getLocalNewsMaterialList:Function,
-    imageMaterialList:{
-        item:Array<{
-            name:string,
-            url:string,
-            media_id:string,
-        }>
-    },
-    materialListLoading:boolean,
-    newsMaterialList:{
-        item:Array<{
-            content:{
-                news_item:Array<{
-                    digest:string,
-                    thumb_url:string,
-                    title:string,
-                }>,
-                update_time:string,
-            },
-            media_id:string
-        }>
-    },
-    localNewsMaterialList:{
-        item:Array<{
-            content:{
-                news_item:Array<{
-                    digest:string,
-                    thumb_url:string,
-                    title:string,
-                }>,
-                update_time:string,
-            },
-            media_id:string
-        }>
-    },
-    voiceMaterialList:{
-        item:Array<{
-            name:string,
-            update_time:string,
-            media_id:string,
-        }>,
-        item_count:number,
-        total_count:number,
-    },
-    videoMaterialList:{
-        item:Array<{}>
-    },
-}
-type State = {
-    newsVisible:boolean,
-    localNewsVisible:boolean,
-    imageVisible:boolean,
-    textVisible:boolean,
-    voiceVisible:boolean,
-    videoVisible:boolean,
-    textInit:string,
-    reply_content_index:number,
-}
-
 @Form.create()
 @connect(
     ({view:{wechatAutoReply:{ keyWordsReplyList, keyWordsReplyListLoading }}}) => ({
         keyWordsReplyList,
         keyWordsReplyListLoading,
     }),
-    dispatch => bindActionCreators(actions,dispatch),
+
 )
-export default class AddReply extends Component<Props,State> {
+export default class AddReply extends Component {
     state = {
         newsVisible:false,
         localNewsVisible:false,
@@ -141,7 +66,7 @@ export default class AddReply extends Component<Props,State> {
         });
     }
 
-    handleSubmit = (e:handleSubmitType) => {
+    handleSubmit = (e) => {
         e.preventDefault();
         const { form, addAutoReplyKeywords } = this.props
         form.validateFields((err, values) => {
@@ -362,7 +287,7 @@ export default class AddReply extends Component<Props,State> {
                                             replyItem.type==='voice' ?
                                             <View className={`voiceContent contentItem`}>
                                                 <img
-                                                    src={require('../../images/wechat/voice.png')}
+                                                    src={require('../../assets/images/wechat/voice.png')}
                                                     style={{
                                                         width:70,
                                                         height:70,

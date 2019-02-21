@@ -1,13 +1,9 @@
-//@flow
 import React,{ Component } from 'react'
-import { View } from 'react-web-dom'
+import { View } from '@/components/flexView'
 import VideoHeader from './header'
 import VideoTable from './table'
 
-type Props = {}
-type State = {}
-
-export default class Video extends Component<Props,State> {
+export default class Video extends Component {
     render() {
         return (
             <View>

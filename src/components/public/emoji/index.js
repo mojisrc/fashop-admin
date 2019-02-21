@@ -1,16 +1,10 @@
-//@flow
 import React, { Component } from "react";
-import { View } from "react-web-dom";
+import { View } from "@/components/flexView";
 import { Popover, Icon } from "antd";
 import styles from "./index.css";
 import { emojiShow } from "./testData";
 
-type Props = {
-    clickFunc:Function
-}
-type State = {}
-
-export default class Emoji extends Component<Props,State> {
+export default class Emoji extends Component {
     render() {
         return (
             <Popover

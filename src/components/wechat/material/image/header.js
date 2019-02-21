@@ -1,28 +1,15 @@
- //@flow
 import React,{ Component } from 'react'
-import { bindActionCreators } from 'redux';
-import { connect } from "react-redux";
-import * as actions from "../../../../actions/wechat/material";
+import { connect } from "dva";
 import { Button, Radio, Upload, message } from 'antd';
-import { View } from 'react-web-dom'
+import { View } from '@/components/flexView'
 import styles from '../index.css'
-import { Fetch } from '../../../../utils'
-import { env } from '../../../../config/root'
-
-type Props = {
-    getWechatMaterialList:Function
-}
-type State = {
-    type:string
-}
-
 @connect(
     ({view:{material:{ imageMaterialList }}}) => ({
         imageMaterialList,
     }),
-    dispatch => bindActionCreators(actions,dispatch),
+
 )
-export default class ImageHeader extends Component<Props,State> {
+export default class ImageHeader extends Component {
     state = {
         type:'wechat'
     }

@@ -1,30 +1,29 @@
-//@flow
 import React,{ Component } from 'react'
-import { View } from 'react-web-dom'
+import { View } from '@/components/flexView'
 import { Popover, Button, Input, Tag, Checkbox, Row, Col } from 'antd'
 import styles from './index.css'
 
-type Props = {
-    tagList:Array<{
-        name:string,
-        count:number,
-        id:number
-    }>,
-    record:{
-        tagid_list:Array<string>,
-    },
-    addTagFunc:Function,
-    addUserTagFunc:Function,
-    popoverContent:Function,
-    popoverTrigger:string,
-}
-type State = {
-    tagValue:string,
-    addTag:boolean,
-    id:Array<number>
-}
+// type Props = {
+//     tagList:Array<{
+//         name:string,
+//         count:number,
+//         id:number
+//     }>,
+//     record:{
+//         tagid_list:Array<string>,
+//     },
+//     addTagFunc:Function,
+//     addUserTagFunc:Function,
+//     popoverContent:Function,
+//     popoverTrigger:string,
+// }
+// type State = {
+//     tagValue:string,
+//     addTag:boolean,
+//     id:Array<number>
+// }
 
-export default class TagPopover extends Component<Props,State> {
+export default class TagPopover extends Component {
     state = {
         addTag:false,
         tagValue:'',

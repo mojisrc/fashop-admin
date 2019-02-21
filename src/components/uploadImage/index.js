@@ -1,16 +1,15 @@
-//@flow
 import React, { Component } from "react";
 import { Icon, Upload, message } from 'antd';
-import { View } from "react-web-dom";
+import { View } from "@/components/flexView";
 import styles from './index.css'
-import { imageUpload } from "../../utils";
+import { imageUpload } from "@/utils";
 import ImageGroup from "./imageGroup";
 
-export default class UploadImage extends Component<{ url?: string, onChange?: Function, children?: any, is_save: number }, {}> {
+export default class UploadImage extends Component {
     static defaultProps = {
         is_save: 0,
     }
-    triggerChange = (e: { origin: { path: string } }) => {
+    triggerChange = (e) => {
         const {
             onChange
         } = this.props
@@ -72,20 +71,14 @@ export default class UploadImage extends Component<{ url?: string, onChange?: Fu
     }
 }
 
-
-type Props = {
-    url:  Array<string>, onChange: Function, onClick: Function, preview: Function
-}
-type State = {}
-
-export class UploadGroupImage extends Component<Props, State> {
+export class UploadGroupImage extends Component{
     static defaultProps = {
         preview: () => {
         },
         onChange: (e) => {
         }
     }
-    triggerChange = (e: { origin: { path: string } }) => {
+    triggerChange = (e) => {
         const { onChange, url } = this.props
         if (onChange) {
             onChange([...url ? url : [], e.origin.path])

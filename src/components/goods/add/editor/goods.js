@@ -1,18 +1,9 @@
-//@flow
 import React,{ Component } from "react";
-import { View } from "react-web-dom";
+import { View } from "@/components/flexView";
 import styles from './goods.css'
-import Image from '../../../image'
+import Image from '@/components/image'
 
-export default class Goods extends Component<
-    {
-        data:Array<{
-            images:Array<{url:string}>
-        }>,
-        item: {},
-    },
-    {}
-> {
+export default class Goods extends Component{
     render() {
         const { item } = this.props
         const value = item.value

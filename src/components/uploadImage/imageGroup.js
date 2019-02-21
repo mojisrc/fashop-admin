@@ -1,29 +1,10 @@
-//@flow
 import * as React from 'react'
 import { Icon } from 'antd';
-import { View } from "react-web-dom";
+import { View } from "@/components/flexView";
 import styles from './index.css'
 import update from 'immutability-helper'
 import { SortableContainer, SortableElement, arrayMove } from 'react-sortable-hoc';
-
 const { Component } = React
-type ImageGroupProps = {
-    url: Array<string>,
-    onChange: Function,
-    addButton: ?React.Node,
-    preview: Function,
-    update: Function
-}
-type SortEndType = { oldIndex: number, newIndex: number }
-type SortStartType = { node: any, index: number, collection: any }
-type EventType = {
-    target: {
-        innerHTML: string,
-        dataset: {
-            index: number
-        }
-    }
-}
 const SortableItem = SortableElement(({ value }) =>
     <li className={styles.sortableListLi}>{value}</li>
 );
@@ -39,7 +20,7 @@ const SortableList = SortableContainer(({ items, pressDelay, children }) => {
     );
 });
 
-export default class ImageGroup extends Component<ImageGroupProps, {}> {
+export default class ImageGroup extends Component{
     static defaultProps = {
         onChange: (any) => {
         },
@@ -47,16 +28,16 @@ export default class ImageGroup extends Component<ImageGroupProps, {}> {
         },
         addButton: <View />
     }
-    onSortEnd = (param: SortEndType, event: EventType) => {
+    onSortEnd = (param, event) => {
         const { url, onChange, } = this.props
         let _url = [...url]
         _url = arrayMove(_url, param.oldIndex, param.newIndex)
         onChange(update(url, { $set: _url }))
     }
-    onSortStart = (param: SortStartType, event: EventType) => {
+    onSortStart = (param, event) => {
     }
 
-    removeCard = (index: number) => {
+    removeCard = (index) => {
         const { url, onChange, } = this.props
         onChange(update(url, {
             $splice: [[index, 1]],

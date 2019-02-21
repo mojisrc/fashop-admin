@@ -1,50 +1,43 @@
-//@flow
 import React, { Component } from "react";
-import { bindActionCreators } from 'redux';
-import { connect } from "react-redux";
-import * as actions from "../../../../actions/wechat/material";
-import { View } from "react-web-dom";
-import { Modal, Button, Input, Row, Col, Card, Checkbox, Pagination, Radio, Spin, Upload, message } from "antd";
+import { connect } from 'dva';
+import { View } from "@/components/flexView";
+import { Modal, Button,  Row, Col, Pagination, Radio, Spin, Upload, message } from "antd";
 import styles from "./index.css";
 import ModalImg from "../../wechatItem/modalImg";
-import { Fetch } from '../../../../utils'
-import { env } from '../../../../config/root'
-
 const RadioGroup = Radio.Group
-const CheckboxGroup = Checkbox.Group;
-
-type Props = {
-    visible:boolean,
-    close:Function,
-    onOk:Function,
-    newsType:string,
-    imageMaterialList:{
-        item:Array<{
-            name:string,
-            url:string,
-            media_id:string,
-        }>
-    },
-    materialListLoading:boolean,
-    getWechatMaterialList:Function,
-}
-type State = {
-    newsTypeValue:string,
-    checkedValues:{
-        media_id:string
-    }
-}
+//
+// type Props = {
+//     visible:boolean,
+//     close:Function,
+//     onOk:Function,
+//     newsType:string,
+//     imageMaterialList:{
+//         item:Array<{
+//             name:string,
+//             url:string,
+//             media_id:string,
+//         }>
+//     },
+//     wechatMaterialListLoading:boolean,
+//     wechatMaterialList:Function,
+// }
+// type State = {
+//     newsTypeValue:string,
+//     checkedValues:{
+//         media_id:string
+//     }
+// }
 
 @connect(
-    ({view:{material:{ imageMaterialList, imageCurrentPage, imagePageSize, materialListLoading }}}) => ({
+    ({view:{material:{ imageMaterialList, imageCurrentPage, imagePageSize, wechatMaterialListLoading }}}) => ({
         imageMaterialList,
         imageCurrentPage,
         imagePageSize,
-        materialListLoading,
+        wechatMaterialListLoading,
     }),
-    dispatch => bindActionCreators(actions,dispatch),
+
 )
-export default class ImageModal extends Component<Props,State> {
+export default class ImageModal extends Component {
     state = {
         newsTypeValue:this.props.newsType,
         checkedValues:{
@@ -52,7 +45,7 @@ export default class ImageModal extends Component<Props,State> {
         }
     }
     componentDidMount(){
-        this.props.getWechatMaterialList({
+        this.props.wechatMaterialList({
             params:{
                 type:'image',
                 offset:'0',
@@ -94,10 +87,10 @@ export default class ImageModal extends Component<Props,State> {
         const {
             newsType,
             imageMaterialList,
-            getWechatMaterialList,
+            wechatMaterialList,
             imageCurrentPage,
             imagePageSize,
-            materialListLoading
+            wechatMaterialListLoading
         } = this.props
         const { item, item_count, total_count } = imageMaterialList
         return(
@@ -115,7 +108,7 @@ export default class ImageModal extends Component<Props,State> {
                                 console.log('handleChange',e);
                                 if(e.code===0){
                                     message.success('上传成功！')
-                                    this.props.getWechatMaterialList({
+                                    this.props.wechatMaterialList({
                                         params:{
                                             type:'image',
                                             offset:'0',
@@ -149,7 +142,7 @@ export default class ImageModal extends Component<Props,State> {
                         <Radio.Button value="local" disabled>服务器</Radio.Button>
                     </Radio.Group>
                 </View>
-                <Spin tip="Loading..." spinning={materialListLoading}>
+                <Spin tip="Loading..." spinning={wechatMaterialListLoading}>
                     <RadioGroup
                         value={checkedValues.media_id}
                         onChange={(e)=>{
@@ -203,7 +196,7 @@ export default class ImageModal extends Component<Props,State> {
                         hideOnSinglePage
                         pageSizeOptions={['5','10','15','20']}
                         onChange={(page, pageSize)=>{
-                            getWechatMaterialList({
+                            wechatMaterialList({
                                 params:{
                                     type:'image',
                                     offset:page===1 ? '0' : (page-1)*pageSize-1,
@@ -212,7 +205,7 @@ export default class ImageModal extends Component<Props,State> {
                             })
                         }}
                         onShowSizeChange={(current, size)=>{
-                            getWechatMaterialList({
+                            wechatMaterialList({
                                 params:{
                                     type:'image',
                                     offset:'0',

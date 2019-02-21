@@ -79,3 +79,8 @@
     display: block;
     padding:0;
 }
+.title {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}

@@ -1,63 +1,107 @@
-//@flow
 import React, { Component } from "react";
-import { connect } from "react-redux";
-import { View } from "react-web-dom";
-import { Input } from "antd";
-import Page from '../../components/public/page'
-import styles from '../../styles/user/userInfo.css'
-import UploadImage from '../../components/uploadImage'
-import { editSelfAvatar } from '../../actions/member'
-import types from '../../constants'
-import { historyType } from "../../utils/flow";
-import { dispatchProps } from "../../utils/defaultProps";
-type Props = {
-    history: historyType,
-    dispatch: dispatchProps,
-    location: { state: { type: string, record: {} }, search: string, pathname: string },
-    match: { url: string, path: string },
-    userInfo:{
-        avatar:string,
-        nickname:string
-    }
+import { connect } from "dva";
+import { Card } from "antd";
+import PageHeaderWrapper from "@/components/pageHeaderWrapper";
+import { Form, Input, Button, message } from "antd";
 
-}
-type State = {
-}
+const FormItem = Form.Item;
 
-@connect(({ app: { member: { userInfo } } }) => ({
-    userInfo
+@Form.create()
+@connect(({ payment, loading }) => ({
+    selfPasswordLoading: loading.effects["member/selfPassword"]
 }))
-export default class Self extends Component<Props,State>{
+class Payment extends Component {
+    static defaultProps = {
+        selfPasswordLoading: false
+    };
+    handleSubmit = e => {
+        e.preventDefault();
+        this.props.form.validateFieldsAndScroll((err, values) => {
+            if (!err) {
+                const { oldpassword, password } = values;
+                const { dispatch } = this.props;
+                dispatch({
+                    type: "member/selfPassword",
+                    payload: {
+                        oldpassword,
+                        password
+                    },
+                    callback: (response) => {
+                        if (response.code === 0) {
+                            message.success("修改成功");
+                        } else {
+                            message.warn(response.msg);
+                        }
+                    }
+                });
+            }
+        });
+    };
 
     render() {
-        const { dispatch, userInfo } = this.props;
+        const { form, selfPasswordLoading } = this.props;
+        const { getFieldDecorator } = form;
         return (
-            <Page className={styles.userInfoWarp}>
-                <View className={styles.userInfoItem}>
-                    <h3>设置头像</h3>
-                    <View className={styles.settingAvatar}>
-                        <img
-                            src={userInfo.avatar}
-                            className={styles.avatarImg}
-                        />
-                        <UploadImage
-                            onChange={(e) => {
-                                dispatch(editSelfAvatar({ params: { avatar: e, nickname: userInfo.nickname } }))
-                                setTimeout(() => {
-                                    dispatch({
-                                        type: types.member.INIT_USER_INFO_STORAGE
-                                    })
-                                }, 2000)
-                            }}
-                            is_save={1}
+            <PageHeaderWrapper hiddenBreadcrumb={true}>
+                <Card bordered={false} title="修改个人密码">
+                    <Form
+                        onSubmit={this.handleSubmit}
+                    >
+                        <FormItem
+                            {...formItemLayout}
+                            label="当前密码"
                         >
-                            <a className={styles.uploadIcon}>上传图像</a>
-                        </UploadImage>
-                        <p>仅支持JPG,GIF,PNG格式上传</p>
-                    </View>
-                </View>
-            </Page>
-        )
+                            {getFieldDecorator("oldpassword", {
+                                rules: [
+                                    {
+                                        required: true,
+                                        message: "请输入"
+                                    }
+                                ]
+                            })(<Input placeholder="请输入" type="password" />)}
+                        </FormItem>
+                        <FormItem {...formItemLayout} label="新密码" extra='当前密码和新密码不能相同'>
+                            {getFieldDecorator("password", {
+                                rules: [
+                                    {
+                                        required: true,
+                                        message: "请输入"
+                                    }
+                                ]
+                            })(<Input placeholder="请输入" />)}
+                        </FormItem>
+                        <FormItem {...tailFormItemLayout}>
+                            <Button type="primary" htmlType="submit" loading={selfPasswordLoading}>
+                                保存
+                            </Button>
+                        </FormItem>
+                    </Form>
+                </Card>
+            </PageHeaderWrapper>
+        );
     }
 }
 
+const formItemLayout = {
+    labelCol: {
+        xs: { span: 24 },
+        sm: { span: 2 }
+    },
+    wrapperCol: {
+        xs: { span: 24 },
+        sm: { span: 10 }
+    }
+};
+const tailFormItemLayout = {
+    wrapperCol: {
+        xs: {
+            span: 24,
+            offset: 0
+        },
+        sm: {
+            span: 10,
+            offset: 2
+        }
+    }
+};
+export default Payment;

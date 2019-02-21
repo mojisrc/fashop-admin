@@ -1,0 +1,46 @@
+.item, .itemAdd {
+    border: 1px solid #e8e8e8;
+    margin-bottom: -1px;
+    border-radius: 0;
+}
+
+.itemAdd {
+    padding: 16px;
+    cursor: pointer;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    border: 1px dashed #e8e8e8;
+    display: flex;
+}
+
+.itemBot {
+    display: flex;
+    flex-direction: row;
+}
+
+.itemLeft {
+    width: 80px;
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px dashed #e5e5e5;
+    border-radius: 5px;
+    position: relative;
+}
+.itemLeft>img {
+    width: 100%;
+}
+.uploadBtn p {
+    margin: 0;
+}
+
+
+
+.itemRight > p {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+

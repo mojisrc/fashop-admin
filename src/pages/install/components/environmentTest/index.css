@@ -1,0 +1,43 @@
+/* table */
+.columns{
+    text-align: center!important;
+}
+.correct{
+    color: #33b16c;
+    font-weight: bold;
+}
+.wrong{
+    color: #fe625d;
+    font-weight: bold;
+}
+.grayBg{
+    background-color: #f8f8f8;
+}
+.helpHref{
+    color: #1890ff;
+}
+
+/* environmentTest */
+.environmentTestWarp{
+    height: 100%;
+}
+.environmentTestWarp h3{
+    font-family: 'PingFangSC-Semibold', 'PingFang SC Semibold', 'PingFang SC', serif;
+    font-weight: 650;
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+.environmentTestFooter{
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+.titleWarp{
+    flex-direction: row;
+}
+.titleWarp>p{
+    margin-right: 10px;
+}
+.itemView{
+    margin-bottom: 20px;
+}

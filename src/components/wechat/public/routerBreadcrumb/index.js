@@ -1,15 +1,12 @@
-//@flow
 import React,{ Component } from 'react'
 import { Breadcrumb } from "antd";
+// type Props = {
+//     pushFunc:Function,
+//     oneLevel:string,
+//     twoLevel:string
+// }
 
-type Props = {
-    pushFunc:Function,
-    oneLevel:string,
-    twoLevel:string
-}
-type State = {}
-
-export default class RouterBreadcrumb extends Component<Props,State> {
+export default class RouterBreadcrumb extends Component {
     render() {
         const { pushFunc, oneLevel, twoLevel } = this.props
         return (

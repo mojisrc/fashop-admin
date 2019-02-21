@@ -1,22 +1,17 @@
 import React, { Component } from "react";
-import {
-    Row,
-    Col,
-} from "antd";
+import { Row, Col } from "antd";
 import styles from "./index.css";
-import PhotoGallery from "../../../components/photoGallery"
-import Image from "../../image";
-import { View } from "react-web-dom";
+import PhotoGallery from "@/components/photoGallery";
+import Image from "@/components/image";
+import { View } from "@/components/flexView";
 
 export default class InfoColumn extends Component {
-    PhotoGallery: any
-
     render() {
-        const { infoList } = this.props
+        const { infoList } = this.props;
         return (
             <Row>
                 <PhotoGallery ref={(e) => {
-                    this.PhotoGallery = e
+                    this.PhotoGallery = e;
                 }} />
                 {
                     infoList.map((infoListItem, index) =>
@@ -50,10 +45,10 @@ export default class InfoColumn extends Component {
                                                                 this.PhotoGallery.setState({
                                                                     index: imgIndex,
                                                                     photos: infoListItem.images.map((image) => {
-                                                                        return { src: image.img }
+                                                                        return { src: image.img };
                                                                     }),
                                                                     open: true
-                                                                })
+                                                                });
                                                             }}
                                                         />
                                                     </div>

@@ -1,31 +1,29 @@
-//@flow
 import React,{ Component } from 'react'
-import { bindActionCreators } from 'redux';
-import { connect } from "react-redux";
-import * as actions from "../../../actions/wechat/autoReply";
+
+import { connect } from "dva";
+import * as actions from "@/actions/wechat/autoReply";
 import { Button, Modal } from 'antd'
-import { View } from 'react-web-dom'
+import { View } from '@/components/flexView'
 import styles from './index.css'
 import MsgTab from '../public/msgTab'
-
-type Props = {
-    getFollowedReplyInfo:Function,
-    setFollowedReplyInfo:Function,
-    followedReplyInfo:{
-        reply_content:{
-            type:string,
-            content:string,
-        }
-    }
-}
-type State = {}
+//
+// type Props = {
+//     getFollowedReplyInfo:Function,
+//     setFollowedReplyInfo:Function,
+//     followedReplyInfo:{
+//         reply_content:{
+//             type:string,
+//             content:string,
+//         }
+//     }
+// }
 @connect(
     ({view:{wechatAutoReply:{ followedReplyInfo }}}) => ({
         followedReplyInfo
     }),
-    dispatch => bindActionCreators(actions,dispatch),
+
 )
-export default class FollowedReply extends Component<Props,State> {
+export default class FollowedReply extends Component {
     componentDidMount(){
         this.props.getFollowedReplyInfo()
     }

@@ -1,20 +1,14 @@
-//@flow
 import React,{ Component } from 'react'
 import { Button, Radio, Modal } from 'antd';
-import { View } from 'react-web-dom'
+import { View } from '@/components/flexView'
 import styles from '../index.css'
 import AddVoiceForm from './addVoiceForm'
-import { formType, handleSubmitType } from '../../../../utils/flow'
+// type State = {
+//    type:string,
+//    addVoiceVisible:boolean
+// }
 
-type Props = {
-    form:formType,
-}
-type State = {
-   type:string,
-   addVoiceVisible:boolean
-}
-
-export default class VoiceHeader extends Component<Props,State> {
+export default class VoiceHeader extends Component {
    state = {
        type:'wechat',
        addVoiceVisible:false

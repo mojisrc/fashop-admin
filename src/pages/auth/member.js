@@ -1,25 +1,15 @@
-//@flow
 import React, { Component } from "react";
 import {Row,Button} from "antd";
-import Page from "../../components/public/page";
-import MemberTable from "../../components/auth/MemberTable";
-import AddMemberModal from '../../components/auth/addMemberModal'
-import {AuthCom,authHoc} from '../../components/auth/authRules'
-import authSignConfig from '../../utils/authSignConfig'
-
-
-type Props = {
-    dispatch: Function,
-}
-
-type State = {
-    roleMembersVisible: boolean,
-}
-
+import PageHeaderWrapper from '@/components/pageHeaderWrapper';
+import MemberTable from "@/components/auth/MemberTable";
+import AddMemberModal from '@/components/auth/addMemberModal'
+import {AuthCom,authHoc} from '@/components/auth/authRules'
+import authSignConfig from '@/utils/authSignConfig'
+import { Card } from "antd";
 @authHoc({
     rules: authSignConfig.auth.member
 })
-export default class Member extends Component<Props,State> {
+export default class Member extends Component {
     state = {
         roleMembersVisible: false,
     };
@@ -34,7 +24,7 @@ export default class Member extends Component<Props,State> {
         } = this.state
 
         return(
-            <Page>
+            <Card bordered={false}>
                 <AuthCom rules={['member/add']}>
                     <Row
                         style={{
@@ -63,7 +53,7 @@ export default class Member extends Component<Props,State> {
                         this.changeRoleMembersModalVisible(false)
                     }}
                 />
-            </Page>
+            </Card>
         )
     }
 }

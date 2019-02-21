@@ -1,30 +1,27 @@
-//@flow
 import React,{ Component } from 'react'
-import { bindActionCreators } from 'redux';
-import { connect } from "react-redux";
-import * as actions from "../../../../actions/wechat/material";
+import { connect } from "dva";
+import * as actions from "@/actions/wechat/material";
 import { Icon, Popconfirm, Table } from 'antd';
-import { View } from 'react-web-dom'
+import { View } from '@/components/flexView'
 import styles from './index.css'
 import moment from 'moment'
-
-type Props = {
-    videoMaterialList:{
-        item:Array<{
-            name:string,
-            url:string,
-            media_id:string,
-        }>,
-        item_count:number,
-        total_count:number
-    },
-    getWechatMaterialList:Function,
-    videoCurrentPage:number,
-    videoPageSize:number,
-    materialListLoading:boolean,
-    delWechatMaterial:Function,
-}
-type State = {}
+//
+// type Props = {
+//     videoMaterialList:{
+//         item:Array<{
+//             name:string,
+//             url:string,
+//             media_id:string,
+//         }>,
+//         item_count:number,
+//         total_count:number
+//     },
+//     getWechatMaterialList:Function,
+//     videoCurrentPage:number,
+//     videoPageSize:number,
+//     materialListLoading:boolean,
+//     delWechatMaterial:Function,
+// }
 
 @connect(
     ({view:{material:{ videoMaterialList, videoCurrentPage, videoPageSize, materialListLoading }}}) => ({
@@ -33,9 +30,9 @@ type State = {}
         videoPageSize,
         materialListLoading,
     }),
-    dispatch => bindActionCreators(actions,dispatch),
+
 )
-export default class VideoTable extends Component<Props,State> {
+export default class VideoTable extends Component {
     componentDidMount(){
         this.props.getWechatMaterialList({
             params:{

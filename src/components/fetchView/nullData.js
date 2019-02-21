@@ -1,6 +1,6 @@
 import React,{ Component } from 'react';
-import {windowWidth} from '../../utils/style';
-import { View } from "react-web-dom";
+import {windowWidth} from '@/utils/style';
+import { View } from "@/components/flexView";
 import PropTypes from 'prop-types';
 
 export default class NullData extends Component{
@@ -29,7 +29,7 @@ export default class NullData extends Component{
                 }
             >
                 <img
-                    src={require('../../images/fetchStatus/nullData.png')}
+                    src={require('../../assets/images/fetchStatus/nullData.png')}
                     alt={'loading'}
                     style={
                         Object.assign({},styles.loaddingImage,

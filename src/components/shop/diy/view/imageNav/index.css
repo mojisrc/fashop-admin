@@ -1,18 +1,23 @@
 /* imgNavPhone */
 .imgNavPhoneWarp{
+    display: flex;
+    align-items: initial;
+    justify-content: flex-start;
     /* min-height: 90px; */
     background-color: #fff;
     flex-direction: row;
     border-top: 10px solid rgba(255, 255, 255, 0);
     border-bottom: 10px solid rgba(255, 255, 255, 0);
-    justify-content: flex-start;
     flex-wrap: wrap;
     overflow: hidden;
 }
 .imgNavPhonItem{
     flex-shrink: 0;
-    align-items: center;
     float: left;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: column;
 }
 .imgNavPhonItem img{
     width: 35px;

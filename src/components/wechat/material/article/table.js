@@ -1,38 +1,36 @@
-//@flow
 import React,{ Component } from 'react'
-import { bindActionCreators } from 'redux';
-import { connect } from "react-redux";
-import * as actions from "../../../../actions/wechat/material";
-import { Popconfirm, Row, Col, Spin, Pagination, message } from 'antd';
-import { View } from 'react-web-dom'
-import styles from './index.css'
-import { historyType } from '../../../../utils/flow'
-import Image from '../../../image'
-import moment from 'moment'
 
-type Props = {
-    newsMaterialList:{
-        item:Array<{
-            update_time:string,
-            content:{
-                news_item:Array<{
-                    title:string,
-                    digest:string,
-                    thumb_url:string,
-                    url:string
-                }>
-            }
-        }>,
-        item_count:number,
-        total_count:number
-    },
-    getWechatMaterialList:Function,
-    newsCurrentPage:number,
-    newsPageSize:number,
-    materialListLoading:boolean,
-    history:historyType
-}
-type State = {}
+import { connect } from "dva";
+import * as actions from "@/actions/wechat/material";
+import { Popconfirm, Row, Col, Spin, Pagination, message } from 'antd';
+import { View } from '@/components/flexView'
+import styles from './index.css'
+
+import Image from '@/image'
+import moment from 'moment'
+//
+// type Props = {
+//     newsMaterialList:{
+//         item:Array<{
+//             update_time:string,
+//             content:{
+//                 news_item:Array<{
+//                     title:string,
+//                     digest:string,
+//                     thumb_url:string,
+//                     url:string
+//                 }>
+//             }
+//         }>,
+//         item_count:number,
+//         total_count:number
+//     },
+//     getWechatMaterialList:Function,
+//     newsCurrentPage:number,
+//     newsPageSize:number,
+//     materialListLoading:boolean,
+//     history:historyType
+// }
 
 @connect(
     ({view:{material:{ newsMaterialList, newsCurrentPage, newsPageSize, materialListLoading }}}) => ({
@@ -41,9 +39,9 @@ type State = {}
         newsPageSize,
         materialListLoading,
     }),
-    dispatch => bindActionCreators(actions,dispatch),
+
 )
-export default class ArticleTable extends Component<Props,State> {
+export default class ArticleTable extends Component {
     componentDidMount(){
         this.props.getWechatMaterialList({
             params:{
@@ -102,7 +100,7 @@ export default class ArticleTable extends Component<Props,State> {
                                                     onClick={() => {
                                                         itemItem.content.news_item.length>1 ?
                                                         message.warn('请选择单个图文进行修改！') :
-                                                        history.push({
+                                                        router.push({
                                                             search:`?menu=6&router=editWechatMaterial&media_id=${itemItem.media_id}`
                                                         })
                                                     }}
@@ -188,7 +186,7 @@ export default class ArticleTable extends Component<Props,State> {
                                 color:'#fff'
                             }}
                             onClick={() => {
-                                this.props.history.push({
+                                router.push({
                                     search:`?menu=6&router=editWechatMaterial&media_id=${media_id}&index=0`
                                 })
                             }}
@@ -225,7 +223,7 @@ export default class ArticleTable extends Component<Props,State> {
                                         color:'#fff'
                                     }}
                                     onClick={() => {
-                                        this.props.history.push({
+                                        router.push({
                                             search:`?menu=6&router=editWechatMaterial&media_id=${media_id}&index=${index}`
                                         })
                                     }}

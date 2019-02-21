@@ -1,25 +1,23 @@
-//@flow
 import React, { Component } from "react";
-import { View } from "react-web-dom";
+//
+// type Props = {
+//     options: {
+//         height: number
+//     }
+// }
+// type State = {}
 
-type Props = {
-    options: {
-        height: number
-    }
-}
-type State = {}
-
-export default class Index extends Component<Props, State> {
+export default class Index extends Component {
     render() {
         const { options } = this.props
         const { height } = options
         return (
-            <View
+            <div
                 style={{
                     height: `${height}px`
                 }}
             >
-            </View>
+            </div>
         )
     }
 }

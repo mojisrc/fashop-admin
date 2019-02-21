@@ -2,7 +2,7 @@ export const abledata = [
     {
         type:'text',
         title: '文字',
-        icon: require('../../../../images/shop/title.png'),
+        icon: require('@/assets/images/shop/title.png'),
         getValue: (e)=>{
             return {
                 content: e
@@ -11,7 +11,7 @@ export const abledata = [
     }, {
         type:'image',
         title: '图片',
-        icon: require('../../../../images/shop/image_ads.png'),
+        icon: require('@/assets/images/shop/image_ads.png'),
         getValue: (e)=>{
             return {
                 url: e
@@ -21,7 +21,7 @@ export const abledata = [
     // {
     //     type:'video',
     //     title : '视频',
-    //     icon : require('../../../../images/shop/video.png'),
+    //     icon : require('@/images/shop/video.png'),
     //     getValue: ({img,url})=>{
     //         return {
     //             url,
@@ -32,7 +32,7 @@ export const abledata = [
     // {
     //     type:'goods',
     //     title : '商品',
-    //     icon : require('../../../../images/shop/goods_list.png'),
+    //     icon : require('@/images/shop/goods_list.png'),
     //     getValue: ({id,img,title,price})=>{
     //         return {
     //             id,
@@ -47,6 +47,6 @@ export const abledata = [
     {
         type:'separator',
         title : '分割线',
-        icon : require('../../../../images/shop/separator.png'),
+        icon : require('@/assets/images/shop/separator.png'),
     }
 ]

@@ -1,7 +1,7 @@
-//@flow
+
 import React, { Component } from 'react'
 import ContainerFather from './containerFather'
-import { View } from 'react-web-dom'
+import { View } from '@/components/flexView'
 
 export default class DragAndDrop extends Component {
 	state = {

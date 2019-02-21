@@ -1,7 +1,7 @@
 import React from 'react'
-import Page from '../../components/public/page'
-import { View } from 'react-web-dom'
-import styles from '../../../src/styles/wechat/wechatIndex.css'
+import PageHeaderWrapper from '@/components/pageHeaderWrapper';
+import { View } from '@/components/flexView'
+import styles from '@/src/styles/wechat/wechatIndex.css'
 import { Button, Table,Icon } from 'antd'
 
 export default class NotBindPublicAccounts extends React.Component {
@@ -85,7 +85,7 @@ export default class NotBindPublicAccounts extends React.Component {
                         type="primary"
                         className={styles.bindBtn}
                         onClick={()=>{
-                            this.props.history.push('/wechat/bindPublicAccounts')
+                            router.push('/wechat/bindPublicAccounts')
                         }}
                     >
                         绑定微信公众号
@@ -115,7 +115,7 @@ export default class NotBindPublicAccounts extends React.Component {
                         pagination={false}
                     />
                 </div>
-            </Page>
+            </Card>
         )
     }
 }
