@@ -53,7 +53,6 @@ class List extends Component {
     };
 
     render() {
-        let { keywords } = this.search.getParam();
         const { policyList, policyListLoading } = this.props;
 
         const columns = [

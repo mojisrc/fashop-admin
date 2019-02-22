@@ -1,9 +1,13 @@
 import React, { Component } from "react";
-import { Drawer, Input, Button, message,Table,Row, Col } from "antd";
+import { Drawer, Input, message,Table,Row, Col } from "antd";
 import { connect } from "dva";
 const Search = Input.Search;
 
-@connect(({ loading }) => ({
+@connect(({ auth, loading }) => ({
+    groupMemberList:auth.groupMemberList,
+    groupMemberListLoading:loading.effects["auth/groupMemberList"],
+    userList:auth.userList,
+    userListLoading:loading.effects["auth/userList"],
     groupAddLoading: loading.effects["auth/groupAdd"]
 }), null, null, {
     withRef: true
@@ -16,7 +20,13 @@ export default class AuthGroupAddMember extends Component {
         }
     };
     state = {
-        visible: false
+        id:0,
+        visible: false,
+        keywords:'',
+        search:{
+            page:1,
+            rows:10
+        }
     };
 
     handleSubmit = (e) => {
@@ -45,12 +55,35 @@ export default class AuthGroupAddMember extends Component {
         });
     };
 
-    show() {
+    show({id}) {
         this.setState({
+            id,
             visible: true
         });
     }
+    search({page}){
+        const { dispatch } = this.props;
+        dispatch({
+            type:'auth/userList',
+            payload: {
+                page,
+                rows:10,
+                keywords:this.state.keywords
+            }
+        })
+    }
+    getGroupMemberList({page}){
+        const { dispatch } = this.props;
+        dispatch({
+            type:'auth/groupMemberList',
+            payload: {
+                page,
+                rows:10,
+                group_id:this.state.id
+            }
+        })
 
+    }
     close() {
         this.setState({
             visible: false
@@ -58,6 +91,7 @@ export default class AuthGroupAddMember extends Component {
     }
 
     render() {
+        const {groupMemberList} = this.props
         const columns = [{
             title: '名称',
             dataIndex: 'name',
@@ -67,67 +101,7 @@ export default class AuthGroupAddMember extends Component {
             key: 'action',
             render: (text, record) => <a href="javascript:;">添加</a>
         }];
-        const data = [{
-            key: '1',
-            name: 'John Brown',
-            age: 32,
-            address: 'New York No. 1 Lake Park',
-            tags: ['nice', 'developer'],
-        }, {
-            key: '2',
-            name: 'Jim Green',
-            age: 42,
-            address: 'London No. 1 Lake Park',
-            tags: ['loser'],
-        }, {
-            key: '3',
-            name: 'Joe Black',
-            age: 32,
-            address: 'Sidney No. 1 Lake Park',
-            tags: ['cool', 'teacher'],
-        }, {
-            key: '3',
-            name: 'Joe Black',
-            age: 32,
-            address: 'Sidney No. 1 Lake Park',
-            tags: ['cool', 'teacher'],
-        }, {
-            key: '3',
-            name: 'Joe Black',
-            age: 32,
-            address: 'Sidney No. 1 Lake Park',
-            tags: ['cool', 'teacher'],
-        }, {
-            key: '3',
-            name: 'Joe Black',
-            age: 32,
-            address: 'Sidney No. 1 Lake Park',
-            tags: ['cool', 'teacher'],
-        }, {
-            key: '3',
-            name: 'Joe Black',
-            age: 32,
-            address: 'Sidney No. 1 Lake Park',
-            tags: ['cool', 'teacher'],
-        }, {
-            key: '3',
-            name: 'Joe Black',
-            age: 32,
-            address: 'Sidney No. 1 Lake Park',
-            tags: ['cool', 'teacher'],
-        }, {
-            key: '3',
-            name: 'Joe Black',
-            age: 32,
-            address: 'Sidney No. 1 Lake Park',
-            tags: ['cool', 'teacher'],
-        }, {
-            key: '3',
-            name: 'Joe Black',
-            age: 32,
-            address: 'Sidney No. 1 Lake Park',
-            tags: ['cool', 'teacher'],
-        }];
+
 
         return (
           <Drawer
@@ -142,21 +116,7 @@ export default class AuthGroupAddMember extends Component {
             visible={this.state.visible}
           >
               <Row gutter={8}>
-
                   <Col span={12}>
-                      <Table
-                        size={'middle'}
-                        title={() => <div style={{
-                              height:32,
-                            display:'flex',
-                            alignItems:'center',
-                        }}>组内成员</div>}
-                        bordered={true}
-                        columns={columns} dataSource={data}
-                      />
-                  </Col>
-                  <Col span={12}>
-
                       <Table
                         size={'middle'}
                         title={() => <div style={{
@@ -166,12 +126,45 @@ export default class AuthGroupAddMember extends Component {
                               placeholder="搜索组外成员"
                               enterButton="搜索"
                               size={'middle'}
-                              onSearch={value => console.log(value)}
+                              onSearch={(value)=>{
+                                  this.setState({
+                                      keywords:value
+                                  },()=>{
+                                      this.search({page:1})
+                                  })
+                              }}
                             />
                         </div>}
                         bordered={true}
                         columns={columns}
-                        dataSource={data}
+                        dataSource={groupMemberList.list}
+                        pagination={{
+                            showSizeChanger: false,
+                            showQuickJumper: false,
+                            current: this.search.page,
+                            pageSize: this.search.rows,
+                            total: groupMemberList.total_number
+                        }}
+                      />
+                  </Col>
+                  <Col span={12}>
+                      <Table
+                        size={'middle'}
+                        title={() => <div style={{
+                            height:32,
+                            display:'flex',
+                            alignItems:'center',
+                        }}>组内成员</div>}
+                        bordered={true}
+                        columns={columns}
+                        dataSource={groupMemberList.list}
+                        pagination={{
+                            showSizeChanger: false,
+                            showQuickJumper: false,
+                            current: this.search.page,
+                            pageSize: this.search.rows,
+                            total: groupMemberList.total_number
+                        }}
 
                       />
                   </Col>

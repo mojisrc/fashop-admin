@@ -86,7 +86,7 @@ class List extends Component {
                     </a>
                     <a
                       onClick={() => {
-                          this.groupAddMember.getWrappedInstance().show();
+                          this.groupAddMember.getWrappedInstance().show({id:record.id});
 
                       }}
                     >
@@ -94,7 +94,7 @@ class List extends Component {
                     </a>
                     <a
                       onClick={() => {
-                          this.groupAddPolicy.getWrappedInstance().show();
+                          this.groupAddPolicy.getWrappedInstance().show({id:record.id});
                       }}
                     >
                         添加权限
