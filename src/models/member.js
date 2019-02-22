@@ -9,6 +9,7 @@ export default {
         list: {
             result: { list: [], total_number: 0 }
         },
+        info: { result: { info: {} } },
         token: {},
         selfEdit: {},
         add: {},
@@ -25,6 +26,14 @@ export default {
             const response = yield call(member.list, payload);
             yield put({
                 type: "_list",
+                payload: response
+            });
+            if (callback) callback(response);
+        },
+        * info({ payload, callback }, { call, put }) {
+            const response = yield call(member.info, payload);
+            yield put({
+                type: "_info",
                 payload: response
             });
             if (callback) callback(response);
@@ -49,6 +58,14 @@ export default {
             const response = yield call(member.add, payload);
             yield put({
                 type: "_add",
+                payload: response
+            });
+            if (callback) callback(response);
+        },
+        * edit({ payload, callback }, { call, put }) {
+            const response = yield call(member.edit, payload);
+            yield put({
+                type: "_edit",
                 payload: response
             });
             if (callback) callback(response);
@@ -135,34 +152,46 @@ export default {
                 list: action.payload
             };
         },
-        _token(state, action) {
+        _info(state, action) {
             return {
                 ...state,
                 info: action.payload
             };
         },
+        _token(state, action) {
+            return {
+                ...state,
+                token: action.payload
+            };
+        },
         _selfEdit(state, action) {
             return {
                 ...state,
-                onSale: action.payload
+                selfEdit: action.payload
             };
         },
         _add(state, action) {
             return {
                 ...state,
-                offSale: action.payload
+                add: action.payload
+            };
+        },
+        _edit(state, action) {
+            return {
+                ...state,
+                edit: action.payload
             };
         },
         _verifyCode(state, action) {
             return {
                 ...state,
-                batchDownshelf: action.payload
+                verifyCode: action.payload
             };
         },
         _del(state, action) {
             return {
                 ...state,
-                batchUpshelf: action.payload
+                del: action.payload
             };
         },
         _self(state, action) {

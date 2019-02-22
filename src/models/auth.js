@@ -1,139 +1,81 @@
-import auth from "@/services/auth";
+import { stringify } from "qs";
 
-export default {
+import Model from "@/utils/models";
+
+const options = {
     namespace: "auth",
-    state: {
-        setRuleTree: {},
-        groupAuthorise: {},
-        ruleTree: {},
-        groupList: {},
-        groupInfo: {},
-        groupAdd: {},
-        groupEdit: {},
-        groupDel: {},
-        groupMemberList: {}
-    },
-    effects: {
-        * groupAuthorise({ payload, callback }, { call, put }) {
-            const response = yield call(auth.groupAuthorise, payload);
-            yield put({
-                type: "_groupAuthorise",
-                payload: response
-            });
-            if (callback) callback(response);
+    api: [
+        {
+            request: "GET /admin/auth/moduleList",
+            response: { result: { list: [] } }
         },
-        * ruleTree({ payload, callback }, { call, put }) {
-            const response = yield call(auth.ruleTree, payload);
-            yield put({
-                type: "_ruleTree",
-                payload: response
-            });
-            if (callback) callback(response);
+        {
+            request: "GET /admin/auth/actionList",
+            response: { result: { list: [] } }
         },
-        * groupList({ payload, callback }, { call, put }) {
-            const response = yield call(auth.groupList, payload);
-            yield put({
-                type: "_groupList",
-                payload: response
-            });
-            if (callback) callback(response);
+        {
+            request: "GET /admin/auth/policyList",
+            response: { result: { total_number: 0, list: [] } }
         },
-        * groupInfo({ payload, callback }, { call, put }) {
-            const response = yield call(auth.groupInfo, payload);
-            yield put({
-                type: "_groupInfo",
-                payload: response
-            });
-            if (callback) callback(response);
+        {
+            request: "GET /admin/auth/policyInfo",
+            response: { result: { info:{} } }
         },
-        * groupAdd({ payload, callback }, { call, put }) {
-            const response = yield call(auth.groupAdd, payload);
-            yield put({
-                type: "_groupAdd",
-                payload: response
-            });
-            if (callback) callback(response);
+        {
+            request: "POST /admin/auth/policyAdd"
         },
-        * groupEdit({ payload, callback }, { call, put }) {
-            const response = yield call(auth.groupEdit, payload);
-            yield put({
-                type: "_groupEdit",
-                payload: response
-            });
-            if (callback) callback(response);
+        {
+            request: "POST /admin/auth/policyEdit"
         },
-        * groupDel({ payload, callback }, { call, put }) {
-            const response = yield call(auth.groupDel, payload);
-            yield put({
-                type: "_groupDel",
-                payload: response
-            });
-            if (callback) callback(response);
+        {
+            request: "POST /admin/auth/policyDel"
         },
-        * groupMemberList({ payload, callback }, { call, put }) {
-            const response = yield call(auth.groupMemberList, payload);
-            yield put({
-                type: "_groupMemberList",
-                payload: response
-            });
-            if (callback) callback(response);
+        {
+            request: "GET /admin/auth/groupList",
+            response: { result: { info: {} } }
+        },
+        {
+            request: "POST /admin/auth/groupAdd"
+        },
+        {
+            request: "POST /admin/auth/groupEdit"
+        },
+        {
+            request: "GET /admin/auth/groupInfo",
+            response: { result: { info: {} } }
+        },
+        {
+            request: "POST /admin/auth/groupDel"
+        },
+        {
+            request: "GET /admin/auth/groupPolicyList",
+            response: { result: { total_number: 0, list: [] } }
+        },
+        {
+            request: "POST /admin/auth/groupPolicyAdd"
+        },
+        {
+            request: "POST /admin/auth/groupPolicyDel"
+        },
+        {
+            request: "GET /admin/auth/groupMemberList",
+            response: { result: { total_number: 0, list: [] } }
+        },
+        {
+            request: "POST /admin/auth/groupMemberAdd"
+        },
+        {
+            request: "POST /admin/auth/groupMemberDel"
+        },
+        {
+            request: "GET /admin/auth/userList",
+            response: { result: { total_number: 0, list: [] } }
         }
-    },
-
-    reducers: {
-        _setRuleTree(state, action) {
-            return {
-                ...state,
-                setRuleTree: action.payload
-            };
-        },
-        _groupAuthorise(state, action) {
-            return {
-                ...state,
-                groupAuthorise: action.payload
-            };
-        },
-        _ruleTree(state, action) {
-            return {
-                ...state,
-                ruleTree: action.payload
-            };
-        },
-        _groupList(state, action) {
-            return {
-                ...state,
-                groupList: action.payload
-            };
-        },
-        _groupInfo(state, action) {
-            return {
-                ...state,
-                groupInfo: action.payload
-            };
-        },
-        _groupAdd(state, action) {
-            return {
-                ...state,
-                groupAdd: action.payload
-            };
-        },
-        _groupEdit(state, action) {
-            return {
-                ...state,
-                groupEdit: action.payload
-            };
-        },
-        _groupDel(state, action) {
-            return {
-                ...state,
-                groupDel: action.payload
-            };
-        },
-        _groupMemberList(state, action) {
-            return {
-                ...state,
-                groupMemberList: action.payload
-            };
-        }
-    }
+    ],
+    state: {},
+    effects: {},
+    reducers: {},
+    subscriptions: {}
 };
+export default Model.getInstance(options).create();
+

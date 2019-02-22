@@ -23,6 +23,16 @@ export default [
                 component: "dashboard/analysis"
             },
             {
+                path: "/auth",
+                name: "权限",
+                routes: [
+                    { path: "/auth", redirect: "auth/group" },
+                    { path: "/auth/member", name: "用户", component: "auth/member" },
+                    { path: "/auth/group", name: "用户组", component: "auth/group" },
+                    { path: "/auth/policy", name: "策略", component: "auth/policy" }
+                ]
+            },
+            {
                 path: "/shop",
                 name: "店铺",
                 routes: [

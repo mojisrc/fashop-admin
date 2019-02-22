@@ -2,6 +2,14 @@ import fa from "@/utils/fa";
 export default {
     async list(data = {}) {
         return fa.request({
+            url: `/admin/member/list`,
+            method: "GET",
+            data
+        });
+    },
+    async info(data = {}) {
+        return fa.request({
+            url: `/admin/member/info`,
             method: "GET",
             data
         });
@@ -23,6 +31,13 @@ export default {
     async add(data = {}) {
         return fa.request({
             url: `/admin/member/add`,
+            method: "POST",
+            data
+        });
+    },
+    async edit(data = {}) {
+        return fa.request({
+            url: `/admin/member/edit`,
             method: "POST",
             data
         });
@@ -63,7 +78,6 @@ export default {
         });
     },
     async login(data = {}) {
-
         return fa.request({
             url: `/admin/member/login`,
             method: "POST",

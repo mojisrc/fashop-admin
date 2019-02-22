@@ -1,6 +1,9 @@
 import Arr from "@/utils/array";
 
-export class Policy {
+export default class Policy {
+    constructor(){
+
+    }
     /**
      * @param array
      */
@@ -42,7 +45,7 @@ export class Policy {
             let policy = this.policyList[i];
             // 策略语法声明
             let statement_list = policy.Statement;
-            for (var j = 0; i < statement_list.length; j++) {
+            for (var j = 0; j < statement_list.length; j++) {
                 // 策略语法声明 是个（声明）列表
                 let statement = statement_list[j];
                 if (statement.Effect === "Allow") {
@@ -51,6 +54,34 @@ export class Policy {
                     this.denyActions = Arr.unique(Arr.merge(this.denyActions, statement.Action));
                 }
             }
+        }
+    }
+
+    /**
+     * 用于获得一组policy获得所有的action
+     * 特殊，临时写法
+     * 不支持Effect判断，仅为获得action列表
+     */
+     static getActionList(policy){
+        let actions = [];
+        let statement_list = policy.Statement;
+        for (var j = 0; j < statement_list.length; j++) {
+            let statement = statement_list[j];
+            for (var a = 0; a < statement.Action.length; a++ )
+            actions.push(statement.Action[a]);
+        }
+        return actions
+    }
+    /**
+     * 用于获得一组policy获得所有的module
+     * 特殊，临时写法
+     * 不支持Effect判断，仅为获得action列表
+     */
+    static getEffect(policy){
+        let statement_list = policy.Statement;
+        for (var j = 0; j < statement_list.length; j++) {
+            let statement = statement_list[j];
+            return statement.Effect
         }
     }
 }
