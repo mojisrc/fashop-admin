@@ -125,7 +125,7 @@ class AuthMemberEdit extends Component {
                     label='密码'
                   >
                       {getFieldDecorator("password", {
-                          rules: [{ required: true, message: "请输入密码" }]
+                          rules: [{  message: "请输入密码" }]
                       })(
                         <Input
                           placeholder="请输入密码"

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "dva";
 import PageHeaderWrapper from "@/components/pageHeaderWrapper";
-import { Card ,Table,Button} from "antd";
+import { Card, Table, Button } from "antd";
 import { View } from "@/components/flexView";
 import moment from "moment/moment";
 import styles from "./list.css";
@@ -29,7 +29,7 @@ class AuthMemberList extends Component {
     }
 
     search = new PageList({
-        router: '/member/list',
+        router: "/member/list",
         refresh: (e) => {
             this.initList(e);
         }
@@ -41,7 +41,7 @@ class AuthMemberList extends Component {
         let payload = this.search.filter();
         dispatch({
             type: "member/list",
-            payload,
+            payload
         });
     };
 
@@ -50,38 +50,36 @@ class AuthMemberList extends Component {
 
         const columns = [
             {
-                title: "ID",
-                dataIndex: "id",
-                key: "id",
-            },
-            {
+                width: 300,
                 title: "账号",
                 dataIndex: "username",
                 key: "username",
+                render: (text, record) => `${text}（${record.name}）`,
+            }, {
+                width: 80,
+                title: "状态",
+                dataIndex: "status",
+                key: "status",
+                render: (value) => Number(value) === 1 ? "正常" : "禁止"
             }, {
                 title: "创建时间",
                 dataIndex: "create_time",
                 key: "create_time",
                 render: text => moment(text, "X").format("YYYY-MM-DD HH:mm:ss")
-            }, {
-                title: "状态",
-                dataIndex: "status",
-                key: "status",
-                render: (value) => Number(value)===1 ? '正常' : '禁止'
             },
-             {
+            {
                 title: "操作",
                 key: "operation",
                 render: (record) =>
-                        <a
-                          onClick={() => {
-                              this.memberEdit.getWrappedInstance().show({
-                                  memberId: record.id
-                              });
-                          }}
-                        >
-                            修改
-                        </a>
+                  <a
+                    onClick={() => {
+                        this.memberEdit.getWrappedInstance().show({
+                            memberId: record.id
+                        });
+                    }}
+                  >
+                      修改
+                  </a>
             }
         ];
 
@@ -94,7 +92,7 @@ class AuthMemberList extends Component {
                       <Button
                         type='primary'
                         onClick={() => {
-                            this.memberAdd.getWrappedInstance().show()
+                            this.memberAdd.getWrappedInstance().show();
                         }}
                       >
                           新建用户组
@@ -137,4 +135,5 @@ class AuthMemberList extends Component {
 
 
 }
+
 export default AuthMemberList;

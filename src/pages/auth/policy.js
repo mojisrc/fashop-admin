@@ -1,7 +1,7 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import { connect } from "dva";
 import PageHeaderWrapper from "@/components/pageHeaderWrapper";
-import { Table, Button, Card,  Modal } from "antd";
+import { Table, Button, Card, Modal,Alert } from "antd";
 import { View } from "@/components/flexView";
 import styles from "./list.css";
 import PageList from "@/components/pageList";
@@ -57,31 +57,31 @@ class List extends Component {
 
         const columns = [
             {
-                title: "用户组名称",
+                title: "策略名称",
                 dataIndex: "name",
                 key: "name"
             }, {
-                title: "开启状态",
-                dataIndex: "status",
-                key: "status",
-                render: (status) => {
-                    return status ? "正常" : "禁止使用";
+                title: "策略类型",
+                dataIndex: "is_system",
+                key: "is_system",
+                render: (is_system) => {
+                    return is_system ? "系统策略" : "自定义策略";
                 }
             }, {
                 title: "操作",
                 key: "operation",
                 render: (record) => <View className={styles.operation}>
-                    <a
-                      onClick={() => {
-                          this.setState({ editVisible: true }, () => {
-                              this.policyEdit.getWrappedInstance().show({ id: record.id });
-                          });
-                      }}
-                    >
-                        修改
-                    </a>
-                    {
-                        <a
+                    <Fragment>
+                        {record.is_system === 0 ? <a
+                          onClick={() => {
+                              this.setState({ editVisible: true }, () => {
+                                  this.policyEdit.getWrappedInstance().show({ id: record.id });
+                              });
+                          }}
+                        >
+                            修改
+                        </a> : null}
+                        {record.is_system === 0 ? <a
                           onClick={() => {
                               Modal.confirm({
                                   title: "确认删除？",
@@ -104,8 +104,8 @@ class List extends Component {
                           }}
                         >
                             删除
-                        </a>
-                    }
+                        </a> : null}
+                    </Fragment>
                 </View>
             }
         ];
@@ -114,16 +114,27 @@ class List extends Component {
               <Card
                 bordered={false}
               >
+                  <Alert
+                    message="权限策略"
+                    description={<div>
+                        <strong>支持两种类型的授权策略：系统策略 和 自定义策略。<br /></strong>
+                        <span>- 系统策略，统一由系统开发者创建，后台用户只能使用而不能修改，系统策略的版本更新由开发人员维护。<br /></span>
+                        <span>- 自定义策略，用户可以自主创建、更新和删除，自定义策略的版本更新由后台用户维护。<br /></span>
+                    </div>}
+                    type="warning"
+                    style={{marginBottom:14}}
+                  />
                   <View className={styles.batchView}>
                       <Button
                         type='primary'
                         onClick={() => {
-                            this.policyAdd.getWrappedInstance().show()
+                            this.policyAdd.getWrappedInstance().show();
                         }}
                       >
                           新建策略
                       </Button>
                   </View>
+
                   <Table
                     loading={policyListLoading}
                     dataSource={policyList.list ? policyList.list : []}

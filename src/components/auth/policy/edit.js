@@ -15,7 +15,7 @@ const FormItem = Form.Item;
 export default class PolicyAdd extends Component {
     static defaultProps = {
         policyAddLoading: false,
-        onAddSuccess: () => {
+        onEditSuccess: () => {
         }
     };
     state = {
@@ -48,7 +48,7 @@ export default class PolicyAdd extends Component {
                     callback: (response) => {
                         if (response.code === 0) {
                             message.success("保存成功");
-                            this.props.onAddSuccess();
+                            this.props.onEditSuccess();
                         } else {
                             message.error(response.msg);
                         }
@@ -178,7 +178,7 @@ export default class PolicyAdd extends Component {
                       )}
                   </FormItem>
                   <FormItem
-                    label='允许或禁止'
+                    label='允许或禁止访问'
                   >
                       {getFieldDecorator("effect", {
                           initialValue: true,

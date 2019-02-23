@@ -22,7 +22,7 @@ const options = {
             response: { result: { info:{} } }
         },
         {
-            request: "POST /admin/auth/policyAdd"
+            request: "POST /admin/auth/policyAdd",
         },
         {
             request: "POST /admin/auth/policyEdit"
