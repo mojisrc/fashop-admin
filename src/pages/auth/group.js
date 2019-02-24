@@ -65,13 +65,6 @@ class List extends Component {
                 dataIndex: "name",
                 key: "name"
             }, {
-                title: "开启状态",
-                dataIndex: "status",
-                key: "status",
-                render: (status) => {
-                    return status ? "正常" : "禁止使用";
-                }
-            }, {
                 title: "操作",
                 key: "operation",
                 render: (record) => <View className={styles.operation}>

@@ -179,6 +179,7 @@ export default class PolicyAdd extends Component {
                   </FormItem>
                   <FormItem
                     label='允许或禁止访问'
+                    help='用于限制授权的组是否能访问或者禁止访问'
                   >
                       {getFieldDecorator("effect", {
                           initialValue: true,

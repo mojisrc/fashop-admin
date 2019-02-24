@@ -52,7 +52,6 @@ class AuthGroupEdit extends Component {
                 if (response.code === 0) {
                     this.props.form.setFieldsValue({
                         name: response.result.info.name,
-                        status: !!response.result.info.status
                     });
                 } else {
                     message.warning("组详情获取失败");
@@ -112,17 +111,6 @@ class AuthGroupEdit extends Component {
                         <Input
                           placeholder="请输入组名称"
                         />
-                      )}
-                  </FormItem>
-                  <FormItem
-                    label='是否开启'
-                  >
-                      {getFieldDecorator("status", {
-                          initialValue: true,
-                          valuePropName: "checked",
-                          rules: [{ required: true, message: "请选择是否开启" }]
-                      })(
-                        <Switch />
                       )}
                   </FormItem>
                   <FormItem>

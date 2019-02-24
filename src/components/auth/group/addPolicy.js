@@ -213,11 +213,11 @@ export default class AuthGroupAddPolicy extends Component {
                       <Table
                         rowKey={record => record.id}
                         size={"middle"}
-                        title={() => <div style={{
+                        title={() => <strong style={{
                             height: 32,
                             display: "flex",
                             alignItems: "center"
-                        }}>被授权的权限策略</div>}
+                        }}>已被授权的权限策略</strong>}
                         bordered={true}
                         columns={memberColumns}
                         dataSource={groupPolicyList.list}

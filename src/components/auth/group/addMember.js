@@ -211,11 +211,11 @@ export default class AuthGroupAddMember extends Component {
                       <Table
                         rowKey={record => record.id}
                         size={"middle"}
-                        title={() => <div style={{
+                        title={() => <strong style={{
                             height: 32,
                             display: "flex",
                             alignItems: "center"
-                        }}>组内成员</div>}
+                        }}>已添加的成员</strong>}
                         bordered={true}
                         columns={memberColumns}
                         dataSource={groupMemberList.list}
