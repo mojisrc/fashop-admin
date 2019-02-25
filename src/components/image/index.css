@@ -1,7 +1,0 @@
-.loader{
-    justify-content: center;
-    align-items: center;
-}
-.loader :global(.anticon){
-    min-height: inherit;
-}

@@ -1,8 +1,0 @@
-/* operation */
-.operation{
-    flex-direction: row;
-    justify-content: flex-start;
-}
-.operation a{
-    margin-right: 15px;
-}

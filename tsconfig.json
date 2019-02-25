@@ -1,0 +1,30 @@
+{
+  "compilerOptions": {
+    "moduleResolution": "node",
+    "experimentalDecorators": true,
+    "jsx": "react",
+    "sourceMap": true,
+    "esModuleInterop": true,
+    "importHelpers": true,
+    "allowSyntheticDefaultImports": true,
+    "target": "es6",
+    "allowJs": true,
+    "baseUrl": ".",
+    "lib": [
+      "dom",
+      "es6",
+      "es7",
+      "es2017"
+    ],
+    "paths": {
+      "@/*": ["src/*"]
+    }
+  },
+  "include": [
+    "src/**/*",
+    "types/*"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}
