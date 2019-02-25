@@ -2,12 +2,13 @@
 export const AXIOS_DEFAULT_CONFIG = {
   timeout: 20000,
   withCredentials: true,
-  baseURL: '/'
+  baseURL: '/api'
 };
 
 // 项目相关配置
 export const PROJECT_DEFAULT_CONFIG = {
-  companyName: 'FaShop'
+  companyName: 'FaShop',
+  tokenKey: 'FaShop_Admin_Token'
 };
 
 // 项目默认设置
