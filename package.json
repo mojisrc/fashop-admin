@@ -60,7 +60,7 @@
     "react-router-dom": "^4.3.1",
     "echarts": "^4.2.0-rc.2",
     "echarts-for-react": "^2.0.15-beta.0",
-    "fashop-policy": "^1.0.0",
+    "fashop-policy": "^1.0.4",
     "re-resizable": "^4.11.0",
     "react-color": "^2.14.1",
     "react-draggable": "^3.1.1",

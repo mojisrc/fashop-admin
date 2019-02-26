@@ -1,4 +1,4 @@
-import React, { Suspense } from "react";
+import React from "react";
 import { Layout } from "antd";
 import DocumentTitle from "react-document-title";
 import isEqual from "lodash/isEqual";
@@ -12,12 +12,9 @@ import { formatMessage } from "umi/locale";
 import Authorized from "@/utils/authorized";
 import logo from "@/assets/images/logo.png";
 import Footer from "./footer";
-import Header from "./header";
 import Context from "./menuContext";
 import Exception403 from "../pages/exception/403";
-import PageLoading from "@/components/pageLoading";
 import SiderMenu from "@/components/siderMenu";
-import { metaTitle } from "../defaultSettings";
 import getPageTitle from '@/utils/getPageTitle';
 
 import styles from "./basicLayout.less";
@@ -62,6 +59,7 @@ class BasicLayout extends React.PureComponent {
             dispatch,
             route: { routes, authority }
         } = this.props;
+        // 获得用户资料
         dispatch({
             type: "member/self"
         });
@@ -72,14 +70,6 @@ class BasicLayout extends React.PureComponent {
             type: "menu/getMenuData",
             payload: { routes, authority }
         });
-    }
-
-    getContext() {
-        const { location, breadcrumbNameMap } = this.props;
-        return {
-            location,
-            breadcrumbNameMap
-        };
     }
 
     getContext() {
@@ -168,18 +158,12 @@ class BasicLayout extends React.PureComponent {
                     minHeight: "100vh"
                 }}
               >
-                  {/*<Header*/}
-                  {/*menuData={menuData}*/}
-                  {/*handleMenuCollapse={this.handleMenuCollapse}*/}
-                  {/*logo={logo}*/}
-                  {/*isMobile={isMobile}*/}
-                  {/*{...this.props}*/}
-                  {/*/>*/}
                   <Content className={styles.content} style={contentStyle}>
                       <Authorized authority={routerConfig} noMatch={<Exception403 />}>
                           {children}
                       </Authorized>
                   </Content>
+                  {/*当是装修模块的时候去掉底部*/}
                   {pathname === "/shop/page/add" || pathname === "/shop/page/edit" ? null : <Footer />}
               </Layout>
           </Layout>

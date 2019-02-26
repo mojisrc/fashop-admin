@@ -27,9 +27,9 @@ export default [
                 name: "权限",
                 routes: [
                     { path: "/auth", redirect: "auth/group" },
-                    { path: "/auth/member", name: "用户", component: "auth/member" },
-                    { path: "/auth/group", name: "用户组", component: "auth/group" },
-                    { path: "/auth/policy", name: "策略", component: "auth/policy" }
+                    { path: "/auth/member", name: "用户", component: "auth/member", policy: "member/list" },
+                    { path: "/auth/group", name: "用户组", component: "auth/group", policy: "auth/groupList" },
+                    { path: "/auth/policy", name: "策略", component: "auth/policy", policy: "auth/policyList" }
                 ]
             },
             {
@@ -37,47 +37,57 @@ export default [
                 name: "店铺",
                 routes: [
                     { path: "/shop", redirect: "/shop/info" },
-                    { path: "/shop/info", name: "基本信息", component: "shop/info" },
-                    { path: "/shop/page", name: "制作页面", component: "shop/page/list" },
-                    { path: "/shop/page/add", component: "shop/page/add" },
-                    { path: "/shop/page/edit", component: "shop/page/edit" },
+                    { path: "/shop/info", name: "基本信息", component: "shop/info", policy: "shop/info" },
+                    { path: "/shop/page", name: "制作页面", component: "shop/page/list", policy: "page/list" },
+                    { path: "/shop/page/add", component: "shop/page/add", policy: "page/add" },
+                    { path: "/shop/page/edit", component: "shop/page/edit", policy: "page/edit" },
                     { path: "/shop/page/demo", component: "shop/page/demo" },
-                    { path: "/shop/category", name: "分类页面", component: "shop/category" }
+                    {
+                        path: "/shop/category",
+                        name: "分类页面",
+                        component: "shop/category",
+                        policy: "shop/setGoodsCategoryStyle"
+                    }
                 ]
             },
             {
                 path: "/order",
                 name: "订单",
                 routes: [
-                    { path: "/order", redirect: "/order/list" },
-                    { path: "/order/list", name: "订单管理", component: "order/list" },
-                    { path: "/order/list/detail", component: "order/detail" },
-                    { path: "/order/refund", name: "退款售后", component: "order/refund" },
-                    { path: "/order/evaluate", name: "评价管理", component: "order/evaluate" },
-                    { path: "/order/refund/edit", component: "order/refundEdit" },
-                    { path: "/order/list/send", component: "order/send" },
+                    { path: "/order", redirect: "/order/list", policy: "order/list" },
+                    { path: "/order/list", name: "订单管理", component: "order/list", policy: "order/list" },
+                    { path: "/order/list/detail", component: "order/detail", policy: "order/detail" },
+                    { path: "/order/refund", name: "退款售后", component: "order/refund", policy: "order/refund" },
+                    { path: "/order/evaluate", name: "评价管理", component: "order/evaluate", policy: "order/evaluate" },
+                    { path: "/order/refund/edit", component: "order/refundEdit", policy: "order/refundEdit" },
+                    { path: "/order/list/send", component: "order/send", policy: "order/send" }
                 ]
             },
             {
                 path: "/goods",
                 name: "商品",
                 routes: [
-                    { path: "/goods", redirect: "/goods/list" },
-                    { path: "/goods/list", name: "商品管理", component: "goods/list" },
-                    { path: "/goods/list/add", component: "goods/add" },
-                    { path: "/goods/list/edit", component: "goods/edit" },
-                    { path: "/goods/category", name: "分类管理", component: "goods/category" },
-                    { path: "/goods/category/add", component: "goods/category/add" },
-                    { path: "/goods/category/edit", component: "goods/category/edit" }
+                    { path: "/goods", redirect: "/goods/list", policy: "goods/list" },
+                    { path: "/goods/list", name: "商品管理", component: "goods/list", policy: "goods/list" },
+                    { path: "/goods/list/add", component: "goods/add", policy: "goods/add" },
+                    { path: "/goods/list/edit", component: "goods/edit", policy: "goods/edit" },
+                    {
+                        path: "/goods/category",
+                        name: "分类管理",
+                        component: "goods/category",
+                        policy: "goodscategory/list"
+                    },
+                    { path: "/goods/category/add", component: "goods/category/add", policy: "goodscategory/add" },
+                    { path: "/goods/category/edit", component: "goods/category/edit", policy: "goodscategory/edit" }
                 ]
             },
             {
                 path: "/user",
                 name: "客户",
                 routes: [
-                    { path: "/user", redirect: "/user/list" },
-                    { path: "/user/list", name: "客户管理", component: "user/list" },
-                    { path: "/user/list/detail", component: "user/detail" }
+                    { path: "/user", redirect: "/user/list", policy: "user/list" },
+                    { path: "/user/list", name: "客户管理", component: "user/list", policy: "user/list" },
+                    { path: "/user/list/detail", component: "user/detail", policy: "user/detail" }
                 ]
             },
             {
@@ -91,7 +101,11 @@ export default [
                 path: "/setting",
                 name: "设置",
                 routes: [
-                    { path: "/setting", redirect: "/setting/deliver/shipper" },
+                    {
+                        path: "/setting",
+                        redirect: "/setting/deliver/shipper",
+                        policy: "shipper/list || express/list || freight/list"
+                    },
                     {
                         path: "/setting/deliver",
                         name: "物流配送",
@@ -115,7 +129,7 @@ export default [
                         routes: [
                             { path: "/setting/wechat", redirect: "/setting/wechat/base" },
                             { path: "/setting/wechat/base", component: "setting/wechat/base" },
-                            { path: "/setting/wechat/miniTemplate", component: "setting/wechat/miniTemplate" },
+                            { path: "/setting/wechat/miniTemplate", component: "setting/wechat/miniTemplate" }
                         ]
                     },
                     { path: "/setting/alipay", name: "支付宝配置", component: "setting/alipay" },
@@ -125,9 +139,9 @@ export default [
                         routes: [
                             { path: "/setting/poster", redirect: "/setting/poster/goods" },
                             { path: "/setting/poster/goods", component: "setting/poster/goods" },
-                            { path: "/setting/poster/groupGoods", component: "setting/poster/groupGoods" },
+                            { path: "/setting/poster/groupGoods", component: "setting/poster/groupGoods" }
                         ]
-                    },
+                    }
                 ]
             },
             {

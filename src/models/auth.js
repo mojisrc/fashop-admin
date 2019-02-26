@@ -19,10 +19,10 @@ const options = {
         },
         {
             request: "GET /admin/auth/policyInfo",
-            response: { result: { info:{} } }
+            response: { result: { info: {} } }
         },
         {
-            request: "POST /admin/auth/policyAdd",
+            request: "POST /admin/auth/policyAdd"
         },
         {
             request: "POST /admin/auth/policyEdit"
@@ -70,6 +70,10 @@ const options = {
         {
             request: "GET /admin/auth/userList",
             response: { result: { total_number: 0, list: [] } }
+        },
+        {
+            request: "GET /admin/auth/selfPolicy",
+            response: { result: { list: [] } }
         }
     ],
     state: {},
