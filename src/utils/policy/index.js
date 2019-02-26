@@ -22,7 +22,7 @@ export default class Policy {
      * @param actionName
      */
     verify(actionName) {
-        let _split = split("/", actionName);
+        let _split = actionName.split("/");
         let controller = _split[0];
         // 允许
         let allow = Arr.inArray(actionName, this.allowActions) || Arr.inArray(`${controller}/*`, this.allowActions) || Arr.inArray("*", this.denyActions);
@@ -32,7 +32,7 @@ export default class Policy {
     }
 
     addPolicy(policy) {
-        this.policyList = this.policyList.push(policy)
+        this.policyList.push(policy)
         this.preParse();
     }
 

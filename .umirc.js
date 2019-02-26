@@ -3,7 +3,7 @@ import fs from "fs";
 import pageRoutes from "./config/router.config";
 import webpackPlugin from "./config/plugin.config";
 import defaultSettings from "./src/defaultSettings";
-
+import slash from 'slash2';
 // 默认接口地址
 var host = "http://127.0.0.1:9510";
 // 默认根目录
@@ -130,27 +130,26 @@ export default {
         modules: true,
         getLocalIdent: (context, localIdentName, localName) => {
             if (
-              context.resourcePath.includes("node_modules") ||
-              context.resourcePath.includes("ant.design.pro.less") ||
-              context.resourcePath.includes("global.less")
+              context.resourcePath.includes('node_modules') ||
+              context.resourcePath.includes('ant.design.pro.less') ||
+              context.resourcePath.includes('global.less')
             ) {
                 return localName;
             }
             const match = context.resourcePath.match(/src(.*)/);
             if (match && match[1]) {
-                const antdProPath = match[1].replace(".less", "");
-                const arr = antdProPath
-                  .split("/")
-                  .map(a => a.replace(/([A-Z])/g, "-$1"))
+                const antdProPath = match[1].replace('.less', '');
+                const arr = slash(antdProPath)
+                  .split('/')
+                  .map(a => a.replace(/([A-Z])/g, '-$1'))
                   .map(a => a.toLowerCase());
-                return `antd-pro${arr.join("-")}-${localName}`.replace(/--/g, "-");
+                return `antd-pro${arr.join('-')}-${localName}`.replace(/--/g, '-');
             }
             return localName;
-        }
+        },
     },
     manifest: {
         basePath: "/"
     },
-
     chainWebpack: webpackPlugin
 };

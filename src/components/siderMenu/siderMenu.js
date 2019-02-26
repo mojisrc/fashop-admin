@@ -9,21 +9,26 @@ import { getDefaultCollapsedSubMenus } from "./siderMenuUtils";
 const BaseMenu = React.lazy(() => import("./baseMenu"));
 const LeftFooter = React.lazy(() => import("./leftFooter"));
 const { Sider } = Layout;
-
+let firstMount = true;
 export default class SiderMenu extends PureComponent {
     constructor(props) {
         super(props);
         this.state = {
-            openKeys: getDefaultCollapsedSubMenus(props)
+            openKeys: getDefaultCollapsedSubMenus(props),
         };
     }
 
+    componentDidMount() {
+        firstMount = false;
+    }
+
     static getDerivedStateFromProps(props, state) {
-        const { pathname } = state;
-        if (props.location.pathname !== pathname) {
+        const { pathname, flatMenuKeysLen } = state;
+        if (props.location.pathname !== pathname || props.flatMenuKeys.length !== flatMenuKeysLen) {
             return {
                 pathname: props.location.pathname,
-                openKeys: getDefaultCollapsedSubMenus(props)
+                flatMenuKeysLen: props.flatMenuKeys.length,
+                openKeys: getDefaultCollapsedSubMenus(props),
             };
         }
         return null;
@@ -42,18 +47,17 @@ export default class SiderMenu extends PureComponent {
     handleOpenChange = openKeys => {
         const moreThanOne = openKeys.filter(openKey => this.isMainMenu(openKey)).length > 1;
         this.setState({
-            openKeys: moreThanOne ? [openKeys.pop()] : [...openKeys]
+            openKeys: moreThanOne ? [openKeys.pop()] : [...openKeys],
         });
     };
-
     render() {
-        const { logo, collapsed, onCollapse, fixSiderbar, theme } = this.props;
+        const { logo, collapsed, onCollapse, fixSiderbar, theme, isMobile } = this.props;
         const { openKeys } = this.state;
         const defaultProps = collapsed ? {} : { openKeys };
 
         const siderClassName = classNames(styles.sider, {
-            [styles.fixSiderbar]: fixSiderbar,
-            [styles.light]: theme === "light"
+            [styles.fixSiderBar]: fixSiderbar,
+            [styles.light]: theme === 'light',
         });
         return (
             <Sider
@@ -61,7 +65,11 @@ export default class SiderMenu extends PureComponent {
                 collapsible
                 collapsed={collapsed}
                 breakpoint="lg"
-                onCollapse={onCollapse}
+                onCollapse={collapse => {
+                    if (firstMount || !isMobile) {
+                        onCollapse(collapse);
+                    }
+                }}
                 width={200}
                 theme={theme}
                 className={siderClassName}
@@ -84,6 +92,7 @@ export default class SiderMenu extends PureComponent {
                         style={{ padding: "16px 0", width: "100%" }}
                         {...defaultProps}
                     />
+                    {/*底部退出*/}
                     <LeftFooter />
                 </Suspense>
             </Sider>

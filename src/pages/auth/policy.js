@@ -7,7 +7,8 @@ import styles from "./list.css";
 import PageList from "@/components/pageList";
 import PolicyEdit from "@/components/auth/policy/edit";
 import PolicyAdd from "@/components/auth/policy/add";
-
+import Policy from "fashop-policy"
+let policy = new Policy
 @connect(({ auth, loading }) => ({
     policyList: auth.policyList.result,
     policyListLoading: loading.effects["auth/policyList"]

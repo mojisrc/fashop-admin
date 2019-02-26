@@ -6,18 +6,23 @@ import { urlToList } from '../_utils/pathTools';
 import { getMenuMatches } from './siderMenuUtils';
 import { isUrl } from '@/utils';
 import styles from './index.less';
+import IconFont from '@/components/iconFont';
 
 const { SubMenu } = Menu;
 
 // Allow menu.js config icon as string or ReactNode
 //   icon: 'setting',
+//   icon: 'icon-geren' #For Iconfont ,
 //   icon: 'http://demo.com/icon.png',
 //   icon: <Icon type="setting" />,
 const getIcon = icon => {
-    if (typeof icon === 'string' && isUrl(icon)) {
-        return <img src={icon} alt="icon" className={styles.icon} />;
-    }
     if (typeof icon === 'string') {
+        if (isUrl(icon)) {
+            return <Icon component={() => <img src={icon} alt="icon" className={styles.icon} />} />;
+        }
+        if (icon.startsWith('icon-')) {
+            return <IconFont type={icon} />;
+        }
         return <Icon type={icon} />;
     }
     return icon;
@@ -33,9 +38,9 @@ export default class BaseMenu extends PureComponent {
             return [];
         }
         return menusData
-            .filter(item => item.name && !item.hideInMenu)
-            .map(item => this.getSubMenuOrItem(item, parent))
-            .filter(item => item);
+          .filter(item => item.name && !item.hideInMenu)
+          .map(item => this.getSubMenuOrItem(item, parent))
+          .filter(item => item);
     };
 
     // Get the currently selected menu
@@ -52,21 +57,21 @@ export default class BaseMenu extends PureComponent {
         if (item.children && !item.hideChildrenInMenu && item.children.some(child => child.name)) {
             const { name } = item;
             return (
-                <SubMenu
-                    title={
-                        item.icon ? (
-                            <span>
+              <SubMenu
+                title={
+                    item.icon ? (
+                      <span>
                 {getIcon(item.icon)}
-                                <span>{name}</span>
+                          <span>{name}</span>
               </span>
-                        ) : (
-                            name
-                        )
-                    }
-                    key={item.path}
-                >
-                    {this.getNavMenuItems(item.children)}
-                </SubMenu>
+                    ) : (
+                      name
+                    )
+                }
+                key={item.path}
+              >
+                  {this.getNavMenuItems(item.children)}
+              </SubMenu>
             );
         }
         return <Menu.Item key={item.path}>{this.getMenuItemPath(item)}</Menu.Item>;
@@ -85,29 +90,29 @@ export default class BaseMenu extends PureComponent {
         // Is it a http link
         if (/^https?:\/\//.test(itemPath)) {
             return (
-                <a href={itemPath} target={target}>
-                    {icon}
-                    <span>{name}</span>
-                </a>
+              <a href={itemPath} target={target}>
+                  {icon}
+                  <span>{name}</span>
+              </a>
             );
         }
         const { location, isMobile, onCollapse } = this.props;
         return (
-            <Link
-                to={itemPath}
-                target={target}
-                replace={itemPath === location.pathname}
-                onClick={
-                    isMobile
-                        ? () => {
-                            onCollapse(true);
-                        }
-                        : undefined
-                }
-            >
-                {icon}
-                <span>{name}</span>
-            </Link>
+          <Link
+            to={itemPath}
+            target={target}
+            replace={itemPath === location.pathname}
+            onClick={
+                isMobile
+                  ? () => {
+                      onCollapse(true);
+                  }
+                  : undefined
+            }
+          >
+              {icon}
+              <span>{name}</span>
+          </Link>
         );
     };
 
@@ -144,18 +149,18 @@ export default class BaseMenu extends PureComponent {
         });
 
         return (
-            <Menu
-                key="Menu"
-                mode={mode}
-                theme={theme}
-                onOpenChange={handleOpenChange}
-                selectedKeys={selectedKeys}
-                style={style}
-                className={cls}
-                {...props}
-            >
-                {this.getNavMenuItems(menuData)}
-            </Menu>
+          <Menu
+            key="Menu"
+            mode={mode}
+            theme={theme}
+            onOpenChange={handleOpenChange}
+            selectedKeys={selectedKeys}
+            style={style}
+            className={cls}
+            {...props}
+          >
+              {this.getNavMenuItems(menuData)}
+          </Menu>
         );
     }
 }
