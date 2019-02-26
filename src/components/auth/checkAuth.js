@@ -1,8 +1,9 @@
 import React, { PureComponent } from "react";
 import Policy from "fashop-policy";
 
-@connect(({ auth }) => ({
-    policyList: auth.selfPolicy.result.list
+@connect(({ auth, member }) => ({
+    policyList: auth.selfPolicy.result.list,
+    self: member.self.result.info
 }))
 export default class CheckAuth extends PureComponent {
     static defaultProps = {
@@ -11,13 +12,17 @@ export default class CheckAuth extends PureComponent {
     };
 
     render() {
-        const { policyList, action, children } = this.props;
-        let policy = new Policy;
-        if (Array.isArray(policyList)) {
-            policyList.map(({ structure }) => {
-                policy.addPolicy(structure);
-            });
+        if (self.id !== 1) {
+            const { policyList, action, children } = this.props;
+            let policy = new Policy;
+            if (Array.isArray(policyList)) {
+                policyList.map(({ structure }) => {
+                    policy.addPolicy(structure);
+                });
+            }
+            return policy.viewVerify(action) ? children : null;
+        } else {
+            return children;
         }
-        return policy.viewVerify(action) ? children : null;
     }
 }

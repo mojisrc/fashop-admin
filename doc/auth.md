@@ -25,3 +25,7 @@ let string  = '(( goods/*  && !goods/list) && goods/info  && goods/info && goods
 
 policy.viewVerify(string)
 ```
+
+## TODO
+- 渲染路由组件时拦截
+- 没权限时的提示类型：占位图、提示框

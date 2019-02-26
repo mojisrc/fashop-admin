@@ -54,11 +54,11 @@ export default [
                 path: "/order",
                 name: "订单",
                 routes: [
-                    { path: "/order", redirect: "/order/list", policy: "order/list" },
+                    { path: "/order", redirect: "/order/list" },
                     { path: "/order/list", name: "订单管理", component: "order/list", policy: "order/list" },
                     { path: "/order/list/detail", component: "order/detail", policy: "order/detail" },
-                    { path: "/order/refund", name: "退款售后", component: "order/refund", policy: "order/refund" },
-                    { path: "/order/evaluate", name: "评价管理", component: "order/evaluate", policy: "order/evaluate" },
+                    { path: "/order/refund", name: "退款售后", component: "order/refund", policy: "orderrefund/list" },
+                    { path: "/order/evaluate", name: "评价管理", component: "order/evaluate", policy: "goodsevaluate/list" },
                     { path: "/order/refund/edit", component: "order/refundEdit", policy: "order/refundEdit" },
                     { path: "/order/list/send", component: "order/send", policy: "order/send" }
                 ]
@@ -67,7 +67,7 @@ export default [
                 path: "/goods",
                 name: "商品",
                 routes: [
-                    { path: "/goods", redirect: "/goods/list", policy: "goods/list" },
+                    { path: "/goods", redirect: "/goods/list"},
                     { path: "/goods/list", name: "商品管理", component: "goods/list", policy: "goods/list" },
                     { path: "/goods/list/add", component: "goods/add", policy: "goods/add" },
                     { path: "/goods/list/edit", component: "goods/edit", policy: "goods/edit" },
