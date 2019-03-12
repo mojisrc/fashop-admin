@@ -1,12 +1,28 @@
+import { Effect } from 'dva';
+import { Reducer } from 'redux';
 import { fetchLogin, fetchCurrent } from '@/services/user.service';
 
-export default {
+export interface IUserModelState {
+  currentUser: {},
+}
+
+export interface IUserModel {
   namespace: 'user',
-
-  state: {
-    currentUser: {},
+  state: IUserModelState,
+  effects: {
+    fetchLogin: Effect,
+    fetchCurrent: Effect
   },
+  reducers: {
+    saveCurrentUser: Reducer<any>
+  }
+}
 
+const UserModel: IUserModel = {
+  namespace: 'user',
+  state: {
+    currentUser: {}
+  },
   effects: {
     // 用户登录
     *fetchLogin(payload, { call, put }) {
@@ -23,9 +39,14 @@ export default {
       }
     },
   },
-
-
   reducers: {
-
+    saveCurrentUser(state, { payload }) {
+      return {
+        ...state,
+        currentUser: payload || {},
+      };
+    },
   }
-}
+};
+
+export default UserModel;
