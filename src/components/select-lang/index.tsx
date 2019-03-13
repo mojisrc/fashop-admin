@@ -1,16 +1,16 @@
 import React from 'react';
-import ClassNames from 'classnames';
 import { Menu, Icon } from 'antd';
 import { formatMessage, setLocale, getLocale } from 'umi/locale';
-import HeaderDropdown from '@/components/header-dropdown';
-import styles from './index.less';
+import { HeaderDropDown } from '@/components/header-dropdown';
+import '@/styles/components/select-lang.scss';
 
 interface IProps {
   className?: string;
+  prefixCls?: string;
 }
 
 export const SelectLang: React.FC<IProps> = (props) => {
-  const { className } = props;
+  const { className, prefixCls } = props;
   const selectedLang = getLocale();
 
   const changeLang = ({ key }) => {
@@ -30,7 +30,7 @@ export const SelectLang: React.FC<IProps> = (props) => {
 
   const langMenu = (
     <Menu
-      className={styles.menu}
+      className={`${prefixCls}`}
       selectedKeys={[selectedLang]}
       onClick={changeLang}
     >
@@ -38,9 +38,9 @@ export const SelectLang: React.FC<IProps> = (props) => {
         const data = locales[locale];
         return (
           <Menu.Item key={locale}>
-              <span role="img" aria-label={data.label}>
-                {data.icon}
-              </span>{' '}
+            <span role="img" aria-label={data.label}>
+              {data.icon}
+            </span>{' '}
             {data.label}
           </Menu.Item>
         );
@@ -49,15 +49,19 @@ export const SelectLang: React.FC<IProps> = (props) => {
   );
 
   return (
-    <HeaderDropdown
+    <HeaderDropDown
       overlay={langMenu}
       placement="bottomRight"
     >
       <Icon
         type="global"
-        className={ClassNames(styles.dropDown, className)}
+        className={className}
         title={formatMessage({ id: 'navBar.lang' })}
       />
-    </HeaderDropdown>
+    </HeaderDropDown>
   );
+};
+
+SelectLang.defaultProps = {
+  prefixCls: 'fa-select-lang'
 };

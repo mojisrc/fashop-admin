@@ -1,0 +1,15 @@
+@import "../common/var";
+@import "../mixins/mixins";
+
+:global {
+  @include b(login-page) {
+    padding-top: 100px;
+    width: 388px;
+    margin: 0 auto;
+
+    .ant-input-prefix {
+      font-size: $font-size-base;
+      color: $disabled-color;
+    }
+  }
+}

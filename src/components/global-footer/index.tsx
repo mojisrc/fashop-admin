@@ -45,5 +45,5 @@ export const GlobalFooter: React.FC<IProps> = (props) => {
 };
 
 GlobalFooter.defaultProps = {
-  prefixCls: 'fs-global-footer'
+  prefixCls: 'fa-global-footer'
 };

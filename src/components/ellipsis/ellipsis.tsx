@@ -191,6 +191,6 @@ export const Ellipsis: React.FC<IProps> = (props) => {
 };
 
 Ellipsis.defaultProps = {
-  prefixCls: 'lotus-ellipsis',
+  prefixCls: 'fa-ellipsis',
   tooltip: false
 };

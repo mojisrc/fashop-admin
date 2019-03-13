@@ -5,7 +5,7 @@ export default [
     component: '../layouts/user.layout',
     routes: [
       { path: '/user', redirect: '/user/login' },
-      { path: '/user/login', component: './User/Login' }
+      { path: '/user/login', component: './user/login' }
     ]
   }
 ];

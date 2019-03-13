@@ -24,4 +24,29 @@
     flex: 1;
     padding: 32px 0;
   }
+
+  @include e(header) {
+    text-align: center;
+    height: 44px;
+    line-height: 44px;
+
+    a {
+      text-decoration: none;
+    }
+
+    img {
+      height: 44px;
+      margin-right: 16px;
+      vertical-align: top;
+    }
+
+    span.title {
+      position: relative;
+      color: $heading-color;
+      font-family: Avenir, 'Helvetica Neue', Arial, Helvetica, sans-serif;
+      top: 2px;
+      font-weight: 600;
+      font-size: 33px;
+    }
+  }
 }

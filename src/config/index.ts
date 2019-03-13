@@ -7,7 +7,6 @@ export const AXIOS_DEFAULT_CONFIG = {
 
 // 项目相关配置
 export const PROJECT_DEFAULT_CONFIG = {
-  companyName: 'FaShop',
   tokenKey: 'FaShop_Token'
 };
 
