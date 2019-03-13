@@ -1,0 +1,8 @@
+// color
+$color-white: #fff;
+$color-black: #000;
+
+$text-color: fade($color-black, 65%);
+$text-color-secondary: fade($color-black, 45%);
+$text-color-inverse: $color-white;
+$icon-color-hover: fade($color-black, 75%);

@@ -11,4 +11,5 @@ export default {
   routes: pageRoutes,
   theme: themeConfig,
   ignoreMomentLocale: true,
+  disableCSSModules: true
 }

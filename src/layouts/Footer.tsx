@@ -1,6 +1,6 @@
 import React from 'react';
 import { Layout, Icon } from 'antd';
-import GlobalFooter from '@/components/GlobalFooter';
+import { GlobalFooter } from '@/components/global-footer';
 import { PROJECT_DEFAULT_CONFIG } from '@/config';
 
 const { Footer } = Layout;
