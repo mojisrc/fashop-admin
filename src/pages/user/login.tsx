@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Form, Input, Icon, Button } from 'antd';
 import { FormComponentProps } from 'antd/es/form';
 import '@/styles/pages/login.scss';
