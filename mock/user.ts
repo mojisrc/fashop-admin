@@ -1,15 +1,15 @@
 function login(req, res) {
   const { username, password } = req.body;
   res.json({
-    status: 200,
-    data: {
-      token: `${username}_token`
+    code: 0,
+    result: {
+      access_token: `${username}_token`
     },
-    message: 'success'
+    msg: 'success'
   });
   res.status(200).end();
 }
 
 export default {
-  'POST /user/login': login,
+  'POST /admin/member/login': login,
 };

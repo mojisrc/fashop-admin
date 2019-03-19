@@ -2,5 +2,5 @@
 export default {
   production: 'https://v2-api.fashop.cn',
   test: 'https://v2-api.fashop.cn',
-  development: 'https://v2-api.fashop.cn'
+  development: ''
 }
