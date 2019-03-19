@@ -12,7 +12,7 @@
     "test:component": "umi test ./src/components"
   },
   "repository": "ssh://git@github.com/mojisrc/fashop-admin.git",
-  "author": "wangxingkang <wangxingkang@sensoro.com>",
+  "author": "fashop fe team",
   "license": "MIT",
   "husky": {
     "hooks": {
