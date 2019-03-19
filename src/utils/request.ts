@@ -5,12 +5,12 @@ import 'nprogress/nprogress.css';
 import { AXIOS_DEFAULT_CONFIG } from '@/config';
 import { getCookie } from '@/utils/cookie';
 
-Axios.defaults.timeout = AXIOS_DEFAULT_CONFIG.timeout;
-Axios.defaults.baseURL = AXIOS_DEFAULT_CONFIG.baseURL;
-Axios.defaults.withCredentials = AXIOS_DEFAULT_CONFIG.withCredentials;
+NProgress.configure({
+  showSpinner: false
+});
 
+// 请求成功
 function requestSuccess(config) {
-  // 请求开始，开启进度条
   NProgress.start();
   const cookie = getCookie();
   if (cookie) {
@@ -19,38 +19,28 @@ function requestSuccess(config) {
   return config;
 }
 
+// 请求失败
 function requestFail(error) {
+  NProgress.done();
   return Promise.reject(error);
 }
 
-/**
- * 统一的接口的返回数据格式
- * {
- *   data: any
- *   code: number,
- *   message: string,
- * }
- * @param response
- */
+// 响应成功
 function responseSuccess(response) {
-  // 请求结束，关闭进度条
   NProgress.done();
-  const { data, status, message } = response.data;
-
-  response.data = {
-    data,
-    code: status,
-    message
-  };
-
-  return response.data;
+  return response;
 }
 
+// 响应失败
 function responseFail(error) {
-  // 请求失败，也应关闭进度条
   NProgress.done();
   return Promise.reject(error);
 }
+
+// 基本配置
+Axios.defaults.timeout = AXIOS_DEFAULT_CONFIG.timeout;
+Axios.defaults.baseURL = AXIOS_DEFAULT_CONFIG.baseURL;
+Axios.defaults.withCredentials = AXIOS_DEFAULT_CONFIG.withCredentials;
 
 // 添加拦截器
 Axios.interceptors.request.use(requestSuccess, requestFail);
@@ -63,7 +53,13 @@ Axios.interceptors.response.use(responseSuccess, responseFail);
 export const request = (config: AxiosRequestConfig) => {
   return Axios(config)
     .then((response) => {
-      return response;
+      const { data } = response;
+      // 处理返回数据格式
+      return {
+        data: data.result,
+        code: data.code === 0 ? 200 : data.code,
+        message: data.code === 0 ? 'success' : data.msg
+      };
     })
     .catch((error) => {
       if (!error.response) {

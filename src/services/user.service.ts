@@ -7,5 +7,5 @@ export async function fetchCurrent() {
 
 // 用户登录
 export async function fetchLogin(data) {
-  return Post('/user/login', data);
+  return Post('/member/login', data);
 }

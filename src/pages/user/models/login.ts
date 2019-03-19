@@ -1,6 +1,8 @@
 import { Effect } from 'dva';
 import { Reducer } from 'redux';
+import { routerRedux } from 'dva/router';
 import { fetchLogin } from '@/services/user.service';
+import { setCookie } from '@/utils/cookie';
 
 export interface ILoginModelState {
   status?: string;
@@ -23,10 +25,14 @@ const UserModel: ILoginModel = {
     status: undefined,
   },
   effects: {
-    *fetchLogin(payload, { call, put }) {
+    *fetchLogin({ payload }, { call, put }) {
       const response = yield call(fetchLogin, payload);
       if (response && response.code === 200) {
-
+        const token = response.data.access_token;
+        if (token) {
+          setCookie('', token);
+          yield put(routerRedux.replace('/'));
+        }
       }
     },
   },
