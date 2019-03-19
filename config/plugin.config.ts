@@ -1,4 +1,6 @@
-export const plugins = [
+import { IPlugin } from 'umi-types';
+
+const plugins: IPlugin[] = [
   ['umi-plugin-react', {
     antd: true,
     dva: {
@@ -20,3 +22,5 @@ export const plugins = [
     }
   }]
 ];
+
+export default plugins;

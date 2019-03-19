@@ -1,4 +1,6 @@
-export default [
+import { IRoute } from 'umi-types';
+
+const routes: IRoute[] = [
   // user
   {
     path: '/user',
@@ -21,3 +23,5 @@ export default [
     ]
   }
 ];
+
+export default routes;
