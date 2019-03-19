@@ -1,6 +1,6 @@
 import { Get, Post } from '@/utils/request';
 
-// 获取当前登录用户信息
+// 获取用户信息
 export async function fetchCurrent() {
   return Get('/user/current');
 }

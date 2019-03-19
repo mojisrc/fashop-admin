@@ -1,60 +1,35 @@
 import React from 'react';
-import { Form, Input, Icon, Button } from 'antd';
+import { connect } from 'dva';
 import { FormComponentProps } from 'antd/es/form';
+import LoginForm from './components/login-form';
 import '@/styles/pages/login.scss';
 
 interface IProps extends FormComponentProps {
   prefixCls?: string;
+  loading?: boolean;
+  dispatch?: (args: any) => void;
 }
-
-const FormItem = Form.Item;
 
 const LoginPage: React.FC<IProps> = (props) => {
   const {
     prefixCls,
-    form: { getFieldDecorator }
+    loading,
+    dispatch,
   } = props;
+
+  const handleSubmit = (values) => {
+    dispatch({
+      type: 'login/fetchLogin',
+      payload: values
+    });
+  };
 
   return (
     <div className={prefixCls}>
-      <Form>
-        <FormItem>
-          {getFieldDecorator('username', {
-            rules: [
-              { required: true, message: '请输入用户名！' }
-            ],
-          })(
-            <Input
-              type="text"
-              size="large"
-              prefix={<Icon type="user" />}
-              placeholder="用户名"
-            />
-          )}
-        </FormItem>
-        <FormItem>
-          {getFieldDecorator('password', {
-            rules: [
-              { required: true, message: '请输入密码！' }
-            ],
-          })(
-            <Input.Password
-              size="large"
-              prefix={<Icon type="lock" />}
-              placeholder="密码"
-            />
-          )}
-        </FormItem>
-        <FormItem>
-          <Button
-            type="primary"
-            size="large"
-            block
-            htmlType="submit"
-          >登录</Button>
-        </FormItem>
-
-      </Form>
+      <LoginForm
+        loading={loading}
+        onSubmit={handleSubmit}
+      />
     </div>
   )
 };
@@ -63,4 +38,6 @@ LoginPage.defaultProps = {
   prefixCls: 'fa-login-page'
 };
 
-export default Form.create()(LoginPage);
+export default connect(({ loading }) => ({
+  loading: loading.effects['login/fetchLogin']
+}))(LoginPage);
