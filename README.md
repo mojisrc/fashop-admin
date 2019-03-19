@@ -1,10 +1,10 @@
 <p align="center">
   <a href="https://www.fashop.cn">
-    <img width="100" src="https://www.fashop.cn/logo.png">
+    <img width="150" src="https://www.fashop.cn/logo.png">
   </a>
 </p>
 
-<h1 align="center">FaShop Admin</h1>
+<h2 align="center">FaShop Admin</h1>
 
 <div align="center">
 微信小程序商城后台，微信小程序微店后台
@@ -14,22 +14,20 @@
 ![](https://img.shields.io/github/issues/mojisrc/fashop-admin.svg)
 ![](https://img.shields.io/github/forks/mojisrc/fashop-admin.svg)
 
-## 安装运行
-```bash
-npm install
-npm start
-```
-- 如果没安装umi 请先安装
-```bash
-npm install umi -g
-```
+**请注意：本分支开发语言为typescript**
 
-## 其他
-- .umirc.local.js 为本地开发配置
-- .build.js `npm run build`编译时不会走`.umirc.local.js`了，如果想在本地编译其他host，可在该文件内修改，不支持es6...
-> 如：module.exports = {  host: "https://v2-api.fashop.cn" };
+## 开发
 
-- .umirc.js 为fashop开发的默认配置，生产环境下也建议不要更改该文件
+* 克隆或下载项目到本地
+* 安装NodeJS
+* 安装项目依赖 项目根目录下执行`npm run bootstrap`
+* 开发 项目根目录下执行`npm run start`
+
+## 编译
+
+> 提供build:test、build:prod两个编译命令、可结合CI使用
+
+请在 config/server.config.ts中配置各个环境的API地址
 
 ## commit-message规范
 
