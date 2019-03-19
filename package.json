@@ -6,8 +6,9 @@
   "main": "index.js",
   "scripts": {
     "bootstrap": "yarn || npm i",
-    "start": "umi dev",
-    "build": "umi build",
+    "start": "cross-env SERVER_ENV=development umi dev",
+    "build:test": "cross-env SERVER_ENV=test umi build",
+    "build:prod": "cross-env SERVER_ENV=production umi build",
     "test": "umi test",
     "test:component": "umi test ./src/components"
   },

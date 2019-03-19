@@ -14,7 +14,7 @@ function requestSuccess(config) {
   NProgress.start();
   const cookie = getCookie();
   if (cookie) {
-    config.headers['Token'] = cookie;
+    config.headers['Access-Token'] = cookie;
   }
   return config;
 }

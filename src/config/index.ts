@@ -2,7 +2,10 @@
 export const AXIOS_DEFAULT_CONFIG = {
   timeout: 20000,
   withCredentials: false,
-  baseURL: 'https://v2-api.fashop.cn/admin'
+  // 使用webpack DefinePlugin 插件
+  // 具体配置请参考 /config/server.config.ts
+  // @ts-ignore
+  baseURL: `${BASE_URL}/admin/`,
 };
 
 // 项目相关配置
