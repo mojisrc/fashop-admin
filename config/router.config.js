@@ -23,22 +23,12 @@ export default [
                 component: "dashboard/analysis"
             },
             {
-                path: "/auth",
-                name: "权限",
-                routes: [
-                    { path: "/auth", redirect: "auth/group" },
-                    { path: "/auth/member", name: "用户", component: "auth/member", policy: "member/list" },
-                    { path: "/auth/group", name: "用户组", component: "auth/group", policy: "auth/groupList" },
-                    { path: "/auth/policy", name: "策略", component: "auth/policy", policy: "auth/policyList" }
-                ]
-            },
-            {
                 path: "/shop",
                 name: "店铺",
                 routes: [
                     { path: "/shop", redirect: "/shop/info" },
                     { path: "/shop/info", name: "基本信息", component: "shop/info", policy: "shop/info" },
-                    { path: "/shop/page", name: "制作页面", component: "shop/page/list", policy: "page/list" },
+                    { path: "/shop/page", name: "制作页面", component: "shop/page/list", policy: "page/list && page/info" },
                     { path: "/shop/page/add", component: "shop/page/add", policy: "page/add" },
                     { path: "/shop/page/edit", component: "shop/page/edit", policy: "page/edit" },
                     { path: "/shop/page/demo", component: "shop/page/demo" },
@@ -95,6 +85,16 @@ export default [
                 routes: [
                     { path: "/member", redirect: "/member/self" },
                     { path: "/member/self", component: "member/self" }
+                ]
+            },
+            {
+                path: "/auth",
+                name: "权限",
+                routes: [
+                    { path: "/auth", redirect: "auth/group" },
+                    { path: "/auth/member", name: "用户", component: "auth/member", policy: "member/list" },
+                    { path: "/auth/group", name: "用户组", component: "auth/group", policy: "auth/groupList" },
+                    { path: "/auth/policy", name: "策略", component: "auth/policy", policy: "auth/policyList" }
                 ]
             },
             {

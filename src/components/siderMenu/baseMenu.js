@@ -35,11 +35,11 @@ export default class BaseMenu extends PureComponent {
      */
     getNavMenuItems = (menusData, parent) => {
         if (!menusData) {
-            return [];
+            return [];``
         }
         return menusData
           .filter(item => item.name && !item.hideInMenu)
-          .map(item => this.getSubMenuOrItem(item, parent))
+          .map(item => this.getSubMenuOrItem(item))
           .filter(item => item);
     };
 

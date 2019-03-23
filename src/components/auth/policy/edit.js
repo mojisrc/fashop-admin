@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import { Drawer, Input, Button, Form, Switch, message, Transfer, Select } from "antd";
 import { connect } from "dva";
-import policy from "fashop-policy"
+import Policy from "fashop-policy"
+const policy = new Policy
+
 const Option = Select.Option;
 const FormItem = Form.Item;
 @Form.create()

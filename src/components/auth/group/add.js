@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Drawer, Input, Button, Form, Switch, message } from "antd";
+import { Drawer, Input, Button, Form, message } from "antd";
 import { connect } from "dva";
 
 const FormItem = Form.Item;

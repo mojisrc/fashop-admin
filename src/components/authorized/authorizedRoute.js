@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Redirect } from 'react-router-dom';
+import { Route, Redirect } from 'umi';
 import Authorized from './authorized';
 
 // TODO: umi只会返回render和rest
