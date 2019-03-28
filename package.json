@@ -21,7 +21,7 @@
     }
   },
   "dependencies": {
-    "antd": "^3.15.1",
+    "antd": "^3.15.2",
     "axios": "^0.18.0",
     "classnames": "^2.2.6",
     "dva": "^2.4.1",
@@ -69,9 +69,9 @@
     "stylelint-config-prettier": "^5.0.0",
     "stylelint-order": "^2.0.0",
     "typescript": "^3.3.3",
-    "umi": "^2.6.2",
-    "umi-plugin-react": "^1.7.0",
-    "umi-types": "^0.3.0"
+    "umi": "^2.6.10",
+    "umi-plugin-react": "^1.7.2",
+    "umi-types": "^0.3.2"
   },
   "engines": {
     "node": ">=8.0.0"
