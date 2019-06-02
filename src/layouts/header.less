@@ -1,0 +1,15 @@
+@import '~antd/lib/style/themes/default.less';
+
+@prefix-cls: ~'city-basic-layout-header';
+
+.@{prefix-cls} {
+  &.is-fixed {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 80px;
+    z-index: 9;
+    width: calc(100% - 80px);
+    transition: width 0.2s;
+  }
+}

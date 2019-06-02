@@ -1,0 +1,64 @@
+@import '~antd/lib/style/themes/default.less';
+
+@nav-header-height: @layout-header-height;
+
+@prefix-cls: ~'lotus-sidebar-menu';
+@z-index-sidebar: 100;
+@sidebar-background: @layout-sider-background;
+
+.@{prefix-cls} {
+  position: fixed;
+  top: 0;
+  right: auto;
+  bottom: 0;
+  left: -200px;
+  z-index: @z-index-sidebar;
+  width: 280px;
+  overflow: hidden;
+  background: @sidebar-background;
+  cursor: pointer;
+  transition: transform @animation-duration-slow cubic-bezier(0.05, 0.74, 0.27, 0.99);
+
+  &__logo {
+    position: relative;
+    height: @nav-header-height;
+    padding-left: (@menu-collapsed-width - 32px) / 2;
+    overflow: hidden;
+    line-height: @nav-header-height;
+    background: #002140;
+    transition: all 0.3s;
+
+    img {
+      display: inline-block;
+      height: 30px;
+      vertical-align: middle;
+    }
+
+    h1 {
+      display: inline-block;
+      margin: 0 0 0 12px;
+      color: white;
+      font-weight: 600;
+      font-size: 16px;
+      font-family: Avenir, 'Helvetica Neue', Arial, Helvetica, sans-serif;
+      vertical-align: middle;
+    }
+  }
+
+  &.is-collapsed {
+    // 请根据项目logo自行调整
+    .lotus-sidebar-menu__logo > img {
+      position: absolute;
+      top: 15px;
+      right: 25px;
+    }
+
+    .lotus-sidebar-menu__logo > h1 {
+      display: none;
+    }
+
+    .ant-menu-root {
+      margin-left: 200px;
+    }
+  }
+}

@@ -1,6 +1,8 @@
 // 后端接口配置
 export default {
-  production: 'https://v2-api.fashop.cn',
-  test: 'https://v2-api.fashop.cn',
-  development: ''
+  // 本地开发使用
+  localhost: '',
+  dev: '',
+  test: '',
+  production: '',
 }

@@ -1,1 +1,0 @@
-export { Ellipsis } from './ellipsis';

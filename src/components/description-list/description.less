@@ -1,0 +1,28 @@
+@import '~antd/lib/style/themes/default.less';
+
+@prefix-cls: ~'lotus-description';
+
+.@{prefix-cls} {
+  &__term {
+    display: table-cell;
+    padding-bottom: 16px;
+    color: @heading-color;
+    line-height: 20px;
+    white-space: nowrap;
+
+    &::after {
+      position: relative;
+      top: -0.5px;
+      margin: 0 8px 0 2px;
+      content: ':';
+    }
+  }
+
+  &__detail {
+    display: table-cell;
+    width: 100%;
+    padding-bottom: 16px;
+    color: @text-color;
+    line-height: 20px;
+  }
+}

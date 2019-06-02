@@ -1,10 +1,15 @@
 import React from 'react';
 import { Icon } from 'antd';
+import defaultSettings from '@/config/default-settings';
 
-export const Copyright = () => {
+const { company } = defaultSettings;
+
+const Copyright = () => {
   return (
-    <span>
-      Copyright <Icon type="copyright" /> FaShop 商城系统 - Power By FaShop (www.fashop.cn)
-    </span>
+    <div>
+      Copyright <Icon type="copyright" /> 2019{company}技术部出品
+    </div>
   )
 };
+
+export default Copyright;

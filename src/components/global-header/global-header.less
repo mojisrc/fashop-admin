@@ -1,0 +1,68 @@
+@import '~antd/lib/style/themes/default.less';
+
+@prefix-cls: ~'lotus-global-header';
+@header-hover-bg: rgba(0, 0, 0, 0.025);
+
+.@{prefix-cls} {
+  position: relative;
+  height: @layout-header-height;
+  padding: 0;
+  background: @white;
+  box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
+
+  &__right {
+    position: absolute;
+    top: 0;
+    right: 15px;
+    z-index: 9;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    max-width: 410px;
+    height: @layout-header-height;
+  }
+
+  &__action {
+    display: inline-block;
+    height: 100%;
+    padding: 0 12px;
+    cursor: pointer;
+    transition: all 0.3s;
+
+    > i {
+      color: @text-color;
+      vertical-align: middle;
+    }
+
+    &:hover {
+      background: @header-hover-bg;
+    }
+  }
+
+  &__menu {
+    .anticon {
+      margin-right: 8px;
+    }
+
+    .ant-dropdown-menu-item {
+      min-width: 160px;
+    }
+  }
+
+  &__account {
+    color: #626262;
+
+    .ant-avatar {
+      margin: ~'calc((@{layout-header-height} - 24px) / 2)' 0;
+      margin-right: 8px;
+      color: @primary-color;
+      vertical-align: top;
+      background: rgba(255, 255, 255, 0.85);
+    }
+
+    > i {
+      padding: 0 10px;
+      color: #b6b6b6;
+    }
+  }
+}

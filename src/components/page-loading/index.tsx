@@ -1,12 +1,10 @@
-import React from 'react';
 import { Spin } from 'antd';
+import React from 'react';
 
-const PageLoading: React.FC = () => {
-  return (
-    <div style={{ paddingTop: 100, textAlign: 'center' }}>
-      <Spin size="large" />
-    </div>
-  )
-};
+const Index: React.FC = () => (
+  <div style={{ paddingTop: 100, textAlign: 'center' }}>
+    <Spin size="large" />
+  </div>
+);
 
-export default PageLoading;
+export default Index;

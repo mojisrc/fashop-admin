@@ -1,16 +1,15 @@
 import { get, remove, set } from 'js-cookie';
-import { PROJECT_DEFAULT_CONFIG } from '@/config';
 
-const tokenKey = PROJECT_DEFAULT_CONFIG.tokenKey;
+const cookieKey = 'admin-token';
 
 export function getCookie(name?: string) {
-  return get(name || tokenKey);
+  return get(name || cookieKey);
 }
 
 export function setCookie(name: string, value: string | object) {
-  set(name || tokenKey, value);
+  set(name || cookieKey, value);
 }
 
 export function removeCookie(name?: string) {
-  remove(name || tokenKey);
+  remove(name || cookieKey);
 }
