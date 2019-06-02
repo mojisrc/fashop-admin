@@ -40,11 +40,10 @@ const Login: ILoginModel = {
   },
   effects: {
     *fetchLogin({ payload }, { call, put }) {
-      console.log(payload);
       const response = yield call(fetchLogin, payload);
       // login success
       if (response && response.code === 200) {
-        const { token } = response.data;
+        const token = response.data.access_token;
         if (token) {
           setCookie('', token);
         }

@@ -19,5 +19,12 @@ export default {
   hash: true,
   theme: themeConfig,
   ignoreMomentLocale: true,
-  disableCSSModules: true
+  disableCSSModules: true,
+  proxy: {
+    '/admin': {
+      target: 'https://v2-api.fashop.cn/admin/',
+      changeOrigin: true,
+      pathRewrite: { '^/admin': '' }
+    }
+  }
 };

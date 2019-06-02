@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'dva';
 import Link from 'umi/link';
 import { Form, Input, Icon, Button } from 'antd';
 import { FormComponentProps } from 'antd/es/form';
@@ -109,4 +110,4 @@ PasswordLoginForm.defaultProps = {
   loading: false
 };
 
-export default Form.create()(PasswordLoginForm);
+export default connect()(Form.create()(PasswordLoginForm));

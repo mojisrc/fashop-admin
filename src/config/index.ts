@@ -5,7 +5,7 @@ export const AJAX_DEFAULT_CONFIG = {
   // 使用webpack DefinePlugin 插件
   // 具体配置请查看 /config/server.config.ts
   // @ts-ignore
-  baseURL: `${BASE_URL}/api/`,
+  baseURL: `${BASE_URL}/admin/`,
 };
 
 // 项目相关配置

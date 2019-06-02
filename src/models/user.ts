@@ -3,7 +3,7 @@ import { Effect } from '@/models/connect';
 import { fetchCurrent } from '@/services/user';
 import Policy, { IAction } from '@jiumao/policy';
 import { IUser } from '@/pages/system/models/system-user';
-import {fetchList} from "@/services/action";
+import { fetchList } from '@/services/action';
 
 export interface ICurrentUser extends IUser {
   name?: string;

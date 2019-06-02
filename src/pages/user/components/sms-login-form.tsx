@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'dva';
 import { Form, Input, Icon, Button } from 'antd';
 import { FormComponentProps } from 'antd/es/form';
 import { formatMessage, FormattedMessage } from 'umi-plugin-react/locale';
@@ -102,4 +103,4 @@ SMSLoginForm.defaultProps = {
   loading: false
 };
 
-export default Form.create()(SMSLoginForm);
+export default connect()(Form.create()(SMSLoginForm));

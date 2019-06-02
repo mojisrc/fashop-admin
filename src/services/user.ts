@@ -2,7 +2,7 @@ import { Get, Post, Delete, Put } from '@/utils/request';
 
 // 用户登录
 export async function fetchLogin(data) {
-  return Post('users/login', data);
+  return Post('member/login', data);
 }
 
 // 退出登录
@@ -30,9 +30,9 @@ export async function fetchUpdate(data) {
   return Put(`users/update`, data);
 }
 
-// 获取当前登录用户信息
+// 当前用户信息
 export async function fetchCurrent() {
-  return Get('users/current');
+  return Get('member/self');
 }
 
 // 重置登录密码 - 无需登录

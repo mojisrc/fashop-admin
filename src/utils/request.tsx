@@ -55,12 +55,12 @@ Axios.interceptors.response.use(responseSuccess, responseFail);
 export const request = (config: AxiosRequestConfig) => {
   return Axios(config)
     .then((response) => {
-      const { data, code, message } = response.data;
+      const { code, msg, result } = response.data;
 
       return {
-        data: data || {},
-        code,
-        message
+        data: result,
+        code: code === 0 ? 200: code,
+        message: msg || 'success'
       };
     })
     .catch((error) => {
