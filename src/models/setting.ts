@@ -1,7 +1,7 @@
 import { Reducer } from 'redux';
 import DefaultSettings, { IDefaultSettings } from '@/config/default-settings';
 
-export { IDefaultSettings as ISettingModelState };
+export interface ISettingModelState extends IDefaultSettings {}
 
 export interface ISettingModel {
   name: 'setting',
