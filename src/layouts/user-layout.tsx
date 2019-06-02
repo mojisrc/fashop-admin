@@ -3,10 +3,10 @@ import { connect } from 'dva';
 import DocumentTitle from 'react-document-title';
 import GlobalFooter from '@/components/global-footer';
 import SelectLang from '@/components/select-lang';
-import { IMenu } from '@/components/side-menu';
+import { IMenu } from '@/components/sidebar-menu';
 import { moGetPageTitle, moGetTitle } from '@/utils/getPageTitle';
 import { ConnectProps } from '@/models/connect';
-import logo from '@/assets/logo.svg';
+import logo from '@/assets/logo.png';
 import Copyright from './copyright';
 import './user-layout.less';
 
@@ -49,7 +49,6 @@ const UserLayout: React.FC<IProps> = (props) => {
               </div>
               <div className={`${prefixCls}__header`}>
                 <img src={logo} alt="logo"/>
-                <h2>React Admin Template</h2>
               </div>
               <div className={`${prefixCls}__title`}>
                 <h2>{title}</h2>

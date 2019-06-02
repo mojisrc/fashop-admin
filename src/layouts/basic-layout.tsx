@@ -9,7 +9,7 @@ import DocumentTitle from 'react-document-title';
 import SidebarMenu, { ISidebarMenuProps, IMenu } from '@/components/sidebar-menu';
 import { moGetPageTitle } from '@/utils/getPageTitle';
 import { ConnectProps, ConnectState, ISettingModelState } from '@/models/connect';
-import logo from '@/assets/logo.svg';
+import logo from '@/assets/mini-logo.png';
 import Context from './menu-context';
 import Header from './header';
 import './basic-layout.less';

@@ -49,7 +49,7 @@ const SidebarMenu: React.FC<ISidebarMenuProps> = (props) => {
     >
       <div className={`${prefixCls}__logo`}>
         <img src={logo} alt="logo" />
-        <h1>{title}</h1>
+        <h1>{title} Admin System</h1>
       </div>
       <React.Suspense fallback={<PageLoading />}>
         <BaseMenu

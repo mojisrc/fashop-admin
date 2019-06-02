@@ -24,9 +24,9 @@ const defaultSettings: IDefaultSettings = {
     disableLocal: false,
   },
   fixedHeader: true,
-  title: 'React Admin Template',
+  title: 'FaShop',
   iconFontUrl: '',
-  company: '九毛科技',
+  company: 'FaShop',
 };
 
 export default defaultSettings;

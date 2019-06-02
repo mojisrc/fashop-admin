@@ -7,7 +7,7 @@
   "scripts": {
     "bootstrap": "yarn || npm i",
     "clean": "rimraf dist",
-    "start": "cross-env PORT=8080 umi dev",
+    "start": "cross-env PORT=9090 umi dev",
     "build": "umi build",
     "build:dev": "cross-env SERVER_ENV=dev umi build",
     "build:test": "cross-env SERVER_ENV=test umi build",
