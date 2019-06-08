@@ -32,6 +32,7 @@ export default {
   'menu.marketing.points.goods': 'Goods',
   'menu.marketing.points.log': 'Log',
   'menu.marketing.points.setting': 'Setting',
+  'menu.marketing.reward': 'Reward',
   'menu.exception': 'Exception',
   'menu.exception.not-permission': '403',
   'menu.exception.not-find': '404',

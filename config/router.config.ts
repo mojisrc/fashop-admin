@@ -185,7 +185,7 @@ export default [
               },
               {
                 path: '/marketing/member-card/order',
-                name: 'record',
+                name: 'order',
                 component: './marketing/member-card/order',
               },
             ],
@@ -215,14 +215,7 @@ export default [
           {
             path: '/marketing/reward',
             name: 'reward',
-            component: '../layouts/blank-layout',
-            routes: [
-              {
-                path: '/marketing/reward/list',
-                name: 'list',
-                component: './marketing/reward/list',
-              },
-            ],
+            component: './marketing/reward/list',
           },
         ],
       },

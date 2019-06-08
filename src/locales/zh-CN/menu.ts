@@ -32,6 +32,7 @@ export default {
   'menu.marketing.points.goods': '积分商品',
   'menu.marketing.points.log': '积分记录',
   'menu.marketing.points.setting': '积分设置',
+  'menu.marketing.reward': '满减送',
   'menu.exception': '异常页',
   'menu.exception.not-permission': '403',
   'menu.exception.not-find': '404',
