@@ -8,9 +8,10 @@ import { IGlobalModelState } from '@/models/global';
 import { ISettingModelState } from '@/models/setting';
 import { IUserModelState } from '@/models/user';
 import { IActionModelState } from '@/models/action';
+import { IPolicyModelState } from '@/models/policy';
 import { IUserGroupModelState } from '@/pages/system/models/user-group';
 import { ISystemUserModelState } from '@/pages/system/models/system-user';
-import { IPolicyModelState } from '@/models/policy';
+import { IClientModelState } from '@/pages/client/models/client';
 
 export interface ConnectState {
   loading: Loading;
@@ -20,6 +21,7 @@ export interface ConnectState {
   user: IUserModelState;
   systemUser: ISystemUserModelState;
   userGroup: IUserGroupModelState;
+  client: IClientModelState;
   action: IActionModelState;
   policy: IPolicyModelState;
 }
@@ -31,7 +33,8 @@ export {
   IUserGroupModelState,
   IActionModelState,
   IPolicyModelState,
-  IUserModelState
+  IClientModelState,
+  IUserModelState,
 };
 
 export type Effect = (
@@ -56,8 +59,8 @@ export interface Loading {
 
 export interface ConnectProps<P extends { [K in keyof P]?: string } = {}>
   extends Partial<RouterTypes<IRoute>> {
-    dispatch?: Dispatch;
-    match?: match<P>;
-  }
+  dispatch?: Dispatch;
+  match?: match<P>;
+}
 
 export default ConnectState;

@@ -34,7 +34,6 @@ export default [
           {
             path: '/dashboard/analysis',
             name: 'analysis',
-            authority: 'dashboard/analysis',
             component: './dashboard/analysis',
           },
           {
@@ -66,6 +65,18 @@ export default [
             path: '/exception/500',
             name: 'server-error',
             component: './exception/500',
+          },
+        ],
+      },
+      {
+        name: 'client',
+        icon: 'icon-client',
+        path: '/client',
+        routes: [
+          {
+            path: '/client/list',
+            name: 'list',
+            component: './client/list',
           },
         ],
       },

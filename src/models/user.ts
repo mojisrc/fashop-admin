@@ -1,4 +1,5 @@
 import { Reducer } from 'redux';
+import isArray from 'lodash/isArray';
 import { Effect } from '@/models/connect';
 import { fetchCurrent } from '@/services/user';
 import Policy, { IAction } from '@jiumao/policy';
@@ -22,13 +23,13 @@ export interface IUserModel {
     // 获取当前用户信息
     fetchCurrent: Effect;
     fetchActions: Effect;
-  },
+  };
   reducers: {
     savePolicy: Reducer<any>;
     saveActions: Reducer<any>;
     saveCurrentUser: Reducer<any>;
     changeNotifyCount: Reducer<any>;
-  }
+  };
 }
 
 const UserModel: IUserModel = {
@@ -36,18 +37,16 @@ const UserModel: IUserModel = {
   state: {
     policy: null,
     actions: [],
-    currentUser: {}
+    currentUser: {},
   },
   effects: {
     *fetchCurrent(_, { call, put, select }) {
       const response = yield call(fetchCurrent);
       if (response && response.code === 200) {
-        const info = response.data || {};
+        const info = response.data.info || {};
         const { policies = [] } = info;
 
-        const { actions = [] } = yield select(
-          (state) => state.user
-        );
+        const { actions = [] } = yield select(state => state.user);
 
         const policy = new Policy(actions);
 
@@ -58,14 +57,14 @@ const UserModel: IUserModel = {
         yield put({
           type: 'saveCurrentUser',
           payload: {
-            ...info
-          }
+            name: info.username,
+          },
         });
 
         yield put({
           type: 'savePolicy',
-          payload: policy
-        })
+          payload: policy,
+        });
       }
     },
     *fetchActions(_, { call, put }) {
@@ -73,14 +72,16 @@ const UserModel: IUserModel = {
       if (response && response.code === 200) {
         const list = response.data;
 
+        if (!isArray(list)) return;
+
         const actions = list.map(item => ({
           module: item.module.name,
-          action: item.name
+          action: item.name,
         }));
 
         yield put({
           type: 'saveActions',
-          payload: actions
+          payload: actions,
         });
       }
     },
@@ -89,19 +90,19 @@ const UserModel: IUserModel = {
     savePolicy(state, { payload }) {
       return {
         ...state,
-        policy: payload
+        policy: payload,
       };
     },
     saveActions(state, { payload }) {
       return {
         ...state,
-        actions: payload
+        actions: payload,
       };
     },
     saveCurrentUser(state, { payload }) {
       return {
         ...state,
-        currentUser: payload
+        currentUser: payload,
       };
     },
     changeNotifyCount(state, { payload }) {
@@ -110,11 +111,11 @@ const UserModel: IUserModel = {
         currentUser: {
           ...state.currentUser,
           notifyCount: payload.totalCount,
-          unreadCount: payload.unreadCount
-        }
+          unreadCount: payload.unreadCount,
+        },
       };
-    }
-  }
+    },
+  },
 };
 
 export default UserModel;

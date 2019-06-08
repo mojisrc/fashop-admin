@@ -14,7 +14,7 @@ function requestSuccess(config) {
   NProgress.start();
   const cookie = getCookie();
   if (cookie) {
-    config.headers['Token'] = cookie;
+    config.headers['Access-Token'] = cookie;
   }
   return config;
 }
@@ -54,16 +54,16 @@ Axios.interceptors.response.use(responseSuccess, responseFail);
  */
 export const request = (config: AxiosRequestConfig) => {
   return Axios(config)
-    .then((response) => {
+    .then(response => {
       const { code, msg, result } = response.data;
 
       return {
         data: result,
-        code: code === 0 ? 200: code,
-        message: msg || 'success'
+        code: code === 0 ? 200 : code,
+        message: msg || 'success',
       };
     })
-    .catch((error) => {
+    .catch(error => {
       if (!error.response) {
         return console.log('Error', error.message);
       }
@@ -75,67 +75,48 @@ export const request = (config: AxiosRequestConfig) => {
       }
 
       // 开发调试
-      console.log(
-        `【${config.method} ${config.url}】请求失败，响应数据：%o`,
-        error.response
-      );
+      console.log(`【${config.method} ${config.url}】请求失败，响应数据：%o`, error.response);
 
       return { code, message: '' };
     });
 };
 
-export const Get = (
-  url: string,
-  params?: object,
-  config?: AxiosRequestConfig
-) => {
+export const Get = (url: string, params?: object, config?: AxiosRequestConfig) => {
   return request(
     Object.assign({}, config, {
       url: url,
-      params: {...params, _t: (new Date()).getTime()},
-      method: 'get'
-    })
+      params: { ...params, _t: new Date().getTime() },
+      method: 'get',
+    }),
   );
 };
 
-export const Post = (
-  url: string,
-  data?: object,
-  config?: AxiosRequestConfig
-) => {
+export const Post = (url: string, data?: object, config?: AxiosRequestConfig) => {
   return request(
     Object.assign({}, config, {
       url: url,
       data: data,
-      method: 'post'
-    })
+      method: 'post',
+    }),
   );
 };
 
-export const Put = (
-  url: string,
-  data?: object,
-  config?: AxiosRequestConfig
-) => {
+export const Put = (url: string, data?: object, config?: AxiosRequestConfig) => {
   return request(
     Object.assign({}, config, {
       url: url,
       data: data,
-      method: 'put'
-    })
+      method: 'put',
+    }),
   );
 };
 
-export const Delete = (
-  url: string,
-  data?: object,
-  config?: AxiosRequestConfig
-) => {
+export const Delete = (url: string, data?: object, config?: AxiosRequestConfig) => {
   return request(
     Object.assign({}, config, {
       url: url,
       data: data,
-      method: 'delete'
-    })
+      method: 'delete',
+    }),
   );
 };

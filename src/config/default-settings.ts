@@ -2,11 +2,11 @@ import { MenuTheme } from 'antd/es/menu';
 
 export interface IDefaultSettings {
   // 页面主题
-  theme: MenuTheme,
+  theme: MenuTheme;
   // 菜单相关
   menu: {
     // 是否禁用多语言
-    disableLocal: boolean
+    disableLocal: boolean;
   };
   // 是否固定Header
   fixedHeader: boolean;
@@ -25,7 +25,7 @@ const defaultSettings: IDefaultSettings = {
   },
   fixedHeader: true,
   title: 'FaShop',
-  iconFontUrl: '',
+  iconFontUrl: '//at.alicdn.com/t/font_1232661_kz1j655329.js',
   company: 'FaShop',
 };
 

@@ -38,7 +38,7 @@ export default {
   disableCSSModules: true,
   proxy: {
     '/admin': {
-      target: 'https://v2-api.fashop.cn/admin/',
+      target: 'http://anders.fashop.cn/admin/',
       changeOrigin: true,
       pathRewrite: { '^/admin': '' },
     },
