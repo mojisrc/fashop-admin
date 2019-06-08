@@ -5,21 +5,21 @@ import { formatTime } from '@/utils/utils';
 import { fetchList } from '@/services/client';
 
 export interface IClient {
-  id: number;
-  name: string;
-  phone: string;
+  id?: number;
+  name?: string;
+  phone?: string;
   // 用户名
-  username: string;
+  username?: string;
   // 用户昵称
-  nickname: string;
+  nickname?: string;
   // 用户头像
-  avatar: string;
+  avatar?: string;
   // 累计消费
-  costTotal: string;
+  costTotal?: string;
   // 最后消费时间
-  lastCostTime: string;
+  lastCostTime?: string;
   // 注册时间
-  createTime: string;
+  createTime?: string;
 }
 
 export interface IClientTableData extends ITableData<IClient> {}

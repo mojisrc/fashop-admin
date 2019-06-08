@@ -3,7 +3,8 @@ import { connect } from 'dva';
 import { ConnectProps, ConnectState } from '@/models/connect';
 import PageHeaderWrapper from '@/components/page-header-wrapper';
 import StandardTable from '@/components/standard-table';
-import { IClientTableData } from './models/client';
+import { IClientTableData, IClient } from './models/client';
+import ClientDetail from './components/client-detail';
 import { Button, Card } from 'antd';
 
 interface IProps extends Required<ConnectProps> {
@@ -21,6 +22,8 @@ const ClientList: React.FC<IProps> = props => {
     page: 1,
     rows: 10,
   });
+  const [visible, setVisible] = React.useState<boolean>(false);
+  const [currentClient, setCurrentClient] = React.useState<IClient>({});
 
   React.useEffect(() => {
     getList(queryData);
@@ -31,6 +34,11 @@ const ClientList: React.FC<IProps> = props => {
       type: 'client/fetchList',
       payload: data,
     });
+  };
+
+  const handleDetail = data => {
+    setCurrentClient(data);
+    setVisible(true);
   };
 
   const columns = [
@@ -74,9 +82,15 @@ const ClientList: React.FC<IProps> = props => {
     {
       title: '操作',
       dataIndex: 'action',
-      render: () => {
+      render: (text, record) => {
         return (
-          <Button size="small" type="link">
+          <Button
+            size="small"
+            type="link"
+            onClick={() => {
+              handleDetail(record);
+            }}
+          >
             详情
           </Button>
         );
@@ -90,9 +104,17 @@ const ClientList: React.FC<IProps> = props => {
 
   return (
     <div>
-      <PageHeaderWrapper title="客户列表"></PageHeaderWrapper>
+      <PageHeaderWrapper title="客户列表" />
 
       <Card bordered={false}>{table}</Card>
+
+      <ClientDetail
+        visible={visible}
+        clientInfo={currentClient}
+        onClose={() => {
+          setVisible(false);
+        }}
+      />
     </div>
   );
 };
