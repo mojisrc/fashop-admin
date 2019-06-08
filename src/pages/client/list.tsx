@@ -68,8 +68,16 @@ const ClientList: React.FC<IProps> = props => {
       },
     },
     {
-      title: '累计消费',
+      title: '购买次数',
+      dataIndex: 'buyTimes',
+    },
+    {
+      title: '累计消费(元)',
       dataIndex: 'costTotal',
+    },
+    {
+      title: '客消费(元)',
+      dataIndex: 'costAverage',
     },
     {
       title: '最后消费',

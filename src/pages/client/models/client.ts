@@ -16,6 +16,10 @@ export interface IClient {
   avatar?: string;
   // 累计消费
   costTotal?: string;
+  // 平均消费 - 客单价
+  costAverage?: string;
+  // 购买次数
+  buyTimes?: number;
   // 最后消费时间
   lastCostTime?: string;
   // 注册时间
@@ -62,6 +66,8 @@ const ClientModel: IClientModel = {
           phone: item.phone,
           avatar: item.avatar,
           costTotal: item.cost_total,
+          costAverage: item.cost_average,
+          buyTimes: item.buy_times,
           lastCostTime: item.last_cost_time ? formatTime(item.create_time * 1000) : '--',
           createTime: formatTime(item.create_time * 1000),
         }));
