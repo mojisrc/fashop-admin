@@ -17,19 +17,19 @@ interface IProps {
   copyright?: React.ReactNode;
 }
 
-export const GlobalFooter: React.FC<IProps> = (props) => {
+const GlobalFooter: React.FC<IProps> = props => {
   const { prefixCls, className, style, links, copyright } = props;
 
   return (
     <div
       className={classNames(className, {
-        [`${prefixCls}`]: true
+        [`${prefixCls}`]: true,
       })}
       style={style}
     >
       {links && (
         <div className={`${prefixCls}__links`}>
-          {links.map((link) => (
+          {links.map(link => (
             <a
               key={link.key}
               title={link.key}
@@ -41,15 +41,13 @@ export const GlobalFooter: React.FC<IProps> = (props) => {
           ))}
         </div>
       )}
-      {copyright && (
-        <div className={`${prefixCls}__copyright`}>
-          {copyright}
-        </div>
-      )}
+      {copyright && <div className={`${prefixCls}__copyright`}>{copyright}</div>}
     </div>
-  )
+  );
 };
 
 GlobalFooter.defaultProps = {
-  prefixCls: 'lotus-global-footer'
+  prefixCls: 'lotus-global-footer',
 };
+
+export default GlobalFooter;

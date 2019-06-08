@@ -9,14 +9,14 @@ export default [
       {
         path: '/user/login',
         name: 'login',
-        component: './user/login'
+        component: './user/login',
       },
       {
         path: '/user/password-reset',
         name: 'password-reset',
-        component: './user/password-reset'
-      }
-    ]
+        component: './user/password-reset',
+      },
+    ],
   },
   // app
   {
@@ -35,15 +35,15 @@ export default [
             path: '/dashboard/analysis',
             name: 'analysis',
             authority: 'dashboard/analysis',
-            component: './dashboard/analysis'
+            component: './dashboard/analysis',
           },
           {
             path: '/dashboard/workplace',
             name: 'workplace',
             authority: 'dashboard/workplace',
-            component: './dashboard/workplace'
-          }
-        ]
+            component: './dashboard/workplace',
+          },
+        ],
       },
       {
         name: 'exception',
@@ -66,7 +66,7 @@ export default [
             path: '/exception/500',
             name: 'server-error',
             component: './exception/500',
-          }
+          },
         ],
       },
       {
@@ -78,20 +78,20 @@ export default [
             path: '/permission/actions',
             name: 'actions',
             authority: ['permission/actionList'],
-            component: './permission/actions/actions'
+            component: './permission/actions/actions',
           },
           {
             path: '/permission/policies',
             name: 'policies',
             component: './permission/policies/policies',
-            authority: ['permission/policyList']
+            authority: ['permission/policyList'],
           },
           {
             path: '/permission/policies/create',
             name: 'policy-create',
             hideInMenu: true,
             component: './permission/policies/create',
-          }
+          },
         ],
       },
       {
@@ -103,16 +103,33 @@ export default [
             path: '/system/user',
             name: 'user',
             authority: '*',
-            component: './system/users'
+            component: './system/users',
           },
           {
             path: '/system/group',
             name: 'group',
             authority: '*',
-            component: './system/groups'
-          }
+            component: './system/groups',
+          },
         ],
       },
-    ]
-  }
+      {
+        name: 'account',
+        icon: 'user',
+        path: '/account',
+        routes: [
+          {
+            path: '/account/center',
+            name: 'center',
+            component: './account/center',
+          },
+          {
+            path: '/account/settings',
+            name: 'settings',
+            component: './account/settings',
+          },
+        ],
+      },
+    ],
+  },
 ];

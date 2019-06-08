@@ -12,21 +12,21 @@ interface IProps extends FormComponentProps {
 
 const FormItem = Form.Item;
 
-const PasswordResetForm: React.FC<IProps> = (props) => {
+const PasswordResetForm: React.FC<IProps> = props => {
   const {
     prefixCls,
     loading,
     onSubmit,
-    form: { validateFields, getFieldDecorator }
+    form: { validateFields, getFieldDecorator },
   } = props;
 
-  const handleSubmit = (e) => {
+  const handleSubmit = e => {
     e.preventDefault();
 
     validateFields((error, values) => {
       if (!error) return;
       onSubmit && onSubmit(values);
-    })
+    });
   };
 
   const handleReturnLogin = () => {
@@ -40,15 +40,15 @@ const PasswordResetForm: React.FC<IProps> = (props) => {
           rules: [
             {
               required: true,
-              message: formatMessage({ id: 'validation.username.required' })
-            }
-          ]
+              message: formatMessage({ id: 'validation.username.required' }),
+            },
+          ],
         })(
           <Input
             size="large"
             prefix={<Icon type="user" />}
             placeholder={`${formatMessage({ id: 'app.login.username' })}`}
-          />
+          />,
         )}
       </FormItem>
       <FormItem>
@@ -56,15 +56,15 @@ const PasswordResetForm: React.FC<IProps> = (props) => {
           rules: [
             {
               required: true,
-              message: formatMessage({ id: 'validation.verification-code.required' })
-            }
-          ]
+              message: formatMessage({ id: 'validation.verification-code.required' }),
+            },
+          ],
         })(
           <Input
             size="large"
             prefix={<Icon type="lock" />}
             placeholder={`${formatMessage({ id: 'app.password-reset.old-password' })}`}
-          />
+          />,
         )}
       </FormItem>
       <FormItem>
@@ -72,9 +72,9 @@ const PasswordResetForm: React.FC<IProps> = (props) => {
           rules: [
             {
               required: true,
-              message: formatMessage({ id: 'validation.verification-code.required' })
-            }
-          ]
+              message: formatMessage({ id: 'validation.verification-code.required' }),
+            },
+          ],
         })(
           <Input
             size="large"
@@ -82,7 +82,7 @@ const PasswordResetForm: React.FC<IProps> = (props) => {
             autoComplete="off"
             prefix={<Icon type="lock" />}
             placeholder={`${formatMessage({ id: 'app.password-reset.new-password' })}`}
-          />
+          />,
         )}
       </FormItem>
       <FormItem>
@@ -90,9 +90,9 @@ const PasswordResetForm: React.FC<IProps> = (props) => {
           rules: [
             {
               required: true,
-              message: formatMessage({ id: 'validation.verification-code.required' })
-            }
-          ]
+              message: formatMessage({ id: 'validation.verification-code.required' }),
+            },
+          ],
         })(
           <Input
             size="large"
@@ -100,17 +100,11 @@ const PasswordResetForm: React.FC<IProps> = (props) => {
             autoComplete="off"
             prefix={<Icon type="lock" />}
             placeholder={`${formatMessage({ id: 'app.password-reset.confirm-password' })}`}
-          />
+          />,
         )}
       </FormItem>
       <FormItem>
-        <Button
-          loading={loading}
-          type="primary"
-          htmlType="submit"
-          size="large"
-          block
-        >
+        <Button loading={loading} type="primary" htmlType="submit" size="large" block>
           <FormattedMessage id="app.password-reset.button" />
         </Button>
         <div className={`${prefixCls}__tools`}>
@@ -120,11 +114,11 @@ const PasswordResetForm: React.FC<IProps> = (props) => {
         </div>
       </FormItem>
     </Form>
-  )
+  );
 };
 
 PasswordResetForm.defaultProps = {
-  loading: false
+  loading: false,
 };
 
-export default Form.create()(PasswordResetForm);
+export default Form.create<IProps>()(PasswordResetForm);

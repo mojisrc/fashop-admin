@@ -1,8 +1,9 @@
 module.exports = {
-  tabWidth: 2,
-  semi: true,
+  // 行最大长度规则
+  printWidth: 100,
+  // 使用单引号
   singleQuote: true,
   bracketSpacing: true,
-  jsxBracketSameLine: false,
-  arrowParens: 'always'
+  trailingComma: 'all',
+  proseWrap: 'never'
 };

@@ -1,3 +1,3 @@
-import { SelectLang } from './select-lang';
+import SelectLang from './select-lang';
 
 export default SelectLang;

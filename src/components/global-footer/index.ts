@@ -1,3 +1,3 @@
-import { GlobalFooter } from './global-footer';
+import GlobalFooter from './global-footer';
 
 export default GlobalFooter;
