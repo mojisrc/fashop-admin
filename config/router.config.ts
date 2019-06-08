@@ -69,6 +69,23 @@ export default [
         ],
       },
       {
+        name: 'shop',
+        icon: 'icon-shop',
+        path: '/shop',
+        routes: [
+          {
+            path: '/shop/list',
+            name: 'list',
+            component: './shop/list',
+          },
+          {
+            path: '/shop/images',
+            name: 'images',
+            component: './shop/images',
+          },
+        ],
+      },
+      {
         name: 'client',
         icon: 'icon-client',
         path: '/client',
@@ -77,6 +94,135 @@ export default [
             path: '/client/list',
             name: 'list',
             component: './client/list',
+          },
+        ],
+      },
+      {
+        name: 'goods',
+        icon: 'shopping',
+        path: '/goods',
+        routes: [
+          {
+            path: '/goods/list',
+            name: 'list',
+            component: './goods/list',
+          },
+          {
+            path: '/goods/category',
+            name: 'category',
+            component: './goods/category',
+          },
+          {
+            path: '/goods/brands',
+            name: 'brands',
+            component: './goods/brands',
+          },
+        ],
+      },
+      {
+        name: 'order',
+        icon: 'icon-order',
+        path: '/order',
+        routes: [
+          {
+            path: '/order/list',
+            name: 'list',
+            component: './order/list',
+          },
+          {
+            path: '/order/refund',
+            name: 'refund',
+            component: './order/refund',
+          },
+          {
+            path: '/order/evaluate',
+            name: 'evaluate',
+            component: './order/evaluate',
+          },
+        ],
+      },
+      {
+        name: 'marketing',
+        icon: 'icon-marketing',
+        path: '/marketing',
+        routes: [
+          {
+            path: '/marketing/coupon',
+            name: 'coupon',
+            component: './marketing/coupon',
+          },
+          {
+            path: '/marketing/spike',
+            name: 'spike',
+            component: './marketing/spike',
+          },
+          {
+            path: '/marketing/gift',
+            name: 'gift',
+            component: '../layouts/blank-layout',
+            routes: [
+              {
+                path: '/marketing/gift/list',
+                name: 'list',
+                component: './marketing/gift/list',
+              },
+              {
+                path: '/marketing/gift/record',
+                name: 'record',
+                component: './marketing/gift/record',
+              },
+            ],
+          },
+          {
+            path: '/marketing/member-card',
+            name: 'member-card',
+            component: '../layouts/blank-layout',
+            routes: [
+              {
+                path: '/marketing/member-card/list',
+                name: 'list',
+                component: './marketing/member-card/list',
+              },
+              {
+                path: '/marketing/member-card/order',
+                name: 'record',
+                component: './marketing/member-card/order',
+              },
+            ],
+          },
+          {
+            path: '/marketing/points',
+            name: 'points',
+            component: '../layouts/blank-layout',
+            routes: [
+              {
+                path: '/marketing/points/goods',
+                name: 'goods',
+                component: './marketing/points/goods',
+              },
+              {
+                path: '/marketing/points/log',
+                name: 'log',
+                component: './marketing/points/log',
+              },
+              {
+                path: '/marketing/points/setting',
+                name: 'setting',
+                component: './marketing/points/setting',
+              },
+            ],
+          },
+          {
+            path: '/marketing/reward',
+            name: 'reward',
+            component: '../layouts/blank-layout',
+            routes: [
+              {
+                path: '/marketing/reward/list',
+                name: 'list',
+                component: './marketing/reward/list',
+              },
+            ],
           },
         ],
       },

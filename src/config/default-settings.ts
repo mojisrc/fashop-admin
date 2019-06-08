@@ -25,7 +25,7 @@ const defaultSettings: IDefaultSettings = {
   },
   fixedHeader: true,
   title: 'FaShop',
-  iconFontUrl: '//at.alicdn.com/t/font_1232661_kz1j655329.js',
+  iconFontUrl: '//at.alicdn.com/t/font_1232661_woswe21y308.js',
   company: 'FaShop',
 };
 
