@@ -32,6 +32,34 @@ ol {
   list-style: none;
 }
 
+// 美化滚动条
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 4px;
+}
+
+.fa-table-tools {
+  position: relative;
+  margin-bottom: 15px;
+}
+
+.fa-table-extra {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 40px;
+  line-height: 40px;
+
+  button + button {
+    margin-left: 8px;
+  }
+}
+
 .layout-container {
   max-width: 1056px;
   height: 100%;
@@ -45,15 +73,4 @@ ol {
   button + button {
     margin-left: 6px;
   }
-}
-
-// 美化滚动条
-::-webkit-scrollbar {
-  width: 5px;
-  height: 5px
-}
-
-::-webkit-scrollbar-thumb {
-  background: #ccc;
-  border-radius: 4px;
 }
