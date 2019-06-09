@@ -13,6 +13,7 @@ import { IUserGroupModelState } from '@/pages/system/models/user-group';
 import { ISystemUserModelState } from '@/pages/system/models/system-user';
 import { IClientModelState } from '@/pages/client/models/client';
 import { IOrderModelState } from '@/pages/order/models/order';
+import { IGoodsModelState } from '@/pages/goods/models/goods';
 
 export interface ConnectState {
   loading: Loading;
@@ -24,6 +25,7 @@ export interface ConnectState {
   userGroup: IUserGroupModelState;
   client: IClientModelState;
   order: IOrderModelState;
+  goods: IGoodsModelState;
   action: IActionModelState;
   policy: IPolicyModelState;
 }
@@ -38,6 +40,7 @@ export {
   IClientModelState,
   IOrderModelState,
   IUserModelState,
+  IGoodsModelState,
 };
 
 export type Effect = (
