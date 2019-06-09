@@ -104,9 +104,9 @@
     "stylelint-order": "^3.0.0",
     "stylelint-prettier": "^1.1.1",
     "typescript": "^3.5.1",
-    "umi": "^2.6.17",
-    "umi-plugin-react": "^1.7.5",
-    "umi-types": "^0.3.2"
+    "umi": "^2.7.3",
+    "umi-plugin-react": "^1.8.2",
+    "umi-types": "^0.3.7"
   },
   "husky": {
     "hooks": {
