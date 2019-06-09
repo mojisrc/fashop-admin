@@ -6,15 +6,10 @@ import { fetchList } from '@/services/brand';
 
 export interface IBrand {
   id?: number;
-  // 商品图片
-  img?: string;
-  // 商品名称
+  // 品牌名称
   title?: string;
-  // 价格
-  price?: string;
-  // 库存
-  stock?: number;
-  shelfStatus?: 0 | 1;
+  // 品牌Logo
+  logo?: string;
   createTime?: string;
 }
 
@@ -53,11 +48,8 @@ const BrandModel: IBrandModel = {
 
         const clients: IBrand[] = list.map(item => ({
           id: item.id,
-          img: item.img,
           title: item.title,
-          price: item.price,
-          stock: item.stock,
-          shelfStatus: item.is_on_sale,
+          logo: item.logo,
           createTime: formatTime(item.create_time * 1000),
         }));
 
