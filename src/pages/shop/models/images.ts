@@ -10,7 +10,7 @@ export interface IImages {
 // 文件夹
 export interface IFolder {
   id: number;
-  pId: number;
+  parentId: number;
   title: string;
 }
 
@@ -43,11 +43,9 @@ const ImagesModel: IImagesModel = {
 
         const folders = list.map(item => ({
           id: item.id,
-          pId: item.pid,
+          parentId: item.pid,
           title: item.title,
         }));
-
-        console.log(folders);
 
         yield put({
           type: 'saveFolders',

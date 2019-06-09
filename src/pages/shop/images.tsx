@@ -4,13 +4,15 @@ import { Row, Col, Card, Button } from 'antd';
 import { ConnectProps, ConnectState } from '@/models/connect';
 import PageHeaderWrapper from '@/components/page-header-wrapper';
 import FolderTree from './components/folder-tree';
+import { IFolder } from './models/images';
 
 interface IProps extends Required<ConnectProps> {
+  folders: IFolder[];
   loading: boolean;
 }
 
 const ShopImages: React.FC<IProps> = props => {
-  const { dispatch, loading } = props;
+  const { dispatch, folders, loading } = props;
 
   React.useEffect(() => {
     dispatch({
@@ -32,7 +34,7 @@ const ShopImages: React.FC<IProps> = props => {
       <Row gutter={16}>
         <Col span={6}>
           <Card bordered={false} title="文件夹">
-            <FolderTree />
+            <FolderTree folders={folders} />
           </Card>
         </Col>
         <Col span={18}>
@@ -43,6 +45,7 @@ const ShopImages: React.FC<IProps> = props => {
   );
 };
 
-export default connect(({ loading }: ConnectState) => ({
+export default connect(({ images, loading }: ConnectState) => ({
+  folders: images.folders,
   loading: loading.effects['images/fetchFolderList'],
 }))(ShopImages);
