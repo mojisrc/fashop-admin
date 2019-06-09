@@ -45,6 +45,11 @@
     }
   }
 
+  .ant-menu-root {
+    height: ~'calc(100vh - @{nav-header-height})';
+    overflow-y: auto;
+  }
+
   &.is-collapsed {
     // 请根据项目logo自行调整
     .lotus-sidebar-menu__logo > img {
