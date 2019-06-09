@@ -12,6 +12,7 @@ import { IPolicyModelState } from '@/models/policy';
 import { IUserGroupModelState } from '@/pages/system/models/user-group';
 import { ISystemUserModelState } from '@/pages/system/models/system-user';
 import { IClientModelState } from '@/pages/client/models/client';
+import { IOrderModelState } from '@/pages/order/models/order';
 
 export interface ConnectState {
   loading: Loading;
@@ -22,6 +23,7 @@ export interface ConnectState {
   systemUser: ISystemUserModelState;
   userGroup: IUserGroupModelState;
   client: IClientModelState;
+  order: IOrderModelState;
   action: IActionModelState;
   policy: IPolicyModelState;
 }
@@ -34,6 +36,7 @@ export {
   IActionModelState,
   IPolicyModelState,
   IClientModelState,
+  IOrderModelState,
   IUserModelState,
 };
 
