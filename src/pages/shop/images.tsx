@@ -1,7 +1,48 @@
 import React from 'react';
+import { connect } from 'dva';
+import { Row, Col, Card, Button } from 'antd';
+import { ConnectProps, ConnectState } from '@/models/connect';
+import PageHeaderWrapper from '@/components/page-header-wrapper';
+import FolderTree from './components/folder-tree';
 
-const ShopImages: React.FC = () => {
-  return <div>ShopImages</div>;
+interface IProps extends Required<ConnectProps> {
+  loading: boolean;
+}
+
+const ShopImages: React.FC<IProps> = props => {
+  const { dispatch, loading } = props;
+
+  React.useEffect(() => {
+    dispatch({
+      type: 'images/fetchFolderList',
+    });
+  }, []);
+
+  return (
+    <div>
+      <PageHeaderWrapper
+        title="图片空间"
+        extra={[
+          <Button key="1" type="primary">
+            创建根目录
+          </Button>,
+        ]}
+      />
+
+      <Row gutter={16}>
+        <Col span={6}>
+          <Card bordered={false} title="文件夹">
+            <FolderTree />
+          </Card>
+        </Col>
+        <Col span={18}>
+          <Card bordered={false} title="主区域"></Card>
+        </Col>
+      </Row>
+    </div>
+  );
 };
 
-export default ShopImages;
+export default connect(({ loading }: ConnectState) => ({
+  loading: loading.effects['images/fetchFolderList'],
+}))(ShopImages);

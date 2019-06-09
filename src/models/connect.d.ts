@@ -15,6 +15,7 @@ import { IClientModelState } from '@/pages/client/models/client';
 import { IOrderModelState } from '@/pages/order/models/order';
 import { IGoodsModelState } from '@/pages/goods/models/goods';
 import { IBrandModelState } from '@/pages/goods/models/brand';
+import { IImagesModelState } from '@/pages/shop/models/images';
 
 export interface ConnectState {
   loading: Loading;
@@ -30,6 +31,7 @@ export interface ConnectState {
   action: IActionModelState;
   policy: IPolicyModelState;
   brand: IBrandModelState;
+  images: IImagesModelState;
 }
 
 export {
@@ -44,6 +46,7 @@ export {
   IUserModelState,
   IBrandModelState,
   IGoodsModelState,
+  IImagesModelState,
 };
 
 export type Effect = (

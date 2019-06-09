@@ -8,7 +8,7 @@ export default {
   'menu.dashboard.workplace': '工作台',
   'menu.shop': '店铺管理',
   'menu.shop.list': '店铺列表',
-  'menu.shop.images': '图片管理',
+  'menu.shop.images': '图片空间',
   'menu.client': '客户管理',
   'menu.client.list': '客户列表',
   'menu.order': '订单管理',

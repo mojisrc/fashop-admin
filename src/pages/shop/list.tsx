@@ -4,4 +4,5 @@ const ShopList: React.FC = () => {
   return <div>ShopList</div>;
 };
 
+// @ts-ignore
 export default ShopList;
