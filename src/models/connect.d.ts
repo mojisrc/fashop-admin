@@ -14,6 +14,7 @@ import { ISystemUserModelState } from '@/pages/system/models/system-user';
 import { IClientModelState } from '@/pages/client/models/client';
 import { IOrderModelState } from '@/pages/order/models/order';
 import { IGoodsModelState } from '@/pages/goods/models/goods';
+import { IBrandModelState } from '@/pages/goods/models/brand';
 
 export interface ConnectState {
   loading: Loading;
@@ -28,6 +29,7 @@ export interface ConnectState {
   goods: IGoodsModelState;
   action: IActionModelState;
   policy: IPolicyModelState;
+  brand: IBrandModelState;
 }
 
 export {
@@ -40,6 +42,7 @@ export {
   IClientModelState,
   IOrderModelState,
   IUserModelState,
+  IBrandModelState,
   IGoodsModelState,
 };
 
