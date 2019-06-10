@@ -4,14 +4,14 @@ import classNames from 'classnames';
 import { PageHeader } from 'antd';
 import { PageHeaderProps } from 'antd/es/page-header';
 import MenuContext from '@/layouts/menu-context';
-import { urlToList } from '@jiumao/dharma';
+import { urlToList } from 'awe-utils';
 import './page-header-wrapper.less';
 
 interface IProps extends PageHeaderProps {
   wrapperClassName?: string;
 }
 
-const PageHeaderWrapper: React.FC<IProps> = (props) => {
+const PageHeaderWrapper: React.FC<IProps> = props => {
   const { wrapperClassName, prefixCls, ...restProps } = props;
   const { location, breadcrumbNameMap } = React.useContext(MenuContext);
 
@@ -19,7 +19,7 @@ const PageHeaderWrapper: React.FC<IProps> = (props) => {
     const pathSnippets = urlToList(pathname);
     const routes = [];
 
-    pathSnippets.forEach((url) => {
+    pathSnippets.forEach(url => {
       const menuData = breadcrumbNameMap[url];
       routes.push({
         path: menuData.path,
@@ -32,9 +32,11 @@ const PageHeaderWrapper: React.FC<IProps> = (props) => {
 
   const itemRender = (route, params, routes) => {
     const last = routes.indexOf(route) === routes.length - 1;
-    return last
-      ? <span>{route.breadcrumbName}</span>
-      : <Link to={route.path}>{route.breadcrumbName}</Link>;
+    return last ? (
+      <span>{route.breadcrumbName}</span>
+    ) : (
+      <Link to={route.path}>{route.breadcrumbName}</Link>
+    );
   };
 
   const pathname = location!.pathname;
@@ -43,22 +45,22 @@ const PageHeaderWrapper: React.FC<IProps> = (props) => {
   return (
     <div
       className={classNames(wrapperClassName, {
-        [`${prefixCls}`]: true
+        [`${prefixCls}`]: true,
       })}
     >
       <PageHeader
         breadcrumb={{
           itemRender,
-          routes
+          routes,
         }}
         {...restProps}
       />
     </div>
-  )
+  );
 };
 
 PageHeaderWrapper.defaultProps = {
-  prefixCls: 'lotus-page-header-wrapper'
+  prefixCls: 'lotus-page-header-wrapper',
 };
 
 export default PageHeaderWrapper;

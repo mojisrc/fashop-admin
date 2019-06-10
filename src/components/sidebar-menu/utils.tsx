@@ -2,7 +2,7 @@ import React from 'react';
 import { Icon } from 'antd';
 import pathToRegexp from 'path-to-regexp';
 import IconFont from '@/components/icon-font';
-import { urlToList } from '@jiumao/dharma';
+import { urlToList } from 'awe-utils';
 import { isUrl } from '@/utils/utils';
 
 // 获取Icon图标
@@ -20,7 +20,7 @@ export const getIcon = (icon?: string | React.ReactNode) => {
 };
 
 // 递归展平数据
-export const getFlatMenuKeys = (menuData) => {
+export const getFlatMenuKeys = menuData => {
   let keys = [];
   menuData.forEach(item => {
     keys.push(item.path);

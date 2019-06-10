@@ -2,7 +2,7 @@ import React from 'react';
 import Link from 'umi/link';
 import { Menu } from 'antd';
 import { MenuMode, MenuTheme } from 'antd/es/menu';
-import { urlToList } from '@jiumao/dharma';
+import { urlToList } from 'awe-utils';
 import { ConnectProps } from '@/models/connect';
 import { getIcon, getMenuMatches } from './utils';
 
@@ -48,7 +48,7 @@ class BaseMenu extends React.Component<IBaseMenuProps, any> {
     openKeys: [],
     collapsed: false,
     menuData: [],
-    onOpenChange: () => void 0
+    onOpenChange: () => void 0,
   };
 
   // 获得菜单子节点
@@ -85,13 +85,7 @@ class BaseMenu extends React.Component<IBaseMenuProps, any> {
       );
     }
 
-    return (
-      <Menu.Item
-        key={item.path}
-      >
-        {this.getMenuItemPath(item)}
-      </Menu.Item>
-    );
+    return <Menu.Item key={item.path}>{this.getMenuItemPath(item)}</Menu.Item>;
   };
 
   // 判断是否是http链接.返回 Link 或 a
@@ -124,7 +118,7 @@ class BaseMenu extends React.Component<IBaseMenuProps, any> {
   };
 
   // 转换路径
-  conversionPath = (path) => {
+  conversionPath = path => {
     if (path && path.indexOf('http') === 0) {
       return path;
     }
@@ -149,7 +143,7 @@ class BaseMenu extends React.Component<IBaseMenuProps, any> {
       menuData,
       collapsed,
       onOpenChange,
-      location
+      location,
     } = this.props;
 
     let selectedKeys = this.getSelectedMenuKeys(location!.pathname);
@@ -160,7 +154,7 @@ class BaseMenu extends React.Component<IBaseMenuProps, any> {
     let props = {};
     if (openKeys && !collapsed) {
       props = {
-        openKeys: openKeys.length === 0 ? [...selectedKeys] : openKeys
+        openKeys: openKeys.length === 0 ? [...selectedKeys] : openKeys,
       };
     }
 
@@ -177,8 +171,7 @@ class BaseMenu extends React.Component<IBaseMenuProps, any> {
       >
         {this.getNavMenuItems(menuData)}
       </Menu>
-    )
-
+    );
   }
 }
 

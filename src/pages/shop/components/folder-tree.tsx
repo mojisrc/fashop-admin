@@ -1,7 +1,7 @@
 import React from 'react';
 import { Tree, Icon } from 'antd';
 import { MenuProvider, Menu, Item } from 'react-contexify';
-import { arrayToTree } from '@jiumao/dharma';
+import { arrayToTree } from 'awe-utils';
 import { IFolder } from '../models/images';
 import 'react-contexify/dist/ReactContexify.min.css';
 
