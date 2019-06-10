@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'dva';
-import { Button, Card, Tabs } from 'antd';
+import { Card, Tabs } from 'antd';
 import PageHeaderWrapper from '@/components/page-header-wrapper';
 import { ConnectProps, ConnectState } from '@/models/connect';
 import StandardTable from '@/components/standard-table';
@@ -16,8 +16,8 @@ interface IProps extends Required<ConnectProps> {
 const TabPane = Tabs.TabPane;
 
 const OrderList: React.FC<IProps> = props => {
-  const { tableData, loading, dispatch } = props;
-  const [queryData, setQueryData] = useQueryData({}, props.location);
+  const { tableData, loading, dispatch, location } = props;
+  const [queryData, setQueryData] = useQueryData(location.pathname);
 
   React.useEffect(() => {
     getList(queryData);

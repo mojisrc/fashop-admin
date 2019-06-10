@@ -13,8 +13,8 @@ interface IProps extends Required<ConnectProps> {
 }
 
 const GoodsList: React.FC<IProps> = props => {
-  const { tableData, loading, dispatch } = props;
-  const [queryData, setQueryData] = useQueryData({}, props.location);
+  const { tableData, loading, dispatch, location } = props;
+  const [queryData, setQueryData] = useQueryData(location.pathname);
 
   React.useEffect(() => {
     getList(queryData);

@@ -1,6 +1,5 @@
 import React from 'react';
 import store from 'store';
-import { Location } from 'history';
 
 interface IQueryData {
   page: number;
@@ -8,31 +7,38 @@ interface IQueryData {
   [key: string]: any;
 }
 
+/**
+ * 表格筛选查询解决方案
+ * 建议以当前路由为存储key，初次加载不存储，操作后才会存储
+ *
+ * @param storageKey 存储key
+ * @param initQueryData 需要初始化的查询数据
+ */
 const useQueryData = (
-  initQueryData: { [key: string]: any },
-  location: Location,
+  storageKey: string,
+  initQueryData?: { [key: string]: any },
 ): [IQueryData, (nextValue?: IQueryData) => void] => {
-  const { pathname } = location;
-  const defaultQueryData = store.get(pathname);
-  const [queryData, setQueryData] = React.useState<IQueryData>(
-    defaultQueryData
-      ? defaultQueryData
-      : {
-          page: 1,
-          rows: 10,
-          ...initQueryData,
-        },
-  );
+  let storageData = {};
+  if (storageKey) {
+    storageData = store.get(storageKey);
+  }
 
-  React.useEffect(() => {
-    if (pathname) {
-      defaultQueryData && setQueryData(defaultQueryData);
-    }
-  }, [location.pathname]);
+  const defaultQueryData = {
+    page: 1,
+    rows: 10,
+    ...initQueryData,
+    ...storageData,
+  };
+
+  const [queryData, setQueryData] = React.useState<IQueryData>(defaultQueryData);
+
+  const storageQueryData = data => {
+    storageKey && store.set(storageKey, data);
+  };
 
   const toggle = React.useCallback(
     (nextValue: IQueryData) => {
-      pathname && store.set(pathname, nextValue);
+      storageQueryData(nextValue);
       setQueryData(nextValue);
     },
     [setQueryData],

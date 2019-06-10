@@ -19,9 +19,9 @@ const Option = Select.Option;
 const Search = Input.Search;
 
 const ClientList: React.FC<IProps> = props => {
-  const { dispatch, tableData, loading, form } = props;
+  const { dispatch, tableData, loading, form, location } = props;
   const { getFieldDecorator } = form;
-  const [queryData, setQueryData] = useQueryData({ keywords_type: 'nickname' }, props.location);
+  const [queryData, setQueryData] = useQueryData(location.pathname, { keywords_type: 'nickname' });
   const [visible, setVisible] = React.useState<boolean>(false);
   const [currentClient, setCurrentClient] = React.useState<IClient>({});
 
@@ -154,7 +154,7 @@ const ClientList: React.FC<IProps> = props => {
     <Select
       defaultValue={queryData.keywords_type}
       onSelect={handleKeywordsSelect}
-      style={{ width: 80 }}
+      style={{ width: 100 }}
     >
       <Option value="nickname">昵称</Option>
       <Option value="phone">手机号</Option>
