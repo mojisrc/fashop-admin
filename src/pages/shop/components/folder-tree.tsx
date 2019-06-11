@@ -14,6 +14,18 @@ const { TreeNode } = Tree;
 const FolderTree: React.FC<IProps> = props => {
   const { folders } = props;
 
+  const handleCreate = e => {
+    console.log(e);
+  };
+
+  const handleUpdate = e => {
+    console.log(e);
+  };
+
+  const handleRemove = e => {
+    console.log(e);
+  };
+
   const loop = data => {
     return data.map(item => {
       const title = (
@@ -51,8 +63,9 @@ const FolderTree: React.FC<IProps> = props => {
         {loop(folderTreeData)}
       </Tree>
       <Menu id="menu_id">
-        <Item>菜单项</Item>
-        <Item>菜单项</Item>
+        <Item onClick={handleCreate}>创建目录</Item>
+        <Item onClick={handleUpdate}>修改目录</Item>
+        <Item onClick={handleRemove}>删除目录</Item>
       </Menu>
     </div>
   );

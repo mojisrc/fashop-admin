@@ -30,19 +30,7 @@ export default [
         path: '/dashboard',
         name: 'dashboard',
         icon: 'dashboard',
-        routes: [
-          {
-            path: '/dashboard/analysis',
-            name: 'analysis',
-            component: './dashboard/analysis',
-          },
-          {
-            path: '/dashboard/workplace',
-            name: 'workplace',
-            authority: 'dashboard/workplace',
-            component: './dashboard/workplace',
-          },
-        ],
+        component: './dashboard/dashboard',
       },
       {
         name: 'exception',

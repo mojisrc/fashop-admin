@@ -33,7 +33,7 @@ const ShopImages: React.FC<IProps> = props => {
 
       <Row gutter={16}>
         <Col span={6}>
-          <Card bordered={false} title="文件夹">
+          <Card bordered={false} title="文件目录">
             <FolderTree folders={folders} />
           </Card>
         </Col>
