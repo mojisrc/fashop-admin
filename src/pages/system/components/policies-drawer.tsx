@@ -1,6 +1,5 @@
 import React from 'react';
-import { Transfer } from 'antd';
-import DescriptionList from '@/components/description-list';
+import { Transfer, Descriptions } from 'antd';
 import DrawerWrapper from '@/components/drawer-wrapper';
 import { IPolicy } from '@/models/policy';
 import { IUser } from '../models/system-user';
@@ -23,9 +22,7 @@ interface IProps {
   onConfirm?: (values) => void;
 }
 
-const Description = DescriptionList.Description;
-
-const PoliciesDrawer: React.FC<IProps> = (props) => {
+const PoliciesDrawer: React.FC<IProps> = props => {
   const { prefixCls, user, type, group, visible, onClose } = props;
   const [title, setTitle] = React.useState<string>('');
   const [targetKeys, setTargetKeys] = React.useState<string[]>([]);
@@ -35,19 +32,17 @@ const PoliciesDrawer: React.FC<IProps> = (props) => {
     setTitle(title);
   }, [props.type]);
 
-  const handleConfirm = () => {
+  const handleConfirm = () => {};
 
-  };
-
-  const handleChange = (targetKeys) => {
+  const handleChange = targetKeys => {
     setTargetKeys(targetKeys);
   };
 
   const filterOption = (inputValue, option) => {
-    return option.description.indexOf(inputValue) > -1
+    return option.description.indexOf(inputValue) > -1;
   };
 
-  const renderItem = (item) => {
+  const renderItem = item => {
     const customLabel = (
       <span>
         {item.title} - {item.description}
@@ -56,7 +51,7 @@ const PoliciesDrawer: React.FC<IProps> = (props) => {
 
     return {
       label: customLabel,
-      value: item.title
+      value: item.title,
     };
   };
 
@@ -71,36 +66,18 @@ const PoliciesDrawer: React.FC<IProps> = (props) => {
     >
       <div className={prefixCls}>
         {type === 'user' && (
-          <DescriptionList
-            size="large"
-            title="用户信息"
-            style={{ marginBottom: 32 }}
-          >
-            <Description term="用户名">
-              {user.username}
-            </Description>
-            <Description term="邮箱">
-              {user.email}
-            </Description>
-            <Description term="手机号">
-              {user.mobile}
-            </Description>
-          </DescriptionList>
+          <Descriptions title="用户信息" style={{ marginBottom: 32 }}>
+            <Descriptions.Item label="用户名">{user.username}</Descriptions.Item>
+            <Descriptions.Item label="邮箱">{user.email}</Descriptions.Item>
+            <Descriptions.Item label="手机号">{user.mobile}</Descriptions.Item>
+          </Descriptions>
         )}
 
         {type === 'group' && (
-          <DescriptionList
-            size="large"
-            title="用户组信息"
-            style={{ marginBottom: 32 }}
-          >
-            <Description term="用户组名">
-              {group.name}
-            </Description>
-            <Description term="显示名称">
-              {group.displayName}
-            </Description>
-          </DescriptionList>
+          <Descriptions title="用户组信息" style={{ marginBottom: 32 }}>
+            <Descriptions.Item label="用户组名">{group.name}</Descriptions.Item>
+            <Descriptions.Item label="显示名称">{group.displayName}</Descriptions.Item>
+          </Descriptions>
         )}
 
         <Transfer
@@ -113,14 +90,14 @@ const PoliciesDrawer: React.FC<IProps> = (props) => {
         />
       </div>
     </DrawerWrapper>
-  )
+  );
 };
 
 PoliciesDrawer.defaultProps = {
   visible: false,
   prefixCls: 'lotus-policies-drawer',
   user: {},
-  policies: []
+  policies: [],
 };
 
 export default PoliciesDrawer;

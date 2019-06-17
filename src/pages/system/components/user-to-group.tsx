@@ -1,8 +1,7 @@
 import React from 'react';
-import { Divider, Transfer, Alert } from 'antd';
+import { Divider, Transfer, Alert, Descriptions } from 'antd';
 import { TransferItem } from 'antd/es/transfer';
 import DrawerWrapper from '@/components/drawer-wrapper';
-import DescriptionList from '@/components/description-list';
 import { IUser } from '../models/system-user';
 import { IGroup } from '../models/user-group';
 import './user-to-group.less';
@@ -16,9 +15,7 @@ interface IProps {
   onConfirm?: (values) => void;
 }
 
-const Description = DescriptionList.Description;
-
-const UserToGroup: React.FC<IProps> = (props) => {
+const UserToGroup: React.FC<IProps> = props => {
   const { prefixCls, visible, user, groups, onClose, onConfirm } = props;
   const [targetKeys, setTargetKeys] = React.useState<string[]>([]);
   const [userGroups, setUserGroups] = React.useState<TransferItem[]>([]);
@@ -27,7 +24,7 @@ const UserToGroup: React.FC<IProps> = (props) => {
     const list: any[] = groups.map(item => ({
       key: item.id,
       title: item.name,
-      description: item.displayName
+      description: item.displayName,
     }));
     setUserGroups(list);
   }, [props.groups]);
@@ -43,15 +40,15 @@ const UserToGroup: React.FC<IProps> = (props) => {
     onConfirm && onConfirm(targetKeys);
   };
 
-  const handleChange = (targetKeys) => {
+  const handleChange = targetKeys => {
     setTargetKeys(targetKeys);
   };
 
   const filterOption = (inputValue, option) => {
-    return option.description.indexOf(inputValue) > -1
+    return option.description.indexOf(inputValue) > -1;
   };
 
-  const renderItem = (item) => {
+  const renderItem = item => {
     const customLabel = (
       <span>
         {item.title} - {item.description}
@@ -60,7 +57,7 @@ const UserToGroup: React.FC<IProps> = (props) => {
 
     return {
       label: customLabel,
-      value: item.title
+      value: item.title,
     };
   };
 
@@ -73,27 +70,13 @@ const UserToGroup: React.FC<IProps> = (props) => {
       width={700}
       title="添加到用户组"
     >
-      <Alert
-        message="用户添加到用户组，将拥有该用户组所有权限"
-        type="warning"
-        closable
-      />
+      <Alert message="用户添加到用户组，将拥有该用户组所有权限" type="warning" closable />
       <div className={prefixCls}>
-        <DescriptionList
-          size="large"
-          title="用户信息"
-          style={{ marginBottom: 32 }}
-        >
-          <Description term="用户名">
-            {user.username}
-          </Description>
-          <Description term="邮箱">
-            {user.email}
-          </Description>
-          <Description term="手机号">
-            {user.mobile}
-          </Description>
-        </DescriptionList>
+        <Descriptions title="用户信息" style={{ marginBottom: 32 }}>
+          <Descriptions.Item label="用户名">{user.username}</Descriptions.Item>
+          <Descriptions.Item label="邮箱">{user.email}</Descriptions.Item>
+          <Descriptions.Item label="手机号">{user.mobile}</Descriptions.Item>
+        </Descriptions>
 
         <Divider />
 
@@ -107,13 +90,13 @@ const UserToGroup: React.FC<IProps> = (props) => {
         />
       </div>
     </DrawerWrapper>
-  )
+  );
 };
 
 UserToGroup.defaultProps = {
   prefixCls: 'lotus-user-to-group',
   user: {},
-  groups: []
+  groups: [],
 };
 
 export default UserToGroup;

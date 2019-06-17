@@ -1,6 +1,6 @@
 import React from 'react';
+import { Descriptions } from 'antd';
 import DrawerWrapper from '@/components/drawer-wrapper';
-import DescriptionList from '@/components/description-list';
 import { IClient } from '../models/client';
 import './client-detail.less';
 
@@ -11,7 +11,6 @@ interface IProps {
 }
 
 const prefixCls = 'fa-client-detail';
-const Description = DescriptionList.Description;
 
 const ClientDetail: React.FC<IProps> = props => {
   const { visible, onClose, clientInfo } = props;
@@ -29,13 +28,13 @@ const ClientDetail: React.FC<IProps> = props => {
           <img width={90} src={clientInfo.avatar} alt="avatar" />
         </div>
         <div className="container">
-          <DescriptionList size="large" col={2} style={{ marginBottom: 32 }}>
-            <Description term="昵称">{clientInfo.nickname}</Description>
-            <Description term="手机号">{clientInfo.phone || '--'}</Description>
-            <Description term="性别">{clientInfo.phone || '--'}</Description>
-            <Description term="客户来源">{clientInfo.phone || '--'}</Description>
-            <Description term="注册时间">{clientInfo.createTime}</Description>
-          </DescriptionList>
+          <Descriptions column={2} style={{ marginBottom: 32 }}>
+            <Descriptions.Item label="昵称">{clientInfo.nickname}</Descriptions.Item>
+            <Descriptions.Item label="手机号">{clientInfo.phone || '--'}</Descriptions.Item>
+            <Descriptions.Item label="性别">{clientInfo.phone || '--'}</Descriptions.Item>
+            <Descriptions.Item label="客户来源">{clientInfo.phone || '--'}</Descriptions.Item>
+            <Descriptions.Item label="注册时间">{clientInfo.createTime}</Descriptions.Item>
+          </Descriptions>
         </div>
       </div>
     </DrawerWrapper>
