@@ -3,7 +3,7 @@ import { connect } from 'dva';
 import { Button, Card } from 'antd';
 import { ConnectProps, ConnectState } from '@/models/connect';
 import PageHeaderWrapper from '@/components/page-header-wrapper';
-import StandardTable from '@/components/standard-table';
+import Table from '@jiumao/rc-table';
 import useQueryData from '@/hooks/use-query-data';
 import { IBrandTableData } from './models/brand';
 
@@ -69,12 +69,7 @@ const BrandPage: React.FC<IProps> = props => {
 
   const table = React.useMemo(() => {
     return (
-      <StandardTable
-        data={tableData}
-        columns={columns}
-        loading={loading}
-        onChange={handleTableChange}
-      />
+      <Table data={tableData} columns={columns} loading={loading} onChange={handleTableChange} />
     );
   }, [props.tableData, props.loading]);
 

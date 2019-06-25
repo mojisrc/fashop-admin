@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'dva';
 import { Button, Card, Tooltip, Typography, Modal, message } from 'antd';
-import StandardTable from '@/components/standard-table';
+import Table from '@jiumao/rc-table';
 import PageHeaderWrapper from '@/components/page-header-wrapper';
 import { ConnectProps, ConnectState } from '@/models/connect';
 import UserDrawer, { TType } from './components/user-drawer';
@@ -18,13 +18,13 @@ interface IProps extends ConnectProps {
 
 interface IQueryData {
   page: number;
-  limit: number
+  limit: number;
 }
 
 const { Paragraph } = Typography;
 const confirm = Modal.confirm;
 
-const UsersPage: React.FC<IProps> = (props) => {
+const UsersPage: React.FC<IProps> = props => {
   const { tableData, loading, groups, dispatch } = props;
   const [visible, setVisible] = React.useState<boolean>(false);
   const [policiesVisible, setPoliciesVisible] = React.useState<boolean>(false);
@@ -33,7 +33,7 @@ const UsersPage: React.FC<IProps> = (props) => {
   const [currentUser, setCurrentUser] = React.useState<IUser>({});
   const [queryData, setQueryData] = React.useState<IQueryData>({
     page: 1,
-    limit: 10
+    limit: 10,
   });
 
   React.useEffect(() => {
@@ -43,8 +43,8 @@ const UsersPage: React.FC<IProps> = (props) => {
   const getList = () => {
     dispatch({
       type: 'systemUser/fetchList',
-      payload: queryData
-    })
+      payload: queryData,
+    });
   };
 
   const showCreateView = () => {
@@ -53,22 +53,22 @@ const UsersPage: React.FC<IProps> = (props) => {
     setVisible(true);
   };
 
-  const showUpdateView = (record) => {
+  const showUpdateView = record => {
     setType('update');
     setCurrentUser(record);
     setVisible(true);
   };
 
-  const showPoliciesView = (record) => {
+  const showPoliciesView = record => {
     setCurrentUser(record);
     setPoliciesVisible(true);
   };
 
-  const showGroupView = (record) => {
+  const showGroupView = record => {
     if (!groups.length) {
       dispatch({
-        type: 'userGroup/fetchAll'
-      })
+        type: 'userGroup/fetchAll',
+      });
     }
     setCurrentUser(record);
     setGroupVisible(true);
@@ -82,7 +82,7 @@ const UsersPage: React.FC<IProps> = (props) => {
     setGroupVisible(false);
   };
 
-  const handleSubmit = (values) => {
+  const handleSubmit = values => {
     if (type === 'create') {
       dispatch({
         type: 'systemUser/fetchCreate',
@@ -91,7 +91,7 @@ const UsersPage: React.FC<IProps> = (props) => {
           setVisible(false);
           message.success('创建成功');
           getList();
-        }
+        },
       });
       return;
     }
@@ -103,60 +103,60 @@ const UsersPage: React.FC<IProps> = (props) => {
           setVisible(false);
           message.success('修改成功');
           getList();
-        }
+        },
       });
     }
   };
 
-  const handleConfirmRemove = (data) => {
+  const handleConfirmRemove = data => {
     confirm({
       title: '确定删除?',
       content: '操作不可逆，请确定是否删除',
       onOk() {
         handleRemove(data.id);
-      }
+      },
     });
   };
 
-  const handleRemove = (userId) => {
+  const handleRemove = userId => {
     dispatch({
       type: 'systemUser/fetchRemove',
       payload: userId,
       callback: () => {
         message.success('删除成功');
         getList();
-      }
-    })
+      },
+    });
   };
 
-  const handleTableChange = (pagination) => {
+  const handleTableChange = pagination => {
     const { current, pageSize } = pagination;
     setQueryData({
       page: current,
-      limit: pageSize
+      limit: pageSize,
     });
   };
 
   const columns = [
     {
       title: '用户名',
-      dataIndex: 'username'
+      dataIndex: 'username',
     },
     {
       title: '邮箱',
-      dataIndex: 'email'
+      dataIndex: 'email',
     },
     {
       title: '手机号',
-      dataIndex: 'mobile'
+      dataIndex: 'mobile',
     },
     {
       title: '创建时间',
-      dataIndex: 'createTime'
+      dataIndex: 'createTime',
     },
     {
       title: '备注',
-      dataIndex: 'remark'
+      dataIndex: 'remark',
     },
     {
       title: '操作',
@@ -167,21 +167,27 @@ const UsersPage: React.FC<IProps> = (props) => {
             <Button
               size="small"
               icon="team"
-              onClick={() => { showGroupView(record) }}
+              onClick={() => {
+                showGroupView(record);
+              }}
             />
           </Tooltip>
           <Tooltip placement="top" title="赋权">
             <Button
               size="small"
               icon="api"
-              onClick={() => { showPoliciesView(record) }}
+              onClick={() => {
+                showPoliciesView(record);
+              }}
             />
           </Tooltip>
           <Tooltip placement="top" title="更新">
             <Button
               size="small"
               icon="edit"
-              onClick={() => { showUpdateView(record) }}
+              onClick={() => {
+                showUpdateView(record);
+              }}
             />
           </Tooltip>
           <Tooltip placement="top" title="删除">
@@ -189,23 +195,20 @@ const UsersPage: React.FC<IProps> = (props) => {
               type="danger"
               size="small"
               icon="delete"
-              onClick={() => { handleConfirmRemove(record) }}
+              onClick={() => {
+                handleConfirmRemove(record);
+              }}
             />
           </Tooltip>
         </div>
-      )
-    }
+      ),
+    },
   ];
 
   const table = React.useMemo(() => {
     return (
-      <StandardTable
-        loading={loading}
-        data={tableData}
-        columns={columns}
-        onChange={handleTableChange}
-      />
-    )
+      <Table loading={loading} data={tableData} columns={columns} onChange={handleTableChange} />
+    );
   }, [props.tableData, props.loading]);
 
   return (
@@ -215,17 +218,13 @@ const UsersPage: React.FC<IProps> = (props) => {
         extra={[
           <Button key="1" type="primary" onClick={showCreateView}>
             新建用户
-          </Button>
+          </Button>,
         ]}
       >
-        <Paragraph>
-          用户可以单独授权，单独授权的用户将不继承已添加的用户组的权限
-        </Paragraph>
+        <Paragraph>用户可以单独授权，单独授权的用户将不继承已添加的用户组的权限</Paragraph>
       </PageHeaderWrapper>
 
-      <Card bordered={false}>
-        {table}
-      </Card>
+      <Card bordered={false}>{table}</Card>
 
       <UserDrawer
         type={type}
@@ -240,7 +239,7 @@ const UsersPage: React.FC<IProps> = (props) => {
         type="user"
         user={currentUser}
         onClose={() => {
-          setPoliciesVisible(false)
+          setPoliciesVisible(false);
         }}
       />
 
@@ -251,12 +250,12 @@ const UsersPage: React.FC<IProps> = (props) => {
         onClose={handleGroupClose}
       />
     </React.Fragment>
-  )
+  );
 };
 
 UsersPage.defaultProps = {
   loading: false,
-  groups: []
+  groups: [],
 };
 
 export default connect(({ systemUser, userGroup, loading }: ConnectState) => ({

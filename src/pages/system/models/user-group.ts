@@ -1,13 +1,7 @@
 import { Reducer } from 'redux';
 import { Effect } from '@/models/connect';
-import {
-  fetchAll,
-  fetchList,
-  fetchCreate,
-  fetchRemove,
-  fetchUpdate
-} from '@/services/group';
-import { ITableData } from '@/components/standard-table';
+import { fetchAll, fetchList, fetchCreate, fetchRemove, fetchUpdate } from '@/services/group';
+import { ITableData } from '@jiumao/rc-table';
 import { formatTime } from '@/utils/utils';
 
 export interface IGroup {
@@ -35,18 +29,18 @@ export interface IUserGroupModel {
     fetchCreate: Effect;
     fetchRemove: Effect;
     fetchUpdate: Effect;
-  },
+  };
   reducers: {
     saveList: Reducer<any>;
     saveTableData: Reducer<any>;
-  }
+  };
 }
 
 const UserGroupModel: IUserGroupModel = {
   namespace: 'userGroup',
   state: {
     tableData: {
-      list: []
+      list: [],
     },
     list: [],
   },
@@ -59,13 +53,13 @@ const UserGroupModel: IUserGroupModel = {
         const groups = list.map(item => ({
           id: item.id,
           name: item.name,
-          displayName: item.displayName
+          displayName: item.displayName,
         }));
 
         yield put({
           type: 'saveList',
-          payload: groups
-        })
+          payload: groups,
+        });
       }
     },
     *fetchList({ payload }, { call, put }) {
@@ -77,8 +71,8 @@ const UserGroupModel: IUserGroupModel = {
         const groups = list.map(item => {
           return {
             ...item,
-            createTime: formatTime(item.createTime)
-          }
+            createTime: formatTime(item.createTime),
+          };
         });
 
         yield put({
@@ -88,10 +82,10 @@ const UserGroupModel: IUserGroupModel = {
             pagination: {
               total,
               current: payload.page,
-              pageSize: payload.limit
-            }
-          }
-        })
+              pageSize: payload.limit,
+            },
+          },
+        });
       }
     },
     *fetchCreate({ payload, callback }, { call }) {
@@ -117,16 +111,16 @@ const UserGroupModel: IUserGroupModel = {
     saveList(state, { payload }) {
       return {
         ...state,
-        list: payload
+        list: payload,
       };
     },
     saveTableData(state, { payload }) {
       return {
         ...state,
-        tableData: payload
+        tableData: payload,
       };
     },
-  }
+  },
 };
 
 export default UserGroupModel;

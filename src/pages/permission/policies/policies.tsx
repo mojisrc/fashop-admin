@@ -3,7 +3,7 @@ import { connect } from 'dva';
 import router from 'umi/router';
 import { Typography, Button, Card, Tooltip, Modal, message } from 'antd';
 import PageHeaderWrapper from '@/components/page-header-wrapper';
-import StandardTable from '@/components/standard-table';
+import Table from '@jiumao/rc-table';
 import { ConnectProps } from '@/models/connect';
 import { IPolicy } from '@/models/policy';
 import './policies.less';
@@ -16,7 +16,7 @@ interface IProps extends ConnectProps {
 const { Paragraph } = Typography;
 const confirm = Modal.confirm;
 
-const PoliciesPage: React.FC<IProps> = (props) => {
+const PoliciesPage: React.FC<IProps> = props => {
   const { prefixCls, policies, dispatch } = props;
 
   React.useEffect(() => {
@@ -25,7 +25,7 @@ const PoliciesPage: React.FC<IProps> = (props) => {
 
   const getList = () => {
     dispatch({
-      type: 'policy/fetchList'
+      type: 'policy/fetchList',
     });
   };
 
@@ -34,7 +34,7 @@ const PoliciesPage: React.FC<IProps> = (props) => {
   };
 
   // 删除权限策略
-  const handleConfirmRemove = (record) => {
+  const handleConfirmRemove = record => {
     confirm({
       title: `确定删除${record.name}策略?`,
       content: '删除不可恢复',
@@ -43,40 +43,40 @@ const PoliciesPage: React.FC<IProps> = (props) => {
       cancelText: '取消',
       onOk() {
         handleRemove(record);
-      }
+      },
     });
   };
 
-  const handleRemove = (record) => {
+  const handleRemove = record => {
     dispatch({
       type: 'policy/fetchRemove',
       payload: record.id,
       callback: () => {
         message.success('删除成功！');
         getList();
-      }
+      },
     });
   };
 
   const columns = [
     {
       title: '权限策略名称',
-      dataIndex: 'name'
+      dataIndex: 'name',
     },
     {
       title: '策略类型',
       dataIndex: 'type',
-      render: (text) => {
+      render: text => {
         return text === 1 ? '系统策略' : '用户自定义策略';
-      }
+      },
     },
     {
       title: '引用次数',
-      dataIndex: 'attachmentCount'
+      dataIndex: 'attachmentCount',
     },
     {
       title: '备注',
-      dataIndex: 'remark'
+      dataIndex: 'remark',
     },
     {
       title: '操作',
@@ -92,8 +92,8 @@ const PoliciesPage: React.FC<IProps> = (props) => {
             }}
           />
         </Tooltip>
-      )
-    }
+      ),
+    },
   ];
 
   return (
@@ -103,12 +103,13 @@ const PoliciesPage: React.FC<IProps> = (props) => {
         extra={[
           <Button key="1" type="primary" onClick={showCreateView}>
             新建权限策略
-          </Button>
+          </Button>,
         ]}
       >
         <div className="content">
           <Paragraph>
-            - 对于系统访问策略，统一由平台创建，用户只能使用而不能修改，系统访问策略的版本更新由平台维护。
+            -
+            对于系统访问策略，统一由平台创建，用户只能使用而不能修改，系统访问策略的版本更新由平台维护。
           </Paragraph>
           <Paragraph>
             - 对于自定义访问策略，用户可以自主创建、更新和删除，自定义策略的版本更新由客户自己维护。
@@ -117,23 +118,23 @@ const PoliciesPage: React.FC<IProps> = (props) => {
       </PageHeaderWrapper>
       <div className={prefixCls}>
         <Card bordered={false}>
-          <StandardTable
+          <Table
             data={{
-              list: policies
+              list: policies,
             }}
             columns={columns}
           />
         </Card>
       </div>
     </React.Fragment>
-  )
+  );
 };
 
 PoliciesPage.defaultProps = {
   prefixCls: 'lotus-policies-page',
-  policies: []
+  policies: [],
 };
 
 export default connect(({ policy }) => ({
-  policies: policy.list
+  policies: policy.list,
 }))(PoliciesPage);

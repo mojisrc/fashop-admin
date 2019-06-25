@@ -1,6 +1,6 @@
 import { Reducer } from 'redux';
 import { Effect } from '@/models/connect';
-import { ITableData } from '@/components/standard-table';
+import { ITableData } from '@jiumao/rc-table';
 import { formatTime } from '@/utils/utils';
 import { fetchList } from '@/services/goods';
 

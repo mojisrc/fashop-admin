@@ -7,7 +7,7 @@ import { Button, Card, Tooltip, Form, Input, Tag } from 'antd';
 import { FormComponentProps } from 'antd/es/form';
 import PageHeaderWrapper from '@/components/page-header-wrapper';
 import FooterToolbar from '@/components/footer-toolbar';
-import StandardTable from '@/components/standard-table';
+import Table from '@jiumao/rc-table';
 import { IStatement } from '@jiumao/policy';
 import { IModule, IAction } from '@/models/action';
 import { ConnectProps } from '@/models/connect';
@@ -18,7 +18,7 @@ interface IProps extends ConnectProps, FormComponentProps {
   actions: IAction[];
 }
 
-const CreatePolicy: React.FC<IProps> = (props) => {
+const CreatePolicy: React.FC<IProps> = props => {
   const { dispatch, form, modules, actions } = props;
   const { getFieldDecorator } = form;
   const [visible, setVisible] = React.useState<boolean>(false);
@@ -26,8 +26,8 @@ const CreatePolicy: React.FC<IProps> = (props) => {
 
   React.useState(() => {
     dispatch({
-      type: 'action/fetchModules'
-    })
+      type: 'action/fetchModules',
+    });
   });
 
   const showCreateView = () => {
@@ -45,24 +45,24 @@ const CreatePolicy: React.FC<IProps> = (props) => {
           type: 'policy/fetchCreate',
           payload: {
             ...values,
-            document: statements
+            document: statements,
           },
           callback: () => {
             setStatement([]);
             form.resetFields();
             handelCancel();
-          }
-        })
+          },
+        });
       }
     });
   };
 
-  const handleStatementCreate = (value) => {
+  const handleStatementCreate = value => {
     setStatement([...statements, value]);
     setVisible(false);
   };
 
-  const handleStatementRemove = (value) => {
+  const handleStatementRemove = value => {
     setStatement(statements.filter(item => !isEqual(item, value)));
   };
 
@@ -74,9 +74,9 @@ const CreatePolicy: React.FC<IProps> = (props) => {
     {
       title: '权限效力',
       dataIndex: 'effect',
-      render: (text) => {
+      render: text => {
         return text === 'allow' ? '允许' : '禁止';
-      }
+      },
     },
     {
       title: '模块',
@@ -84,18 +84,18 @@ const CreatePolicy: React.FC<IProps> = (props) => {
       render: (text, record) => {
         const action = record.action[0];
         return action.split('/')[0];
-      }
+      },
     },
     {
       title: '操作名称',
       dataIndex: 'action',
-      render: (text) => {
-        return (
-          text.map((item, index) => (
-            <Tag key={index} color="#2db7f5">{item}</Tag>
-          ))
-        );
-      }
+      render: text => {
+        return text.map((item, index) => (
+          <Tag key={index} color="#2db7f5">
+            {item}
+          </Tag>
+        ));
+      },
     },
     {
       title: '操作',
@@ -109,8 +109,8 @@ const CreatePolicy: React.FC<IProps> = (props) => {
             onClick={() => handleStatementRemove(record)}
           />
         </Tooltip>
-      )
-    }
+      ),
+    },
   ];
 
   return (
@@ -120,7 +120,7 @@ const CreatePolicy: React.FC<IProps> = (props) => {
         extra={[
           <Button key="1" type="primary" onClick={showCreateView}>
             添加授权语句
-          </Button>
+          </Button>,
         ]}
       >
         <Form layout="inline">
@@ -129,15 +129,13 @@ const CreatePolicy: React.FC<IProps> = (props) => {
               rules: [
                 {
                   required: true,
-                  message: '策略名称不能为空'
+                  message: '策略名称不能为空',
                 },
               ],
             })(<Input placeholder="请输入策略名称" />)}
           </Form.Item>
           <Form.Item label="策略备注">
-            {getFieldDecorator('remark', {
-
-            })(<Input placeholder="请输入策略备注" />)}
+            {getFieldDecorator('remark', {})(<Input placeholder="请输入策略备注" />)}
           </Form.Item>
         </Form>
       </PageHeaderWrapper>
@@ -153,9 +151,9 @@ const CreatePolicy: React.FC<IProps> = (props) => {
       />
 
       <Card bordered={false}>
-        <StandardTable
+        <Table
           data={{
-            list: statements
+            list: statements,
           }}
           columns={columns}
           rowKey={() => uniqueId()}
@@ -163,22 +161,20 @@ const CreatePolicy: React.FC<IProps> = (props) => {
       </Card>
 
       <FooterToolbar>
-        <Button
-          type="primary"
-          disabled={!statements.length}
-          onClick={handleCreate}
-        >确定</Button>
+        <Button type="primary" disabled={!statements.length} onClick={handleCreate}>
+          确定
+        </Button>
         <Button onClick={handelCancel}>返回</Button>
       </FooterToolbar>
     </React.Fragment>
-  )
+  );
 };
 
 CreatePolicy.defaultProps = {
-  modules: []
+  modules: [],
 };
 
 export default connect(({ action }) => ({
   modules: action.modules,
-  actions: action.list
+  actions: action.list,
 }))(Form.create()(CreatePolicy));

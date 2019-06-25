@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'dva';
 import { Button, Card, Tooltip, Alert, message, Modal } from 'antd';
-import StandardTable from '@/components/standard-table';
+import Table from '@jiumao/rc-table';
 import PageHeaderWrapper from '@/components/page-header-wrapper';
 import { ConnectProps, ConnectState } from '@/models/connect';
 import { IGroupTableData, IGroup } from './models/user-group';
@@ -10,17 +10,17 @@ import PoliciesDrawer from './components/policies-drawer';
 
 interface IProps extends ConnectProps {
   loading: boolean;
-  tableData: IGroupTableData
+  tableData: IGroupTableData;
 }
 
 interface IQueryData {
   page: number;
-  limit: number
+  limit: number;
 }
 
 const confirm = Modal.confirm;
 
-const GroupsPage: React.FC<IProps> = (props) => {
+const GroupsPage: React.FC<IProps> = props => {
   const { tableData, loading, dispatch } = props;
 
   const [visible, setVisible] = React.useState<boolean>(false);
@@ -30,7 +30,7 @@ const GroupsPage: React.FC<IProps> = (props) => {
 
   const [queryData, setQueryData] = React.useState<IQueryData>({
     page: 1,
-    limit: 10
+    limit: 10,
   });
 
   React.useEffect(() => {
@@ -40,11 +40,11 @@ const GroupsPage: React.FC<IProps> = (props) => {
   const getList = () => {
     dispatch({
       type: 'userGroup/fetchList',
-      payload: queryData
-    })
+      payload: queryData,
+    });
   };
 
-  const handleSubmit = (values) => {
+  const handleSubmit = values => {
     if (type === 'create') {
       dispatch({
         type: 'userGroup/fetchCreate',
@@ -53,7 +53,7 @@ const GroupsPage: React.FC<IProps> = (props) => {
           setVisible(false);
           message.success('创建成功');
           getList();
-        }
+        },
       });
       return;
     }
@@ -65,33 +65,33 @@ const GroupsPage: React.FC<IProps> = (props) => {
           setVisible(false);
           message.success('修改成功');
           getList();
-        }
+        },
       });
     }
   };
 
-  const handleConfirmRemove = (data) => {
+  const handleConfirmRemove = data => {
     confirm({
       title: '确定删除?',
       content: '操作不可逆，请确定是否删除',
       onOk() {
         handleRemove(data.id);
-      }
+      },
     });
   };
 
-  const handleRemove = (id) => {
+  const handleRemove = id => {
     dispatch({
       type: 'userGroup/fetchRemove',
       payload: id,
       callback: () => {
         message.success('删除成功');
         getList();
-      }
-    })
+      },
+    });
   };
 
-  const showPoliciesView = (data) => {
+  const showPoliciesView = data => {
     setCurrentGroup(data);
     setPoliciesVisible(true);
   };
@@ -101,7 +101,7 @@ const GroupsPage: React.FC<IProps> = (props) => {
     setType('create');
   };
 
-  const showUpdateView = (data) => {
+  const showUpdateView = data => {
     setCurrentGroup(data);
     setVisible(true);
     setType('update');
@@ -111,34 +111,34 @@ const GroupsPage: React.FC<IProps> = (props) => {
     setVisible(false);
   };
 
-  const handleTableChange = (pagination) => {
+  const handleTableChange = pagination => {
     const { current, pageSize } = pagination;
     setQueryData({
       page: current,
-      limit: pageSize
+      limit: pageSize,
     });
   };
 
   const columns = [
     {
       title: '用户组名称',
-      dataIndex: 'name'
+      dataIndex: 'name',
     },
     {
       title: '显示名称',
-      dataIndex: 'displayName'
+      dataIndex: 'displayName',
     },
     {
       title: '用户数',
-      dataIndex: 'userNumber'
+      dataIndex: 'userNumber',
     },
     {
       title: '创建时间',
-      dataIndex: 'createTime'
+      dataIndex: 'createTime',
     },
     {
       title: '备注',
-      dataIndex: 'remark'
+      dataIndex: 'remark',
     },
     {
       title: '操作',
@@ -146,23 +146,24 @@ const GroupsPage: React.FC<IProps> = (props) => {
       render: (text, record) => (
         <div className="table-action">
           <Tooltip placement="top" title="添加组成员">
-            <Button
-              size="small"
-              icon="user-add"
-            />
+            <Button size="small" icon="user-add" />
           </Tooltip>
           <Tooltip placement="top" title="赋权">
             <Button
               size="small"
               icon="api"
-              onClick={() => { showPoliciesView(record) }}
+              onClick={() => {
+                showPoliciesView(record);
+              }}
             />
           </Tooltip>
           <Tooltip placement="top" title="更新">
             <Button
               size="small"
               icon="edit"
-              onClick={() => { showUpdateView(record) }}
+              onClick={() => {
+                showUpdateView(record);
+              }}
             />
           </Tooltip>
           <Tooltip placement="top" title="删除">
@@ -170,23 +171,20 @@ const GroupsPage: React.FC<IProps> = (props) => {
               type="danger"
               size="small"
               icon="delete"
-              onClick={() => { handleConfirmRemove(record) }}
+              onClick={() => {
+                handleConfirmRemove(record);
+              }}
             />
           </Tooltip>
         </div>
-      )
-    }
+      ),
+    },
   ];
 
   const table = React.useMemo(() => {
     return (
-      <StandardTable
-        loading={loading}
-        data={tableData}
-        columns={columns}
-        onChange={handleTableChange}
-      />
-    )
+      <Table loading={loading} data={tableData} columns={columns} onChange={handleTableChange} />
+    );
   }, [props.tableData, props.loading]);
 
   return (
@@ -196,7 +194,7 @@ const GroupsPage: React.FC<IProps> = (props) => {
         extra={[
           <Button key="1" type="primary" onClick={showCreateView}>
             新建用户组
-          </Button>
+          </Button>,
         ]}
       >
         <Alert
@@ -206,9 +204,7 @@ const GroupsPage: React.FC<IProps> = (props) => {
         />
       </PageHeaderWrapper>
 
-      <Card bordered={false}>
-        {table}
-      </Card>
+      <Card bordered={false}>{table}</Card>
 
       <GroupDrawer
         visible={visible}
@@ -223,15 +219,15 @@ const GroupsPage: React.FC<IProps> = (props) => {
         type="group"
         group={currentGroup}
         onClose={() => {
-          setPoliciesVisible(false)
+          setPoliciesVisible(false);
         }}
       />
     </React.Fragment>
-  )
+  );
 };
 
 GroupsPage.defaultProps = {
-  loading: false
+  loading: false,
 };
 
 export default connect(({ userGroup, loading }: ConnectState) => ({

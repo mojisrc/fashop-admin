@@ -3,7 +3,7 @@ import { connect } from 'dva';
 import { Card, Tabs } from 'antd';
 import PageHeaderWrapper from '@/components/page-header-wrapper';
 import { ConnectProps, ConnectState } from '@/models/connect';
-import StandardTable from '@/components/standard-table';
+import Table from '@jiumao/rc-table';
 import useQueryData from '@/hooks/use-query-data';
 import { IOrderTableData } from './models/order';
 import { orderStatusList } from './config';
@@ -67,12 +67,7 @@ const OrderList: React.FC<IProps> = props => {
 
   const table = React.useMemo(() => {
     return (
-      <StandardTable
-        data={tableData}
-        columns={columns}
-        loading={loading}
-        onChange={handleTableChange}
-      />
+      <Table data={tableData} columns={columns} loading={loading} onChange={handleTableChange} />
     );
   }, [props.tableData, props.loading]);
 

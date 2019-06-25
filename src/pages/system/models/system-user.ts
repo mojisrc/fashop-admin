@@ -1,13 +1,8 @@
 import { Reducer } from 'redux';
 import { Effect } from '@/models/connect';
-import {
-  fetchList,
-  fetchCreate,
-  fetchRemove,
-  fetchUpdate
-} from '@/services/user';
+import { fetchList, fetchCreate, fetchRemove, fetchUpdate } from '@/services/user';
 import { IPolicyData } from '@jiumao/policy';
-import { ITableData } from '@/components/standard-table';
+import { ITableData } from '@jiumao/rc-table';
 import { formatTime } from '@/utils/utils';
 
 export interface IUser {
@@ -22,8 +17,8 @@ export interface IUser {
 export interface IUserTableData extends ITableData<IUser> {}
 
 export interface ISystemUserModelState {
-  list: IUser[],
-  tableData: IUserTableData
+  list: IUser[];
+  tableData: IUserTableData;
   policies: IPolicyData[];
 }
 
@@ -36,11 +31,11 @@ export interface ISystemUserModel {
     fetchCreate: Effect;
     fetchRemove: Effect;
     fetchUpdate: Effect;
-  },
+  };
   reducers: {
     saveTableData: Reducer<any>;
     savePolicies: Reducer<any>;
-  }
+  };
 }
 
 const SystemUserModel: ISystemUserModel = {
@@ -48,9 +43,9 @@ const SystemUserModel: ISystemUserModel = {
   state: {
     list: [],
     tableData: {
-      list: []
+      list: [],
     },
-    policies: []
+    policies: [],
   },
   effects: {
     *fetchList({ payload }, { call, put }) {
@@ -62,8 +57,8 @@ const SystemUserModel: ISystemUserModel = {
         const users = list.map(item => {
           return {
             ...item,
-            createTime: formatTime(item.createTime)
-          }
+            createTime: formatTime(item.createTime),
+          };
         });
 
         yield put({
@@ -73,10 +68,10 @@ const SystemUserModel: ISystemUserModel = {
             pagination: {
               total,
               current: payload.page,
-              pageSize: payload.limit
-            }
-          }
-        })
+              pageSize: payload.limit,
+            },
+          },
+        });
       }
     },
     *fetchCreate({ payload, callback }, { call }) {
@@ -96,22 +91,22 @@ const SystemUserModel: ISystemUserModel = {
       if (response && response.code === 200) {
         callback && callback();
       }
-    }
+    },
   },
   reducers: {
     saveTableData(state, { payload }) {
       return {
         ...state,
-        tableData: payload
+        tableData: payload,
       };
     },
     savePolicies(state, { payload }) {
       return {
         ...state,
-        policies: payload
+        policies: payload,
       };
-    }
-  }
+    },
+  },
 };
 
 export default SystemUserModel;
