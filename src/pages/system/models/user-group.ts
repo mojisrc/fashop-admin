@@ -1,8 +1,8 @@
 import { Reducer } from 'redux';
-import { Effect } from '@/models/connect';
-import { fetchAll, fetchList, fetchCreate, fetchRemove, fetchUpdate } from '@/services/group';
 import { ITableData } from '@jiumao/rc-table';
 import { formatTime } from '@/utils/utils';
+import { Effect } from '@/models/connect';
+import { fetchAll, fetchList, fetchCreate, fetchRemove, fetchUpdate } from '../services/group';
 
 export interface IGroup {
   id?: string | number;
