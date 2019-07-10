@@ -215,14 +215,12 @@ export default [
           {
             path: '/permission/actions',
             name: 'actions',
-            authority: ['permission/actionList'],
             component: './permission/actions/actions',
           },
           {
             path: '/permission/policies',
             name: 'policies',
             component: './permission/policies/policies',
-            authority: ['permission/policyList'],
           },
           {
             path: '/permission/policies/create',

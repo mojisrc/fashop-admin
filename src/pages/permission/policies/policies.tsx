@@ -99,7 +99,7 @@ const PoliciesPage: React.FC<IProps> = props => {
   return (
     <React.Fragment>
       <PageHeaderWrapper
-        title="支持两种类型的授权策略：由平台管理的系统访问策略和由客户管理的自定义访问策略。"
+        title="支持两种类型的授权策略：系统策略和自定义策略。"
         extra={[
           <Button key="1" type="primary" onClick={showCreateView}>
             新建权限策略
@@ -108,11 +108,11 @@ const PoliciesPage: React.FC<IProps> = props => {
       >
         <div className="content">
           <Paragraph>
-            -
-            对于系统访问策略，统一由平台创建，用户只能使用而不能修改，系统访问策略的版本更新由平台维护。
+            - 系统策略:
+            由系统开发者创建，用户只能使用而不能修改，系统访问策略的版本更新由开发人员维护。
           </Paragraph>
           <Paragraph>
-            - 对于自定义访问策略，用户可以自主创建、更新和删除，自定义策略的版本更新由客户自己维护。
+            - 自定义策略: 用户可以自主创建、更新和删除，自定义策略的版本更新由用户维护。
           </Paragraph>
         </div>
       </PageHeaderWrapper>
