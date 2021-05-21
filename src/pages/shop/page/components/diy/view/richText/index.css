@@ -1,0 +1,13 @@
+.diyRichText{
+}
+.diyRichText .diyRichTextContainner{
+
+}
+.diyRichText .diyRichTextContainner p{
+    margin: 0;
+    word-wrap:break-word;
+}
+
+.diyRichText .diyRichTextContainner img{
+    max-width: 100%;
+}

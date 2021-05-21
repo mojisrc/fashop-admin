@@ -1,0 +1,26 @@
+/* imageAdsPhone */
+.imageAdsPhoneWarp{
+    display: flex;
+    align-items: initial;
+    justify-content: flex-start;
+    flex-direction: column;
+    width: 100%;
+}
+.carouselItem{
+    width: 100%;
+    overflow: hidden;
+    display: inline-block!important;
+
+}
+.carouselItem img{
+    width: 100%;
+    height: 100%;
+}
+
+.goodsEmpty{
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 10px 0;
+}

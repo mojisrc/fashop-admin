@@ -1,0 +1,94 @@
+.dataDisplayWarp,
+.indexChartWarp,
+.dataDisplayWarp,
+
+.dataDisplayWarp,
+.indexChartWarp {
+    margin-bottom: 24px;
+    width: 100%;
+}
+
+/* dataDisplay */
+.dataDisplay {
+    display: flex;
+    flex-direction: row;
+}
+
+.dataDisplay:first-child {
+    padding-bottom: 24px;
+    border-bottom: 1px dashed #ececec;
+}
+
+.dataDisplay:last-child {
+    padding-top: 24px;
+}
+
+.dataDisplayItem {
+    flex: 1;
+    padding-left: 24px;
+    border-right: 1px solid #ececec;
+}
+
+.dataDisplayItem:last-child {
+    border-right: 0;
+}
+
+.dataDisplayItem span {
+    color: rgb(153, 153, 153);
+    line-height: 22px;
+}
+
+.dataDisplayItem p {
+    font-size: 24px;
+    color: rgba(0, 0, 0, 0.847);
+    line-height: 38px;
+    margin: 0;
+}
+
+/* indexChart */
+.indexChartWarp {
+
+}
+
+.echartView {
+    height: 500px;
+}
+
+.chartOperate {
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    height: 44px;
+    margin-right: 10px;
+}
+
+.chartOperate p {
+    margin: 0;
+    margin-right: 10px;
+    color: rgba(0, 0, 0, 0.647058823529412);
+    font-family: 'PingFangSC-Regular', 'PingFang SC';
+    font-weight: 400;
+    font-style: normal;
+    line-height: 22px;
+    font-size: 14px;
+}
+
+.chartOperate p > span {
+    color: #000000;
+}
+
+.authTypeBtn {
+    height: 20px;
+    line-height: 20px;
+    font-family: 'PingFangSC-Regular', 'PingFang SC';
+    font-size: 12px;
+    margin-right: 10px;
+}
+
+.react_for_echarts > div:nth-child(1) {
+    width: 100% !important;
+}
+
+.react_for_echarts > div > canvas {
+    width: 100% !important;
+}

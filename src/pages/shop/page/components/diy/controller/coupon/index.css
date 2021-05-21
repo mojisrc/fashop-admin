@@ -1,0 +1,58 @@
+/*couponCtrl*/
+.couponCtrlWarp {
+    border: 1px solid #e8e8e8;
+    border-radius: 4px;
+    padding: 16px;
+}
+
+.couponCtrlImgItemWarp {
+    height: 76px;
+    border-radius: 4px;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    display: flex;
+    text-align: center;
+}
+
+.couponCtrlImgWarp {
+    margin-bottom: 10px;
+}
+
+.couponCtrlImgWarp img {
+    width: 76px;
+}
+
+.couponCtrlConfirmDelete {
+    flex-direction: row;
+    align-items: center;
+}
+
+.couponCtrlConfirmDelete img {
+    width: 60px;
+    height: 60px;
+    margin-right: 10px;
+}
+
+.couponCtrlConfirmDelete p {
+    margin: 0;
+    margin-right: 10px;
+}
+
+.couponCtrlConfirmDelete span {
+
+}
+
+.couponCtrlAddWarp {
+    background-color: #fff;
+    border: 1px dashed #ddd;
+}
+
+.couponCtrlImgDelectWarp {
+    width: 80%;
+    position: absolute;
+    top: 0;
+    background-color: rgba(0, 0, 0, .1);
+    transition: .2s;
+}
+

@@ -1,0 +1,10 @@
+.leftFooter{
+    color: #333333;
+    text-align: center;
+}
+.leftFooter a{
+    color: #333333;
+}
+.leftFooter a:hover{
+    color: #ffffff;
+}

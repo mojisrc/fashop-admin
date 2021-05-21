@@ -1,0 +1,46 @@
+/*根据A4纸尺寸是210毫米×297毫米，而1英寸=2.54厘米，我们可以得出当分辨率是多少像素时，得出A4纸大小尺寸为多少毫米。如下是我们较长用到的规格尺寸：*/
+
+/*                             当分辨率是72像素/英寸时，A4纸像素长宽分别是842×595；*/
+
+/*                                       当分辨率是120像素/英寸时，A4纸像素长宽分别是2105×1487；*/
+
+/*                                                  当分辨率是150像素/英寸时，A4纸像素长宽分别是1754×1240；*/
+
+/*                                                             当分辨率是300像素/英寸时，A4纸像素长宽分别是3508×2479.*/
+.wrap{
+    display: flex;
+    justify-content: center;
+}
+.wrap :global(.ant-table-row-cell-break-word){
+    padding: 5px 10px;
+}
+.wrap :global(.ant-table-footer){
+    padding: 5px 10px;
+}
+.wrap :global(.ant-descriptions-item){
+    padding-bottom: 5px;
+}
+
+.contain{
+    width:842px;
+
+}
+.contain>h2{
+    text-align: center;
+}
+.table{
+    margin-bottom: 20px;
+}
+.item{
+    /*height:595px;*/
+    /*display: flex;*/
+    /*flex-direction: column;*/
+    /*justify-content: center;*/
+    /*border-bottom: 1px solid #CCCCCC;*/
+    page-break-before: auto;
+    page-break-after: always;
+}
+.remark{
+    font-weight: bold;
+}
+

@@ -1,0 +1,9 @@
+.videoPhoneWarp{
+    display: flex;
+    align-items: initial;
+    justify-content: flex-start;
+    flex-direction: column;
+}
+.videoPhoneWarp video{
+    width: 100%;
+}

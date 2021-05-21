@@ -1,0 +1,20 @@
+export const AntTheme = {
+    brand_primary: "#DBAF6A",
+    brand_primary_tap: "#F7D7A3",
+    primary_button_fill: "#DBAF6A",
+    primary_button_fill_tap: "#F7D7A3",
+    ghost_button_color: "#DBAF6A",
+    ghost_button_fill_tap: "#F7D7A3",
+    button_height: 44,
+    button_font_size: 16,
+    button_height_sm: 30,
+    button_font_size_sm: 14,
+    list_item_height: 50,
+    color_text_base: "#333333",
+    border_color_base: "#eaeaea",
+    search_bar_fill: "#fff",
+    search_color_icon: "#ccc",
+    search_bar_input_height: 30,
+    search_bar_font_size: 14,
+    h_spacing_lg: 15
+}

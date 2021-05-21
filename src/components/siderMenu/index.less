@@ -1,72 +1,185 @@
 @import '~antd/lib/style/themes/default.less';
-@ease-in-out-circ: cubic-bezier(0.78, 0.14, 0.15, 0.86);
+
+@nav-header-height: @layout-header-height;
+.sitePopover {
+    width: 200px;
+    .sitePopoverItem {
+        cursor:pointer;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 10px;
+        border-bottom: 1px solid #eaeaea;
+        padding-bottom: 10px;
+        &:last-child{
+            border-bottom: none;
+            margin-bottom:0;
+            padding-bottom:0;
+        }
+        > a {
+            color: #333333;
+        }
+
+        &:hover {
+            color: @primary-color;
+            > a {
+                color: @primary-color;
+            }
+        }
+    }
+}
+
 .logo {
-  height: 64px;
-  position: relative;
-  line-height: 64px;
-  //padding-left: (@menu-collapsed-width - 32px) / 2;
-  transition: all 0.3s;
-  background: #000;
-  overflow: hidden;
-  text-align: center;
-  img {
-    display: inline-block;
-    vertical-align: middle;
-    height: 32px;
-  }
-  h1 {
-    color: white;
-    display: inline-block;
-    vertical-align: middle;
-    font-size: 20px;
-    margin: 0 0 0 12px;
-    font-family: 'Myriad Pro', 'Helvetica Neue', Arial, Helvetica, sans-serif;
-    font-weight: 600;
-  }
+    position: relative;
+    height: @nav-header-height;
+    overflow: hidden;
+    line-height: @nav-header-height;
+    background: @layout-header-background;
+    transition: all 0.3s;
+    text-align: center;
+    padding: 10px 0 0 0;
+    .logoMain{
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+    }
+    .logoWrap {
+        background-color: #ffffff;
+        border-radius: 100px;
+        height: 50px;
+        width: 50px;
+        padding: 10px;
+        overflow: hidden;
+        //margin-left: 10px;
+        //margin-right: 5px;
+        img {
+            display: block;
+            vertical-align: middle;
+            width: 100%;
+            height: 100%;
+        }
+    }
+
+    h1 {
+        display: inline-block;
+        margin: 0 0 0 12px;
+        color: white;
+        font-weight: 600;
+        font-size: 20px;
+        font-family: Avenir, 'Helvetica Neue', Arial, Helvetica, sans-serif;
+        vertical-align: middle;
+    }
 }
 
 .sider {
-  min-height: 100vh;
-  box-shadow: 2px 0 6px rgba(0, 21, 41, 0.35);
-  position: relative;
-  z-index: 10;
-  &.ligth {
-    background-color: white;
-    .logo {
-      background: white;
-      h1 {
-        color: #000;
-      }
+    position: relative;
+    z-index: 10;
+    min-height: 100vh;
+    box-shadow: 2px 0 6px rgba(0, 21, 41, 0.35);
+
+    &.fixSiderBar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        box-shadow: 2px 0 8px 0 rgba(29, 35, 41, 0.05);
+
+        :global {
+            .ant-menu-root {
+                //60px为左侧底部退出区域
+                height: ~'calc(100vh - @{nav-header-height} - 60px)';
+                overflow-y: auto;
+
+            }
+
+            .ant-menu-root::-webkit-scrollbar {
+                width: 0;
+                height: 0;
+            }
+
+            .ant-menu-root::-webkit-scrollbar-thumb {
+                background: #333
+            }
+
+            .ant-menu-root::-webkit-scrollbar-track {
+                background: #999;
+            }
+
+            .ant-menu-inline {
+                border-right: 0;
+
+                .ant-menu-item,
+                .ant-menu-submenu-title {
+                    width: 100%;
+                }
+            }
+        }
     }
-  }
+
+    &.light {
+        background-color: white;
+        box-shadow: 2px 0 8px 0 rgba(29, 35, 41, 0.05);
+
+        .logo {
+            background: white;
+            box-shadow: 1px 1px 0 0 @border-color-split;
+
+            h1 {
+                color: @primary-color;
+            }
+        }
+
+        :global(.ant-menu-light) {
+            border-right-color: transparent;
+        }
+    }
 }
 
 .icon {
-  width: 14px;
-  margin-right: 10px;
+    width: 14px;
+    vertical-align: baseline;
 }
 
 :global {
-  .drawer .drawer-content {
-    background: #001529;
-  }
-  .ant-menu-inline-collapsed {
-    & > .ant-menu-item .sider-menu-item-img + span,
-    &
-      > .ant-menu-item-group
-      > .ant-menu-item-group-list
-      > .ant-menu-item
-      .sider-menu-item-img
-      + span,
-    & > .ant-menu-submenu > .ant-menu-submenu-title .sider-menu-item-img + span {
-      max-width: 0;
-      display: inline-block;
-      opacity: 0;
+    .top-nav-menu li.ant-menu-item {
+        height: @nav-header-height;
+        line-height: @nav-header-height;
     }
-  }
-  .ant-menu-item .sider-menu-item-img + span,
-  .ant-menu-submenu-title .sider-menu-item-img + span {
-    transition: opacity 0.3s @ease-in-out, width 0.3s @ease-in-out;
-    opacity: 1;
-  }
+
+    .drawer .drawer-content {
+        background: #001529;
+    }
+
+    // custom
+    .ant-menu-dark, .ant-menu-dark .ant-menu-sub {
+        background-color: @menu-dark-bg;
+    }
+
+    .ant-menu-inline-collapsed {
+        & > .ant-menu-item .sider-menu-item-img + span,
+        &
+        > .ant-menu-item-group
+        > .ant-menu-item-group-list
+        > .ant-menu-item
+        .sider-menu-item-img
+        + span,
+        & > .ant-menu-submenu > .ant-menu-submenu-title .sider-menu-item-img + span {
+            display: inline-block;
+            max-width: 0;
+            opacity: 0;
+        }
+    }
+
+    .ant-menu-item .sider-menu-item-img + span,
+    .ant-menu-submenu-title .sider-menu-item-img + span {
+        opacity: 1;
+        transition: opacity 0.3s @ease-in-out, width 0.3s @ease-in-out;
+    }
+
+    .ant-drawer-left {
+        .ant-drawer-body {
+            padding: 0;
+        }
+    }
 }

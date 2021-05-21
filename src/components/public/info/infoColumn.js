@@ -1,23 +1,13 @@
 import React, { Component } from "react";
-import {
-    Row,
-    Col,
-} from "antd";
+import { Row, Col } from "antd";
 import styles from "./index.css";
-import PhotoGallery from "../../../components/photoGallery"
-import Image from "../../image";
-import { View } from "react-web-dom";
+import Images from "@/components/images";
 
 export default class InfoColumn extends Component {
-    PhotoGallery: any
-
     render() {
-        const { infoList } = this.props
+        const { infoList } = this.props;
         return (
             <Row>
-                <PhotoGallery ref={(e) => {
-                    this.PhotoGallery = e
-                }} />
                 {
                     infoList.map((infoListItem, index) =>
                         <Col span={24} key={index}>
@@ -37,30 +27,10 @@ export default class InfoColumn extends Component {
                                         {infoListItem.info}
                                     </span>
                                 }
-                                {
-                                    Array.isArray(infoListItem.images) && infoListItem.images.length > 0 ?
-                                        <View className={styles.squareImageList}>
-                                            {
-                                                infoListItem.images.map((item, imgIndex) =>
-                                                    <div key={`div_${imgIndex}`}>
-                                                        <Image
-                                                            key={imgIndex}
-                                                            src={item.img}
-                                                            onClick={() => {
-                                                                this.PhotoGallery.setState({
-                                                                    index: imgIndex,
-                                                                    photos: infoListItem.images.map((image) => {
-                                                                        return { src: image.img }
-                                                                    }),
-                                                                    open: true
-                                                                })
-                                                            }}
-                                                        />
-                                                    </div>
-                                                )
-                                            }
-                                        </View> : null
-                                }
+                                <Images
+                                    size={100}
+                                    list={infoListItem.images}
+                                />
                             </div>
                         </Col>
                     )

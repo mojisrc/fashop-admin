@@ -1,103 +1,103 @@
-// @flow
 import React, { Component } from "react";
-import { message } from "antd";
-import OrderDetailView from "../../components/order/orderDetail";
-import { View } from "react-web-dom";
-import { publicFunction } from "../../utils";
-import { getOrderInfo } from "../../actions/order"
+import OrderDetailView from "@/pages/order/components/detail";
+import { connect } from "umi";
+import { Spin, Card, Tabs } from "antd";
+import PageHeaderWrapper from '@/components/pageHeaderWrapper';
 
-const { parseQuery } = publicFunction
-type Props = {
-    id: number,
-    location: { state: { type: string, record: {} }, search: string, pathname: string },
-    history: { goBack: Function, push: Function },
-}
+const TabPane = Tabs.TabPane;
 
-type State = {
-    orderInfo: {
-        info: {
-            id: number,
-            amount: number,
-            freight_fee: number,
-            sn: string,
-            trade_no: string,
-            create_time: number,
-            extend_order_goods: Array<{}>,
-            extend_order_extend: {
-                reciver_name: string,
-                reciver_info: {
-                    address: string,
-                    name: string,
-                    phone: string,
-                    combine_detail: string,
-                },
-                message: string,
-                deliver_name: string,
-                deliver_phone: string,
-                deliver_address: string,
-                tracking_time: number,
-                tracking_no: string,
-                remark: string
-            },
-            state: number,
-
-        }
-    }
-}
-export default class Detail extends Component<Props, State> {
+@connect(({ order, loading }) => ({
+    orderInfo: order.info,
+    orderInfoLoading: loading.effects["order/info"],
+    orderGroupInfo: order.groupInfo,
+    orderGroupInfoLoading: loading.effects["order/groupInfo"],
+}))
+export default class Detail extends Component {
     state = {
-        orderInfo: {
-            info: {
-                id: 0,
-                amount: 0,
-                freight_fee: 0.00,
-                sn: '',
-                trade_no: 'aaa',
-                create_time: 0,
-                extend_order_goods: [],
-                extend_order_extend: {
-                    reciver_name: '',
-                    reciver_info: {
-                        address: '',
-                        name: '',
-                        phone: '',
-                        combine_detail: ''
-                    },
-                    message: '',
-                    deliver_name: '',
-                    deliver_phone: '',
-                    deliver_address: '',
-                    tracking_time: 0,
-                    tracking_no: '',
-                    remark: ''
+        info: {
+            id: 0,
+            amount: 0,
+            freight_fee: 0.00,
+            sn: "",
+            trade_no: "",
+            create_time: 0,
+            extend_order_goods: [],
+            extend_order_extend: {
+                reciver_name: "",
+                reciver_info: {
+                    address: "",
+                    name: "",
+                    phone: "",
+                    combine_detail: ""
                 },
-                state: 0,
+                message: "",
+                deliver_name: "",
+                deliver_phone: "",
+                deliver_address: "",
+                tracking_time: 0,
+                tracking_no: "",
+                remark: ""
+            },
+            state: 0
 
+        }
+    };
+
+    componentDidMount() {
+        const { dispatch, location: { query: { id, group_id } } } = this.props;
+        dispatch({
+            type: group_id && group_id!=="0" ? "order/groupInfo" : "order/info",
+            payload: {
+                id
+            },
+            callback: (response) => {
+                this.setState({
+                    info: response.result.info
+                });
             }
-        }
-    }
-
-    async componentWillMount() {
-        const { location } = this.props
-        const { id } = parseQuery(location.search)
-        const response = await getOrderInfo({ params: { id } })
-        if (response.code === 0) {
-            this.setState({
-                orderInfo: response.result
-            })
-        } else {
-            message.warning("订单详情获取失败")
-        }
+        });
     }
 
     render() {
-
-        const { history, } = this.props
-        const { orderInfo } = this.state
+        const { orderInfoLoading, orderInfo, orderGroupInfo, orderGroupInfoLoading, location: { query: { group_id } } } = this.props;
+        if (group_id && group_id !== "0"){
+            return (
+                <PageHeaderWrapper hiddenBreadcrumb={true} policy={'order/info'}>
+                    <Tabs
+                        type="card"
+                        className="fa-card-tab"
+                        defaultActiveKey="2"
+                        tabBarStyle={{
+                            marginBottom: 0,
+                            borderBottomWidth: 0,
+                        }}
+                    >
+                        <TabPane tab="订单详情" key="1" >
+                            <Card bordered={false}>
+                                <Spin size="large" className="globalSpin" spinning={orderInfoLoading}>
+                                    <OrderDetailView orderInfo={orderInfo.result} />
+                                </Spin>
+                            </Card>
+                        </TabPane>
+                        <TabPane tab="拼团详情" key="2" >
+                            <Card bordered={false}>
+                                <Spin size="large" className="globalSpin" spinning={orderInfoLoading}>
+                                    <OrderDetailView orderGroupInfo={orderInfo.result} />
+                                </Spin>
+                            </Card>
+                        </TabPane>
+                    </Tabs>
+                </PageHeaderWrapper>
+            );
+        }
         return (
-            <View>
-                <OrderDetailView orderInfo={orderInfo} history={history} />
-            </View>
-        )
+            <PageHeaderWrapper hiddenBreadcrumb={true} policy={'order/detail'}>
+                <Card bordered={false}>
+                    <Spin size="large" className="globalSpin" spinning={orderInfoLoading}>
+                        <OrderDetailView orderInfo={orderInfo.result} />
+                    </Spin>
+                </Card>
+            </PageHeaderWrapper>
+        );
     }
 }

@@ -1,0 +1,10 @@
+.listEmpty{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 700px;
+    flex-direction: column;
+}
+.listEmpty > img{
+    width: 100px;
+}

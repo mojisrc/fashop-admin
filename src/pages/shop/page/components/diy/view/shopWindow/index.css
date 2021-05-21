@@ -1,0 +1,61 @@
+/* shopWindowPhone */
+.shopWindowPhoneWarp{
+    display: flex;
+    align-items: initial;
+    justify-content: flex-start;
+    background-color: #fff;
+    flex-direction: row;
+    flex-wrap: wrap;
+    overflow: hidden;
+}
+.shopWindowPhoneItem{
+
+}
+.shopWindowPhoneItem:last-child{
+    margin-right: 0;
+}
+.shopWindowPhoneItem img{
+    width: 100%;
+}
+.shopWindowPhoneLeft{
+    width: 50%;
+    /*margin-right: 2px;*/
+}
+.shopWindowPhoneLeft img{
+    height: 100%;
+    width: 100%;
+    overflow:hidden
+}
+.shopWindowPhoneRight{
+    width: 50%;
+    overflow:hidden
+}
+.shopWindowPhoneRight>div{
+    /*解决Image组件的display问题*/
+    display: block!important;
+}
+.shopWindowPhoneRight img{
+    width: 100%;
+}
+.shopWindowPhoneRight img:first-child{
+    /*margin-bottom: 2px;*/
+}
+.layoutstyle1{
+
+}
+.layoutstyle2{
+    width: 33.3%;
+    overflow: hidden;
+}
+.layoutstyle112{
+    width: 50%;
+    overflow: hidden;
+}
+.layoutstyle113{
+    width: 33.3%;
+    overflow: hidden;
+}
+.layoutstyle114{
+    width: 25%;
+    overflow: hidden;
+}

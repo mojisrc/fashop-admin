@@ -1,0 +1,19 @@
+.main{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.avatar{
+    margin-right: 8px;
+}
+
+.nameWrap{
+    display: flex;
+    flex-direction: column;
+}
+.nameWrap a{
+    color:#666666;
+}
+.phone{
+    color:#999999;
+}

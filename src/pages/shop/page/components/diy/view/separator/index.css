@@ -1,0 +1,10 @@
+.separatorPhoneWarp{
+    display: flex;
+    align-items: initial;
+    justify-content: flex-start;
+    flex-direction: column;
+}
+.separatorPhoneWarp p{
+    border-bottom: 1px #eaeaea;
+    margin: 10px;
+}

@@ -1,29 +1,26 @@
-//@flow
-import 'rc-drawer/assets/index.css';
 import React from 'react';
-import DrawerMenu from 'rc-drawer';
-import SiderMenu from './SiderMenu';
+import { Drawer } from 'antd';
+import SiderMenu from './siderMenu';
+import { getFlatMenuKeys } from './siderMenuUtils';
 
-const SiderMenuWrapper = props => {
-  const { isMobile, collapsed } = props;
-  return isMobile ? (
-    <DrawerMenu
-      getContainer={null}
-      level={null}
-      handleChild={<i className="drawer-handle-icon" />}
-      onHandleClick={() => {
-        props.onCollapse(!collapsed);
-      }}
-      open={!collapsed}
-      onMaskClick={() => {
-        props.onCollapse(true);
-      }}
-    >
-      <SiderMenu {...props} collapsed={isMobile ? false : collapsed} />
-    </DrawerMenu>
-  ) : (
-    <SiderMenu {...props} />
-  );
-};
+const SiderMenuWrapper = React.memo(props => {
+    const { isMobile, menuData, collapsed, onCollapse } = props;
+    const flatMenuKeys = getFlatMenuKeys(menuData);
+    return isMobile ? (
+      <Drawer
+        visible={!collapsed}
+        placement="left"
+        onClose={() => onCollapse(true)}
+        style={{
+            padding: 0,
+            height: '100vh',
+        }}
+      >
+          <SiderMenu {...props} flatMenuKeys={flatMenuKeys} collapsed={isMobile ? false : collapsed} />
+      </Drawer>
+    ) : (
+      <SiderMenu {...props} flatMenuKeys={flatMenuKeys} />
+    );
+});
 
 export default SiderMenuWrapper;

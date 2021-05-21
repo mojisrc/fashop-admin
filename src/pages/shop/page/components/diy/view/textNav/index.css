@@ -1,0 +1,21 @@
+/* textNavPhone */
+.textNavPhoneWarp{
+    display: flex;
+    align-items: initial;
+    justify-content: flex-start;
+    flex-direction: column;
+    background-color: #fff;
+}
+.textNavPhoneItem{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 10px;
+    height: 30px;
+    border-bottom: 1px solid #eaeaea;
+}
+.textNavPhoneItem p{
+    margin: 0;
+}

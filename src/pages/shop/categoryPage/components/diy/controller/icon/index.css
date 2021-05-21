@@ -1,0 +1,70 @@
+/*imgNavCtrl*/
+.imgNavCtrlItem,.imgNavCtrlItemAdd{
+    border: 1px solid #e8e8e8;
+    margin-bottom: -1px;
+    border-radius: 0;
+}
+.imgNavCtrlItemAdd{
+    padding: 16px;
+    cursor: pointer;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    border: 1px dashed #e8e8e8;
+    display: flex;
+}
+.imgNavCtrlItemTop{
+    margin: 0;
+    height: 48px;
+    line-height: 48px;
+    background-color: #fafafa;
+    text-align: right;
+    border-bottom: 1px solid #e8e8e8;
+}
+.imgNavCtrlItemTop a{
+    margin-right: 10px;
+}
+.imgNavCtrlItemBot{
+    display: flex;
+    flex-direction: row;
+}
+.imgNavCtrlItemLeft{
+    width: 80px;
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px dashed #e5e5e5;
+    border-radius: 5px;
+    position: relative;
+}
+.avatarInput{
+    opacity: 0;
+    filter: alpha(opacity=0);
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 9;
+    cursor: pointer;
+}
+.uploadBtn p{
+    margin: 0;
+}
+.imgNavCtrlItemRight{
+    margin-left: 16px;
+    flex: 1;
+}
+.imgNavCtrlItemRight > p{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.imageNavCtrlItemItemRight > p,.imageNavCtrlItemRightRow{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+

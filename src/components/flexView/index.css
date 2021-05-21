@@ -1,0 +1,17 @@
+.View{
+    display: flex;
+    flex-direction: column;
+}
+.ScrollView{
+  align-items: initial;
+  justify-content: flex-start;
+  flex-direction: column;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.flex{
+    display: flex;
+}
+.block{
+    display: block;
+}

@@ -1,0 +1,52 @@
+.infoWarp{
+    margin-top: 15px;
+}
+.infoWarp:first-child{
+    margin-top: 0;
+}
+.infoWarp:last-child{
+    border-bottom: 0;
+}
+
+.infoItem{
+    color: rgba(0, 0, 0, 0.847058823529412);
+}
+.infoItem span{
+    color: rgba(0, 0, 0, 0.647058823529412);
+}
+.btnWarp{
+    flex-direction: row;
+}
+.btnWarp button{
+    margin-right: 24px;
+}
+.goodsDesc{
+    flex-direction: row;
+    align-items: center;
+    display: flex;
+}
+.goodsDesc img{
+    width: 40px;
+    height: 40px;
+    border-radius: 4px;
+    margin-right: 5px;
+}
+.tableFooter{
+    margin: 0;
+    text-align: right;
+}
+
+.tableFooterReviseAmount{
+    margin: 0;
+    text-align: right;
+    color:red
+}
+.tableFooterDiscount{
+    margin: 0;
+    text-align: right;
+    color:green;
+}
+.goodsImg img{
+    width:30px;
+    height:30px;
+}

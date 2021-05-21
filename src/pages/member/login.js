@@ -1,123 +1,80 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
-import { Form, Button, Input, Icon } from "antd";
-import { View } from "react-web-dom";
-import styles from '../../styles/user/login.css'
-import types from '../../constants';
+import { formatMessage } from "@/utils/locale";
+import { message } from "antd";
+import Login from "@/components/login/index";
+import styles from "./login.less";
+import { FormattedMessage, connect } from "umi";
 
-const FormItem = Form.Item
+const { UserName, Password, Submit } = Login;
 
-@connect(({ app: { member: { fetchLoginLoading } } }) => ({
-    fetchLoginLoading
+@connect(({ loading }) => ({
+    loginLoading: loading.effects["member/login"]
 }))
-@Form.create()
-export default class Login extends Component {
-    handleSubmit = (e) => {
-        e.preventDefault();
-        const {
-            dispatch,
-            form,
-        } = this.props
-        form.validateFields((err, values) => {
-            if (!err) {
-                dispatch({
-                    type: types.member.USER_LOGIN,
-                    params: values,
-                })
-            }
-        })
-    }
+class LoginPage extends Component {
+    state = {};
 
-    componentDidMount() {
-        // const {
-        //     dispatch
-        // } = this.props
-        // dispatch({
-        //     type: types.member.GET_VERIFY_CODE
-        // })
-    }
+    handleSubmit = (err, values) => {
+        const { type } = this.state;
+        if (!err) {
+            const { dispatch } = this.props;
+            dispatch({
+                type: "member/login",
+                payload: {
+                    ...values,
+                    type
+                },
+                callback: (response) => {
+                    if (response.code !== 0) {
+                        message.error(response.msg);
+                    }
+                }
+            });
+        }
+    };
+
 
     render() {
-        const {
-            fetchLoginLoading,
-            form,
-        } = this.props
-        const { getFieldDecorator } = form;
+        const { loginLoading } = this.props;
+        const { type } = this.state;
         return (
-            <View className={styles.loginBgc}>
-                <View className={styles.loginWarp}>
-                    <View className={styles.logo}>
-                        <img
-                            alt={'logo'}
-                            src={'/logo-black.png'}
-                        />
-                    </View>
-                    <Form onSubmit={this.handleSubmit}>
-                        <FormItem>
-                            {getFieldDecorator('username', {
-                                rules: [
-                                    {
-                                        required: true,
-                                        message: '请输入用户名',
-                                    },
-                                ],
-                            })(
-                                <Input
-                                    prefix={<Icon type="user" style={{ fontSize: 13 }} />}
-                                    size="large"
-                                    placeholder="请输入用户名"
-                                />
-                            )}
-                        </FormItem>
-                        <FormItem
-                            style={{ marginTop: 15 }}
-                        >
-                            {getFieldDecorator('password', {
-                                rules: [
-                                    {
-                                        required: true,
-                                        message: '请输入密码',
-                                    },
-                                ],
-                            })(
-                                <Input
-                                    prefix={<Icon type="lock" style={{ fontSize: 13 }} />}
-                                    size="large"
-                                    type="password"
-                                    placeholder="请输入密码"
-                                />
-                            )}
-                        </FormItem>
-                        {/*<FormItem*/}
-                        {/*style={{ marginTop: 15 }}*/}
-                        {/*>*/}
-                        {/*{getFieldDecorator('verify_code', {*/}
-                        {/*rules: [*/}
-                        {/*{*/}
-                        {/*required: true,*/}
-                        {/*message: '请输入验证码',*/}
-                        {/*},*/}
-                        {/*],*/}
-                        {/*})(*/}
-                        {/*<Input*/}
-                        {/*prefix={<Icon type="lock" style={{ fontSize: 13 }} />}*/}
-                        {/*size="large"*/}
-                        {/*placeholder="请输入验证码"*/}
-                        {/*/>*/}
-                        {/*)}*/}
-                        {/*</FormItem>*/}
-                        <Button
-                            htmlType="submit"
-                            type="primary"
-                            style={{ width: '100%', marginTop: 10 }}
-                            size={'large'}
-                            loading={fetchLoginLoading}
-                        >
-                            登录
-                        </Button>
-                    </Form>
-                </View>
-            </View>
-        )
+            <div className={styles.main}>
+                <Login
+                    defaultActiveKey={type}
+                    onTabChange={this.onTabChange}
+                    onSubmit={this.handleSubmit}
+                    ref={form => {
+                        this.loginForm = form;
+                    }}
+                >
+                    <UserName
+                        name="username"
+                        placeholder={`${formatMessage({ id: "app.login.userName" })}`}
+                        rules={[
+                            {
+                                required: true,
+                                message: formatMessage({ id: "validation.userName.required" })
+                            }
+                        ]}
+                    />
+                    <Password
+                        name="password"
+                        placeholder={`${formatMessage({ id: "app.login.password" })}`}
+                        rules={[
+                            {
+                                required: true,
+                                message: formatMessage({ id: "validation.password.required" })
+                            }
+                        ]}
+                        onPressEnter={() => this.loginForm.validateFields(this.handleSubmit)}
+                    />
+
+                    <Submit loading={loginLoading}>
+                        <FormattedMessage id="app.login.login" />
+                    </Submit>
+                </Login>
+            </div>
+        );
     }
 }
+
+export default LoginPage;

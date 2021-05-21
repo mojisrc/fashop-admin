@@ -1,0 +1,23 @@
+/* topMenuPhone */
+.topMenuPhoneWarp{
+    display: flex;
+    align-items: initial;
+    justify-content: flex-start;
+    min-height: 44px;
+    flex-direction: row;
+}
+.topMenuPhoneItem{
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+    padding: 2px 0;
+}
+.topMenuPhoneItem img{
+    width: 22px;
+    height: 20px;
+}
+.topMenuPhoneItem p{
+    margin: 0;
+}

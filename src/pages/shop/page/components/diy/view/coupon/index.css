@@ -1,0 +1,84 @@
+.main{
+    background-color: #ffffff;
+}
+.item {
+    height: 80px;
+    margin: 5px 10px 5px 10px;
+    background-color: #fff;
+    flex-direction: row;
+    overflow: hidden;
+    justify-content: space-between;
+    display: flex;
+}
+
+.item > div:nth-child(1) {
+    flex-direction: row;
+    justify-content: flex-start;
+    display: flex;
+    align-items: center;
+}
+
+.item > div:nth-child(1) > div:nth-child(1) {
+    flex-direction: column;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    background-color: #EE3B40;
+    text-align: center;
+    width: 100px;
+    color: #ffffff;
+    height: 80px;
+}
+
+.item > div:nth-child(1) > div:nth-child(1) > span {
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.item > div:nth-child(1) > div:nth-child(1) > em {
+    font-style: normal;
+    font-size: 12px;
+}
+
+.item > div:nth-child(1) > div:nth-child(2) {
+    flex-direction: column;
+    display: flex;
+    text-align: left;
+    justify-content: center;
+    margin-left: 10px;
+}
+
+.item > div:nth-child(1) > div:nth-child(2) > h3 {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    max-width: 150px;
+}
+
+.item > div:nth-child(1) > div:nth-child(2) > em {
+    font-style: normal;
+    color: #999;
+}
+
+.item > div:nth-child(1) > div:nth-child(2) > i {
+    font-style: normal;
+    color: #666;
+}
+
+.item > div:nth-child(2) {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
+
+.empty{
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 10px 0;
+}

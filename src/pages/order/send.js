@@ -1,133 +1,92 @@
-// @flow
+import { Form } from '@ant-design/compatible';
 import React, { Component } from "react";
-import { connect } from "react-redux";
-import { Form, Button, Input } from 'antd';
-import SendAddress from "../../components/order/orderSend/sendAddress";
-import DeliveryWay from "../../components/order/orderSend/deliveryWay";
-import Page from "../../components/public/page";
-import { formType } from "../../utils/flow";
-import { Fetch, publicFunction } from "../../utils";
-import { message } from "antd/lib/index";
-import { dispatchProps } from "../../utils/defaultProps";
-import { orderSetSend } from "../../actions/order";
-import { OrderApi } from "../../config/api/order";
-import { ExpressApi } from "../../config/api/express";
-import { ShipperApi } from "../../config/api/shipper";
+import { connect } from "umi";
+import {  Button, Input, Card } from "antd";
+import SendAddress from "@/pages/order/components/send/sendAddress";
+import DeliveryWay from "@/pages/order/components/send/deliveryWay";
+import PageHeaderWrapper from "@/components/pageHeaderWrapper";
+import { message, Spin } from "antd/lib/index";
+import { history as router } from "umi";
 
 const { TextArea } = Input;
 
-type Props = {
-    orderInfo: {
-        info: {
-            sn: string,
-            create_time: number,
-            extend_order_goods: Array<{}>,
-            extend_order_extend: {
-                reciver_name: string,
-                reciver_info: {
-                    address: string,
-                    name: string,
-                    phone: string
-                },
-                remark: string,
-                deliver_name: string,
-                deliver_phone: string,
-                deliver_address: string,
-                need_express: number
-            },
-        }
-    },
-    form: formType,
-    history: { goBack: Function },
-    dispatch: dispatchProps,
-    location: { state: { type: string, record: {} }, search: string },
-
-}
-type State = {
-    shipperList: Array<{
-        id: number,
-        name: string,
-        combine_detail: string,
-        address: string,
-        contact_number: string,
-        is_default: number
-    }>,
-    expressList: Array<{
-        id: number,
-        company_name: string,
-        is_commonly_use: number
-    }>,
-    info: {
-        sn: string,
-        create_time: number,
-        extend_order_goods: Array<{}>,
-        extend_order_extend: {
-            reciver_name: string,
-            reciver_info: {
-                address: string,
-                name: string,
-                phone: string
-            },
-            message: string,
-            deliver_name: string,
-            deliver_phone: string,
-            deliver_address: string,
-            need_express: number
-        },
-    },
-    deliver_name: string,
-    deliver_phone: string,
-    deliver_address: string,
-    express_id: number,
-    tracking_no: string,
-    remark: string,
-    need_express: number
-}
-const { parseQuery } = publicFunction
-
 const FormItem = Form.Item;
 @Form.create()
-@connect()
-export default class Send extends Component<Props, State> {
+@connect(({ order, shipper, express, loading }) => ({
+    orderInfo: order.info.result,
+    shipperList: shipper.list.result.list,
+    expressList: express.list.result.list,
+    orderInfoLoading: loading.effects["order/info"],
+    shipperListLoading: loading.effects["express/list"],
+    expressListLoading: loading.effects["express/list"],
+    orderSetSendLoading: loading.effects["order/setSend"]
+}))
+// todo 需要简化，想去掉state 和 传给子组件的过程
+export default class Send extends Component {
+    static defaultProps = {
+        orderInfoLoading: true,
+        shipperListLoading: true,
+        expressListLoading: true,
+        shipperList: [],
+        expressList: [],
+        orderInfo: {
+            info: {
+                sn: "",
+                create_time: 0,
+                extend_order_goods: [],
+                extend_order_extend: {
+                    reciver_name: "",
+                    reciver_info: {
+                        address: "",
+                        name: "",
+                        phone: ""
+                    },
+                    message: "",
+                    deliver_name: "",
+                    deliver_phone: "",
+                    deliver_address: "",
+                    need_express: 1
+                }
+            }
+        }
+
+    };
     state = {
         express_id: 0,
-        tracking_no: '',
-        deliver_name: '',
-        deliver_phone: '',
-        deliver_address: '',
+        tracking_no: "",
+        deliver_name: "",
+        deliver_phone: "",
+        deliver_address: "",
         need_express: 1,
-        remark: '',
+        remark: "",
         shipperList: [],
         expressList: [],
         info: {
-            sn: '',
+            sn: "",
             create_time: 0,
             extend_order_goods: [],
             extend_order_extend: {
-                reciver_name: '',
+                reciver_name: "",
                 reciver_info: {
-                    address: '',
-                    name: '',
-                    phone: ''
+                    address: "",
+                    name: "",
+                    phone: ""
                 },
-                message: '',
-                deliver_name: '',
-                deliver_phone: '',
-                deliver_address: '',
+                message: "",
+                deliver_name: "",
+                deliver_phone: "",
+                deliver_address: "",
                 need_express: 1
-            },
-        },
-    }
-    static defaultProps = {
-        dispatch: dispatchProps,
-    }
-    handleSubmit = (e: { preventDefault: Function }) => {
+            }
+        }
+    };
+
+    handleSubmit = (e) => {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
             if (!err) {
-                const { dispatch } = this.props
-                const { id } = parseQuery(this.props.location.search)
-                const { deliver_name, deliver_phone, deliver_address } = this.state
+                const { dispatch, location: { query: { id } } } = this.props;
+                const { deliver_name, deliver_phone, deliver_address } = this.state;
                 let params = {
                     id,
                     deliver_name,
@@ -135,142 +94,154 @@ export default class Send extends Component<Props, State> {
                     deliver_address,
                     is_commonly_use: values.is_commonly_use ? 1 : 0,
                     remark: values.remark,
-                    need_express: values.need_express,
-                }
+                    need_express: values.need_express
+                };
                 if (values.need_express === 1) {
                     params = Object.assign({}, params, {
                         express_id: values.express_id,
                         tracking_no: values.tracking_no
-                    })
+                    });
                 }
-                dispatch(orderSetSend({ params }))
+                dispatch({
+                    type: "order/setSend",
+                    payload: params,
+                    callback: (response ) => {
+                        if(response.code === 0 ){
+                            message.success("操作成功");
+                            router.goBack();
+                        }else{
+                            message.error(response.msg);
+                        }
+                    }
+                });
+            }
+        });
+    };
+
+    componentDidMount() {
+        const { dispatch, location: { query: { id } } } = this.props;
+        dispatch({
+            type: "order/info",
+            payload: {
+                id
+            },
+            callback: (response) => {
+                if (response.code === 0) {
+                    const { deliver_name, deliver_phone, deliver_address, express_id, tracking_no, remark, need_express } = response.result.info.extend_order_extend;
+                    this.setState({
+                        info: response.result.info,
+                        deliver_name,
+                        deliver_phone,
+                        deliver_address,
+                        express_id,
+                        tracking_no,
+                        remark,
+                        need_express
+                    }, () => {
+                        dispatch({
+                            type: "shipper/list",
+                            payload: {
+                                page: 1,
+                                rows: 1000
+                            }
+                        });
+                        dispatch({
+                            type: "express/list",
+                            payload: {
+                                page: 1,
+                                rows: 1000
+                            }
+                        });
+                    });
+                } else {
+                    message.warning(response.msg);
+                    router.goBack();
+                }
             }
         });
     }
 
-    async componentDidMount() {
-        const { location } = this.props
-        const { id } = parseQuery(location.search)
-
-        const orderInfo = await Fetch.fetch({
-            api: OrderApi.info,
-            params: { id }
-        })
-
-        if (orderInfo.code === 0) {
-            const { deliver_name, deliver_phone, deliver_address, express_id, tracking_no, remark, need_express } = orderInfo.result.info.extend_order_extend
-            this.setState({
-                info: orderInfo.result.info,
-                deliver_name,
-                deliver_phone,
-                deliver_address,
-                express_id,
-                tracking_no,
-                remark,
-                need_express
-            })
-        } else {
-            message.warning(orderInfo.msg)
-        }
-
-        const shipperResult = await Fetch.fetch({
-            api: ShipperApi.list,
-            params: {
-                page: 1,
-                rows: 1000,
-            }
-        })
-        if (shipperResult.code === 0) {
-            this.setState({ shipperList: shipperResult.result.list })
-        } else {
-            message.warning(shipperResult.msg)
-        }
-
-        const expressResult = await Fetch.fetch({
-            api: ExpressApi.list,
-            params: {
-                page: 1,
-                rows: 1000,
-            }
-        })
-        if (expressResult.code === 0) {
-            this.setState({ expressList: expressResult.result.list })
-        } else {
-            message.warning(expressResult.msg)
-        }
-    }
-
     render() {
-        const { shipperList, expressList, deliver_name, deliver_phone, deliver_address, tracking_no, express_id, remark, need_express } = this.state
+        const { deliver_name, deliver_phone, deliver_address, tracking_no, express_id, remark, need_express } = this.state;
+        const { shipperList, expressList, orderInfoLoading, shipperListLoading, expressListLoading, orderSetSendLoading } = this.props;
         const { getFieldDecorator } = this.props.form;
         if (!need_express) {
             getFieldDecorator("tracking_no", { initialValue: tracking_no });
         }
         return (
-            <Page>
-                <Form onSubmit={this.handleSubmit}>
-                    <SendAddress
-                        form={this.props.form}
-                        shipperList={shipperList}
-                        deliver_name={deliver_name}
-                        deliver_phone={deliver_phone}
-                        deliver_address={deliver_address}
-                        onShipperChange={({ deliver_name, deliver_phone, deliver_address }) => {
-                            this.setState({
-                                deliver_name,
-                                deliver_phone,
-                                deliver_address
-                            })
-                        }}
-                    />
-                    <DeliveryWay
-                        form={this.props.form}
-                        express_id={express_id}
-                        expressList={expressList}
-                        need_express={need_express}
-                        tracking_no={tracking_no}
-                        onExpressChange={({ express_id, tracking_no, need_express }) => {
-                            this.setState({
-                                express_id,
-                                tracking_no,
-                                need_express
-                            })
-                        }}
-                    />
-                    <FormItem
-                        label="输入备注"
-                        colon={false}
-                    >
-                        {getFieldDecorator('remark', {
-                            initialValue: remark
-                        })(
-                            <TextArea
-                                placeholder="请输入备注"
-                                type='textarea'
-                                autosize={{ minRows: 2, maxRows: 6 }}
-                            />
-                        )}
-                    </FormItem>
-                    <FormItem>
-                        <Button
-                            type="primary"
-                            htmlType="submit"
-                            style={{
-                                marginRight: 10
-                            }}
-                        >
-                            确定
-                        </Button>
-                        <Button
-                            onClick={() => {
-                                this.props.history.goBack()
-                            }}
-                        >
-                            返回
-                        </Button>
-                    </FormItem>
-                </Form>
-            </Page>
-        )
+            <PageHeaderWrapper hiddenBreadcrumb={true} policy={'order/setSend'}>
+                <Spin size="large" spinning={orderInfoLoading}>
+                    <Card bordered={false}>
+                        <Form onSubmit={this.handleSubmit}>
+                            <Spin size="large" spinning={shipperListLoading}>
+                                <SendAddress
+                                    form={this.props.form}
+                                    shipperList={shipperList}
+                                    deliver_name={deliver_name}
+                                    deliver_phone={deliver_phone}
+                                    deliver_address={deliver_address}
+                                    onShipperChange={({ deliver_name, deliver_phone, deliver_address }) => {
+                                        this.setState({
+                                            deliver_name,
+                                            deliver_phone,
+                                            deliver_address
+                                        });
+                                    }}
+                                />
+                            </Spin>
+                            <Spin size="large" spinning={expressListLoading}>
+                                <DeliveryWay
+                                    form={this.props.form}
+                                    express_id={express_id}
+                                    expressList={expressList}
+                                    need_express={need_express}
+                                    tracking_no={tracking_no}
+                                    onExpressChange={({ express_id, tracking_no, need_express }) => {
+                                        this.setState({
+                                            express_id,
+                                            tracking_no,
+                                            need_express
+                                        });
+                                    }}
+                                />
+                            </Spin>
+                            <FormItem
+                                label="输入备注"
+                                colon={false}
+                            >
+                                {getFieldDecorator("remark", {
+                                    initialValue: remark
+                                })(
+                                    <TextArea
+                                        placeholder="请输入备注"
+                                        type='textarea'
+                                        autosize={{ minRows: 2, maxRows: 6 }}
+                                    />
+                                )}
+                            </FormItem>
+                            <FormItem>
+                                <Button
+                                    loading={orderSetSendLoading}
+                                    type="primary"
+                                    htmlType="submit"
+                                    style={{
+                                        marginRight: 10
+                                    }}
+                                >
+                                    确定
+                                </Button>
+                                <Button
+                                    onClick={() => {
+                                        router.goBack();
+                                    }}
+                                >
+                                    返回
+                                </Button>
+                            </FormItem>
+                        </Form>
+                    </Card>
+                </Spin>
+            </PageHeaderWrapper>
+        );
     }
 }

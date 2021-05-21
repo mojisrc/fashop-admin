@@ -1,24 +1,24 @@
-import { Fetch } from './index'
+import { Fetch } from "./index";
 import { message } from "antd";
-import { ImageApi } from "../config/api/image"
+import upload from "@/services/upload";
 
-export default ({ file, onSuccess, is_save }) => {
+export default ({ file, onSuccess, is_save, folder_id ,name}) => {
     const reader = new FileReader();
     reader.onload = async (a) => {
         const dataURL = a.target.result;
-        const e = await Fetch.fetch({
-            api: ImageApi.add,
-            params: {
-                image: dataURL,
-                is_save,
-            }
-        })
-        console.log(e)
+        const e = await upload.addImage({
+            image: dataURL,
+            is_save,
+            folder_id,
+            name
+        });
         if (e.code === 0) {
-            onSuccess(e.result)
+            let result = e.result
+            result['file'] = file
+            onSuccess(result);
         } else {
-            message.warning(e.msg)
+            message.warning(e.msg);
         }
-    }
+    };
     reader.readAsDataURL(file);
 }

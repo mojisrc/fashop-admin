@@ -1,0 +1,153 @@
+/*goodsListPhone*/
+.goodsListWarp1{
+    display: flex;
+    align-items: initial;
+    justify-content: flex-start;
+    flex-direction: row;
+    flex-wrap: wrap;
+    box-sizing: border-box;
+    padding: 6px 6px 0 6px;
+}
+.goodsListWarp2{
+    display: flex;
+    align-items: initial;
+    justify-content: flex-start;
+    flex-direction: row;
+    flex-wrap: wrap;
+    box-sizing: border-box;
+}
+.goodsListWarp3{
+    display: flex;
+    align-items: initial;
+    justify-content: flex-start;
+    flex-direction: row;
+    flex-wrap: wrap;
+    box-sizing: border-box;
+    padding: 6px;
+}
+.goodsListWarp4{
+    display: flex;
+    align-items: initial;
+    justify-content: flex-start;
+    flex-direction: row;
+    flex-wrap: wrap;
+    box-sizing: border-box;
+}
+
+/* list */
+.listWarp{
+    width: 100%;
+    display: flex;
+    align-items: initial;
+    justify-content: flex-start;
+    flex-direction: row;
+    background-color: #fff;
+    padding: 10px;
+    padding-bottom: 0;
+}
+.listImgWarp{
+    width: 30%;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eaeaea;
+}
+.listImgWarp img{
+    width: 100%;
+}
+.listRight{
+    flex: 1;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    border-bottom: 1px solid #eaeaea;
+    justify-content: space-around;
+}
+.listTitle{
+    overflow : hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    height: 20px;
+    word-break: break-all;
+    word-wrap:break-word;
+}
+.listPrice{
+    color: #ff585d;
+}
+.listPrice span{
+    font-size: 12px;
+    margin-right: 10px;
+    color: #ccc;
+    text-decoration: line-through;
+}
+
+/* big */
+.bigWarp{
+    width: 100%;
+}
+.bigWarp:last-child .smallBot{
+    margin-bottom: 0;
+}
+.bigImgWarp{
+    width: 100%;
+    overflow: hidden;
+}
+.bigImgWarp img{
+    width: 100%;
+    overflow-y: hidden;
+}
+/* small */
+.smallWarp{
+}
+
+.smallImgWarp{
+    width: 100%;
+    overflow: hidden;
+}
+.smallImgWarp img{
+    width: 100%;
+}
+.smallBot{
+    background-color: #fff;
+    padding: 0 10px;
+    margin-bottom: 6px;
+    display: flex;
+    flex-direction: column;
+}
+
+.smallTitle{
+    margin: 10px 0;
+    overflow : hidden;
+    text-overflow: ellipsis;
+    height: 20px;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    font-size: 14px;
+    color: #333333;
+    word-break: break-all;
+    word-wrap:break-word;
+    display:-webkit-box;
+}
+.smallPrice{
+    color: #ff585d;
+}
+.smallPrice span{
+    margin-right: 10px;
+    color: #ccc;
+    text-decoration: line-through;
+}
+
+.lineClamp1{
+    -webkit-line-clamp: 1!important;
+    height: 20px!important;
+}
+.lineClamp2{
+    -webkit-line-clamp: 2!important;
+    height: 40px!important;
+}
+.goodsEmpty{
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 10px 0;
+}

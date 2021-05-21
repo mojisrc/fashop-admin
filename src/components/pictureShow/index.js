@@ -1,3 +1,4 @@
+import { Icon } from '@ant-design/compatible';
 import React, { Component } from "react";
 import {
     Row,
@@ -5,7 +6,7 @@ import {
     Button,
     Modal,
     Input,
-    Icon,
+    
     Checkbox,
     Upload,
     Popover,
@@ -14,7 +15,7 @@ import {
     Card,
     message,
 } from "antd";
-import { View } from "react-web-dom"
+import { View } from "@/components/flexView"
 import styles from "./index.css";
 
 const { Content, Sider } = Layout;

@@ -1,0 +1,8 @@
+.goodsSearchPhoneWarp{
+    flex: 1;
+    padding: 10px;
+    display: flex;
+    align-items: initial;
+    justify-content: flex-start;
+    flex-direction: column;
+}

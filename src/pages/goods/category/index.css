@@ -1,0 +1,20 @@
+.column{
+    text-align: center!important;
+}
+.operation{
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+.operation a{
+    margin-right: 10px;
+}
+.operation a:last-child{
+    margin-right: 0;
+}
+.batchView{
+    margin-bottom: 24px;
+}
+.batchView button{
+    margin-right: 24px;
+}

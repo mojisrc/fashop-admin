@@ -1,0 +1,18 @@
+.main{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+}
+.left{
+    width: 200px;
+    overflow-x: scroll;
+
+}
+.right{
+    flex:1;
+    margin-left:15px;
+    min-height: 600px;
+}
+.imageList{
+}
+

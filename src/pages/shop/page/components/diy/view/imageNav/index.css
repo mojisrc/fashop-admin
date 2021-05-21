@@ -1,0 +1,37 @@
+/* imgNavPhone */
+.imgNavPhoneWarp{
+    display: flex;
+    align-items: initial;
+    justify-content: flex-start;
+    /* min-height: 90px; */
+    background-color: #fff;
+    flex-direction: row;
+    border-top: 10px solid rgba(255, 255, 255, 0);
+    border-bottom: 10px solid rgba(255, 255, 255, 0);
+    flex-wrap: wrap;
+    overflow: hidden;
+}
+.imgNavPhonItem{
+    flex-shrink: 0;
+    float: left;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: column;
+}
+.imgNavPhonItem img{
+    width: 35px;
+    height: 35px;
+    background-color: #f6f6f6;
+}
+.imgNavPhonItem p{
+    margin: 0;
+    margin-top: 2px;
+    font-family: 'PingFangSC-Regular', 'PingFang SC', serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 12px;
+    color: rgba(0, 0, 0, 0.427450980392157);
+    text-align: center;
+    line-height: 22px;
+}
