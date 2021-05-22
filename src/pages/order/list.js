@@ -248,7 +248,6 @@ class List extends Component {
                 className: `${styles.goodsTitle}`,
                 render: (record) => {
                     return <div>
-                        {record.is_overseas === 1 && <Tag color="magenta">海淘</Tag>}
                         {record.goods_title}
                     </div>
                 }

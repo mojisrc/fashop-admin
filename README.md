@@ -1,8 +1,8 @@
 ## 安装
-`npm install`
+`yarn`
 
 ## 运行
-`npm start`
+`yarn run start`
 
 
 ## 本地环境配置

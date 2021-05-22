@@ -116,8 +116,7 @@ export default class GoodsEdit extends Component {
                         line_price: info.line_price,
                         title: info.title,
                         images: info.images,
-                        body2: info.body2,
-                        is_overseas: !!info.extend.is_overseas,
+                        body: info.body,
                         tag_ids: info.tag_ids ? info.tag_ids : []
                     });
                 }
@@ -141,13 +140,13 @@ export default class GoodsEdit extends Component {
         this.props.form.validateFieldsAndScroll(async (err, values) => {
             if (!err) {
                 const { dispatch } = this.props;
-                const { title, images, category_ids, body2, skus, sale_time, freight, brand_id, supplier_id, media_id, line_price, is_overseas, tag_ids } = values;
+                const { title, images, category_ids, body, skus, sale_time, freight, brand_id, supplier_id, media_id, line_price,  tag_ids } = values;
                 const { id, is_on_sale } = this.state.info
                 let params = {
                     id,
                     title,
                     images,
-                    body2,
+                    body,
                     category_ids,
                     skus,
                     freight_fee: freight.freight_fee,
@@ -157,7 +156,6 @@ export default class GoodsEdit extends Component {
                     supplier_id,
                     media_id,
                     line_price,
-                    is_overseas,
                     tag_ids,
                     is_on_sale
                 };
@@ -388,7 +386,7 @@ export default class GoodsEdit extends Component {
                                             placeholder="请选择自定义标签"
                                         >
                                             {Array.isArray(tagList) && tagList.map((item, index) => {
-                                                return <Option key={index} value={item.id}>{item.title}</Option>;
+                                                return <Option key={index} value={`${item.id}`}>{item.title}</Option>;
                                             })}
                                         </Select>
                                     )}
@@ -402,19 +400,6 @@ export default class GoodsEdit extends Component {
                                             required: false
                                         }]
                                     })(<InputNumber min={0} precision={2} style={{ width: 150 }} />)} 元
-                                </FormItem>
-                                <FormItem
-                                    label="海淘产品"
-                                    {...formItemLayout}
-                                >
-                                    <Row type="flex" align="middle">
-                                        {getFieldDecorator("is_overseas", {
-                                            valuePropName: "checked",
-                                            initialValue: false
-                                        })(
-                                            <Checkbox>是</Checkbox>
-                                        )}
-                                    </Row>
                                 </FormItem>
                             </div>
                             <div className={styles.item}>
@@ -462,7 +447,7 @@ export default class GoodsEdit extends Component {
                                 <h3>商品详情</h3>
                             </div>
                             <FormItem {...formItemLayout} label='详情装修'>
-                                {getFieldDecorator("body2", {
+                                {getFieldDecorator("body", {
                                     initialValue: [],
                                     rules: [{
                                         required: true,

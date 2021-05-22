@@ -76,7 +76,7 @@ export default class GoodsList extends Component {
             {
                 title: "商品图",
                 dataIndex: "img",
-                width: 50,
+                width: 80,
                 render: (e) => (
                     <Image
                         type='goods'

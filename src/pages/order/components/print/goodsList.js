@@ -19,7 +19,6 @@ export default class OrderPrintGoodsList extends Component {
         pay_balance: 0,
         is_revise: 0,
         is_revise_freight: 0,
-        is_overseas: 0,
         className: null
     };
 

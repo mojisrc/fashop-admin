@@ -1,4 +1,4 @@
-import { Form } from '@ant-design/compatible';
+import { Form } from "@ant-design/compatible";
 import React, { Component } from "react";
 import { connect } from "umi";
 import {
@@ -103,10 +103,10 @@ class GoodsEdit extends Component {
         let cache = JSON.parse(localStorage.getItem("fashop-goods-add")) || {};
         if (typeof cache["formValues"] !== "undefined") {
             setFieldsValue(
-                typeof cache.formValues["sale_time"] !== "undefined" ? {
-                    ...cache.formValues,
-                    sale_time: moment(cache.formValues.sale_time)
-                } : cache.formValues
+              typeof cache.formValues["sale_time"] !== "undefined" ? {
+                  ...cache.formValues,
+                  sale_time: moment(cache.formValues.sale_time)
+              } : cache.formValues
             );
         }
         if (typeof cache["state"] !== "undefined" && typeof cache["state"]["brandInfo"] !== "undefined") {
@@ -153,13 +153,12 @@ class GoodsEdit extends Component {
         this.props.form.validateFieldsAndScroll(async (err, values) => {
             if (!err) {
                 const { dispatch } = this.props;
-                const { title, images, category_ids, body, body2, skus, sale_time, freight, brand_id, supplier_id, line_price, media_id, is_overseas, tag_ids } = values;
+                const { title, images, category_ids, body, skus, sale_time, freight, brand_id, supplier_id, line_price, media_id, tag_ids } = values;
                 let params = {
                     title,
                     images,
                     category_ids,
                     body,
-                    body2,
                     skus,
                     freight_fee: freight.freight_fee,
                     freight_id: freight.freight_id,
@@ -168,7 +167,6 @@ class GoodsEdit extends Component {
                     supplier_id,
                     line_price,
                     media_id,
-                    is_overseas: is_overseas ? 1 : 0,
                     tag_ids
                 };
                 dispatch({
@@ -200,271 +198,258 @@ class GoodsEdit extends Component {
         const categoryTree = Antd.treeData(tree);
         const tagList = goodsTag.list;
         return (
-            <PageHeaderWrapper hiddenBreadcrumb={true} policy={"goods/add"}>
-                <Card bordered={false}>
-                    <Spin size="large" spinning={goodsCategoryLoading}>
-                        <Form onSubmit={this.handleSubmit} style={{ width: 1000 }}>
-                            <div className={styles.item}>
-                                <h3>基本信息</h3>
-                                <FormItem
-                                    {...formItemLayout}
-                                    label='商品图'
-                                >
-                                    {getFieldDecorator("images", {
-                                        rules: [{ required: true, message: "请选择商品图" }]
-                                    })(
-                                        <ImageSpace
-                                            multi={true}
-                                            batch={false}
-                                            url={getFieldValue("images")}
-                                            itemStyle={{
-                                                width: 100,
-                                                height: 100,
-                                                marginRight: 10,
-                                                marginBottom: 10
-                                            }}
-                                        />
-                                    )}
-                                </FormItem>
+          <PageHeaderWrapper hiddenBreadcrumb={true} policy={"goods/add"}>
+              <Card bordered={false}>
+                  <Spin size="large" spinning={goodsCategoryLoading}>
+                      <Form onSubmit={this.handleSubmit} style={{ width: 1000 }}>
+                          <div className={styles.item}>
+                              <h3>基本信息</h3>
+                              <FormItem
+                                {...formItemLayout}
+                                label='商品图'
+                              >
+                                  {getFieldDecorator("images", {
+                                      rules: [{ required: true, message: "请选择商品图" }]
+                                  })(
+                                    <ImageSpace
+                                      multi={true}
+                                      batch={false}
+                                      url={getFieldValue("images")}
+                                      itemStyle={{
+                                          width: 100,
+                                          height: 100,
+                                          marginRight: 10,
+                                          marginBottom: 10
+                                      }}
+                                    />
+                                  )}
+                              </FormItem>
 
-                                <FormItem
-                                    {...formItemLayout}
-                                    label='商品名称'
-                                >
-                                    {getFieldDecorator("title", {
-                                        rules: [{ required: true, message: "请输入商品名称" }]
-                                    })(
-                                        <Input
-                                            placeholder="请输入商品名称"
-                                        />
-                                    )}
-                                </FormItem>
-                                <FormItem
-                                    {...formItemLayout}
-                                    extra="mp4格式，建议时长9-30秒，建议视频宽高比16:9"
-                                    label="视频"
-                                >
-                                    {getFieldDecorator("media_id", {
-                                        initialValue: 0
-                                    })(
-                                        <SelectVideo
-                                            ref={(e) => this.selectVideo = e}
-                                            getState={(state) => {
-                                                this.selectVideo.close();
-                                                this.setState({
-                                                    videoInfo: state.value
-                                                }, () => {
-                                                    setFieldsValue({ "media_id": state.value.id });
-                                                });
-                                            }}
-                                        />
-                                    )}
-                                    {getFieldValue("media_id") > 0 ? <Tag
-                                        color="geekblue"
-                                        closable
-                                        onClose={() => {
-                                            setFieldsValue({ media_id: 0 });
-                                        }}
-                                        onClick={() => {
-                                            // 防止点击关闭触发预览
-                                            getFieldValue("media_id") > 0 && this.setState({ previewVideoVisible: true });
-                                        }}
+                              <FormItem
+                                {...formItemLayout}
+                                label='商品名称'
+                              >
+                                  {getFieldDecorator("title", {
+                                      rules: [{ required: true, message: "请输入商品名称" }]
+                                  })(
+                                    <Input
+                                      placeholder="请输入商品名称"
+                                    />
+                                  )}
+                              </FormItem>
+                              <FormItem
+                                {...formItemLayout}
+                                extra="mp4格式，建议时长9-30秒，建议视频宽高比16:9"
+                                label="视频"
+                              >
+                                  {getFieldDecorator("media_id", {
+                                      initialValue: 0
+                                  })(
+                                    <SelectVideo
+                                      ref={(e) => this.selectVideo = e}
+                                      getState={(state) => {
+                                          this.selectVideo.close();
+                                          this.setState({
+                                              videoInfo: state.value
+                                          }, () => {
+                                              setFieldsValue({ "media_id": state.value.id });
+                                          });
+                                      }}
+                                    />
+                                  )}
+                                  {getFieldValue("media_id") > 0 ? <Tag
+                                    color="geekblue"
+                                    closable
+                                    onClose={() => {
+                                        setFieldsValue({ media_id: 0 });
+                                    }}
+                                    onClick={() => {
+                                        // 防止点击关闭触发预览
+                                        getFieldValue("media_id") > 0 && this.setState({ previewVideoVisible: true });
+                                    }}
+                                  >
+                                      已选，点击预览
+                                  </Tag> : <a onClick={() => {
+                                      this.selectVideo.show();
+                                  }}
+                                  >选择视频</a>}
+                              </FormItem>
+                              <Form.Item
+                                {...formItemLayout}
+                                label="品牌"
+                              >
+                                  {getFieldDecorator("brand_id")(
+                                    <SelectBrand
+                                      ref={(e) => {
+                                          this.selectBrand = e;
+                                      }}
+                                      getState={(state) => {
+                                          this.selectBrand.close();
+                                          this.setState({
+                                              brandInfo: state.value
+                                          }, () => {
+                                              setFieldsValue({ "brand_id": state.value.id });
+                                          });
+                                      }}
+                                    />
+                                  )}
+                                  <a onClick={() => {
+                                      this.selectBrand.show();
+                                  }}
+                                     style={{ marginRight: 10 }}
+                                  >选择品牌</a>
+                                  {getFieldValue("brand_id") > 0 ? `已选择：${this.state.brandInfo.title}` : null}
+                              </Form.Item>
+                              <Form.Item
+                                {...formItemLayout}
+                                label="供应商"
+                              >
+                                  {getFieldDecorator("supplier_id")(
+                                    <SelectSupplier
+                                      ref={(e) => {
+                                          this.selectSupplier = e;
+                                      }}
+                                      getState={(state) => {
+                                          this.selectSupplier.close();
+                                          this.setState({
+                                              supplierInfo: state.value
+                                          }, () => {
+                                              setFieldsValue({ "supplier_id": state.value.id });
+                                          });
+                                      }}
+                                    />
+                                  )}
+                                  <a onClick={() => {
+                                      this.selectSupplier.show();
+                                  }}
+                                     style={{ marginRight: 10 }}
+                                  >选择供应商</a>
+                                  {getFieldValue("supplier_id") > 0 ? `已选择：${this.state.supplierInfo.title}` : null}
+                              </Form.Item>
+                              <FormItem
+                                {...formItemLayout}
+                                label='商品分类'
+                              >
+                                  {getFieldDecorator("category_ids", {
+                                      rules: [{ required: true, message: "请选择商品分类" }]
+                                  })(
+                                    <TreeSelect
+                                      treeData={categoryTree}
+                                      showSearch
+                                      dropdownStyle={{ maxHeight: 400, overflow: "auto" }}
+                                      placeholder="请选择商品分类"
+                                      allowClear
+                                      multiple
+                                      treeDefaultExpandAll
+                                      onChange={(value) => {
+                                          setFieldsValue({
+                                              category_ids: value
+                                          });
+                                      }}
+                                    />
+                                  )}
+                              </FormItem>
+                              <FormItem
+                                {...formItemLayout}
+                                label='自定义标签'
+                              >
+                                  {getFieldDecorator("tag_ids", {
+                                      rules: [{ message: "请选择标签", type: "array" }]
+                                  })(
+                                    <Select
+                                      mode="multiple"
+                                      placeholder="请选择自定义标签"
                                     >
-                                        已选，点击预览
-                                    </Tag> : <a onClick={() => {
-                                        this.selectVideo.show();
-                                    }}
-                                    >选择视频</a>}
-                                </FormItem>
-                                <Form.Item
-                                    {...formItemLayout}
-                                    label="品牌"
-                                >
-                                    {getFieldDecorator("brand_id")(
-                                        <SelectBrand
-                                            ref={(e) => {
-                                                this.selectBrand = e;
-                                            }}
-                                            getState={(state) => {
-                                                this.selectBrand.close();
-                                                this.setState({
-                                                    brandInfo: state.value
-                                                }, () => {
-                                                    setFieldsValue({ "brand_id": state.value.id });
-                                                });
-                                            }}
-                                        />
-                                    )}
-                                    <a onClick={() => {
-                                        this.selectBrand.show();
-                                    }}
-                                       style={{ marginRight: 10 }}
-                                    >选择品牌</a>
-                                    {getFieldValue("brand_id") > 0 ? `已选择：${this.state.brandInfo.title}` : null}
-                                </Form.Item>
-                                <Form.Item
-                                    {...formItemLayout}
-                                    label="供应商"
-                                >
-                                    {getFieldDecorator("supplier_id")(
-                                        <SelectSupplier
-                                            ref={(e) => {
-                                                this.selectSupplier = e;
-                                            }}
-                                            getState={(state) => {
-                                                this.selectSupplier.close();
-                                                this.setState({
-                                                    supplierInfo: state.value
-                                                }, () => {
-                                                    setFieldsValue({ "supplier_id": state.value.id });
-                                                });
-                                            }}
-                                        />
-                                    )}
-                                    <a onClick={() => {
-                                        this.selectSupplier.show();
-                                    }}
-                                       style={{ marginRight: 10 }}
-                                    >选择供应商</a>
-                                    {getFieldValue("supplier_id") > 0 ? `已选择：${this.state.supplierInfo.title}` : null}
-                                </Form.Item>
-                                <FormItem
-                                    {...formItemLayout}
-                                    label='商品分类'
-                                >
-                                    {getFieldDecorator("category_ids", {
-                                        rules: [{ required: true, message: "请选择商品分类" }]
-                                    })(
-                                        <TreeSelect
-                                            treeData={categoryTree}
-                                            showSearch
-                                            dropdownStyle={{ maxHeight: 400, overflow: "auto" }}
-                                            placeholder="请选择商品分类"
-                                            allowClear
-                                            multiple
-                                            treeDefaultExpandAll
-                                            onChange={(value) => {
-                                                setFieldsValue({
-                                                    category_ids: value
-                                                });
-                                            }}
-                                        />
-                                    )}
-                                </FormItem>
-                                <FormItem
-                                    {...formItemLayout}
-                                    label='自定义标签'
-                                >
-                                    {getFieldDecorator("tag_ids", {
-                                        rules: [{ message: "请选择标签", type: "array" }]
-                                    })(
-                                        <Select
-                                            mode="multiple"
-                                            placeholder="请选择自定义标签"
-                                        >
-                                            {Array.isArray(tagList) && tagList.map((item, index) => {
-                                                return <Option key={index} value={item.id}>{item.title}</Option>;
-                                            })}
-                                        </Select>
-                                    )}
-                                </FormItem>
-                                <FormItem {...formItemLayout} label={"划线价"}
-                                          extra={<div>如：<span style={{ textDecoration: "line-through" }}>¥500.00</span>
-                                          </div>}
-                                >
-                                    {getFieldDecorator("line_price", {
-                                        rules: [{
-                                            required: false
-                                        }]
-                                    })(<InputNumber min={0} precision={2} style={{ width: 150 }} />)} 元
-                                </FormItem>
-                                <FormItem
-                                    label="海淘产品"
-                                    {...formItemLayout}
-                                >
-                                    <Row type="flex" align="middle">
-                                        {getFieldDecorator("is_overseas", {
-                                            valuePropName: "checked",
-                                            initialValue: false
-                                        })(
-                                            <Checkbox>是</Checkbox>
-                                        )}
-                                    </Row>
-                                </FormItem>
-                            </div>
-                            <div className={styles.item}>
-                                <h3>型号价格</h3>
-                                <FormItem {...formItemLayout}>
-                                    {getFieldDecorator("skus", {
-                                        rules: [{
-                                            validator: Sku.validator,
-                                            required: true
-                                        }]
-                                    })(<Sku form={form} />)}
-                                </FormItem>
-                            </div>
-                            <div className={styles.item}>
-                                <h3>运费其他</h3>
-                                <FormItem {...formItemLayout} label={"运费"}>
-                                    {getFieldDecorator("freight", {
-                                        rules: [{
-                                            required: true,
-                                            message: "请设置运费"
-                                        }]
-                                    })(<GoodsFreight />)}
-                                </FormItem>
-                                <FormItem {...formItemLayout} label={"开售时间"}>
-                                    {getFieldDecorator("sale_time", {
-                                        rules: [{
-                                            required: true,
-                                            message: "请选择开售时间"
-                                        }]
-                                    })(
-                                        <DatePicker
-                                            showTime
-                                            format="YYYY-MM-DD HH:mm:ss"
-                                            placeholder="选择时间"
-                                            style={{ marginRight: 15 }}
-                                        />
-                                    )}
-                                </FormItem>
-                                <h3>商品详情</h3>
-                            </div>
-                            <FormItem {...formItemLayout} label='详情装修'>
-                                {getFieldDecorator("body2", {
-                                    initialValue: [],
-                                    rules: [{
-                                        required: true,
-                                        message: "请装修详情"
-                                    }]
-                                })(
-                                    <Editor />
-                                )}
-                            </FormItem>
-                            <FormItem {...tailFormItemLayout}>
-                                <Button
-                                    type="primary"
-                                    htmlType="submit"
-                                    loading={goodsAddLoading}
-                                    style={{
-                                        marginRight: 10
-                                    }}
-                                >
-                                    保存添加
-                                </Button>
-                            </FormItem>
-                        </Form>
-                        <Modal visible={previewVisible} footer={null} onCancel={this.previewCancel}>
-                            <img style={{ width: "100%" }} src={previewImage} />
-                        </Modal>
-                        <Modal title="预览视频" visible={previewVideoVisible} footer={null} onCancel={() => {
-                            this.setState({ previewVideoVisible: false });
-                        }}>
-                            <video src={videoInfo.url} controls="controls" style={{ width: "100%" }} />
-                        </Modal>
-                    </Spin>
-                </Card>
-            </PageHeaderWrapper>
+                                        {Array.isArray(tagList) && tagList.map((item, index) => {
+                                            return <Option key={index} value={`${item.id}`}>{item.title}</Option>;
+                                        })}
+                                    </Select>
+                                  )}
+                              </FormItem>
+                              <FormItem {...formItemLayout} label={"划线价"}
+                                        extra={<div>如：<span style={{ textDecoration: "line-through" }}>¥500.00</span>
+                                        </div>}
+                              >
+                                  {getFieldDecorator("line_price", {
+                                      rules: [{
+                                          required: false
+                                      }]
+                                  })(<InputNumber min={0} precision={2} style={{ width: 150 }} />)} 元
+                              </FormItem>
+                          </div>
+                          <div className={styles.item}>
+                              <h3>型号价格</h3>
+                              <FormItem {...formItemLayout}>
+                                  {getFieldDecorator("skus", {
+                                      rules: [{
+                                          validator: Sku.validator,
+                                          required: true
+                                      }]
+                                  })(<Sku form={form} />)}
+                              </FormItem>
+                          </div>
+                          <div className={styles.item}>
+                              <h3>运费其他</h3>
+                              <FormItem {...formItemLayout} label={"运费"}>
+                                  {getFieldDecorator("freight", {
+                                      rules: [{
+                                          required: true,
+                                          message: "请设置运费"
+                                      }]
+                                  })(<GoodsFreight />)}
+                              </FormItem>
+                              <FormItem {...formItemLayout} label={"开售时间"}>
+                                  {getFieldDecorator("sale_time", {
+                                      rules: [{
+                                          required: true,
+                                          message: "请选择开售时间"
+                                      }]
+                                  })(
+                                    <DatePicker
+                                      showTime
+                                      format="YYYY-MM-DD HH:mm:ss"
+                                      placeholder="选择时间"
+                                      style={{ marginRight: 15 }}
+                                    />
+                                  )}
+                              </FormItem>
+                              <h3>商品详情</h3>
+                          </div>
+                          <FormItem {...formItemLayout} label='详情装修'>
+                              {getFieldDecorator("body", {
+                                  initialValue: [],
+                                  rules: [{
+                                      required: true,
+                                      message: "请装修详情"
+                                  }]
+                              })(
+                                <Editor />
+                              )}
+                          </FormItem>
+                          <FormItem {...tailFormItemLayout}>
+                              <Button
+                                type="primary"
+                                htmlType="submit"
+                                loading={goodsAddLoading}
+                                style={{
+                                    marginRight: 10
+                                }}
+                              >
+                                  保存添加
+                              </Button>
+                          </FormItem>
+                      </Form>
+                      <Modal visible={previewVisible} footer={null} onCancel={this.previewCancel}>
+                          <img style={{ width: "100%" }} src={previewImage} />
+                      </Modal>
+                      <Modal title="预览视频" visible={previewVideoVisible} footer={null} onCancel={() => {
+                          this.setState({ previewVideoVisible: false });
+                      }}>
+                          <video src={videoInfo.url} controls="controls" style={{ width: "100%" }} />
+                      </Modal>
+                  </Spin>
+              </Card>
+          </PageHeaderWrapper>
         );
     }
 

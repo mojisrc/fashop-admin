@@ -19,11 +19,10 @@ export default class OrderDetailGoodsInfo extends Component {
         pay_balance: 0,
         is_revise: 0,
         is_revise_freight: 0,
-        is_overseas: 0
     };
 
     render() {
-        const { extend_order_goods, amount, freight_fee, revise_amount, revise_freight_fee, discount, points, pay_balance, is_revise, is_revise_freight, is_overseas } = this.props;
+        const { extend_order_goods, amount, freight_fee, revise_amount, revise_freight_fee, discount, points, pay_balance, is_revise, is_revise_freight } = this.props;
         const { coupon_amount, member_amount, points_amount, reward_amount } = discount;
 
         const columns = [
@@ -33,10 +32,6 @@ export default class OrderDetailGoodsInfo extends Component {
                 key: "goods_img",
                 render: (text, record) => <div className={styles.goodsDesc}>
                     <img src={record.goods_img} />
-                    <div>
-                        {record.is_overseas === 1 && <Tag color="magenta">海淘</Tag>}
-                        <span>{record.goods_title}</span>
-                    </div>
                 </div>
             }, {
                 title: "规格",
