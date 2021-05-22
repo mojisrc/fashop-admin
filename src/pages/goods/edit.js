@@ -26,7 +26,6 @@ import { history as router } from "umi";
 import moment from "moment";
 import GoodsFreight from "@/pages/goods/components/add/freight";
 import SelectBrand from "@/pages/goods/components/selectBrand";
-import SelectSupplier from "@/pages/goods/components/selectSupplier";
 import SelectVideo from "@/pages/goods/components/selectVideo";
 import ImageSpace from "@/components/uploadImage/imageSpace";
 
@@ -58,7 +57,6 @@ export default class GoodsEdit extends Component {
     };
     state = {
         brandInfo: {},
-        supplierInfo: {},
         videoInfo: {},
         photoGalleryVisible: false,
         photoGalleryOnOk: (e) => {
@@ -105,13 +103,11 @@ export default class GoodsEdit extends Component {
                         previewVisible: false,
                         previewImage: "",
                         brandInfo: typeof info["brand"] !== "undefined" ? info.brand : {},
-                        supplierInfo: typeof info["supplier"] !== "undefined" ? info.supplier : {},
                         videoInfo: typeof info["media"] !== "undefined" && typeof info["media"]["url"] !== "undefined" ? info.media : {}
                     });
                     // TODO 把所有都换成setFieldsValue
                     setFieldsValue({
                         brand_id: info.brand_id,
-                        supplier_id: typeof info["supplier"] !== "undefined" ? info.supplier.id : 0,
                         media_id: info.media_id,
                         line_price: info.line_price,
                         title: info.title,
@@ -140,7 +136,7 @@ export default class GoodsEdit extends Component {
         this.props.form.validateFieldsAndScroll(async (err, values) => {
             if (!err) {
                 const { dispatch } = this.props;
-                const { title, images, category_ids, body, skus, sale_time, freight, brand_id, supplier_id, media_id, line_price,  tag_ids } = values;
+                const { title, images, category_ids, body, skus, sale_time, freight, brand_id,  media_id, line_price,  tag_ids } = values;
                 const { id, is_on_sale } = this.state.info
                 let params = {
                     id,
@@ -153,7 +149,6 @@ export default class GoodsEdit extends Component {
                     freight_id: freight.freight_id,
                     sale_time: sale_time.unix(),
                     brand_id,
-                    supplier_id,
                     media_id,
                     line_price,
                     tag_ids,
@@ -309,37 +304,6 @@ export default class GoodsEdit extends Component {
                                         this.selectBrand.show();
                                     }}
                                     >选择品牌</a>}
-
-                                </Form.Item>
-
-                                <Form.Item
-                                    {...formItemLayout}
-                                    label="供应商"
-                                >
-                                    {getFieldDecorator("supplier_id")(
-                                        <SelectSupplier
-                                            ref={(e) => {
-                                                this.selectSupplier = e;
-                                            }}
-                                            getState={(state) => {
-                                                this.selectSupplier.close();
-                                                this.setState({
-                                                    supplierInfo: state.value
-                                                }, () => {
-                                                    setFieldsValue({ "supplier_id": state.value.id });
-                                                });
-                                            }}
-                                        />
-                                    )}
-
-                                    {getFieldValue("supplier_id") > 0 ? <Tag closable onClose={() => {
-                                        setFieldsValue({ supplier_id: 0 });
-                                    }}>
-                                        {this.state.supplierInfo.title}
-                                    </Tag> : <a onClick={() => {
-                                        this.selectSupplier.show();
-                                    }}
-                                    >选择供应商</a>}
 
                                 </Form.Item>
 

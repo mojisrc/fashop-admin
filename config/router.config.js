@@ -94,17 +94,11 @@ export default [
                     { path: "/goods/tag", component: "goods/tag", policy: "goodstag/list" },
                     { path: "/goods/tag/add", component: "goods/tag/add", policy: "goodstag/add" },
                     { path: "/goods/tag/edit", component: "goods/tag/edit", policy: "goodstag/edit" },
-                    { path: "/goods/supplier", redirect: "/goods/supplier/list", policy: "supplier/list" },
-                    { path: "/goods/supplier/list", component: "goods/supplier/list", policy: "supplier/list" },
                     { path: "/goods/brand", redirect: "/goods/brand/list" },
                     { path: "/goods/brand/list", component: "goods/brand/list", policy: "goods/brand" },
-                    { path: "/goods/relation", redirect: "/goods/relation/list" },
-                    { path: "/goods/relation/list", component: "goods/relation/list", policy: "goodsrelation/list" },
-                    { path: "/goods/relation/add", component: "goods/relation/add", policy: "goodsrelation/add" },
-                    { path: "/goods/relation/edit", component: "goods/relation/edit", policy: "goodsrelation/edit" },
                     { path: "/goods/body", component: "goods/body", policy: "goods/bodySet" }
                 ],
-                policy: "goods/list || goods/category || goods/supplier || goods/brand"
+                policy: "goods/list || goods/category || goods/brand"
             },
             {
                 path: "/user", name: "客户", component: "user/layout",

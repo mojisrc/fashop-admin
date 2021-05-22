@@ -13,8 +13,6 @@ import {
     DatePicker,
     InputNumber,
     Tag,
-    Row,
-    Checkbox,
     Select
 } from "antd";
 import PageHeaderWrapper from "@/components/pageHeaderWrapper";
@@ -27,7 +25,6 @@ import { history as router } from "umi";
 import GoodsFreight from "@/pages/goods/components/add/freight";
 import moment from "moment";
 import SelectBrand from "@/pages/goods/components/selectBrand";
-import SelectSupplier from "@/pages/goods/components/selectSupplier";
 import SelectVideo from "@/pages/goods/components/selectVideo";
 import ImageSpace from "@/components/uploadImage/imageSpace";
 
@@ -153,7 +150,7 @@ class GoodsEdit extends Component {
         this.props.form.validateFieldsAndScroll(async (err, values) => {
             if (!err) {
                 const { dispatch } = this.props;
-                const { title, images, category_ids, body, skus, sale_time, freight, brand_id, supplier_id, line_price, media_id, tag_ids } = values;
+                const { title, images, category_ids, body, skus, sale_time, freight, brand_id,  line_price, media_id, tag_ids } = values;
                 let params = {
                     title,
                     images,
@@ -164,7 +161,6 @@ class GoodsEdit extends Component {
                     freight_id: freight.freight_id,
                     sale_time: sale_time.unix(),
                     brand_id,
-                    supplier_id,
                     line_price,
                     media_id,
                     tag_ids
@@ -299,32 +295,6 @@ class GoodsEdit extends Component {
                                      style={{ marginRight: 10 }}
                                   >选择品牌</a>
                                   {getFieldValue("brand_id") > 0 ? `已选择：${this.state.brandInfo.title}` : null}
-                              </Form.Item>
-                              <Form.Item
-                                {...formItemLayout}
-                                label="供应商"
-                              >
-                                  {getFieldDecorator("supplier_id")(
-                                    <SelectSupplier
-                                      ref={(e) => {
-                                          this.selectSupplier = e;
-                                      }}
-                                      getState={(state) => {
-                                          this.selectSupplier.close();
-                                          this.setState({
-                                              supplierInfo: state.value
-                                          }, () => {
-                                              setFieldsValue({ "supplier_id": state.value.id });
-                                          });
-                                      }}
-                                    />
-                                  )}
-                                  <a onClick={() => {
-                                      this.selectSupplier.show();
-                                  }}
-                                     style={{ marginRight: 10 }}
-                                  >选择供应商</a>
-                                  {getFieldValue("supplier_id") > 0 ? `已选择：${this.state.supplierInfo.title}` : null}
                               </Form.Item>
                               <FormItem
                                 {...formItemLayout}

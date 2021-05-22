@@ -17,14 +17,8 @@ export default class Layout extends Component {
             case "tag":
                 router.push(`${match.url}/tag`);
                 break;
-            case "supplier/list":
-                router.push(`${match.url}/supplier/list`);
-                break;
             case "brand/list":
                 router.push(`${match.url}/brand/list`);
-                break;
-            case "relation/list":
-                router.push(`${match.url}/relation/list`);
                 break;
             case "body":
                 router.push(`${match.url}/body`);
@@ -49,17 +43,9 @@ export default class Layout extends Component {
                 tab: "标签"
             },
             {
-                key: "supplier/list",
-                tab: "供应商"
-            },
-            {
                 key: "brand/list",
                 tab: "品牌"
             },
-            // {
-            //     key: "relation/list",
-            //     tab: "关联模板"
-            // },
             {
                 key: "body",
                 tab: "详情"
