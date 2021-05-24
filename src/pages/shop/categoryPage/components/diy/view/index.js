@@ -1,4 +1,3 @@
-import { Icon } from '@ant-design/compatible';
 import React, { Component } from "react";
 import { Divider } from "antd";
 import styles from "./index.css";
@@ -8,6 +7,7 @@ import RightView from "./right";
 import SelectBrand from "../tool/selectBrand/index";
 import { connect } from "umi";
 import Arr from "@/utils/array";
+import EditOutlined from "@ant-design/icons/EditOutlined";
 
 @connect(({ goodsCategory, loading }) => ({
     goodsCategoryList: goodsCategory.list.result,
@@ -29,7 +29,7 @@ export default class PageView extends Component {
             <div className={styles.dragPhoneWarp}>
                 <div className={styles.dragPhoneHeader}>
                     <div onClick={onHeaderClick}>
-                        <Icon type="edit" /> <a
+                        <EditOutlined /> <a
                         onClick={() => {
 
                         }}

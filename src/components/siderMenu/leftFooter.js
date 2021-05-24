@@ -1,9 +1,9 @@
-import { Icon } from '@ant-design/compatible';
 import React, { PureComponent } from "react";
 import styles from "./leftFooter.css";
-import { Row, Col,  Modal } from "antd";
+import { Row, Col, Modal } from "antd";
 import { history as router } from "umi";
 import { connect } from "umi";
+import PoweroffOutlined from "@ant-design/icons/PoweroffOutlined";
 
 const confirm = Modal.confirm;
 @connect()
@@ -23,22 +23,22 @@ export default class LeftFooter extends PureComponent {
 
     render() {
         return (
-            <div className={styles.leftFooter}>
-                <Row type="flex" justify="space-around" align="middle" style={{ height: 60 }}>
-                    <Col>
-                        <a onClick={this.logout}>
-                            <Icon type="poweroff" />
-                        </a>
-                    </Col>
-                    <Col>
-                        <a onClick={() => {
-                            router.push("/member/self");
-                        }}>
-                            <Icon type="user" />
-                        </a>
-                    </Col>
-                </Row>
-            </div>
+          <div className={styles.leftFooter}>
+              <Row type="flex" justify="space-around" align="middle" style={{ height: 60 }}>
+                  <Col>
+                      <a onClick={this.logout}>
+                          <PoweroffOutlined />
+                      </a>
+                  </Col>
+                  <Col>
+                      <a onClick={() => {
+                          router.push("/member/self");
+                      }}>
+                          <UserOutlined />
+                      </a>
+                  </Col>
+              </Row>
+          </div>
         );
     }
 }

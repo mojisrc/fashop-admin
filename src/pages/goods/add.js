@@ -23,7 +23,7 @@ import Arr from "@/utils/array";
 import Antd from "@/utils/antd";
 import { history as router } from "umi";
 import GoodsFreight from "@/pages/goods/components/add/freight";
-import moment from "moment";
+import moment from "dayjs";
 import SelectBrand from "@/pages/goods/components/selectBrand";
 import SelectVideo from "@/pages/goods/components/selectVideo";
 import ImageSpace from "@/components/uploadImage/imageSpace";

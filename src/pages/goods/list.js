@@ -8,7 +8,7 @@ import Image from "@/components/image";
 import GoodsApi from "@/services/goods";
 import styles from "@/pages/goods/components/list/table/index.css";
 import { View } from "@/components/flexView";
-import moment from "moment";
+import moment from "dayjs";
 import { history as router } from "umi";
 import Antd from "@/utils/antd";
 @connect(({ goods, goodsCategory, loading }) => ({

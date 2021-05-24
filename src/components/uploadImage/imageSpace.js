@@ -1,4 +1,4 @@
-import { Icon } from '@ant-design/compatible';
+import PlusOutlined from "@ant-design/icons/PlusOutlined";
 import React, { Component } from "react";
 import {  Modal } from "antd";
 import { View } from "@/components/flexView";
@@ -71,7 +71,7 @@ export default class UploadImageSpace extends Component {
                                 disabled === false && this.ImageSpaceModal.show();
                             }}
                         >
-                            <Icon type='plus' />
+                            <PlusOutlined />
                             <span style={{ lineHeight: 1.5 }}>上传</span>
                         </View>
                     }

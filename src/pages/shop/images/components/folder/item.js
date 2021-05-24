@@ -1,8 +1,7 @@
-import { Icon } from '@ant-design/compatible';
 import React, { Component } from "react";
 import styles from "./item.css";
 import { Input, Checkbox } from "antd";
-
+import FolderOpenOutlined from "@ant-design/icons/FolderOpenOutlined"
 export default class FolderItem extends Component {
     static defaultProps = {
         name:"",
@@ -36,10 +35,7 @@ export default class FolderItem extends Component {
                     className={styles.image}
                     style={checked ? { borderColor: "#3E86DC" } : {}}
                 >
-                    <Icon
-                        style={{ fontSize: 50, color: "#72BFEB" }}
-                        type="folder-open"
-                    />
+                    <FolderOpenOutlined style={{ fontSize: 50, color: "#72BFEB" }} />
                     <div className={styles.imageHover}
                          style={checked ? { display: "initial" } : {}}
                          onClick={() => {

@@ -4,7 +4,7 @@ import { Form } from '@ant-design/compatible';
 import '@ant-design/compatible/assets/index.css';
 import { Button, Input, Select, DatePicker, TreeSelect } from "antd";
 import { initialValue } from "@/utils/form";
-import moment from "moment/moment";
+import moment from "dayjs";
 
 const Option = Select.Option;
 const { RangePicker } = DatePicker;

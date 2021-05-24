@@ -5,7 +5,7 @@ import DetailInfo from "./info/detail";
 import GoodsInfo from "./info/goods";
 import OperateInfo from "./info/operate";
 import Tracking from "./info/tracking";
-import { publicFunction } from "@/utils/index";
+import { publicFunction } from "@/utils";
 import { info } from "@/models/refund";
 import { Spin } from "antd";
 import { query } from "@/utils/fa";

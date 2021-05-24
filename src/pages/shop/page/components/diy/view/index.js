@@ -1,4 +1,3 @@
-import { Icon } from '@ant-design/compatible';
 import React, { Component } from "react";
 import { Modal, message } from "antd";
 import { SortableContainer, SortableElement, arrayMove } from "react-sortable-hoc";
@@ -21,17 +20,18 @@ import Scrollbar from "react-scrollbars-custom";
 import RichText from "./richText";
 import GoodsRelation from "./goodsRelation";
 import GoodsGuessLike from "./goodsGuessLike";
+import EditOutlined from "@ant-design/icons/EditOutlined";
 
 const SortableItem = SortableElement(({ value }) =>
-    <li className={styles.sortableListLi}>{value}</li>
+  <li className={styles.sortableListLi}>{value}</li>
 );
 const SortableList = SortableContainer(({ items, pressDelay }) => {
     return (
-        <ul className={styles.sortableList}>
-            {items.length > 0 ? items.map((value, index) => (
-                <SortableItem key={`item-${index}`} index={index} value={value}  />
-            )) : null}
-        </ul>
+      <ul className={styles.sortableList}>
+          {items.length > 0 ? items.map((value, index) => (
+            <SortableItem key={`item-${index}`} index={index} value={value} />
+          )) : null}
+      </ul>
     );
 });
 
@@ -39,18 +39,21 @@ export default class PageView extends Component {
 
     static defaultProps = {
         // 关闭编辑
-        disabled:false,
-        showViewSaveBtn:true,
-        options:{},
-        body:[],
-        backgroundColor:'#f8f8f8',
-        onViewItemClick:()=>{},
-        onHeaderClick:()=>{},
-        setPage:()=>{},
-        style:{},
-        empty:<div/>,
-        toolListData:[]
-    }
+        disabled: false,
+        showViewSaveBtn: true,
+        options: {},
+        body: [],
+        backgroundColor: "#f8f8f8",
+        onViewItemClick: () => {
+        },
+        onHeaderClick: () => {
+        },
+        setPage: () => {
+        },
+        style: {},
+        empty: <div />,
+        toolListData: []
+    };
 
     state = {
         hoverShow: -2,
@@ -64,7 +67,7 @@ export default class PageView extends Component {
 
     // param: SortEndType, event: EventType
     onSortEnd = (param, event) => {
-        if(this.props.disabled) return ;
+        if (this.props.disabled) return;
         // 防止两次执行
         if (this.state.actioning === false) {
             const { body, setPage } = this.props;
@@ -82,7 +85,7 @@ export default class PageView extends Component {
     };
     onSortStart = (param, event) => {
         this.props.onViewItemClick();
-        if(this.props.disabled) return ;
+        if (this.props.disabled) return;
         const text = event.target.innerHTML;
         if (text === "删除" || text === "上移" || text === "下移") {
             this.setState({
@@ -178,74 +181,75 @@ export default class PageView extends Component {
 
     render() {
         const { hoverShow } = this.state;
-        const { body, options, onHeaderClick, backgroundColor, children,showViewSaveBtn,style ,empty} = this.props;
+        const { body, options, onHeaderClick, backgroundColor, children, showViewSaveBtn, style, empty } = this.props;
 
         const items = Array.isArray(body) && body.length > 0 ? body.map((item, index) => (
-            <div
-                key={index}
-                className={`${styles.phoneItem} ${options.index === index ? styles.phoneItemActive : ""} ${this.props.disabled ? "disabled" : ""}`}
-                onMouseEnter={() => {
-                    if(this.props.disabled) return ;
-                    if (index !== options.index) {
-                        this.setState({ hoverShow: index });
-                    }
-                }}
-                onMouseLeave={() => {
-                    if(this.props.disabled) return ;
-                    this.setState({ hoverShow: -2 });
-                }}
-            >
-                {
-                    this.returnContain({ type: item.type, title: item.title }, index)
+          <div
+            key={index}
+            className={`${styles.phoneItem} ${options.index === index ? styles.phoneItemActive : ""} ${this.props.disabled ? "disabled" : ""}`}
+            onMouseEnter={() => {
+                if (this.props.disabled) return;
+                if (index !== options.index) {
+                    this.setState({ hoverShow: index });
                 }
-                {
-                    (options.index === index) || (hoverShow === index && hoverShow !== options.index) ?
-                        <div
-                            className={styles.operation}
-                            onClick={(e) => {
-                                e.stopPropagation();
-                            }}
-                        >
-                            {
-                                index > 0 ? <a data-index={index}>上移</a> : null
-                            }
-                            {
-                                index < body.length - 1 ? <a data-index={index}>下移</a> : null
-                            }
-                            <a data-index={index}>编辑</a>
-                            <a data-index={index}>删除</a>
-                        </div>
-                        : null
-                }
-            </div>
+            }}
+            onMouseLeave={() => {
+                if (this.props.disabled) return;
+                this.setState({ hoverShow: -2 });
+            }}
+          >
+              {
+                  this.returnContain({ type: item.type, title: item.title }, index)
+              }
+              {
+                  (options.index === index) || (hoverShow === index && hoverShow !== options.index) ?
+                    <div
+                      className={styles.operation}
+                      onClick={(e) => {
+                          e.stopPropagation();
+                      }}
+                    >
+                        {
+                            index > 0 ? <a data-index={index}>上移</a> : null
+                        }
+                        {
+                            index < body.length - 1 ? <a data-index={index}>下移</a> : null
+                        }
+                        <a data-index={index}>编辑</a>
+                        <a data-index={index}>删除</a>
+                    </div>
+                    : null
+              }
+          </div>
         )) : [];
         return (
-            <div className={styles.dragPhoneWarp} style={style}>
-                {showViewSaveBtn && <div className={styles.dragPhoneHeader}>
-                    <div onClick={onHeaderClick}>
-                        <Icon type="edit" /><a style={{ marginLeft: 15 }}>编辑页面基本信息</a>
-                    </div>
-                    {children}
-                </div>}
-                <Scrollbar style={{ width: "100%", height: "100%", minHeight: 600 }} noScrollX={true}
-                           wrapperRenderer={
-                               props => {
-                                   const { elementRef, ...restProps } = props;
-                                   return <div {...restProps}
-                                               className="pageDiyViewScrollWrapper"
-                                               ref={elementRef} />;
-                               }
-                           }
-                >
-                    <div
-                        className={styles.dragPhoneContain}
-                        style={backgroundColor ? { backgroundColor } : { backgroundColor: "#FFFFFF" }}
-                    >
-                        {!Array.isArray(body) || body.length === 0 ? empty : <SortableList items={items} onSortEnd={this.onSortEnd} onSortStart={this.onSortStart} />}
-                    </div>
+          <div className={styles.dragPhoneWarp} style={style}>
+              {showViewSaveBtn && <div className={styles.dragPhoneHeader}>
+                  <div onClick={onHeaderClick}>
+                      <EditOutlined /><a style={{ marginLeft: 15 }}>编辑页面基本信息</a>
+                  </div>
+                  {children}
+              </div>}
+              <Scrollbar style={{ width: "100%", height: "100%", minHeight: 600 }} noScrollX={true}
+                         wrapperRenderer={
+                             props => {
+                                 const { elementRef, ...restProps } = props;
+                                 return <div {...restProps}
+                                             className="pageDiyViewScrollWrapper"
+                                             ref={elementRef} />;
+                             }
+                         }
+              >
+                  <div
+                    className={styles.dragPhoneContain}
+                    style={backgroundColor ? { backgroundColor } : { backgroundColor: "#FFFFFF" }}
+                  >
+                      {!Array.isArray(body) || body.length === 0 ? empty :
+                        <SortableList items={items} onSortEnd={this.onSortEnd} onSortStart={this.onSortStart} />}
+                  </div>
 
-                </Scrollbar>
-            </div>
+              </Scrollbar>
+          </div>
         );
     }
 

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Row, Col, Button, Input, Rate, Switch, Pagination, Spin, Card, Image, Avatar, Space } from "antd";
 import styles from "./evaluate.css";
 import { View } from "@/components/flexView";
-import moment from "moment";
+import moment from "dayjs";
 import { connect } from "umi";
 import GoodsApi from "@/services/goods";
 import PageList from "@/components/pageList";

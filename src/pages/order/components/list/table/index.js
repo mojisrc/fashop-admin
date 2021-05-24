@@ -4,7 +4,7 @@ import * as ReactDOM from "react-dom";
 import styles from "./index.css";
 import { View } from "@/components/flexView";
 import { connect } from "umi";
-import moment from "moment/moment";
+import moment from "dayjs";
 import Image from "@/components/image/index";
 import Query from "@/utils/query";
 import EditAddress from "../editAddress/index";

@@ -4,7 +4,7 @@ import styles from "./index.css";
 import { View } from "@/components/flexView";
 import { connect } from "umi";
 import Image from "@/components/image/index";
-import moment from "moment";
+import moment from "dayjs";
 import Query from "@/utils/query";
 import GoodsApi from "@/services/goods";
 import { history as router } from "umi";

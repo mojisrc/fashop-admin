@@ -1,4 +1,4 @@
-import { Icon } from '@ant-design/compatible';
+import PlusOutlined from "@ant-design/icons/PlusOutlined";
 import React, { Component, Fragment } from "react";
 import {  Upload, message, Modal } from "antd";
 import { View } from "@/components/flexView";
@@ -86,7 +86,7 @@ export default class UploadImage extends Component {
         const { url } = this.props;
         return (
             !url ? <View className={styles.uploadBtn}>
-                <Icon type='plus' />
+                <PlusOutlined />
                 <p>Upload</p>
             </View> : null
         );
@@ -131,7 +131,7 @@ export class UploadGroupImage extends Component {
                             }}
                             style={{ marginBottom: 15 }}
                         >
-                            <Icon type='plus' />
+                            <PlusOutlined />
                             <span style={{ lineHeight: 1.5 }}>上传</span>
                         </View>
                     }

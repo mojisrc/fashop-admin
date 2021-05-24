@@ -4,7 +4,7 @@ import PageHeaderWrapper from "@/components/pageHeaderWrapper";
 import { Card,Table } from "antd";
 import PageList from "@/components/pageList";
 import { history as router } from "umi";
-import moment from "moment";
+import moment from "dayjs";
 
 @connect(({ refund, loading }) => ({
     refundList: refund.list.result,

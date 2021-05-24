@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "umi";
 import { Button, Table, Switch, message, Popconfirm } from "antd";
-import moment from "moment";
+import moment from "dayjs";
 import { View } from "@/components/flexView";
 import styles from "./list.css";
 import { history as router } from "umi";

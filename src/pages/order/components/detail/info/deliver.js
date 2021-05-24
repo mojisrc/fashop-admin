@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import styles from "./index.css";
 import { View } from "@/components/flexView";
 import InfoRow from "@/components/public/info/infoRow";
-import moment from "moment";
+import moment from "dayjs";
 import { history as router } from "umi";
 
 export default class DeliverInfo extends Component {

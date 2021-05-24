@@ -1,14 +1,15 @@
-import { Icon } from '@ant-design/compatible';
-import { Form } from '@ant-design/compatible';
+import { Form } from "@ant-design/compatible";
 import React, { Component, Fragment } from "react";
 import { connect } from "umi";
 import { View } from "@/components/flexView";
 import styles from "./index.css";
-import { Modal, Input, Select, Button,  Tag, Popover, Checkbox, message,  InputNumber } from "antd";
+import { Modal, Input, Select, Button, Tag, Popover, Checkbox, message, InputNumber } from "antd";
 import { ThemeStyle } from "@/utils/style";
 import SkuTable from "./skuTable";
 import GoodsApi from "@/services/goods";
 import SpecManagement from "@/pages/goods/components/specManagement";
+import PlusOutlined from "@ant-design/icons/PlusOutlined";
+import CloseCircleOutlined from "@ant-design/icons/CloseCircleOutlined";
 
 const confirm = Modal.confirm;
 const Option = Select.Option;
@@ -122,7 +123,7 @@ export default class Sku extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        if (this.state.refresh){
+        if (this.state.refresh) {
             const skus = nextProps.value || this.defaultValue;
             let specs = [];
             let multiSkus = false;
@@ -160,7 +161,7 @@ export default class Sku extends Component {
                 multiSkus,
                 specs,
                 refresh: false
-            })
+            });
         }
     }
 
@@ -169,168 +170,163 @@ export default class Sku extends Component {
         const { specRowRightCloseBtnHoverIndex, specs, lastSpecValuesPopoverClick, multiSkus } = this.state;
         const skus = this.state.value;
         return (
-            <Fragment>
-                {multiSkus === false && this.renderSingleSku()}
-                <FormItem
-                    {...formItemLayout}
-                    label='商品型号'
-                >
-                    {multiSkus === false ?
-                        <Button
-                            type="dashed"
-                            onClick={() => {
-                                this.setState({
-                                    specs: [
-                                        {
-                                            id: 0,
-                                            name: "",
-                                            values: []
-                                        }
-                                    ],
-                                    multiSkus: true
-                                });
-                            }}
-                            style={{ width: 150 }}
-                        >
-                            <Icon type="plus" /> 添加型号分类
-                        </Button>
-                        : <View className={styles.spec}>
-                            <View className={styles.itemWarp}>
-                                {
-                                    specs.length > 0 && specs.map((spec, index) => (
-                                        <View
-                                            key={spec.id}
-                                            className={styles.item}
-                                            onMouseEnter={() => {
-                                                this.setState({ specRowRightCloseBtnHoverIndex: index });
-                                            }}
-                                            onMouseLeave={() => {
-                                                this.setState({ specRowRightCloseBtnHoverIndex: -1 });
-                                            }}
-                                        >
-                                            <View className={styles.itemTop}>
-                                                <Select
-                                                    placeholder="请选择型号分类"
-                                                    value={spec.id > 0 ? `${spec.id}` : []}
-                                                    style={{ width: "30%", top: "0" }}
-                                                    onChange={(specId) => {
-                                                        if (specId === "customSpecShow") {
-                                                            this.customSpecShow();
-                                                        } else {
-                                                            this.onSpecSelectChange(specId, index);
-                                                        }
-                                                    }}
-                                                >
-                                                    {Array.isArray(specList) && specList.length > 0 && specList.map((item) => (
-                                                        <Option key={item.id} disabled={!!specs.find((spec) => {
-                                                            return item.id === spec.id;
-                                                        })}>{item.name}</Option>))}
-                                                    <Option key={"customSpecShow"}><Icon type="plus" /> 自定义</Option>
-                                                </Select>
-                                                {
-                                                    specRowRightCloseBtnHoverIndex === index ?
-                                                        <View
-                                                            onClick={() => {
-                                                                confirm({
-                                                                    title: "确定要删除吗？",
-                                                                    okText: "删除",
-                                                                    okType: "danger",
-                                                                    cancelText: "取消",
-                                                                    onOk: () => {
-                                                                        let _specs = [...specs];
-                                                                        _specs.splice(index, 1);
-                                                                        const __multiSkus = _specs.length !== 0
-                                                                        const data = !__multiSkus ? this.defaultValue : this.mergeSkus(_specs);
-                                                                        this.setState({
-                                                                            specs: _specs,
-                                                                            multiSkus: __multiSkus,
-                                                                            value: data
-                                                                        }, () => {
-                                                                            let fieldsValue = {};
-                                                                            fieldsValue[this.state.id] = data;
-                                                                            this.props.form.setFieldsValue(fieldsValue);
-                                                                            if (data.length === 0) {
-                                                                                this.initGoodsSpecList();
-                                                                            }
-                                                                        });
-                                                                    }
-                                                                });
-                                                            }}
-                                                        >
-                                                            <Icon
-                                                                type="close-circle"
-                                                                style={{
-                                                                    fontSize: "16px"
-                                                                }}
-                                                            />
-                                                        </View> : null
-                                                }
-                                            </View>
-                                            <View className={styles.tagsWarp}>
-                                                {
-                                                    spec.values.map((value) => (
-                                                        <Tag
-                                                            key={`spec_${spec.id}_value_${value.id}`}
-                                                            closable
-                                                            onClose={() => {
-                                                                const _specs = [...specs];
-                                                                _specs[index].values = _specs[index].values.filter((filterItem) => {
-                                                                    return filterItem.id !== value.id;
-                                                                });
-                                                                const skuValue = this.mergeSkus(_specs);
-                                                                onChange(this.mergeSkus(skuValue));
-                                                                this.setState({
-                                                                    value: skuValue
-                                                                });
-                                                            }}
-                                                        >
-                                                            {value.name}
-                                                        </Tag>
-                                                    ))
-                                                }
-                                                {
-                                                    spec.id > 0 ?
-                                                        <Popover
-                                                            content={this.renderSpecValuePopoverContent(spec, index)}
-                                                            trigger="click"
-                                                            placement="bottomLeft"
-                                                            visible={index === lastSpecValuesPopoverClick.index ? lastSpecValuesPopoverClick.visible : false}
-                                                        >
-                                                            <a style={{ color: ThemeStyle.themeColor }} onClick={() => {
-                                                                this.setState({
-                                                                    lastSpecValuesPopoverClick: {
-                                                                        index,
-                                                                        visible: true
-                                                                    }
-                                                                });
-                                                            }}> + 添加型号 </a>
-                                                        </Popover> : null
-                                                }
-                                            </View>
-                                        </View>
-                                    ))
-                                }
-                            </View>
+          <Fragment>
+              {multiSkus === false && this.renderSingleSku()}
+              <FormItem
+                {...formItemLayout}
+                label='商品型号'
+              >
+                  {multiSkus === false ?
+                    <Button
+                      type="dashed"
+                      onClick={() => {
+                          this.setState({
+                              specs: [
+                                  {
+                                      id: 0,
+                                      name: "",
+                                      values: []
+                                  }
+                              ],
+                              multiSkus: true
+                          });
+                      }}
+                      style={{ width: 150 }}
+                    >
+                        <PlusOutlined /> 添加型号分类
+                    </Button>
+                    : <View className={styles.spec}>
+                        <View className={styles.itemWarp}>
                             {
-                                multiSkus === true ? <View
-                                    className={styles.buttonWarp}>{this.addSpecItemButtom()}</View> : this.addSpecItemButtom()
+                                specs.length > 0 && specs.map((spec, index) => (
+                                  <View
+                                    key={spec.id}
+                                    className={styles.item}
+                                    onMouseEnter={() => {
+                                        this.setState({ specRowRightCloseBtnHoverIndex: index });
+                                    }}
+                                    onMouseLeave={() => {
+                                        this.setState({ specRowRightCloseBtnHoverIndex: -1 });
+                                    }}
+                                  >
+                                      <View className={styles.itemTop}>
+                                          <Select
+                                            placeholder="请选择型号分类"
+                                            value={spec.id > 0 ? `${spec.id}` : []}
+                                            style={{ width: "30%", top: "0" }}
+                                            onChange={(specId) => {
+                                                if (specId === "customSpecShow") {
+                                                    this.customSpecShow();
+                                                } else {
+                                                    this.onSpecSelectChange(specId, index);
+                                                }
+                                            }}
+                                          >
+                                              {Array.isArray(specList) && specList.length > 0 && specList.map((item) => (
+                                                <Option key={item.id} disabled={!!specs.find((spec) => {
+                                                    return item.id === spec.id;
+                                                })}>{item.name}</Option>))}
+                                              <Option key={"customSpecShow"}><PlusOutlined /> 自定义</Option>
+                                          </Select>
+                                          {
+                                              specRowRightCloseBtnHoverIndex === index ?
+                                                <View
+                                                  onClick={() => {
+                                                      confirm({
+                                                          title: "确定要删除吗？",
+                                                          okText: "删除",
+                                                          okType: "danger",
+                                                          cancelText: "取消",
+                                                          onOk: () => {
+                                                              let _specs = [...specs];
+                                                              _specs.splice(index, 1);
+                                                              const __multiSkus = _specs.length !== 0;
+                                                              const data = !__multiSkus ? this.defaultValue : this.mergeSkus(_specs);
+                                                              this.setState({
+                                                                  specs: _specs,
+                                                                  multiSkus: __multiSkus,
+                                                                  value: data
+                                                              }, () => {
+                                                                  let fieldsValue = {};
+                                                                  fieldsValue[this.state.id] = data;
+                                                                  this.props.form.setFieldsValue(fieldsValue);
+                                                                  if (data.length === 0) {
+                                                                      this.initGoodsSpecList();
+                                                                  }
+                                                              });
+                                                          }
+                                                      });
+                                                  }}
+                                                >
+                                                    <CloseCircleOutlined />
+                                                </View> : null
+                                          }
+                                      </View>
+                                      <View className={styles.tagsWarp}>
+                                          {
+                                              spec.values.map((value) => (
+                                                <Tag
+                                                  key={`spec_${spec.id}_value_${value.id}`}
+                                                  closable
+                                                  onClose={() => {
+                                                      const _specs = [...specs];
+                                                      _specs[index].values = _specs[index].values.filter((filterItem) => {
+                                                          return filterItem.id !== value.id;
+                                                      });
+                                                      const skuValue = this.mergeSkus(_specs);
+                                                      onChange(this.mergeSkus(skuValue));
+                                                      this.setState({
+                                                          value: skuValue
+                                                      });
+                                                  }}
+                                                >
+                                                    {value.name}
+                                                </Tag>
+                                              ))
+                                          }
+                                          {
+                                              spec.id > 0 ?
+                                                <Popover
+                                                  content={this.renderSpecValuePopoverContent(spec, index)}
+                                                  trigger="click"
+                                                  placement="bottomLeft"
+                                                  visible={index === lastSpecValuesPopoverClick.index ? lastSpecValuesPopoverClick.visible : false}
+                                                >
+                                                    <a style={{ color: ThemeStyle.themeColor }} onClick={() => {
+                                                        this.setState({
+                                                            lastSpecValuesPopoverClick: {
+                                                                index,
+                                                                visible: true
+                                                            }
+                                                        });
+                                                    }}> + 添加型号 </a>
+                                                </Popover> : null
+                                          }
+                                      </View>
+                                  </View>
+                                ))
                             }
-                            {multiSkus === true && <SkuTable skus={skus} specs={specs} onChange={(e) => {
-                                this.setState({
-                                    value: e
-                                }, () => {
-                                    onChange(e);
-                                });
-                            }} />}
-                            {this.customSpecModal()}
-                            <SpecManagement
-                                ref={(e) => {
-                                    this.specManagement = e;
-                                }}
-                            />
-                        </View>}
-                </FormItem>
-            </Fragment>
+                        </View>
+                        {
+                            multiSkus === true ? <View
+                              className={styles.buttonWarp}>{this.addSpecItemButtom()}</View> : this.addSpecItemButtom()
+                        }
+                        {multiSkus === true && <SkuTable skus={skus} specs={specs} onChange={(e) => {
+                            this.setState({
+                                value: e
+                            }, () => {
+                                onChange(e);
+                            });
+                        }} />}
+                        {this.customSpecModal()}
+                        <SpecManagement
+                          ref={(e) => {
+                              this.specManagement = e;
+                          }}
+                        />
+                    </View>}
+              </FormItem>
+          </Fragment>
         );
     }
 
@@ -339,59 +335,59 @@ export default class Sku extends Component {
 
         return <Fragment>
             <FormItem
-                {...formItemLayout}
-                label='商品价格'
-                required={true}
+              {...formItemLayout}
+              label='商品价格'
+              required={true}
             >
                 <InputNumber
-                    style={{
-                        width: 150
-                    }}
-                    precision={2}
-                    formatter={value => `${value}`}
-                    min={0}
-                    value={skus[0].price}
-                    onChange={(e) => {
-                        this.setSkus([{
-                            ...skus[0],
-                            price: e
-                        }]);
-                    }}
+                  style={{
+                      width: 150
+                  }}
+                  precision={2}
+                  formatter={value => `${value}`}
+                  min={0}
+                  value={skus[0].price}
+                  onChange={(e) => {
+                      this.setSkus([{
+                          ...skus[0],
+                          price: e
+                      }]);
+                  }}
                 /> 元
             </FormItem>
             <FormItem
-                {...formItemLayout}
-                label='库存'
-                required={true}
+              {...formItemLayout}
+              label='库存'
+              required={true}
             >
                 <InputNumber
-                    style={{ width: 150 }}
-                    precision={0}
-                    formatter={value => `${value}`}
-                    min={0}
-                    value={skus[0].stock}
-                    onChange={(e) => {
-                        this.setSkus([{
-                            ...skus[0],
-                            stock: e
-                        }]);
-                    }}
+                  style={{ width: 150 }}
+                  precision={0}
+                  formatter={value => `${value}`}
+                  min={0}
+                  value={skus[0].stock}
+                  onChange={(e) => {
+                      this.setSkus([{
+                          ...skus[0],
+                          stock: e
+                      }]);
+                  }}
                 /> 件
             </FormItem>
             <FormItem
-                {...formItemLayout}
-                label='商品编码'
+              {...formItemLayout}
+              label='商品编码'
             >
                 <Input
-                    style={{ width: 440 }}
-                    placeholder="选填，用于商家系统对接"
-                    value={skus[0].code}
-                    onChange={(e) => {
-                        this.setSkus([{
-                            ...skus[0],
-                            code: e.target.value
-                        }]);
-                    }}
+                  style={{ width: 440 }}
+                  placeholder="选填，用于商家系统对接"
+                  value={skus[0].code}
+                  onChange={(e) => {
+                      this.setSkus([{
+                          ...skus[0],
+                          code: e.target.value
+                      }]);
+                  }}
                 />
             </FormItem>
         </Fragment>;
@@ -458,152 +454,152 @@ export default class Sku extends Component {
         const useModelDataValue = useModelData.values.filter((e) => !cv.includes(e.id));
         return (
 
-            <View className={styles.valuesPopoverWarp}>
-                {useModelDataValue.length > 0 ? <View className={styles.valuesPopoverTop}>
-                    {
-                        useModelDataValue.map((tagsItem) => (
-                            <View
-                                key={tagsItem.id}
-                                className={styles.valuesPopoverTopItem}
+          <View className={styles.valuesPopoverWarp}>
+              {useModelDataValue.length > 0 ? <View className={styles.valuesPopoverTop}>
+                  {
+                      useModelDataValue.map((tagsItem) => (
+                        <View
+                          key={tagsItem.id}
+                          className={styles.valuesPopoverTopItem}
+                        >
+                            <Checkbox
+                              checked={specValueIds.includes(tagsItem.id)}
+                              onChange={(e) => {
+                                  if (e.target.checked) {
+                                      this.setState({ specValueIds: [...specValueIds, tagsItem.id] });
+                                  } else {
+                                      const _specValueIds = [...specValueIds];
+                                      const _index = _specValueIds.findIndex((id) => id === tagsItem.id);
+                                      _specValueIds.splice(_index, 1);
+                                      this.setState({ specValueIds: _specValueIds });
+                                  }
+                              }}
                             >
-                                <Checkbox
-                                    checked={specValueIds.includes(tagsItem.id)}
-                                    onChange={(e) => {
-                                        if (e.target.checked) {
-                                            this.setState({ specValueIds: [...specValueIds, tagsItem.id] });
-                                        } else {
-                                            const _specValueIds = [...specValueIds];
-                                            const _index = _specValueIds.findIndex((id) => id === tagsItem.id);
-                                            _specValueIds.splice(_index, 1);
-                                            this.setState({ specValueIds: _specValueIds });
-                                        }
-                                    }}
+                                <Tag
+                                  closable
+                                  onClose={(e) => {
+                                      e.preventDefault();
+                                      confirm({
+                                          title: "确定要删除吗",
+                                          okText: "删除",
+                                          okType: "danger",
+                                          cancelText: "取消",
+                                          onOk: () => {
+                                              this.delSpecValue({ id: tagsItem.id });
+                                          }
+                                      });
+                                  }}
                                 >
-                                    <Tag
-                                        closable
-                                        onClose={(e) => {
-                                            e.preventDefault();
-                                            confirm({
-                                                title: "确定要删除吗",
-                                                okText: "删除",
-                                                okType: "danger",
-                                                cancelText: "取消",
-                                                onOk: () => {
-                                                    this.delSpecValue({ id: tagsItem.id });
-                                                }
-                                            });
-                                        }}
-                                    >
-                                        {tagsItem.name}
-                                    </Tag>
-                                </Checkbox>
-                            </View>
-                        ))
-                    }
-                </View> : null}
-                <View className={styles.valuesPopoverMid}>
-                    {
-                        addSpecComVisible ?
-                            <View className={styles.valuesPopoverMid} style={{ padding: "0" }}>
-                                <Input
-                                    size={"small"}
-                                    placeholder='输入型号'
-                                    ref={(e) => {
-                                        if (e) {
-                                            this.AddSpecInput = e;
-                                        }
-                                    }}
-                                />
-                                <Button
-                                    type="primary"
-                                    size={"small"}
-                                    onClick={() => {
-                                        const value = this.AddSpecInput.input.value;
-                                        if (value) {
-                                            this.addSpecValue({
-                                                id: activeItem.id,
-                                                name: value
-                                            });
-                                        } else {
-                                            message.warn("请输入型号!");
-                                        }
-                                    }}
-                                >添加</Button>
-                                <Button
-                                    size={"small"}
-                                    onClick={() => {
-                                        this.setState({ addSpecComVisible: false });
-                                    }}
-                                >取消</Button>
-                            </View> :
-                            <a style={{ color: ThemeStyle.themeColor }}
-                               onClick={() => this.setState({ addSpecComVisible: true })}>添加型号</a>
-                    }
-                </View>
-                <View className={styles.valuesPopoverBot}>
-                    <Button
-                        onClick={() => {
-                            this.setState({ lastSpecValuesPopoverClick: { index, visible: false } });
-                        }}
-                    >
-                        取消
-                    </Button>
-                    <Button
-                        type='primary'
-                        onClick={() => {
-                            this.setState({ lastSpecValuesPopoverClick: { index, visible: false } });
-                            const _specs = [...specs];
-                            const specIndex = specList.findIndex((spec) => spec.id === activeItem.id);
-                            let specVaues = [];
-                            for (let i = 0; i < specValueIds.length; i++) {
-                                let findSpecValue = specList[specIndex].values.find((value) => value.id === specValueIds[i]);
-                                if (findSpecValue) {
-                                    specVaues.push({
-                                        id: findSpecValue.id,
-                                        name: findSpecValue.name
-                                    });
-                                }
+                                    {tagsItem.name}
+                                </Tag>
+                            </Checkbox>
+                        </View>
+                      ))
+                  }
+              </View> : null}
+              <View className={styles.valuesPopoverMid}>
+                  {
+                      addSpecComVisible ?
+                        <View className={styles.valuesPopoverMid} style={{ padding: "0" }}>
+                            <Input
+                              size={"small"}
+                              placeholder='输入型号'
+                              ref={(e) => {
+                                  if (e) {
+                                      this.AddSpecInput = e;
+                                  }
+                              }}
+                            />
+                            <Button
+                              type="primary"
+                              size={"small"}
+                              onClick={() => {
+                                  const value = this.AddSpecInput.input.value;
+                                  if (value) {
+                                      this.addSpecValue({
+                                          id: activeItem.id,
+                                          name: value
+                                      });
+                                  } else {
+                                      message.warn("请输入型号!");
+                                  }
+                              }}
+                            >添加</Button>
+                            <Button
+                              size={"small"}
+                              onClick={() => {
+                                  this.setState({ addSpecComVisible: false });
+                              }}
+                            >取消</Button>
+                        </View> :
+                        <a style={{ color: ThemeStyle.themeColor }}
+                           onClick={() => this.setState({ addSpecComVisible: true })}>添加型号</a>
+                  }
+              </View>
+              <View className={styles.valuesPopoverBot}>
+                  <Button
+                    onClick={() => {
+                        this.setState({ lastSpecValuesPopoverClick: { index, visible: false } });
+                    }}
+                  >
+                      取消
+                  </Button>
+                  <Button
+                    type='primary'
+                    onClick={() => {
+                        this.setState({ lastSpecValuesPopoverClick: { index, visible: false } });
+                        const _specs = [...specs];
+                        const specIndex = specList.findIndex((spec) => spec.id === activeItem.id);
+                        let specVaues = [];
+                        for (let i = 0; i < specValueIds.length; i++) {
+                            let findSpecValue = specList[specIndex].values.find((value) => value.id === specValueIds[i]);
+                            if (findSpecValue) {
+                                specVaues.push({
+                                    id: findSpecValue.id,
+                                    name: findSpecValue.name
+                                });
                             }
-                            _specs[index].values = [...specVaues, ..._specs[index].values];
-                            const data = this.mergeSkus(_specs);
-                            this.setState({ specValueIds: [], value: data }, () => {
-                                onChange(data);
-                            });
-                        }}
-                    >
-                        确定
-                    </Button>
-                </View>
-            </View>
+                        }
+                        _specs[index].values = [...specVaues, ..._specs[index].values];
+                        const data = this.mergeSkus(_specs);
+                        this.setState({ specValueIds: [], value: data }, () => {
+                            onChange(data);
+                        });
+                    }}
+                  >
+                      确定
+                  </Button>
+              </View>
+          </View>
         );
     }
 
     addSpecItemButtom() {
         const { specs } = this.state;
         return (
-            <Button
-                type="dashed"
-                disabled={specs[specs.length - 1].id <= 0}
-                onClick={() => {
-                    if (specs.length === 3) {
-                        message.warning("最多添加3个型号");
-                    } else {
-                        this.setState({
-                            specs: [
-                                ...specs,
-                                {
-                                    id: 0,
-                                    name: "",
-                                    values: []
-                                }
-                            ]
-                        });
-                    }
-                }}
-                style={{ width: "150px", marginTop: "15px" }}
-            >
-                <Icon type="plus" /> 添加型号分类
-            </Button>
+          <Button
+            type="dashed"
+            disabled={specs[specs.length - 1].id <= 0}
+            onClick={() => {
+                if (specs.length === 3) {
+                    message.warning("最多添加3个型号");
+                } else {
+                    this.setState({
+                        specs: [
+                            ...specs,
+                            {
+                                id: 0,
+                                name: "",
+                                values: []
+                            }
+                        ]
+                    });
+                }
+            }}
+            style={{ width: "150px", marginTop: "15px" }}
+          >
+              <PlusOutlined /> 添加型号分类
+          </Button>
         );
 
 
@@ -631,40 +627,40 @@ export default class Sku extends Component {
 
     customSpecModal() {
         return (
-            <Modal
-                style={{ top: "40%" }}
-                visible={this.state.customSpecSortShow}
-                title="自定义型号分类"
-                onOk={this.customSpecModalOk}
-                onCancel={this.customSpecModalCancel}
-                footer={[
-                    <Button
-                        key="back"
-                        size="large"
-                        onClick={this.customSpecModalCancel}
-                    >
-                        取消
-                    </Button>,
-                    <Button
-                        key="submit"
-                        type="primary"
-                        size="large"
-                        loading={this.state.loading}
-                        onClick={this.customSpecModalOk}
-                    >
-                        确定
-                    </Button>
-                ]}
-            >
-                <p>请输入型号分类名称：</p>
-                <Input
-                    ref={(e) => {
-                        if (e) {
-                            this.AddSpecValueInput = e;
-                        }
-                    }}
-                />
-            </Modal>
+          <Modal
+            style={{ top: "40%" }}
+            visible={this.state.customSpecSortShow}
+            title="自定义型号分类"
+            onOk={this.customSpecModalOk}
+            onCancel={this.customSpecModalCancel}
+            footer={[
+                <Button
+                  key="back"
+                  size="large"
+                  onClick={this.customSpecModalCancel}
+                >
+                    取消
+                </Button>,
+                <Button
+                  key="submit"
+                  type="primary"
+                  size="large"
+                  loading={this.state.loading}
+                  onClick={this.customSpecModalOk}
+                >
+                    确定
+                </Button>
+            ]}
+          >
+              <p>请输入型号分类名称：</p>
+              <Input
+                ref={(e) => {
+                    if (e) {
+                        this.AddSpecValueInput = e;
+                    }
+                }}
+              />
+          </Modal>
         );
     }
 

@@ -3,7 +3,7 @@ import { Table, Button, Tag, Card } from "antd";
 import styles from "./index.css";
 import { View } from "@/components/flexView";
 import { connect } from "umi";
-import moment from "moment/moment";
+import moment from "dayjs";
 import { Modal } from "antd";
 import { history as router } from "umi";
 import PageList from "@/components/pageList";

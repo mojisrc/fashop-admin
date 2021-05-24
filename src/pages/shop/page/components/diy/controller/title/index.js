@@ -1,10 +1,7 @@
-import { Icon } from '@ant-design/compatible';
 import { Form } from '@ant-design/compatible';
 import React, { Component } from "react";
 import {  Input, Radio } from "antd";
 import ColorPicker from "@/components/public/colorPicker";
-import { View } from "@/components/flexView";
-import UploadImage from "@/components/uploadImage/index";
 import { formItemLayout } from "@/pages/shop/page/components/diy/formLayout";
 import ImageSpace from "@/components/uploadImage/imageSpace";
 

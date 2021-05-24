@@ -1,6 +1,5 @@
-import { Icon } from '@ant-design/compatible';
 import React, { Component } from "react";
-
+import RightOutlined from "@ant-design/icons/RightOutlined";
 import styles from "./index.css";
 //
 // type Props = {
@@ -19,21 +18,21 @@ import styles from "./index.css";
 
 export default class Index extends Component {
     render() {
-        const { data } = this.props
+        const { data } = this.props;
         return (
-            <div className={styles.textNavPhoneWarp}>
-                {
-                    data.map((listItem, index) => {
-                        return <div
-                            className={styles.textNavPhoneItem}
-                            key={index}
-                        >
-                            <p>{listItem.title}</p>
-                            <Icon type='right' />
-                        </div>
-                    })
-                }
-            </div>
-        )
+          <div className={styles.textNavPhoneWarp}>
+              {
+                  data.map((listItem, index) => {
+                      return <div
+                        className={styles.textNavPhoneItem}
+                        key={index}
+                      >
+                          <p>{listItem.title}</p>
+                          <RightOutlined />
+                      </div>;
+                  })
+              }
+          </div>
+        );
     }
 }

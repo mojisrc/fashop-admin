@@ -1,11 +1,11 @@
-import { Icon } from '@ant-design/compatible';
-import { Form } from '@ant-design/compatible';
-import {   Tabs, Slider, Input } from "antd";
+import { Form } from "@ant-design/compatible";
+import { Tabs, Slider, Input } from "antd";
 import styles from "./groupGoods.css";
 import ColorPicker from "@/components/public/colorPicker";
 import UploadImage from "@/components/uploadImage";
 import { BaseController, formItemLayout, maxWidth, maxHeight } from "./baseController";
 import { connect } from "umi";
+import PlusOutlined from "@ant-design/icons/PlusOutlined";
 
 const TabPane = Tabs.TabPane;
 const FormItem = Form.Item;
@@ -38,32 +38,32 @@ class GOO extends BaseController {
                 <TabPane tab="背景" key="background">
                     <FormItem {...formItemLayout} label="背景色">
                         <ColorPicker
-                            color={types["background"].options.backgroundColor}
-                            colorChange={(color) => {
-                                const { _index } = this.getTypeBody("background");
-                                let _body = [...body];
-                                _body[_index].options.backgroundColor = color.hex;
-                                this.setState({ body: _body });
-                            }}
+                          color={types["background"].options.backgroundColor}
+                          colorChange={(color) => {
+                              const { _index } = this.getTypeBody("background");
+                              let _body = [...body];
+                              _body[_index].options.backgroundColor = color.hex;
+                              this.setState({ body: _body });
+                          }}
                         />
                     </FormItem>
                     <FormItem {...formItemLayout} label="背景图">
                         <UploadImage
-                            onChange={(e) => {
-                                const { _index } = this.getTypeBody("background");
-                                let _body = [...body];
-                                _body[_index].options.backgroundImage = e;
-                                this.setState({ body: _body });
-                            }}
-                            is_save={0}
+                          onChange={(e) => {
+                              const { _index } = this.getTypeBody("background");
+                              let _body = [...body];
+                              _body[_index].options.backgroundImage = e;
+                              this.setState({ body: _body });
+                          }}
+                          is_save={0}
                         >
                             <div className={styles.uploadBtn}>
                                 {types["background"].options.backgroundImage.length ?
-                                    <img
-                                        src={types["background"].options.backgroundImage}
-                                        alt=''
-                                        style={{ backgroundColor: types["background"].options.backgroundColor }}
-                                    /> : <Icon type='plus' className={styles.uploadIcon} />}
+                                  <img
+                                    src={types["background"].options.backgroundImage}
+                                    alt=''
+                                    style={{ backgroundColor: types["background"].options.backgroundColor }}
+                                  /> : <PlusOutlined className={styles.uploadIcon} />}
                             </div>
                         </UploadImage>
                     </FormItem>
@@ -109,13 +109,13 @@ class GOO extends BaseController {
                     </FormItem>
                     <FormItem {...formItemLayout} label="颜色">
                         <ColorPicker
-                            color={types["nickname"].options.fontColor}
-                            colorChange={(color) => {
-                                const { _index } = this.getTypeBody("nickname");
-                                let _body = [...body];
-                                _body[_index].options.fontColor = color.hex;
-                                this.setState({ body: _body });
-                            }}
+                          color={types["nickname"].options.fontColor}
+                          colorChange={(color) => {
+                              const { _index } = this.getTypeBody("nickname");
+                              let _body = [...body];
+                              _body[_index].options.fontColor = color.hex;
+                              this.setState({ body: _body });
+                          }}
                         />
                     </FormItem>
                 </TabPane>
@@ -144,13 +144,13 @@ class GOO extends BaseController {
                     </FormItem>
                     <FormItem {...formItemLayout} label="颜色">
                         <ColorPicker
-                            color={types["slogan"].options.fontColor}
-                            colorChange={(color) => {
-                                const { _index } = this.getTypeBody("slogan");
-                                let _body = [...body];
-                                _body[_index].options.fontColor = color.hex;
-                                this.setState({ body: _body });
-                            }}
+                          color={types["slogan"].options.fontColor}
+                          colorChange={(color) => {
+                              const { _index } = this.getTypeBody("slogan");
+                              let _body = [...body];
+                              _body[_index].options.fontColor = color.hex;
+                              this.setState({ body: _body });
+                          }}
                         />
                     </FormItem>
                 </TabPane>
@@ -168,24 +168,24 @@ class GOO extends BaseController {
                     </FormItem>
                     <FormItem {...formItemLayout} label="颜色">
                         <ColorPicker
-                            color={types["group_number"].options.fontColor}
-                            colorChange={(color) => {
-                                const { _index } = this.getTypeBody("group_number");
-                                let _body = [...body];
-                                _body[_index].options.fontColor = color.hex;
-                                this.setState({ body: _body });
-                            }}
+                          color={types["group_number"].options.fontColor}
+                          colorChange={(color) => {
+                              const { _index } = this.getTypeBody("group_number");
+                              let _body = [...body];
+                              _body[_index].options.fontColor = color.hex;
+                              this.setState({ body: _body });
+                          }}
                         />
                     </FormItem>
                     <FormItem {...formItemLayout} label="背景色">
                         <ColorPicker
-                            color={types["group_number"].options.fontColor}
-                            colorChange={(color) => {
-                                const { _index } = this.getTypeBody("group_number");
-                                let _body = [...body];
-                                _body[_index].options.fontBackgroundColor = color.hex;
-                                this.setState({ body: _body });
-                            }}
+                          color={types["group_number"].options.fontColor}
+                          colorChange={(color) => {
+                              const { _index } = this.getTypeBody("group_number");
+                              let _body = [...body];
+                              _body[_index].options.fontBackgroundColor = color.hex;
+                              this.setState({ body: _body });
+                          }}
                         />
                     </FormItem>
                 </TabPane>
@@ -219,13 +219,13 @@ class GOO extends BaseController {
                     </FormItem>
                     <FormItem {...formItemLayout} label="颜色">
                         <ColorPicker
-                            color={types["goods_title"].options.fontColor}
-                            colorChange={(color) => {
-                                const { _index } = this.getTypeBody("goods_title");
-                                let _body = [...body];
-                                _body[_index].options.fontColor = color.hex;
-                                this.setState({ body: _body });
-                            }}
+                          color={types["goods_title"].options.fontColor}
+                          colorChange={(color) => {
+                              const { _index } = this.getTypeBody("goods_title");
+                              let _body = [...body];
+                              _body[_index].options.fontColor = color.hex;
+                              this.setState({ body: _body });
+                          }}
                         />
                     </FormItem>
                 </TabPane>
@@ -243,13 +243,13 @@ class GOO extends BaseController {
                     </FormItem>
                     <FormItem {...formItemLayout} label="颜色">
                         <ColorPicker
-                            color={types["goods_group_price"].options.fontColor}
-                            colorChange={(color) => {
-                                const { _index } = this.getTypeBody("goods_group_price");
-                                let _body = [...body];
-                                _body[_index].options.fontColor = color.hex;
-                                this.setState({ body: _body });
-                            }}
+                          color={types["goods_group_price"].options.fontColor}
+                          colorChange={(color) => {
+                              const { _index } = this.getTypeBody("goods_group_price");
+                              let _body = [...body];
+                              _body[_index].options.fontColor = color.hex;
+                              this.setState({ body: _body });
+                          }}
                         />
                     </FormItem>
                 </TabPane>
@@ -267,13 +267,13 @@ class GOO extends BaseController {
                     </FormItem>
                     <FormItem {...formItemLayout} label="颜色">
                         <ColorPicker
-                            color={types["goods_price"].options.fontColor}
-                            colorChange={(color) => {
-                                const { _index } = this.getTypeBody("goods_price");
-                                let _body = [...body];
-                                _body[_index].options.fontColor = color.hex;
-                                this.setState({ body: _body });
-                            }}
+                          color={types["goods_price"].options.fontColor}
+                          colorChange={(color) => {
+                              const { _index } = this.getTypeBody("goods_price");
+                              let _body = [...body];
+                              _body[_index].options.fontColor = color.hex;
+                              this.setState({ body: _body });
+                          }}
                         />
                     </FormItem>
                 </TabPane>
@@ -320,10 +320,10 @@ class GOO extends BaseController {
                                 lockAspectRatio: "1/1"
                             },
                             children: <img
-                                style={{
-                                    borderRadius: item.options.borderRadius
-                                }}
-                                src={"https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"} />,
+                              style={{
+                                  borderRadius: item.options.borderRadius
+                              }}
+                              src={"https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"} />,
                             tabPane: {
                                 title: "头像"
                             }
@@ -334,7 +334,7 @@ class GOO extends BaseController {
                         ...item, ...{
                             resizableProps: { lockAspectRatio: null },
                             children: <div
-                                style={{ fontSize: item.options.fontSize, color: item.options.fontColor }}
+                              style={{ fontSize: item.options.fontSize, color: item.options.fontColor }}
                             >用户昵称</div>,
                             tabPane: {
                                 title: "昵称"
@@ -346,7 +346,7 @@ class GOO extends BaseController {
                         ...item, ...{
                             resizableProps: { lockAspectRatio: null },
                             children: <div
-                                style={{ fontSize: item.options.fontSize, color: item.options.fontColor }}
+                              style={{ fontSize: item.options.fontSize, color: item.options.fontColor }}
                             ><b>{item.options.fontContent}</b></div>,
                             tabPane: {
                                 title: "口号"
@@ -358,11 +358,11 @@ class GOO extends BaseController {
                         ...item, ...{
                             resizableProps: { lockAspectRatio: null },
                             children: <div
-                                style={{
-                                    fontSize: item.options.fontSize,
-                                    color: item.options.fontColor,
-                                    backgroundColor: item.options.fontBackgroundColor
-                                }}
+                              style={{
+                                  fontSize: item.options.fontSize,
+                                  color: item.options.fontColor,
+                                  backgroundColor: item.options.fontBackgroundColor
+                              }}
                             >2人团</div>,
                             tabPane: {
                                 title: "拼团数"
@@ -375,9 +375,9 @@ class GOO extends BaseController {
                             resizableProps: {
                                 lockAspectRatio: "1/1"
                             },
-                            children: <div style={{padding:10, border:'1px solid #ff8003', borderRadius:6}}>
+                            children: <div style={{ padding: 10, border: "1px solid #ff8003", borderRadius: 6 }}>
                                 <img
-                                src={"https://img14.360buyimg.com/n7/jfs/t1/21043/38/1380/506454/5c1209f7E3e839ba2/9c5ea9fe4add6cf6.jpg"} />
+                                  src={"https://img14.360buyimg.com/n7/jfs/t1/21043/38/1380/506454/5c1209f7E3e839ba2/9c5ea9fe4add6cf6.jpg"} />
                             </div>,
                             tabPane: {
                                 title: "图片"
@@ -389,8 +389,12 @@ class GOO extends BaseController {
                         ...item, ...{
                             resizableProps: { lockAspectRatio: null },
                             children: <div
-                                style={{ fontSize: item.options.fontSize, color: item.options.fontColor,backgroundColor:"#fff9" }}
-                            ><b style={{padding:4}}>新款风衣文艺范韩版修身款翻领纯棉七分袖百搭短款新款风</b></div>,
+                              style={{
+                                  fontSize: item.options.fontSize,
+                                  color: item.options.fontColor,
+                                  backgroundColor: "#fff9"
+                              }}
+                            ><b style={{ padding: 4 }}>新款风衣文艺范韩版修身款翻领纯棉七分袖百搭短款新款风</b></div>,
                             tabPane: {
                                 title: "标题"
                             }
@@ -401,7 +405,7 @@ class GOO extends BaseController {
                         ...item, ...{
                             resizableProps: { lockAspectRatio: null },
                             children: <div
-                                style={{ fontSize: item.options.fontSize, color: item.options.fontColor }}
+                              style={{ fontSize: item.options.fontSize, color: item.options.fontColor }}
                             >¥50.00</div>,
                             tabPane: {
                                 title: "价格"
@@ -413,7 +417,7 @@ class GOO extends BaseController {
                         ...item, ...{
                             resizableProps: { lockAspectRatio: null },
                             children: <div
-                                style={{ fontSize: item.options.fontSize, color: item.options.fontColor }}
+                              style={{ fontSize: item.options.fontSize, color: item.options.fontColor }}
                             >¥99.00</div>,
                             tabPane: {
                                 title: "原价"
@@ -425,7 +429,7 @@ class GOO extends BaseController {
                         ...item, ...{
                             resizableProps: { lockAspectRatio: "1/1" },
                             children: <img
-                                src={"https://user-gold-cdn.xitu.io/2018/9/27/1661a8590479bcc6?w=258&h=258&f=jpeg&s=24702"} />,
+                              src={"https://user-gold-cdn.xitu.io/2018/9/27/1661a8590479bcc6?w=258&h=258&f=jpeg&s=24702"} />,
                             tabPane: {
                                 title: "二维码"
                             }

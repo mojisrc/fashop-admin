@@ -4,7 +4,7 @@ import { Modal, Input, Checkbox, Pagination, Spin, Button } from "antd";
 import styles from "./index.css";
 import { list } from "@/models/goods";
 import { connect } from "umi";
-import { ScrollView } from "@/components/flexView/index";
+import { ScrollView } from "@/components/flexView";
 import Image from "@/components/image/index";
 
 const Search = Input.Search;

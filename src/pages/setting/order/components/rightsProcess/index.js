@@ -1,4 +1,3 @@
-import { Icon } from '@ant-design/compatible';
 import { Form } from '@ant-design/compatible';
 import React, { Component } from "react";
 import { connect } from "umi";

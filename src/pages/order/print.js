@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "umi";
 import PageHeaderWrapper from "@/components/pageHeaderWrapper";
 import { Card, Descriptions, Button, Divider } from "antd";
-import moment from "moment/moment";
+import moment from "dayjs";
 import OrderPrintGoodsList from "@/pages/order/components/print/goodsList";
 import styles from "./print.css"
 

@@ -1,6 +1,5 @@
 import React, { Fragment } from "react";
 import { Link } from "umi";
-import { Icon } from "antd";
 import GlobalFooter from "@/components/globalFooter";
 import styles from "./userLayout.less";
 import logo from "@/assets/images/loginLogo.png";
@@ -10,7 +9,7 @@ const links = [
 
 const copyright = (
     <Fragment>
-        Copyright <Icon type="copyright" /> FaShop
+        Copyright FaShop
     </Fragment>
 );
 

@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from "react";
 import { connect } from "umi";
 import { Button, Table, Switch, message, Popconfirm, Card, Divider } from "antd";
-import moment from "moment";
+import moment from "dayjs";
 import { history as router } from "umi";
 import PageList from "@/components/pageList/index";
 import PageHeaderWrapper from "@/components/pageHeaderWrapper";

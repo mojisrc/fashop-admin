@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { View } from "@/components/flexView";
 import { Modal, Table, Button } from "antd";
 import { connect } from "umi";
-import moment from "moment";
+import moment from "dayjs";
 
 @connect(({ categoryPage, loading }) => ({
     pageList: categoryPage.list.result,

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { View } from "@/components/flexView";
 import { Modal, Table, Button } from "antd";
 import { connect } from "umi";
-import moment from "moment";
+import moment from "dayjs";
 import PropTypes from "prop-types";
 import styles from "@/pages/shop/page/components/diy/view/coupon/index.css";
 @connect(({ coupon, loading }) => ({

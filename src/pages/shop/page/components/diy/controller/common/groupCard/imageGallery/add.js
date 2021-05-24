@@ -1,4 +1,4 @@
-import { Icon } from '@ant-design/compatible';
+import PlusOutlined from "@ant-design/icons/PlusOutlined";
 import React, { Component, Fragment } from "react";
 import PropTypes from "prop-types";
 import styles from "./index.css";
@@ -29,7 +29,7 @@ export default class GroupCardImageGalleryAdd extends Component {
                 }}
             >
 
-                <Icon type='plus' /> 添加
+                <PlusOutlined /> 添加
             </div>
             <ImageSpaceModal
                 ref={e => this.ImageSpaceModal = e}

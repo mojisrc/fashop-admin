@@ -5,7 +5,7 @@ import { Card, Tag } from "antd";
 import OrderEditPrice from "@/pages/order/components/editPrice/index";
 import { Table, Button, message } from "antd";
 import { View } from "@/components/flexView";
-import moment from "moment/moment";
+import moment from "dayjs";
 import Image from "@/components/image/index";
 import { history as router } from "umi";
 import styles from "./list.css";

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "umi";
 import { Input, Button, Table, Switch, message,Popconfirm } from "antd";
-import moment from "moment";
+import moment from "dayjs";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { View } from "@/components/flexView";
 import styles from "./index.css";

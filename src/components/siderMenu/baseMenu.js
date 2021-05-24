@@ -1,13 +1,9 @@
-import { Icon } from '@ant-design/compatible';
 import React, { PureComponent } from 'react';
 import classNames from 'classnames';
 import { Menu } from 'antd';
 import { Link } from 'umi';
 import { urlToList } from '../_utils/pathTools';
 import { getMenuMatches } from './siderMenuUtils';
-import { isUrl } from '@/utils';
-import styles from './index.less';
-import IconFont from '@/components/iconFont';
 
 const { SubMenu } = Menu;
 
@@ -15,19 +11,20 @@ const { SubMenu } = Menu;
 //   icon: 'setting',
 //   icon: 'icon-geren' #For Iconfont ,
 //   icon: 'http://demo.com/icon.png',
-//   icon: <Icon type="setting" />,
-const getIcon = icon => {
-    if (typeof icon === 'string') {
-        if (isUrl(icon)) {
-            return <Icon component={() => <img src={icon} alt="icon" className={styles.icon} />} />;
-        }
-        if (icon.startsWith('icon-')) {
-            return <IconFont type={icon} />;
-        }
-        return <Icon type={icon} />;
-    }
-    return icon;
-};
+//   icon: <SettingOutlined />,
+// 需要改造 不然打包大
+// const getIcon = icon => {
+//     if (typeof icon === 'string') {
+//         if (isUrl(icon)) {
+//             return <Icon component={() => <img src={icon} alt="icon" className={styles.icon} />} />;
+//         }
+//         if (icon.startsWith('icon-')) {
+//             return <IconFont type={icon} />;
+//         }
+//         return <Icon type={icon} />;
+//     }
+//     return icon;
+// };
 
 export default class BaseMenu extends PureComponent {
     /**
@@ -36,7 +33,7 @@ export default class BaseMenu extends PureComponent {
      */
     getNavMenuItems = (menusData, parent) => {
         if (!menusData) {
-            return [];``
+            return [];
         }
         return menusData
           .filter(item => item.name && !item.hideInMenu)
@@ -62,7 +59,6 @@ export default class BaseMenu extends PureComponent {
                 title={
                     item.icon ? (
                       <span>
-                {getIcon(item.icon)}
                           <span>{name}</span>
               </span>
                     ) : (
@@ -86,13 +82,13 @@ export default class BaseMenu extends PureComponent {
     getMenuItemPath = item => {
         const { name } = item;
         const itemPath = this.conversionPath(item.path);
-        const icon = getIcon(item.icon);
+        // const icon = getIcon(item.icon);
         const { target } = item;
         // Is it a http link
         if (/^https?:\/\//.test(itemPath)) {
             return (
               <a href={itemPath} target={target}>
-                  {icon}
+                  {/*{icon}*/}
                   <span>{name}</span>
               </a>
             );
@@ -111,7 +107,7 @@ export default class BaseMenu extends PureComponent {
                   : undefined
             }
           >
-              {icon}
+              {/*{icon}*/}
               <span>{name}</span>
           </Link>
         );

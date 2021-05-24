@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import { Button, Input, Select, TreeSelect } from "antd";
 import { connect } from "umi";
 import Query from "@/utils/query";
-import { getQueryPath } from "@/utils/index";
+import { getQueryPath } from "@/utils";
 import Arr from "@/utils/array";
 
 const Option = Select.Option;

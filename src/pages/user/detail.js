@@ -6,7 +6,7 @@ import styles from "@/styles/customer/customerDetail.css";
 import ShoppingInfo from "@/pages/user/components/detail/shopping";
 import ReceiveInfo from "@/pages/user/components/detail/receive";
 import Image from "@/components/image";
-import moment from "moment/moment";
+import moment from "dayjs";
 import PageHeaderWrapper from "@/components/pageHeaderWrapper";
 import User from "@/utils/user";
 

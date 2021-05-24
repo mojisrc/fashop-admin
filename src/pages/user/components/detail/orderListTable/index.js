@@ -3,7 +3,7 @@ import { Table } from "antd";
 import styles from "./index.css";
 import { View } from "@/components/flexView";
 import { connect } from "umi";
-import moment from "moment/moment";
+import moment from "dayjs";
 import Image from "@/components/image/index";
 import PageList from "@/components/pageList/index";
 import { history as router } from "umi";

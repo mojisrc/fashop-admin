@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import styles from "./index.css";
-import moment from "moment";
+import moment from "dayjs";
 
 export default class Coupon extends Component {
     render() {

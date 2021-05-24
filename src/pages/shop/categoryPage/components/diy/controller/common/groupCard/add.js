@@ -1,27 +1,27 @@
-import { Icon } from '@ant-design/compatible';
-import React, { PureComponent, } from "react";
+import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import styles from "./index.css";
+import PlusOutlined from "@ant-design/icons/PlusOutlined";
 
 export default class GroupCardAdd extends PureComponent {
     static propTypes = {
-        onClick: PropTypes.func.isRequired,
+        onClick: PropTypes.func.isRequired
     };
     static defaultProps = {
         onClick: () => {
 
-        },
+        }
     };
 
     render() {
         const { onClick } = this.props;
         return <div
-            className={styles.itemAdd}
-            onClick={() => {
-                onClick()
-            }}
+          className={styles.itemAdd}
+          onClick={() => {
+              onClick();
+          }}
         >
-            <Icon type='plus' /> 添加
+            <PlusOutlined /> 添加
         </div>;
     }
 }

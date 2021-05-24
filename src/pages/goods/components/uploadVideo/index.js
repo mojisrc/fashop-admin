@@ -1,7 +1,7 @@
-import { Icon } from '@ant-design/compatible';
 import React, { Component, Fragment } from "react";
 import {  Upload, Button } from "antd";
 import PropTypes from "prop-types";
+import CloudUploadOutlined from "@ant-design/icons/CloudUploadOutlined";
 
 export default class UploadVideo extends Component {
     static propTypes = {
@@ -44,7 +44,7 @@ export default class UploadVideo extends Component {
                     data={{ type: 1 }}
                 >
                     <Button>
-                        <Icon type="upload" /> 上传视频
+                        <CloudUploadOutlined /> 上传视频
                     </Button>
                 </Upload>
             </Fragment>

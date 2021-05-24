@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Table, Card } from "antd";
 import { connect } from "umi";
-import moment from "moment/moment";
+import moment from "dayjs";
 import Image from "@/components/image/index";
 import { history as router } from "umi";
 import PageHeaderWrapper from "@/components/pageHeaderWrapper";

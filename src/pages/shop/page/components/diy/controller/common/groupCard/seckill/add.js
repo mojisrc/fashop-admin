@@ -1,4 +1,4 @@
-import { Icon } from '@ant-design/compatible';
+import PlusOutlined from "@ant-design/icons/PlusOutlined";
 import React, { PureComponent, Fragment } from "react";
 import PropTypes from "prop-types";
 import styles from "./index.css";
@@ -29,7 +29,7 @@ export default class GroupCouponCardAdd extends PureComponent {
                     this.setState({ addVisible: true });
                 }}
             >
-                <Icon type='plus' /> 添加
+                <PlusOutlined /> 添加
             </div>
             <SelectSeckillGoods
                 visible={addVisible}

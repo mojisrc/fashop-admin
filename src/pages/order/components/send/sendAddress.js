@@ -1,10 +1,8 @@
-import { Icon } from '@ant-design/compatible';
 import { Form } from '@ant-design/compatible';
 import React, { Component } from "react";
 import {  Select, Card, Row, Col, Alert } from "antd";
 import { View } from "@/components/flexView";
 import styles from "./index.css";
-import { connect } from "umi";
 
 const FormItem = Form.Item;
 const Option = Select.Option;

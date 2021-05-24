@@ -3,7 +3,7 @@ import { connect } from "umi";
 import PageHeaderWrapper from "@/components/pageHeaderWrapper";
 import { Card, Table, Button } from "antd";
 import { View } from "@/components/flexView";
-import moment from "moment/moment";
+import moment from "dayjs";
 import styles from "./list.css";
 import PageList from "@/components/pageList";
 import MemberAdd from "@/pages/auth/components/member/add";

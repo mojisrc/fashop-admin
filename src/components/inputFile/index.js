@@ -1,4 +1,4 @@
-import { Icon } from '@ant-design/compatible';
+import PlusOutlined from "@ant-design/icons/PlusOutlined";
 import React, { Component } from "react";
 import styles from "./index.css";
 
@@ -47,7 +47,7 @@ export default class InputFile extends Component {
                             style={{ width: "80px" }}
                         /> :
                         <View className={styles.uploadBtn}>
-                            <Icon type='plus' />
+                            <PlusOutlined />
                             <p>Upload</p>
                         </View>
                 }

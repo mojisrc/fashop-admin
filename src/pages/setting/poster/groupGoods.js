@@ -1,4 +1,3 @@
-import { Icon } from '@ant-design/compatible';
 import { Form } from '@ant-design/compatible';
 import {   Tabs, Slider, Input } from "antd";
 import styles from "./groupGoods.css";
@@ -6,6 +5,7 @@ import ColorPicker from "@/components/public/colorPicker";
 import UploadImage from "@/components/uploadImage";
 import { BaseController, formItemLayout, maxWidth, maxHeight } from "./baseController";
 import { connect } from "umi";
+import PlusOutlined from "@ant-design/icons/PlusOutlined";
 
 const TabPane = Tabs.TabPane;
 const FormItem = Form.Item;
@@ -63,7 +63,7 @@ class PosterGroupGoods extends BaseController {
                                         src={types["background"].options.backgroundImage}
                                         alt=''
                                         style={{ backgroundColor: types["background"].options.backgroundColor }}
-                                    /> : <Icon type='plus' className={styles.uploadIcon} />}
+                                    /> : <PlusOutlined className={styles.uploadIcon} />}
                             </div>
                         </UploadImage>
                     </FormItem>

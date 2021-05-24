@@ -2,7 +2,7 @@ import React, { Component, Fragment } from "react";
 import { Card, Button, Table, Divider, Modal} from "antd";
 import PageList from "@/components/pageList";
 import { connect } from "umi";
-import moment from "moment";
+import moment from "dayjs";
 import BrandAdd from "./components/add";
 import BrandEdit from "./components/edit";
 import PageHeaderWrapper from "@/components/pageHeaderWrapper";

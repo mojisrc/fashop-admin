@@ -2,23 +2,35 @@ import React, { Component } from "react";
 import { View } from "@/components/flexView";
 import { Tabs, DatePicker } from "antd";
 import styles from "./index.css";
-import ReactEcharts from "echarts-for-react";
 import statistics from "@/services/statistics";
-import moment from "moment";
-
+import moment from "dayjs";
+import ReactEChartsCore from "echarts-for-react/lib/core";
+import * as echarts from "echarts/core";
+import { BarChart, } from 'echarts/charts';
+import { CanvasRenderer, } from 'echarts/renderers';
+import {
+    GridComponent,
+    TooltipComponent,
+    TitleComponent,
+} from 'echarts/components';
+// https://github.com/hustcc/echarts-for-react
+echarts.use(
+  [TitleComponent, TooltipComponent, GridComponent, BarChart, CanvasRenderer]
+);
 const TabPane = Tabs.TabPane;
 const { MonthPicker } = DatePicker;
 export default class Charts extends Component {
     state = {
-        activeKey: '月销售额',
-        chartDate: moment(`${moment().format('YYYY')}-${moment().format('MM')}`),
+        activeKey: "月销售额",
+        chartDate: moment(`${moment().format("YYYY")}-${moment().format("MM")}`),
         monthSaleChartList: [],
         monthOrderChartList: [],
         customerGrowthChartList: [],
         newCustomerCostList: [],
         xAxisData: [],
-        yAxisData: [],
-    }
+        yAxisData: []
+    };
+
     componentDidMount() {
         const { activeKey, chartDate } = this.state;
         this.initChart(moment(chartDate).format("YYYY-MM"), activeKey);
@@ -220,46 +232,50 @@ export default class Charts extends Component {
 
         // 选定的时间必须小于当前月
         function disabledDate(current) {
-            return current && current > moment().endOf('day');
+            return current && current > moment().endOf("day");
         }
+
         return (
-            <View className={styles.indexChartWarp}>
-                <Tabs
-                    activeKey={activeKey}
-                    onChange={(activeKey) => {
-                        this.setState({ activeKey });
-                        this.initChart(moment(chartDate).format("YYYY-MM"), activeKey);
-                    }}
-                    tabBarExtraContent={
-                        <View className={styles.chartOperate}>
-                            {/*<p>累计：<span>￥{saleAccumulative.accumulative_amount}.00</span></p>*/}
-                            {/*<p>日均：<span>￥{saleAverage.day_average}.00</span></p>*/}
-                            <MonthPicker
-                                disabledDate={disabledDate}
-                                style={{ width: 110 }}
-                                format={"YYYY-MM"}
-                                defaultValue={chartDate}
-                                onChange={(date, dateString) => {
-                                    const { activeKey } = this.state;
-                                    this.initChart(dateString, activeKey);
-                                }}
+          <View className={styles.indexChartWarp}>
+              <Tabs
+                activeKey={activeKey}
+                onChange={(activeKey) => {
+                    this.setState({ activeKey });
+                    this.initChart(moment(chartDate).format("YYYY-MM"), activeKey);
+                }}
+                tabBarExtraContent={
+                    <View className={styles.chartOperate}>
+                        {/*<p>累计：<span>￥{saleAccumulative.accumulative_amount}.00</span></p>*/}
+                        {/*<p>日均：<span>￥{saleAverage.day_average}.00</span></p>*/}
+                        <MonthPicker
+                          disabledDate={disabledDate}
+                          style={{ width: 110 }}
+                          format={"YYYY-MM"}
+                          defaultValue={chartDate}
+                          onChange={(date, dateString) => {
+                              const { activeKey } = this.state;
+                              this.initChart(dateString, activeKey);
+                          }}
+                        />
+                    </View>
+                }
+              >
+                  {
+                      tabList.map(({ id, tab }) =>
+                        <TabPane tab={tab} key={tab}>
+                            <ReactEChartsCore
+                              echarts={echarts}
+                              notMerge={true}
+                              lazyUpdate={true}
+                              option={this.getOption()}
+                              style={{ height: "340px", width: "100%" }}
+                              className={styles.react_for_echarts}
                             />
-                        </View>
-                    }
-                >
-                    {
-                        tabList.map(({ id, tab }) =>
-                            <TabPane tab={tab} key={tab}>
-                                <ReactEcharts
-                                    option={this.getOption()}
-                                    style={{ height: "340px", width: "100%" }}
-                                    className={styles.react_for_echarts}
-                                />
-                            </TabPane>
-                        )
-                    }
-                </Tabs>
-            </View>
+                        </TabPane>
+                      )
+                  }
+              </Tabs>
+          </View>
         );
     }
 }

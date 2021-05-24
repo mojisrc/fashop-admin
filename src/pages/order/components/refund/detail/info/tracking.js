@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import styles from "../index.css";
 import { View } from "@/components/flexView";
 import InfoColumn from "@/components/public/info/infoColumn";
-import moment from "moment";
+import moment from "dayjs";
 import { Modal, message } from "antd";
 import { connect } from "umi";
 

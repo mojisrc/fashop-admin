@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Table, Tag } from "antd";
 import styles from "./index.css";
 import { View } from "@/components/flexView";
-import moment from "moment";
+import moment from "dayjs";
 
 export default class OrderDetailGoodsInfo extends Component {
     render() {

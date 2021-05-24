@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from "react";
 import { Table, Card, Divider, Modal } from "antd";
 import { connect } from "umi";
-import moment from "moment/moment";
+import moment from "dayjs";
 import PageHeaderWrapper from "@/components/pageHeaderWrapper/index";
 import PageList from "@/components/pageList/index";
 

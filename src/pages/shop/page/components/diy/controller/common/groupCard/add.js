@@ -1,4 +1,4 @@
-import { Icon } from '@ant-design/compatible';
+import PlusOutlined from "@ant-design/icons/PlusOutlined";
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import styles from "./index.css";
@@ -22,7 +22,7 @@ export default class GroupCardAdd extends PureComponent {
                 onClick();
             }}
         >
-            <Icon type='plus' /> 添加
+            <PlusOutlined /> 添加
         </div>;
     }
 }

@@ -8,7 +8,6 @@ iframe: 400
 
 ````jsx
 import GlobalFooter from 'ant-design-pro/lib/GlobalFooter';
-import { Icon } from 'antd';
 
 const links = [{
   key: '帮助',

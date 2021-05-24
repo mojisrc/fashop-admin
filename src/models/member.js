@@ -3,6 +3,7 @@ import { setAuthority } from "@/utils/authority";
 import { reloadAuthorized } from "@/utils/authorized";
 import { stringify } from "qs";
 import { getPageQuery } from "@/utils";
+
 export default {
     namespace: "member",
     state: {
@@ -16,7 +17,7 @@ export default {
         verifyCode: {},
         del: {},
         logout: {},
-        self: {},
+        self: { result: { info: {} } },
         selfPassword: {},
         login: {}
     },

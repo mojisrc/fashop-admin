@@ -1,10 +1,9 @@
-import { Icon } from '@ant-design/compatible';
 import React, { Component } from "react";
 import { Table, Alert, message, InputNumber, Modal, Spin } from "antd";
 import styles from "./index.css";
-import { View, Text } from "@/components/flexView/index";
+import { View, Text } from "@/components/flexView";
 import update from "immutability-helper";
-import { parsePrice } from "@/utils/index";
+import { parsePrice } from "@/utils";
 import { connect } from "umi";
 
 

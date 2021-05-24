@@ -16,6 +16,7 @@ import Exception403 from "../pages/exception/403";
 import SiderMenu from "@/components/siderMenu";
 import getPageTitle from "@/utils/getPageTitle";
 import defaultSettings from "@/defaultSettings";
+import { history as router } from 'umi';
 
 import styles from "./basicLayout.less";
 
@@ -59,14 +60,19 @@ class BasicLayout extends React.PureComponent {
     }
 
     componentDidMount() {
-        const { dispatch, route: { routes, authority } } = this.props;
-        dispatch({
-            type: "setting/getSetting"
-        });
-        dispatch({
-            type: "menu/getMenuData",
-            payload: { routes, authority }
-        });
+        const token = JSON.parse(localStorage.getItem('token')) ?? null;
+        if (token) {
+            const { dispatch, route: { routes, authority } } = this.props;
+            dispatch({
+                type: "setting/getSetting"
+            });
+            dispatch({
+                type: "menu/getMenuData",
+                payload: { routes, authority }
+            });
+        }else {
+            router.push('/login');
+        }
     }
 
     getContext() {

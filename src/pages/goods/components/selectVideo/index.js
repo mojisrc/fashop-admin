@@ -2,7 +2,7 @@ import React, { Component,Fragment } from "react";
 import { Modal, Button, Table,Divider } from "antd";
 import { connect } from "umi";
 import UploadVideo from "../uploadVideo";
-import moment from "moment/moment";
+import moment from "dayjs";
 
 @connect(({ goodsMedia, loading }) => ({
     goodsMediaList: goodsMedia.list.result,

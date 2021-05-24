@@ -1,6 +1,6 @@
-import { Icon } from '@ant-design/compatible';
 import React, { PureComponent } from "react";
 import Img from "react-image";
+import LoadingOutlined from "@ant-design/icons/LoadingOutlined";
 
 import styles from "./index.css";
 import { View } from "@/components/flexView";
@@ -57,8 +57,7 @@ export default class NetWorkImage extends PureComponent {
                         style={style}
                         className={`${className} ${styles.loader}`}
                     >
-                        <Icon
-                            type="loading"
+                        <LoadingOutlined
                             style={style}
                             className={className}
                         />
