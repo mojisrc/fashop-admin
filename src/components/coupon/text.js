@@ -1,7 +1,5 @@
 import React, { Component } from "react";
-import { list } from "@/models/coupon";
 import moment from "dayjs";
-import _ from "lodash";
 
 
 export default class CouponText extends Component {

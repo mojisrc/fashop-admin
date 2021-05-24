@@ -17,6 +17,22 @@ export default class Arr {
     }
 
     /**
+     *
+     * @param {Array} values
+     * @param {Array} arr
+     * @returns {boolean}
+     */
+    static inArrayMulti(values, arr) {
+        let result = false
+        values.map((value) => {
+            if (Arr.inArray(value, arr)) {
+                result = true
+            }
+        })
+        return result;
+    }
+
+    /**
      * 去重
      * @param {Array} arr
      * @returns {Array}
@@ -78,4 +94,32 @@ export default class Arr {
         return arr;
     }
 
+    /**
+     * 正反选
+     * @param value
+     * @param arr
+     */
+    static toggle(value, arr) {
+        let _arr = arr.concat()
+        if (Arr.inArray(value, arr)) {
+            _arr = Arr.del(value, arr)
+        } else {
+            _arr.push(value)
+        }
+        return _arr
+    }
+    /**
+     * 删除
+     * @param  {Array|String|Number} value
+     * @param arr
+     * @returns {*}
+     */
+    static del(value, arr) {
+        for (var i = 0; i < arr.length; i++) {
+            if (value === arr[i]) {
+                arr.splice(i, 1);
+            }
+        }
+        return arr
+    }
 }

@@ -74,7 +74,7 @@
     react-color "2.19.3"
     swr "^0.3.6"
 
-"@ant-design/pro-form@1.24.0", "@ant-design/pro-form@^1.16.0", "@ant-design/pro-form@^1.21.4":
+"@ant-design/pro-form@1.24.0", "@ant-design/pro-form@^1.16.0":
   version "1.24.0"
   resolved "https://registry.yarnpkg.com/@ant-design/pro-form/-/pro-form-1.24.0.tgz#dc41155ef82f034cacbdbea34b882ca789abd91e"
   integrity sha512-uo21RtNmJf4tnceY3ni45OIjkJ0FOj1iJHGHXVC7VwPAIqiFxsMFiDc3oy8MrBJcMSRWOCiL9HuJNBQubfzAzg==
@@ -241,7 +241,7 @@
     semver "^5.4.1"
     source-map "^0.5.0"
 
-"@babel/core@^7.7.5", "@babel/core@^7.8.7":
+"@babel/core@^7.7.5":
   version "7.14.3"
   resolved "https://registry.yarnpkg.com/@babel/core/-/core-7.14.3.tgz#5395e30405f0776067fbd9cf0884f15bfb770a38"
   integrity sha512-jB5AmTKOCSJIZ72sd78ECEhuPiDMKlQdDI/4QRI6lzYATx5SSogS1oQA2AoPecRCknm30gHi2l+QVvNUu3wZAg==
@@ -585,7 +585,7 @@
   dependencies:
     regenerator-runtime "^0.12.0"
 
-"@babel/runtime@^7.10.1", "@babel/runtime@^7.10.4", "@babel/runtime@^7.10.5", "@babel/runtime@^7.11.1", "@babel/runtime@^7.11.2", "@babel/runtime@^7.12.5", "@babel/runtime@^7.4.5", "@babel/runtime@^7.7.2", "@babel/runtime@^7.8.7", "@babel/runtime@^7.9.2":
+"@babel/runtime@^7.10.1", "@babel/runtime@^7.10.4", "@babel/runtime@^7.10.5", "@babel/runtime@^7.11.1", "@babel/runtime@^7.11.2", "@babel/runtime@^7.12.5", "@babel/runtime@^7.4.5", "@babel/runtime@^7.7.2", "@babel/runtime@^7.9.2":
   version "7.14.0"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.14.0.tgz#46794bc20b612c5f75e62dd071e24dfd95f1cbe6"
   integrity sha512-JELkvo/DlpNdJ7dlyw/eY7E0suy5i5GQH+Vlxaq1nsNJ+H7f4Vtv3jMeCEgRhZZQFXTjldYfQgv2qmM6M1v5wA==
@@ -1063,12 +1063,6 @@
     "@types/node" "*"
     "@types/yargs" "^15.0.0"
     chalk "^4.0.0"
-
-"@maximusft/mergeclassnames@https://gitee.com/hanwenbo/mergeClassNames.git":
-  version "1.0.1"
-  resolved "https://gitee.com/hanwenbo/mergeClassNames.git#b1ada4c97bc0075156b971c8a4b57cbc7525f408"
-  dependencies:
-    "@babel/core" "^7.8.7"
 
 "@qixian.cs/path-to-regexp@^6.1.0":
   version "6.1.0"
@@ -1900,7 +1894,7 @@ antd-mobile@^2.3.1:
     rmc-tabs "~1.2.0"
     rmc-tooltip "~1.0.0"
 
-antd@^4.1.2, antd@^4.1.3, antd@^4.15.2, antd@^4.15.6:
+antd@^4.1.2, antd@^4.1.3, antd@^4.15.6:
   version "4.15.6"
   resolved "https://registry.yarnpkg.com/antd/-/antd-4.15.6.tgz#bc4359b8f232c8bbb073d7236446edc9aa658d38"
   integrity sha512-uXn1uRFlPLrAmjfkyxKc3avMVO5N30o3YoSMSJPRw5OLNjOfWsnZDPKvZwinn+QQE9N7dRXylcMfNvl11LH2gA==
@@ -2282,55 +2276,6 @@ braces@^3.0.1, braces@~3.0.2:
   integrity sha1-NFThpGLujVmeI23zNs2epPiv4Qc=
   dependencies:
     fill-range "^7.0.1"
-
-braft-convert@^2.1.10, "braft-convert@https://gitee.com/hanwenbo/braft-convert.git":
-  version "2.3.0"
-  resolved "https://gitee.com/hanwenbo/braft-convert.git#45654da9e8fec7b2f65a5991e13c73e9046225a5"
-  dependencies:
-    draft-convert "^2.1.10"
-    draft-js "^0.11.7"
-
-"braft-editor@https://gitee.com/hanwenbo/braft-editor.git":
-  version "2.3.8"
-  resolved "https://gitee.com/hanwenbo/braft-editor.git#63c6649ff667d9ec9e1bdc4d50d48f3339c039da"
-  dependencies:
-    "@ant-design/pro-form" "^1.21.4"
-    "@babel/runtime" "^7.8.7"
-    "@maximusft/mergeclassnames" "https://gitee.com/hanwenbo/mergeClassNames.git"
-    antd "^4.15.2"
-    braft-convert "https://gitee.com/hanwenbo/braft-convert.git"
-    braft-extensions beta
-    braft-finder "https://gitee.com/hanwenbo/braft-finder.git"
-    braft-utils "^3.0.12"
-    draft-convert "^2.1.8"
-    draft-js "^0.11.5"
-    draft-js-multidecorators "^1.0.0"
-    draftjs-utils "^0.10.2"
-    immutable "~3.8.2"
-    prop-types "^15.7.2"
-    react-color "^2.14.1"
-    uuid "^7.0.2"
-
-braft-extensions@beta:
-  version "0.0.12"
-  resolved "https://registry.yarnpkg.com/braft-extensions/-/braft-extensions-0.0.12.tgz#cabd6108c670457c44a953b7a8f2606fe024952b"
-  integrity sha512-tKI4d0BWA1u/zXpRUfH6ITfgVlhVdFMggaYVh6OOyTKyBThv7dg1MEczDurr+T3LVH65HN2DmcMytA3rG5VPOw==
-  dependencies:
-    "@babel/runtime" "^7.0.0"
-    braft-convert "^2.1.10"
-    braft-utils "^3.0.8"
-
-"braft-finder@file:../../../../Users/hanwenbo/react/braft-finder":
-  version "0.0.21"
-
-"braft-finder@https://gitee.com/hanwenbo/braft-finder.git":
-  version "0.0.21"
-  resolved "https://gitee.com/hanwenbo/braft-finder.git#19207700b20797e84b0f5c94d02a615ab928f1a5"
-
-braft-utils@^3.0.12, braft-utils@^3.0.8:
-  version "3.0.12"
-  resolved "https://registry.yarnpkg.com/braft-utils/-/braft-utils-3.0.12.tgz#2b755ce1d8397d96b627b6767f74d07f25729d85"
-  integrity sha512-O2cKysURNC4HSEMKgNmQ2RluwcrxvYrztlEmyPN5SzktiNX3vaLFQoo0Ez3PlIhvjaGrIBSIT2Oyh2N6mn6TFg==
 
 brorand@^1.0.1:
   version "1.1.0"
@@ -2833,11 +2778,6 @@ core-js@^2.4.0:
   version "2.6.1"
   resolved "https://registry.npmjs.org/core-js/-/core-js-2.6.1.tgz#87416ae817de957a3f249b3b5ca475d4aaed6042"
 
-core-js@^3.6.4:
-  version "3.12.1"
-  resolved "https://registry.yarnpkg.com/core-js/-/core-js-3.12.1.tgz#6b5af4ff55616c08a44d386f1f510917ff204112"
-  integrity sha512-Ne9DKPHTObRuB09Dru5AjwKjY4cJHVGu+y5f7coGn1E9Grkc3p2iBwE9AI/nJzsE29mQF7oq+mhYYRqOMFN1Bw==
-
 core-util-is@1.0.2, core-util-is@~1.0.0:
   version "1.0.2"
   resolved "https://registry.npmjs.org/core-util-is/-/core-util-is-1.0.2.tgz#b5fd54220aa2bc5ab57aab7140c940754503c1a7"
@@ -3272,22 +3212,6 @@ domexception@^2.0.1:
   dependencies:
     webidl-conversions "^5.0.0"
 
-draft-convert@^2.1.10, draft-convert@^2.1.8:
-  version "2.1.11"
-  resolved "https://registry.yarnpkg.com/draft-convert/-/draft-convert-2.1.11.tgz#09797151ac7ed9c8f7898d116ba9f36869997bdf"
-  integrity sha512-8jLuhXmx5h5jiGi7thqdqV8O3aOmT7D5Q4OvCmT5tJWyMXWhKcJCktgqnwvEVGrHGxYJwfkfU4F/3fhGP2Dljw==
-  dependencies:
-    "@babel/runtime" "^7.5.5"
-    immutable "~3.7.4"
-    invariant "^2.2.1"
-
-draft-js-multidecorators@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/draft-js-multidecorators/-/draft-js-multidecorators-1.0.0.tgz#6c4be8d7b78dd2b966ee51ee6cc179b9b535e612"
-  integrity sha1-bEvo17eN0rlm7lHubMF5ubU15hI=
-  dependencies:
-    immutable "*"
-
 draft-js@^0.10.0, draft-js@~0.10.0:
   version "0.10.5"
   resolved "https://registry.npmjs.org/draft-js/-/draft-js-0.10.5.tgz#bfa9beb018fe0533dbb08d6675c371a6b08fa742"
@@ -3295,20 +3219,6 @@ draft-js@^0.10.0, draft-js@~0.10.0:
     fbjs "^0.8.15"
     immutable "~3.7.4"
     object-assign "^4.1.0"
-
-draft-js@^0.11.5, draft-js@^0.11.7:
-  version "0.11.7"
-  resolved "https://registry.yarnpkg.com/draft-js/-/draft-js-0.11.7.tgz#be293aaa255c46d8a6647f3860aa4c178484a206"
-  integrity sha512-ne7yFfN4sEL82QPQEn80xnADR8/Q6ALVworbC5UOSzOvjffmYfFsr3xSZtxbIirti14R7Y33EZC5rivpLgIbsg==
-  dependencies:
-    fbjs "^2.0.0"
-    immutable "~3.7.4"
-    object-assign "^4.1.1"
-
-draftjs-utils@^0.10.2:
-  version "0.10.2"
-  resolved "https://registry.yarnpkg.com/draftjs-utils/-/draftjs-utils-0.10.2.tgz#a7f16d2c1c174ac38ba3bbf700c256f176b2699c"
-  integrity sha512-EstHqr3R3JVcilJrBaO/A+01GvwwKmC7e4TCjC7S94ZeMh4IVmf60OuQXtHHpwItK8C2JCi3iljgN5KHkJboUg==
 
 dva-core@2.0.4:
   version "2.0.4"
@@ -3759,20 +3669,6 @@ fbjs@^0.8.15, fbjs@^0.8.3, fbjs@^0.8.9:
   dependencies:
     core-js "^1.0.0"
     isomorphic-fetch "^2.1.1"
-    loose-envify "^1.0.0"
-    object-assign "^4.1.0"
-    promise "^7.1.1"
-    setimmediate "^1.0.5"
-    ua-parser-js "^0.7.18"
-
-fbjs@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/fbjs/-/fbjs-2.0.0.tgz#01fb812138d7e31831ed3e374afe27b9169ef442"
-  integrity sha512-8XA8ny9ifxrAWlyhAbexXcs3rRMtxWcs3M0lctLfB49jRDHiaxj+Mo0XxbwE7nKZYzgCFoq64FS+WFd4IycPPQ==
-  dependencies:
-    core-js "^3.6.4"
-    cross-fetch "^3.0.4"
-    fbjs-css-vars "^1.0.0"
     loose-envify "^1.0.0"
     object-assign "^4.1.0"
     promise "^7.1.1"
@@ -4235,7 +4131,7 @@ immutability-helper@^3.1.1:
   resolved "https://registry.yarnpkg.com/immutability-helper/-/immutability-helper-3.1.1.tgz#2b86b2286ed3b1241c9e23b7b21e0444f52f77b7"
   integrity sha512-Q0QaXjPjwIju/28TsugCHNEASwoCcJSyJV3uO1sOIQGI0jKgm9f41Lvz0DZj3n46cNCyAZTsEYoY4C2bVRUzyQ==
 
-immutable@*, immutable@^3.7.4, immutable@^3.8.1, immutable@~3.8.2:
+immutable@^3.7.4, immutable@^3.8.1:
   version "3.8.2"
   resolved "https://registry.npmjs.org/immutable/-/immutable-3.8.2.tgz#c2439951455bb39913daf281376f1530e104adf3"
 
@@ -9067,11 +8963,6 @@ util@^0.11.0:
 uuid@^3.3.2:
   version "3.3.2"
   resolved "https://registry.npmjs.org/uuid/-/uuid-3.3.2.tgz#1b4af4955eb3077c501c23872fc6513811587131"
-
-uuid@^7.0.2:
-  version "7.0.3"
-  resolved "https://registry.yarnpkg.com/uuid/-/uuid-7.0.3.tgz#c5c9f2c8cf25dc0a372c4df1441c41f5bd0c680b"
-  integrity sha512-DPSke0pXhTZgoF/d+WSt2QaKMCFSfx7QegxEWT+JOuHF5aWrKEn0G+ztjuJg/gG8/ItK+rbPCD/yNv8yyih6Cg==
 
 uuid@^8.3.0:
   version "8.3.2"

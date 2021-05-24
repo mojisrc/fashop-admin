@@ -4,7 +4,8 @@ import { message, Modal } from "antd";
 import { connect } from "umi";
 import {  Button, TreeSelect } from "antd";
 import Arr from "@/utils/array";
-import _ from "lodash";
+import { isEmpty } from "@/utils";
+
 
 const FormItem = Form.Item;
 
@@ -72,7 +73,7 @@ export default class FolderChange extends Component {
                             value: `${item.id}`,
                             key: `${item.id}`
                         };
-                        if (typeof item["children"] !== "undefined" && !_.isEmpty(item.children)) {
+                        if (typeof item["children"] !== "undefined" && !isEmpty(item.children)) {
                             _item["children"] = loop(item.children);
                         }
                         return _item;
@@ -91,7 +92,7 @@ export default class FolderChange extends Component {
             const { imageIds, folderIds } = this.state;
             const { dispatch } = this.props;
             if (!err) {
-                if (!_.isEmpty(imageIds)) {
+                if (!isEmpty(imageIds)) {
                     dispatch({
                         type: "image/move",
                         payload: {
@@ -107,7 +108,7 @@ export default class FolderChange extends Component {
                         }
                     });
                 }
-                if (!_.isEmpty(folderIds)) {
+                if (!isEmpty(folderIds)) {
                     dispatch({
                         type: "image/folderMove",
                         payload: {

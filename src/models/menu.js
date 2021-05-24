@@ -1,5 +1,5 @@
 import memoizeOne from "memoize-one";
-import isEqual from "lodash/isEqual";
+import { isEqual } from "@/utils";
 import Authorized from "@/utils/authorized";
 import Policy from "fashop-policy";
 

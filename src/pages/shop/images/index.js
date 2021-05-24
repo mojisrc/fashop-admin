@@ -6,11 +6,11 @@ import { connect } from "umi";
 import Arr from "@/utils/array";
 import Folder from "./components/folder";
 import UploadDragger from "./components/upload";
-import _ from "lodash";
 import FolderAdd from "./components/add";
 import FolderItem from "./components/folder/item";
 import FolderImage from "./components/folder/image";
 import FolderChange from "./components/change";
+import { isEmpty } from "@/utils";
 
 const ButtonGroup = Button.Group;
 
@@ -41,7 +41,7 @@ export default class ImageSpacePage extends Component {
         batch: true,
         // 是否多选
         multi: true,
-        height: 'auto',
+        height: "auto",
         inModal: false
     };
     state = {
@@ -55,9 +55,9 @@ export default class ImageSpacePage extends Component {
 
     componentDidMount() {
         const { folderList } = this.props;
-        const { list } = folderList
+        const { list } = folderList;
         const folderTree = Arr.toTree(folderList.list);
-        this.setState({ folderTree })
+        this.setState({ folderTree });
         if (list.length === 0) {
             this.init();
         }
@@ -73,7 +73,7 @@ export default class ImageSpacePage extends Component {
                 this.setState({
                     folderTree
                 }, () => {
-                    if (!_.isEmpty(folderTree)) {
+                    if (!isEmpty(folderTree)) {
                         const _current_folder_id = folderTree[0].id;
                         this.initFolderInfo(current_folder_id === 0 ? _current_folder_id : current_folder_id);
                     }
@@ -137,9 +137,7 @@ export default class ImageSpacePage extends Component {
             const { imagesCheckedIds } = this.state;
             let _imagesCheckedIds = [...imagesCheckedIds];
             if (Arr.inArray(id, imagesCheckedIds)) {
-                _imagesCheckedIds = _.remove(imagesCheckedIds, function (n) {
-                    return id !== n;
-                });
+                _imagesCheckedIds = Arr.toggle(id, imagesCheckedIds);
             } else {
                 _imagesCheckedIds.push(id);
             }
@@ -165,9 +163,7 @@ export default class ImageSpacePage extends Component {
         const { folderCheckedIds } = this.state;
         let _folderCheckedIds = [...folderCheckedIds];
         if (Arr.inArray(id, folderCheckedIds)) {
-            _folderCheckedIds = _.remove(folderCheckedIds, function (n) {
-                return id !== n;
-            });
+            _folderCheckedIds = Arr.toggle(id, folderCheckedIds);
         } else {
             _folderCheckedIds.push(id);
         }
@@ -255,162 +251,143 @@ export default class ImageSpacePage extends Component {
     render() {
         const { folderTree, current_folder_id, imagesCheckedIds, folderCheckedIds } = this.state;
         const { folderInfo, dispatch, showSubFolder, batch, multi, inModal, height } = this.props;
-        const { image } = folderInfo || {}
-        const imageLength = Array.isArray(image) ? image.length : 0
-        const warpHeight = 48 + 40 + 15
+        const { image } = folderInfo || {};
+        const imageLength = Array.isArray(image) ? image.length : 0;
+        const warpHeight = 48 + 40 + 15;
         return (
-            <PageHeaderWrapper hiddenBreadcrumb={true} policy={'imagefolder/add'}>
-                <Card bordered={false} className={inModal ? styles.inModal : styles.card}>
-                    <div className={styles.main}>
-                        <div className={styles.left}>
-                            {folderTree ? <Folder
-                                ref={e => this.folder = e}
-                                folderTree={folderTree}
-                                onSelect={(e) => {
-                                    if (e.length > 0 && parseInt(e[0]) !== current_folder_id) {
-                                        this.initFolderInfo(parseInt(e[0]));
-                                    }
+          <PageHeaderWrapper hiddenBreadcrumb={true} policy={"imagefolder/add"}>
+              <Card bordered={false} className={inModal ? styles.inModal : styles.card}>
+                  <div className={styles.main}>
+                      <div className={styles.left}>
+                          {folderTree ? <Folder
+                            ref={e => this.folder = e}
+                            folderTree={folderTree}
+                            onSelect={(e) => {
+                                if (e.length > 0 && parseInt(e[0]) !== current_folder_id) {
+                                    this.initFolderInfo(parseInt(e[0]));
+                                }
+                            }}
+                            treeHeight={height > 0 ? height - 40 : window.innerHeight - warpHeight}
+                          /> : <div style={{ padding: 15 }}>
+                              <Skeleton active title={false} />
+                              <Skeleton active title={false} />
+                              <Skeleton active title={false} />
+                              <Skeleton active title={false} />
+                              <Skeleton active title={false} />
+                              <Skeleton active title={false} />
+                              <Skeleton active title={false} />
+                              <Skeleton active title={false} />
+                              <Skeleton active title={false} />
+                              <Skeleton active title={false} />
+                              <Skeleton active title={false} />
+                          </div>
+                          }
+                      </div>
+                      <div className={styles.right}>
+                          {this.getBreadCrumbs()}
+                          <div style={{ marginBottom: 15 }}>
+                              <Button
+                                onClick={() => {
+                                    this.UploadDragger.show();
                                 }}
-                                treeHeight={height > 0 ? height - 40 : window.innerHeight - warpHeight}
-                            /> : <div style={{ padding: 15 }}>
-                                <Skeleton active title={false} />
-                                <Skeleton active title={false} />
-                                <Skeleton active title={false} />
-                                <Skeleton active title={false} />
-                                <Skeleton active title={false} />
-                                <Skeleton active title={false} />
-                                <Skeleton active title={false} />
-                                <Skeleton active title={false} />
-                                <Skeleton active title={false} />
-                                <Skeleton active title={false} />
-                                <Skeleton active title={false} />
-                            </div>
-                            }
-                        </div>
-                        <div className={styles.right}>
-                            {this.getBreadCrumbs()}
-                            <div style={{ marginBottom: 15 }}>
-                                <Button
-                                    onClick={() => {
-                                        this.UploadDragger.show();
-                                    }}
-                                    style={{ marginRight: 10 }}
-                                >上传</Button>
-                                <Button
-                                    onClick={() => {
-                                        this.folderAdd.show({ pid: current_folder_id });
-                                    }}
-                                >新建文件夹</Button>
-                            </div>
-                            {batch && multi && <div style={{ marginBottom: 15 }}>
-                                <Checkbox
-                                    onChange={(e) => {
-                                        this.toggleCheckAll(e);
-                                    }}
-                                >全选</Checkbox>
-                                {!_.isEmpty(folderCheckedIds) || !_.isEmpty(imagesCheckedIds) ? <ButtonGroup>
-                                    <Button size={"small"}
-                                            onClick={() => {
-                                                this.onMutiDel();
-                                            }}
-                                    >删除</Button>
-                                    <Button size={"small"}
-                                            onClick={() => {
-                                                this.onMutiMove();
-                                            }}
-                                    >移动到</Button>
-                                </ButtonGroup> : null}
-                            </div>}
-                            <UploadDragger
-                                folder_id={current_folder_id}
-                                ref={e => this.UploadDragger = e}
-                                onClose={(fileList) => {
-                                    if (fileList.length > 0) {
-                                        this.initFolderInfo(current_folder_id);
-                                    }
+                                style={{ marginRight: 10 }}
+                              >上传</Button>
+                              <Button
+                                onClick={() => {
+                                    this.folderAdd.show({ pid: current_folder_id });
                                 }}
-                            />
-                            <div
-                                className={styles.folderImageWarp}
-                                style={height > 0 ? {
-                                    height: height - 85
-                                } : { height: window.innerHeight - warpHeight - 85 }}>
-                                {showSubFolder && <div className={styles.imageList}>
-                                    {folderInfo.folder && folderInfo.folder.map((item, index) => {
-                                        return <FolderItem
-                                            checked={Arr.inArray(item.id, folderCheckedIds)}
-                                            key={index}
-                                            name={item.title}
-                                            onChecked={() => {
-                                                this.toggleFolderCheckedIds(item.id);
-                                            }}
-                                            onNameInputBlur={(value) => {
-                                                if (value && value !== item.title) {
-                                                    dispatch({
-                                                        type: "image/folderEdit",
-                                                        payload: {
-                                                            id: item.id,
-                                                            title: value
-                                                        },
-                                                        callback: (e) => {
-                                                            if (e.code === 0) {
-                                                                this.initFolderInfo(current_folder_id);
-                                                            } else {
-                                                                message.error(e.msg);
-                                                            }
+                              >新建文件夹</Button>
+                          </div>
+                          {batch && multi && <div style={{ marginBottom: 15 }}>
+                              <Checkbox
+                                onChange={(e) => {
+                                    this.toggleCheckAll(e);
+                                }}
+                              >全选</Checkbox>
+                              {!isEmpty(folderCheckedIds) || !isEmpty(imagesCheckedIds) ? <ButtonGroup>
+                                  <Button size={"small"}
+                                          onClick={() => {
+                                              this.onMutiDel();
+                                          }}
+                                  >删除</Button>
+                                  <Button size={"small"}
+                                          onClick={() => {
+                                              this.onMutiMove();
+                                          }}
+                                  >移动到</Button>
+                              </ButtonGroup> : null}
+                          </div>}
+                          <UploadDragger
+                            folder_id={current_folder_id}
+                            ref={e => this.UploadDragger = e}
+                            onClose={(fileList) => {
+                                if (fileList.length > 0) {
+                                    this.initFolderInfo(current_folder_id);
+                                }
+                            }}
+                          />
+                          <div
+                            className={styles.folderImageWarp}
+                            style={height > 0 ? {
+                                height: height - 85
+                            } : { height: window.innerHeight - warpHeight - 85 }}>
+                              {showSubFolder && <div className={styles.imageList}>
+                                  {folderInfo.folder && folderInfo.folder.map((item, index) => {
+                                      return <FolderItem
+                                        checked={Arr.inArray(item.id, folderCheckedIds)}
+                                        key={index}
+                                        name={item.title}
+                                        onChecked={() => {
+                                            this.toggleFolderCheckedIds(item.id);
+                                        }}
+                                        onNameInputBlur={(value) => {
+                                            if (value && value !== item.title) {
+                                                dispatch({
+                                                    type: "image/folderEdit",
+                                                    payload: {
+                                                        id: item.id,
+                                                        title: value
+                                                    },
+                                                    callback: (e) => {
+                                                        if (e.code === 0) {
+                                                            this.initFolderInfo(current_folder_id);
+                                                        } else {
+                                                            message.error(e.msg);
                                                         }
-                                                    });
-                                                }
-                                            }}
-                                            onImageDoubleClick={() => {
-                                                this.folder.expandedKey(item.id);
-                                                if (item.id !== current_folder_id) {
-                                                    this.initFolderInfo(item.id);
-                                                }
-                                            }}
-                                        />;
-                                    })}
-                                </div>}
-                                <div className={styles.imageList}>
-                                    {imageLength > 0 && folderInfo.image.map((item, index) => {
-                                        return <FolderImage
-                                            checked={Arr.inArray(item.id, imagesCheckedIds)}
-                                            key={index}
-                                            url={item.url}
-                                            name={item.name}
-                                            onChecked={() => {
-                                                this.toggleImagesCheckedIds(item.id);
-                                            }}
-                                            onDel={() => {
-                                                Modal.confirm({
-                                                    title: "确定删除该图片吗？",
-                                                    okText: "确认",
-                                                    okType: "danger",
-                                                    cancelText: "取消",
-                                                    onOk: () => {
-                                                        dispatch({
-                                                            type: "image/del",
-                                                            payload: {
-                                                                ids: [item.id]
-                                                            },
-                                                            callback: (e) => {
-                                                                if (e.code === 0) {
-                                                                    this.initFolderInfo(current_folder_id);
-                                                                } else {
-                                                                    message.error(e.msg);
-                                                                }
-                                                            }
-                                                        });
                                                     }
                                                 });
-                                            }}
-                                            onNameInputBlur={(value) => {
-                                                if (value && value !== item.name) {
+                                            }
+                                        }}
+                                        onImageDoubleClick={() => {
+                                            this.folder.expandedKey(item.id);
+                                            if (item.id !== current_folder_id) {
+                                                this.initFolderInfo(item.id);
+                                            }
+                                        }}
+                                      />;
+                                  })}
+                              </div>}
+                              <div className={styles.imageList}>
+                                  {imageLength > 0 && folderInfo.image.map((item, index) => {
+                                      return <FolderImage
+                                        checked={Arr.inArray(item.id, imagesCheckedIds)}
+                                        key={index}
+                                        url={item.url}
+                                        name={item.name}
+                                        onChecked={() => {
+                                            this.toggleImagesCheckedIds(item.id);
+                                        }}
+                                        onDel={() => {
+                                            Modal.confirm({
+                                                title: "确定删除该图片吗？",
+                                                okText: "确认",
+                                                okType: "danger",
+                                                cancelText: "取消",
+                                                onOk: () => {
                                                     dispatch({
-                                                        type: "image/edit",
+                                                        type: "image/del",
                                                         payload: {
-                                                            id: item.id,
-                                                            name: value
+                                                            ids: [item.id]
                                                         },
                                                         callback: (e) => {
                                                             if (e.code === 0) {
@@ -421,38 +398,57 @@ export default class ImageSpacePage extends Component {
                                                         }
                                                     });
                                                 }
-                                            }}
-                                        />;
-                                    })}
-                                </div>
-                            </div>
-                            {showSubFolder && folderInfo && folderInfo.folder && folderInfo.folder.length === 0 && imageLength === 0 &&
-                            <Empty
-                                image={Empty.PRESENTED_IMAGE_SIMPLE}
-                                style={{
-                                    margin: "150px 0"
-                                }}
-                                imageStyle={{
-                                    height: 60
-                                }}
-                            />}
-                        </div>
-                    </div>
-                </Card>
-                <FolderAdd
-                    wrappedComponentRef={(form) => this.folderAdd = form}
-                    onSubmit={() => {
-                        this.folderAdd.close();
-                        this.init();
-                    }}
-                />
-                <FolderChange
-                    wrappedComponentRef={(form) => this.folderChange = form}
-                    onSubmit={() => {
-                        this.onFolderChangeClose();
-                    }}
-                />
-            </PageHeaderWrapper>
+                                            });
+                                        }}
+                                        onNameInputBlur={(value) => {
+                                            if (value && value !== item.name) {
+                                                dispatch({
+                                                    type: "image/edit",
+                                                    payload: {
+                                                        id: item.id,
+                                                        name: value
+                                                    },
+                                                    callback: (e) => {
+                                                        if (e.code === 0) {
+                                                            this.initFolderInfo(current_folder_id);
+                                                        } else {
+                                                            message.error(e.msg);
+                                                        }
+                                                    }
+                                                });
+                                            }
+                                        }}
+                                      />;
+                                  })}
+                              </div>
+                          </div>
+                          {showSubFolder && folderInfo && folderInfo.folder && folderInfo.folder.length === 0 && imageLength === 0 &&
+                          <Empty
+                            image={Empty.PRESENTED_IMAGE_SIMPLE}
+                            style={{
+                                margin: "150px 0"
+                            }}
+                            imageStyle={{
+                                height: 60
+                            }}
+                          />}
+                      </div>
+                  </div>
+              </Card>
+              <FolderAdd
+                wrappedComponentRef={(form) => this.folderAdd = form}
+                onSubmit={() => {
+                    this.folderAdd.close();
+                    this.init();
+                }}
+              />
+              <FolderChange
+                wrappedComponentRef={(form) => this.folderChange = form}
+                onSubmit={() => {
+                    this.onFolderChangeClose();
+                }}
+              />
+          </PageHeaderWrapper>
         );
     }
 
@@ -461,18 +457,18 @@ export default class ImageSpacePage extends Component {
         let breadCrumbs = [];
         let dataList = [];
         const loop = data =>
-            data.map(item => {
-                dataList.push({
-                    id: item.id,
-                    title: item.title,
-                    pid: item.pid
-                });
-                if (typeof item["children"] !== "undefined" && !_.isEmpty(item.children)) {
-                    loop(item.children);
-                }
-            });
+          data.map(item => {
+              dataList.push({
+                  id: item.id,
+                  title: item.title,
+                  pid: item.pid
+              });
+              if (typeof item["children"] !== "undefined" && !isEmpty(item.children)) {
+                  loop(item.children);
+              }
+          });
 
-        !_.isEmpty(folderTree) && loop(folderTree);
+        !isEmpty(folderTree) && loop(folderTree);
 
         const getParent = (current) => {
             breadCrumbs.unshift({

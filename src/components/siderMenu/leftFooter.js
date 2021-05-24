@@ -4,6 +4,7 @@ import { Row, Col, Modal } from "antd";
 import { history as router } from "umi";
 import { connect } from "umi";
 import PoweroffOutlined from "@ant-design/icons/PoweroffOutlined";
+import UserOutlined from "@ant-design/icons/UserOutlined"
 
 const confirm = Modal.confirm;
 @connect()

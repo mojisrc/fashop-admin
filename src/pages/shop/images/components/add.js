@@ -1,10 +1,10 @@
-import { Form } from '@ant-design/compatible';
+import { Form } from "@ant-design/compatible";
 import React, { Component } from "react";
 import { message, Modal } from "antd";
 import { connect } from "umi";
-import {  Input, Button, TreeSelect } from "antd";
+import { Input, Button, TreeSelect } from "antd";
 import Arr from "@/utils/array";
-import _ from "lodash";
+import { isEmpty } from "@/utils";
 
 const FormItem = Form.Item;
 
@@ -35,10 +35,10 @@ export default class FolderAdd extends Component {
             visible: true
         }, () => {
             this.init();
-            if (e && typeof e['pid'] !== "undefined") {
+            if (e && typeof e["pid"] !== "undefined") {
                 const { form: { setFieldsValue } } = this.props;
                 setFieldsValue({
-                    pid: e['pid']
+                    pid: e["pid"]
                 });
             }
         });
@@ -57,17 +57,17 @@ export default class FolderAdd extends Component {
             callback: (response) => {
                 const folderTree = Arr.toTree(response.result.list);
                 const loop = data =>
-                    data.map(item => {
-                        let _item = {
-                            title: item.title,
-                            value: `${item.id}`,
-                            key: `${item.id}`
-                        };
-                        if (typeof item["children"] !== "undefined" && !_.isEmpty(item.children)) {
-                            _item["children"] = loop(item.children);
-                        }
-                        return _item;
-                    });
+                  data.map(item => {
+                      let _item = {
+                          title: item.title,
+                          value: `${item.id}`,
+                          key: `${item.id}`
+                      };
+                      if (typeof item["children"] !== "undefined" && !isEmpty(item.children)) {
+                          _item["children"] = loop(item.children);
+                      }
+                      return _item;
+                  });
                 this.setState({
                     folderTree: loop(folderTree)
                 });
@@ -104,37 +104,37 @@ export default class FolderAdd extends Component {
         const { submitLoading } = this.props;
         const { getFieldDecorator } = this.props.form;
         return <Modal
-            title="新建文件夹"
-            visible={visible}
-            width={756}
-            footer={false}
-            onCancel={() => {
-                this.setState({
-                    visible: false
-                });
-            }}
+          title="新建文件夹"
+          visible={visible}
+          width={756}
+          footer={false}
+          onCancel={() => {
+              this.setState({
+                  visible: false
+              });
+          }}
         >
 
             <Form onSubmit={this.handleSubmit} style={{ maxWidth: 600 }}>
                 <FormItem
-                    label="上级文件夹"
-                    help="如不选择，则默认为根目录文件夹"
-                    {...formItemLayout}
+                  label="上级文件夹"
+                  help="如不选择，则默认为根目录文件夹"
+                  {...formItemLayout}
                 >
                     {getFieldDecorator("pid")(
-                        <TreeSelect
-                            treeData={folderTree}
-                            showSearch
-                            dropdownStyle={{ maxHeight: 400, overflow: "auto" }}
-                            placeholder="请输入文件夹名称"
-                            allowClear
-                            treeDefaultExpandAll
-                        />
+                      <TreeSelect
+                        treeData={folderTree}
+                        showSearch
+                        dropdownStyle={{ maxHeight: 400, overflow: "auto" }}
+                        placeholder="请输入文件夹名称"
+                        allowClear
+                        treeDefaultExpandAll
+                      />
                     )}
                 </FormItem>
                 <FormItem
-                    label="分组名称"
-                    {...formItemLayout}
+                  label="分组名称"
+                  {...formItemLayout}
                 >
                     {getFieldDecorator("title", {
                         rules: [{
@@ -142,10 +142,10 @@ export default class FolderAdd extends Component {
                             message: "请输入分组名称"
                         }]
                     })(
-                        <Input
-                            placeholder='请输入分组名称，长度不超过10个字'
-                            style={{ width: "100%" }}
-                        />
+                      <Input
+                        placeholder='请输入分组名称，长度不超过10个字'
+                        style={{ width: "100%" }}
+                      />
                     )}
                 </FormItem>
 

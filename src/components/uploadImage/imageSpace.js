@@ -6,7 +6,8 @@ import styles from "./index.css";
 import ImageGroup from "./imageGroup";
 import PropTypes from "prop-types";
 import ImageSpaceModal from "@/components/imageSpace";
-import _ from "lodash";
+import { isEmpty } from "@/utils";
+
 // 对imageSpace modal的升级 临时写法
 export default class UploadImageSpace extends Component {
     static propTypes = {
@@ -43,7 +44,7 @@ export default class UploadImageSpace extends Component {
         if (multi === true) {
             _url = Array.isArray(url) ? url : [];
         } else {
-            _url = !_.isEmpty(url) ? [url] : [];
+            _url = !isEmpty(url) ? [url] : [];
         }
         return (
             <View className={styles.view1}>

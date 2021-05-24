@@ -15,7 +15,6 @@ import TopMenu from "./topMenu";
 import Title from "./title";
 import TextNav from "./textNav";
 import Coupon from "./coupon/index";
-import RichText from "./richText";
 import GoodsRelation from "./goodsRelation";
 import GoodsGuessLike from "./goodsGuessLike";
 
@@ -88,13 +87,6 @@ export default class PageControl extends Component {
                         data={itemData.data}
                         getValues={this.props.getValues}
                         refreshCoupon={this.props.couponListRefresh}
-                    />;
-                    break;
-                case "rich_text":
-                    item = <RichText
-                        options={itemData.options}
-                        data={itemData.data}
-                        getValues={this.props.getValues}
                     />;
                     break;
                 case "goods_relation":

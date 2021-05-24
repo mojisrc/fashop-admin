@@ -22,8 +22,6 @@
         "ahooks": "^2.9.6",
         "antd": "^4.15.6",
         "antd-dayjs-webpack-plugin": "^1.0.6",
-        "braft-editor": "https://gitee.com/hanwenbo/braft-editor.git",
-        "braft-finder": "/Users/hanwenbo/react/braft-finder",
         "classnames": "^2.2.6",
         "dom-parser": "^0.1.6",
         "dom-to-image": "^2.6.0",
@@ -35,7 +33,6 @@
         "immutability-helper": "^3.1.1",
         "js-file-download": "^0.4.9",
         "lint-staged": "^10.5.4",
-        "lodash": "^4.17.21",
         "lodash-decorators": "^6.0.1",
         "memoize-one": "^5.0.0",
         "numeral": "^2.0.6",
@@ -87,9 +84,5 @@
         "react-intl": "^5.8.1",
         "typescript": "^4.1.2",
         "yorkie": "^2.0.0"
-    },
-    "resolutions": {
-        "braft-convert": "https://gitee.com/hanwenbo/braft-convert.git",
-        "braft-utils": "^3.0.12"
     }
 }

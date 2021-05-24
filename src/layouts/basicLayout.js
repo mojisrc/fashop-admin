@@ -1,7 +1,7 @@
 import React from "react";
 import { Layout, Spin } from "antd";
 import DocumentTitle from "react-document-title";
-import isEqual from "lodash/isEqual";
+import { isEqual } from "@/utils";
 import memoizeOne from "memoize-one";
 import { connect } from "umi";
 import { ContainerQuery } from "react-container-query";

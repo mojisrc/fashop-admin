@@ -17,7 +17,6 @@ import AuxiliaryBlank from "./auxiliaryBlank/index";
 import Coupon from "./coupon/index";
 import styles from "./index.css";
 import Scrollbar from "react-scrollbars-custom";
-import RichText from "./richText";
 import GoodsRelation from "./goodsRelation";
 import GoodsGuessLike from "./goodsGuessLike";
 import EditOutlined from "@ant-design/icons/EditOutlined";
@@ -286,8 +285,6 @@ export default class PageView extends Component {
                 return <TextNav options={options} data={data} />;
             case "coupon":
                 return <Coupon options={options} data={data} />;
-            case "rich_text":
-                return <RichText options={options} data={data} />;
             case "goods_relation":
                 return <GoodsRelation options={options} data={data} />;
             case "goods_guess_like":
