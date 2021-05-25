@@ -4,7 +4,7 @@ import * as ReactDOM from "react-dom";
 import styles from "./index.css";
 import { View } from "@/components/flexView";
 import { connect } from "umi";
-import moment from "dayjs";
+import dayjs from "dayjs";
 import Image from "@/components/image/index";
 import Query from "@/utils/query";
 import EditAddress from "../editAddress/index";
@@ -45,7 +45,7 @@ class OrderListTable extends Component {
             { key: "keywords_type", rule: ["rely", "keywords"] }
         ]);
         if (get["create_time"] !== undefined) {
-            get["create_time"] = [moment(get["create_time"][0]).unix(), moment(get["create_time"][1]).unix()];
+            get["create_time"] = [dayjs(get["create_time"][0]).unix(), dayjs(get["create_time"][1]).unix()];
         }
         dispatch({
             type: "order/list",
@@ -91,7 +91,7 @@ class OrderListTable extends Component {
                 dataIndex: "create_time",
                 key: "create_time",
                 render: (text) => {
-                    return moment(text, "X").format("YYYY-MM-DD HH:mm:ss");
+                    return dayjs(text * 1000).format("YYYY-MM-DD HH:mm:ss");
                 }
             }, {
                 title: "订单状态",

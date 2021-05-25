@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "umi";
 import { Input, Button, Table, Switch, message,Popconfirm } from "antd";
-import moment from "dayjs";
+import dayjs from "dayjs";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { View } from "@/components/flexView";
 import styles from "./index.css";
@@ -57,11 +57,11 @@ export default class MyTemplate extends Component {
         }, {
             title: "创建时间",
             dataIndex: "create_time",
-            render: text => moment(text, "X").format("YYYY-MM-DD HH:mm:ss")
+            render: text => dayjs(text * 1000).format("YYYY-MM-DD HH:mm:ss")
         }, {
             title: "最后编辑",
             dataIndex: "update_time",
-            render: text => text ? moment(text, "X").format("YYYY-MM-DD HH:mm:ss") : "-"
+            render: text => text ? dayjs(text * 1000).format("YYYY-MM-DD HH:mm:ss") : "-"
         }, {
             title: "设为主页",
             dataIndex: "is_portal",

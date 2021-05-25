@@ -50,9 +50,7 @@ export default defineConfig({
         edge: false,
         ios: false
     },
-    dynamicImport: {
-        loading: "@/components/pageLoading/index"
-    },
+    dynamicImport: false,
     define: {
         APP_TYPE: process.env.APP_TYPE || "",
         "process.env.dev": {

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import styles from "./index.css";
 import { View } from "@/components/flexView";
 import InfoRow from "@/components/public/info/infoRow";
-import moment from "dayjs";
+import dayjs from "dayjs";
 import { history as router } from "umi";
 
 export default class DeliverInfo extends Component {
@@ -37,7 +37,7 @@ export default class DeliverInfo extends Component {
                         }
                         , {
                             title: "发货时间",
-                            info: moment(tracking_time, "X").format("YYYY-MM-DD HH:mm:ss")
+                            info: dayjs(tracking_time * 1000).format("YYYY-MM-DD HH:mm:ss")
                         }, {
                             title: "发货备注",
                             info: remark ? remark : "无"

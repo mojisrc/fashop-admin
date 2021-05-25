@@ -6,7 +6,7 @@ import styles from "@/styles/customer/customerDetail.css";
 import ShoppingInfo from "@/pages/user/components/detail/shopping";
 import ReceiveInfo from "@/pages/user/components/detail/receive";
 import Image from "@/components/image";
-import moment from "dayjs";
+import dayjs from "dayjs";
 import PageHeaderWrapper from "@/components/pageHeaderWrapper";
 import User from "@/utils/user";
 
@@ -103,14 +103,14 @@ export default class Detail extends Component {
                                     <View className={styles.infoView}>
                                         <p>昵称：<span>{nickname}</span></p>
                                         <p>性别：<span>{sex === 1 ? "男" : sex === 2 ? "女" : "未知"}</span></p>
-                                        <p>注册时间：<span>{moment(create_time, "X").format("YYYY-MM-DD HH:mm:ss")}</span>
+                                        <p>注册时间：<span>{dayjs(create_time * 1000).format("YYYY-MM-DD HH:mm:ss")}</span>
                                         </p>
                                     </View>
                                 </Col>
                                 <Col span={5}>
                                     <View className={styles.infoView}>
                                         <p>手机号：<span>{phone}</span></p>
-                                        {/*<p>生日：<span>{birthday ? moment(birthday, "X").format("YYYY-MM-DD HH:mm:ss") : "-"}</span></p>*/}
+                                        {/*<p>生日：<span>{birthday ? dayjs(birthday* 1000).format("YYYY-MM-DD HH:mm:ss") : "-"}</span></p>*/}
                                         <p>注册来源：<span>{User.sourceString(source)}</span></p>
                                     </View>
                                 </Col>

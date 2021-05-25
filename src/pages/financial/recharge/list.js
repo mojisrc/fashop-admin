@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Table, Card } from "antd";
 import { connect } from "umi";
-import moment from "dayjs";
+import dayjs from "dayjs";
 import PageHeaderWrapper from "@/components/pageHeaderWrapper/index";
 import PageList from "@/components/pageList/index";
 import Image from "@/components/image";
@@ -108,14 +108,14 @@ class RechargeList extends Component {
                 dataIndex: "payment_time",
                 key: "payment_time",
                 render: (text) => {
-                    return text > 0 ? moment(text, "X").format("YYYY-MM-DD HH:mm:ss") : "-";
+                    return text > 0 ? dayjs(text * 1000).format("YYYY-MM-DD HH:mm:ss") : "-";
                 }
             }, {
                 title: "充值时间",
                 dataIndex: "create_time",
                 key: "create_time",
                 render: (text) => {
-                    return text > 0 ? moment(text, "X").format("YYYY-MM-DD HH:mm:ss") : "-";
+                    return text > 0 ? dayjs(text * 1000).format("YYYY-MM-DD HH:mm:ss") : "-";
                 }
             }
         ];

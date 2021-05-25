@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import styles from "../index.css";
 import { View } from "@/components/flexView";
 import InfoRow from "@/components/public/info/infoRow";
-import moment from "dayjs";
+import dayjs from "dayjs";
 import { history as router } from "umi";
 
 export default class OrderDetailBasicInfo extends Component {
@@ -26,7 +26,7 @@ export default class OrderDetailBasicInfo extends Component {
                         },
                         {
                             title: "申请时间",
-                            info: moment(create_time, "X").format("YYYY-MM-DD HH:mm:ss")
+                            info: dayjs(create_time * 1000).format("YYYY-MM-DD HH:mm:ss")
                         },
                         {
                             title: "支付方式",

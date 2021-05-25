@@ -3,7 +3,7 @@ import { Table } from "antd";
 import styles from "./index.css";
 import { View } from "@/components/flexView";
 import { connect } from "umi";
-import moment from "dayjs";
+import dayjs from "dayjs";
 import Image from "@/components/image/index";
 import PageList from "@/components/pageList/index";
 import { history as router } from "umi";
@@ -76,7 +76,7 @@ export default class OrderManagementTable extends Component {
                 dataIndex: "create_time",
                 key: "create_time",
                 render: (text) => {
-                    return moment(text, "X").format("YYYY-MM-DD HH:mm:ss");
+                    return dayjs(text * 1000).format("YYYY-MM-DD HH:mm:ss");
                 }
             }, {
                 title: "订单状态",

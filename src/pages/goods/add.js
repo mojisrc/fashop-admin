@@ -23,7 +23,7 @@ import Arr from "@/utils/array";
 import Antd from "@/utils/antd";
 import { history as router } from "umi";
 import GoodsFreight from "@/pages/goods/components/add/freight";
-import moment from "dayjs";
+import dayjs from "dayjs";
 import SelectBrand from "@/pages/goods/components/selectBrand";
 import SelectVideo from "@/pages/goods/components/selectVideo";
 import ImageSpace from "@/components/uploadImage/imageSpace";
@@ -102,7 +102,7 @@ class GoodsEdit extends Component {
             setFieldsValue(
               typeof cache.formValues["sale_time"] !== "undefined" ? {
                   ...cache.formValues,
-                  sale_time: moment(cache.formValues.sale_time)
+                  sale_time: dayjs(cache.formValues.sale_time)
               } : cache.formValues
             );
         }

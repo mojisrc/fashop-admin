@@ -3,7 +3,7 @@ import { Table, Button, Tag, Card } from "antd";
 import styles from "./index.css";
 import { View } from "@/components/flexView";
 import { connect } from "umi";
-import moment from "dayjs";
+import dayjs from "dayjs";
 import { Modal } from "antd";
 import { history as router } from "umi";
 import PageList from "@/components/pageList";
@@ -89,7 +89,7 @@ class FreightList extends Component {
                 dataIndex: "create_time",
                 key: "create_time",
                 render: (text) => {
-                    return moment(text, "X").format("YYYY-MM-DD HH:mm:ss");
+                    return dayjs(text * 1000).format("YYYY-MM-DD HH:mm:ss");
                 }
             },
             {

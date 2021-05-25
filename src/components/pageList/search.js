@@ -4,7 +4,7 @@ import { Form } from '@ant-design/compatible';
 import '@ant-design/compatible/assets/index.css';
 import { Button, Input, Select, DatePicker, TreeSelect } from "antd";
 import { initialValue } from "@/utils/form";
-import moment from "dayjs";
+import dayjs from "dayjs";
 
 const Option = Select.Option;
 const { RangePicker } = DatePicker;
@@ -125,7 +125,7 @@ class Search extends Component {
 
     timeRangeToStamp(times) {
         if (times && Array.isArray(times) && times.length === 2) {
-            times = [moment(times[0]).unix(), moment(times[1]).unix()];
+            times = [dayjs(times[0]).unix(), dayjs(times[1]).unix()];
         } else {
             times = [];
         }
@@ -262,7 +262,7 @@ class Search extends Component {
             }, timeRange);
 
             if (Array.isArray(timeRange.initialValue) && timeRange.initialValue.length === 2) {
-                timeRange.initialValue = [moment(parseInt(timeRange.initialValue[0] + "000")), moment(parseInt(timeRange.initialValue[1] + "000"))];
+                timeRange.initialValue = [dayjs(parseInt(timeRange.initialValue[0] + "000")), dayjs(parseInt(timeRange.initialValue[1] + "000"))];
             }
             this.values[timeRange.field] = timeRange.initialValue
 

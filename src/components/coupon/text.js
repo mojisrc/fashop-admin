@@ -1,7 +1,5 @@
 import React, { Component } from "react";
-import moment from "dayjs";
-
-
+import dayjs from "dayjs";
 export default class CouponText extends Component {
 
     render() {
@@ -19,7 +17,7 @@ export default class CouponText extends Component {
             {
                 data.valid_time_choice === 1 ?
                     <div>
-                        {moment(data.valid_start_time, "X").format("YYYY.MM.DD")} - {moment(data.valid_end_time, "X").format("YYYY.MM.DD")}
+                        {dayjs(data.valid_start_time*1000).format("YYYY.MM.DD")} - {dayjs(data.valid_end_time*1000).format("YYYY.MM.DD")}
                     </div>
                     : null
             }

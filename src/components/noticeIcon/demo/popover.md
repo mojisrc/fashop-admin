@@ -7,7 +7,7 @@ title: 带浮层卡片
 
 ````jsx
 import NoticeIcon from 'ant-design-pro/lib/NoticeIcon';
-import moment from 'moment';
+import dayjs from 'dayjs';
 import { Tag } from 'antd';
 
 const data = [{
@@ -110,7 +110,7 @@ function getNoticeData(notices) {
   const newNotices = notices.map((notice) => {
     const newNotice = { ...notice };
     if (newNotice.datetime) {
-      newNotice.datetime = moment(notice.datetime).fromNow();
+      newNotice.datetime = dayjs(notice.datetime).fromNow();
     }
     // transform id to item key
     if (newNotice.id) {

@@ -4,7 +4,7 @@ import styles from "./index.css";
 import { View } from "@/components/flexView";
 import { connect } from "umi";
 import Image from "@/components/image/index";
-import moment from "dayjs";
+import dayjs from "dayjs";
 import Query from "@/utils/query";
 import GoodsApi from "@/services/goods";
 import { history as router } from "umi";
@@ -112,7 +112,7 @@ export default class GoodsListTable extends Component {
             }, {
                 title: "创建时间",
                 dataIndex: "create_time",
-                render: e => moment(e * 1000).format("YYYY-MM-DD hh:mm"),
+                render: e => dayjs(e * 1000).format("YYYY-MM-DD hh:mm"),
                 width: 200
             }, {
                 title: "上架状态",

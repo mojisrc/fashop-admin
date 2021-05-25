@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { View } from "@/components/flexView";
 import { Modal, Table, Button } from "antd";
 import { connect } from "umi";
-import moment from "dayjs";
+import dayjs from "dayjs";
 
 @connect(({ goodsRelation, loading }) => ({
     relationList: goodsRelation.pageGoodsRelationList.result,
@@ -86,7 +86,7 @@ export default class SelectGoodsRelation extends Component {
                 }, {
                     title: "创建时间",
                     dataIndex: "create_time",
-                    render: text => moment(text, "X").format("YYYY-MM-DD HH:mm:ss")
+                    render: text => dayjs(text * 1000).format("YYYY-MM-DD HH:mm:ss")
                 }, {
                 title: "",
                 dataIndex: "is_portal",

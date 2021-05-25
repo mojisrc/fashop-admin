@@ -5,7 +5,7 @@ import { Card, Tag } from "antd";
 import OrderEditPrice from "@/pages/order/components/editPrice/index";
 import { Table, Button, message } from "antd";
 import { View } from "@/components/flexView";
-import moment from "dayjs";
+import dayjs from "dayjs";
 import Image from "@/components/image/index";
 import { history as router } from "umi";
 import styles from "./list.css";
@@ -153,7 +153,7 @@ class List extends Component {
                 title: "下单时间",
                 dataIndex: "create_time",
                 key: "create_time",
-                render: text => moment(text, "X").format("YYYY-MM-DD HH:mm:ss")
+                render: text => dayjs(text * 1000).format("YYYY-MM-DD HH:mm:ss")
             }, {
                 title: "订单状态",
                 dataIndex: "state",

@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from "react";
 import { Table, Card, Divider, Modal } from "antd";
 import { connect } from "umi";
-import moment from "dayjs";
+import dayjs from "dayjs";
 import PageHeaderWrapper from "@/components/pageHeaderWrapper/index";
 import PageList from "@/components/pageList/index";
 
@@ -87,7 +87,7 @@ class WithdrawalList extends Component {
                 dataIndex: "create_time",
                 key: "create_time",
                 render: (text) => {
-                    return text > 0 ? moment(text, "X").format("YYYY-MM-DD HH:mm:ss") : "-";
+                    return text > 0 ? dayjs(text * 1000).format("YYYY-MM-DD HH:mm:ss") : "-";
                 }
             }, {
                 title: "提现金额（元）",
@@ -105,7 +105,7 @@ class WithdrawalList extends Component {
                 dataIndex: "payment_time",
                 key: "payment_time",
                 render: (text) => {
-                    return text > 0 ? moment(text, "X").format("YYYY-MM-DD HH:mm:ss") : "-";
+                    return text > 0 ? dayjs(text * 1000).format("YYYY-MM-DD HH:mm:ss") : "-";
                 }
             }, {
                 title: "支付状态",

@@ -3,7 +3,7 @@ import { View } from "@/components/flexView";
 import { Tabs, DatePicker } from "antd";
 import styles from "./index.css";
 import statistics from "@/services/statistics";
-import moment from "dayjs";
+import dayjs from "dayjs";
 import ReactEChartsCore from "echarts-for-react/lib/core";
 import * as echarts from "echarts/core";
 import { BarChart, } from 'echarts/charts';
@@ -22,7 +22,7 @@ const { MonthPicker } = DatePicker;
 export default class Charts extends Component {
     state = {
         activeKey: "月销售额",
-        chartDate: moment(`${moment().format("YYYY")}-${moment().format("MM")}`),
+        chartDate: dayjs(`${dayjs().format("YYYY")}-${dayjs().format("MM")}`),
         monthSaleChartList: [],
         monthOrderChartList: [],
         customerGrowthChartList: [],
@@ -33,7 +33,7 @@ export default class Charts extends Component {
 
     componentDidMount() {
         const { activeKey, chartDate } = this.state;
-        this.initChart(moment(chartDate).format("YYYY-MM"), activeKey);
+        this.initChart(dayjs(chartDate).format("YYYY-MM"), activeKey);
     }
 
     async initChart(date, activeKey) {
@@ -232,7 +232,7 @@ export default class Charts extends Component {
 
         // 选定的时间必须小于当前月
         function disabledDate(current) {
-            return current && current > moment().endOf("day");
+            return current && current > dayjs().endOf("day");
         }
 
         return (
@@ -241,7 +241,7 @@ export default class Charts extends Component {
                 activeKey={activeKey}
                 onChange={(activeKey) => {
                     this.setState({ activeKey });
-                    this.initChart(moment(chartDate).format("YYYY-MM"), activeKey);
+                    this.initChart(dayjs(chartDate).format("YYYY-MM"), activeKey);
                 }}
                 tabBarExtraContent={
                     <View className={styles.chartOperate}>

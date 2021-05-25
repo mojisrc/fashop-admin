@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "umi";
 import PageHeaderWrapper from "@/components/pageHeaderWrapper";
 import { Card, Descriptions, Button, Divider } from "antd";
-import moment from "dayjs";
+import dayjs from "dayjs";
 import OrderPrintGoodsList from "@/pages/order/components/print/goodsList";
 import styles from "./print.css"
 
@@ -85,7 +85,7 @@ class List extends Component {
                                         {tracking_time > 0 && <DescriptionsItem
                                             label="出库日期"
                                         >
-                                            {moment(tracking_time, "X").format("YYYY-MM-DD HH:mm:ss")}
+                                            {dayjs(tracking_time * 1000).format("YYYY-MM-DD HH:mm:ss")}
                                         </DescriptionsItem>}
                                         <DescriptionsItem label="客户">{reciver_name}</DescriptionsItem>
                                         {need_express === 1 && <DescriptionsItem label="配送方式">

@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import styles from "./index.css";
 import { View } from "@/components/flexView";
 import InfoRow from "@/components/public/info/infoRow";
-import moment from 'moment'
+import dayjs from 'dayjs'
 
 export default class OrderDetailBasicInfo extends Component{
     render() {
@@ -19,7 +19,7 @@ export default class OrderDetailBasicInfo extends Component{
                         },
                         {
                             title: '拼团状态',
-                            info: moment(create_time, 'X').format('YYYY-MM-DD HH:mm:ss'),
+                            info: dayjs(create_time * 1000).format('YYYY-MM-DD HH:mm:ss'),
                         },
                         {
                             title: '拼团时限',

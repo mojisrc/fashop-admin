@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Row, Col, Button, Input, Rate, Switch, Pagination, Spin, Card, Image, Avatar, Space } from "antd";
 import styles from "./evaluate.css";
 import { View } from "@/components/flexView";
-import moment from "dayjs";
+import dayjs from "dayjs";
 import { connect } from "umi";
 import GoodsApi from "@/services/goods";
 import PageList from "@/components/pageList";
@@ -159,7 +159,7 @@ class Evaluate extends Component {
                                                 <View className={styles.topRight}>
                                             <span>
                                                 {
-                                                    moment(item.create_time, "X").format("YYYY-MM-DD HH:mm:ss")
+                                                    dayjs(item.create_time * 1000).format("YYYY-MM-DD HH:mm:ss")
                                                 }
                                             </span>
                                                     <p>
@@ -229,7 +229,7 @@ class Evaluate extends Component {
                                                         >
                                                             <p className={styles.contentItemTop}>
                                                                 <i>管理员</i>
-                                                                <span>{moment(item.reply_time, "X").format("YYYY-MM-DD HH:mm")}</span>
+                                                                <span>{dayjs(item.reply_time* 1000).format("YYYY-MM-DD HH:mm")}</span>
                                                             </p>
                                                             <p
                                                                 className={styles.contentItemBot}
@@ -247,7 +247,7 @@ class Evaluate extends Component {
                                                         >
                                                             <p className={styles.contentItemTop}>
                                                                 <i>{item.nickname}</i>
-                                                                <span>{moment(item.additional_time, "X").format("YYYY-MM-DD HH:mm")}</span>
+                                                                <span>{dayjs(item.additional_time* 1000).format("YYYY-MM-DD HH:mm")}</span>
                                                             </p>
                                                             <p
                                                                 className={styles.contentItemBot}
@@ -274,7 +274,7 @@ class Evaluate extends Component {
                                                         >
                                                             <p className={styles.contentItemTop}>
                                                                 <i>管理员</i>
-                                                                <span>{moment(item.reply_time2, "X").format("YYYY-MM-DD HH:mm")}</span>
+                                                                <span>{dayjs(item.reply_time2* 1000).format("YYYY-MM-DD HH:mm")}</span>
                                                             </p>
                                                             <p
                                                                 className={styles.contentItemBot}

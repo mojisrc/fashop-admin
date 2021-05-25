@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { View } from "@/components/flexView";
 import { Modal, Table, Button } from "antd";
 import { connect } from "umi";
-import moment from "dayjs";
+import dayjs from "dayjs";
 
 @connect(({ categoryPage, loading }) => ({
     pageList: categoryPage.list.result,
@@ -77,7 +77,7 @@ export default class SelectCategoryPage extends Component {
             }, {
                 title: "最后编辑",
                 dataIndex: "update_time",
-                render: text => text ? moment(text, "X").format("YYYY-MM-DD HH:mm") : "-"
+                render: text => text ? dayjs(text * 1000).format("YYYY-MM-DD HH:mm") : "-"
             }, {
                 title: "",
                 dataIndex: "is_portal",

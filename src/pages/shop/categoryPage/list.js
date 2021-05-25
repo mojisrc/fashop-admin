@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "umi";
 import { Button, Table, Switch, message, Popconfirm } from "antd";
-import moment from "dayjs";
+import dayjs from "dayjs";
 import { View } from "@/components/flexView";
 import styles from "./list.css";
 import { history as router } from "umi";
@@ -56,11 +56,11 @@ export default class CategoryPage extends Component {
         }, {
             title: "创建时间",
             dataIndex: "create_time",
-            render: text => moment(text, "X").format("YYYY-MM-DD HH:mm:ss")
+            render: text => dayjs(text * 1000).format("YYYY-MM-DD HH:mm:ss")
         }, {
             title: "最后编辑",
             dataIndex: "update_time",
-            render: text => text ? moment(text, "X").format("YYYY-MM-DD HH:mm:ss") : "-"
+            render: text => text ? dayjs(text * 1000).format("YYYY-MM-DD HH:mm:ss") : "-"
         }, {
             title: "设为主页",
             dataIndex: "is_portal",

@@ -8,7 +8,7 @@ import Image from "@/components/image";
 import GoodsApi from "@/services/goods";
 import styles from "@/pages/goods/components/list/table/index.css";
 import { View } from "@/components/flexView";
-import moment from "dayjs";
+import dayjs from "dayjs";
 import { history as router } from "umi";
 import Antd from "@/utils/antd";
 @connect(({ goods, goodsCategory, loading }) => ({
@@ -120,7 +120,7 @@ export default class GoodsList extends Component {
             }, {
                 title: "开售时间",
                 dataIndex: "sale_time",
-                render: e => moment(e * 1000).format("YYYY-MM-DD hh:mm"),
+                render: e => dayjs(e * 1000).format("YYYY-MM-DD hh:mm"),
                 width: 200
             }, {
                 title: "上架状态",

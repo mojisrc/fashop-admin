@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import styles from "./index.css";
-import moment from "dayjs";
+import dayjs from "dayjs";
 
 export default class Coupon extends Component {
     render() {
@@ -17,7 +17,7 @@ export default class Coupon extends Component {
 
                         <div>
                             <h3>{item.title}</h3>
-                            <em>{moment(item.valid_start_time, "X").format("YYYY.MM.DD")} - {moment(item.valid_end_time, "X").format("YYYY.MM.DD")}</em>
+                            <em>{dayjs(item.valid_start_time * 1000).format("YYYY.MM.DD")} - {dayjs(item.valid_end_time* 1000).format("YYYY.MM.DD")}</em>
                             <i>{item.goods_choice === 1 ? "全店商品可用" : "部分商品可用"}</i>
                         </div>
                     </div>

@@ -3,7 +3,7 @@ import { connect } from "umi";
 import PageHeaderWrapper from "@/components/pageHeaderWrapper";
 import { Card, Table, Button } from "antd";
 import { View } from "@/components/flexView";
-import moment from "dayjs";
+import dayjs from "dayjs";
 import styles from "./list.css";
 import PageList from "@/components/pageList";
 import MemberAdd from "@/pages/auth/components/member/add";
@@ -65,7 +65,7 @@ class AuthMemberList extends Component {
                 title: "创建时间",
                 dataIndex: "create_time",
                 key: "create_time",
-                render: text => moment(text, "X").format("YYYY-MM-DD HH:mm:ss")
+                render: text => dayjs(text * 1000).format("YYYY-MM-DD HH:mm:ss")
             },
             {
                 title: "操作",

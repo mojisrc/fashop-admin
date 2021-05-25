@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Table, Card } from "antd";
 import { connect } from "umi";
-import moment from "dayjs";
+import dayjs from "dayjs";
 import Image from "@/components/image/index";
 import { history as router } from "umi";
 import PageHeaderWrapper from "@/components/pageHeaderWrapper";
@@ -108,7 +108,7 @@ class UserList extends Component {
                 dataIndex: "last_cost_time",
                 key: "last_cost_time",
                 render: (text) => {
-                    return text > 0 ? moment(text, "X").format("YYYY-MM-DD HH:mm:ss") : "-";
+                    return text > 0 ? dayjs(text * 1000).format("YYYY-MM-DD HH:mm:ss") : "-";
                 }
             }, {
                 title: "来源",
@@ -123,7 +123,7 @@ class UserList extends Component {
                 dataIndex: "create_time",
                 key: "create_time",
                 render: (text) => {
-                    return text > 0 ? moment(text, "X").format("YYYY-MM-DD HH:mm:ss") : "-";
+                    return text > 0 ? dayjs(text * 1000).format("YYYY-MM-DD HH:mm:ss") : "-";
                 }
             }, {
                 title: "操作",

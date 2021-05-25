@@ -2,7 +2,7 @@ import React, { Component,Fragment } from "react";
 import { Modal, Button, Table,Divider } from "antd";
 import { connect } from "umi";
 import UploadVideo from "../uploadVideo";
-import moment from "dayjs";
+import dayjs from "dayjs";
 
 @connect(({ goodsMedia, loading }) => ({
     goodsMediaList: goodsMedia.list.result,
@@ -87,7 +87,7 @@ export default class SelectVideo extends Component {
                     title: "创建时间",
                     dataIndex: "create_time",
                     key: "create_time",
-                    render: text => moment(text, "X").format("YYYY-MM-DD HH:mm:ss")
+                    render: text => dayjs(text * 1000).format("YYYY-MM-DD HH:mm:ss")
                 }, {
                     title: "操作",
                     dataIndex: "is_portal",

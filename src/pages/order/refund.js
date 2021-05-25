@@ -4,7 +4,7 @@ import PageHeaderWrapper from "@/components/pageHeaderWrapper";
 import { Card,Table } from "antd";
 import PageList from "@/components/pageList";
 import { history as router } from "umi";
-import moment from "dayjs";
+import dayjs from "dayjs";
 
 @connect(({ refund, loading }) => ({
     refundList: refund.list.result,
@@ -94,7 +94,7 @@ export default class Refund extends Component {
                 title: "申请时间",
                 dataIndex: "create_time",
                 key: "create_time",
-                render: text => moment(text, "X").format("YYYY-MM-DD HH:mm")
+                render: text => dayjs(text * 1000).format("YYYY-MM-DD HH:mm")
             }, {
                 title: "订单号",
                 dataIndex: "order_sn",

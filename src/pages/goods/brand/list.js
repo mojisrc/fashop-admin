@@ -2,7 +2,7 @@ import React, { Component, Fragment } from "react";
 import { Card, Button, Table, Divider, Modal} from "antd";
 import PageList from "@/components/pageList";
 import { connect } from "umi";
-import moment from "dayjs";
+import dayjs from "dayjs";
 import BrandAdd from "./components/add";
 import BrandEdit from "./components/edit";
 import PageHeaderWrapper from "@/components/pageHeaderWrapper";
@@ -72,7 +72,7 @@ class BrandList extends Component {
             }, {
                 title: "创建时间",
                 dataIndex: "create_time",
-                render: e => moment(e * 1000).format("YYYY-MM-DD hh:mm"),
+                render: e => dayjs(e * 1000).format("YYYY-MM-DD hh:mm"),
                 width: 200
             }, {
                 title: "操作",

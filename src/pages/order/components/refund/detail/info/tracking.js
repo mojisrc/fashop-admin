@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import styles from "../index.css";
 import { View } from "@/components/flexView";
 import InfoColumn from "@/components/public/info/infoColumn";
-import moment from "dayjs";
+import dayjs from "dayjs";
 import { Modal, message } from "antd";
 import { connect } from "umi";
 
@@ -47,7 +47,7 @@ export default class Tracking extends Component {
                         },
                         {
                             title: "操作时间",
-                            info: tracking_time ? moment(tracking_time, "X").format("YYYY-MM-DD HH:mm:ss") : ""
+                            info: tracking_time ? dayjs(tracking_time * 1000).format("YYYY-MM-DD HH:mm:ss") : ""
                         },
                         {
                             title: "发货凭证",
@@ -85,7 +85,7 @@ export default class Tracking extends Component {
                                     });
                                 }}>确认收货？</a></div>
                                 :
-                                <div>已收货，时间：{moment(receive_time, "X").format("YYYY-MM-DD HH:mm:ss")}</div>
+                                <div>已收货，时间：{dayjs(receive_time* 1000).format("YYYY-MM-DD HH:mm:ss")}</div>
                         }
                     ]}
                 />
