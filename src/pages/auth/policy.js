@@ -1,12 +1,11 @@
 import React, { Component, Fragment } from "react";
 import { connect } from "umi";
 import PageHeaderWrapper from "@/components/pageHeaderWrapper";
-import { Table, Button, Card, Modal,Alert } from "antd";
-import { View } from "@/components/flexView";
-import styles from "./list.css";
+import { Table, Button, Card, Modal, Alert, Divider,Space } from "antd";
 import PageList from "@/components/pageList";
 import PolicyEdit from "@/pages/auth/components/policy/edit";
 import PolicyAdd from "@/pages/auth/components/policy/add";
+
 @connect(({ auth, loading }) => ({
     policyList: auth.policyList.result,
     policyListLoading: loading.effects["auth/policyList"]
@@ -69,9 +68,9 @@ class List extends Component {
             }, {
                 title: "操作",
                 key: "operation",
-                render: (record) => <View className={styles.operation}>
+                render: (record) => <>
                     <Fragment>
-                        {record.is_system === 0 ? <a
+                        {record.is_system === 0 && <><a
                           onClick={() => {
                               this.setState({ editVisible: true }, () => {
                                   this.policyEdit.show({ id: record.id });
@@ -79,8 +78,10 @@ class List extends Component {
                           }}
                         >
                             修改
-                        </a> : null}
-                        {record.is_system === 0 ? <a
+                        </a>
+                            <Divider type="vertical" />
+                        </>}
+                        {record.is_system === 0 && <a
                           onClick={() => {
                               Modal.confirm({
                                   title: "确认删除？",
@@ -103,13 +104,13 @@ class List extends Component {
                           }}
                         >
                             删除
-                        </a> : null}
+                        </a>}
                     </Fragment>
-                </View>
+                </>
             }
         ];
         return (
-          <PageHeaderWrapper hiddenBreadcrumb={true} policy={'auth/policyList'}>
+          <PageHeaderWrapper hiddenBreadcrumb={true} policy={"auth/policyList"}>
               <Card
                 bordered={false}
               >
@@ -121,9 +122,9 @@ class List extends Component {
                         <span>- 自定义策略，用户可以自主创建、更新和删除，自定义策略的版本更新由后台用户维护。<br /></span>
                     </div>}
                     type="warning"
-                    style={{marginBottom:14}}
+                    style={{ marginBottom: 14 }}
                   />
-                  <View className={styles.batchView}>
+                  <Space style={{ marginBottom: 15}}>
                       <Button
                         type='primary'
                         onClick={() => {
@@ -132,7 +133,7 @@ class List extends Component {
                       >
                           新建策略
                       </Button>
-                  </View>
+                  </Space>
 
                   <Table
                     loading={policyListLoading}

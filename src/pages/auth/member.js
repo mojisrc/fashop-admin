@@ -1,10 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "umi";
 import PageHeaderWrapper from "@/components/pageHeaderWrapper";
-import { Card, Table, Button } from "antd";
-import { View } from "@/components/flexView";
+import { Card, Table, Button ,Space} from "antd";
 import dayjs from "dayjs";
-import styles from "./list.css";
 import PageList from "@/components/pageList";
 import MemberAdd from "@/pages/auth/components/member/add";
 import MemberEdit from "@/pages/auth/components/member/edit";
@@ -88,7 +86,7 @@ class AuthMemberList extends Component {
               <Card
                 bordered={false}
               >
-                  <View className={styles.batchView}>
+                  <Space style={{ marginBottom: 15}}>
                       <Button
                         type='primary'
                         onClick={() => {
@@ -97,7 +95,7 @@ class AuthMemberList extends Component {
                       >
                           新建用户
                       </Button>
-                  </View>
+                  </Space>
                   <Table
                     loading={memberListLoading}
                     dataSource={memberList.list ? memberList.list : []}

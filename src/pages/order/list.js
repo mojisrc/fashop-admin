@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "umi";
 import PageHeaderWrapper from "@/components/pageHeaderWrapper";
-import { Card, Tag } from "antd";
+import { Card } from "antd";
 import OrderEditPrice from "@/pages/order/components/editPrice/index";
 import { Table, Button, message } from "antd";
 import { View } from "@/components/flexView";
@@ -10,7 +10,7 @@ import Image from "@/components/image/index";
 import { history as router } from "umi";
 import styles from "./list.css";
 import PageList from "@/components/pageList";
-import Time from "@/utils/time"
+import Time from "@/utils/time";
 
 @connect(({ order, loading }) => ({
     orderList: order.list.result,
@@ -31,10 +31,10 @@ class List extends Component {
             orderId: 0,
             visible: false,
             expandedRowKeys: [],
-            tabKey: state_type ? state_type : 'all',
+            tabKey: state_type ? state_type : "all",
             selectedRowKeys: [],
             list: []
-        }
+        };
     }
 
     componentDidMount() {
@@ -55,7 +55,7 @@ class List extends Component {
             keywords: null,
             create_time: [],
             order_type: null,
-            group_state_type: null,
+            group_state_type: null
         },
         rule: [{ key: "keywords_type", rule: ["rely", "keywords"] }],
         refresh: (e) => {
@@ -101,15 +101,15 @@ class List extends Component {
         const { orderList, orderListLoading } = this.props;
         let { expandedRowKeys, selectedRowKeys } = this.state;
         let { list } = orderList;
-        let _list = []
+        let _list = [];
         if (Array.isArray(list)) {
             // 为什么 非要JSON一下呢
-            _list = JSON.parse(JSON.stringify(list))
+            _list = JSON.parse(JSON.stringify(list));
             _list.map((item) => {
                 Array.isArray(item.extend_order_goods) && item.extend_order_goods.map((goods) => {
-                    goods["reciver_info"] = typeof item.extend_order_extend['reciver_info'] !== "undefined" ? item.extend_order_extend.reciver_info : {};
+                    goods["reciver_info"] = typeof item.extend_order_extend["reciver_info"] !== "undefined" ? item.extend_order_extend.reciver_info : {};
                     goods["rows"] = item.extend_order_goods.length;
-                    goods["extend_user"] = item.extend_user
+                    goods["extend_user"] = item.extend_user;
                     return goods;
                 });
                 return item;
@@ -119,7 +119,7 @@ class List extends Component {
             selectedRowKeys,
             onChange: (selectedRowKeys) => {
                 this.setState({ selectedRowKeys });
-            },
+            }
         };
         let tabList = state_type_list.map((item) => {
             return {
@@ -140,7 +140,7 @@ class List extends Component {
                 data: group_state_type_list,
                 initialValue: group_state_type
             }
-        }] : []
+        }] : [];
         const columns = [
             {
                 title: "订单号",
@@ -177,7 +177,7 @@ class List extends Component {
                 key: "amount",
                 render: (value, record) => {
                     return record.is_revise ?
-                        <span style={{ color: 'red' }}>已改价 ¥{record.revise_amount}</span> : `¥${value}`
+                      <span style={{ color: "red" }}>已改价 ¥{record.revise_amount}</span> : `¥${value}`;
                 }
             }, {
                 title: "操作",
@@ -185,42 +185,42 @@ class List extends Component {
                 render: (record) => <View className={styles.operation}>
                     {
                         record.state === 10 ? <a
-                            onClick={() => {
-                                this.editPrice.show({
-                                    orderId: record.id
-                                });
-                            }}
+                          onClick={() => {
+                              this.editPrice.show({
+                                  orderId: record.id
+                              });
+                          }}
                         >
                             改价
                         </a> : null
                     }
                     <a
-                        onClick={() => {
-                            router.push(`/order/list/detail?id=${record.id}`);
-                        }}
+                      onClick={() => {
+                          router.push(`/order/list/detail?id=${record.id}`);
+                      }}
                     >
                         详情
                     </a>
                     {
                         Number(order_type) !== 2 ? null : <a
-                            onClick={() => {
-                                // this.setState({ group_type: 1 }, () => {
-                                //     router.push(`/order/list?group_type=1`);
-                                //     // 重置搜索表单的值
-                                //     this.searchForm.resetValues();
-                                //     // 重置PageSearchList
-                                //     this.search.reset();
-                                // })
-                            }}
+                          onClick={() => {
+                              // this.setState({ group_type: 1 }, () => {
+                              //     router.push(`/order/list?group_type=1`);
+                              //     // 重置搜索表单的值
+                              //     this.searchForm.resetValues();
+                              //     // 重置PageSearchList
+                              //     this.search.reset();
+                              // })
+                          }}
                         >
                             查看同团订单
                         </a>
                     }
                     {
                         record.state === 20 ? <a
-                            onClick={() => {
-                                router.push(`/order/list/send?id=${record.id}`);
-                            }}
+                          onClick={() => {
+                              router.push(`/order/list/send?id=${record.id}`);
+                          }}
                         >
                             发货
                         </a> : ""
@@ -236,11 +236,11 @@ class List extends Component {
                 key: "goods_img",
                 className: `${styles.goodsGoodsImg} ${styles.borderRightNone}`,
                 render: (e) => (
-                    <Image
-                        type='goods'
-                        src={e}
-                        style={{ width: 32, height: 32 }}
-                    />
+                  <Image
+                    type='goods'
+                    src={e}
+                    style={{ width: 32, height: 32 }}
+                  />
                 )
             }, {
                 title: "商品名称",
@@ -249,7 +249,7 @@ class List extends Component {
                 render: (record) => {
                     return <div>
                         {record.goods_title}
-                    </div>
+                    </div>;
                 }
             }, {
                 title: "规格",
@@ -257,7 +257,7 @@ class List extends Component {
                 key: "goods_spec",
                 className: `${styles.goodsSpec}`,
                 render: (goods_spec) => {
-                    return goods_spec[0].id > 0 ? goods_spec.map(function (item) {
+                    return goods_spec[0].id > 0 ? goods_spec.map(function(item) {
                         return item.value_name + " ";
                     }) : "-";
                 }
@@ -297,15 +297,15 @@ class List extends Component {
                     return {
                         children: <span>{value}<a className={styles.reciverAvatar}
                                                   onClick={() => {
-                                                      router.push(`/user/list/detail?id=${row.extend_user.id}`)
+                                                      router.push(`/user/list/detail?id=${row.extend_user.id}`);
                                                   }}
                         ><Image
-                            type='avatar'
-                            src={row.extend_user.profile.avatar}
-                            style={{
-                                width: 20,
-                                height: 20
-                            }}
+                          type='avatar'
+                          src={row.extend_user.profile.avatar}
+                          style={{
+                              width: 20,
+                              height: 20
+                          }}
                         />{row.extend_user.profile.nickname}</a></span>, props: { rowSpan: index === 0 ? row.rows : 0 }
                     };
                 }
@@ -330,111 +330,111 @@ class List extends Component {
             }
         ];
         return (
-            <PageHeaderWrapper hiddenBreadcrumb={true} policy={'order/list'}>
-                <OrderEditPrice ref={(e) => this.editPrice = e} />
-                <Card
-                    bordered={false}
-                    tabList={tabList}
-                    activeTabKey={this.state.tabKey}
-                    onTabChange={(key) => {
-                        this.onTabChange(key);
-                    }}
-                >
-                    <PageList.Search
-                        wrappedComponentRef={(form) => this.searchForm = form}
-                        ref={this.searchInstance}
-                        loading={orderListLoading}
-                        onSubmit={this.search.submit}
-                        defaultValue={this.search.defaultParam}
-                        onReset={this.search.reset}
-                        items={[
-                            {
-                                selectInput: [
-                                    {
-                                        field: "keywords_type",
-                                        style: { minWidth: 115 },
-                                        initialValue: keywords_type,
-                                        data: keywords_type_list
-                                    },
-                                    {
-                                        field: "keywords",
-                                        placeholder: "请输入关键词",
-                                        initialValue: keywords
+          <PageHeaderWrapper hiddenBreadcrumb={true} policy={"order/list"}>
+              <OrderEditPrice ref={(e) => this.editPrice = e} />
+              <Card
+                bordered={false}
+                tabList={tabList}
+                activeTabKey={this.state.tabKey}
+                onTabChange={(key) => {
+                    this.onTabChange(key);
+                }}
+              >
+                  <PageList.Search
+                    wrappedComponentRef={(form) => this.searchForm = form}
+                    ref={this.searchInstance}
+                    loading={orderListLoading}
+                    onSubmit={this.search.submit}
+                    defaultValue={this.search.defaultParam}
+                    onReset={this.search.reset}
+                    items={[
+                        {
+                            selectInput: [
+                                {
+                                    field: "keywords_type",
+                                    style: { minWidth: 115 },
+                                    initialValue: keywords_type,
+                                    data: keywords_type_list
+                                },
+                                {
+                                    field: "keywords",
+                                    placeholder: "请输入关键词",
+                                    initialValue: keywords
+                                }
+                            ]
+                        },
+                        {
+                            label: "下单时间",
+                            timeRange: {
+                                field: "create_time",
+                                initialValue: create_time
+                            }
+                        },
+                        {
+                            label: "订单类型",
+                            select: {
+                                field: "order_type",
+                                style: { width: 100 },
+                                placeholder: "全部类型",
+                                data: order_type_list,
+                                initialValue: order_type
+                            }
+                        }, ...group_search
+                    ]}
+                  />
+                  <div className="listTableTop">
+                      <Button
+                        type='primary'
+                        onClick={() => {
+                            if (selectedRowKeys.length > 0) {
+                                router.push({
+                                    pathname: `/order/list/print`,
+                                    query: {
+                                        ids: selectedRowKeys
                                     }
-                                ]
-                            },
-                            {
-                                label: "下单时间",
-                                timeRange: {
-                                    field: "create_time",
-                                    initialValue: create_time
-                                }
-                            },
-                            {
-                                label: "订单类型",
-                                select: {
-                                    field: "order_type",
-                                    style: { width: 100 },
-                                    placeholder: "全部类型",
-                                    data: order_type_list,
-                                    initialValue: order_type
-                                }
-                            }, ...group_search
-                        ]}
-                    />
-                    <div className="listTableTop">
-                        <Button
-                            type='primary'
-                            onClick={() => {
-                                if (selectedRowKeys.length > 0) {
-                                    router.push({
-                                        pathname: `/order/list/print`,
-                                        query: {
-                                            ids: selectedRowKeys
-                                        },
-                                    })
-                                } else {
-                                    message.info("请选择")
-                                }
+                                });
+                            } else {
+                                message.info("请选择");
+                            }
 
-                            }}
-                        >
-                            批量打印
-                        </Button>
-                    </div>
-                    <Table
-                        loading={orderListLoading}
-                        dataSource={_list}
-                        columns={columns}
-                        expandedRowRender={record => (
-                            <Table
-                                dataSource={record.extend_order_goods}
-                                columns={expandedRowColumns}
-                                pagination={false}
-                                defaultExpandAllRows={true}
-                                rowKey={record => `${record.id}_child`}
-                            />
-                        )}
-                        onExpand={(expanded, record) => {
-                            expanded ? expandedRowKeys.push(record.id) : expandedRowKeys = expandedRowKeys.filter(v => v !== record.id);
-                            this.setState({ expandedRowKeys });
                         }}
-                        expandedRowKeys={expandedRowKeys}
-                        pagination={{
-                            showSizeChanger: false,
-                            showTotal: (total, range) => `共 ${total} 条`,
-                            current: this.search.page,
-                            pageSize: this.search.rows,
-                            total: orderList.total_number
-                        }}
-                        onChange={({ current }) => {
-                            this.search.setPage(current).push();
-                        }}
-                        rowKey={record => record.id}
-                        rowSelection={rowSelection}
-                    />
-                </Card>
-            </PageHeaderWrapper>
+                      >
+                          批量打印
+                      </Button>
+                  </div>
+                  <Table
+                    loading={orderListLoading}
+                    dataSource={_list}
+                    columns={columns}
+                    expandedRowRender={record => (
+                      <Table
+                        dataSource={record.extend_order_goods}
+                        columns={expandedRowColumns}
+                        pagination={false}
+                        defaultExpandAllRows={true}
+                        rowKey={record => `${record.id}_child`}
+                      />
+                    )}
+                    onExpand={(expanded, record) => {
+                        expanded ? expandedRowKeys.push(record.id) : expandedRowKeys = expandedRowKeys.filter(v => v !== record.id);
+                        this.setState({ expandedRowKeys });
+                    }}
+                    expandedRowKeys={expandedRowKeys}
+                    pagination={{
+                        showSizeChanger: false,
+                        showTotal: (total, range) => `共 ${total} 条`,
+                        current: this.search.page,
+                        pageSize: this.search.rows,
+                        total: orderList.total_number
+                    }}
+                    onChange={({ current }) => {
+                        this.search.setPage(current).push();
+                    }}
+                    rowKey={record => record.id}
+                    rowSelection={rowSelection}
+                  />
+              </Card>
+          </PageHeaderWrapper>
         );
     }
 
@@ -444,7 +444,7 @@ class List extends Component {
                 return "已取消";
             case 10:
                 if (Time.overdue(record.payable_time)) {
-                    return "支付超时"
+                    return "支付超时";
                 } else {
                     return "待支付";
                 }
@@ -477,13 +477,13 @@ class List extends Component {
     getActivityText(marketing_activity) {
         switch (marketing_activity) {
             case 0:
-                break
+                break;
             case 1:
-                return <span style={{ color: 'red' }}>[拼团] </span>
+                return <span style={{ color: "red" }}>[拼团] </span>;
             case 2:
-                return <span style={{ color: 'red' }}>[秒杀] </span>
+                return <span style={{ color: "red" }}>[秒杀] </span>;
             case 3:
-                return <span style={{ color: 'red' }}>[赠品] </span>
+                return <span style={{ color: "red" }}>[赠品] </span>;
         }
     }
 }

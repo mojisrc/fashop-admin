@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import { connect } from "umi";
 import { Button, Table, Switch, message, Popconfirm, Card, Divider } from "antd";
 import dayjs from "dayjs";
@@ -54,7 +54,7 @@ export default class MyTemplate extends Component {
         }, {
             title: "创建时间",
             dataIndex: "create_time",
-            render: text =>  dayjs(text * 1000).format("YYYY-MM-DD hh:mm")
+            render: text => dayjs(text * 1000).format("YYYY-MM-DD hh:mm")
         }, {
             title: "最后编辑",
             dataIndex: "update_time",
@@ -84,7 +84,7 @@ export default class MyTemplate extends Component {
             {
                 title: "操作",
                 key: "operation",
-                render: (record) => <Fragment>
+                render: (record) => <>
                     <a
                       onClick={() => {
                           router.push(`/shop/page/edit?id=${record.id}`);
@@ -127,7 +127,7 @@ export default class MyTemplate extends Component {
                     >
                         <a>克隆</a>
                     </Popconfirm>
-                </Fragment>
+                </>
             }
         ];
         return (

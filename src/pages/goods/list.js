@@ -1,12 +1,11 @@
 import React, { Component } from "react";
 import PageHeaderWrapper from "@/components/pageHeaderWrapper";
 import { connect } from "umi";
-import { Card, Button, Table, Switch, Modal } from "antd";
+import { Card, Button, Table, Switch, Modal, Divider} from "antd";
 import PageList from "@/components/pageList";
 import Arr from "@/utils/array";
 import Image from "@/components/image";
 import GoodsApi from "@/services/goods";
-import styles from "@/pages/goods/components/list/table/index.css";
 import { View } from "@/components/flexView";
 import dayjs from "dayjs";
 import { history as router } from "umi";
@@ -144,9 +143,8 @@ export default class GoodsList extends Component {
             }, {
                 title: "操作",
                 key: "operation",
-                className: styles.column,
                 width: 100,
-                render: (record) => <View className={styles.operation}>
+                render: (record) => <>
                     <a
                         onClick={() => {
                             router.push({
@@ -160,6 +158,8 @@ export default class GoodsList extends Component {
                     >
                         编辑
                     </a>
+                    <Divider type="vertical" />
+
                     <a
                         onClick={async () => {
                             Modal.confirm({
@@ -177,7 +177,7 @@ export default class GoodsList extends Component {
 
                         }}
                     >删除</a>
-                </View>
+                </>
             }
         ];
         return (

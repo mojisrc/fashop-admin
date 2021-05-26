@@ -1,7 +1,7 @@
 import { Form } from '@ant-design/compatible';
 import React, { Component } from "react";
 import { Input, Button, Modal,  Tree, message, Card, Spin } from "antd";
-import styles from "@/styles/freight/freightAdd.css";
+import styles from "@/pages/setting/freight/freightAdd.css";
 import FreightAddTable from "@/pages/setting/freight/components/addTable/index";
 import { connect } from "umi";
 import Arr from "@/utils/array";

@@ -1,9 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "umi";
 import PageHeaderWrapper from "@/components/pageHeaderWrapper";
-import { Table, Button, Card, Modal } from "antd";
-import { View } from "@/components/flexView";
-import styles from "./list.css";
+import { Table, Button, Card, Modal, Space, Divider } from "antd";
 import PageList from "@/components/pageList";
 import GroupAdd from "@/pages/auth/components/group/add";
 import GroupEdit from "@/pages/auth/components/group/edit";
@@ -56,7 +54,6 @@ class List extends Component {
     };
 
     render() {
-        let { keywords } = this.search.getParam();
         const { groupList, groupListLoading } = this.props;
 
         const columns = [
@@ -67,118 +64,123 @@ class List extends Component {
             }, {
                 title: "操作",
                 key: "operation",
-                render: (record) => <View className={styles.operation}>
+                render: (record) => <>
                     <a
-                        onClick={() => {
-                            this.setState({ editVisible: true }, () => {
-                                this.groupEdit.show({ groupId: record.id });
-                            });
-                        }}
+                      onClick={() => {
+                          this.setState({ editVisible: true }, () => {
+                              this.groupEdit.show({ groupId: record.id });
+                          });
+                      }}
                     >
                         修改
                     </a>
-                    <a
-                        onClick={() => {
-                            this.groupAddMember.show({ id: record.id });
+                    <Divider type="vertical" />
 
-                        }}
+                    <a
+                      onClick={() => {
+                          this.groupAddMember.show({ id: record.id });
+
+                      }}
                     >
                         添加组成员
                     </a>
+                    <Divider type="vertical" />
+
                     <a
-                        onClick={() => {
-                            this.groupAddPolicy.show({ id: record.id });
-                        }}
+                      onClick={() => {
+                          this.groupAddPolicy.show({ id: record.id });
+                      }}
                     >
                         添加权限
                     </a>
-                    {
-                        <a
-                            onClick={() => {
-                                Modal.confirm({
-                                    title: "确认删除？",
-                                    okText: "确认",
-                                    okType: "danger",
-                                    cancelText: "取消",
-                                    onOk: async () => {
-                                        const { dispatch } = this.props;
-                                        dispatch({
-                                            type: "auth/groupDel",
-                                            payload: {
-                                                id: record.id
-                                            },
-                                            callback: () => {
-                                                this.initList();
-                                            }
-                                        });
-                                    }
-                                });
-                            }}
-                        >
-                            删除
-                        </a>
-                    }
-                </View>
+
+                    <Divider type="vertical" />
+
+                    <a
+                      onClick={() => {
+                          Modal.confirm({
+                              title: "确认删除？",
+                              okText: "确认",
+                              okType: "danger",
+                              cancelText: "取消",
+                              onOk: async () => {
+                                  const { dispatch } = this.props;
+                                  dispatch({
+                                      type: "auth/groupDel",
+                                      payload: {
+                                          id: record.id
+                                      },
+                                      callback: () => {
+                                          this.initList();
+                                      }
+                                  });
+                              }
+                          });
+                      }}
+                    >
+                        删除
+                    </a>
+                </>
             }
         ];
         return (
-            <PageHeaderWrapper hiddenBreadcrumb={true} policy={'auth/groupList'}>
-                <Card
-                    bordered={false}
-                >
-                    <View className={styles.batchView}>
-                        <Button
-                            type='primary'
-                            onClick={() => {
-                                this.groupAdd.show();
-                            }}
-                        >
-                            新建用户组
-                        </Button>
-                    </View>
-                    <Table
-                        loading={groupListLoading}
-                        dataSource={groupList.list ? groupList.list : []}
-                        columns={columns}
-                        pagination={{
-                            showSizeChanger: false,
-                            showTotal: (total, range) => `共 ${total} 条`,
-                            current: this.search.page,
-                            pageSize: this.search.rows,
-                            total: groupList.total_number
+          <PageHeaderWrapper hiddenBreadcrumb={true} policy={"auth/groupList"}>
+              <Card
+                bordered={false}
+              >
+                  <Space style={{ marginBottom: 15}}>
+                      <Button
+                        type='primary'
+                        onClick={() => {
+                            this.groupAdd.show();
                         }}
-                        onChange={({ current }) => {
-                            this.search.setPage(current).push();
-                        }}
-                        rowKey={record => record.id}
-                    />
-                </Card>
-                <PolicyAdd />
-                <GroupAddMember
-                    ref={(e) => {
-                        this.groupAddMember = e;
+                      >
+                          新建用户组
+                      </Button>
+                  </Space>
+                  <Table
+                    loading={groupListLoading}
+                    dataSource={groupList.list ? groupList.list : []}
+                    columns={columns}
+                    pagination={{
+                        showSizeChanger: false,
+                        showTotal: (total, range) => `共 ${total} 条`,
+                        current: this.search.page,
+                        pageSize: this.search.rows,
+                        total: groupList.total_number
                     }}
-                />
-                <GroupAddPolicy
-                    ref={(e) => {
-                        this.groupAddPolicy = e;
+                    onChange={({ current }) => {
+                        this.search.setPage(current).push();
                     }}
-                />
-                <GroupAdd
-                    wrappedComponentRef={(form) => this.groupAdd = form}
-                    onAddSuccess={() => {
-                        this.groupAdd.close();
-                        this.initList();
-                    }}
-                />
-                <GroupEdit
-                    wrappedComponentRef={(form) => this.groupEdit = form}
-                    onEditSuccess={() => {
-                        this.groupEdit.close();
-                        this.initList();
-                    }}
-                />
-            </PageHeaderWrapper>
+                    rowKey={record => record.id}
+                  />
+              </Card>
+              <PolicyAdd />
+              <GroupAddMember
+                ref={(e) => {
+                    this.groupAddMember = e;
+                }}
+              />
+              <GroupAddPolicy
+                ref={(e) => {
+                    this.groupAddPolicy = e;
+                }}
+              />
+              <GroupAdd
+                wrappedComponentRef={(form) => this.groupAdd = form}
+                onAddSuccess={() => {
+                    this.groupAdd.close();
+                    this.initList();
+                }}
+              />
+              <GroupEdit
+                wrappedComponentRef={(form) => this.groupEdit = form}
+                onEditSuccess={() => {
+                    this.groupEdit.close();
+                    this.initList();
+                }}
+              />
+          </PageHeaderWrapper>
         );
     }
 }

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "umi";
 import { Tabs, Row, Col, Card, Spin } from "antd";
 import { View } from "@/components/flexView";
-import styles from "@/styles/customer/customerDetail.css";
+import styles from "./customerDetail.css";
 import ShoppingInfo from "@/pages/user/components/detail/shopping";
 import ReceiveInfo from "@/pages/user/components/detail/receive";
 import Image from "@/components/image";
