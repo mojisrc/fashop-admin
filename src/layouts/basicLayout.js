@@ -9,7 +9,8 @@ import classNames from "classnames";
 import pathToRegexp from "path-to-regexp";
 import Media from "react-media";
 import Authorized from "@/utils/authorized";
-import logo from "@/assets/images/logo.png";
+import logo from "@/assets/images/light-logo.png";
+import darkLogo from "@/assets/images/dark-logo.png";
 import Footer from "./footer";
 import Context from "./menuContext";
 import Exception403 from "../pages/exception/403";
@@ -179,8 +180,10 @@ class BasicLayout extends React.PureComponent {
                         {params => (
                             <Context.Provider value={this.getContext()}>
                                 {policyLoading ?
-                                    <Spin size="large" spinning={policyLoading} className={styles.policyLoading}
-                                          tip="权限验证中..." /> : <div className={classNames(params)}>{layout}</div>}
+                                  <div className={styles.policyLoading}>
+                                      <img src={darkLogo}/>
+                                      <Spin size="large" spinning={policyLoading}/>
+                                  </div> : <div className={classNames(params)}>{layout}</div>}
                             </Context.Provider>
                         )}
                     </ContainerQuery>

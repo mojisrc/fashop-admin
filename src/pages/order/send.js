@@ -1,11 +1,10 @@
 import { Form } from '@ant-design/compatible';
 import React, { Component } from "react";
 import { connect } from "umi";
-import {  Button, Input, Card } from "antd";
+import {  Button, Input, Card ,message, Spin} from "antd";
 import SendAddress from "@/pages/order/components/send/sendAddress";
 import DeliveryWay from "@/pages/order/components/send/deliveryWay";
 import PageHeaderWrapper from "@/components/pageHeaderWrapper";
-import { message, Spin } from "antd/lib/index";
 import { history as router } from "umi";
 
 const { TextArea } = Input;

@@ -2,7 +2,7 @@ import React, { Fragment } from "react";
 import { Link } from "umi";
 import GlobalFooter from "@/components/globalFooter";
 import styles from "./userLayout.less";
-import logo from "@/assets/images/loginLogo.png";
+import logo from "@/assets/images/dark-logo.png";
 
 const links = [
 ];

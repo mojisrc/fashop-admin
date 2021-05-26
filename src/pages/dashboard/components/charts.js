@@ -6,13 +6,9 @@ import statistics from "@/services/statistics";
 import dayjs from "dayjs";
 import ReactEChartsCore from "echarts-for-react/lib/core";
 import * as echarts from "echarts/core";
-import { BarChart, } from 'echarts/charts';
-import { CanvasRenderer, } from 'echarts/renderers';
-import {
-    GridComponent,
-    TooltipComponent,
-    TitleComponent,
-} from 'echarts/components';
+import { BarChart } from "echarts/charts";
+import { CanvasRenderer } from "echarts/renderers";
+import { GridComponent, TooltipComponent, TitleComponent } from "echarts/components";
 // https://github.com/hustcc/echarts-for-react
 echarts.use(
   [TitleComponent, TooltipComponent, GridComponent, BarChart, CanvasRenderer]

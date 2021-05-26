@@ -7262,14 +7262,15 @@ react-color@2.19.3:
     reactcss "^1.2.0"
     tinycolor2 "^1.4.1"
 
-react-color@^2.14.1:
-  version "2.14.1"
-  resolved "https://registry.npmjs.org/react-color/-/react-color-2.14.1.tgz#db8ad4f45d81e74896fc2e1c99508927c6d084e0"
+react-color@^3.0.0-beta.3:
+  version "3.0.0-beta.3"
+  resolved "https://registry.yarnpkg.com/react-color/-/react-color-3.0.0-beta.3.tgz#5b59a1ed09066751409b98206fe265c7ff02d811"
+  integrity sha1-W1mh7QkGZ1FAm5ggb+Jlx/8C2BE=
   dependencies:
     lodash "^4.0.1"
     material-colors "^1.2.1"
     prop-types "^15.5.10"
-    reactcss "^1.2.0"
+    reactcss "^1.2.3"
     tinycolor2 "^1.4.1"
 
 react-container-query@^0.11.0:

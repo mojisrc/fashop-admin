@@ -31,12 +31,12 @@ export default defineConfig({
     hash: true,
     base: base,
     publicPath: base,
-    antd: {},
     dva: {
         skipModelValidate: true,
         hmr: true,
-        immer: true
-        // 注：如需兼容 IE11，需配置 { immer: { enableES5: true }}。
+        immer: true, // 注：如需兼容 IE11，需配置 { immer: { enableES5: true }}。
+        lazyLoad: true
+
     },
     locale: {
         default: "zh-CN", // default zh-CN
@@ -50,7 +50,7 @@ export default defineConfig({
         edge: false,
         ios: false
     },
-    dynamicImport: false,
+    dynamicImportSyntax: {},
     define: {
         APP_TYPE: process.env.APP_TYPE || "",
         "process.env.dev": {
@@ -144,15 +144,27 @@ export default defineConfig({
         "https://cdn.jsdelivr.net/npm/react@16.14.0/umd/react.development.min.js",
         "https://cdn.jsdelivr.net/npm/react-dom@16.14.0/umd/react-dom.development.min.js",
         "https://cdn.jsdelivr.net/npm/react-dom@16.14.0/umd/react-dom-server.browser.development.js",
+        // "https://cdn.jsdelivr.net/npm/antd@4.15.6/dist/antd.js",
+        "https://cdn.jsdelivr.net/npm/echarts@5.1.1/dist/echarts.min.js"
     ] : [
         "https://gw.alipayobjects.com/os/lib/react/16.14.0/umd/react.production.min.js",
         "https://gw.alipayobjects.com/os/lib/react-dom/16.14.0/umd/react-dom.production.min.js",
         "https://gw.alipayobjects.com/os/lib/react-dom/16.14.0/umd/react-dom-server.browser.production.min.js",
+        // "https://cdn.jsdelivr.net/npm/antd@4.15.6/dist/antd.min.js",
+        "https://cdn.jsdelivr.net/npm/echarts@5.1.1/dist/echarts.min.js"
     ],
+    dynamicImport: {
+        loading: "@/components/pageLoading"
+    },
+    antd: {},
     externals: {
         "react": "window.React",
         "react-dom": "window.ReactDOM",
+        "echarts": "echarts"
+        // "antd": "antd",
     },
-    devtool: 'eval',
-    esbuild: {},
+    favicon: base + "favicon.png",
+    // devtool: "eval",
+    devtool: false,
+    esbuild: {}
 });
