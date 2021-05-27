@@ -149,7 +149,7 @@ export default class AuthGroupAddMember extends Component {
                             this.getGroupMemberList();
                             this.userSearch();
                         } else {
-                            message.error(e.msg);
+                            message.error(response.msg);
                         }
                     }
                 });
