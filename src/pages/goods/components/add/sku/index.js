@@ -451,11 +451,13 @@ export default class Sku extends Component {
                 cv.push(e.id);
             });
         });
-        const useModelDataValue = useModelData.values.filter((e) => !cv.includes(e.id));
+        let useModelDataValue = [];
+        if (useModelData.values) {
+            useModelDataValue = useModelData.values.filter((e) => !cv.includes(e.id));
+        }
         return (
-
           <View className={styles.valuesPopoverWarp}>
-              {useModelDataValue.length > 0 ? <View className={styles.valuesPopoverTop}>
+              {useModelDataValue.length > 0 && <View className={styles.valuesPopoverTop}>
                   {
                       useModelDataValue.map((tagsItem) => (
                         <View
@@ -496,7 +498,7 @@ export default class Sku extends Component {
                         </View>
                       ))
                   }
-              </View> : null}
+              </View> }
               <View className={styles.valuesPopoverMid}>
                   {
                       addSpecComVisible ?

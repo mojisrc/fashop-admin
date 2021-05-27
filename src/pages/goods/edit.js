@@ -220,6 +220,8 @@ export default class GoodsEdit extends Component {
                                             batch={false}
                                             url={getFieldValue("images")}
                                             itemStyle={{
+                                                width: 100,
+                                                height: 100,
                                                 marginRight: 10,
                                                 marginBottom: 10
                                             }}
