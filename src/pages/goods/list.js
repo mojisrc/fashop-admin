@@ -86,7 +86,7 @@ export default class GoodsList extends Component {
             }, {
                 title: "商品标题",
                 dataIndex: "title",
-                width: 230
+                width: 300
             }, {
                 title: "价格（元）",
                 dataIndex: "price",
@@ -143,7 +143,7 @@ export default class GoodsList extends Component {
             }, {
                 title: "操作",
                 key: "operation",
-                width: 100,
+                width: 150,
                 render: (record) => <>
                     <a
                         onClick={() => {

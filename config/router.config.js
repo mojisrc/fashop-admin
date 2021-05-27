@@ -234,54 +234,6 @@ export default [
                     },
                 ]
             },
-            {
-                path: "/financial",
-                name: "财务",
-                policy: "asetswithdrawal/list || asetswithdrawal/settingEdit || assetsrecharge/list ",
-                routes: [
-                    {
-                        path: "/financial/withdrawal", name: "提现管理", component: "financial/withdrawal/layout",
-                        routes: [
-                            {
-                                path: "/financial/withdrawal",
-                                redirect: "/financial/withdrawal/list",
-                                policy: "asetswithdrawal/list"
-                            },
-                            {
-                                path: "/financial/withdrawal/list",
-                                component: "financial/withdrawal/list",
-                                policy: "asetswithdrawal/list"
-                            },
-                            {
-                                path: "/financial/withdrawal/detail",
-                                component: "financial/withdrawal/detail",
-                                policy: "asetswithdrawal/detail"
-                            },
-                            {
-                                path: "/financial/withdrawal/setting",
-                                component: "financial/withdrawal/setting",
-                                policy: "asetswithdrawal/settingEdit"
-                            }
-                        ]
-                    },
-                    {
-                        path: "/financial/recharge", name: "充值记录", component: "financial/recharge/layout",
-                        routes: [
-                            {
-                                path: "/financial/recharge",
-                                redirect: "/financial/recharge/list",
-                                policy: "assetsrecharge/list"
-                            },
-                            {
-                                path: "/financial/recharge/list",
-                                component: "financial/recharge/list",
-                                policy: "assetsrecharge/list"
-                            }
-                        ]
-                    }
-
-                ]
-            }
         ]
     }
 ];

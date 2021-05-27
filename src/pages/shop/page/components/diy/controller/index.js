@@ -14,8 +14,6 @@ import Video from "./video";
 import TopMenu from "./topMenu";
 import Title from "./title";
 import TextNav from "./textNav";
-import Coupon from "./coupon/index";
-import GoodsRelation from "./goodsRelation";
 import GoodsGuessLike from "./goodsGuessLike";
 
 export default class PageControl extends Component {
@@ -80,21 +78,6 @@ export default class PageControl extends Component {
                     break;
                 case "text_nav":
                     item = <TextNav options={itemData.options} data={itemData.data} getValues={this.props.getValues} />;
-                    break;
-                case "coupon":
-                    item = <Coupon
-                        options={itemData.options}
-                        data={itemData.data}
-                        getValues={this.props.getValues}
-                        refreshCoupon={this.props.couponListRefresh}
-                    />;
-                    break;
-                case "goods_relation":
-                    item = <GoodsRelation
-                        options={itemData.options}
-                        data={itemData.data}
-                        getValues={this.props.getValues}
-                    />;
                     break;
                 case "goods_guess_like":
                     item = <GoodsGuessLike

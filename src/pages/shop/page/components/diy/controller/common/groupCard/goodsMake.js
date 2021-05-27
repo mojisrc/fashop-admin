@@ -5,7 +5,6 @@ import GoodsAdd from "./goodsAdd";
 import Sort from "./sort";
 import styles from "./index.css";
 import { Card } from "antd";
-import Item from "@/pages/shop/page/components/diy/controller/common/groupCard/item";
 
 export default class GroupCardMake extends PureComponent {
     static propTypes = {

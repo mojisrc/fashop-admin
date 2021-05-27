@@ -14,10 +14,8 @@ import TopMenu from "./topMenu/index";
 import Title from "./title/index";
 import TextNav from "./textNav/index";
 import AuxiliaryBlank from "./auxiliaryBlank/index";
-import Coupon from "./coupon/index";
 import styles from "./index.css";
 import Scrollbar from "react-scrollbars-custom";
-import GoodsRelation from "./goodsRelation";
 import GoodsGuessLike from "./goodsGuessLike";
 import EditOutlined from "@ant-design/icons/EditOutlined";
 
@@ -283,10 +281,6 @@ export default class PageView extends Component {
                 return <Title options={options} data={data} />;
             case "text_nav":
                 return <TextNav options={options} data={data} />;
-            case "coupon":
-                return <Coupon options={options} data={data} />;
-            case "goods_relation":
-                return <GoodsRelation options={options} data={data} />;
             case "goods_guess_like":
                 return <GoodsGuessLike options={options} data={data} />;
             default:
